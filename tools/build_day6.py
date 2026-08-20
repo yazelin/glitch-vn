@@ -22,6 +22,8 @@ b = Board("board-day6", "Day 6・那一頁不是我寫的",
 # ══════════ 早 ══════════
 b.prev = b.scene("d6m-scene", "第六天・清晨", "守則本已經攤開在桌上，翻到中間某一頁。", "早",
                  bgm=A["bgm-theme"], start=True)
+b.prev = b.wake("d6m", prefill=["昨天守則上那句話"])
+b.link(b.find("d6m-scene")["id"], b.prev)
 b.chain([
     ("d6m-boot",  "逼——嗶！", "當機", G),
     ("d6m-page",  "那一頁全空白。沒有字，沒有日期，右下角沒有版本號。", "平常", None),

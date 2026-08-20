@@ -152,9 +152,14 @@ hub = q          # 選擇卡本身就是 hub,不用另外一張
 store_gate, store_outs = b.store(
     "d3n-mem",
     "她說到一半停住了。\n"
-    "「等一下。我剛剛手上有一個東西。是什麼形狀的來著。」\n"
-    "她低頭看自己的手。手是空的——麵包早上就被她放回冰箱了，"
-    "但是現在她連自己拿過那個東西都不記得。",
+    "「等一下。」\n"
+    "她把手舉到眼前，翻過來，又翻回去。手心有一道很淺的壓痕，"
+    "像剛剛握過什麼有重量的東西。\n"
+    "「我這隻手剛剛拿過東西。是什麼形狀的來著。」\n"
+    "她握起來，鬆開，再握起來，想用手的形狀把那個東西的形狀想回來。想不回來。\n"
+    "「……算了。應該不重要。」\n"
+    "她把手放下。口袋裡有一張折得很整齊的保鮮膜，她沒有摸到，"
+    "也不會知道那是誰折的。",
     overflow_ops=[{"variable": "lostBread", "kind": "set", "value": 1}],
     x=b.col(3), y=-700)
 
@@ -363,7 +368,7 @@ for k, (tag, lead, sug) in enumerate(RULEIN):
     n2 = b.add(f"d3e-in-{tag}", {"type": "input", "title": f"填空位（{tag}）",
         "text": "空位在這裡。今天要留什麼給明天的我？\n"
                 "（明天早上的她會照著這句話做。她不會問為什麼。）",
-        "inputVariable": "ruleLine3", "inputPlaceholder": "寫一句話…",
+        "inputVariable": "ruleLine3", "inputPlaceholder": sug[0],
         "inputSuggestions": sug}, x=rx + 320, y=(k - 1) * 260)
     b.link(n1, n2)
     if tag != "none":
@@ -377,7 +382,14 @@ cur = b.setvar("d3e-rulever", [{"variable": "ruleVersion", "kind": "add", "value
                x=rx + 700, y=0)
 for n in rule_nodes: b.link(n, cur)
 b.prev = cur
+# 寫完唸一次給他聽。迴路要在今天閉合——五家裡有兩家說「明天才看得到後果，
+# 本日不閉合」。他聽完的那句話，就是玩家今天寫的字第一次產生後果。
 b.chain([
+    ("d3e-read",  "我唸一次給你聽，確認我明天看得懂。", "平常", G),
+    ("d3e-quote", "「{{ruleLine3}}」", "平常", G),
+    ("d3e-hear",  "黑洞先生在角落，沒有轉頭。可是他的觸手停了一下，才繼續動。", "平常", None),
+    ("d3e-ok",    "明天的我會照著這句做。她不會問為什麼，因為問了也沒有人會回答。", "平常", G),
+    ("d3e-hm",    "嗯。", "預設", HOLE),
     ("d3e-save",  "記得存檔。今天這幾格，我自己留不住。", "平常", G),
     ("d3e-sleep", "她躺下的時候，把口袋裡的保鮮膜摺成更小的方塊。", "平常", None),
     ("d3e-crack", "而在她看不見的黑暗裡，門邊那雙裂開的短靴，裂痕又往鞋帶孔的方向裂了一點。", "平常", None),

@@ -331,6 +331,19 @@ parts.append(f'''<section>
 </div>
 </section>''')
 
+parts.append("""<section>
+<div class="eyebrow">記憶體</div>
+<h2>四格，而且看得見</h2>
+<p>她一次只裝得下四件事。<strong>四格的內容你看得到</strong>——選項與台詞會把它們唸出來，
+所以你隨時知道自己替她留了什麼。</p>
+<p>滿了不會問你要丟哪一格。<strong>最舊的那一件自己掉出去</strong>，她沒得挑，你也擋不住，
+而且她連它存在過都不會知道。</p>
+<p>一件線索單獨看不出東西。<strong>兩件同時還在她腦子裡，她才拼得出來</strong>——
+而她一次只裝得下四件。所以「哪兩件同時還在」，就是你整天在決定的事。</p>
+<p>拼出來的東西會變成她那天晚上寫進守則的那句話。隔天早上她會唸出來，然後照做。
+<strong>那是唯一活得過一個晚上的東西。</strong></p>
+</section>""")
+
 parts.append('''<section>
 <div class="eyebrow">核心選擇</div>
 <h2>三個去處</h2>

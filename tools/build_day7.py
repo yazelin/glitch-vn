@@ -24,6 +24,8 @@ b = Board("board-day7", "Day 7・麵包",
 # ══════════ 早 ══════════
 b.prev = b.scene("d7m-scene", "第七天・清晨", "她開機的時候，房間裡已經有別人了。", "早",
                  bgm=A["bgm-theme"], start=True)
+b.prev = b.wake("d7m", prefill=["昨天守則上那句話"])
+b.link(b.find("d7m-scene")["id"], b.prev)
 b.chain([
     ("d7m-boot",  "逼——嗶！", "當機", G),
     ("d7m-door",  "黑洞先生站在門口。他手裡拿著一塊麵包，保鮮膜包得很整齊。", "平常", None),

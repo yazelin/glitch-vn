@@ -6,16 +6,16 @@
 ## 一、規模
 
 - 天數：7
-- 卡片：626（其中素材庫 134 張不在遊玩路徑上）
-- 連線：724
-- 變數：46
+- 卡片：738（其中素材庫 134 張不在遊玩路徑上）
+- 連線：893
+- 變數：64
 
 ## 二、變數
 
 | 變數 | 說明 | 預設 | 誰會動它 |
 |---|---|---|---|
 | `playerName` | 玩家名字：她存進 4KB 的第一格。對話中用 {{playerName}} | `記憶體` | Day 1、Day 2 |
-| `slotUsed` | 已用記憶格：0–4。滿了就得決定東西去哪 | `0` | Day 1、Day 2、Day 3、Day 4、Day 7 |
+| `slotUsed` | 已用記憶格：0–4。滿了就得決定東西去哪 | `0` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
 | `fedCount` | 餵給黑洞先生的件數：決定門邊備用短靴堆的高度與他的描述 | `0` | Day 1、Day 2、Day 3、Day 4 |
 | `givenCount` | 交給玩家保管的件數：存進核心硬碟的件數 | `0` | Day 1、Day 2、Day 3、Day 4、Day 6、Day 7 |
 | `routeCat` | 貓叫聲的去處：keep / feed / give | `` | （沒有卡片會動） |
@@ -32,7 +32,7 @@
 | `holeFeet` | 黑洞先生的腳數：餵他 +1、沒餵 -1;立繪與靴子堆跟著變 | `6` | Day 1、Day 2、Day 3、Day 4、Day 5 |
 | `dejaVu` | 似曾相識指數：她開始覺得今天好像發生過 | `0` | Day 2、Day 4 |
 | `savedOk` | 玩家有沒有存檔：0=沒存,隔天她會不認識你 | `0` | Day 1 |
-| `fedToday` | 今天餵過他沒有：每天早上歸零,一天只吃得下一個 | `0` | Day 1、Day 2、Day 3、Day 4、Day 5 |
+| `fedToday` | 今天餵過他沒有：每天早上歸零,一天只吃得下一個 | `0` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
 | `todayEvent` | 今天抽到的事件：random 抽出來的編號 | `0` | Day 2、Day 4 |
 | `usedNote` | 紙條事件用過了：事件池去重 | `0` | Day 1 |
 | `usedPicture` | 門口的畫用過了：事件池去重 | `0` | Day 2 |
@@ -57,9 +57,27 @@
 | `breadKept` | 麵包託給他了：Day 6 交出去=1 | `0` | Day 6 |
 | `toldHer` | 玩家告訴她了：Day 7 中午有沒有把 Day 3 的記憶還她 | `0` | Day 7 |
 | `ending` | 結局：A-full/A-eat/B/C | `` | Day 7 |
-| `overwroteCount` | 被擠掉過幾件：記憶體滿了還硬塞,被擠掉的件數 | `0` | Day 4 |
+| `overwroteCount` | 被擠掉過幾件：記憶體滿了還硬塞,被擠掉的件數 | `0` | Day 1、Day 2、Day 3、Day 4 |
 | `ngToken` | 玩家打的暗號：二週目知識閘門的輸入 | `` | Day 1 |
 | `ngPlus` | 二週目：答對暗號=1 | `0` | Day 1 |
+| `slot1` | 記憶格 1：她今天記得的第一件事 | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
+| `slot2` | 記憶格 2：第二件 | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
+| `slot3` | 記憶格 3：第三件 | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
+| `slot4` | 記憶格 4：第四件 | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
+| `pending` | 剛發現、還沒決定去處的東西：存進格子時用 valueFrom 複製 | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
+| `looksLeft` | 今天還能看幾個地方：他傍晚回來,一天只陪得了三個 | `3` | Day 3 |
+| `seenFridge` | 看過冰箱：探索紀錄 | `0` | Day 3 |
+| `seenWindow` | 看過窗台：探索紀錄 | `0` | Day 3 |
+| `seenBoots` | 看過門邊的靴子：探索紀錄 | `0` | Day 3 |
+| `seenRules` | 看過守則本：探索紀錄 | `0` | Day 3 |
+| `seenCorner` | 看過他坐的角落：探索紀錄 | `0` | Day 3 |
+| `keptFridge` | 留著:保鮮膜的折法：拼線索用 | `0` | Day 3 |
+| `keptWindow` | 留著:窗台上的圓印：拼線索用 | `0` | Day 3 |
+| `keptBoots` | 留著:裂開的靴子：拼線索用 | `0` | Day 3 |
+| `keptRules` | 留著:守則上那兩條：拼線索用 | `0` | Day 3 |
+| `keptCorner` | 留著:角落地板的圓：拼線索用 | `0` | Day 3 |
+| `lostBread` | 她把麵包那件事忘了：記憶體滿了,最舊的掉出去 | `0` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
+| `figured` | 今天她拼出了什麼：dough/hand/him/none | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
 
 ## 三、每天的選擇與後果
 
@@ -73,6 +91,7 @@
     - `usedNote` 設為 `1`
     - `slotUsed` 加 `1`
     - `todayRoute` 設為 `keep`
+    - `pending` 設為 `跟黑洞先生說謝謝`
 - 2. 給黑洞先生吃（他會長回一隻腳）
     - `usedNote` 設為 `1`
     - `fedToday` 加 `1`
@@ -114,6 +133,10 @@
 - `ngToken` ＝ `以前。` → 你以前來過
 - `todayRoute` ＝ `keep` → 她留著
 - `todayRoute` ＝ `give` → 交給你了
+- `slotUsed` ＝ `0` → 存進第 1 格
+- `slotUsed` ＝ `1` → 存進第 2 格
+- `slotUsed` ＝ `2` → 存進第 3 格
+- `slotUsed` ＝ `3` → 存進第 4 格
 
 ### Day 2・靴子與裂痕
 
@@ -124,6 +147,7 @@
 - 1. 留在我這裡（明天睡醒就忘了）
     - `slotUsed` 加 `1`
     - `todayRoute` 設為 `keep`
+    - `pending` 設為 `今天發現的那件事`
 - 2. 給黑洞先生吃（他會長回一隻腳）
     - `fedToday` 加 `1`
     - `fedCount` 加 `1`
@@ -142,32 +166,146 @@
 - `todayEvent` ＝ `3` → 事件3
 - `usedPicture` ＝ `1` → 事件2
 - `usedBoot` ＝ `1` → 事件3
+- `savedOk` ＝ `0` → 讀取失敗
+- `slotUsed` ＝ `0` → 存進第 1 格
+- `slotUsed` ＝ `1` → 存進第 2 格
+- `slotUsed` ＝ `2` → 存進第 3 格
+- `slotUsed` ＝ `3` → 存進第 4 格
 - `todayRoute` ＝ `feed` → 他吃掉了
 - `todayRoute` ＝ `keep` → 她留著
-- `savedOk` ＝ `0` → 讀取失敗
 
 ### Day 3・麵包
 
-**第三天・中午｜「冰箱裡有一塊我做的麵包」這件事，要放哪裡？**
+**第三天・中午｜今天要陪她去看哪裡？**
 
-- 1. 留在我這裡（明天睡醒就忘了）
-    - `slotUsed` 加 `1`
-    - `breadState` 設為 `self`
+- 1. keptFridge
+    - （條件：`seenFridge` ＝ `1`）（不動變數）
+    - （不動變數）
+- 2. keptWindow
+    - （條件：`seenWindow` ＝ `1`）（不動變數）
+    - （不動變數）
+- 3. keptBoots
+    - （條件：`seenBoots` ＝ `1`）（不動變數）
+    - （不動變數）
+- 4. keptRules
+    - （條件：`seenRules` ＝ `1`）（不動變數）
+    - （不動變數）
+- 5. keptCorner
+    - （條件：`seenCorner` ＝ `1`）（不動變數）
+    - （不動變數）
+
+**第三天・中午｜「保鮮膜的折法」這件事要放哪裡？**
+
+- 1. 留在我這裡（今天晚上我還講得出來）
+    - `keptFridge` 設為 `1`
 - 2. 給黑洞先生吃（他會長回一隻腳）
     - `fedToday` 加 `1`
     - `fedCount` 加 `1`
     - `holeFeet` 加 `1`
-    - `breadState` 設為 `hole`
 - 3. 交給你保管（留得住，但你要回來）
     - `givenCount` 加 `1`
-    - `breadState` 設為 `player`
 
-**第三天・深夜｜填空 → `ruleLine3`**：空位在這裡。今天要留什麼給明天的我？
+**第三天・中午｜「窗台上的圓印」這件事要放哪裡？**
+
+- 1. 留在我這裡（今天晚上我還講得出來）
+    - `keptWindow` 設為 `1`
+- 2. 給黑洞先生吃（他會長回一隻腳）
+    - `fedToday` 加 `1`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 3. 交給你保管（留得住，但你要回來）
+    - `givenCount` 加 `1`
+
+**第三天・中午｜「裂開的那雙靴子」這件事要放哪裡？**
+
+- 1. 留在我這裡（今天晚上我還講得出來）
+    - `keptBoots` 設為 `1`
+- 2. 給黑洞先生吃（他會長回一隻腳）
+    - `fedToday` 加 `1`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 3. 交給你保管（留得住，但你要回來）
+    - `givenCount` 加 `1`
+
+**第三天・中午｜「守則上的那兩條」這件事要放哪裡？**
+
+- 1. 留在我這裡（今天晚上我還講得出來）
+    - `keptRules` 設為 `1`
+- 2. 給黑洞先生吃（他會長回一隻腳）
+    - `fedToday` 加 `1`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 3. 交給你保管（留得住，但你要回來）
+    - `givenCount` 加 `1`
+
+**第三天・中午｜「角落地板上的圓」這件事要放哪裡？**
+
+- 1. 留在我這裡（今天晚上我還講得出來）
+    - `keptCorner` 設為 `1`
+- 2. 給黑洞先生吃（他會長回一隻腳）
+    - `fedToday` 加 `1`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 3. 交給你保管（留得住，但你要回來）
+    - `givenCount` 加 `1`
+
+**第三天・傍晚｜那塊麵包要怎麼辦？**
+
+- 1. 拿給黑洞先生（他今天還沒吃東西）
+    - `breadState` 設為 `hole`
+    - `fedToday` 加 `1`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 2. 放回冰箱（明天她不會記得它在那裡）
+    - `breadState` 設為 `self`
+- 3. 交給你保管（她再也不會知道自己烤過麵包）
+    - `breadState` 設為 `player`
+    - `givenCount` 加 `1`
+
+**第三天・傍晚｜填空 → `ruleLine3`**：空位在這裡。今天要留什麼給明天的我？
+
+**第三天・傍晚｜填空 → `ruleLine3`**：空位在這裡。今天要留什麼給明天的我？
+
+**第三天・傍晚｜填空 → `ruleLine3`**：空位在這裡。今天要留什麼給明天的我？
+
+**第三天・傍晚｜填空 → `ruleLine3`**：空位在這裡。今天要留什麼給明天的我？
 
 **這天會依狀態分岔的地方**
 
-- `breadState` ＝ `hole` → 他吃掉了
-- `breadState` ＝ `self` → 她留著
+- `slotUsed` ＝ `0` → 存進第 1 格
+- `slotUsed` ＝ `1` → 存進第 2 格
+- `slotUsed` ＝ `2` → 存進第 3 格
+- `slotUsed` ＝ `3` → 存進第 4 格
+- `keptRules` ＝ `1` → 拼起來了：hand
+- `keptRules` ＝ `1` → 拼起來了：dough
+- `keptCorner` ＝ `1` → 拼起來了：feet
+- `keptWindow` ＝ `1` → 拼起來了：dough
+- `keptFridge` ＝ `1` → 拼起來了：hand
+- `keptBoots` ＝ `1` → 拼起來了：feet
+- `looksLeft` ＝ `2` → 時間
+- `looksLeft` ＝ `1` → 時間
+- `seenFridge` ＝ `0` → 沒去冰箱
+- `seenWindow` ＝ `0` → 沒去窗台
+- `seenBoots` ＝ `0` → 沒去門邊那疊短靴
+- `seenRules` ＝ `0` → 沒去守則本
+- `seenCorner` ＝ `0` → 沒去黑洞先生坐的那個角落
+- `seenWindow` ＝ `0` → 沒去窗台
+- `seenBoots` ＝ `0` → 沒去門邊那疊短靴
+- `seenRules` ＝ `0` → 沒去守則本
+- `seenCorner` ＝ `0` → 沒去黑洞先生坐的那個角落
+- `seenBoots` ＝ `0` → 沒去門邊那疊短靴
+- `seenRules` ＝ `0` → 沒去守則本
+- `seenCorner` ＝ `0` → 沒去黑洞先生坐的那個角落
+- `seenRules` ＝ `0` → 沒去守則本
+- `seenCorner` ＝ `0` → 沒去黑洞先生坐的那個角落
+- `seenCorner` ＝ `0` → 沒去黑洞先生坐的那個角落
+- `figured` ＝ `dough` → 他說（發酵）
+- `figured` ＝ `hand` → 他說（那個人是我嗎）
+- `figured` ＝ `feet` → 他說（他以前有腳嗎）
+- `lostBread` ＝ `1` → 她忘了麵包這件事
+- `figured` ＝ `dough` → 守則引子（dough）
+- `figured` ＝ `hand` → 守則引子（hand）
+- `figured` ＝ `feet` → 守則引子（feet）
 
 ### Day 4・數靴子
 
@@ -182,10 +320,7 @@
 **第四天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
-    - （條件：`slotUsed` ≥ `4`）`overwroteCount` 加 `1`
-    - （條件：`slotUsed` ≥ `4`）`todayRoute` 設為 `keep`
-    - （條件：`slotUsed` ≥ `4`）`usedPlant` 設為 `1`
-    - `slotUsed` 加 `1`
+    - `pending` 設為 `窗台那盆歪的植物`
     - `todayRoute` 設為 `keep`
     - `usedPlant` 設為 `1`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -202,10 +337,7 @@
 **第四天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
-    - （條件：`slotUsed` ≥ `4`）`overwroteCount` 加 `1`
-    - （條件：`slotUsed` ≥ `4`）`todayRoute` 設為 `keep`
-    - （條件：`slotUsed` ≥ `4`）`usedReceipt` 設為 `1`
-    - `slotUsed` 加 `1`
+    - `pending` 設為 `凌晨三點的收據`
     - `todayRoute` 設為 `keep`
     - `usedReceipt` 設為 `1`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -222,10 +354,7 @@
 **第四天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
-    - （條件：`slotUsed` ≥ `4`）`overwroteCount` 加 `1`
-    - （條件：`slotUsed` ≥ `4`）`todayRoute` 設為 `keep`
-    - （條件：`slotUsed` ≥ `4`）`usedButton` 設為 `1`
-    - `slotUsed` 加 `1`
+    - `pending` 設為 `口袋裡的鈕扣`
     - `todayRoute` 設為 `keep`
     - `usedButton` 設為 `1`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -242,10 +371,7 @@
 **第四天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
-    - （條件：`slotUsed` ≥ `4`）`overwroteCount` 加 `1`
-    - （條件：`slotUsed` ≥ `4`）`todayRoute` 設為 `keep`
-    - （條件：`slotUsed` ≥ `4`）`usedFlour` 設為 `1`
-    - `slotUsed` 加 `1`
+    - `pending` 設為 `水槽的麵粉痕跡`
     - `todayRoute` 設為 `keep`
     - `usedFlour` 設為 `1`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -262,10 +388,7 @@
 **第四天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
-    - （條件：`slotUsed` ≥ `4`）`overwroteCount` 加 `1`
-    - （條件：`slotUsed` ≥ `4`）`todayRoute` 設為 `keep`
-    - （條件：`slotUsed` ≥ `4`）`usedDoorNote` 設為 `1`
-    - `slotUsed` 加 `1`
+    - `pending` 設為 `門墊上的紙條`
     - `todayRoute` 設為 `keep`
     - `usedDoorNote` 設為 `1`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -282,10 +405,7 @@
 **第四天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
-    - （條件：`slotUsed` ≥ `4`）`overwroteCount` 加 `1`
-    - （條件：`slotUsed` ≥ `4`）`todayRoute` 設為 `keep`
-    - （條件：`slotUsed` ≥ `4`）`usedMap` 設為 `1`
-    - `slotUsed` 加 `1`
+    - `pending` 設為 `牆上的地圖`
     - `todayRoute` 設為 `keep`
     - `usedMap` 設為 `1`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -315,6 +435,10 @@
 - `usedButton` ＝ `1` → 事件4
 - `usedFlour` ＝ `1` → 事件5
 - `usedDoorNote` ＝ `1` → 事件6
+- `slotUsed` ＝ `0` → 存進第 1 格
+- `slotUsed` ＝ `1` → 存進第 2 格
+- `slotUsed` ＝ `2` → 存進第 3 格
+- `slotUsed` ＝ `3` → 存進第 4 格
 - `todayRoute` ＝ `feed` → 他吃掉了
 - `todayRoute` ＝ `keep` → 她留著
 - `todayEvent` ＝ `1` → 痕跡1
