@@ -1,0 +1,305 @@
+#!/usr/bin/env python3
+"""生 docs/index.html —— 遊戲介紹、做的時候學到的、作者。
+
+文案手寫（這是要讀的東西，生不出來），但**數字從 project.json 拉**，
+免得改了劇本之後站上還寫著舊的張數。
+"""
+import html, json, pathlib
+
+P = json.load(open(pathlib.Path.home() / "glitch-vn/backup/project.json"))
+DAYS = [b for b in P["boards"] if b["id"].startswith("board-day")]
+CARDS = sum(len(b["nodes"]) for b in DAYS)
+EDGES = sum(len(b["edges"]) for b in DAYS)
+CHOICES = sum(1 for b in DAYS for n in b["nodes"] if n["data"].get("type") == "choice")
+INPUTS = sum(1 for b in DAYS for n in b["nodes"] if n["data"].get("type") == "input")
+BRANCH = sum(1 for b in DAYS for e in b["edges"] if (e.get("data") or {}).get("condition"))
+VARS = len({op["variable"] for b in DAYS for n in b["nodes"]
+            for op in (n["data"].get("variableOps") or [])}
+           | {n["data"]["inputVariable"] for b in DAYS for n in b["nodes"]
+              if n["data"].get("inputVariable")})
+E = html.escape
+
+CSS = """
+:root{
+  /* 取自遊戲美術：黑洞先生的身體 #14142a、格莉奇 #c8c8f0、房間夜燈的暖褐 */
+  --ground:#f7f6fb; --surface:#fff; --sunk:#eeecf6;
+  --ink:#16162c; --body:#3a3752; --muted:#615d7d; --faint:#8b87a5;
+  --rule:#dcd8ea; --accent:#4f4fb0; --lamp:#8a5a1e;
+  --measure:34em;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --ground:#0d0d1e; --surface:#16162e; --sunk:#111124;
+  --ink:#e7e4f4; --body:#c3bfda; --muted:#9793b4; --faint:#6f6b8c;
+  --rule:#2a2a48; --accent:#a8a8e8; --lamp:#d9a05b;
+}}
+:root[data-theme="dark"]{
+  --ground:#0d0d1e; --surface:#16162e; --sunk:#111124;
+  --ink:#e7e4f4; --body:#c3bfda; --muted:#9793b4; --faint:#6f6b8c;
+  --rule:#2a2a48; --accent:#a8a8e8; --lamp:#d9a05b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--body);
+  font-family:"Noto Sans TC",system-ui,sans-serif;
+  font-size:17px;line-height:2;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Noto Serif TC",Georgia,serif;color:var(--ink);
+  text-wrap:balance;margin:0;font-weight:600;letter-spacing:.015em}
+a{color:var(--accent)}
+.wrap{max-width:calc(var(--measure) + 260px);margin:0 auto;padding:0 26px}
+.col{max-width:var(--measure)}
+.mono,code{font-family:"DM Mono","SFMono-Regular",Menlo,monospace;font-variant-numeric:tabular-nums}
+code{font-size:.88em;color:var(--ink);background:var(--sunk);
+  padding:1px 5px;border-radius:2px;word-break:break-word}
+.guard code{background:transparent;padding:0;color:inherit}
+
+/* 開場 */
+.hero{padding:110px 0 60px}
+.kicker{font-size:12.5px;letter-spacing:.06em;
+  color:var(--accent);margin-bottom:26px}
+.hero h1{font-size:clamp(38px,7vw,68px);line-height:1.18}
+.hero .lede{margin:28px 0 0;max-width:var(--measure);font-size:19px;color:var(--muted)}
+
+/* 數字條：這些是從遊戲檔案讀的，不是寫死的 */
+.stats{display:flex;flex-wrap:wrap;gap:0;margin-top:46px;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.stat{padding:20px 30px 20px 0;margin-right:30px;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:"DM Mono",monospace;font-size:27px;
+  color:var(--ink);font-weight:500;line-height:1.2}
+.stat span{font-size:12.5px;color:var(--faint);letter-spacing:.04em}
+
+section{padding:64px 0;border-top:1px solid var(--rule)}
+.eyebrow{font-size:12.5px;letter-spacing:.05em;color:var(--faint);margin-bottom:14px}
+h2{font-size:31px;margin-bottom:8px}
+section p{max-width:var(--measure);margin:20px 0 0}
+section p strong{color:var(--ink);font-weight:500}
+blockquote{margin:26px 0 0;padding:0 0 0 20px;border-left:2px solid var(--accent);
+  max-width:var(--measure);color:var(--ink);font-family:"Noto Serif TC",serif;font-size:19px}
+
+/* 教訓：每一條配一支抓它的東西。這個配對是真的——每一條都變成了腳本 */
+.lesson{margin-top:38px;max-width:calc(var(--measure) + 120px)}
+.lesson h3{font-size:19.5px;line-height:1.6}
+.lesson p{margin-top:10px;max-width:var(--measure)}
+.guard{margin-top:14px;padding:11px 16px;background:var(--sunk);
+  border-left:2px solid var(--lamp);border-radius:0 2px 2px 0;
+  font-family:"DM Mono",monospace;font-size:12.5px;line-height:1.85;color:var(--muted)}
+.guard b{color:var(--lamp);font-weight:400}
+
+.grouptitle{margin-top:56px;padding-bottom:10px;border-bottom:1px solid var(--rule);
+  font-size:13px;letter-spacing:.05em;color:var(--accent)}
+.grouptitle:first-of-type{margin-top:34px}
+
+/* 誰做的 */
+.who{display:grid;grid-template-columns:1fr;gap:0;margin-top:28px}
+.credit{margin:0;display:grid;grid-template-columns:118px 1fr;gap:20px;padding:13px 0;
+  border-bottom:1px solid var(--rule);align-items:baseline}
+.credit:last-child{border-bottom:0}
+.credit dt{font-size:12.5px;color:var(--faint);letter-spacing:.03em}
+.credit dd{margin:0;font-size:15.5px;line-height:1.85}
+
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.links a{display:inline-block;padding:9px 17px;border:1px solid var(--rule);
+  border-radius:2px;text-decoration:none;font-size:14.5px;background:var(--surface)}
+.links a:hover{border-color:var(--accent)}
+.links a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+footer{padding:52px 0 84px;border-top:1px solid var(--rule);
+  color:var(--faint);font-size:13.5px}
+footer p{max-width:var(--measure);margin:0 0 8px}
+@media (max-width:620px){
+  body{font-size:16px;line-height:1.95}
+  .hero{padding:64px 0 44px}
+  .stat{padding-right:20px;margin-right:20px}
+  .credit{grid-template-columns:1fr;gap:2px}
+}
+"""
+
+LESSONS = [
+    ("平台", [
+        ("條件分支會靜默消失",
+         "用 <code>POST /nodes</code> 推帶條件的連線，伺服器會把 "
+         "<code>edge.data.condition</code> 整個丟掉，還會依「同一個出口」去重、只留最後一條。"
+         "條件分支的做法本來就是同一個出口拉多條線，所以這兩件事加起來會讓整組分支消失——"
+         "而且不會報錯。卡片還在，只是變成走不到的孤島。",
+         "改用 <b>PUT /projects/:id</b> 整包替換。這種錯不會自己現形，只能靠模擬器走一次才看得出來。"),
+        ("伺服器不驗結構，所以問不出欄位長怎樣",
+         "POST 什麼就存什麼，回應也照樣吐回來，從回應學不到任何東西。"
+         "真正的欄位定義在前端的 bundle 裡，連內建範例專案的資料都在。",
+         "抓 <b>/assets/index-*.js</b> 直接讀。整套卡片的預設值與範例都在那裡面。"),
+        ("AI 對話卡要玩家登入，而且失敗訊息會變成角色的台詞",
+         "平台有一張 AI 對話卡，可以讓玩家跟角色自由聊天。但沒登入的玩家打那個端點會拿到 401，"
+         "而播放器的錯誤處理是把錯誤訊息當成角色的回覆推進對話——所以玩家會看到角色開口說"
+         "「請先使用 Google 登入」。匯出的單檔網頁裡更是完全沒有 AI runtime。",
+         "先打端點測，別看文件。<b>負控制</b>：拿一個一定不存在的端點比對，"
+         "確認 404 長什麼樣，才知道 401 代表端點真的在。"),
+    ]),
+    ("驗證", [
+        ("可達性不夠，要帶著變數狀態走",
+         "有條件連線之後，「這張卡連得到」跟「這張卡走得到」是兩件事。"
+         "要照 <code>set</code>／<code>add</code> 更新變數、照條件挑邊，才驗得出哪些卡實際上到不了，"
+         "以及數字有沒有算錯。",
+         "<b>sim_board.py</b>：把 random 展開成每一種可能，走遍所有玩法，回報走不到的卡與環。"),
+        ("只有一條有條件的出口，等於死路",
+         "最後一天結尾有一張卡只掛了一條「二週目才走」的線。第一次玩的人走到那裡就卡住，"
+         "而畫面上什麼都不會發生。",
+         "模擬器的訊息是 <b>「某某卡沒有可走的出線」</b>。這條規則後來救了不只一次。"),
+        ("有人讀、沒人寫的變數",
+         "第二天的事件池有一組去重閘門，讀兩個變數來判斷事件出現過沒有——"
+         "但沒有任何卡片寫入那兩個變數。去重從來沒有生效過，而且看起來完全正常。",
+         "檢查程式把「被寫」跟「被讀」分開算，<b>讀得到但沒人寫</b>就報錯：靠它的分支永遠不會成立。"),
+        ("工具給錯答案，我差點照著刪",
+         "同一支檢查程式一開始只算「變數有沒有被寫」，於是把十一個還在用的變數報成死變數。"
+         "它漏掉了兩種用法：連線的條件，還有台詞裡的 <code>{{變數}}</code> 引用。"
+         "我差一點就照著它的話刪掉了。",
+         "工具說的話也要驗。修好之後<b>立刻抓到一個真的 bug</b>——就是上面那個去重閘門。"),
+        ("卡片編號撞名會變成環",
+         "同一天裡兩張卡用了同一個 id，接線就接到錯的那一張，在圖上變成一個迴圈。"
+         "症狀是模擬器跑不完，不是報錯。",
+         "建構器加一行 <b>assert</b> 擋重複 id。這種錯不該靠眼睛抓。"),
+    ]),
+    ("用 AI 幫忙寫", [
+        ("提問的框架決定你會拿到什麼答案",
+         "同一份劇本，我問了三次。第一次問「有什麼問題」，六個模型交出一份拆除清單，"
+         "每一份都寫著「致命傷」。第二次改成試玩模擬——只准描述當下的反應，"
+         "不准評論、不准給建議——四個模型全都說會想繼續玩第三天。"
+         "第三次只准找好的，用來確認哪些東西不能動。",
+         "同一份稿子，三種問法，三種結論。<b>只改跨框架都成立的</b>，"
+         "只在單一框架出現的先擱著。"),
+        ("試玩框架給的東西，分析框架給不了",
+         "「有什麼問題」拿到的是意見。「你讀到這裡在想什麼」拿到的是<b>棄坑點</b>——"
+         "兩個模型在同一段說「差點滑掉」，那個訊號比六份分析都有用。",
+         "問法：<b>逐段寫下你當下的反應，無聊就說無聊，想關掉就寫想關掉。</b>"),
+        ("開放題會編，選擇題不會",
+         "早期驗配樂的時候，我問模型「這首曲子裡有哪些樂器」，同一個檔案問三次拿到三份"
+         "互相矛盾的答案，而且每一份都講得很有把握。改成二選一的比對題就穩了。",
+         "驗收一律問<b>比對題</b>，不問開放題。而且要先建 ground truth。"),
+        ("一個模型抓到的洞，另外五個沒看見",
+         "第五天早上原本有一句守則寫著「他明天會在家」——等於昨天的她預言了今天。"
+         "她每天睡醒清空，不可能知道。這個前提漏洞只有一個模型指出來。",
+         "同一題<b>同時發給好幾個</b>，不要只信一個。彼此矛盾的地方就是要自己判斷的地方。"),
+    ]),
+    ("寫作本身", [
+        ("中文的第二人稱不夠用",
+         "「你」留給玩家、「妳」留給格莉奇之後，格莉奇要跟黑洞先生講話就沒有第二人稱可用了。"
+         "硬套的結果是「黑洞先生每次都說『妳以前』。黑洞先生到底知道多少我不記得的事？」——"
+         "讀起來像法庭筆錄。",
+         "解法是中文本來就有的：<b>句首叫名字，後面省略主語</b>。"
+         "寫成 check_pronouns.py，四百多張卡自動掃。"),
+        ("晚上不對中午的選擇有反應，那個選擇就是假的",
+         "前兩天做的時候還沒有這條規矩。不管玩家中午選了什麼，晚上他回來都是同一套台詞。"
+         "六個模型一致點名這件事。",
+         "現在<b>每一天的晚上都依當天的選擇分三個版本</b>演。"),
+        ("不要用旁白把機制解釋掉",
+         "最後一天有一個結局，原本旁白直接寫「他一天只吃得下一件，今天這一件排不進去了」。"
+         "那句話把玩家的「原來如此」降級成「被告知」。",
+         "換成<b>門邊那疊短靴今天很高</b>。玩家自己算得出來。"),
+        ("改線上版不改腳本，重建就蓋回去",
+         "有兩次我用 API 直接改了台詞，沒回頭改建置腳本。下一次重建整天，改動全部消失。",
+         "規矩：<b>一律改腳本</b>。線上版是輸出，不是原稿。"),
+        ("弄丟的腳本，可以從成品反推回來",
+         "前兩天的建置腳本在一次暫存目錄被清空的時候弄丟了，那兩天只存在線上版，改不動。",
+         "<b>reverse_board.py</b> 把板子原樣印成 Python。"
+         "關鍵是<b>先在本機逐筆比對再推</b>——反推不完整的話直接推就毀了。"),
+    ]),
+]
+
+
+def lessons_html():
+    out = []
+    for group, items in LESSONS:
+        out.append(f'<h3 class="grouptitle">{E(group)}</h3>')
+        for title, body, guard in items:
+            out.append(f'<div class="lesson"><h3>{E(title)}</h3><p>{body}</p>'
+                       f'<div class="guard">{guard}</div></div>')
+    return "".join(out)
+
+
+HTML = f'''<title>做一個會忘記你的遊戲</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@600&display=swap">
+<style>{CSS}</style>
+
+<div class="wrap">
+
+<header class="hero">
+<div class="kicker">格莉奇與黑洞先生　製作記錄</div>
+<h1>做一個<br>會忘記你的遊戲</h1>
+<p class="lede">她的記憶體只有 4KB，每天睡醒清空。你是她的外接記憶體——
+她裝不下的東西可以交給你保管，但你要回來，她才拿得回去。
+這頁記的是做這個東西的時候撞到的牆，以及每一面牆後來變成了哪一支腳本。</p>
+<div class="stats">
+<div class="stat"><b>{len(DAYS)}</b><span>天</span></div>
+<div class="stat"><b>{CARDS}</b><span>張卡</span></div>
+<div class="stat"><b>{EDGES}</b><span>條連線</span></div>
+<div class="stat"><b>{BRANCH}</b><span>條看狀態才走</span></div>
+<div class="stat"><b>{VARS}</b><span>個變數</span></div>
+<div class="stat"><b>4</b><span>個結局</span></div>
+</div>
+</header>
+
+<section>
+<div class="eyebrow">這個遊戲</div>
+<h2>一天一圈，七天結帳</h2>
+<p>格莉奇是一個機器人，記憶體只有 4KB，每天睡醒清空。黑洞先生是她的室友，白天去上班，
+永遠吃不飽，會把她忘掉的東西吃掉——他一天只吃得下一件。他沒有腳，
+用一叢穿短靴的觸手撐起西裝，吃飽多幾隻、餓了少幾隻，門邊堆著沒人穿的短靴。</p>
+<p>每天中午他去上班，只剩她跟你。那天會有一件小事，而你要決定它的去處：
+<strong>留在她的 4KB</strong>（明天睡醒就忘）、<strong>給黑洞先生吃</strong>（消失，但他長回一隻腳）、
+或是<strong>交給你保管</strong>（留得住，但你要回來）。三個去處沒有一個是免費的。</p>
+<p>七天之後結帳。他一天只吃得下一件，所以<strong>你這一週每餵他一次，就花掉一次他的胃</strong>——
+最後一天她端出一塊為他烤的麵包，而他吃不下。前六天每一次看起來都像好意，
+帳單開在最後一天。</p>
+<blockquote>「記得存檔。不然明天我又要重新認識你。」</blockquote>
+<p>存檔在這個遊戲裡是玩法的一部分。她沒有手幫你按——你不存，第二天她不認識你，
+你的名字、你昨天說的話，她那裡一格都沒有。</p>
+<div class="links">
+<a href="manual.html">使用說明與攻略</a>
+</div>
+</section>
+
+<section>
+<div class="eyebrow">做的時候學到的</div>
+<h2>每一面牆，後來都變成一支腳本</h2>
+<p>底下每一條都真的發生過，而且每一條都留下了一支會擋住它再發生的東西。
+這是我覺得比劇本本身更值得記下來的部分——<strong>靠記性擋不住的，就寫成程式擋</strong>。</p>
+{lessons_html()}
+</section>
+
+<section>
+<div class="eyebrow">誰做的</div>
+<h2>林亞澤</h2>
+<p>擎添工業。工業自動化系統整合出身，現在做 AI 工具。
+平常在 <a href="https://yazelin.github.io">yazelin.github.io</a> 寫東西。</p>
+<p>格莉奇與黑洞先生比這個遊戲早很多。先是他部落格上那個會畫圖的小東西，
+後來變成一套出過的貼圖。這個 VN 把他們搬進一個有迴圈的故事裡，
+給了他們一個會結束的七天。</p>
+<p>他自己教的方法論叫<strong>甲方思維</strong>——心法是把自己當甲方，招式是開規格、下發包、做驗收。
+這個專案基本上就是那套方法自己跑了一次。</p>
+<div class="who">
+<dl class="credit"><dt>世界觀與角色</dt><dd>林亞澤。格莉奇與黑洞先生原本就存在，這裡只是換了一個場地。</dd></dl>
+<dl class="credit"><dt>方向</dt><dd>林亞澤。包括每一次退稿——麵包那個結局是第四個版本，前三個都被打回來。</dd></dl>
+<dl class="credit"><dt>劇本草稿</dt><dd>llmshare 上的多個模型平行寫，同一段各寫一份，再逐句挑。沒有一天是整篇照抄的。</dd></dl>
+<dl class="credit"><dt>實作與驗證</dt><dd>Claude。建置腳本、模擬器、代名詞檢查、這頁與說明書的產生器。</dd></dl>
+<dl class="credit"><dt>配樂</dt><dd>Suno 生曲，自己後製成無縫循環。</dd></dl>
+</div>
+<div class="links">
+<a href="https://yazelin.github.io">部落格</a>
+<a href="manual.html">遊戲說明書</a>
+</div>
+</section>
+
+<footer>
+<p>這頁的數字（{len(DAYS)} 天、{CARDS} 張卡、{EDGES} 條連線、{VARS} 個變數）
+是從遊戲檔案讀出來的，不是寫死的。改了劇本重跑 <span class="mono">tools/gen_about.py</span> 就同步。</p>
+<p>《格莉奇與黑洞先生》　MIT　林亞澤</p>
+</footer>
+
+</div>
+'''
+
+out = pathlib.Path.home() / "glitch-vn/docs/index.html"
+out.write_text(HTML, encoding="utf-8")
+print(f"寫好 {out}（{len(HTML)//1024} KB）")

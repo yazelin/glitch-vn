@@ -306,7 +306,7 @@ def choice_block(seg, q, opts, times=1):
 
 parts = []
 parts.append(f'''<div class="wrap"><header class="hero">
-<div class="boot">逼——嗶！　系統讀取中</div>
+<div class="boot"><a href="index.html" style="color:inherit">← 製作記錄</a>　逼——嗶！　系統讀取中</div>
 <h1>格莉奇與黑洞先生<br>使用說明</h1>
 <p class="sub">一天一圈的視覺小說。她的記憶體只有 4KB，每天睡醒清空。
 你是她的外接記憶體——她裝不下的東西可以交給你保管，但你要回來，她才拿得回去。</p>
@@ -466,7 +466,7 @@ HTML = f'''<title>格莉奇與黑洞先生使用說明</title>
 {"".join(parts)}
 '''
 
-out = pathlib.Path.home() / "glitch-vn/docs/index.html"
+out = pathlib.Path.home() / "glitch-vn/docs/manual.html"
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(HTML, encoding="utf-8")
 print(f"寫好 {out}（{len(HTML) // 1024} KB，{len(DAYS)} 天、{len(var_rows())} 個變數）")
