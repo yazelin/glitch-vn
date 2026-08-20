@@ -139,4 +139,57 @@ b.link('d1ng-y3', 'd1m-boot', 'right')
 b.link('d1ng-hub', 'd1m-boot', 'right')
 b.link('d1m-scene', 'd1ng-ask', 'right')
 
+# ══════════════════ 打磨（三輪會審之後）══════════════════
+# 第一輪問「有什麼問題」，六家交出一份拆除清單。第二輪改成試玩模擬（只准描述
+# 反應、不准評論），四家全都說會想玩第三天——比第一輪的「致命傷」溫和得多。
+# 第三輪只准找好的，用來確認哪些不能動。跨框架都成立的才改，只在單一框架出現
+# 的先擱著。
+
+# ── 一、開場那個輸入框把新玩家擋在門外 ──
+# 兩輪都有人說「一開始叫我打字，我有點不想打」。二週目閘門是我後來加的，
+# 結果變成新玩家看到的第一個畫面，而那段是寫給回鍋玩家的。
+# 改成先問一句是非題：第一次來的人點一下就進去，不用面對空白輸入框。
+ngq = b.choice("d1ng-q", "開始之前。\n你以前來過這裡嗎？",
+               ["我第一次來", "我來過。我知道一件她不知道的事。"], x=-1500, y=-200)
+b.unlink("d1m-scene", "d1ng-ask")
+b.link("d1m-scene", ngq)
+b.link(ngq, "d1m-boot", "choice-0")
+b.link(ngq, "d1ng-ask", "choice-1")
+
+# ── 二、黑洞先生的外觀說明是棄坑點 ──
+# 「描述太長又還沒進入重點，我差點就滑掉」「星空頭加觸手加短靴太刻意獵奇」。
+# 描述砍短；「一天只吃得下一個」移到中午——那句在做決定的當下才有用。
+b.settext("d1m-narr2", "一個穿西裝的黑影走過來。他的頭是一顆裝著星空的球。西裝底下沒有腿。")
+b.remove("d1m-one")
+b.link("d1m-boots", "d1m-bye")
+
+# ── 三、選擇卡前面把三個選項又唸了一遍 ──
+# 選項就寫在卡上，唸第二遍只是拖時間。換成剛才從早上移下來的那句。
+b.settext("d1n-rules", "喔對了。黑洞先生一天只吃得下一個。他是永遠吃不飽，不是永遠吃得下。")
+
+# ── 四、餵他那條要先聽見代價，晚上再看見它 ──
+# 原本直接用旁白說「他永遠不會知道」。改成讓玩家聽見聲音，晚上自己對上。
+b.settext("d1n-feed", "她把紙條留在桌上。門外有東西掉在地上的聲音，遠的，輕的，"
+                      "像一隻靴子落在別的靴子上面。")
+
+# ── 五、晚上要對中午的選擇有反應 ──
+# 這是 Day 3 之後才定下來的規矩，前兩天當時還沒有。六家一致點名。
+for nid, route in (("d1n-keep", "keep"), ("d1n-feed", "feed"), ("d1n-give", "give")):
+    b.addops(nid, [{"variable": "todayRoute", "kind": "set", "value": route}])
+
+FEET = "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。"
+b.settext("d1e-feet", FEET + "最上面那雙是剛剛才放上去的，鞋口還撐著。她沒有數，她從來不數。")
+ex = 4200
+r_keep = b.say("d1e-r-keep", FEET + "她整個下午都在想那句謝謝要謝什麼。"
+               "現在他就站在她面前，而她已經忘了自己想過。", who=None, title="她留著",
+               x=ex, y=-260)
+r_give = b.say("d1e-r-give", FEET + "那句謝謝在你那裡。她看著他，什麼都沒說，"
+               "因為她不知道自己有話要說。", who=None, title="交給你了", x=ex, y=260)
+b.unlink("d1e-back", "d1e-feet")
+b.link("d1e-back", r_keep, "right", cond={"variable": "todayRoute", "op": "eq", "value": "keep"})
+b.link("d1e-back", r_give, "right", cond={"variable": "todayRoute", "op": "eq", "value": "give"})
+b.link("d1e-back", "d1e-feet")
+b.link(r_keep, "d1e-rule1")
+b.link(r_give, "d1e-rule1")
+
 b.push('Day 1・你是誰：從線上版反推重建')

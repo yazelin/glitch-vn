@@ -93,6 +93,31 @@ class Board:
         if cond: e["data"] = {"condition": {"kind": "variable", **cond}}
         self.edges.append(e)
 
+    def find(self, nid):
+        return next(n for n in self.nodes if n["id"] == nid)
+
+    def settext(self, nid, text):
+        """改一張已經存在的卡的台詞。反推回來的板子用這個打磨,比重寫整張安全。"""
+        self.find(nid)["data"]["text"] = text
+
+    def addops(self, nid, ops):
+        d = self.find(nid)["data"]
+        base = d.setdefault("variableOps", [])
+        base += [{"id": f"op-{len(base) + i}", **o} for i, o in enumerate(ops)]
+
+    def remove(self, nid):
+        """刪掉一張卡連同它的線。搬走內容之後原卡要刪,不然會變成走不到的孤兒。"""
+        n = len(self.nodes)
+        self.nodes[:] = [x for x in self.nodes if x["id"] != nid]
+        assert len(self.nodes) < n, f"本來就沒有這張卡：{nid}"
+        self.edges[:] = [e for e in self.edges
+                         if e["source"] != nid and e["target"] != nid]
+
+    def unlink(self, a, b):
+        n = len(self.edges)
+        self.edges[:] = [e for e in self.edges if not (e["source"] == a and e["target"] == b)]
+        assert len(self.edges) < n, f"本來就沒有這條線：{a} -> {b}"
+
     def chain(self, items, y=0, x=None, link_prev=True):
         """[(id, 文字, 表情, 說話者)] 串成一直線,自動接上前一張。
 

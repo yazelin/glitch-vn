@@ -96,4 +96,33 @@ b.link('d2e-save', 'd2e-sleep', 'right')
 b.link('d2e-sleep', 'd2e-tbc', 'right')
 b.link('d2e-tbc', 'd2e-jump', 'right')
 
+# ══════════════════ 打磨（三輪會審之後）══════════════════
+
+# ── 一、沒存檔那條原本在唸玩家 ──
+# 「外接記憶體要自己按存檔。我說過了。」——這是在罵人，而且罰的是玩家。
+# glm 給了更好的方向：讓「沒存檔」本身變得有意思，而不是變成懲罰。
+b.settext("d2m-lost3", "所以我只能重問一次。有點尷尬，"
+                       "不過我每天都在重問，所以也還好。")
+b.settext("d2m-relearn", "你隨便講一個都行，我就當那是真的。\n"
+                         "反正明天我也會忘——除非這次有人幫我按存檔。")
+
+# ── 二、晚上要對中午的選擇有反應 ──
+for nid, route in (("d2n-keep", "keep"), ("d2n-feed", "feed"), ("d2n-give", "give")):
+    b.addops(nid, [{"variable": "todayRoute", "kind": "set", "value": route}])
+
+ex = 3600
+r_feed = b.say("d2e-r-feed", "他今天回來得比平常穩，走路的時候沒有搖。"
+               "她發現的那件事現在在他身上，而她連自己發現過什麼都不記得。",
+               who=None, title="他吃掉了", x=ex, y=-260)
+r_keep = b.say("d2e-r-keep", "她想跟他講今天發現的那件事。話到嘴邊，"
+               "她發現自己已經不確定那是什麼了。", who=None, title="她留著", x=ex, y=0)
+r_give = b.say("d2e-r-give", "她今天沒有東西可以跟他講。她發現的那件事在你那裡，"
+               "她連自己交出去過都不知道。", who=None, title="交給你了", x=ex, y=260)
+b.unlink("d2e-back", "d2e-deja")
+b.link("d2e-back", r_feed, "right", cond={"variable": "todayRoute", "op": "eq", "value": "feed"})
+b.link("d2e-back", r_keep, "right", cond={"variable": "todayRoute", "op": "eq", "value": "keep"})
+b.link("d2e-back", r_give)
+for r in (r_feed, r_keep, r_give):
+    b.link(r, "d2e-deja")
+
 b.push('Day 2・靴子與裂痕：從線上版反推重建')
