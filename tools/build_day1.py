@@ -5,7 +5,7 @@
 say()／chain()。台詞照樣直接改這裡,改完跑這支重建,不要只改線上版。
 """
 import sys; sys.path.insert(0, "/home/ct/glitch-vn/tools")
-from daykit import Board
+from daykit import Board, G, HOLE
 
 b = Board('board-day1', 'Day 1・你是誰', '**這裡是入口。** 早：他出門前\u3000中：只有格莉奇和玩家\u3000晚：他回家、填守則、存檔教學。結尾自動跳 Day 2。')
 
@@ -191,5 +191,43 @@ b.link("d1e-back", r_give, "right", cond={"variable": "todayRoute", "op": "eq", 
 b.link("d1e-back", "d1e-feet")
 b.link(r_keep, "d1e-rule1")
 b.link(r_give, "d1e-rule1")
+
+# ══════════════ 記憶格（第二輪打磨）══════════════
+# 玩家實測：「不知道自己在記什麼」。四格從來沒有被看見過——狀態列只寫「1／4」，
+# 沒有內容。這裡把它攤開，而且從 Day 1 就攤開：Day 3 的整個玩法建立在這上面，
+# 不能等到 Day 3 才憑空出現。
+
+wake = b.wake("d1m", prefill=[])
+b.unlink("d1m-scene", "d1ng-q")
+b.link("d1m-scene", wake)
+b.link(wake, "d1ng-q")
+
+# 你的名字就是她今天的第一格
+b.addops("d1n-store", [{"variable": "slot1", "kind": "set", "valueFrom": "playerName"}])
+b.settext("d1n-store", "「{{playerName}}」放進第一格。\n"
+                       "四格裡的第一格。今天剩下三格。")
+
+# 那張紙條要走共用的記憶格，跟後面每一天一樣
+b.settext("d1n-keep", "她把紙條摺好塞回口袋。")
+b.addops("d1n-keep", [{"variable": "pending", "kind": "set", "value": "跟黑洞先生說謝謝"}])
+store_gate, store_outs = b.store(
+    "d1n-mem",
+    "她說到一半停住了。最舊的那一格自己掉出去了，她連它存在過都不知道。",
+    x=3600, y=-700)
+b.unlink("d1n-keep", "d1n-after")   # 原本直接接下去,要先拆掉才輪得到記憶格
+b.link("d1n-keep", store_gate)
+for n in store_outs:
+    b.link(n, "d1n-after")
+
+# 晚上她把格子唸出來。這是「留著」唯一的出口——清空之前講給他聽。
+rep = b.chain([
+    ("d1e-mem1", "睡前我要把今天記得的東西唸一次。不然明天我不會知道今天發生過什麼。", "平常", G),
+    ("d1e-mem2", "「{{slot1}}」、「{{slot2}}」、「{{slot3}}」、「{{slot4}}」。", "平常", G),
+    ("d1e-mem3", "空的那幾格我沒有辦法告訴你裡面本來有什麼。空的就是空的。", "發呆", G),
+    ("d1e-mem4", "黑洞先生在角落，沒有回應。可是他有在聽——他每天都在聽。", "平常", None),
+], x=5200, y=-300, link_prev=False)
+b.unlink("d1e-feet", "d1e-rule1")
+b.link("d1e-feet", rep[0])
+b.link(rep[-1], "d1e-rule1")
 
 b.push('Day 1・你是誰：從線上版反推重建')

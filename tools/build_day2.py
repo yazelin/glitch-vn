@@ -5,7 +5,7 @@
 say()／chain()。台詞照樣直接改這裡,改完跑這支重建,不要只改線上版。
 """
 import sys; sys.path.insert(0, "/home/ct/glitch-vn/tools")
-from daykit import Board
+from daykit import Board, G, HOLE
 
 b = Board('board-day2', 'Day 2・靴子與裂痕', '早：沒存檔的話她不認識你\u3000中：隨機抽今天的事件\u3000晚：引用你昨天寫的守則')
 
@@ -149,5 +149,43 @@ b.link(lost, "d2m-lost1")
 b.link(okl, "d2m-ok1")
 b.settext("d2m-ok2", "我不記得你。可是牆上寫著你的名字，"
                      "而且我今天醒得比較快——有人替我省下一格。")
+
+# ══════════════ 記憶格（第二輪打磨）══════════════
+# 記憶格要在每一天都存在，玩家在 Day 1 學到的東西不能中途消失。
+wake = b.wake("d2m", prefill=[])
+b.unlink("d2m-scene", "d2m-boot")
+b.link("d2m-scene", wake)
+b.link(wake, "d2m-boot")
+
+# 有存檔的話，你的名字還在第一格；沒存檔的話她重問一次
+b.addops("d2m-ok1", [{"variable": "slot1", "kind": "set", "valueFrom": "playerName"},
+                     {"variable": "slotUsed", "kind": "set", "value": 1}])
+b.addops("d2m-relearn", [{"variable": "slot1", "kind": "set", "valueFrom": "playerName"},
+                         {"variable": "slotUsed", "kind": "set", "value": 1}])
+
+# 中午那件事要走共用的記憶格
+b.settext("d2n-keep", "她把今天這件事收進腦子裡。")
+b.addops("d2n-keep", [{"variable": "pending", "kind": "set", "value": "今天發現的那件事"}])
+store_gate, store_outs = b.store(
+    "d2n-mem",
+    "她說到一半停住了。最舊的那一格自己掉出去了，她連它存在過都不知道。",
+    x=3600, y=-700)
+b.unlink("d2n-keep", "d2n-after")
+b.link("d2n-keep", store_gate)
+for n in store_outs:
+    b.link(n, "d2n-after")
+
+# 晚上唸一次格子
+rep = b.chain([
+    ("d2e-mem1", "睡前唸一次。「{{slot1}}」、「{{slot2}}」、「{{slot3}}」、「{{slot4}}」。", "平常", G),
+    ("d2e-mem2", "有幾格是空的。我不知道那幾格本來有沒有裝過東西。", "發呆", G),
+], x=4600, y=-300, link_prev=False)
+b.unlink("d2e-back", "d2e-r-feed")
+b.unlink("d2e-back", "d2e-r-keep")
+b.unlink("d2e-back", "d2e-r-give")
+b.link("d2e-back", rep[0])
+b.link(rep[-1], "d2e-r-feed", "right", cond={"variable": "todayRoute", "op": "eq", "value": "feed"})
+b.link(rep[-1], "d2e-r-keep", "right", cond={"variable": "todayRoute", "op": "eq", "value": "keep"})
+b.link(rep[-1], "d2e-r-give")
 
 b.push('Day 2・靴子與裂痕：從線上版反推重建')

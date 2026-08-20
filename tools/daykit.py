@@ -164,7 +164,7 @@ class Board:
     def pool(self, key, events, roll_var="todayEvent", after_text="好。那我們等黑洞先生回來。"):
         """隨機事件池。
 
-        events = [(短名, 去重變數, 介紹文, 表情, 留著文, 餵他文, 交給你文)]
+        events = [(短名, 去重變數, 介紹文, 表情, 留著文, 餵他文, 交給你文, 記憶格標籤)]
 
         每個事件要有自己的三去處結果——共用一張選擇卡做不到,因為 choice 的
         handle 只有一組。所以每個事件各配一張選擇卡。
@@ -177,8 +177,8 @@ class Board:
                            text="", title="抽今天的事件")
         self.link(self.prev, roll)
         gx = self.col()
-        gates, tails = [], []
-        for i, (name, used, intro, face, t_keep, t_feed, t_give) in enumerate(events):
+        gates, tails, keeps = [], [], []
+        for i, (name, used, intro, face, t_keep, t_feed, t_give, label) in enumerate(events):
             y = (i - len(events) / 2) * 300
             g = self.say(f"{key}-{name}", intro, face=face, title=f"事件{i+1}", x=gx, y=y)
             gates.append(g)
@@ -189,17 +189,10 @@ class Board:
             # 記憶體滿了要有代價,不然「留著」跟「交給你」在故事層都只是東西不見了。
             # 四家會審都點這一項:第 4 格之後再留,就會擠掉一件她不知道是什麼的舊事。
             k = self.setvar(f"{key}-{name}-keep",
-                            [{"variable": "slotUsed", "kind": "add", "value": 1},
+                            [{"variable": "pending", "kind": "set", "value": label or name},
                              {"variable": "todayRoute", "kind": "set", "value": "keep"},
                              {"variable": used, "kind": "set", "value": 1}],
                             text=t_keep, title="留著", x=gx + 600, y=y - 150)
-            kf = self.setvar(f"{key}-{name}-full",
-                             [{"variable": "overwroteCount", "kind": "add", "value": 1},
-                              {"variable": "todayRoute", "kind": "set", "value": "keep"},
-                              {"variable": used, "kind": "set", "value": 1}],
-                             text="她硬塞進去。4KB 滿了，某個舊的東西被擠出來——"
-                                  "她不知道被擠掉的是什麼，因為被擠掉的東西連同「它存在過」一起沒了。",
-                             title="留著（滿了）", x=gx + 600, y=y - 60)
             f = self.setvar(f"{key}-{name}-feed",
                             [{"variable": "fedToday", "kind": "add", "value": 1},
                              {"variable": "fedCount", "kind": "add", "value": 1},
@@ -212,20 +205,46 @@ class Board:
                               {"variable": "todayRoute", "kind": "set", "value": "give"},
                               {"variable": used, "kind": "set", "value": 1}],
                              text=t_give, title="交給你", x=gx + 600, y=y + 90)
-            self.link(c, kf, "choice-0",
-                      cond={"variable": "slotUsed", "op": "gte", "value": 4})
             self.link(c, k, "choice-0")
             self.link(c, f, "choice-1"); self.link(c, gg, "choice-2")
-            tails += [k, kf, f, gg]
+            keeps.append(k)
+            tails += [f, gg]
         # 抽到用過的就掉到下一個;最後一個當保底
         for i in range(len(gates) - 1):
             self.link(gates[i], gates[i + 1], "right",
                       cond={"variable": events[i][1], "op": "eq", "value": 1})
         self.link(roll, gates[-1])
-        aft = self.say(f"{key}-after", after_text, x=gx + 1000, y=0)
+        # 所有「留著」都走同一組記憶格:滿了最舊的自己掉出去,她沒得挑。
+        store_gate, store_outs = self.store(
+            f"{key}-mem",
+            "她說到一半停住了。「等一下。我剛剛腦子裡有一個東西，它剛剛還在的。」\n"
+            "她低頭，然後抬頭，然後放棄。最舊的那一格自己掉出去了，"
+            "她連它存在過都不知道。",
+            x=gx + 900, y=-700)
+        for k_ in keeps: self.link(k_, store_gate)
+        tails += store_outs
+        aft = self.say(f"{key}-after", after_text, x=gx + 1400, y=0)
         for t in tails: self.link(t, aft)
         self.prev = aft
         return aft
+
+    def wake(self, key, prefill=(), looks=0, x=None, y=0):
+        """開機：清空記憶格。她每天睡醒清空，所以每一天都要走這一步。
+
+        prefill = 醒來就已經佔掉的格子（例如 Day 3 手裡那塊麵包）。
+        沒有這個的話，一整天都填不滿四格，「滿了會掉出去」就永遠不會發生。
+        """
+        ops = [{"variable": "slotUsed", "kind": "set", "value": len(prefill)},
+               {"variable": "fedToday", "kind": "set", "value": 0},
+               {"variable": "figured", "kind": "set", "value": ""},
+               {"variable": "lostBread", "kind": "set", "value": 0},
+               {"variable": "pending", "kind": "set", "value": ""}]
+        for i in range(4):
+            ops.append({"variable": f"slot{i+1}", "kind": "set",
+                        "value": prefill[i] if i < len(prefill) else ""})
+        if looks:
+            ops.append({"variable": "looksLeft", "kind": "set", "value": looks})
+        return self.setvar(f"{key}-wake", ops, text="", title="開機：記憶體清空", x=x, y=y)
 
     # ── 探索日用的零件 ────────────────────────────────────
     def store(self, key, overflow_text, overflow_ops=(), x=0, y=0):
