@@ -8,7 +8,7 @@
     python3 sim_board.py board-day2            # 用變數預設值跑
     python3 sim_board.py board-day2 savedOk=1  # 指定進場時的變數狀態
 """
-import pathlib, json, sys, urllib.request
+import os, pathlib, json, sys, urllib.request
 
 K = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 P = "project-e14f9260-e4c0-4ce7-9d2d-70203cdec591"
@@ -47,15 +47,29 @@ def pick(es, st):
 
 EDGES = [e for es_ in out.values() for e in es_]
 visited, terms, problems, runs = set(), {}, [], [0]
+seen_states = set()      # (卡片, 狀態) —— 同一張卡在同一個狀態下只走一次
+CAP = int(os.environ.get("SIM_CAP", "60000"))
+truncated = [False]
 
 def run(nid, st, depth=0):
-    if depth > 500:
-        problems.append("深度爆炸,可能有環"); return
+    # 探索選單那種「繞回來」的迴圈是設計的一部分,不是環。真正的無限迴圈會在
+    # 同一張卡遇到同一個狀態,用這個擋;狀態有變(例如 looksLeft 少了一)就繼續走。
+    key = (nid, tuple(sorted((k, str(v)) for k, v in st.items())))
+    if key in seen_states:
+        return
+    seen_states.add(key)
+    if len(seen_states) > CAP:
+        truncated[0] = True; return
+    if depth > 4000:
+        problems.append("深度爆炸,可能有真的環"); return
     visited.add(nid)
     dd = N[nid]["data"]; st = dict(st)
     rand = []
     for op in dd.get("variableOps", []):
-        v, k, val = op["variable"], op["kind"], op.get("value")
+        v, k = op["variable"], op["kind"]
+        # valueFrom = 從另一個變數複製,不是用字面值。播放器實作:
+        # const x = m.valueFrom ? d[m.valueFrom] : m.value
+        val = st.get(op["valueFrom"], "") if op.get("valueFrom") else op.get("value")
         cur = st.get(v, "")
         if k == "set": st[v] = val
         elif k == "add": st[v] = (float(cur) if str(cur) not in ("", "None") else 0) + float(val)
@@ -98,7 +112,8 @@ for kv in sys.argv[2:]:
     k, v = kv.split("=", 1)
     init[k] = float(v) if v.replace("-", "").replace(".", "").isdigit() else v
 run(starts[0], init)
-print(f"  模擬玩法 {runs[0]} 條  終點 {terms}")
+print(f"  模擬玩法 {runs[0]} 條  終點 {terms}"
+      + (f"　★ 到達 {CAP} 個狀態上限,沒走完" if truncated[0] else ""))
 un = sorted(set(N) - visited)
 print(f"  沒走到的卡 {len(un)}:", un[:20])
 for p in dict.fromkeys(problems):

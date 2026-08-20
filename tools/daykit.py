@@ -227,6 +227,51 @@ class Board:
         self.prev = aft
         return aft
 
+    # ── 探索日用的零件 ────────────────────────────────────
+    def store(self, key, x=0, y=0):
+        """把 pending 存進第一個空的記憶格。滿了就跳淘汰選擇。
+
+        依 slotUsed 分五路。用 valueFrom 從 pending 複製過去,不是字面值——
+        播放器的實作是 `m.valueFrom ? d[m.valueFrom] : m.value`,驗過。
+        五個地點共用這一組,不用每個地點各寫一份。
+        """
+        # 純路由點。用 setVariable(空 ops)而不是對話卡:空 text 的對話卡在播放器裡
+        # 是一個空的對話框,玩家要點過去。setVariable 會自動前進,不佔畫面。
+        gate = self.setvar(f"{key}-gate", [], text="", title="放進記憶體", x=x, y=y)
+        outs = []
+        for i in range(4):
+            n = self.setvar(
+                f"{key}-s{i+1}",
+                [{"variable": f"slot{i+1}", "kind": "set", "valueFrom": "pending"},
+                 {"variable": "slotUsed", "kind": "add", "value": 1}],
+                text="", title=f"存進第 {i+1} 格", x=x + 300, y=y + (i - 2) * 110)
+            self.link(gate, n, "right",
+                      cond={"variable": "slotUsed", "op": "eq", "value": i})
+            outs.append(n)
+        # 滿了:必須丟一格,而丟掉的那件黑洞先生會吃掉,玩家擋不住
+        full = self.say(f"{key}-full",
+                        "等等。我的腦袋在閃，有一格的燈號變紅了。\n"
+                        "四格都滿了。要放新的東西進來，就得有一格空出來。",
+                        face="當機", title="記憶體滿了", x=x + 300, y=y + 260)
+        self.link(gate, full)
+        q = self.choice(f"{key}-drop", "要忘掉哪一格？\n（忘掉的那件，黑洞先生會吃掉。）",
+                        ["忘掉「{{slot1}}」", "忘掉「{{slot2}}」",
+                         "忘掉「{{slot3}}」", "忘掉「{{slot4}}」"],
+                        x=x + 600, y=y + 260)
+        self.link(full, q)
+        for i in range(4):
+            n = self.setvar(
+                f"{key}-drop{i+1}",
+                [{"variable": f"slot{i+1}", "kind": "set", "valueFrom": "pending"},
+                 {"variable": "fedCount", "kind": "add", "value": 1},
+                 {"variable": "holeFeet", "kind": "add", "value": 1},
+                 {"variable": "overwroteCount", "kind": "add", "value": 1}],
+                text="她不知道自己剛剛丟掉了什麼。連「這裡本來有個東西」的凹痕都沒有留下。",
+                title=f"丟掉第 {i+1} 格", x=x + 900, y=y + 150 + i * 100)
+            self.link(q, n, f"choice-{i}")
+            outs.append(n)
+        return gate, outs
+
     def push(self, summary):
         proj = _get()
         boards = [b for b in proj["boards"] if b["id"] != self.bid]

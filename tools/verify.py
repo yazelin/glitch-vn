@@ -71,6 +71,22 @@ for v in ghost:
     bad.append(f"變數 {v} 有人讀卻沒人寫，靠它的分支永遠不會成立"); print(f"  ★ {bad[-1]}")
 print(f"  沒人用的變數 {len(dead)} 個：{'、'.join(dead) or '無'}")
 
+print("── 空卡片 ──")
+# 空 text 的對話卡在播放器裡是一個空的對話框,玩家要點過去。用空卡當匯流點很順手,
+# 但玩起來是一格莫名其妙的停頓。Day 3 改成探索日的時候踩過。
+blanks = []
+for b in DAYS:
+    for n in b["nodes"]:
+        d = n["data"]
+        if d.get("type") in (None, "dialogue") and not (d.get("text") or "").strip():
+            blanks.append(f'{b["id"]}／{n["id"]}')
+for x in blanks[:8]:
+    print(f"  ★ 空的對話卡：{x}")
+if blanks:
+    bad.append(f"{len(blanks)} 張空的對話卡")
+else:
+    print("  沒有空的對話卡")
+
 print("── 中文寫作（speak-tw）──")
 # 刻意保留的句子。speak-tw 的 speak-tw-ok 標記加不到 Larch 卡片上,所以放這裡,
 # 每一條都要寫清楚為什麼 —— 不寫理由的例外一律不收。
