@@ -209,6 +209,7 @@ b.settext("d1n-store", "「{{playerName}}」放進第一格。\n"
 
 # 那張紙條要走共用的記憶格，跟後面每一天一樣
 b.settext("d1n-keep", "她把紙條摺好塞回口袋。")
+b.dropop("d1n-keep", "slotUsed")   # 共用零件會加,這裡不能再加
 b.addops("d1n-keep", [{"variable": "pending", "kind": "set", "value": "跟黑洞先生說謝謝"}])
 store_gate, store_outs = b.store(
     "d1n-mem",

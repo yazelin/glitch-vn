@@ -6,9 +6,9 @@
 ## 一、規模
 
 - 天數：7
-- 卡片：738（其中素材庫 134 張不在遊玩路徑上）
-- 連線：893
-- 變數：64
+- 卡片：755（其中素材庫 134 張不在遊玩路徑上）
+- 連線：917
+- 變數：65
 
 ## 二、變數
 
@@ -78,6 +78,7 @@
 | `keptCorner` | 留著:角落地板的圓：拼線索用 | `0` | Day 3 |
 | `lostBread` | 她把麵包那件事忘了：記憶體滿了,最舊的掉出去 | `0` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
 | `figured` | 今天她拼出了什麼：dough/hand/him/none | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
+| `d2Deleted` | Day 2 早上刪掉哪一格：name/cache/sound/crack | `` | Day 2 |
 
 ## 三、每天的選擇與後果
 
@@ -89,7 +90,6 @@
 
 - 1. 留在我這裡（明天睡醒就忘了）
     - `usedNote` 設為 `1`
-    - `slotUsed` 加 `1`
     - `todayRoute` 設為 `keep`
     - `pending` 設為 `跟黑洞先生說謝謝`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -145,7 +145,6 @@
 **第二天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
-    - `slotUsed` 加 `1`
     - `todayRoute` 設為 `keep`
     - `pending` 設為 `今天發現的那件事`
 - 2. 給黑洞先生吃（他會長回一隻腳）
@@ -159,6 +158,33 @@
 
 **第二天・夜晚｜填空 → `ruleLine2`**：第 {{ruleVersion}} 版的空位。今天換這一句。你幫我寫。
 
+**第二天・夜晚｜要刪掉哪一格？**
+
+- 1. 刪掉「{{slot1}}」
+    - `slot1` 設為 ``
+    - `d2Deleted` 設為 `name`
+    - `slotUsed` 設為 `3`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 2. 刪掉「{{slot2}}」
+    - `slot2` 設為 ``
+    - `d2Deleted` 設為 `cache`
+    - `slotUsed` 設為 `3`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 3. 刪掉「{{slot3}}」
+    - `slot3` 設為 ``
+    - `d2Deleted` 設為 `sound`
+    - `slotUsed` 設為 `3`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+- 4. 刪掉「{{slot4}}」
+    - `slot4` 設為 ``
+    - `d2Deleted` 設為 `crack`
+    - `slotUsed` 設為 `3`
+    - `fedCount` 加 `1`
+    - `holeFeet` 加 `1`
+
 **這天會依狀態分岔的地方**
 
 - `todayEvent` ＝ `1` → 事件1
@@ -171,6 +197,10 @@
 - `slotUsed` ＝ `1` → 存進第 2 格
 - `slotUsed` ＝ `2` → 存進第 3 格
 - `slotUsed` ＝ `3` → 存進第 4 格
+- `d2Deleted` ＝ `name` → 他吃了（name）
+- `d2Deleted` ＝ `sound` → 他吃了（sound）
+- `d2Deleted` ＝ `crack` → 他吃了（crack）
+- `d2Deleted` ＝ `cache` → 他吃了（cache）
 - `todayRoute` ＝ `feed` → 他吃掉了
 - `todayRoute` ＝ `keep` → 她留著
 

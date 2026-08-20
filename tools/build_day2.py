@@ -165,6 +165,7 @@ b.addops("d2m-relearn", [{"variable": "slot1", "kind": "set", "valueFrom": "play
 
 # 中午那件事要走共用的記憶格
 b.settext("d2n-keep", "她把今天這件事收進腦子裡。")
+b.dropop("d2n-keep", "slotUsed")   # 共用零件會加,這裡不能再加
 b.addops("d2n-keep", [{"variable": "pending", "kind": "set", "value": "今天發現的那件事"}])
 store_gate, store_outs = b.store(
     "d2n-mem",
@@ -187,5 +188,100 @@ b.link("d2e-back", rep[0])
 b.link(rep[-1], "d2e-r-feed", "right", cond={"variable": "todayRoute", "op": "eq", "value": "feed"})
 b.link(rep[-1], "d2e-r-keep", "right", cond={"variable": "todayRoute", "op": "eq", "value": "keep"})
 b.link(rep[-1], "d2e-r-give")
+
+# ══════════════ 開機就滿了（第三輪：給 Day 2 自己的形狀）══════════════
+# 每一天要長得不一樣。Day 3 是探索、Day 4 是事件池、Day 5 是他在家。
+# Day 2 的形狀是：**她開機的時候四格就是滿的**，什麼都裝不進去，得先刪一格。
+#
+# 這也是「刪掉東西」的教學——而且教得很痛：四格裡有一格是你的名字。
+# Day 3 之後改成「最舊的自己掉出去、玩家沒得挑」，所以這是全遊戲唯一一次
+# 玩家真的挑得了要忘掉什麼。挑過一次，才知道後面那個「沒得挑」有多不一樣。
+
+full = b.setvar("d2m-full",
+    [{"variable": "slot2", "kind": "set", "value": "昨天的殘留快取"},
+     {"variable": "slot3", "kind": "set", "value": "一段沒有來源的聲音"},
+     {"variable": "slot4", "kind": "set", "value": "門邊有東西裂開了"},
+     {"variable": "slotUsed", "kind": "set", "value": 4}],
+    text="", title="開機就滿了", x=1800, y=0)
+b.unlink("d2m-join", "d2m-rule")
+b.link("d2m-join", full)
+
+pre = b.chain([
+    ("d2m-f1", "等一下。我開機的時候，四格就已經是滿的了。", "當機", G),
+    ("d2m-f2", "「{{slot1}}」、「{{slot2}}」、「{{slot3}}」、「{{slot4}}」。", "平常", G),
+    ("d2m-f3", "昨天應該全部清空才對。可是這四個東西還在，而且我不記得自己放進去過。", "發呆", G),
+    ("d2m-f4", "滿的話我今天什麼都裝不進來。得先丟掉一格。", "平常", G),
+    ("d2m-f5", "你幫我挑。我自己挑不出來——我又不知道它們哪個重要。", "平常", G),
+], x=2100, y=0, link_prev=False)
+b.link(full, pre[0])
+
+dq = b.choice("d2m-delq", "要刪掉哪一格？\n（刪掉的那件，黑洞先生今天會吃掉。）",
+              ["刪掉「{{slot1}}」", "刪掉「{{slot2}}」",
+               "刪掉「{{slot3}}」", "刪掉「{{slot4}}」"],
+              x=3900, y=0)
+b.link(pre[-1], dq)
+
+dx = 4300
+DEL = [
+    ("name", "刪掉你",
+     "她把第一格清掉。\n"
+     "「好，空出來了。」她轉過來，看著螢幕。「……你是誰？」\n"
+     "牆上那個名字還在，可是她的腦子裡已經沒有了。她整天都會叫你「你」。",
+     [{"variable": "slot1", "kind": "set", "value": ""}]),
+    ("cache", "刪掉殘留快取",
+     "她把第二格清掉。什麼事都沒有發生。\n"
+     "「這個應該是垃圾吧。」她說。她說對了，可是她永遠不會知道自己說對了。",
+     [{"variable": "slot2", "kind": "set", "value": ""}]),
+    ("sound", "刪掉那段聲音",
+     "她把第三格清掉。\n"
+     "「那是什麼聲音來著。有點像揉東西的聲音，很小聲，在很晚的時候。」\n"
+     "話說到一半那段聲音就沒了。她愣了一下，然後聳肩。",
+     [{"variable": "slot3", "kind": "set", "value": ""}]),
+    ("crack", "刪掉裂開那件事",
+     "她把第四格清掉。\n"
+     "「門邊有東西裂開了？哪裡？」她走過去看，那疊靴子好好地堆在那裡。\n"
+     "裂痕就在最上面那一雙上，她的眼睛掃過去，沒有停。",
+     [{"variable": "slot4", "kind": "set", "value": ""}]),
+]
+outs = []
+for k, (tag, title, text, ops) in enumerate(DEL):
+    n = b.setvar(f"d2m-del-{tag}",
+                 ops + [{"variable": "d2Deleted", "kind": "set", "value": tag},
+                        {"variable": "slotUsed", "kind": "set", "value": 3},
+                        {"variable": "fedCount", "kind": "add", "value": 1},
+                        {"variable": "holeFeet", "kind": "add", "value": 1}],
+                 text=text, title=title, x=dx, y=(k - 1.5) * 200)
+    b.link(dq, n, f"choice-{k}")
+    outs.append(n)
+
+back = b.say("d2m-del-after", "三格。今天可以裝三件事。", who=G, face="平常",
+             title="空出來了", x=dx + 500, y=0)
+for n in outs: b.link(n, back)
+b.link(back, "d2m-rule")
+
+# 晚上他會提到今天被吃掉的那一格。他一天只吃得下一件，所以中午餵他就不吃這個。
+ex2 = 5200
+EAT = [
+    ("name", "他今天吃到一個名字。他沒有說是誰的名字。", -300),
+    ("sound", "他今天吃到一段聲音。很小聲，在很晚的時候，像有人在揉什麼。", -100),
+    ("crack", "他今天吃到一道裂痕。門邊那疊靴子今天看起來完好如新。", 100),
+    ("cache", "他今天吃到一團什麼都不是的東西。他嚼了很久。", 300),
+]
+eat_nodes = []
+for tag, text, yy in EAT:
+    n = b.say(f"d2e-eat-{tag}", text, who=None, title=f"他吃了（{tag}）", x=ex2, y=yy)
+    eat_nodes.append((tag, n))
+join2 = b.say("d2e-eat-join", "她沒有注意到。她從來不注意這種事。", who=None,
+              title="她沒注意", x=ex2 + 400, y=0)
+for tag, n in eat_nodes:
+    b.link("d2e-mem2", n, "right", cond={"variable": "d2Deleted", "op": "eq", "value": tag})
+    b.link(n, join2)
+b.unlink("d2e-mem2", "d2e-r-feed")
+b.unlink("d2e-mem2", "d2e-r-keep")
+b.unlink("d2e-mem2", "d2e-r-give")
+b.link("d2e-mem2", join2)
+b.link(join2, "d2e-r-feed", "right", cond={"variable": "todayRoute", "op": "eq", "value": "feed"})
+b.link(join2, "d2e-r-keep", "right", cond={"variable": "todayRoute", "op": "eq", "value": "keep"})
+b.link(join2, "d2e-r-give")
 
 b.push('Day 2・靴子與裂痕：從線上版反推重建')

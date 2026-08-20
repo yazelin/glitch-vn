@@ -100,6 +100,17 @@ class Board:
         """改一張已經存在的卡的台詞。反推回來的板子用這個打磨,比重寫整張安全。"""
         self.find(nid)["data"]["text"] = text
 
+    def dropop(self, nid, variable):
+        """拿掉某張卡對某個變數的操作。
+
+        反推回來的卡片自己會加 slotUsed,而共用的記憶格零件也會加——重複計數,
+        結果是還沒滿就被當成滿了。這種錯只有模擬器抓得到:
+        「該走到的存放分支一個都沒走到,而溢位那條走到了」。
+        """
+        d = self.find(nid)["data"]
+        d["variableOps"] = [o for o in d.get("variableOps", [])
+                            if o.get("variable") != variable]
+
     def addops(self, nid, ops):
         d = self.find(nid)["data"]
         base = d.setdefault("variableOps", [])
