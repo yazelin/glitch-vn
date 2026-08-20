@@ -178,4 +178,24 @@ b.chain([
     ("d7z-4", "她不會記得那是誰。她會念出來，然後說一句話。", "平常", None),
     ("d7z-5", "「你好。你是新來的吧？我沒印象。」", "平常", G),
 ])
+# 二週目的回報:她記不住你,他記得住。這幾張只有打對暗號的人看得到。
+# chain 會把 b.prev 推到鏈尾,所以入口要先接住,不能事後拿 b.prev。
+ng_from = b.prev
+ng = b.chain([
+    ("d7ng-1", "可是這一次，你不是新來的。", "平常", None),
+    ("d7ng-2", "門邊那疊短靴，最上面那雙是新的。沒有人穿過。", "平常", None),
+    ("d7ng-3", "他今天沒有出門。他站在門口，臉朝著螢幕的方向。", "平常", None),
+    ("d7ng-5", "她沒有聽見這句。她正在念守則的第一行。", "平常", None),
+    ("d7ng-6", "這句是說給你聽的。他是這間房子裡唯一不會忘記的那個。", "平常", None),
+], x=zx + 300 * 6, y=-300, link_prev=False)
+b.link(ng_from, ng[0], "right", cond={"variable": "ngPlus", "op": "eq", "value": 1})
+# 他這句越過她對玩家說,標題標出來讓 check_pronouns 放行
+again = b.say("d7ng-4", "又是你。", who=HOLE, face="預設", title="他對玩家說",
+              x=zx + 300 * 9, y=-300)
+b.link(ng[2], again); b.link(again, ng[3])
+b.edges[:] = [e for e in b.edges if not (e["source"] == ng[2] and e["target"] == ng[3])]
+# 兩條路都要有出口。只掛一條有條件的線,第一次玩的人會卡在最後一張。
+fin = b.say("d7-fin", "（完）", who=None, title="完", x=zx + 300 * 13, y=0)
+b.link(ng_from, fin)
+b.link(ng[-1], fin)
 b.push("Day 7 三個結局:留給他(依 fedCount 再分吃得下／吃不下)、她自己吃掉、交給玩家保管")

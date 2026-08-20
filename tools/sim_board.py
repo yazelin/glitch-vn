@@ -45,6 +45,7 @@ def pick(es, st):
     plain = [x for x in es if not guarded(x)]
     return plain[0] if plain else None
 
+EDGES = [e for es_ in out.values() for e in es_]
 visited, terms, problems, runs = set(), {}, [], [0]
 
 def run(nid, st, depth=0):
@@ -60,8 +61,15 @@ def run(nid, st, depth=0):
         elif k == "add": st[v] = (float(cur) if str(cur) not in ("", "None") else 0) + float(val)
         elif k == "toggle": st[v] = not bool(cur)
         elif k == "random": rand.append((v, int(op.get("min", 0)), int(op.get("max", 1))))
-    if dd.get("inputVariable"): st[dd["inputVariable"]] = "(玩家輸入)"
     states = [st]
+    iv = dd.get("inputVariable")
+    if iv:
+        # 玩家打什麼字不知道,但下游只要有邊在比對這個變數,那些值就都要走一次
+        # ——否則像二週目暗號那種閘門永遠測不到。再加一個「打了別的字」的狀態。
+        vals = sorted({c["value"] for e in EDGES
+                       for c in [(e.get("data") or {}).get("condition")]
+                       if c and c.get("variable") == iv})
+        states = [{**st, iv: v} for v in vals] + [{**st, iv: "(玩家輸入)"}]
     for v, lo, hi in rand:                       # random 的每個可能值都要走一次
         states = [{**s, v: n} for s in states for n in range(lo, hi + 1)]
     es = out.get(nid, [])

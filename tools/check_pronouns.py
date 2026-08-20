@@ -47,7 +47,10 @@ for b in d["boards"]:
                 continue
             if sp == "格莉奇" and "妳" in t:
                 problems.append((b["id"], n["id"], "格莉奇不會說「妳」（那是別人對她的稱呼）", t))
-            if sp == "黑洞先生" and "你" in t and "存檔" not in t:
+            # 他偶爾會越過她對玩家說話(二週目結尾)。那種卡在標題掛「對玩家」放行,
+            # 免得整條規則被關鍵字比對稀釋掉。
+            to_player = "對玩家" in (dd.get("title") or "")
+            if sp == "黑洞先生" and "你" in t and "存檔" not in t and not to_player:
                 problems.append((b["id"], n["id"], "黑洞先生對格莉奇要用「妳」；對玩家才用「你」", t))
             if "他" in t and "黑洞先生" not in t and n["id"] in noon:
                 problems.append((b["id"], n["id"], "中午段他不在畫面上，用「他」會誤會", t))

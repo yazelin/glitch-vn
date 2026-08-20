@@ -16,6 +16,7 @@
     tools/build_dayN.py      各天的劇本。改劇本改這裡，不要只改線上版
     tools/pull.py            把 Larch 上的專案整包抓下來存進 backup/
     tools/gen_docs.py        從 backup/project.json 生 docs/mechanics.md
+    tools/verify.py          一個指令跑完所有檢查（改完劇本跑這支）
     tools/sim_board.py       走遍一塊板子的所有玩法，抓斷線與環
     tools/check_pronouns.py  代名詞規則檢查（妳／你／全名）
     tools/dump_board.py      把一塊板子印成可讀劇本，拿去給人審
@@ -28,10 +29,15 @@
 ## 改完要跑的
 
     python3 tools/build_dayN.py      # 重建那一天
-    python3 tools/pull.py            # 抓回來存檔
-    python3 tools/sim_board.py board-dayN
-    python3 tools/check_pronouns.py
+    python3 tools/verify.py          # 模擬 + 跳躍 + 變數 + 代名詞，離開碼非 0 就是有問題
     python3 tools/gen_docs.py        # 更新機制表
+
+## 二週目
+
+Larch 的變數是專案層級、有預設值，新開一場就回預設，平台沒有 NG+。
+這個遊戲不靠平台：**玩家本人就是存檔**。Day 1 開場由旁白直接問玩家一句
+只有玩完的人才會知道的話（`tools/patch_ngplus.py` 裡有收哪些）。答對了
+`ngPlus` 會是 1，最後一天會多一段——她還是不記得你，但黑洞先生記得。
 
 ## 代名詞規則
 
