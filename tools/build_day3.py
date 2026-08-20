@@ -81,6 +81,12 @@ cur = b.scene("d3n-scene", "第三天・中午", "太陽爬到窗戶正上方。
 b.link(b.prev, cur); b.prev = cur
 
 
+# 每一筆最後一欄是「搭檔」:(對方的旗標, 拼出來的代號, 她當場說的話)
+# 只要對方已經在記憶格裡,留下這一件的當下就會接起來。
+# 一件線索單獨看不出東西，兩件放在一起才有意思。
+# 最後一欄是搭檔：(對方的旗標, 拼出來的代號, 她當場說的話)。
+# **合併發生在留下第二件的當下，不是等到晚上。** 五家會審指出等到晚上的話，
+# 玩家探索前不知道哪兩個能拼，變成盲賭；而且「啊原來如此」那一下應該在現場。
 PLACES = [
     ("fridge", "seenFridge", "keptFridge", "冰箱",
      "她走到冰箱前面。金屬門面還留著清晨開關時的餘溫。",
@@ -89,7 +95,8 @@ PLACES = [
       "但是我現在的包裝技術明明很爛。"],
      "冰箱的門我剛剛才關上。再開一次，裡面也不會多長出東西。",
      "冰箱繼續運轉。沒有人去確認那塊麵包的保鮮膜還是不是原來的樣子。",
-     "保鮮膜的折法"),
+     "保鮮膜的折法",
+     [("keptRules", 'hand', '她把保鮮膜攤開，又摺回去。\n「守則本上的字比我現在寫的穩。這個保鮮膜也折得比我會做的仔細。」\n「有一個比我穩的人，用我的字跡寫東西，用我的手折保鮮膜。」\n「那個人是我嗎？還是我是那個人剩下來的部分？」')]),
 
     ("window", "seenWindow", "keptWindow", "窗台",
      "她走到窗邊。陽光從左邊斜斜照進來，在窗台上畫出一條很亮的線。",
@@ -98,7 +105,8 @@ PLACES = [
       "可是現在什麼都沒有。有人把一個放在這裡很久的東西拿走了。"],
      "窗台就長那樣。灰塵不會自己演一次給我看。",
      "下午的陽光從窗台慢慢退開。那個圓形的灰塵印還留在那裡，等著被誰注意到。",
-     "窗台上的圓印"),
+     "窗台上的圓印",
+     [("keptRules", 'dough', '她突然不講話了。\n「守則上寫『不要半夜開烤箱』、『麵粉要收在櫃子裡』。」\n「而窗台上有一個碗底的印子，很深，表示那個碗在那裡放了很久很久。」\n「碗放在有太陽的地方是為了發酵。」\n她停住了。這句話她說得太順了，順到不像是第一次說。')]),
 
     ("boots", "seenBoots", "keptBoots", "門邊那疊短靴",
      "她蹲到門邊，手指撥過那疊沒人穿的短靴，揚起很薄的灰。",
@@ -107,7 +115,8 @@ PLACES = [
       "沒有腳卻有這麼多靴子。黑洞先生的觸手會換鞋嗎？還是觸手也會長大，舊的皮撐破了？"],
      "我剛剛數過了。再數一次，數字也不會變得比較好懂。",
      "門邊的短靴維持著原來的堆疊角度。裂痕在陰影裡繼續裂。",
-     "裂開的那雙靴子"),
+     "裂開的那雙靴子",
+     [("keptCorner", 'feet', '「靴子是裝腳的東西。」\n「可是角落地板上那些刮痕，是觸手磨出來的。細細的，一道一道。」\n「坐在那裡的人沒有腳。可是門邊那疊靴子，每一雙都是照著腳的形狀做的。」\n她抬起頭。\n「黑洞先生以前有腳嗎？」')]),
 
     ("rules", "seenRules", "keptRules", "守則本",
      "她翻開桌上的守則本。紙頁因為太常被翻動而捲起邊角。",
@@ -116,7 +125,8 @@ PLACES = [
       "最後一頁有我的簽名，還畫了一個笑臉。我不記得我有這麼開朗過。"],
      "同一頁我剛看完。那些字不會因為我多看一次就換一種說法。",
      "守則本攤在桌上，捲起的紙頁慢慢恢復原本翹起的弧度。前幾天的筆跡繼續等。",
-     "守則上的那兩條"),
+     "守則上的那兩條",
+     [("keptWindow", 'dough', '她突然不講話了。\n「守則上寫『不要半夜開烤箱』、『麵粉要收在櫃子裡』。」\n「而窗台上有一個碗底的印子，很深，表示那個碗在那裡放了很久很久。」\n「碗放在有太陽的地方是為了發酵。」\n她停住了。這句話她說得太順了，順到不像是第一次說。'), ("keptFridge", 'hand', '她把保鮮膜攤開，又摺回去。\n「守則本上的字比我現在寫的穩。這個保鮮膜也折得比我會做的仔細。」\n「有一個比我穩的人，用我的字跡寫東西，用我的手折保鮮膜。」\n「那個人是我嗎？還是我是那個人剩下來的部分？」')]),
 
     ("corner", "seenCorner", "keptCorner", "黑洞先生坐的那個角落",
      "她走到房間最裡面的角落。那裡的地板顏色比周圍淺了一圈。",
@@ -126,7 +136,8 @@ PLACES = [
       "黑洞先生每天回來都窩在這裡。不餓的時候也窩著。"],
      "那個圓我已經量過了。地板不會在十分鐘裡改變形狀。",
      "角落的陰影隨著日落變濃。地板上那個淺色的圓被黑暗慢慢填滿。",
-     "角落地板上的圓"),
+     "角落地板上的圓",
+     [("keptBoots", 'feet', '「靴子是裝腳的東西。」\n「可是角落地板上那些刮痕，是觸手磨出來的。細細的，一道一道。」\n「坐在那裡的人沒有腳。可是門邊那疊靴子，每一雙都是照著腳的形狀做的。」\n她抬起頭。\n「黑洞先生以前有腳嗎？」')]),
 ]
 
 q = b.choice("d3n-q", "今天要陪她去看哪裡？\n" + MEM,
@@ -148,7 +159,7 @@ store_gate, store_outs = b.store(
     x=b.col(3), y=-700)
 
 after = []          # 每個地點結束之後匯到這裡，接時間流逝
-for i, (key, seen, kept, name, go, finds, again, missed, label) in enumerate(PLACES):
+for i, (key, seen, kept, name, go, finds, again, missed, label, combos) in enumerate(PLACES):
     y = (i - 2) * 420
     x0 = b.col() if i == 0 else x0
     gx = 3000 + i * 0     # 位置只影響編輯畫面的可讀性
@@ -179,7 +190,17 @@ for i, (key, seen, kept, name, go, finds, again, missed, label) in enumerate(PLA
     keep_mark = b.setvar(f"d3n-{key}-keep", [{"variable": kept, "kind": "set", "value": 1}],
                          text="", title=f"留著：{label}",
                          x=2400 + len(finds) * 300, y=y)
-    b.link(rq, keep_mark, "choice-0"); b.link(keep_mark, store_gate)
+    b.link(rq, keep_mark, "choice-0")
+    # 搭檔已經在記憶格裡的話,當場接起來。走到這裡代表這一件一定留著了,
+    # 所以只要比對方一個變數,不需要 AND。
+    for ci, (partner, tag, text) in enumerate(combos):
+        n = b.setvar(f"d3n-{key}-c{ci}",
+                     [{"variable": "figured", "kind": "set", "value": tag}],
+                     text=text, title=f"拼起來了：{tag}",
+                     x=2700 + len(finds) * 300 + ci * 300, y=y - 150)
+        b.link(keep_mark, n, "right", cond={"variable": partner, "op": "eq", "value": 1})
+        b.link(n, store_gate)
+    b.link(keep_mark, store_gate)      # 搭檔都不在就直接收進記憶格
     n_feed = b.setvar(f"d3n-{key}-feed",
                       [{"variable": "fedToday", "kind": "add", "value": 1},
                        {"variable": "fedCount", "kind": "add", "value": 1},
@@ -218,7 +239,7 @@ b.link(tick, dusk)
 # 用串接式:每一張都直接連到「後面所有還沒檢查的地點」,最後一條無條件的接晚上。
 # 不用空白卡當匯流點——空 text 的對話卡在播放器裡是一個空的對話框,玩家要點過去。
 missed_nodes = []
-for i, (key, seen, kept, name, go, finds, again, missed, label) in enumerate(PLACES):
+for i, (key, seen, kept, name, go, finds, again, missed, label, combos) in enumerate(PLACES):
     missed_nodes.append((seen, b.say(f"d3n-{key}-missed", missed, who=None,
                                      title=f"沒去{name}", x=5300 + i * 300, y=-420)))
 
@@ -238,68 +259,30 @@ b.chain([
     ("d3e-list",  "我記得「{{slot1}}」、「{{slot2}}」、「{{slot3}}」、「{{slot4}}」。", "平常", G),
     ("d3e-gap",   "……有幾格是空的。空的那幾格我沒有辦法告訴你裡面本來有什麼，因為空的就是空的。", "發呆", G),
 ])
+
+# 合併已經在中午發生過了（留下第二件的當下）。晚上只負責反應。
 report = b.prev
-
-# ══ 拼線索 ══
-# 這一天真正的機制在這裡:一件線索單獨看不出東西,兩件放在一起才有意思。
-# 她一次只裝得下四件事,所以「哪兩件同時還在」就是玩家整天在決定的事。
-# 邊的條件一次只能比一個變數,所以 AND 靠 andlink 串兩跳。
 cx = b.col(2)
-none = b.setvar("d3e-fig-none", [{"variable": "figured", "kind": "set", "value": "none"}],
-                text="她把今天的東西一件一件排開。它們就只是四件事，各自躺在那裡，"
-                     "沒有一件跟另一件連得起來。",
-                title="什麼都沒拼出來", x=cx + 1200, y=400)
-
-FIG = [
-    ("dough", ["keptRules", "keptWindow"],
-     "她突然不講話了。\n"
-     "「等一下。守則上寫『不要半夜開烤箱』、『麵粉要收在櫃子裡』。」\n"
-     "「窗台上有一個碗底的印子，很深，表示那個碗在那裡放了很久很久。」\n"
-     "「碗放在那裡幹嘛？發酵要放在有太陽的地方——」\n"
-     "她停住了。這句話她說得太順了，順到不像是她第一次說。"),
-    ("hand", ["keptFridge", "keptRules"],
-     "她把保鮮膜攤開，又摺回去，再攤開。\n"
-     "「守則本上的字比較穩。這個保鮮膜也折得比我現在會做的還仔細。」\n"
-     "「所以有一個比我穩的人在這個房間裡做過事情。」\n"
-     "「那個人用我的字跡寫東西，用我的手折保鮮膜。」\n"
-     "「那個人是我嗎？還是我是那個人剩下來的部分？」"),
-    ("him", ["keptBoots", "keptCorner"],
-     "「地板上那個圓，是他坐出來的。要坐多久才坐得出一個凹下去的圓？」\n"
-     "「門邊那雙靴子裂開了。沒有人穿過它，它自己裂的。」\n"
-     "「他在這裡坐了很久很久。久到地板記得他，而我不記得。」\n"
-     "她看向角落。他在那裡，沒有動。"),
-]
-prev_gate = report
-for tag, conds, text in FIG:
-    n = b.setvar(f"d3e-fig-{tag}", [{"variable": "figured", "kind": "set", "value": tag}],
-                 text=text, title=f"拼出來了：{tag}", x=cx + 900, y=FIG.index((tag, conds, text)) * 260 - 260)
-    nxt = b.setvar(f"d3e-cont-{tag}", [], text="", title="接著",
-                   x=cx + 400, y=FIG.index((tag, conds, text)) * 260 - 200)
-    b.andlink(prev_gate, [{"variable": c, "op": "eq", "value": 1} for c in conds],
-              n, nxt, x=cx, y=FIG.index((tag, conds, text)) * 260 - 260, key=f"d3e-{tag}")
-    prev_gate = nxt
-b.link(prev_gate, none)
-
-fig_out = [b.find(f"d3e-fig-{t}")["id"] for t, _, _ in FIG] + [none]
 
 # ══ 他的反應:依她拼出了什麼 ══
 hx = cx + 1600
+# 她今天拼出了什麼，他就回哪一句。這是他一天裡唯一會多說一句話的地方。
 REACT = [
-    ("dough", "妳每次都停在同一句。", "他說（麵糰）"),
+    ("dough", "妳每次都停在同一句。", "他說（發酵）"),
     ("hand",  "妳沒有剩下來。妳一直都在。", "他說（那個人是我嗎）"),
-    ("him",   "地板不會忘記。妳會。這不是妳的錯。", "他說（關於他）"),
+    ("feet",  "有過。", "他說（他以前有腳嗎）"),
 ]
 react_join = b.say("d3e-react-join", "她等了一下，等到確定他不會再說第二句。",
                    who=None, title="等他", x=hx + 400, y=0)
 for k, (tag, line, title) in enumerate(REACT):
     n = b.say(f"d3e-react-{tag}", line, who=HOLE, face="預設", title=title,
               x=hx, y=(k - 1) * 200)
-    for src in fig_out:
+    for src in [report]:
         b.link(src, n, "right", cond={"variable": "figured", "op": "eq", "value": tag})
     b.link(n, react_join)
 quiet = b.say("d3e-react-none", "他把外套掛好，坐進角落。今天的報告他沒有接。",
               who=None, title="他沒接", x=hx, y=400)
-for src in fig_out:
+for src in [report]:
     b.link(src, quiet)
 b.link(quiet, react_join)
 b.prev = react_join
@@ -357,17 +340,43 @@ rule_in = b.say("d3e-rule", "好吧。填守則。第 {{ruleVersion}} 版。", f
 for n in (forgot, b_hole, b_self, b_play): b.link(n, rule_in)
 b.prev = rule_in
 
-cur = b.add("d3e-rulein", {"type": "input", "title": "填空位",
-    "text": "空位在這裡。今天要留什麼給明天的我？\n"
-            "（明天早上的她會照著這句話做。她不會問為什麼。）",
-    "inputVariable": "ruleLine3", "inputPlaceholder": "寫一句話…",
-    "inputSuggestions": ["去看窗台。", "翻守則本，看前面幾天寫了什麼。",
-                         "問黑洞先生「以前」是什麼時候。"]})
-b.link(b.prev, cur); b.prev = cur
+# 她今天拼出來的東西，只有寫進守則才活得過今晚。所以建議句依 figured 不同——
+# 五家會審說上一版「拼出來只多幾句獨白，不改變任何事」，這裡是那句話的出口。
+rx = b.col()
+RULEIN = [
+    ("dough", "我今天差點想起一件事。趁還沒忘，我要把它寫下來。",
+     ["我以前會烤麵包。", "窗台上那個碗是拿來發酵的。", "「不要半夜開烤箱」是我自己寫的。"]),
+    ("hand", "有一個比我穩的人用過我的手。我要把這件事留給明天的我。",
+     ["守則本上的字是我寫的，只是比較早以前的我。",
+      "我的手會做一些我的腦不知道的事。", "去比對筆跡。"]),
+    ("feet", "我今天問了一個問題，他回答了。這種事不常發生。",
+     ["黑洞先生以前有腳。他說有過。", "門邊的靴子是他的，不是別人的。",
+      "問他腳是怎麼不見的。"]),
+    ("none", "今天沒有拼出什麼。可是我還是得寫一句。",
+     ["去看窗台。", "翻守則本，看前面幾天寫了什麼。",
+      "問黑洞先生「以前」是什麼時候。"]),
+]
+rule_nodes = []
+for k, (tag, lead, sug) in enumerate(RULEIN):
+    n1 = b.say(f"d3e-lead-{tag}", lead, who=G, face="平常",
+               title=f"守則引子（{tag}）", x=rx, y=(k - 1) * 260)
+    n2 = b.add(f"d3e-in-{tag}", {"type": "input", "title": f"填空位（{tag}）",
+        "text": "空位在這裡。今天要留什麼給明天的我？\n"
+                "（明天早上的她會照著這句話做。她不會問為什麼。）",
+        "inputVariable": "ruleLine3", "inputPlaceholder": "寫一句話…",
+        "inputSuggestions": sug}, x=rx + 320, y=(k - 1) * 260)
+    b.link(n1, n2)
+    if tag != "none":
+        b.link(b.prev, n1, "right", cond={"variable": "figured", "op": "eq", "value": tag})
+    else:
+        b.link(b.prev, n1)
+    rule_nodes.append(n2)
 cur = b.setvar("d3e-rulever", [{"variable": "ruleVersion", "kind": "add", "value": 1},
                                {"variable": "dayCount", "kind": "set", "value": 3}],
-               text="她一筆一畫寫上去。第 {{ruleVersion}} 版，完成。", title="守則 +1")
-b.link(b.prev, cur); b.prev = cur
+               text="她一筆一畫寫上去。第 {{ruleVersion}} 版，完成。", title="守則 +1",
+               x=rx + 700, y=0)
+for n in rule_nodes: b.link(n, cur)
+b.prev = cur
 b.chain([
     ("d3e-save",  "記得存檔。今天這幾格，我自己留不住。", "平常", G),
     ("d3e-sleep", "她躺下的時候，把口袋裡的保鮮膜摺成更小的方塊。", "平常", None),
