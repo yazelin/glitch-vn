@@ -19067,8 +19067,22 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3m-warn-right-d3m-you",
+          "id": "e-d3m-warn-right-d3m-pair",
           "source": "d3m-warn",
+          "target": "d3m-pair",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-pair-right-d3m-pair2",
+          "source": "d3m-pair",
+          "target": "d3m-pair2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-pair2-right-d3m-you",
+          "source": "d3m-pair2",
           "target": "d3m-you",
           "animated": true,
           "sourceHandle": "right"
@@ -19148,46 +19162,11 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3n-mem-gate-right-d3n-mem-full",
+          "id": "e-d3n-mem-gate-right-d3n-mem-shift",
           "source": "d3n-mem-gate",
-          "target": "d3n-mem-full",
+          "target": "d3n-mem-shift",
           "animated": true,
           "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-mem-full-right-d3n-mem-drop",
-          "source": "d3n-mem-full",
-          "target": "d3n-mem-drop",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-mem-drop-choice-0-d3n-mem-drop1",
-          "source": "d3n-mem-drop",
-          "target": "d3n-mem-drop1",
-          "animated": true,
-          "sourceHandle": "choice-0"
-        },
-        {
-          "id": "e-d3n-mem-drop-choice-1-d3n-mem-drop2",
-          "source": "d3n-mem-drop",
-          "target": "d3n-mem-drop2",
-          "animated": true,
-          "sourceHandle": "choice-1"
-        },
-        {
-          "id": "e-d3n-mem-drop-choice-2-d3n-mem-drop3",
-          "source": "d3n-mem-drop",
-          "target": "d3n-mem-drop3",
-          "animated": true,
-          "sourceHandle": "choice-2"
-        },
-        {
-          "id": "e-d3n-mem-drop-choice-3-d3n-mem-drop4",
-          "source": "d3n-mem-drop",
-          "target": "d3n-mem-drop4",
-          "animated": true,
-          "sourceHandle": "choice-3"
         },
         {
           "id": "e-d3n-q-choice-0-d3n-fridge-again",
@@ -19254,11 +19233,18 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3n-fridge-route-choice-0-d3n-mem-gate",
+          "id": "e-d3n-fridge-route-choice-0-d3n-fridge-keep",
           "source": "d3n-fridge-route",
-          "target": "d3n-mem-gate",
+          "target": "d3n-fridge-keep",
           "animated": true,
           "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e-d3n-fridge-keep-right-d3n-mem-gate",
+          "source": "d3n-fridge-keep",
+          "target": "d3n-mem-gate",
+          "animated": true,
+          "sourceHandle": "right"
         },
         {
           "id": "e-d3n-fridge-route-choice-1-d3n-fridge-feed",
@@ -19339,11 +19325,18 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3n-window-route-choice-0-d3n-mem-gate",
+          "id": "e-d3n-window-route-choice-0-d3n-window-keep",
           "source": "d3n-window-route",
-          "target": "d3n-mem-gate",
+          "target": "d3n-window-keep",
           "animated": true,
           "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e-d3n-window-keep-right-d3n-mem-gate",
+          "source": "d3n-window-keep",
+          "target": "d3n-mem-gate",
+          "animated": true,
+          "sourceHandle": "right"
         },
         {
           "id": "e-d3n-window-route-choice-1-d3n-window-feed",
@@ -19424,11 +19417,18 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3n-boots-route-choice-0-d3n-mem-gate",
+          "id": "e-d3n-boots-route-choice-0-d3n-boots-keep",
           "source": "d3n-boots-route",
-          "target": "d3n-mem-gate",
+          "target": "d3n-boots-keep",
           "animated": true,
           "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e-d3n-boots-keep-right-d3n-mem-gate",
+          "source": "d3n-boots-keep",
+          "target": "d3n-mem-gate",
+          "animated": true,
+          "sourceHandle": "right"
         },
         {
           "id": "e-d3n-boots-route-choice-1-d3n-boots-feed",
@@ -19509,11 +19509,18 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3n-rules-route-choice-0-d3n-mem-gate",
+          "id": "e-d3n-rules-route-choice-0-d3n-rules-keep",
           "source": "d3n-rules-route",
-          "target": "d3n-mem-gate",
+          "target": "d3n-rules-keep",
           "animated": true,
           "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e-d3n-rules-keep-right-d3n-mem-gate",
+          "source": "d3n-rules-keep",
+          "target": "d3n-mem-gate",
+          "animated": true,
+          "sourceHandle": "right"
         },
         {
           "id": "e-d3n-rules-route-choice-1-d3n-rules-feed",
@@ -19601,11 +19608,18 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3n-corner-route-choice-0-d3n-mem-gate",
+          "id": "e-d3n-corner-route-choice-0-d3n-corner-keep",
           "source": "d3n-corner-route",
-          "target": "d3n-mem-gate",
+          "target": "d3n-corner-keep",
           "animated": true,
           "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e-d3n-corner-keep-right-d3n-mem-gate",
+          "source": "d3n-corner-keep",
+          "target": "d3n-mem-gate",
+          "animated": true,
+          "sourceHandle": "right"
         },
         {
           "id": "e-d3n-corner-route-choice-1-d3n-corner-feed",
@@ -19720,29 +19734,8 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3n-mem-drop1-right-d3n-tick",
-          "source": "d3n-mem-drop1",
-          "target": "d3n-tick",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-mem-drop2-right-d3n-tick",
-          "source": "d3n-mem-drop2",
-          "target": "d3n-tick",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-mem-drop3-right-d3n-tick",
-          "source": "d3n-mem-drop3",
-          "target": "d3n-tick",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-mem-drop4-right-d3n-tick",
-          "source": "d3n-mem-drop4",
+          "id": "e-d3n-mem-shift-right-d3n-tick",
+          "source": "d3n-mem-shift",
           "target": "d3n-tick",
           "animated": true,
           "sourceHandle": "right"
@@ -20115,67 +20108,392 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3e-gap-right-d3e-r-corner",
+          "id": "e-d3e-gap-right-d3e-dough-and0",
           "data": {
             "condition": {
               "op": "eq",
               "kind": "variable",
               "value": 1,
-              "variable": "seenCorner"
+              "variable": "keptRules"
             }
           },
           "source": "d3e-gap",
-          "target": "d3e-r-corner",
+          "target": "d3e-dough-and0",
           "animated": true,
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3e-gap-right-d3e-r-fridge",
+          "id": "e-d3e-gap-right-d3e-cont-dough",
+          "source": "d3e-gap",
+          "target": "d3e-cont-dough",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-dough-and0-right-d3e-fig-dough",
           "data": {
             "condition": {
               "op": "eq",
               "kind": "variable",
-              "value": 0,
-              "variable": "seenFridge"
+              "value": 1,
+              "variable": "keptWindow"
             }
           },
-          "source": "d3e-gap",
-          "target": "d3e-r-fridge",
+          "source": "d3e-dough-and0",
+          "target": "d3e-fig-dough",
           "animated": true,
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3e-gap-right-d3e-r-none",
-          "source": "d3e-gap",
-          "target": "d3e-r-none",
+          "id": "e-d3e-dough-and0-right-d3e-cont-dough",
+          "source": "d3e-dough-and0",
+          "target": "d3e-cont-dough",
           "animated": true,
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3e-r-corner-right-d3e-merge",
-          "source": "d3e-r-corner",
-          "target": "d3e-merge",
+          "id": "e-d3e-cont-dough-right-d3e-hand-and0",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 1,
+              "variable": "keptFridge"
+            }
+          },
+          "source": "d3e-cont-dough",
+          "target": "d3e-hand-and0",
           "animated": true,
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3e-r-fridge-right-d3e-merge",
-          "source": "d3e-r-fridge",
-          "target": "d3e-merge",
+          "id": "e-d3e-cont-dough-right-d3e-cont-hand",
+          "source": "d3e-cont-dough",
+          "target": "d3e-cont-hand",
           "animated": true,
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3e-r-none-right-d3e-merge",
-          "source": "d3e-r-none",
-          "target": "d3e-merge",
+          "id": "e-d3e-hand-and0-right-d3e-fig-hand",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 1,
+              "variable": "keptRules"
+            }
+          },
+          "source": "d3e-hand-and0",
+          "target": "d3e-fig-hand",
           "animated": true,
           "sourceHandle": "right"
         },
         {
-          "id": "e-d3e-merge-right-d3e-bread1",
-          "source": "d3e-merge",
-          "target": "d3e-bread1",
+          "id": "e-d3e-hand-and0-right-d3e-cont-hand",
+          "source": "d3e-hand-and0",
+          "target": "d3e-cont-hand",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-cont-hand-right-d3e-him-and0",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 1,
+              "variable": "keptBoots"
+            }
+          },
+          "source": "d3e-cont-hand",
+          "target": "d3e-him-and0",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-cont-hand-right-d3e-cont-him",
+          "source": "d3e-cont-hand",
+          "target": "d3e-cont-him",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-him-and0-right-d3e-fig-him",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 1,
+              "variable": "keptCorner"
+            }
+          },
+          "source": "d3e-him-and0",
+          "target": "d3e-fig-him",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-him-and0-right-d3e-cont-him",
+          "source": "d3e-him-and0",
+          "target": "d3e-cont-him",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-cont-him-right-d3e-fig-none",
+          "source": "d3e-cont-him",
+          "target": "d3e-fig-none",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-dough-right-d3e-react-dough",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "dough",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-dough",
+          "target": "d3e-react-dough",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-hand-right-d3e-react-dough",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "dough",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-hand",
+          "target": "d3e-react-dough",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-him-right-d3e-react-dough",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "dough",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-him",
+          "target": "d3e-react-dough",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-none-right-d3e-react-dough",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "dough",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-none",
+          "target": "d3e-react-dough",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-react-dough-right-d3e-react-join",
+          "source": "d3e-react-dough",
+          "target": "d3e-react-join",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-dough-right-d3e-react-hand",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "hand",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-dough",
+          "target": "d3e-react-hand",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-hand-right-d3e-react-hand",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "hand",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-hand",
+          "target": "d3e-react-hand",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-him-right-d3e-react-hand",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "hand",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-him",
+          "target": "d3e-react-hand",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-none-right-d3e-react-hand",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "hand",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-none",
+          "target": "d3e-react-hand",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-react-hand-right-d3e-react-join",
+          "source": "d3e-react-hand",
+          "target": "d3e-react-join",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-dough-right-d3e-react-him",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "him",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-dough",
+          "target": "d3e-react-him",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-hand-right-d3e-react-him",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "him",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-hand",
+          "target": "d3e-react-him",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-him-right-d3e-react-him",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "him",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-him",
+          "target": "d3e-react-him",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-none-right-d3e-react-him",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "him",
+              "variable": "figured"
+            }
+          },
+          "source": "d3e-fig-none",
+          "target": "d3e-react-him",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-react-him-right-d3e-react-join",
+          "source": "d3e-react-him",
+          "target": "d3e-react-join",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-dough-right-d3e-react-none",
+          "source": "d3e-fig-dough",
+          "target": "d3e-react-none",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-hand-right-d3e-react-none",
+          "source": "d3e-fig-hand",
+          "target": "d3e-react-none",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-him-right-d3e-react-none",
+          "source": "d3e-fig-him",
+          "target": "d3e-react-none",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-fig-none-right-d3e-react-none",
+          "source": "d3e-fig-none",
+          "target": "d3e-react-none",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-react-none-right-d3e-react-join",
+          "source": "d3e-react-none",
+          "target": "d3e-react-join",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-react-join-right-d3e-bread-forgot",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 1,
+              "variable": "lostBread"
+            }
+          },
+          "source": "d3e-react-join",
+          "target": "d3e-bread-forgot",
           "animated": true,
           "sourceHandle": "right"
         },
@@ -20190,6 +20508,13 @@
           "id": "e-d3e-bread2-right-d3e-bread3",
           "source": "d3e-bread2",
           "target": "d3e-bread3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-react-join-right-d3e-bread1",
+          "source": "d3e-react-join",
+          "target": "d3e-bread1",
           "animated": true,
           "sourceHandle": "right"
         },
@@ -20220,6 +20545,13 @@
           "target": "d3e-bread-player",
           "animated": true,
           "sourceHandle": "choice-2"
+        },
+        {
+          "id": "e-d3e-bread-forgot-right-d3e-rule",
+          "source": "d3e-bread-forgot",
+          "target": "d3e-rule",
+          "animated": true,
+          "sourceHandle": "right"
         },
         {
           "id": "e-d3e-bread-hole-right-d3e-rule",
@@ -20649,9 +20981,9 @@
         {
           "id": "d3m-warn",
           "data": {
-            "text": "如果滿了我還硬要記，就得丟掉一格。丟掉的那件會被黑洞先生吃掉，我攔不住。",
+            "text": "如果滿了我還硬要記，最舊的那一格就會自己掉出去。我攔不住，也不會知道掉的是什麼。",
             "type": "dialogue",
-            "title": "如果滿了我還硬要記，就得丟掉一格",
+            "title": "如果滿了我還硬要記，最舊的那一格",
             "emotion": "平常",
             "speaker": "格莉奇",
             "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
@@ -20661,6 +20993,42 @@
           "type": "story",
           "position": {
             "x": 5400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-pair",
+          "data": {
+            "text": "還有一件事。有時候兩件東西同時擺在我腦子裡，我會突然看懂一點什麼。一件一件分開看就沒有。",
+            "type": "dialogue",
+            "title": "還有一件事。有時候兩件東西同時擺",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-pair2",
+          "data": {
+            "text": "所以你挑的時候，順便想一下哪兩件放在一起會有意思。",
+            "type": "dialogue",
+            "title": "所以你挑的時候，順便想一下哪兩件",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6000,
             "y": 0
           }
         },
@@ -20678,7 +21046,7 @@
           },
           "type": "story",
           "position": {
-            "x": 5700,
+            "x": 6300,
             "y": 0
           }
         },
@@ -20692,7 +21060,7 @@
           },
           "type": "story",
           "position": {
-            "x": 6000,
+            "x": 6600,
             "y": 0
           }
         },
@@ -20703,17 +21071,17 @@
             "type": "choice",
             "title": "選擇",
             "choices": [
-              "冰箱",
-              "窗台",
-              "門邊那疊短靴",
-              "守則本",
-              "黑洞先生坐的那個角落"
+              "keptFridge",
+              "keptWindow",
+              "keptBoots",
+              "keptRules",
+              "keptCorner"
             ],
             "choiceMode": "branch"
           },
           "type": "story",
           "position": {
-            "x": 6300,
+            "x": 6900,
             "y": 0
           }
         },
@@ -20727,7 +21095,7 @@
           },
           "type": "story",
           "position": {
-            "x": 7200,
+            "x": 7800,
             "y": -700
           }
         },
@@ -20754,7 +21122,7 @@
           },
           "type": "story",
           "position": {
-            "x": 7500,
+            "x": 8100,
             "y": -920
           }
         },
@@ -20781,7 +21149,7 @@
           },
           "type": "story",
           "position": {
-            "x": 7500,
+            "x": 8100,
             "y": -810
           }
         },
@@ -20808,7 +21176,7 @@
           },
           "type": "story",
           "position": {
-            "x": 7500,
+            "x": 8100,
             "y": -700
           }
         },
@@ -20835,202 +21203,59 @@
           },
           "type": "story",
           "position": {
-            "x": 7500,
+            "x": 8100,
             "y": -590
           }
         },
         {
-          "id": "d3n-mem-full",
+          "id": "d3n-mem-shift",
           "data": {
-            "text": "等等。我的腦袋在閃，有一格的燈號變紅了。\n四格都滿了。要放新的東西進來，就得有一格空出來。",
-            "type": "dialogue",
-            "title": "記憶體滿了",
-            "emotion": "當機",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196243145_glitch-error.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 7500,
-            "y": -440
-          }
-        },
-        {
-          "id": "d3n-mem-drop",
-          "data": {
-            "text": "要忘掉哪一格？\n（忘掉的那件，黑洞先生會吃掉。）",
-            "type": "choice",
-            "title": "選擇",
-            "choices": [
-              "忘掉「{{slot1}}」",
-              "忘掉「{{slot2}}」",
-              "忘掉「{{slot3}}」",
-              "忘掉「{{slot4}}」"
-            ],
-            "choiceMode": "branch"
-          },
-          "type": "story",
-          "position": {
-            "x": 7800,
-            "y": -440
-          }
-        },
-        {
-          "id": "d3n-mem-drop1",
-          "data": {
-            "text": "她不知道自己剛剛丟掉了什麼。連「這裡本來有個東西」的凹痕都沒有留下。",
+            "text": "她說到一半停住了。\n「等一下。我剛剛手上有一個東西。是什麼形狀的來著。」\n她低頭看自己的手。手是空的——麵包早上就被她放回冰箱了，但是現在她連自己拿過那個東西都不記得。",
             "type": "setVariable",
-            "title": "丟掉第 1 格",
+            "title": "最舊的掉出去了",
             "variableOps": [
               {
                 "id": "op-0",
                 "kind": "set",
                 "variable": "slot1",
-                "valueFrom": "pending"
+                "valueFrom": "slot2"
               },
               {
                 "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedCount"
-              },
-              {
-                "id": "op-2",
-                "kind": "add",
-                "value": 1,
-                "variable": "holeFeet"
-              },
-              {
-                "id": "op-3",
-                "kind": "add",
-                "value": 1,
-                "variable": "overwroteCount"
-              }
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 8100,
-            "y": -550
-          }
-        },
-        {
-          "id": "d3n-mem-drop2",
-          "data": {
-            "text": "她不知道自己剛剛丟掉了什麼。連「這裡本來有個東西」的凹痕都沒有留下。",
-            "type": "setVariable",
-            "title": "丟掉第 2 格",
-            "variableOps": [
-              {
-                "id": "op-0",
                 "kind": "set",
                 "variable": "slot2",
-                "valueFrom": "pending"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedCount"
+                "valueFrom": "slot3"
               },
               {
                 "id": "op-2",
-                "kind": "add",
-                "value": 1,
-                "variable": "holeFeet"
-              },
-              {
-                "id": "op-3",
-                "kind": "add",
-                "value": 1,
-                "variable": "overwroteCount"
-              }
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 8100,
-            "y": -450
-          }
-        },
-        {
-          "id": "d3n-mem-drop3",
-          "data": {
-            "text": "她不知道自己剛剛丟掉了什麼。連「這裡本來有個東西」的凹痕都沒有留下。",
-            "type": "setVariable",
-            "title": "丟掉第 3 格",
-            "variableOps": [
-              {
-                "id": "op-0",
                 "kind": "set",
                 "variable": "slot3",
-                "valueFrom": "pending"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedCount"
-              },
-              {
-                "id": "op-2",
-                "kind": "add",
-                "value": 1,
-                "variable": "holeFeet"
+                "valueFrom": "slot4"
               },
               {
                 "id": "op-3",
-                "kind": "add",
-                "value": 1,
-                "variable": "overwroteCount"
-              }
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 8100,
-            "y": -350
-          }
-        },
-        {
-          "id": "d3n-mem-drop4",
-          "data": {
-            "text": "她不知道自己剛剛丟掉了什麼。連「這裡本來有個東西」的凹痕都沒有留下。",
-            "type": "setVariable",
-            "title": "丟掉第 4 格",
-            "variableOps": [
-              {
-                "id": "op-0",
                 "kind": "set",
                 "variable": "slot4",
                 "valueFrom": "pending"
               },
               {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedCount"
-              },
-              {
-                "id": "op-2",
-                "kind": "add",
-                "value": 1,
-                "variable": "holeFeet"
-              },
-              {
-                "id": "op-3",
+                "id": "op-4",
                 "kind": "add",
                 "value": 1,
                 "variable": "overwroteCount"
+              },
+              {
+                "id": "op-5",
+                "kind": "set",
+                "value": 1,
+                "variable": "lostBread"
               }
             ]
           },
           "type": "story",
           "position": {
             "x": 8100,
-            "y": -250
+            "y": -400
           }
         },
         {
@@ -21163,6 +21388,27 @@
           "type": "story",
           "position": {
             "x": 3000,
+            "y": -840
+          }
+        },
+        {
+          "id": "d3n-fridge-keep",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "留著：保鮮膜的折法",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "keptFridge"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3300,
             "y": -840
           }
         },
@@ -21354,6 +21600,27 @@
           }
         },
         {
+          "id": "d3n-window-keep",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "留著：窗台上的圓印",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "keptWindow"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3300,
+            "y": -420
+          }
+        },
+        {
           "id": "d3n-window-feed",
           "data": {
             "text": "她把這件事留在原地。晚上黑洞先生回來的時候，它已經不在了。",
@@ -21541,6 +21808,27 @@
           }
         },
         {
+          "id": "d3n-boots-keep",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "留著：裂開的那雙靴子",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "keptBoots"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3300,
+            "y": 0
+          }
+        },
+        {
           "id": "d3n-boots-feed",
           "data": {
             "text": "她把這件事留在原地。晚上黑洞先生回來的時候，它已經不在了。",
@@ -21724,6 +22012,27 @@
           "type": "story",
           "position": {
             "x": 3000,
+            "y": 420
+          }
+        },
+        {
+          "id": "d3n-rules-keep",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "留著：守則上的那兩條",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "keptRules"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3300,
             "y": 420
           }
         },
@@ -21929,6 +22238,27 @@
           "type": "story",
           "position": {
             "x": 3300,
+            "y": 840
+          }
+        },
+        {
+          "id": "d3n-corner-keep",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "留著：角落地板上的圓",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "keptCorner"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3600,
             "y": 840
           }
         },
@@ -22152,7 +22482,7 @@
           },
           "type": "story",
           "position": {
-            "x": 7800,
+            "x": 8400,
             "y": 0
           }
         },
@@ -22170,7 +22500,7 @@
           },
           "type": "story",
           "position": {
-            "x": 8100,
+            "x": 8700,
             "y": 0
           }
         },
@@ -22188,7 +22518,7 @@
           },
           "type": "story",
           "position": {
-            "x": 8400,
+            "x": 9000,
             "y": 0
           }
         },
@@ -22203,7 +22533,7 @@
           },
           "type": "story",
           "position": {
-            "x": 8700,
+            "x": 9300,
             "y": 0
           }
         },
@@ -22221,7 +22551,7 @@
           },
           "type": "story",
           "position": {
-            "x": 9000,
+            "x": 9600,
             "y": 0
           }
         },
@@ -22239,7 +22569,7 @@
           },
           "type": "story",
           "position": {
-            "x": 9300,
+            "x": 9900,
             "y": 0
           }
         },
@@ -22257,63 +22587,180 @@
           },
           "type": "story",
           "position": {
-            "x": 9600,
+            "x": 10200,
             "y": 0
           }
         },
         {
-          "id": "d3e-r-corner",
+          "id": "d3e-fig-none",
           "data": {
-            "text": "那個圓，比妳早來。",
-            "type": "dialogue",
-            "title": "他說（角落）",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
+            "text": "她把今天的東西一件一件排開。它們就只是四件事，各自躺在那裡，沒有一件跟另一件連得起來。",
+            "type": "setVariable",
+            "title": "什麼都沒拼出來",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": "none",
+                "variable": "figured"
+              }
+            ]
           },
           "type": "story",
           "position": {
-            "x": 8600,
+            "x": 12000,
+            "y": 400
+          }
+        },
+        {
+          "id": "d3e-fig-dough",
+          "data": {
+            "text": "她突然不講話了。\n「等一下。守則上寫『不要半夜開烤箱』、『麵粉要收在櫃子裡』。」\n「窗台上有一個碗底的印子，很深，表示那個碗在那裡放了很久很久。」\n「碗放在那裡幹嘛？發酵要放在有太陽的地方——」\n她停住了。這句話她說得太順了，順到不像是她第一次說。",
+            "type": "setVariable",
+            "title": "拼出來了：dough",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": "dough",
+                "variable": "figured"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 11700,
+            "y": -260
+          }
+        },
+        {
+          "id": "d3e-cont-dough",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "接著",
+            "variableOps": []
+          },
+          "type": "story",
+          "position": {
+            "x": 11200,
             "y": -200
           }
         },
         {
-          "id": "d3e-r-fridge",
+          "id": "d3e-dough-and0",
           "data": {
-            "text": "冰箱今天很重。",
-            "type": "dialogue",
-            "title": "他說（沒看冰箱）",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
+            "text": "",
+            "type": "setVariable",
+            "title": "檢查",
+            "variableOps": []
           },
           "type": "story",
           "position": {
-            "x": 8600,
+            "x": 10800,
+            "y": -260
+          }
+        },
+        {
+          "id": "d3e-fig-hand",
+          "data": {
+            "text": "她把保鮮膜攤開，又摺回去，再攤開。\n「守則本上的字比較穩。這個保鮮膜也折得比我現在會做的還仔細。」\n「所以有一個比我穩的人在這個房間裡做過事情。」\n「那個人用我的字跡寫東西，用我的手折保鮮膜。」\n「那個人是我嗎？還是我是那個人剩下來的部分？」",
+            "type": "setVariable",
+            "title": "拼出來了：hand",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": "hand",
+                "variable": "figured"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 11700,
             "y": 0
           }
         },
         {
-          "id": "d3e-r-none",
+          "id": "d3e-cont-hand",
           "data": {
-            "text": "他把外套掛好，坐進角落。這個報告他沒有接。",
-            "type": "dialogue",
-            "title": "他沒接",
-            "speaker": "旁白",
-            "characterPosition": "center"
+            "text": "",
+            "type": "setVariable",
+            "title": "接著",
+            "variableOps": []
           },
           "type": "story",
           "position": {
-            "x": 8600,
-            "y": 200
+            "x": 11200,
+            "y": 60
           }
         },
         {
-          "id": "d3e-merge",
+          "id": "d3e-hand-and0",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "檢查",
+            "variableOps": []
+          },
+          "type": "story",
+          "position": {
+            "x": 10800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-fig-him",
+          "data": {
+            "text": "「地板上那個圓，是他坐出來的。要坐多久才坐得出一個凹下去的圓？」\n「門邊那雙靴子裂開了。沒有人穿過它，它自己裂的。」\n「他在這裡坐了很久很久。久到地板記得他，而我不記得。」\n她看向角落。他在那裡，沒有動。",
+            "type": "setVariable",
+            "title": "拼出來了：him",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": "him",
+                "variable": "figured"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 11700,
+            "y": 260
+          }
+        },
+        {
+          "id": "d3e-cont-him",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "接著",
+            "variableOps": []
+          },
+          "type": "story",
+          "position": {
+            "x": 11200,
+            "y": 320
+          }
+        },
+        {
+          "id": "d3e-him-and0",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "檢查",
+            "variableOps": []
+          },
+          "type": "story",
+          "position": {
+            "x": 10800,
+            "y": 260
+          }
+        },
+        {
+          "id": "d3e-react-join",
           "data": {
             "text": "她等了一下，等到確定他不會再說第二句。",
             "type": "dialogue",
@@ -22323,8 +22770,116 @@
           },
           "type": "story",
           "position": {
-            "x": 8920,
+            "x": 12800,
             "y": 0
+          }
+        },
+        {
+          "id": "d3e-react-dough",
+          "data": {
+            "text": "妳每次都停在同一句。",
+            "type": "dialogue",
+            "title": "他說（麵糰）",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12400,
+            "y": -200
+          }
+        },
+        {
+          "id": "d3e-react-hand",
+          "data": {
+            "text": "妳沒有剩下來。妳一直都在。",
+            "type": "dialogue",
+            "title": "他說（那個人是我嗎）",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-react-him",
+          "data": {
+            "text": "地板不會忘記。妳會。這不是妳的錯。",
+            "type": "dialogue",
+            "title": "他說（關於他）",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12400,
+            "y": 200
+          }
+        },
+        {
+          "id": "d3e-react-none",
+          "data": {
+            "text": "他把外套掛好，坐進角落。今天的報告他沒有接。",
+            "type": "dialogue",
+            "title": "他沒接",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12400,
+            "y": 400
+          }
+        },
+        {
+          "id": "d3e-bread-forgot",
+          "data": {
+            "text": "他站起來，走到冰箱前面，打開，拿出那塊用保鮮膜包好的麵包。\n「那是什麼？」她問。\n他沒有回答。他把它整個放進嘴裡，連紙條一起。\n她看著他吃，覺得那個包裝的手法有點眼熟，可是想不起來在哪裡看過。",
+            "type": "setVariable",
+            "title": "她忘了麵包這件事",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": "hole",
+                "variable": "breadState"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "fedToday"
+              },
+              {
+                "id": "op-2",
+                "kind": "add",
+                "value": 1,
+                "variable": "fedCount"
+              },
+              {
+                "id": "op-3",
+                "kind": "add",
+                "value": 1,
+                "variable": "holeFeet"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 11100,
+            "y": -400
           }
         },
         {
@@ -22341,7 +22896,7 @@
           },
           "type": "story",
           "position": {
-            "x": 9900,
+            "x": 11100,
             "y": 0
           }
         },
@@ -22359,7 +22914,7 @@
           },
           "type": "story",
           "position": {
-            "x": 10200,
+            "x": 11400,
             "y": 0
           }
         },
@@ -22374,7 +22929,7 @@
           },
           "type": "story",
           "position": {
-            "x": 10500,
+            "x": 11700,
             "y": 0
           }
         },
@@ -22393,7 +22948,7 @@
           },
           "type": "story",
           "position": {
-            "x": 10800,
+            "x": 12000,
             "y": 0
           }
         },
@@ -22432,7 +22987,7 @@
           },
           "type": "story",
           "position": {
-            "x": 11100,
+            "x": 12300,
             "y": -160
           }
         },
@@ -22453,7 +23008,7 @@
           },
           "type": "story",
           "position": {
-            "x": 11100,
+            "x": 12300,
             "y": 0
           }
         },
@@ -22480,7 +23035,7 @@
           },
           "type": "story",
           "position": {
-            "x": 11100,
+            "x": 12300,
             "y": 160
           }
         },
@@ -22498,7 +23053,7 @@
           },
           "type": "story",
           "position": {
-            "x": 11420,
+            "x": 12700,
             "y": 0
           }
         },
@@ -22511,8 +23066,8 @@
             "inputVariable": "ruleLine3",
             "inputPlaceholder": "寫一句話…",
             "inputSuggestions": [
-              "去看冰箱。",
-              "不要看門邊的靴子。",
+              "去看窗台。",
+              "翻守則本，看前面幾天寫了什麼。",
               "問黑洞先生「以前」是什麼時候。"
             ]
           },
@@ -22682,7 +23237,7 @@
       "label": "日本語"
     }
   ],
-  "updatedAt": "2026-08-20T20:24:23.668Z",
+  "updatedAt": "2026-08-20T20:32:34.641Z",
   "variables": [
     {
       "id": "playerName",
@@ -23139,6 +23694,62 @@
       "label": "看過他坐的角落",
       "description": "探索紀錄",
       "defaultValue": 0
+    },
+    {
+      "id": "keptFridge",
+      "name": "keptFridge",
+      "type": "number",
+      "label": "留著:保鮮膜的折法",
+      "description": "拼線索用",
+      "defaultValue": 0
+    },
+    {
+      "id": "keptWindow",
+      "name": "keptWindow",
+      "type": "number",
+      "label": "留著:窗台上的圓印",
+      "description": "拼線索用",
+      "defaultValue": 0
+    },
+    {
+      "id": "keptBoots",
+      "name": "keptBoots",
+      "type": "number",
+      "label": "留著:裂開的靴子",
+      "description": "拼線索用",
+      "defaultValue": 0
+    },
+    {
+      "id": "keptRules",
+      "name": "keptRules",
+      "type": "number",
+      "label": "留著:守則上那兩條",
+      "description": "拼線索用",
+      "defaultValue": 0
+    },
+    {
+      "id": "keptCorner",
+      "name": "keptCorner",
+      "type": "number",
+      "label": "留著:角落地板的圓",
+      "description": "拼線索用",
+      "defaultValue": 0
+    },
+    {
+      "id": "lostBread",
+      "name": "lostBread",
+      "type": "number",
+      "label": "她把麵包那件事忘了",
+      "description": "記憶體滿了,最舊的掉出去",
+      "defaultValue": 0
+    },
+    {
+      "id": "figured",
+      "name": "figured",
+      "type": "text",
+      "label": "今天她拼出了什麼",
+      "description": "dough/hand/him/none",
+      "defaultValue": ""
     }
   ],
   "characters": [

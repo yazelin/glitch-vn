@@ -69,7 +69,10 @@ b.chain([
     ("d3m-two",   "四格。已經用掉兩格了——「{{slot1}}」跟「{{slot2}}」。今天才剛開始耶。", "發呆", G),
     ("d3m-plan",  "他要傍晚才回來。在那之前我想在房間裡看幾個地方，可是我只剩兩格，"
                   "而且我走到一半就會忘記自己在找什麼。", "平常", G),
-    ("d3m-warn",  "如果滿了我還硬要記，就得丟掉一格。丟掉的那件會被黑洞先生吃掉，我攔不住。", "平常", G),
+    ("d3m-warn",  "如果滿了我還硬要記，最舊的那一格就會自己掉出去。我攔不住，也不會知道掉的是什麼。", "平常", G),
+    ("d3m-pair",  "還有一件事。有時候兩件東西同時擺在我腦子裡，我會突然看懂一點什麼。"
+                  "一件一件分開看就沒有。", "平常", G),
+    ("d3m-pair2", "所以你挑的時候，順便想一下哪兩件放在一起會有意思。", "平常", G),
     ("d3m-you",   "所以你帶路。你說去哪，我就去哪。", "平常", G),
 ])
 
@@ -79,7 +82,7 @@ b.link(b.prev, cur); b.prev = cur
 
 
 PLACES = [
-    ("fridge", "seenFridge", "冰箱",
+    ("fridge", "seenFridge", "keptFridge", "冰箱",
      "她走到冰箱前面。金屬門面還留著清晨開關時的餘溫。",
      ["麵包還在裡面。是我早上看到的那塊，還是另一塊？",
       "保鮮膜折得很仔細，邊角收進去，像我在包禮物的時候會做的事。",
@@ -88,7 +91,7 @@ PLACES = [
      "冰箱繼續運轉。沒有人去確認那塊麵包的保鮮膜還是不是原來的樣子。",
      "保鮮膜的折法"),
 
-    ("window", "seenWindow", "窗台",
+    ("window", "seenWindow", "keptWindow", "窗台",
      "她走到窗邊。陽光從左邊斜斜照進來，在窗台上畫出一條很亮的線。",
      ["這裡有東西被移動過。陽光直射的那個位置，灰塵的形狀是圓的。",
       "圓的，大小跟一個碗底差不多。印子很深，表示那個東西在這裡放了很久很久。",
@@ -97,7 +100,7 @@ PLACES = [
      "下午的陽光從窗台慢慢退開。那個圓形的灰塵印還留在那裡，等著被誰注意到。",
      "窗台上的圓印"),
 
-    ("boots", "seenBoots", "門邊那疊短靴",
+    ("boots", "seenBoots", "keptBoots", "門邊那疊短靴",
      "她蹲到門邊，手指撥過那疊沒人穿的短靴，揚起很薄的灰。",
      ["這麼多雙，全部一樣的款式，像某種儀式用的陳列。",
       "有一雙的鞋面裂開了，從鞋尖裂到鞋帶孔中間。",
@@ -106,7 +109,7 @@ PLACES = [
      "門邊的短靴維持著原來的堆疊角度。裂痕在陰影裡繼續裂。",
      "裂開的那雙靴子"),
 
-    ("rules", "seenRules", "守則本",
+    ("rules", "seenRules", "keptRules", "守則本",
      "她翻開桌上的守則本。紙頁因為太常被翻動而捲起邊角。",
      ["這些字我看得懂。「不要半夜開烤箱」、「麵粉要收在櫃子裡」。",
       "可是筆跡跟我現在寫的不一樣。比較穩，比較不抖。",
@@ -115,7 +118,7 @@ PLACES = [
      "守則本攤在桌上，捲起的紙頁慢慢恢復原本翹起的弧度。前幾天的筆跡繼續等。",
      "守則上的那兩條"),
 
-    ("corner", "seenCorner", "黑洞先生坐的那個角落",
+    ("corner", "seenCorner", "keptCorner", "黑洞先生坐的那個角落",
      "她走到房間最裡面的角落。那裡的地板顏色比周圍淺了一圈。",
      ["地板的磨損是一個很規則的圓，大小剛好塞得下一團觸手。",
       "圓圈裡有幾道刮痕，很細，像硬殼反覆摩擦留下的。",
@@ -132,10 +135,20 @@ b.link(b.prev, q)
 hub = q          # 選擇卡本身就是 hub,不用另外一張
 
 # 存進記憶體的共用零件（五個地點共用）
-store_gate, store_outs = b.store("d3n-mem", x=b.col(3), y=-700)
+# 她早上就佔掉兩格(麵包、字跡),所以第三次留東西一定會擠掉最舊的那一格 ——
+# 也就是「手裡這塊麵包」。順序固定,所以掉出去的是什麼算得出來,
+# 可以寫成真正的台詞而不是泛泛的「你忘記了某個東西」。
+store_gate, store_outs = b.store(
+    "d3n-mem",
+    "她說到一半停住了。\n"
+    "「等一下。我剛剛手上有一個東西。是什麼形狀的來著。」\n"
+    "她低頭看自己的手。手是空的——麵包早上就被她放回冰箱了，"
+    "但是現在她連自己拿過那個東西都不記得。",
+    overflow_ops=[{"variable": "lostBread", "kind": "set", "value": 1}],
+    x=b.col(3), y=-700)
 
 after = []          # 每個地點結束之後匯到這裡，接時間流逝
-for i, (key, seen, name, go, finds, again, missed, label) in enumerate(PLACES):
+for i, (key, seen, kept, name, go, finds, again, missed, label) in enumerate(PLACES):
     y = (i - 2) * 420
     x0 = b.col() if i == 0 else x0
     gx = 3000 + i * 0     # 位置只影響編輯畫面的可讀性
@@ -163,7 +176,10 @@ for i, (key, seen, name, go, finds, again, missed, label) in enumerate(PLACES):
                    "交給你保管（留得住，但你要回來）"],
                   x=2100 + len(finds) * 300, y=y)
     b.link(mark, rq)
-    b.link(rq, store_gate, "choice-0")
+    keep_mark = b.setvar(f"d3n-{key}-keep", [{"variable": kept, "kind": "set", "value": 1}],
+                         text="", title=f"留著：{label}",
+                         x=2400 + len(finds) * 300, y=y)
+    b.link(rq, keep_mark, "choice-0"); b.link(keep_mark, store_gate)
     n_feed = b.setvar(f"d3n-{key}-feed",
                       [{"variable": "fedToday", "kind": "add", "value": 1},
                        {"variable": "fedCount", "kind": "add", "value": 1},
@@ -202,7 +218,7 @@ b.link(tick, dusk)
 # 用串接式:每一張都直接連到「後面所有還沒檢查的地點」,最後一條無條件的接晚上。
 # 不用空白卡當匯流點——空 text 的對話卡在播放器裡是一個空的對話框,玩家要點過去。
 missed_nodes = []
-for i, (key, seen, name, go, finds, again, missed, label) in enumerate(PLACES):
+for i, (key, seen, kept, name, go, finds, again, missed, label) in enumerate(PLACES):
     missed_nodes.append((seen, b.say(f"d3n-{key}-missed", missed, who=None,
                                      title=f"沒去{name}", x=5300 + i * 300, y=-420)))
 
@@ -220,38 +236,101 @@ b.chain([
     ("d3e-none",  "他沒有回答。他走向房間最裡面那個角落。", "平常", None),
     ("d3e-report","我今天記了一些東西。趁我還記得，現在報告一下。", "平常", G),
     ("d3e-list",  "我記得「{{slot1}}」、「{{slot2}}」、「{{slot3}}」、「{{slot4}}」。", "平常", G),
-    ("d3e-gap",   "……有幾格是空的。空的那幾格我沒有辦法告訴你裡面本來有什麼，"
-                  "因為空的就是空的。", "發呆", G),
+    ("d3e-gap",   "……有幾格是空的。空的那幾格我沒有辦法告訴你裡面本來有什麼，因為空的就是空的。", "發呆", G),
 ])
-back = b.prev
+report = b.prev
 
-# 依今天看過什麼，他回一句不一樣的
-ex = 8600
-r_corner = b.say("d3e-r-corner", "那個圓，比妳早來。", who=HOLE, face="預設",
-                 title="他說（角落）", x=ex, y=-200)
-b.link(back, r_corner, "right", cond={"variable": "seenCorner", "op": "eq", "value": 1})
-r_fridge = b.say("d3e-r-fridge", "冰箱今天很重。", who=HOLE, face="預設",
-                 title="他說（沒看冰箱）", x=ex, y=0)
-b.link(back, r_fridge, "right", cond={"variable": "seenFridge", "op": "eq", "value": 0})
-r_none = b.say("d3e-r-none", "他把外套掛好，坐進角落。這個報告他沒有接。", who=None,
-               title="他沒接", x=ex, y=200)
-b.link(back, r_none)
+# ══ 拼線索 ══
+# 這一天真正的機制在這裡:一件線索單獨看不出東西,兩件放在一起才有意思。
+# 她一次只裝得下四件事,所以「哪兩件同時還在」就是玩家整天在決定的事。
+# 邊的條件一次只能比一個變數,所以 AND 靠 andlink 串兩跳。
+cx = b.col(2)
+none = b.setvar("d3e-fig-none", [{"variable": "figured", "kind": "set", "value": "none"}],
+                text="她把今天的東西一件一件排開。它們就只是四件事，各自躺在那裡，"
+                     "沒有一件跟另一件連得起來。",
+                title="什麼都沒拼出來", x=cx + 1200, y=400)
 
-merge = b.say("d3e-merge", "她等了一下，等到確定他不會再說第二句。", who=None,
-              title="等他", x=ex + 320, y=0)
-for n in (r_corner, r_fridge, r_none): b.link(n, merge)
-b.prev = merge
+FIG = [
+    ("dough", ["keptRules", "keptWindow"],
+     "她突然不講話了。\n"
+     "「等一下。守則上寫『不要半夜開烤箱』、『麵粉要收在櫃子裡』。」\n"
+     "「窗台上有一個碗底的印子，很深，表示那個碗在那裡放了很久很久。」\n"
+     "「碗放在那裡幹嘛？發酵要放在有太陽的地方——」\n"
+     "她停住了。這句話她說得太順了，順到不像是她第一次說。"),
+    ("hand", ["keptFridge", "keptRules"],
+     "她把保鮮膜攤開，又摺回去，再攤開。\n"
+     "「守則本上的字比較穩。這個保鮮膜也折得比我現在會做的還仔細。」\n"
+     "「所以有一個比我穩的人在這個房間裡做過事情。」\n"
+     "「那個人用我的字跡寫東西，用我的手折保鮮膜。」\n"
+     "「那個人是我嗎？還是我是那個人剩下來的部分？」"),
+    ("him", ["keptBoots", "keptCorner"],
+     "「地板上那個圓，是他坐出來的。要坐多久才坐得出一個凹下去的圓？」\n"
+     "「門邊那雙靴子裂開了。沒有人穿過它，它自己裂的。」\n"
+     "「他在這裡坐了很久很久。久到地板記得他，而我不記得。」\n"
+     "她看向角落。他在那裡，沒有動。"),
+]
+prev_gate = report
+for tag, conds, text in FIG:
+    n = b.setvar(f"d3e-fig-{tag}", [{"variable": "figured", "kind": "set", "value": tag}],
+                 text=text, title=f"拼出來了：{tag}", x=cx + 900, y=FIG.index((tag, conds, text)) * 260 - 260)
+    nxt = b.setvar(f"d3e-cont-{tag}", [], text="", title="接著",
+                   x=cx + 400, y=FIG.index((tag, conds, text)) * 260 - 200)
+    b.andlink(prev_gate, [{"variable": c, "op": "eq", "value": 1} for c in conds],
+              n, nxt, x=cx, y=FIG.index((tag, conds, text)) * 260 - 260, key=f"d3e-{tag}")
+    prev_gate = nxt
+b.link(prev_gate, none)
+
+fig_out = [b.find(f"d3e-fig-{t}")["id"] for t, _, _ in FIG] + [none]
+
+# ══ 他的反應:依她拼出了什麼 ══
+hx = cx + 1600
+REACT = [
+    ("dough", "妳每次都停在同一句。", "他說（麵糰）"),
+    ("hand",  "妳沒有剩下來。妳一直都在。", "他說（那個人是我嗎）"),
+    ("him",   "地板不會忘記。妳會。這不是妳的錯。", "他說（關於他）"),
+]
+react_join = b.say("d3e-react-join", "她等了一下，等到確定他不會再說第二句。",
+                   who=None, title="等他", x=hx + 400, y=0)
+for k, (tag, line, title) in enumerate(REACT):
+    n = b.say(f"d3e-react-{tag}", line, who=HOLE, face="預設", title=title,
+              x=hx, y=(k - 1) * 200)
+    for src in fig_out:
+        b.link(src, n, "right", cond={"variable": "figured", "op": "eq", "value": tag})
+    b.link(n, react_join)
+quiet = b.say("d3e-react-none", "他把外套掛好，坐進角落。今天的報告他沒有接。",
+              who=None, title="他沒接", x=hx, y=400)
+for src in fig_out:
+    b.link(src, quiet)
+b.link(quiet, react_join)
+b.prev = react_join
+
+# ══ 麵包的去處 ══
+# 她如果連麵包都忘了(記憶體滿了擠掉最舊的那一格),就沒得選——他自己去拿。
+bx = b.col()
+forgot = b.setvar("d3e-bread-forgot",
+                  [{"variable": "breadState", "kind": "set", "value": "hole"},
+                   {"variable": "fedToday", "kind": "add", "value": 1},
+                   {"variable": "fedCount", "kind": "add", "value": 1},
+                   {"variable": "holeFeet", "kind": "add", "value": 1}],
+                  text="他站起來，走到冰箱前面，打開，拿出那塊用保鮮膜包好的麵包。\n"
+                       "「那是什麼？」她問。\n"
+                       "他沒有回答。他把它整個放進嘴裡，連紙條一起。\n"
+                       "她看著他吃，覺得那個包裝的手法有點眼熟，可是想不起來在哪裡看過。",
+                  title="她忘了麵包這件事", x=bx, y=-400)
+b.link(react_join, forgot, "right", cond={"variable": "lostBread", "op": "eq", "value": 1})
+
 b.chain([
     ("d3e-bread1", "還有一件事。冰箱裡那塊麵包。", "平常", G),
     ("d3e-bread2", "我今天一整天都沒有動它。它上面寫著給你，可是我不知道為什麼。", "平常", G),
     ("d3e-bread3", "黑洞先生沒有看冰箱的方向。他在等她自己決定。", "平常", None),
-])
+], x=bx, y=0, link_prev=False)
+b.link(react_join, b.find("d3e-bread1")["id"])
 bq = b.choice("d3e-breadq", "那塊麵包要怎麼辦？",
               ["拿給黑洞先生（他今天還沒吃東西）",
                "放回冰箱（明天她不會記得它在那裡）",
-               "交給你保管（她再也不會知道自己烤過麵包）"])
+               "交給你保管（她再也不會知道自己烤過麵包）"],
+              x=bx + 900, y=0)
 b.link(b.prev, bq)
-bx = b.col()
 b_hole = b.setvar("d3e-bread-hole",
                   [{"variable": "breadState", "kind": "set", "value": "hole"},
                    {"variable": "fedToday", "kind": "add", "value": 1},
@@ -259,28 +338,31 @@ b_hole = b.setvar("d3e-bread-hole",
                    {"variable": "holeFeet", "kind": "add", "value": 1}],
                   text="他接過去，沒有拆保鮮膜就整個放進嘴裡。連紙條一起。\n"
                        "她看著那張寫著自己字跡的紙條消失，覺得自己好像應該難過，可是想不起來為什麼。",
-                  title="給他吃了", x=bx, y=-160)
+                  title="給他吃了", x=bx + 1200, y=-160)
 b_self = b.setvar("d3e-bread-self",
                   [{"variable": "breadState", "kind": "set", "value": "self"}],
                   text="她把麵包放回冰箱，關門的時候特別輕。\n"
                        "門合上的那一刻，她已經在想別的事了。",
-                  title="放回冰箱", x=bx, y=0)
+                  title="放回冰箱", x=bx + 1200, y=0)
 b_play = b.setvar("d3e-bread-player",
                   [{"variable": "breadState", "kind": "set", "value": "player"},
                    {"variable": "givenCount", "kind": "add", "value": 1}],
                   text="她把保鮮膜的折法又演了一遍給你看。先對折兩次，再從中間往外壓。\n"
                        "像是在確認你真的記住了。",
-                  title="交給你了", x=bx, y=160)
+                  title="交給你了", x=bx + 1200, y=160)
 b.link(bq, b_hole, "choice-0"); b.link(bq, b_self, "choice-1"); b.link(bq, b_play, "choice-2")
+
 rule_in = b.say("d3e-rule", "好吧。填守則。第 {{ruleVersion}} 版。", face="平常", who=G,
-                x=bx + 320, y=0)
-for n in (b_hole, b_self, b_play): b.link(n, rule_in)
+                x=bx + 1600, y=0)
+for n in (forgot, b_hole, b_self, b_play): b.link(n, rule_in)
 b.prev = rule_in
+
 cur = b.add("d3e-rulein", {"type": "input", "title": "填空位",
     "text": "空位在這裡。今天要留什麼給明天的我？\n"
             "（明天早上的她會照著這句話做。她不會問為什麼。）",
     "inputVariable": "ruleLine3", "inputPlaceholder": "寫一句話…",
-    "inputSuggestions": ["去看冰箱。", "不要看門邊的靴子。", "問黑洞先生「以前」是什麼時候。"]})
+    "inputSuggestions": ["去看窗台。", "翻守則本，看前面幾天寫了什麼。",
+                         "問黑洞先生「以前」是什麼時候。"]})
 b.link(b.prev, cur); b.prev = cur
 cur = b.setvar("d3e-rulever", [{"variable": "ruleVersion", "kind": "add", "value": 1},
                                {"variable": "dayCount", "kind": "set", "value": 3}],
