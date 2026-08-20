@@ -6006,1064 +6006,6 @@
       "description": "最早做的獨立版本，一次講完不迴圈，結尾就是結尾。留著是因為麵包高潮、四格記憶體機制與三個結局都在這裡，Day 7 會用到。正式入口是 Day 1。"
     },
     {
-      "id": "board-day3",
-      "kind": "story",
-      "mode": "story",
-      "name": "Day 3・麵包",
-      "edges": [
-        {
-          "id": "e-d3m-scene-right-d3m-stand",
-          "source": "d3m-scene",
-          "target": "d3m-stand",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-stand-right-d3m-boot",
-          "source": "d3m-stand",
-          "target": "d3m-boot",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-boot-right-d3m-late",
-          "source": "d3m-boot",
-          "target": "d3m-late",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-late-right-d3m-note",
-          "source": "d3m-late",
-          "target": "d3m-note",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-note-right-d3m-hands",
-          "source": "d3m-note",
-          "target": "d3m-hands",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-hands-right-d3m-ask",
-          "source": "d3m-hands",
-          "target": "d3m-ask",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-ask-right-d3m-reply",
-          "source": "d3m-ask",
-          "target": "d3m-reply",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-reply-right-d3m-when",
-          "source": "d3m-reply",
-          "target": "d3m-when",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-when-right-d3m-silent",
-          "source": "d3m-when",
-          "target": "d3m-silent",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-silent-right-d3m-feet",
-          "source": "d3m-silent",
-          "target": "d3m-feet",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3m-feet-right-d3n-scene",
-          "source": "d3m-feet",
-          "target": "d3n-scene",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-scene-right-d3n-look",
-          "source": "d3n-scene",
-          "target": "d3n-look",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-look-right-d3n-smell",
-          "source": "d3n-look",
-          "target": "d3n-smell",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-smell-right-d3n-logic",
-          "source": "d3n-smell",
-          "target": "d3n-logic",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-logic-right-d3n-logic2",
-          "source": "d3n-logic",
-          "target": "d3n-logic2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-logic2-right-d3n-bread-intro",
-          "source": "d3n-logic2",
-          "target": "d3n-bread-intro",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-bread-intro-right-d3n-bread-q",
-          "source": "d3n-bread-intro",
-          "target": "d3n-bread-q",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-bread-q-choice-0-d3n-bread-keep",
-          "source": "d3n-bread-q",
-          "target": "d3n-bread-keep",
-          "animated": true,
-          "sourceHandle": "choice-0"
-        },
-        {
-          "id": "e-d3n-bread-q-choice-1-d3n-bread-feed",
-          "source": "d3n-bread-q",
-          "target": "d3n-bread-feed",
-          "animated": true,
-          "sourceHandle": "choice-1"
-        },
-        {
-          "id": "e-d3n-bread-q-choice-2-d3n-bread-give",
-          "source": "d3n-bread-q",
-          "target": "d3n-bread-give",
-          "animated": true,
-          "sourceHandle": "choice-2"
-        },
-        {
-          "id": "e-d3n-bread-keep-right-d3n-bread-after",
-          "source": "d3n-bread-keep",
-          "target": "d3n-bread-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-bread-feed-right-d3n-bread-after",
-          "source": "d3n-bread-feed",
-          "target": "d3n-bread-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-bread-give-right-d3n-bread-after",
-          "source": "d3n-bread-give",
-          "target": "d3n-bread-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3n-bread-after-right-d3e-scene",
-          "source": "d3n-bread-after",
-          "target": "d3e-scene",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-scene-right-d3e-back",
-          "source": "d3e-scene",
-          "target": "d3e-back",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-back-right-d3e-r-hole",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "hole",
-              "variable": "breadState"
-            }
-          },
-          "source": "d3e-back",
-          "target": "d3e-r-hole",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-back-right-d3e-r-self",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "self",
-              "variable": "breadState"
-            }
-          },
-          "source": "d3e-back",
-          "target": "d3e-r-self",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-back-right-d3e-r-player",
-          "source": "d3e-back",
-          "target": "d3e-r-player",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-r-hole-right-d3e-join",
-          "source": "d3e-r-hole",
-          "target": "d3e-join",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-r-self-right-d3e-join",
-          "source": "d3e-r-self",
-          "target": "d3e-join",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-r-player-right-d3e-join",
-          "source": "d3e-r-player",
-          "target": "d3e-join",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-join-right-d3e-push",
-          "source": "d3e-join",
-          "target": "d3e-push",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-push-right-d3e-past",
-          "source": "d3e-push",
-          "target": "d3e-past",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-past-right-d3e-push2",
-          "source": "d3e-past",
-          "target": "d3e-push2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-push2-right-d3e-quiet",
-          "source": "d3e-push2",
-          "target": "d3e-quiet",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-quiet-right-d3e-you",
-          "source": "d3e-quiet",
-          "target": "d3e-you",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-you-right-d3e-none",
-          "source": "d3e-you",
-          "target": "d3e-none",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-none-right-d3e-rule",
-          "source": "d3e-none",
-          "target": "d3e-rule",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-rule-right-d3e-rulein",
-          "source": "d3e-rule",
-          "target": "d3e-rulein",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-rulein-right-d3e-rulever",
-          "source": "d3e-rulein",
-          "target": "d3e-rulever",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-rulever-right-d3e-save",
-          "source": "d3e-rulever",
-          "target": "d3e-save",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-save-right-d3e-sleep",
-          "source": "d3e-save",
-          "target": "d3e-sleep",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d3e-sleep-right-d3e-jump",
-          "source": "d3e-sleep",
-          "target": "d3e-jump",
-          "animated": true,
-          "sourceHandle": "right"
-        }
-      ],
-      "nodes": [
-        {
-          "id": "d3m-scene",
-          "data": {
-            "bgm": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787213051881_bgm-theme.mp3",
-            "text": "冰箱門沒關緊，透出一條光。",
-            "type": "scene",
-            "start": true,
-            "title": "第三天・清晨",
-            "bgmLoop": true,
-            "bgmVolume": 0.3,
-            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787223976597_bg-morning.png"
-          },
-          "type": "story",
-          "position": {
-            "x": 300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-stand",
-          "data": {
-            "text": "她站在冰箱前面，手裡拿著一塊用保鮮膜包好的麵包。她不記得自己是怎麼走過來的。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-boot",
-          "data": {
-            "text": "……逼——嗶！",
-            "type": "dialogue",
-            "title": "……逼——嗶！",
-            "emotion": "當機",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196243145_glitch-error.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-late",
-          "data": {
-            "text": "喔。我開機了。剛剛那是誰在動？",
-            "type": "dialogue",
-            "title": "喔。我開機了。剛剛那是誰在動？",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 1200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-note",
-          "data": {
-            "text": "保鮮膜上貼著一張紙條。「給黑洞先生。」是我的字。",
-            "type": "dialogue",
-            "title": "保鮮膜上貼著一張紙條。「給黑洞先",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 1500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-hands",
-          "data": {
-            "text": "我的手記得怎麼包保鮮膜，可是我的腦不記得為什麼要包。",
-            "type": "dialogue",
-            "title": "我的手記得怎麼包保鮮膜，可是我的",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 1800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-ask",
-          "data": {
-            "text": "黑洞先生，這是我做的嗎？",
-            "type": "dialogue",
-            "title": "黑洞先生，這是我做的嗎？",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 2100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-reply",
-          "data": {
-            "text": "是妳的字。",
-            "type": "dialogue",
-            "title": "是妳的字。",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 2400,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-when",
-          "data": {
-            "text": "那什麼時候做的？",
-            "type": "dialogue",
-            "title": "那什麼時候做的？",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 2700,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-silent",
-          "data": {
-            "text": "黑洞先生沒有回答。他把西裝拉平，出門了。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 3000,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3m-feet",
-          "data": {
-            "text": "門邊那疊沒人穿的短靴，今天的高度對得上他身上 {{holeFeet}} 隻腳。她沒有數，她從來不數。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 3300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-scene",
-          "data": {
-            "text": "太陽爬到窗戶正上方。麵包放在桌子中間，保鮮膜反著光。",
-            "type": "scene",
-            "title": "第三天・中午",
-            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787223994106_bg-noon.png"
-          },
-          "type": "story",
-          "position": {
-            "x": 3600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-look",
-          "data": {
-            "text": "我把它翻來翻去看了很久。保鮮膜包得很仔細——先對折兩次，再從中間往外壓。那是我會做的方式。",
-            "type": "dialogue",
-            "title": "我把它翻來翻去看了很久。保鮮膜包",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 3900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-smell",
-          "data": {
-            "text": "我聞了一下。身體有反應。像是很久沒做，可是手還記得。",
-            "type": "dialogue",
-            "title": "我聞了一下。身體有反應。像是很久",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 4200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-logic",
-          "data": {
-            "text": "問題來了。如果我忘了它在哪，黑洞先生就會把它當成沒人要的東西吃掉，然後長回一隻腳。",
-            "type": "dialogue",
-            "title": "問題來了。如果我忘了它在哪，黑洞",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 4500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-logic2",
-          "data": {
-            "text": "可是如果我記得——那這塊麵包到底是要給誰的？",
-            "type": "dialogue",
-            "title": "可是如果我記得——那這塊麵包到底",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 4800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-bread-intro",
-          "data": {
-            "text": "「冰箱裡有麵包」這件事，你幫我決定。",
-            "type": "dialogue",
-            "title": "「冰箱裡有麵包」這件事，你幫我決",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 5100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-bread-q",
-          "data": {
-            "text": "「冰箱裡有一塊我做的麵包」這件事，要放哪裡？\n（記憶體 {{slotUsed}}／4　黑洞先生今天吃了 {{fedToday}}／1）",
-            "type": "choice",
-            "title": "選擇",
-            "choices": [
-              "留在我這裡（明天睡醒就忘了）",
-              "給黑洞先生吃（他會長回一隻腳）",
-              "交給你保管（留得住，但你要回來）"
-            ],
-            "choiceMode": "branch"
-          },
-          "type": "story",
-          "position": {
-            "x": 5400,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-bread-keep",
-          "data": {
-            "text": "她把麵包放回冰箱，把「它在那裡」記在自己的記憶體裡。明天她會忘，然後它就變成一塊沒有人記得的麵包。",
-            "type": "setVariable",
-            "title": "留著",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "add",
-                "value": 1,
-                "variable": "slotUsed"
-              },
-              {
-                "id": "op-1",
-                "kind": "set",
-                "value": "self",
-                "variable": "breadState"
-              }
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 5700,
-            "y": -240
-          }
-        },
-        {
-          "id": "d3n-bread-feed",
-          "data": {
-            "text": "她把「冰箱裡有麵包」這件事交給黑洞先生。麵包本身還在冰箱，可是明天沒有人會想起去開那扇門。",
-            "type": "setVariable",
-            "title": "餵他",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedToday"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedCount"
-              },
-              {
-                "id": "op-2",
-                "kind": "add",
-                "value": 1,
-                "variable": "holeFeet"
-              },
-              {
-                "id": "op-3",
-                "kind": "set",
-                "value": "hole",
-                "variable": "breadState"
-              }
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 5700,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3n-bread-give",
-          "data": {
-            "text": "她把麵包舉起來給你看，讓你看清楚保鮮膜的折法。「你幫我記著它在冰箱。明天問我。」",
-            "type": "setVariable",
-            "title": "交給你",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "add",
-                "value": 1,
-                "variable": "givenCount"
-              },
-              {
-                "id": "op-1",
-                "kind": "set",
-                "value": "player",
-                "variable": "breadState"
-              }
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 5700,
-            "y": 240
-          }
-        },
-        {
-          "id": "d3n-bread-after",
-          "data": {
-            "text": "好。那我們等黑洞先生回來。",
-            "type": "dialogue",
-            "title": "好。那我們等黑洞先生回來。",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 6000,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-scene",
-          "data": {
-            "text": "城市的燈熄了大半。螢幕和桌燈是房間裡僅剩的光。",
-            "type": "scene",
-            "title": "第三天・深夜",
-            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787242999310_bg-night-v2.png"
-          },
-          "type": "story",
-          "position": {
-            "x": 6300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-back",
-          "data": {
-            "text": "我回來了。",
-            "type": "dialogue",
-            "title": "我回來了。",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 6600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-r-hole",
-          "data": {
-            "text": "黑洞先生掛外套的時候，她發現他少穿了一隻短靴。門邊那疊今天多出一雙。她沒有數，她從來不數。",
-            "type": "dialogue",
-            "title": "他吃掉了",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 6900,
-            "y": -260
-          }
-        },
-        {
-          "id": "d3e-r-self",
-          "data": {
-            "text": "她經過冰箱的時候停了三秒，盯著門把看。她自己也不知道在看什麼。明天她不會記得這個動作。",
-            "type": "dialogue",
-            "title": "她留著",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 6900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-r-player",
-          "data": {
-            "text": "她把保鮮膜的折法又演了一遍給你看。先對折兩次，再從中間往外壓。像是在確認你真的記住了。",
-            "type": "dialogue",
-            "title": "交給你了",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 6900,
-            "y": 260
-          }
-        },
-        {
-          "id": "d3e-join",
-          "data": {
-            "text": "……",
-            "type": "dialogue",
-            "title": "匯合",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 7200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-push",
-          "data": {
-            "text": "黑洞先生。那塊麵包。知道我什麼時候做的吧。",
-            "type": "dialogue",
-            "title": "黑洞先生。那塊麵包。知道我什麼時",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 7200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-past",
-          "data": {
-            "text": "妳以前烤過。",
-            "type": "dialogue",
-            "title": "妳以前烤過。",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 7500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-push2",
-          "data": {
-            "text": "「以前」是什麼時候？",
-            "type": "dialogue",
-            "title": "「以前」是什麼時候？",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 7800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-quiet",
-          "data": {
-            "text": "黑洞先生把外套掛好。這個問題他沒有接。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 8100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-you",
-          "data": {
-            "text": "黑洞先生每次都說「以前」。到底知道多少我不記得的事？",
-            "type": "dialogue",
-            "title": "黑洞先生每次都說「以前」。到底知",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 8400,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-none",
-          "data": {
-            "text": "他還是沒有回答。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 8700,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-rule",
-          "data": {
-            "text": "算了。填守則。第 {{ruleVersion}} 版。",
-            "type": "dialogue",
-            "title": "算了。填守則。第 {{ruleV",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 9000,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-rulein",
-          "data": {
-            "text": "空位在這裡。今天要留什麼給明天的我？",
-            "type": "input",
-            "title": "填空位",
-            "inputVariable": "ruleLine3",
-            "inputPlaceholder": "寫一句話…",
-            "inputSuggestions": [
-              "冰箱裡有東西。",
-              "問黑洞先生「以前」是什麼時候。",
-              "我的手比我的腦記得多。"
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 9300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-rulever",
-          "data": {
-            "text": "她寫上去。第 {{ruleVersion}} 版，完成。",
-            "type": "setVariable",
-            "title": "守則 +1",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "add",
-                "value": 1,
-                "variable": "ruleVersion"
-              },
-              {
-                "id": "op-1",
-                "kind": "set",
-                "value": 3,
-                "variable": "dayCount"
-              }
-            ]
-          },
-          "type": "story",
-          "position": {
-            "x": 9600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-save",
-          "data": {
-            "text": "記得存檔。不然明天我又要重新認識你。",
-            "type": "dialogue",
-            "title": "記得存檔。不然明天我又要重新認識",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 9900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-sleep",
-          "data": {
-            "text": "她躺回床上。螢幕的光慢慢暗下去。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 10200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d3e-jump",
-          "data": {
-            "text": "天亮了。",
-            "type": "boardJump",
-            "title": "下一天",
-            "jumpNodeId": "d4m-scene",
-            "jumpBoardId": "board-day4"
-          },
-          "type": "story",
-          "position": {
-            "x": 10500,
-            "y": 0
-          }
-        }
-      ],
-      "description": "早：從冰箱開始，開機聲在看到麵包之後才響　中：她研究保鮮膜　晚：依中午的選擇演三個版本"
-    },
-    {
       "id": "board-day5",
       "kind": "story",
       "mode": "story",
@@ -18098,35 +17040,6 @@
           "sourceHandle": "right"
         },
         {
-          "id": "e-d2m-boot-right-d2m-load",
-          "source": "d2m-boot",
-          "target": "d2m-load",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d2m-load-right-d2m-hub",
-          "source": "d2m-load",
-          "target": "d2m-hub",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d2m-hub-right-d2m-lost1",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": 0,
-              "variable": "savedOk"
-            }
-          },
-          "source": "d2m-hub",
-          "target": "d2m-lost1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
           "id": "e-d2m-lost1-right-d2m-lost2",
           "source": "d2m-lost1",
           "target": "d2m-lost2",
@@ -18144,13 +17057,6 @@
           "id": "e-d2m-lost3-right-d2m-relearn",
           "source": "d2m-lost3",
           "target": "d2m-relearn",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e-d2m-hub-right-d2m-ok1",
-          "source": "d2m-hub",
-          "target": "d2m-ok1",
           "animated": true,
           "sourceHandle": "right"
         },
@@ -18510,6 +17416,49 @@
           "target": "d2e-deja",
           "animated": true,
           "sourceHandle": "right"
+        },
+        {
+          "id": "e-d2m-boot-right-d2m-hub",
+          "source": "d2m-boot",
+          "target": "d2m-hub",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d2m-hub-right-d2m-load-lost",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 0,
+              "variable": "savedOk"
+            }
+          },
+          "source": "d2m-hub",
+          "target": "d2m-load-lost",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d2m-hub-right-d2m-load-ok",
+          "source": "d2m-hub",
+          "target": "d2m-load-ok",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d2m-load-lost-right-d2m-lost1",
+          "source": "d2m-load-lost",
+          "target": "d2m-lost1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d2m-load-ok-right-d2m-ok1",
+          "source": "d2m-load-ok",
+          "target": "d2m-ok1",
+          "animated": true,
+          "sourceHandle": "right"
         }
       ],
       "nodes": [
@@ -18546,24 +17495,6 @@
           "type": "story",
           "position": {
             "x": 300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d2m-load",
-          "data": {
-            "text": "系統讀取中……（過久）",
-            "type": "dialogue",
-            "title": "系統讀取中……（過久）",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "position": {
-            "x": 600,
             "y": 0
           }
         },
@@ -18675,7 +17606,7 @@
         {
           "id": "d2m-ok2",
           "data": {
-            "text": "我不記得你。可是牆上寫著你的名字，所以你昨天在。",
+            "text": "我不記得你。可是牆上寫著你的名字，而且我今天醒得比較快——有人替我省下一格。",
             "type": "dialogue",
             "title": "我不記得你。可是牆上寫著你的名字",
             "emotion": "平常",
@@ -18859,6 +17790,14 @@
             "speaker": "格莉奇",
             "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
             "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "usedPicture"
+              }
+            ],
             "characterPosition": "center"
           },
           "type": "story",
@@ -18877,6 +17816,14 @@
             "speaker": "格莉奇",
             "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
             "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "usedBoot"
+              }
+            ],
             "characterPosition": "center"
           },
           "type": "story",
@@ -19288,9 +18235,1341 @@
             "x": 3600,
             "y": 260
           }
+        },
+        {
+          "id": "d2m-load-lost",
+          "data": {
+            "text": "系統讀取中……\n……\n……算了。今天沒人幫我。",
+            "type": "dialogue",
+            "title": "讀取失敗",
+            "emotion": "當機",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196243145_glitch-error.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 600,
+            "y": 300
+          }
+        },
+        {
+          "id": "d2m-load-ok",
+          "data": {
+            "text": "系統讀取中……（這次比較快）",
+            "type": "dialogue",
+            "title": "讀取成功",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 600,
+            "y": -300
+          }
         }
       ],
       "description": "早：沒存檔的話她不認識你　中：隨機抽今天的事件　晚：引用你昨天寫的守則"
+    },
+    {
+      "id": "board-day3",
+      "kind": "story",
+      "mode": "story",
+      "name": "Day 3・麵包",
+      "edges": [
+        {
+          "id": "e-d3m-scene-right-d3m-stand",
+          "source": "d3m-scene",
+          "target": "d3m-stand",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-stand-right-d3m-boot",
+          "source": "d3m-stand",
+          "target": "d3m-boot",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-boot-right-d3m-late",
+          "source": "d3m-boot",
+          "target": "d3m-late",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-late-right-d3m-note",
+          "source": "d3m-late",
+          "target": "d3m-note",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-note-right-d3m-hands",
+          "source": "d3m-note",
+          "target": "d3m-hands",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-hands-right-d3m-ask",
+          "source": "d3m-hands",
+          "target": "d3m-ask",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-ask-right-d3m-reply",
+          "source": "d3m-ask",
+          "target": "d3m-reply",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-reply-right-d3m-when",
+          "source": "d3m-reply",
+          "target": "d3m-when",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-when-right-d3m-silent",
+          "source": "d3m-when",
+          "target": "d3m-silent",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-silent-right-d3m-feet",
+          "source": "d3m-silent",
+          "target": "d3m-feet",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3m-feet-right-d3n-scene",
+          "source": "d3m-feet",
+          "target": "d3n-scene",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-scene-right-d3n-look",
+          "source": "d3n-scene",
+          "target": "d3n-look",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-look-right-d3n-smell",
+          "source": "d3n-look",
+          "target": "d3n-smell",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-smell-right-d3n-logic",
+          "source": "d3n-smell",
+          "target": "d3n-logic",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-logic-right-d3n-logic2",
+          "source": "d3n-logic",
+          "target": "d3n-logic2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-logic2-right-d3n-bread-intro",
+          "source": "d3n-logic2",
+          "target": "d3n-bread-intro",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-bread-intro-right-d3n-bread-q",
+          "source": "d3n-bread-intro",
+          "target": "d3n-bread-q",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-bread-q-choice-0-d3n-bread-keep",
+          "source": "d3n-bread-q",
+          "target": "d3n-bread-keep",
+          "animated": true,
+          "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e-d3n-bread-q-choice-1-d3n-bread-feed",
+          "source": "d3n-bread-q",
+          "target": "d3n-bread-feed",
+          "animated": true,
+          "sourceHandle": "choice-1"
+        },
+        {
+          "id": "e-d3n-bread-q-choice-2-d3n-bread-give",
+          "source": "d3n-bread-q",
+          "target": "d3n-bread-give",
+          "animated": true,
+          "sourceHandle": "choice-2"
+        },
+        {
+          "id": "e-d3n-bread-keep-right-d3n-bread-after",
+          "source": "d3n-bread-keep",
+          "target": "d3n-bread-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-bread-feed-right-d3n-bread-after",
+          "source": "d3n-bread-feed",
+          "target": "d3n-bread-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-bread-give-right-d3n-bread-after",
+          "source": "d3n-bread-give",
+          "target": "d3n-bread-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3n-bread-after-right-d3e-scene",
+          "source": "d3n-bread-after",
+          "target": "d3e-scene",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-scene-right-d3e-back",
+          "source": "d3e-scene",
+          "target": "d3e-back",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-back-right-d3e-r-hole",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "hole",
+              "variable": "breadState"
+            }
+          },
+          "source": "d3e-back",
+          "target": "d3e-r-hole",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-back-right-d3e-r-self",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "self",
+              "variable": "breadState"
+            }
+          },
+          "source": "d3e-back",
+          "target": "d3e-r-self",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-back-right-d3e-r-player",
+          "source": "d3e-back",
+          "target": "d3e-r-player",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-r-hole-right-d3e-join",
+          "source": "d3e-r-hole",
+          "target": "d3e-join",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-r-self-right-d3e-join",
+          "source": "d3e-r-self",
+          "target": "d3e-join",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-r-player-right-d3e-join",
+          "source": "d3e-r-player",
+          "target": "d3e-join",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-join-right-d3e-push",
+          "source": "d3e-join",
+          "target": "d3e-push",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-push-right-d3e-past",
+          "source": "d3e-push",
+          "target": "d3e-past",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-past-right-d3e-push2",
+          "source": "d3e-past",
+          "target": "d3e-push2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-push2-right-d3e-quiet",
+          "source": "d3e-push2",
+          "target": "d3e-quiet",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-quiet-right-d3e-you",
+          "source": "d3e-quiet",
+          "target": "d3e-you",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-you-right-d3e-none",
+          "source": "d3e-you",
+          "target": "d3e-none",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-none-right-d3e-rule",
+          "source": "d3e-none",
+          "target": "d3e-rule",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-rule-right-d3e-rulein",
+          "source": "d3e-rule",
+          "target": "d3e-rulein",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-rulein-right-d3e-rulever",
+          "source": "d3e-rulein",
+          "target": "d3e-rulever",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-rulever-right-d3e-page",
+          "source": "d3e-rulever",
+          "target": "d3e-page",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-page-right-d3e-mayI",
+          "source": "d3e-page",
+          "target": "d3e-mayI",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-mayI-right-d3e-sure",
+          "source": "d3e-mayI",
+          "target": "d3e-sure",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-sure-right-d3e-tear",
+          "source": "d3e-sure",
+          "target": "d3e-tear",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-tear-right-d3e-taste",
+          "source": "d3e-tear",
+          "target": "d3e-taste",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-taste-right-d3e-what",
+          "source": "d3e-taste",
+          "target": "d3e-what",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-what-right-d3e-look",
+          "source": "d3e-what",
+          "target": "d3e-look",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-look-right-d3e-same",
+          "source": "d3e-look",
+          "target": "d3e-same",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-same-right-d3e-huh",
+          "source": "d3e-same",
+          "target": "d3e-huh",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-huh-right-d3e-inside",
+          "source": "d3e-huh",
+          "target": "d3e-inside",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-inside-right-d3e-save",
+          "source": "d3e-inside",
+          "target": "d3e-save",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-save-right-d3e-sleep",
+          "source": "d3e-save",
+          "target": "d3e-sleep",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e-d3e-sleep-right-d3e-jump",
+          "source": "d3e-sleep",
+          "target": "d3e-jump",
+          "animated": true,
+          "sourceHandle": "right"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "d3m-scene",
+          "data": {
+            "bgm": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787213051881_bgm-theme.mp3",
+            "text": "冰箱門沒關緊，透出一條光。",
+            "type": "scene",
+            "start": true,
+            "title": "第三天・清晨",
+            "bgmLoop": true,
+            "bgmVolume": 0.3,
+            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787223976597_bg-morning.png"
+          },
+          "type": "story",
+          "position": {
+            "x": 300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-stand",
+          "data": {
+            "text": "她站在冰箱前面，手裡拿著一塊用保鮮膜包好的麵包。她不記得自己是怎麼走過來的。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-boot",
+          "data": {
+            "text": "……逼——嗶！",
+            "type": "dialogue",
+            "title": "……逼——嗶！",
+            "emotion": "當機",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196243145_glitch-error.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-late",
+          "data": {
+            "text": "喔。我開機了。剛剛那是誰在動？",
+            "type": "dialogue",
+            "title": "喔。我開機了。剛剛那是誰在動？",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 1200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-note",
+          "data": {
+            "text": "保鮮膜上貼著一張紙條。「給黑洞先生。」是我的字。",
+            "type": "dialogue",
+            "title": "保鮮膜上貼著一張紙條。「給黑洞先",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 1500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-hands",
+          "data": {
+            "text": "我的手記得怎麼包保鮮膜，可是我的腦不記得為什麼要包。",
+            "type": "dialogue",
+            "title": "我的手記得怎麼包保鮮膜，可是我的",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 1800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-ask",
+          "data": {
+            "text": "黑洞先生，這是我做的嗎？",
+            "type": "dialogue",
+            "title": "黑洞先生，這是我做的嗎？",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 2100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-reply",
+          "data": {
+            "text": "是妳的字。",
+            "type": "dialogue",
+            "title": "是妳的字。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 2400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-when",
+          "data": {
+            "text": "那什麼時候做的？",
+            "type": "dialogue",
+            "title": "那什麼時候做的？",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 2700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-silent",
+          "data": {
+            "text": "黑洞先生沒有回答。他把西裝拉平，出門了。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3m-feet",
+          "data": {
+            "text": "門邊那疊沒人穿的短靴，今天的高度對得上他身上 {{holeFeet}} 隻腳。她沒有數，她從來不數。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-scene",
+          "data": {
+            "text": "太陽爬到窗戶正上方。麵包放在桌子中間，保鮮膜反著光。",
+            "type": "scene",
+            "title": "第三天・中午",
+            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787223994106_bg-noon.png"
+          },
+          "type": "story",
+          "position": {
+            "x": 3600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-look",
+          "data": {
+            "text": "我把它翻來翻去看了很久。保鮮膜包得很仔細——先對折兩次，再從中間往外壓。那是我會做的方式。",
+            "type": "dialogue",
+            "title": "我把它翻來翻去看了很久。保鮮膜包",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-smell",
+          "data": {
+            "text": "我聞了一下。身體有反應。像是很久沒做，可是手還記得。",
+            "type": "dialogue",
+            "title": "我聞了一下。身體有反應。像是很久",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-logic",
+          "data": {
+            "text": "問題來了。如果我忘了它在哪，黑洞先生就會把它當成沒人要的東西吃掉，然後長回一隻腳。",
+            "type": "dialogue",
+            "title": "問題來了。如果我忘了它在哪，黑洞",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-logic2",
+          "data": {
+            "text": "可是如果我記得——那這塊麵包到底是要給誰的？",
+            "type": "dialogue",
+            "title": "可是如果我記得——那這塊麵包到底",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-bread-intro",
+          "data": {
+            "text": "「冰箱裡有麵包」這件事，你幫我決定。",
+            "type": "dialogue",
+            "title": "「冰箱裡有麵包」這件事，你幫我決",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-bread-q",
+          "data": {
+            "text": "「冰箱裡有一塊我做的麵包」這件事，要放哪裡？\n（記憶體 {{slotUsed}}／4　黑洞先生今天吃了 {{fedToday}}／1）",
+            "type": "choice",
+            "title": "選擇",
+            "choices": [
+              "留在我這裡（明天睡醒就忘了）",
+              "給黑洞先生吃（他會長回一隻腳）",
+              "交給你保管（留得住，但你要回來）"
+            ],
+            "choiceMode": "branch"
+          },
+          "type": "story",
+          "position": {
+            "x": 5400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-bread-keep",
+          "data": {
+            "text": "她把麵包放回冰箱，把「它在那裡」記在自己的記憶體裡。明天她會忘，然後它就變成一塊沒有人記得的麵包。",
+            "type": "setVariable",
+            "title": "留著",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "add",
+                "value": 1,
+                "variable": "slotUsed"
+              },
+              {
+                "id": "op-1",
+                "kind": "set",
+                "value": "self",
+                "variable": "breadState"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 5700,
+            "y": -240
+          }
+        },
+        {
+          "id": "d3n-bread-feed",
+          "data": {
+            "text": "她把「冰箱裡有麵包」這件事交給黑洞先生。麵包本身還在冰箱，可是明天沒有人會想起去開那扇門。",
+            "type": "setVariable",
+            "title": "餵他",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "add",
+                "value": 1,
+                "variable": "fedToday"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "fedCount"
+              },
+              {
+                "id": "op-2",
+                "kind": "add",
+                "value": 1,
+                "variable": "holeFeet"
+              },
+              {
+                "id": "op-3",
+                "kind": "set",
+                "value": "hole",
+                "variable": "breadState"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 5700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3n-bread-give",
+          "data": {
+            "text": "她把麵包舉起來給你看，讓你看清楚保鮮膜的折法。「你幫我記著它在冰箱。明天問我。」",
+            "type": "setVariable",
+            "title": "交給你",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "add",
+                "value": 1,
+                "variable": "givenCount"
+              },
+              {
+                "id": "op-1",
+                "kind": "set",
+                "value": "player",
+                "variable": "breadState"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 5700,
+            "y": 240
+          }
+        },
+        {
+          "id": "d3n-bread-after",
+          "data": {
+            "text": "好。那我們等黑洞先生回來。",
+            "type": "dialogue",
+            "title": "好。那我們等黑洞先生回來。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-scene",
+          "data": {
+            "text": "城市的燈熄了大半。螢幕和桌燈是房間裡僅剩的光。",
+            "type": "scene",
+            "title": "第三天・深夜",
+            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787242999310_bg-night-v2.png"
+          },
+          "type": "story",
+          "position": {
+            "x": 6300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-back",
+          "data": {
+            "text": "我回來了。",
+            "type": "dialogue",
+            "title": "我回來了。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-r-hole",
+          "data": {
+            "text": "黑洞先生掛外套的時候，她發現他少穿了一隻短靴。門邊那疊今天多出一雙。她沒有數，她從來不數。",
+            "type": "dialogue",
+            "title": "他吃掉了",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6900,
+            "y": -260
+          }
+        },
+        {
+          "id": "d3e-r-self",
+          "data": {
+            "text": "她經過冰箱的時候停了三秒，盯著門把看。她自己也不知道在看什麼。明天她不會記得這個動作。",
+            "type": "dialogue",
+            "title": "她留著",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-r-player",
+          "data": {
+            "text": "她把保鮮膜的折法又演了一遍給你看。先對折兩次，再從中間往外壓。像是在確認你真的記住了。",
+            "type": "dialogue",
+            "title": "交給你了",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6900,
+            "y": 260
+          }
+        },
+        {
+          "id": "d3e-join",
+          "data": {
+            "text": "……",
+            "type": "dialogue",
+            "title": "匯合",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-push",
+          "data": {
+            "text": "黑洞先生。那塊麵包。知道我什麼時候做的吧。",
+            "type": "dialogue",
+            "title": "黑洞先生。那塊麵包。知道我什麼時",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-past",
+          "data": {
+            "text": "妳以前烤過。",
+            "type": "dialogue",
+            "title": "妳以前烤過。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-push2",
+          "data": {
+            "text": "「以前」是什麼時候？",
+            "type": "dialogue",
+            "title": "「以前」是什麼時候？",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-quiet",
+          "data": {
+            "text": "黑洞先生把外套掛好。這個問題他沒有接。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 8100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-you",
+          "data": {
+            "text": "黑洞先生每次都說「以前」。到底知道多少我不記得的事？",
+            "type": "dialogue",
+            "title": "黑洞先生每次都說「以前」。到底知",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 8400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-none",
+          "data": {
+            "text": "他還是沒有回答。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 8700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-rule",
+          "data": {
+            "text": "算了。填守則。第 {{ruleVersion}} 版。",
+            "type": "dialogue",
+            "title": "算了。填守則。第 {{ruleV",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 9000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-rulein",
+          "data": {
+            "text": "空位在這裡。今天要留什麼給明天的我？",
+            "type": "input",
+            "title": "填空位",
+            "inputVariable": "ruleLine3",
+            "inputPlaceholder": "寫一句話…",
+            "inputSuggestions": [
+              "冰箱裡有東西。",
+              "問黑洞先生「以前」是什麼時候。",
+              "我的手比我的腦記得多。"
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 9300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-rulever",
+          "data": {
+            "text": "她寫上去。第 {{ruleVersion}} 版，完成。",
+            "type": "setVariable",
+            "title": "守則 +1",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "add",
+                "value": 1,
+                "variable": "ruleVersion"
+              },
+              {
+                "id": "op-1",
+                "kind": "set",
+                "value": 3,
+                "variable": "dayCount"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 9600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-page",
+          "data": {
+            "text": "他走過來，翻開守則本，停在昨天那一頁。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 9900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-mayI",
+          "data": {
+            "text": "這頁。",
+            "type": "dialogue",
+            "title": "這頁。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 10200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-sure",
+          "data": {
+            "text": "喔。那頁我不記得寫了什麼，你拿去吧。",
+            "type": "dialogue",
+            "title": "喔。那頁我不記得寫了什麼，你拿去",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 10500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-tear",
+          "data": {
+            "text": "他把那一頁撕下來，摺成很小一塊，放進嘴裡。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 10800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-taste",
+          "data": {
+            "text": "這味道像上週的。",
+            "type": "dialogue",
+            "title": "這味道像上週的。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 11100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-what",
+          "data": {
+            "text": "那是昨天才寫的。",
+            "type": "dialogue",
+            "title": "那是昨天才寫的。",
+            "emotion": "當機",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196243145_glitch-error.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 11400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-look",
+          "data": {
+            "text": "他看著她，像在確認什麼。然後他把本子闔上。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 11700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-same",
+          "data": {
+            "text": "一樣。",
+            "type": "dialogue",
+            "title": "一樣。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-huh",
+          "data": {
+            "text": "什麼一樣？昨天跟上週怎麼會一樣？",
+            "type": "dialogue",
+            "title": "什麼一樣？昨天跟上週怎麼會一樣？",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-inside",
+          "data": {
+            "text": "他沒有回答。她不知道在他裡面，昨天跟上週放在同一個地方。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-save",
+          "data": {
+            "text": "記得存檔。不然明天我又要重新認識你。",
+            "type": "dialogue",
+            "title": "記得存檔。不然明天我又要重新認識",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-sleep",
+          "data": {
+            "text": "她躺回床上。螢幕的光慢慢暗下去。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 13200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d3e-jump",
+          "data": {
+            "text": "天亮了。",
+            "type": "boardJump",
+            "title": "下一天",
+            "jumpNodeId": "d4m-scene",
+            "jumpBoardId": "board-day4"
+          },
+          "type": "story",
+          "position": {
+            "x": 13500,
+            "y": 0
+          }
+        }
+      ],
+      "description": "早：從冰箱開始，開機聲在看到麵包之後才響　中：她研究保鮮膜　晚：依中午的選擇演三個版本"
     }
   ],
   "locale": "zh-Hant",
@@ -19358,7 +19637,7 @@
       "label": "日本語"
     }
   ],
-  "updatedAt": "2026-08-20T18:45:56.221Z",
+  "updatedAt": "2026-08-20T18:57:22.784Z",
   "variables": [
     {
       "id": "playerName",

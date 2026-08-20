@@ -52,10 +52,24 @@ for b in P["boards"]:
         iv = n["data"].get("inputVariable")
         if iv and iv not in V:
             bad.append(f"{n['id']} 寫進不存在的變數 {iv}"); print(f"  ★ {bad[-1]}")
-unused = [v for v in V if not any(
-    op["variable"] == v for b in DAYS for n in b["nodes"] for op in (n["data"].get("variableOps") or []))
-    and not any(n["data"].get("inputVariable") == v for b in DAYS for n in b["nodes"])]
-print(f"  七天用不到的變數 {len(unused)} 個（素材庫版留下來的）：{'、'.join(unused) or '無'}")
+# 用到 = 被寫、被填、被邊條件讀、或被台詞用 {{}} 引用。前兩項算漏了會誤判成死變數,
+# 差點害我刪掉 11 個還活著的。
+written, read = set(), set()
+for b in P["boards"]:
+    for n in b["nodes"]:
+        for op in n["data"].get("variableOps") or []: written.add(op["variable"])
+        if n["data"].get("inputVariable"): written.add(n["data"]["inputVariable"])
+        txt = json.dumps(n["data"], ensure_ascii=False)
+        for v in V:
+            if "{{" + v + "}}" in txt: read.add(v)
+    for e in b["edges"]:
+        c = (e.get("data") or {}).get("condition")
+        if c: read.add(c["variable"])
+ghost = sorted(read - written)      # 讀得到但沒人寫 —— 那條分支永遠不會成立
+dead = sorted(set(V) - written - read)
+for v in ghost:
+    bad.append(f"變數 {v} 有人讀卻沒人寫，靠它的分支永遠不會成立"); print(f"  ★ {bad[-1]}")
+print(f"  沒人用的變數 {len(dead)} 個：{'、'.join(dead) or '無'}")
 
 print("── 中文寫作（speak-tw）──")
 # 刻意保留的句子。speak-tw 的 speak-tw-ok 標記加不到 Larch 卡片上,所以放這裡,

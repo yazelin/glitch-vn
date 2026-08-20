@@ -125,4 +125,29 @@ b.link("d2e-back", r_give)
 for r in (r_feed, r_keep, r_give):
     b.link(r, "d2e-deja")
 
+# ── 三、去重閘門讀的變數沒有人寫 ──
+# 三個事件的閘門用 usedPicture／usedBoot 做去重（抽到用過的就往下掉），可是
+# 沒有任何卡片寫入這兩個變數，那兩條分支永遠不會成立。抽中就記起來。
+# verify.py 現在會抓這種「有人讀沒人寫」的變數。
+b.addops("d2n-gate-picture", [{"variable": "usedPicture", "kind": "set", "value": 1}])
+b.addops("d2n-gate-boot", [{"variable": "usedBoot", "kind": "set", "value": 1}])
+
+# ── 四、開機速度反映昨天有沒有存檔 ──
+# minimax 的點子。原本兩條路共用「系統讀取中……（過久）」，可是有人幫她留住
+# 昨天的話，開機本來就該不一樣。這比多寫一句解釋有用。
+b.remove("d2m-load")
+b.link("d2m-boot", "d2m-hub")
+lost = b.say("d2m-load-lost", "系統讀取中……\n……\n……算了。今天沒人幫我。",
+             face="當機", title="讀取失敗", x=600, y=300)
+okl = b.say("d2m-load-ok", "系統讀取中……（這次比較快）",
+            face="發呆", title="讀取成功", x=600, y=-300)
+b.unlink("d2m-hub", "d2m-lost1")
+b.unlink("d2m-hub", "d2m-ok1")
+b.link("d2m-hub", lost, "right", cond={"variable": "savedOk", "op": "eq", "value": 0})
+b.link("d2m-hub", okl)
+b.link(lost, "d2m-lost1")
+b.link(okl, "d2m-ok1")
+b.settext("d2m-ok2", "我不記得你。可是牆上寫著你的名字，"
+                     "而且我今天醒得比較快——有人替我省下一格。")
+
 b.push('Day 2・靴子與裂痕：從線上版反推重建')
