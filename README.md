@@ -16,6 +16,7 @@
     tools/build_dayN.py      各天的劇本。改劇本改這裡，不要只改線上版
     tools/pull.py            把 Larch 上的專案整包抓下來存進 backup/
     tools/gen_docs.py        從 backup/project.json 生 docs/mechanics.md
+    tools/gen_site.py        生 docs/index.html（說明書＋攻略站，GitHub Pages 直接吃）
     tools/verify.py          一個指令跑完所有檢查（改完劇本跑這支）
     tools/sim_board.py       走遍一塊板子的所有玩法，抓斷線與環
     tools/check_pronouns.py  代名詞規則檢查（妳／你／全名）
@@ -33,6 +34,7 @@
     python3 tools/build_dayN.py      # 重建那一天
     python3 tools/verify.py          # 模擬 + 跳躍 + 變數 + speak-tw + 代名詞，離開碼非 0 就是有問題
     python3 tools/gen_docs.py        # 更新機制表
+    python3 tools/gen_site.py        # 更新說明書站
 
 ## 二週目
 
@@ -50,7 +52,13 @@ Larch 的變數是專案層級、有預設值，新開一場就回預設，平�
 
 ## 機制
 
-看 [docs/mechanics.md](docs/mechanics.md)。那份是程式生的，不要手改。
+看 [docs/mechanics.md](docs/mechanics.md)，或 `docs/index.html`（同樣的資料，
+排版過的說明書＋攻略站）。**兩份都是程式從 `backup/project.json` 生的，不要手改**——
+手寫的攻略一定會跟遊戲對不上。
+
+要開 GitHub Pages：Settings → Pages → Source 選 `main` 分支的 `/docs` 資料夾。
+`docs/index.html` 就是首頁，不需要額外設定。劇透用 `<details>` 收起來，
+標題沿用遊戲裡「交給你保管」的說法。
 
 ## 授權
 

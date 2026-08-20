@@ -6,8 +6,8 @@
 ## 一、規模
 
 - 天數：7
-- 卡片：610（其中素材庫 134 張不在遊玩路徑上）
-- 連線：703
+- 卡片：626（其中素材庫 134 張不在遊玩路徑上）
+- 連線：724
 - 變數：46
 
 ## 二、變數
@@ -35,8 +35,8 @@
 | `fedToday` | 今天餵過他沒有：每天早上歸零,一天只吃得下一個 | `0` | Day 1、Day 2、Day 3、Day 4、Day 5 |
 | `todayEvent` | 今天抽到的事件：random 抽出來的編號 | `0` | Day 2、Day 4 |
 | `usedNote` | 紙條事件用過了：事件池去重 | `0` | Day 1 |
-| `usedPicture` | 門口的畫用過了：事件池去重 | `0` | （沒有卡片會動） |
-| `usedBoot` | 少一隻靴子用過了：事件池去重 | `0` | （沒有卡片會動） |
+| `usedPicture` | 門口的畫用過了：事件池去重 | `0` | Day 2 |
+| `usedBoot` | 少一隻靴子用過了：事件池去重 | `0` | Day 2 |
 | `ruleLine1` | 第一天寫的守則：玩家親手打的字,後面會被引用 | `` | Day 1 |
 | `ruleLine2` | 第二天寫的守則：同上 | `` | Day 2 |
 | `breadState` | 麵包在哪：fridge=冰箱／player=玩家保管／hole=他保管／eaten=被吃／self=她自己記住 | `fridge` | Day 3 |
@@ -50,7 +50,7 @@
 | `usedButton` | 口袋裡的鈕扣用過了：事件池去重 | `0` | Day 4 |
 | `usedFlour` | 水槽的麵粉痕跡用過了：事件池去重;麵包前史碎片 | `0` | Day 4 |
 | `usedMap` | 牆上的地圖用過了：事件池去重 | `0` | Day 4 |
-| `todayRoute` | 今天的去處：當天中午那件事送去哪:keep/feed/give | `` | Day 4、Day 5 |
+| `todayRoute` | 今天的去處：當天中午那件事送去哪:keep/feed/give | `` | Day 1、Day 2、Day 4、Day 5 |
 | `usedDoorNote` | 門墊紙條已用：事件池去重 | `0` | Day 4 |
 | `blankPage` | 空白頁怎麼處理：tear/keep/ask | `` | Day 6 |
 | `handoverLine` | 託付麵包時說的話：玩家替她寫的那句 | `` | Day 6 |
@@ -72,14 +72,17 @@
 - 1. 留在我這裡（明天睡醒就忘了）
     - `usedNote` 設為 `1`
     - `slotUsed` 加 `1`
+    - `todayRoute` 設為 `keep`
 - 2. 給黑洞先生吃（他會長回一隻腳）
     - `usedNote` 設為 `1`
     - `fedToday` 加 `1`
     - `fedCount` 加 `1`
     - `holeFeet` 加 `1`
+    - `todayRoute` 設為 `feed`
 - 3. 交給你保管（留得住，但你要回來）
     - `usedNote` 設為 `1`
     - `givenCount` 加 `1`
+    - `todayRoute` 設為 `give`
 
 **第一天・夜晚｜填空 → `ruleLine1`**：這個空位你幫我填。寫一句話，給明天的我。
 
@@ -92,6 +95,13 @@
 
 **第一天・夜晚｜填空 → `ngToken`**：寫一句這個房子裡有人說過、而她記不住的話。
 
+**第一天・夜晚｜開始之前。**
+
+- 1. 我第一次來
+    - （不動變數）
+- 2. 我來過。我知道一件她不知道的事。
+    - （不動變數）
+
 **這天會依狀態分岔的地方**
 
 - `ngToken` ＝ `她給的` → 你以前來過
@@ -102,32 +112,39 @@
 - `ngToken` ＝ `看妳睡。` → 你以前來過
 - `ngToken` ＝ `以前` → 你以前來過
 - `ngToken` ＝ `以前。` → 你以前來過
+- `todayRoute` ＝ `keep` → 她留著
+- `todayRoute` ＝ `give` → 交給你了
 
 ### Day 2・靴子與裂痕
 
-**第二天・早晨｜填空 → `playerName`**：那……可以再告訴我一次嗎？這次記得存。
+**第二天・早晨｜填空 → `playerName`**：你隨便講一個都行，我就當那是真的。
 
 **第二天・中午｜這件事要放哪裡？**
 
 - 1. 留在我這裡（明天睡醒就忘了）
     - `slotUsed` 加 `1`
+    - `todayRoute` 設為 `keep`
 - 2. 給黑洞先生吃（他會長回一隻腳）
     - `fedToday` 加 `1`
     - `fedCount` 加 `1`
     - `holeFeet` 加 `1`
+    - `todayRoute` 設為 `feed`
 - 3. 交給你保管（留得住，但你要回來）
     - `givenCount` 加 `1`
+    - `todayRoute` 設為 `give`
 
 **第二天・夜晚｜填空 → `ruleLine2`**：第 {{ruleVersion}} 版的空位。今天換這一句。你幫我寫。
 
 **這天會依狀態分岔的地方**
 
-- `savedOk` ＝ `0` → 你是誰？
 - `todayEvent` ＝ `1` → 事件1
 - `todayEvent` ＝ `2` → 事件2
 - `todayEvent` ＝ `3` → 事件3
 - `usedPicture` ＝ `1` → 事件2
 - `usedBoot` ＝ `1` → 事件3
+- `todayRoute` ＝ `feed` → 他吃掉了
+- `todayRoute` ＝ `keep` → 她留著
+- `savedOk` ＝ `0` → 讀取失敗
 
 ### Day 3・麵包
 
