@@ -34,8 +34,28 @@ b.chain([
     ("d5m-off",   "請假？", "平常", G),
     ("d5m-yes2",  "嗯。", "預設", HOLE),
     ("d5m-why",   "為什麼？", "平常", G),
-    ("d5m-nore",  "他沒有再說話。一隻觸手慢慢縮進西裝下襬。", "平常", None),
 ])
+# 她昨天數到了的話，他今天不出門就有理由——而且他會說。
+# 兩家說 Day 5 缺一個屬於自己的頓悟；這裡讓 Day 4 的發現在今天結帳。
+wx = b.col()
+w_yes = b.say("d5m-why-yes", "妳昨天數到了。", who=HOLE, face="預設",
+              title="他請假的理由", x=wx, y=-200)
+b.link(b.prev, w_yes, "right", cond={"variable": "connected", "op": "eq", "value": 1})
+b.chain([
+    ("d5m-w1", "數到什麼？", "發呆", G),
+    ("d5m-w2", "他沒有再說一次。他知道她今天已經沒有昨天了。", "平常", None),
+    ("d5m-w3", "她翻開守則本，昨天那一頁上是她自己的字。她看著看著，手停住了。", "平常", None),
+    ("d5m-w4", "……門邊那疊靴子。是我寫的。我昨天寫了這個。", "發呆", G),
+    ("d5m-w5", "他今天沒有出門。門邊那疊今天不會再變高。", "平常", None),
+], x=wx + 300, y=-200, link_prev=False)
+b.link(w_yes, b.find("d5m-w1")["id"])
+w_end = b.prev
+w_no = b.say("d5m-why-no", "他沒有再說話。", who=None, title="他不說", x=wx, y=100)
+b.link(b.prev if False else b.find("d5m-why")["id"], w_no)
+j5 = b.say("d5m-why-join", "一隻觸手慢慢縮進西裝下襬。", who=None, title="接著",
+           x=wx + 1800, y=0)
+b.link(w_end, j5); b.link(w_no, j5)
+b.prev = j5
 cur = b.setvar("d5m-shrink", [{"variable": "holeFeet", "kind": "add", "value": -1},
                               {"variable": "fedToday", "kind": "set", "value": 0}],
                text="剩 {{holeFeet}} 隻。", title="他縮了一隻")

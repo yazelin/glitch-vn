@@ -271,11 +271,25 @@ eat_nodes = []
 for tag, text, yy in EAT:
     n = b.say(f"d2e-eat-{tag}", text, who=None, title=f"他吃了（{tag}）", x=ex2, y=yy)
     eat_nodes.append((tag, n))
+# 刪掉名字的話，他會讓她知道有人存在過。這是 Day 2 唯一一個情感錨點——
+# 兩家說這天只有機制驚奇，情感沒有推進。
+nm = b.chain([
+    ("d2e-nm1", "什麼名字？", "平常", G),
+    ("d2e-nm2", "妳的朋友。", "預設", HOLE),
+    ("d2e-nm3", "我有朋友？", "當機", G),
+    ("d2e-nm4", "他沒有回答第二次。她站在原地，看著螢幕的方向，看了很久。", "平常", None),
+    ("d2e-nm5", "如果我有朋友，那個人現在在哪裡？", "發呆", G),
+    ("d2e-nm6", "她正在看著你。她不知道自己正在看著你。", "平常", None),
+], x=ex2 + 300, y=-500, link_prev=False)
+
 join2 = b.say("d2e-eat-join", "她沒有注意到。她從來不注意這種事。", who=None,
-              title="她沒注意", x=ex2 + 400, y=0)
+              title="她沒注意", x=ex2 + 2400, y=0)
+b.link(b.find("d2e-eat-name")["id"], b.find("d2e-nm1")["id"])
+b.link(nm[-1], join2)
 for tag, n in eat_nodes:
     b.link("d2e-mem2", n, "right", cond={"variable": "d2Deleted", "op": "eq", "value": tag})
-    b.link(n, join2)
+    if tag != "name":
+        b.link(n, join2)
 b.unlink("d2e-mem2", "d2e-r-feed")
 b.unlink("d2e-mem2", "d2e-r-keep")
 b.unlink("d2e-mem2", "d2e-r-give")

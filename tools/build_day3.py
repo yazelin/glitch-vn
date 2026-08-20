@@ -236,7 +236,7 @@ for nid, text, left in TIME:
     b.link(tick, n, "right", cond={"variable": "looksLeft", "op": "eq", "value": left})
     b.link(n, hub)
 
-dusk = b.say("d3n-dusk", "牆上的影子折到第三道彎。她的語尾開始重複同一個助詞，像磁帶絞到了。",
+dusk = b.say("d3n-dusk", "牆上的影子折到第三道彎。她講話開始重複同一個字，卡住，然後跳過去。",
              who=None, title="傍晚要到了", x=4900, y=-400)
 b.link(tick, dusk)
 

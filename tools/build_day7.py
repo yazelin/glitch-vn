@@ -39,6 +39,27 @@ b.chain([
     ("d7m-did",   "……我真的有烤。", "發呆", G),
     ("d7m-forget","可是為什麼我會忘記這種事。", "發呆", G),
 ])
+# 你昨天替他寫的那一句，今天回到她手上——而她以為是自己寫的。
+from_here = b.prev      # chain 會把 prev 推到鏈尾,入口要先存起來
+px = b.col()
+pg = b.chain([
+    ("d7m-p1", "桌上還有一樣東西。守則本，翻開的，壓在麵包旁邊。", "平常", None),
+    ("d7m-p2", "她翻到那一頁。那頁本來是空白的，沒有編號的那一頁。", "平常", None),
+    ("d7m-p3", "「{{holeLine}}」", "平常", None),
+    ("d7m-p4", "有字了。什麼時候寫的？", "發呆", G),
+    ("d7m-p5", "她看了很久，然後點點頭。", "平常", None),
+    ("d7m-p6", "是我寫的吧。這本子裡的字都是我寫的。", "平常", G),
+    ("d7m-p7", "她不知道那一頁在誰的名下。她也不會知道那句話是誰請人代筆的。", "平常", None),
+    ("d7m-p8", "可是她讀了。今天早上她讀到了。", "平常", None),
+], x=px, y=-300, link_prev=False)
+b.link(from_here, pg[0], "right", cond={"variable": "wroteForHim", "op": "eq", "value": 1})
+skip7 = b.say("d7m-p-skip", "桌上只有那塊麵包。", who=None, title="沒有守則本",
+              x=px, y=100)
+b.link(from_here, skip7)
+join7 = b.say("d7m-p-join", "她把手放在麵包上，隔著保鮮膜。", who=None, title="接著",
+              x=px + 2700, y=0)
+b.link(pg[-1], join7); b.link(skip7, join7)
+b.prev = join7
 
 # ══════════ 中 ══════════
 cur = b.scene("d7n-scene", "第七天・中午", "她坐在沙發上，麵包放在膝蓋中間。保鮮膜朝上，指紋壓痕很清楚。", "中")

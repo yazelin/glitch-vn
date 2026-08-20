@@ -74,10 +74,41 @@ for i, (tag, txt) in enumerate([
     b.link(q, n, f"choice-{i}")
     opts.append(n)
 
+# ── 這一天你不是她的記憶，你是他的聲音 ──
+# Day 6 原本只有 71 張卡、一個選擇，是全七天最薄的。它需要一件別天沒有的事。
+# 他放了一頁空白進她的守則本，說「我不知道要寫什麼」。那句話跟她每天說的一模一樣。
+# 所以：她請你替他想。你寫的字會進到**他的那一頁**，不是她的。
+hx = b.col()
+hf = b.chain([
+    ("d6n-h1", "等一下。我想到一件事。", "平常", G),
+    ("d6n-h2", "他說他不知道要寫什麼。我每天也是這樣講。", "平常", G),
+    ("d6n-h3", "可是我每天都有寫。因為有你。你會幫我想。", "平常", G),
+    ("d6n-h4", "她把守則本翻到那頁空白，推到螢幕前面。", "平常", None),
+    ("d6n-h5", "那你也幫他想一句。他自己想不出來。", "平常", G),
+    ("d6n-h6", "我不會告訴他是你寫的。我會忘記，所以我沒有辦法告訴任何人。", "平常", G),
+], x=hx, y=-300, link_prev=False)
+hin = b.add("d6n-hwrite", {"type": "input", "title": "替他寫一句",
+    "text": "這一頁是他的，不是她的。你寫什麼，就會留在他那裡。\n"
+            "（他不會知道是你寫的。她明天也不會記得這件事發生過。）",
+    "inputVariable": "holeLine", "inputPlaceholder": "寫一句話…",
+    "inputSuggestions": ["她每天都在對我好。她自己不知道。",
+                         "我不是故意要吃掉那些的。",
+                         "今天她問我問題，我回答了。"]}, x=hx + 1800, y=-300)
+b.link(b.prev, hin)
+hset = b.setvar("d6n-hset", [{"variable": "wroteForHim", "kind": "set", "value": 1}],
+                text="你寫上去了。字跡是你的，可是那一頁在他的名下。\n"
+                     "她看了一眼，點點頭，把本子合上。她已經在忘記了。",
+                title="替他寫了", x=hx + 2100, y=-300)
+b.link(hin, hset)
+b.prev = hset
+
 lead = b.say("d6n-lead", "還有一件事。冰箱裡那塊麵包，我不記得自己包過的那塊，紙條還在上面。"
                          "我今天想把它交給黑洞先生——不給他吃，是要他收著。",
              who=G, face="平常", title="她的決定", x=nx + 320, y=0)
 for n in opts: b.link(n, lead)
+# 三個選項本來直接接到「託付麵包」。改道:先經過「替他寫那一頁」再接下去。
+b.redirect(lead, b.find("d6n-h1")["id"], keep=(hset,))
+b.link(hset, lead)
 line = b.add("d6n-line", {"type": "input", "title": "替她想一句話",
     "text": "她要對黑洞先生說一句話，好讓他分得出「吃」跟「保管」的差別。\n你替她想。她會照著念。",
     "inputVariable": "handoverLine", "inputPlaceholder": "寫一句話…",

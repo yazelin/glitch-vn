@@ -204,6 +204,11 @@ b.link(wake, "d1ng-q")
 
 # 你的名字就是她今天的第一格
 b.addops("d1n-store", [{"variable": "slot1", "kind": "set", "valueFrom": "playerName"}])
+# 這句原本是「外接記憶體要自己按存檔喔。我沒手幫你按。」——太像在教操作。
+# 而且說話者是黑洞先生:讓他在 Day 1 就直接對玩家說話,會把二週目那個梗提前燒掉。
+# 改成她說,而且講的是真的做不到的事:她沒有辦法從這邊叫你。
+b.settext("d1e-save4", "你要自己記得回來。我這邊沒有辦法叫你。")
+b.find("d1e-save4")["data"]["speaker"] = "格莉奇"
 b.settext("d1n-store", "「{{playerName}}」放進第一格。\n"
                        "四格裡的第一格。今天剩下三格。")
 
