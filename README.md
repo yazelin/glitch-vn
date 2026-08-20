@@ -20,16 +20,18 @@
     tools/sim_board.py       走遍一塊板子的所有玩法，抓斷線與環
     tools/check_pronouns.py  代名詞規則檢查（妳／你／全名）
     tools/dump_board.py      把一塊板子印成可讀劇本，拿去給人審
+    tools/reverse_board.py   從線上版反推出建置腳本（腳本弄丟時用）
     backup/project.json      Larch 專案的完整副本
 
-`build_day1.py` 與 `build_day2.py` 在一次暫存目錄被清空時弄丟了。那兩天只存在於
-`backup/project.json` 裡，所以那份**一定要進版控**，不可以再 gitignore 掉。
-要改那兩天只能就地補（做法看 `tools/patch_day2_jump.py`）。
+`build_day1.py` 與 `build_day2.py` 曾經在一次暫存目錄被清空時弄丟，後來用
+`reverse_board.py` 從 `backup/project.json` 反推回來（節點與連線逐筆比對過，
+完全一致），現在那兩天跟其他天一樣可以重建。`backup/project.json` **一定要
+進版控**，不可以再 gitignore 掉——它是唯一的完整副本。
 
 ## 改完要跑的
 
     python3 tools/build_dayN.py      # 重建那一天
-    python3 tools/verify.py          # 模擬 + 跳躍 + 變數 + 代名詞，離開碼非 0 就是有問題
+    python3 tools/verify.py          # 模擬 + 跳躍 + 變數 + speak-tw + 代名詞，離開碼非 0 就是有問題
     python3 tools/gen_docs.py        # 更新機制表
 
 ## 二週目

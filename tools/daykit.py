@@ -24,6 +24,24 @@ ROUTES = ["留在我這裡（明天睡醒就忘了）",
 STATUS = "（記憶體 {{slotUsed}}／4　黑洞先生今天吃了 {{fedToday}}／1）"
 
 
+def _api(data=None, method="GET", tries=4):
+    """Larch 偶爾回 502,不是我們的問題,但每次手動重跑很煩。退避重試。"""
+    import time
+    body = json.dumps(data).encode() if data is not None else None
+    for i in range(tries):
+        try:
+            return json.load(urllib.request.urlopen(urllib.request.Request(
+                BASE, body, H, method=method), timeout=180))
+        except urllib.error.HTTPError as e:
+            if e.code < 500 or i == tries - 1: raise
+            print(f"  Larch 回 {e.code}，{2 ** i * 5} 秒後重試（第 {i + 1} 次）")
+            time.sleep(2 ** i * 5)
+
+
+def _get(): return _api()
+def _put(payload): return _api(payload, "PUT")
+
+
 class Board:
     def __init__(self, bid, name, desc):
         self.bid, self.name, self.desc = bid, name, desc
@@ -185,14 +203,13 @@ class Board:
         return aft
 
     def push(self, summary):
-        proj = json.load(urllib.request.urlopen(urllib.request.Request(BASE, headers=H), timeout=120))
+        proj = _get()
         boards = [b for b in proj["boards"] if b["id"] != self.bid]
         boards.append({"id": self.bid, "kind": "story", "mode": "story",
                        "name": self.name, "description": self.desc,
                        "nodes": self.nodes, "edges": self.edges})
         proj["boards"] = boards
-        r = json.load(urllib.request.urlopen(urllib.request.Request(
-            BASE, json.dumps({"project": proj, "summary": summary}).encode(), H, method="PUT"), timeout=180))
+        r = _put({"project": proj, "summary": summary})
         b = [x for x in r["boards"] if x["id"] == self.bid][0]
         print(f"{self.name}：卡片 {len(b['nodes'])}  邊 {len(b['edges'])}")
         return r

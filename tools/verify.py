@@ -57,6 +57,25 @@ unused = [v for v in V if not any(
     and not any(n["data"].get("inputVariable") == v for b in DAYS for n in b["nodes"])]
 print(f"  七天用不到的變數 {len(unused)} 個（素材庫版留下來的）：{'、'.join(unused) or '無'}")
 
+print("── 中文寫作（speak-tw）──")
+# 刻意保留的句子。speak-tw 的 speak-tw-ok 標記加不到 Larch 卡片上,所以放這裡,
+# 每一條都要寫清楚為什麼 —— 不寫理由的例外一律不收。
+ALLOW = {
+    "……不是那邊，是這邊":
+        "Day 5 開場的夢話。這是劇情碎片(她夢裡在指某個方向),不是拿來製造洞見感的修辭",
+}
+dump = T.parent / "docs/script.txt"
+with open(dump, "w") as f:
+    for b in DAYS:
+        f.write(subprocess.run([sys.executable, str(T / "dump_board.py"), b["id"]],
+                               capture_output=True, text=True).stdout)
+r = subprocess.run(["speak-tw", str(dump)], capture_output=True, text=True)
+hits = [l.strip() for l in r.stdout.splitlines() if ":" in l and l.startswith("    ")]
+real = [h for h in hits if not any(a in h for a in ALLOW)]
+for h in real: print(f"  ★ {h}")
+if real: bad.append(f"speak-tw {len(real)} 處")
+print(f"  {len(hits)} 處命中，{len(hits) - len(real)} 處是登記過的例外，剩 {len(real)} 處要改")
+
 print("── 代名詞 ──")
 r = subprocess.run([sys.executable, str(T / "check_pronouns.py")], capture_output=True, text=True)
 print("  " + r.stdout.strip().replace("\n", "\n  "))

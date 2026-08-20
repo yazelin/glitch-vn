@@ -103,8 +103,8 @@ b.link(hb_ask, hb_q)
 hb_yes = b.setvar("d4n-hb-yes",
                   [{"variable": "givenCount", "kind": "add", "value": -1},
                    {"variable": "slotUsed", "kind": "add", "value": 1}],
-                  text="你把它拿出來還給她。她接過去，看了很久，然後笑了——"
-                       "不是想起來的那種笑，是「原來我以前做過這種事」的那種。",
+                  text="你把它拿出來還給她。她接過去，看了很久，然後笑了一下。"
+                       "那個表情像是在看別人做的一件好事，而那個人剛好是她自己。",
                   title="還她", x=hx + 620, y=-220)
 hb_no = b.say("d4n-hb-no", "「那你先收著。」她說得很輕鬆，因為她根本不知道自己寄放了什麼。",
               who=None, x=hx + 620, y=-100)
