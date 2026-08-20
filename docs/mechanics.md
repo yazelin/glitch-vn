@@ -6,9 +6,9 @@
 ## 一、規模
 
 - 天數：7
-- 卡片：755（其中素材庫 134 張不在遊玩路徑上）
-- 連線：917
-- 變數：65
+- 卡片：779（其中素材庫 134 張不在遊玩路徑上）
+- 連線：946
+- 變數：68
 
 ## 二、變數
 
@@ -79,6 +79,9 @@
 | `lostBread` | 她把麵包那件事忘了：記憶體滿了,最舊的掉出去 | `0` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
 | `figured` | 今天她拼出了什麼：dough/hand/him/none | `` | Day 1、Day 2、Day 3、Day 4、Day 5、Day 6、Day 7 |
 | `d2Deleted` | Day 2 早上刪掉哪一格：name/cache/sound/crack | `` | Day 2 |
+| `toldFeet` | 早上你怎麼回答靴子的數字：truth/same/silent | `` | Day 4 |
+| `sawBoot` | 她今天親眼看到門邊多一雙：餵他之後當場看到 | `0` | Day 4 |
+| `connected` | 她把靴子跟遺忘連起來了：Day 4 的核心 | `0` | Day 4 |
 
 ## 三、每天的選擇與後果
 
@@ -339,6 +342,15 @@
 
 ### Day 4・數靴子
 
+**第四天・清晨｜她問你昨天門邊有幾雙靴子。你知道答案。**
+
+- 1. 告訴她真的數字
+    - `toldFeet` 設為 `truth`
+- 2. 跟她說跟昨天一樣
+    - `toldFeet` 設為 `same`
+- 3. 不回答
+    - `toldFeet` 設為 `silent`
+
 **第四天・中午｜要還一件給她嗎？**
 
 - 1. 還給她（她今天會記得，明天照樣忘）
@@ -469,6 +481,8 @@
 - `slotUsed` ＝ `1` → 存進第 2 格
 - `slotUsed` ＝ `2` → 存進第 3 格
 - `slotUsed` ＝ `3` → 存進第 4 格
+- `todayRoute` ＝ `feed` → 門邊多了一雙
+- `toldFeet` ＝ `truth` → 她連起來了
 - `todayRoute` ＝ `feed` → 他吃掉了
 - `todayRoute` ＝ `keep` → 她留著
 - `todayEvent` ＝ `1` → 痕跡1
@@ -477,6 +491,7 @@
 - `todayEvent` ＝ `4` → 痕跡4
 - `todayEvent` ＝ `5` → 痕跡5
 - `todayEvent` ＝ `6` → 痕跡6
+- `connected` ＝ `1` → 他說（她連起來了）
 
 ### Day 5・他請假
 

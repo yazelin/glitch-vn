@@ -100,6 +100,22 @@ class Board:
         """改一張已經存在的卡的台詞。反推回來的板子用這個打磨,比重寫整張安全。"""
         self.find(nid)["data"]["text"] = text
 
+    def redirect(self, old_target, new_target, keep=()):
+        """把所有指向 old_target 的線改指向 new_target。
+
+        要在既有的匯流點前面插一個閘門的時候用。直接對來源加一條有條件的線是
+        沒用的——那些來源可能已經有別的有條件的線,而且一定會有一條命中,
+        新加的永遠輪不到。Day 4 晚上踩過。
+        """
+        n = 0
+        for e in self.edges:
+            if e["target"] == old_target and e["source"] not in keep:
+                e["target"] = new_target
+                e["id"] = f"e-{e['source']}-{e.get('sourceHandle','right')}-{new_target}"
+                n += 1
+        assert n, f"沒有線指向 {old_target}"
+        return n
+
     def dropop(self, nid, variable):
         """拿掉某張卡對某個變數的操作。
 

@@ -41,10 +41,40 @@ b.chain([
 ])
 cur = b.setvar("d4m-counted", [{"variable": "countedFeet", "kind": "set", "value": 1},
                                {"variable": "dejaVu", "kind": "add", "value": 1}],
-               text="她把這個數字記下來。她不知道要拿它跟什麼比。", title="第一次數")
+               text="她把這個數字記下來。", title="第一次數")
 b.link(b.prev, cur); b.prev = cur
+
+# ── 這一天的核心矛盾：數字對不上，而你是唯一知道為什麼的人 ──
+# 六家一致說 Day 4 沒有當天的矛盾。這裡用遊戲本來就有的累積：門邊那疊靴子
+# 是你這禮拜餵他的次數堆出來的——那疊就是她忘掉的東西的數量。
 b.chain([
-    ("d4m-pocket", "然後她把手插進口袋。", "平常", None),
+    ("d4m-askyou", "你記得昨天有幾雙嗎？", "平常", G),
+    ("d4m-only",   "你是這個房子裡唯一有昨天的人。我沒有，黑洞先生不講。", "平常", G),
+])
+tq = b.choice("d4m-tellq", "她問你昨天門邊有幾雙靴子。你知道答案。",
+              ["告訴她真的數字", "跟她說跟昨天一樣", "不回答"])
+b.link(b.prev, tq)
+tx = b.col()
+t_truth = b.setvar("d4m-t-truth", [{"variable": "toldFeet", "kind": "set", "value": "truth"}],
+    text="你把真的數字給她。\n"
+         "「所以多了。」她說。「多了幾雙我不知道，可是多了。」\n"
+         "她蹲回門邊，開始把靴子一雙一雙排開。",
+    title="說真話", x=tx, y=-200)
+t_same = b.setvar("d4m-t-same", [{"variable": "toldFeet", "kind": "set", "value": "same"}],
+    text="你跟她說跟昨天一樣。\n"
+         "「喔，那就好。」她鬆了一口氣，站起來拍拍膝蓋。\n"
+         "她一整天都不會再看那疊靴子。這件事現在只有你揹著。",
+    title="說一樣", x=tx, y=0)
+t_none = b.setvar("d4m-t-silent", [{"variable": "toldFeet", "kind": "set", "value": "silent"}],
+    text="你沒有回答。\n"
+         "「……好吧。」她看著螢幕看了一會兒。「你也不知道，還是你不想講？」\n"
+         "「算了。反正我等一下也會忘記我問過。」",
+    title="不回答", x=tx, y=200)
+b.link(tq, t_truth, "choice-0"); b.link(tq, t_same, "choice-1"); b.link(tq, t_none, "choice-2")
+join_t = b.say("d4m-t-join", "她把手插進口袋。", who=None, title="接著", x=tx + 400, y=0)
+for n in (t_truth, t_same, t_none): b.link(n, join_t)
+b.prev = join_t
+b.chain([
     ("d4m-empty",  "口袋是空的。空得很具體，像是本來有東西，剛剛才被拿走。", "發呆", G),
 ])
 
@@ -124,7 +154,42 @@ b.link(hb_yes, hb_join); b.link(hb_no, hb_join)
 b.link(hb_gate, hb_join)   # 手上沒東西就直接跳過整段
 b.prev = hb_join
 
-b.pool("d4n", EVENTS, after_text="好。收工。我們等黑洞先生回來。")
+b.pool("d4n", EVENTS, after_text="好。收工。")
+
+# 餵他之後，門邊當場多一雙。這是整個遊戲裡「餵他」第一次有看得見的代價——
+# 而如果早上你說了真話，她會把兩件事連起來：那疊靴子就是她忘掉的東西的數量。
+after_pool = b.prev
+sx = b.col()
+saw = b.setvar("d4n-saw", [{"variable": "sawBoot", "kind": "set", "value": 1}],
+    text="門邊有東西輕輕落下的聲音。\n"
+         "那疊短靴上面多了一雙。剛剛還沒有的。",
+    title="門邊多了一雙", x=sx, y=-200)
+b.link(after_pool, saw, "right", cond={"variable": "todayRoute", "op": "eq", "value": "feed"})
+
+conn = b.setvar("d4n-connect", [{"variable": "connected", "kind": "set", "value": 1}],
+    text="", title="她連起來了", x=sx + 300, y=-300)
+b.link(saw, conn, "right", cond={"variable": "toldFeet", "op": "eq", "value": "truth"})
+b.chain([
+    ("d4n-c1", "等一下。", "當機", G),
+    ("d4n-c2", "早上你說多了。剛剛又多了一雙。而我剛剛才決定要把一件事交給黑洞先生。", "發呆", G),
+    ("d4n-c3", "她走到門邊，蹲下來，手放在最上面那雙靴子上。那雙是新的，鞋底沒有磨過。", "平常", None),
+    ("d4n-c4", "這疊短靴不是誰的鞋子。這疊是我忘掉的東西。", "發呆", G),
+    ("d4n-c5", "一雙就是一件。門邊有 {{holeFeet}} 隻腳的高度，就是我忘了 {{fedCount}} 件事。", "發呆", G),
+    ("d4n-c6", "她坐在門邊，很久沒有站起來。", "平常", None),
+    ("d4n-c7", "……可是我不知道那 {{fedCount}} 件是什麼。我連自己丟過什麼都不知道。", "發呆", G),
+], x=sx + 600, y=-300, link_prev=False)
+b.link(conn, b.find("d4n-c1")["id"])
+conn_end = b.prev
+
+noconn = b.say("d4n-noconn", "她看了那雙新靴子一眼，然後轉開。今天沒有人告訴她該數什麼。",
+               who=None, title="她沒連起來", x=sx + 600, y=-100)
+b.link(saw, noconn)
+
+join_n = b.say("d4n-join", "好。我們等黑洞先生回來。", who=G, face="平常",
+               title="收工", x=sx + 3400, y=0)
+b.link(after_pool, join_n)
+b.link(conn_end, join_n); b.link(noconn, join_n)
+b.prev = join_n
 
 # ══════════ 晚 ══════════
 cur = b.scene("d4e-scene", "第四天・傍晚", "門口有腳步聲。不只一組。", "晚")
@@ -158,9 +223,31 @@ for i, t in enumerate(TRACE):
     b.link(r_feed, n, "right", cond={"variable": "todayEvent", "op": "eq", "value": i + 1})
     traces.append(n)
 
+# 她今天把靴子跟遺忘連起來的話，他不會裝作沒發生。
+cn = b.say("d4e-conn", "妳今天數到了。", who=HOLE, face="預設", title="他說（她連起來了）",
+           x=tx + 340, y=-620)
+cn2 = b.say("d4e-conn2", "數到了。門邊那疊是我丟掉的東西。是不是？", who=G, face="發呆",
+            title="她問", x=tx + 640, y=-620)
+cn3 = b.say("d4e-conn3", "是。", who=HOLE, face="預設", title="他承認", x=tx + 940, y=-620)
+cn4 = b.say("d4e-conn4", "他第一次直接回答一個問題。她愣了兩秒，然後低頭看自己的手。",
+            who=None, title="他第一次直接回答", x=tx + 1240, y=-620)
+cn5 = b.say("d4e-conn5", "那你為什麼要留著？丟掉的東西你留著幹嘛？", who=G, face="發呆",
+            title="她追問", x=tx + 1540, y=-620)
+cn6 = b.say("d4e-conn6", "他沒有回答這一句。他走去角落坐下，那疊靴子在他背後。",
+            who=None, title="他不答", x=tx + 1840, y=-620)
+for a, bb in ((cn, cn2), (cn2, cn3), (cn3, cn4), (cn4, cn5), (cn5, cn6)): b.link(a, bb)
+
 merge = b.say("d4e-merge", "妳今天在數什麼。", who=HOLE, face="預設", title="他問了", x=tx + 340, y=0)
 for r in (r_keep, r_give, *traces): b.link(r, merge)
 b.link(r_feed, merge)   # 保底:抽到的事件不在表上時不會斷線
+# 所有原本指向 merge 的線先改指向閘門,閘門再判斷她有沒有連起來。
+# 直接對來源加一條有條件的線是沒用的——那些來源已經有「痕跡」那組有條件的線,
+# 而且一定會有一條命中,新加的永遠輪不到。
+gate4 = b.setvar("d4e-gate", [], text="", title="她連起來了嗎", x=tx + 300, y=-300)
+b.redirect(merge, gate4, keep=(cn6,))
+b.link(gate4, cn, "right", cond={"variable": "connected", "op": "eq", "value": 1})
+b.link(gate4, merge)
+b.link(cn6, merge)
 b.prev = merge
 b.chain([
     ("d4e-admit", "靴子。門邊那疊。我今天第一次數。", "平常", G),
