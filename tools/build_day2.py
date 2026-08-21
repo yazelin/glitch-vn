@@ -18,7 +18,7 @@ b.add('d2m-lost2', {'text': '昨天沒有人幫我存下來。所以你昨天說
 b.add('d2m-lost3', {'text': '外接記憶體要自己按存檔。我說過了。', 'type': 'dialogue', 'title': '外接記憶體要自己按存檔。我說過了', 'emotion': '餓', 'speaker': '黑洞先生', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp', 'characterId': 'character-25c9632f-cd67-49d0-a4bd-2757b51127e7', 'characterPosition': 'center'}, x=1800, y=220)
 b.add('d2m-relearn', {'text': '那……可以再告訴我一次嗎？這次記得存。', 'type': 'input', 'title': '再說一次你的名字', 'inputVariable': 'playerName', 'inputPlaceholder': '再輸入一次…'}, x=2100, y=220)
 b.add('d2m-ok1', {'text': '早安，{{playerName}}。', 'type': 'dialogue', 'title': '早安，{{playerName}', 'emotion': '開心', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=1200, y=-220)
-b.add('d2m-ok2', {'text': "我不記得你。可是牆上寫著你的名字。\n而且我今天醒得比較快。\n有人替我省下一格。", 'type': 'dialogue', 'title': '我不記得你。可是牆上寫著你的名字', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=1500, y=-220)
+b.add('d2m-ok2', {'text': "我不記得你。可是牆上寫著你的名字。\n我今天醒得比較快。\n有人替我省下一格。", 'type': 'dialogue', 'title': '我不記得你。可是牆上寫著你的名字', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=1500, y=-220)
 b.add('d2m-join', {'text': '今天是第幾天我不知道。我從來不知道。', 'type': 'dialogue', 'title': '今天是第幾天我不知道。我從來不知', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=2400, y=0)
 b.add('d2m-rule', {'text': '可是守則知道。它已經改到第 {{ruleVersion}} 版了。', 'type': 'dialogue', 'title': '可是守則知道。它已經改到第 {{', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=2700, y=0)
 b.add('d2m-quote', {'text': '昨天那一版的空位上寫著——「{{ruleLine1}}」。那是你寫的。', 'type': 'dialogue', 'title': '昨天那一版的空位上寫著——「{{', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=3000, y=0)
@@ -146,8 +146,9 @@ b.link("d2m-hub", lost, "right", cond={"variable": "savedOk", "op": "eq", "value
 b.link("d2m-hub", okl)
 b.link(lost, "d2m-lost1")
 b.link(okl, "d2m-ok1")
-b.settext("d2m-ok2", "我不記得你。可是牆上寫著你的名字，"
-                     "而且我今天醒得比較快——有人替我省下一格。")
+b.settext("d2m-ok2", "我不記得你。可是牆上寫著你的名字。\n"
+                     "我今天醒得比較快。\n有人替我省下一格。")
+
 
 # ══════════════ 記憶格（第二輪打磨）══════════════
 # 記憶格要在每一天都存在，玩家在 Day 1 學到的東西不能中途消失。

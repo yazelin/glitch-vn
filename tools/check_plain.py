@@ -42,12 +42,15 @@ for b in DAYS:
             continue
         named = "黑洞先生" in t
         why = []
-        if t.count("他") >= 3:
-            why.append(f"「他」{t.count('他')} 次")
+        # 只數次數是錯的規則。先講名字再一路用「他」是正確的中文,不該報。
+        # 真正累的是**沒有錨點**的代名詞:整張卡都沒有出現名字。
+        if t.count("他") >= 3 and not named:
+            why.append(f"「他」{t.count('他')} 次而且整張卡沒有名字")
         if t.lstrip("「（").startswith("他") and not named and not prev_named:
             why.append("開頭就是「他」，前後都沒有名字")
-        if t.count("她") >= 4:
-            why.append(f"「她」{t.count('她')} 次")
+        # 跟「他」同一個道理:開頭點過名字之後一路用「她」是正確的中文。
+        if t.count("她") >= 4 and "格莉奇" not in t:
+            why.append(f"「她」{t.count('她')} 次而且整張卡沒有名字")
         for s_ in SENT.findall(readable(t)):
             s_ = s_.strip()
             if len(s_) > 30:
