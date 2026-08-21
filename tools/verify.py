@@ -28,6 +28,16 @@ for b in DAYS:
     for p_ in prob:
         print(f"      ★ {p_.strip()}"); bad.append(f"{b['id']}: {p_.strip()}")
 
+print("── 接線 ──")
+# 模擬器只驗「從起點走得到」。斷頭的邊、指向不存在的卡、孤島、沒有保底的出口
+# 它都看不見——因為那些東西本來就走不到,不會出現在「走過的卡」裡。
+r = subprocess.run([sys.executable, str(T / "check_wiring.py")],
+                   capture_output=True, text=True)
+for line in r.stdout.strip().splitlines():
+    print("  " + line)
+if r.returncode:
+    bad.append("接線有問題")
+
 print("── 跨板跳躍 ──")
 ids = {x["id"] for x in P["boards"]}
 for b in P["boards"]:

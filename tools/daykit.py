@@ -88,7 +88,11 @@ class Board:
                               "jumpBoardId": board_id, "jumpNodeId": node_id}, x, y)
 
     def link(self, a, b, handle="right", cond=None):
-        e = {"id": f"e-{a}-{handle}-{b}", "source": a, "target": b,
+        # id 要唯一。用「來源＋出口＋目標」當 id 的話,同一組多條件的線會全部撞在
+        # 一起(二週目八個暗號都是 hub→yes)。功能上 Larch 照單全收,可是編輯器的
+        # 圖用 id 當 key,而且下次誰去重就會被吃掉。加序號。
+        self._eid = getattr(self, "_eid", 0) + 1
+        e = {"id": f"e{self._eid}-{a}-{handle}-{b}", "source": a, "target": b,
              "sourceHandle": handle, "animated": True}
         if cond: e["data"] = {"condition": {"kind": "variable", **cond}}
         self.edges.append(e)
@@ -111,7 +115,9 @@ class Board:
         for e in self.edges:
             if e["target"] == old_target and e["source"] not in keep:
                 e["target"] = new_target
-                e["id"] = f"e-{e['source']}-{e.get('sourceHandle','right')}-{new_target}"
+                self._eid = getattr(self, "_eid", 0) + 1
+                e["id"] = (f"e{self._eid}-{e['source']}-"
+                           f"{e.get('sourceHandle','right')}-{new_target}")
                 n += 1
         assert n, f"沒有線指向 {old_target}"
         return n
