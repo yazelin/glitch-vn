@@ -213,8 +213,11 @@ for i, (key, seen, kept, name, go, finds, again, missed, label, combos) in enume
                       text="她把這件事留在原地。晚上黑洞先生回來的時候，它已經不在了。",
                       title="餵他", x=2400 + len(finds) * 300, y=y + 90)
     n_give = b.setvar(f"d3n-{key}-give",
-                      [{"variable": "givenCount", "kind": "add", "value": 1}],
-                      text="她講給你聽，講了兩次，確認你記住了。她自己不會記得講過。",
+                      [{"variable": "givenCount", "kind": "add", "value": 1},
+                       {"variable": "heldItem", "kind": "set", "value": label}],
+                      text="她講給你聽，講了兩次。\n"
+                           "「你要記住喔。明天我會問你。」\n"
+                           "她自己不會記得講過這句話。",
                       title="交給你", x=2400 + len(finds) * 300, y=y + 180)
     b.link(rq, n_feed, "choice-1"); b.link(rq, n_give, "choice-2")
     after += [n_feed, n_give]

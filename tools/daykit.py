@@ -255,6 +255,37 @@ class Board:
         self.prev = aft
         return aft
 
+    def recall(self, key, question, items, x=0, y=0):
+        """昨天你替她保管的東西，今天她問你那是什麼。答對她才拿得回去。
+
+        這是整個遊戲的論點做成玩法：你是她的記憶，所以被考的是**你的**記憶。
+        原型裡本來就有（「我今天好像學過一種貓叫。你還記得怎麼叫嗎？」），
+        做成七天迴圈的時候掉了，現在接回來。
+
+        items = [(標籤, 答對的話她說什麼, 答錯的話她說什麼)]
+        選項固定，正確答案靠 heldItem 比對——所以同一張選擇卡可以考任何一件。
+        """
+        q = self.choice(f"{key}-q", question, [it[0] for it in items], x=x, y=y)
+        outs = []
+        for i, (label, ok_text, no_text) in enumerate(items):
+            ok = self.setvar(
+                f"{key}-ok{i}",
+                [{"variable": "recallOk", "kind": "set", "value": 1},
+                 {"variable": "pending", "kind": "set", "value": label},
+                 {"variable": "givenCount", "kind": "add", "value": -1},
+                 {"variable": "heldItem", "kind": "set", "value": ""}],
+                text=ok_text, title=f"答對：{label}", x=x + 400, y=y + (i - 2) * 130)
+            self.link(q, ok, f"choice-{i}",
+                      cond={"variable": "heldItem", "op": "eq", "value": label})
+            no = self.setvar(
+                f"{key}-no{i}",
+                [{"variable": "recallOk", "kind": "set", "value": 2},
+                 {"variable": "heldItem", "kind": "set", "value": ""}],
+                text=no_text, title=f"答錯：{label}", x=x + 400, y=y + (i - 2) * 130 + 60)
+            self.link(q, no, f"choice-{i}")
+            outs.append((ok, no))
+        return q, outs
+
     def wake(self, key, prefill=(), looks=0, x=None, y=0):
         """開機：清空記憶格。她每天睡醒清空，所以每一天都要走這一步。
 
