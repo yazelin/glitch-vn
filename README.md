@@ -60,6 +60,17 @@ Larch 的變數是專案層級、有預設值，新開一場就回預設，平�
 `docs/index.html` 就是首頁，不需要額外設定。劇透用 `<details>` 收起來，
 標題沿用遊戲裡「交給你保管」的說法。
 
+## 這個 repo 裡有劇透
+
+`tools/build_day*.py` 是完整劇本，`docs/mechanics.md` 是完整機制表，
+`tools/patch_ngplus.py` 裡面有二週目的暗號答案。想自己玩一次的話先別看原始碼。
+
+## 金鑰
+
+`tools/` 底下的腳本讀 `~/.config/larch/key`，`chat/proxy.py` 讀環境變數
+`LLMSHARE_API_KEY`。**原始碼裡不放金鑰**，歷史裡也沒有。
+
 ## 授權
 
-MIT，林亞澤。
+MIT，林亞澤。角色（格莉奇、黑洞先生）的設定正典在
+[ai-brain-site](https://github.com/yazelin/ai-brain-site) 的 `persona.json`。
