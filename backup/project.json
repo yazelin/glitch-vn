@@ -21253,2921 +21253,6 @@
       "description": "早：從冰箱開始　中：五個地方只看得了三個，4KB 真的會滿　晚：她只講得出還留在格子裡的"
     },
     {
-      "id": "board-day1",
-      "kind": "story",
-      "mode": "story",
-      "name": "Day 1・你是誰",
-      "edges": [
-        {
-          "id": "e1-d1m-boot-right-d1m-narr",
-          "source": "d1m-boot",
-          "target": "d1m-narr",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e2-d1m-narr-right-d1m-load",
-          "source": "d1m-narr",
-          "target": "d1m-load",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e3-d1m-load-right-d1m-hi",
-          "source": "d1m-load",
-          "target": "d1m-hi",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e4-d1m-hi-right-d1m-me",
-          "source": "d1m-hi",
-          "target": "d1m-me",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e5-d1m-me-right-d1m-4kb",
-          "source": "d1m-me",
-          "target": "d1m-4kb",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e6-d1m-4kb-right-d1m-clear",
-          "source": "d1m-4kb",
-          "target": "d1m-clear",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e7-d1m-clear-right-d1m-eaten",
-          "source": "d1m-clear",
-          "target": "d1m-eaten",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e9-d1m-door-right-d1m-narr2",
-          "source": "d1m-door",
-          "target": "d1m-narr2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e10-d1m-narr2-right-d1m-who",
-          "source": "d1m-narr2",
-          "target": "d1m-who",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e11-d1m-who-right-d1m-legs",
-          "source": "d1m-who",
-          "target": "d1m-legs",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e12-d1m-legs-right-d1m-boots",
-          "source": "d1m-legs",
-          "target": "d1m-boots",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e15-d1m-bye-right-d1m-close",
-          "source": "d1m-bye",
-          "target": "d1m-close",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e16-d1m-close-right-d1n-scene",
-          "source": "d1m-close",
-          "target": "d1n-scene",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e17-d1n-scene-right-d1n-alone",
-          "source": "d1n-scene",
-          "target": "d1n-alone",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e18-d1n-alone-right-d1n-you",
-          "source": "d1n-alone",
-          "target": "d1n-you",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e19-d1n-you-right-d1n-ask",
-          "source": "d1n-you",
-          "target": "d1n-ask",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e20-d1n-ask-right-d1n-store",
-          "source": "d1n-ask",
-          "target": "d1n-store",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e21-d1n-store-right-d1n-role",
-          "source": "d1n-store",
-          "target": "d1n-role",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e22-d1n-role-right-d1n-cost",
-          "source": "d1n-role",
-          "target": "d1n-cost",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e23-d1n-cost-right-d1n-note1",
-          "source": "d1n-cost",
-          "target": "d1n-note1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e24-d1n-note1-right-d1n-note2",
-          "source": "d1n-note1",
-          "target": "d1n-note2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e25-d1n-note2-right-d1n-note3",
-          "source": "d1n-note2",
-          "target": "d1n-note3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e26-d1n-note3-right-d1n-rules",
-          "source": "d1n-note3",
-          "target": "d1n-rules",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e27-d1n-rules-right-d1n-q",
-          "source": "d1n-rules",
-          "target": "d1n-q",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e28-d1n-q-choice-0-d1n-keep",
-          "source": "d1n-q",
-          "target": "d1n-keep",
-          "animated": true,
-          "sourceHandle": "choice-0"
-        },
-        {
-          "id": "e29-d1n-q-choice-1-d1n-feed",
-          "source": "d1n-q",
-          "target": "d1n-feed",
-          "animated": true,
-          "sourceHandle": "choice-1"
-        },
-        {
-          "id": "e30-d1n-q-choice-2-d1n-give",
-          "source": "d1n-q",
-          "target": "d1n-give",
-          "animated": true,
-          "sourceHandle": "choice-2"
-        },
-        {
-          "id": "e32-d1n-feed-right-d1n-after",
-          "source": "d1n-feed",
-          "target": "d1n-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e33-d1n-give-right-d1n-after",
-          "source": "d1n-give",
-          "target": "d1n-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e34-d1n-after-right-d1e-scene",
-          "source": "d1n-after",
-          "target": "d1e-scene",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e35-d1e-scene-right-d1e-back",
-          "source": "d1e-scene",
-          "target": "d1e-back",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e38-d1e-rule1-right-d1e-rule2",
-          "source": "d1e-rule1",
-          "target": "d1e-rule2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e39-d1e-rule2-right-d1e-rule3",
-          "source": "d1e-rule2",
-          "target": "d1e-rule3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e40-d1e-rule3-right-d1e-rulein",
-          "source": "d1e-rule3",
-          "target": "d1e-rulein",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e41-d1e-rulein-right-d1e-rulever",
-          "source": "d1e-rulein",
-          "target": "d1e-rulever",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e42-d1e-rulever-right-d1e-save1",
-          "source": "d1e-rulever",
-          "target": "d1e-save1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e43-d1e-save1-right-d1e-save2",
-          "source": "d1e-save1",
-          "target": "d1e-save2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e44-d1e-save2-right-d1e-save3",
-          "source": "d1e-save2",
-          "target": "d1e-save3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e45-d1e-save3-right-d1e-save4",
-          "source": "d1e-save3",
-          "target": "d1e-save4",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e46-d1e-save4-right-d1e-saveq",
-          "source": "d1e-save4",
-          "target": "d1e-saveq",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e47-d1e-saveq-choice-0-d1e-saved",
-          "source": "d1e-saveq",
-          "target": "d1e-saved",
-          "animated": true,
-          "sourceHandle": "choice-0"
-        },
-        {
-          "id": "e48-d1e-saveq-choice-1-d1e-notsaved",
-          "source": "d1e-saveq",
-          "target": "d1e-notsaved",
-          "animated": true,
-          "sourceHandle": "choice-1"
-        },
-        {
-          "id": "e49-d1e-saved-right-d1e-saved2",
-          "source": "d1e-saved",
-          "target": "d1e-saved2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e50-d1e-notsaved-right-d1e-notsaved2",
-          "source": "d1e-notsaved",
-          "target": "d1e-notsaved2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e51-d1e-saved2-right-d1e-sleep",
-          "source": "d1e-saved2",
-          "target": "d1e-sleep",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e52-d1e-notsaved2-right-d1e-sleep",
-          "source": "d1e-notsaved2",
-          "target": "d1e-sleep",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e53-d1e-hook1-right-d1e-hook2",
-          "source": "d1e-hook1",
-          "target": "d1e-hook2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e54-d1e-hook2-right-d1e-hook3",
-          "source": "d1e-hook2",
-          "target": "d1e-hook3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e55-d1e-sleep-right-d1e-hook1",
-          "source": "d1e-sleep",
-          "target": "d1e-hook1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e56-d1e-hook3-right-d1e-jump",
-          "source": "d1e-hook3",
-          "target": "d1e-jump",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e57-d1ng-ask-right-d1ng-in",
-          "source": "d1ng-ask",
-          "target": "d1ng-in",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e58-d1ng-in-right-d1ng-hub",
-          "source": "d1ng-in",
-          "target": "d1ng-hub",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e59-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "她給的",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e60-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "她給的。",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e61-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "不要數",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e62-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "不要數。",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e63-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "看妳睡",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e64-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "看妳睡。",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e65-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "以前",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e66-d1ng-hub-right-d1ng-yes",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "以前。",
-              "variable": "ngToken"
-            }
-          },
-          "source": "d1ng-hub",
-          "target": "d1ng-yes",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e67-d1ng-yes-right-d1ng-y1",
-          "source": "d1ng-yes",
-          "target": "d1ng-y1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e68-d1ng-y1-right-d1ng-y2",
-          "source": "d1ng-y1",
-          "target": "d1ng-y2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e69-d1ng-y2-right-d1ng-y3",
-          "source": "d1ng-y2",
-          "target": "d1ng-y3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e70-d1ng-y3-right-d1m-boot",
-          "source": "d1ng-y3",
-          "target": "d1m-boot",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e71-d1ng-hub-right-d1m-boot",
-          "source": "d1ng-hub",
-          "target": "d1m-boot",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e74-d1ng-q-choice-0-d1m-boot",
-          "source": "d1ng-q",
-          "target": "d1m-boot",
-          "animated": true,
-          "sourceHandle": "choice-0"
-        },
-        {
-          "id": "e75-d1ng-q-choice-1-d1ng-ask",
-          "source": "d1ng-q",
-          "target": "d1ng-ask",
-          "animated": true,
-          "sourceHandle": "choice-1"
-        },
-        {
-          "id": "e76-d1m-boots-right-d1m-bye",
-          "source": "d1m-boots",
-          "target": "d1m-bye",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e77-d1e-back-right-d1e-r-keep",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "keep",
-              "variable": "todayRoute"
-            }
-          },
-          "source": "d1e-back",
-          "target": "d1e-r-keep",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e78-d1e-back-right-d1e-r-give",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": "give",
-              "variable": "todayRoute"
-            }
-          },
-          "source": "d1e-back",
-          "target": "d1e-r-give",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e79-d1e-back-right-d1e-feet",
-          "source": "d1e-back",
-          "target": "d1e-feet",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e80-d1e-r-keep-right-d1e-rule1",
-          "source": "d1e-r-keep",
-          "target": "d1e-rule1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e81-d1e-r-give-right-d1e-rule1",
-          "source": "d1e-r-give",
-          "target": "d1e-rule1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e82-d1m-scene-right-d1m-wake",
-          "source": "d1m-scene",
-          "target": "d1m-wake",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e83-d1m-wake-right-d1ng-q",
-          "source": "d1m-wake",
-          "target": "d1ng-q",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e84-d1m-keep1-right-d1m-keep2",
-          "source": "d1m-keep1",
-          "target": "d1m-keep2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e85-d1m-keep2-right-d1m-keep3",
-          "source": "d1m-keep2",
-          "target": "d1m-keep3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e86-d1m-keep3-right-d1m-keep4",
-          "source": "d1m-keep3",
-          "target": "d1m-keep4",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e87-d1m-keep4-right-d1m-keep5",
-          "source": "d1m-keep4",
-          "target": "d1m-keep5",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e88-d1m-keep5-right-d1m-keep6",
-          "source": "d1m-keep5",
-          "target": "d1m-keep6",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e89-d1m-keep6-right-d1m-keep7",
-          "source": "d1m-keep6",
-          "target": "d1m-keep7",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e90-d1m-keep7-right-d1m-keep8",
-          "source": "d1m-keep7",
-          "target": "d1m-keep8",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e91-d1m-keep8-right-d1m-keep9",
-          "source": "d1m-keep8",
-          "target": "d1m-keep9",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e92-d1m-keep9-right-d1m-keep10",
-          "source": "d1m-keep9",
-          "target": "d1m-keep10",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e93-d1m-keep10-right-d1m-keep11",
-          "source": "d1m-keep10",
-          "target": "d1m-keep11",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e94-d1m-keep11-right-d1m-keep12",
-          "source": "d1m-keep11",
-          "target": "d1m-keep12",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e95-d1m-eaten-right-d1m-keep1",
-          "source": "d1m-eaten",
-          "target": "d1m-keep1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e96-d1m-keep12-right-d1m-door",
-          "source": "d1m-keep12",
-          "target": "d1m-door",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e97-d1n-mem-gate-right-d1n-mem-s1",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": 0,
-              "variable": "slotUsed"
-            }
-          },
-          "source": "d1n-mem-gate",
-          "target": "d1n-mem-s1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e98-d1n-mem-gate-right-d1n-mem-s2",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": 1,
-              "variable": "slotUsed"
-            }
-          },
-          "source": "d1n-mem-gate",
-          "target": "d1n-mem-s2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e99-d1n-mem-gate-right-d1n-mem-s3",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": 2,
-              "variable": "slotUsed"
-            }
-          },
-          "source": "d1n-mem-gate",
-          "target": "d1n-mem-s3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e100-d1n-mem-gate-right-d1n-mem-s4",
-          "data": {
-            "condition": {
-              "op": "eq",
-              "kind": "variable",
-              "value": 3,
-              "variable": "slotUsed"
-            }
-          },
-          "source": "d1n-mem-gate",
-          "target": "d1n-mem-s4",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e101-d1n-mem-gate-right-d1n-mem-shift",
-          "source": "d1n-mem-gate",
-          "target": "d1n-mem-shift",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e102-d1n-keep-right-d1n-mem-gate",
-          "source": "d1n-keep",
-          "target": "d1n-mem-gate",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e103-d1n-mem-s1-right-d1n-after",
-          "source": "d1n-mem-s1",
-          "target": "d1n-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e104-d1n-mem-s2-right-d1n-after",
-          "source": "d1n-mem-s2",
-          "target": "d1n-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e105-d1n-mem-s3-right-d1n-after",
-          "source": "d1n-mem-s3",
-          "target": "d1n-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e106-d1n-mem-s4-right-d1n-after",
-          "source": "d1n-mem-s4",
-          "target": "d1n-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e107-d1n-mem-shift-right-d1n-after",
-          "source": "d1n-mem-shift",
-          "target": "d1n-after",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e108-d1e-mem1-right-d1e-mem2",
-          "source": "d1e-mem1",
-          "target": "d1e-mem2",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e109-d1e-mem2-right-d1e-mem3",
-          "source": "d1e-mem2",
-          "target": "d1e-mem3",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e110-d1e-mem3-right-d1e-mem4",
-          "source": "d1e-mem3",
-          "target": "d1e-mem4",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e111-d1e-feet-right-d1e-mem1",
-          "source": "d1e-feet",
-          "target": "d1e-mem1",
-          "animated": true,
-          "sourceHandle": "right"
-        },
-        {
-          "id": "e112-d1e-mem4-right-d1e-rule1",
-          "source": "d1e-mem4",
-          "target": "d1e-rule1",
-          "animated": true,
-          "sourceHandle": "right"
-        }
-      ],
-      "nodes": [
-        {
-          "id": "d1m-scene",
-          "data": {
-            "bgm": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787213051881_bgm-theme.mp3",
-            "text": "窗外的天剛亮。這裡是一棟沒人要的大樓，最上面一層。",
-            "type": "scene",
-            "start": true,
-            "title": "第一天・早晨",
-            "bgmLoop": true,
-            "bgmVolume": 0.3,
-            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787242985373_bg-morning-v2.png"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 88
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-boot",
-          "data": {
-            "text": "逼——嗶！",
-            "type": "dialogue",
-            "title": "逼——嗶！",
-            "emotion": "當機",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196243145_glitch-error.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-narr",
-          "data": {
-            "text": "床上那個女孩坐了起來。她是格莉奇，一個機器人。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-load",
-          "data": {
-            "text": "系統讀取中……（過久）",
-            "type": "dialogue",
-            "title": "系統讀取中……（過久）",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-hi",
-          "data": {
-            "text": "早安。今天也順利開機了。",
-            "type": "dialogue",
-            "title": "早安。今天也順利開機了。",
-            "emotion": "預設",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196216033_glitch-idle.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 1200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-me",
-          "data": {
-            "text": "我叫格莉奇。我的記憶體只有四 KB。",
-            "type": "dialogue",
-            "title": "我叫格莉奇。我的記憶體只有四 K",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 1500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-4kb",
-          "data": {
-            "text": "四 KB 有多小？大概就是：我一次只裝得下四件事。",
-            "type": "dialogue",
-            "title": "四 KB 有多小？大概就是：我一",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 1800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-clear",
-          "data": {
-            "text": "而且我每天睡醒，裡面會全部清空。所以昨天發生什麼，我完全不知道。",
-            "type": "dialogue",
-            "title": "而且我每天睡醒，裡面會全部清空。",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 2100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-eaten",
-          "data": {
-            "text": "清空的那些會去哪裡？會被我室友吃掉。",
-            "type": "dialogue",
-            "title": "清空的那些會去哪裡？會被我室友吃",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 2400,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-door",
-          "data": {
-            "text": "我出門了。",
-            "type": "dialogue",
-            "title": "我出門了。",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 2700,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-narr2",
-          "data": {
-            "text": "一個穿西裝的黑影走過來。他的頭是一顆裝著星空的球。西裝底下沒有腿。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3000,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-who",
-          "data": {
-            "text": "這是黑洞先生。他是我室友，白天要去上班。",
-            "type": "dialogue",
-            "title": "這是黑洞先生。他是我室友，白天要",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-legs",
-          "data": {
-            "text": "他沒有腳。那叢觸手是他長出來撐住西裝用的。吃飽就多長幾隻，餓了就少長幾隻。",
-            "type": "dialogue",
-            "title": "他沒有腳。那叢觸手是他長出來撐住",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-boots",
-          "data": {
-            "text": "門邊堆著一疊沒人穿的短靴。他今天長出來的腳很少，多出來的靴子就堆在那裡。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-bye",
-          "data": {
-            "text": "那我走了。",
-            "type": "dialogue",
-            "title": "那我走了。",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 4500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-close",
-          "data": {
-            "text": "門關上。房間裡剩下她一個。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 4800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-scene",
-          "data": {
-            "text": "太陽爬到窗戶正上方。廢棄大樓的中午安靜得聽得見管線的聲音。",
-            "type": "scene",
-            "title": "第一天・中午",
-            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787223994106_bg-noon.png"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-alone",
-          "data": {
-            "text": "黑洞先生上班去了。這棟樓裡現在只剩我一個。",
-            "type": "dialogue",
-            "title": "他上班去了。這棟樓裡現在只剩我一",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5400,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-you",
-          "data": {
-            "text": "……啊，不對。還有你。",
-            "type": "dialogue",
-            "title": "……啊，不對。還有你。",
-            "emotion": "開心",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5700,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-ask",
-          "data": {
-            "text": "你是新來的吧？我沒印象。不過我對誰都沒印象，所以這不算什麼。\n先告訴我，你叫什麼？",
-            "type": "input",
-            "title": "先把你存起來",
-            "inputVariable": "playerName",
-            "inputPlaceholder": "輸入你的名字…",
-            "inputSuggestions": [
-              "記憶體",
-              "暫存檔",
-              "路過的人"
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 6000,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-store",
-          "data": {
-            "text": "「{{playerName}}」放進第一格。\n四格裡的第一格。今天剩下三格。",
-            "type": "setVariable",
-            "title": "第一格：你的名字",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 1,
-                "variable": "slotUsed"
-              },
-              {
-                "id": "op-1",
-                "kind": "set",
-                "value": 1,
-                "variable": "dayCount"
-              },
-              {
-                "id": "op-2",
-                "kind": "set",
-                "value": 0,
-                "variable": "fedToday"
-              },
-              {
-                "id": "op-3",
-                "kind": "set",
-                "variable": "slot1",
-                "valueFrom": "playerName"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 6300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-role",
-          "data": {
-            "text": "你是我的外接記憶體。我裝不下的東西，可以交給你保管。",
-            "type": "dialogue",
-            "title": "你是我的外接記憶體。我裝不下的東",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 6600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-cost",
-          "data": {
-            "text": "不過交給你有一個條件：你要再來找我，我才拿得回來。你如果不回來，那東西一樣會不見。",
-            "type": "dialogue",
-            "title": "不過交給你有一個條件：你要再來找",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 6900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-note1",
-          "data": {
-            "text": "說到這個——我口袋裡有一張紙條。",
-            "type": "dialogue",
-            "title": "說到這個——我口袋裡有一張紙條。",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 7200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-note2",
-          "data": {
-            "text": "上面是我自己的字：「今天要跟黑洞先生說謝謝。」",
-            "type": "dialogue",
-            "title": "上面是我自己的字：「今天要跟他說",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 7500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-note3",
-          "data": {
-            "text": "可是我不知道要謝什麼。昨天的我沒有寫。",
-            "type": "dialogue",
-            "title": "可是我不知道要謝什麼。昨天的我沒",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 7800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-rules",
-          "data": {
-            "text": "喔對了。黑洞先生一天只吃得下一個。他是永遠吃不飽，不是永遠吃得下。",
-            "type": "dialogue",
-            "title": "所以這件事要放哪裡？留在我這裡，",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 8100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-q",
-          "data": {
-            "text": "「今天要跟他說謝謝」這件事，要放哪裡？\n（記憶體 {{slotUsed}}／4　黑洞先生今天吃了 {{fedToday}}／1）",
-            "type": "choice",
-            "title": "選擇",
-            "choices": [
-              "留在我這裡（明天睡醒就忘了）",
-              "給黑洞先生吃（他會長回一隻腳）",
-              "交給你保管（留得住，但你要回來）"
-            ],
-            "choiceMode": "branch"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 8400,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-keep",
-          "data": {
-            "text": "她把紙條摺好塞回口袋。",
-            "type": "setVariable",
-            "title": "留著",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 1,
-                "variable": "usedNote"
-              },
-              {
-                "id": "op-2",
-                "kind": "set",
-                "value": "keep",
-                "variable": "todayRoute"
-              },
-              {
-                "id": "op-2",
-                "kind": "set",
-                "value": "跟黑洞先生說謝謝",
-                "variable": "pending"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 8700,
-            "y": -240
-          }
-        },
-        {
-          "id": "d1n-feed",
-          "data": {
-            "text": "她把紙條留在桌上。\n門外有東西掉在地上的聲音。\n很遠，很輕，像一隻靴子落在別的靴子上面。",
-            "type": "setVariable",
-            "title": "餵他",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 1,
-                "variable": "usedNote"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedToday"
-              },
-              {
-                "id": "op-2",
-                "kind": "add",
-                "value": 1,
-                "variable": "fedCount"
-              },
-              {
-                "id": "op-3",
-                "kind": "add",
-                "value": 1,
-                "variable": "holeFeet"
-              },
-              {
-                "id": "op-4",
-                "kind": "set",
-                "value": "feed",
-                "variable": "todayRoute"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 8700,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1n-give",
-          "data": {
-            "text": "她把紙條唸給你聽，唸了兩次。「今天要跟黑洞先生說謝謝。」現在這句話在你這裡。",
-            "type": "setVariable",
-            "title": "交給你",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 1,
-                "variable": "usedNote"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "givenCount"
-              },
-              {
-                "id": "op-2",
-                "kind": "set",
-                "value": "give",
-                "variable": "todayRoute"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 8700,
-            "y": 240
-          }
-        },
-        {
-          "id": "d1n-after",
-          "data": {
-            "text": "好。那我們等黑洞先生回來。",
-            "type": "dialogue",
-            "title": "好。那我們等他回來。",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 9000,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-scene",
-          "data": {
-            "text": "機櫃早就斷電了。整個房間只剩桌上那面螢幕還亮著。",
-            "type": "scene",
-            "title": "第一天・夜晚",
-            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787242999310_bg-night-v2.png"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 9300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-back",
-          "data": {
-            "text": "我回來了。",
-            "type": "dialogue",
-            "title": "我回來了。",
-            "emotion": "餓",
-            "speaker": "黑洞先生",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 9600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-feet",
-          "data": {
-            "text": "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。最上面那雙是剛剛才放上去的，鞋口還撐著。她沒有數，她從來不數。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 9900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-rule1",
-          "data": {
-            "text": "睡前要翻守則。這是我跟他一起寫的規矩，已經改到第一千零四版了。",
-            "type": "dialogue",
-            "title": "睡前要翻守則。這是我跟他一起寫的",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 10200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-rule2",
-          "data": {
-            "text": "為什麼有這麼多版？因為我每天都忘記，所以每天都要重新跟他約定一次。",
-            "type": "dialogue",
-            "title": "為什麼有這麼多版？因為我每天都忘",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 10500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-rule3",
-          "data": {
-            "text": "寫完的條文後面，留了一個空位，還沒寫字。每一版都會留一個，給那一天的我自己填。",
-            "type": "dialogue",
-            "title": "寫完的條文後面，留了一個空位，還",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 10800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-rulein",
-          "data": {
-            "text": "這個空位你幫我填。寫一句話，給明天的我。",
-            "type": "input",
-            "title": "填空位",
-            "inputVariable": "ruleLine1",
-            "inputPlaceholder": "寫一句話…",
-            "inputSuggestions": [
-              "今天發生的事，去問記憶體。",
-              "不要一個人把東西吃完。",
-              "明天的我，你好。"
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 11100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-rulever",
-          "data": {
-            "text": "她一筆一畫寫上去，寫得很慢。第一千零四版，完成。",
-            "type": "setVariable",
-            "title": "守則 +1",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "add",
-                "value": 1,
-                "variable": "ruleVersion"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 11400,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-save1",
-          "data": {
-            "text": "等一下。先別關。",
-            "type": "dialogue",
-            "title": "等一下。先別關。",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 11700,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-save2",
-          "data": {
-            "text": "我明天醒來什麼都不記得。可是你不一樣——你可以把今天留住。",
-            "type": "dialogue",
-            "title": "我明天醒來什麼都不記得。可是你不",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 12000,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-save3",
-          "data": {
-            "text": "看到畫面上那個存檔的按鈕嗎？按下去，選一格存起來。下次打開的時候記得按讀取。",
-            "type": "dialogue",
-            "title": "看到畫面上那個存檔的按鈕嗎？按下",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 12300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-save4",
-          "data": {
-            "text": "你要自己記得回來。我這邊沒有辦法叫你。",
-            "type": "dialogue",
-            "title": "外接記憶體要自己按存檔喔。我沒手",
-            "emotion": "餓",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
-            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 12600,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-saveq",
-          "data": {
-            "text": "存檔了嗎？",
-            "type": "choice",
-            "title": "選擇",
-            "choices": [
-              "我存好了。",
-              "我不想存。"
-            ],
-            "choiceMode": "branch"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 12900,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-saved",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "存了",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 1,
-                "variable": "savedOk"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 13200,
-            "y": -160
-          }
-        },
-        {
-          "id": "d1e-notsaved",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "沒存",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 0,
-                "variable": "savedOk"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 13200,
-            "y": 160
-          }
-        },
-        {
-          "id": "d1e-saved2",
-          "data": {
-            "text": "好。那明天見。",
-            "type": "dialogue",
-            "title": "好。那明天見。",
-            "emotion": "開心",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 13500,
-            "y": -160
-          }
-        },
-        {
-          "id": "d1e-notsaved2",
-          "data": {
-            "text": "……好吧。那明天見。",
-            "type": "dialogue",
-            "title": "……好吧。那明天見。",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 13500,
-            "y": 160
-          }
-        },
-        {
-          "id": "d1e-sleep",
-          "data": {
-            "text": "她躺回床上。螢幕的光慢慢暗下去。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 13800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-jump",
-          "data": {
-            "text": "天亮了。",
-            "type": "boardJump",
-            "title": "第二天",
-            "jumpNodeId": "d2m-scene",
-            "jumpBoardId": "board-day2"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 14100,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1ng-ask",
-          "data": {
-            "text": "在她醒來之前。\n如果這不是你第一次來，你會知道一件她不知道的事。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": -900,
-            "y": -200
-          }
-        },
-        {
-          "id": "d1ng-in",
-          "data": {
-            "text": "寫一句這個房子裡有人說過、而她記不住的話。\n第一次來的話直接跳過就好。",
-            "type": "input",
-            "title": "暗號",
-            "inputVariable": "ngToken",
-            "inputPlaceholder": "（第一次來就留空）"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": -600,
-            "y": -200
-          }
-        },
-        {
-          "id": "d1ng-hub",
-          "data": {
-            "text": "……",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": -300,
-            "y": -200
-          }
-        },
-        {
-          "id": "d1ng-yes",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "你以前來過",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 1,
-                "variable": "ngPlus"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": -300,
-            "y": -520
-          }
-        },
-        {
-          "id": "d1ng-y1",
-          "data": {
-            "text": "你打的那幾個字留在畫面上，過了三秒才淡掉。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 0,
-            "y": -520
-          }
-        },
-        {
-          "id": "d1ng-y2",
-          "data": {
-            "text": "她還沒醒。她不會知道你打過什麼，明天也不會。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 300,
-            "y": -520
-          }
-        },
-        {
-          "id": "d1ng-y3",
-          "data": {
-            "text": "可是你知道。這一次你不是新來的。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 600,
-            "y": -520
-          }
-        },
-        {
-          "id": "d1e-hook1",
-          "data": {
-            "text": "明天我醒來，什麼都不記得。",
-            "type": "dialogue",
-            "title": "明天我醒來，什麼都不記得。",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 14200,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-hook2",
-          "data": {
-            "text": "牆上有你的名字。可是牆會記得，我不會。",
-            "type": "dialogue",
-            "title": "牆上有你的名字。可是牆會記得，我",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 14500,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1e-hook3",
-          "data": {
-            "text": "所以你要回來。你回來我才找得到今天。",
-            "type": "dialogue",
-            "title": "所以你要回來。你回來我才找得到今",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 14800,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1ng-q",
-          "data": {
-            "text": "開始之前。\n你以前來過這裡嗎？",
-            "type": "choice",
-            "title": "選擇",
-            "choices": [
-              "我第一次來",
-              "我來過。我知道一件她不知道的事。"
-            ],
-            "choiceMode": "branch"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": -1500,
-            "y": -200
-          }
-        },
-        {
-          "id": "d1e-r-keep",
-          "data": {
-            "text": "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。她整個下午都在想那句謝謝要謝什麼。現在他就站在她面前，而她已經忘了自己想過。",
-            "type": "dialogue",
-            "title": "她留著",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 4200,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1e-r-give",
-          "data": {
-            "text": "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。那句謝謝在你那裡。她看著他，什麼都沒說，因為她不知道自己有話要說。",
-            "type": "dialogue",
-            "title": "交給你了",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 4200,
-            "y": 260
-          }
-        },
-        {
-          "id": "d1m-wake",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "開機：記憶體清空",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "value": 0,
-                "variable": "slotUsed"
-              },
-              {
-                "id": "op-1",
-                "kind": "set",
-                "value": 0,
-                "variable": "fedToday"
-              },
-              {
-                "id": "op-2",
-                "kind": "set",
-                "value": "",
-                "variable": "figured"
-              },
-              {
-                "id": "op-3",
-                "kind": "set",
-                "value": 0,
-                "variable": "lostBread"
-              },
-              {
-                "id": "op-4",
-                "kind": "set",
-                "value": "",
-                "variable": "pending"
-              },
-              {
-                "id": "op-5",
-                "kind": "set",
-                "value": "",
-                "variable": "slot1"
-              },
-              {
-                "id": "op-6",
-                "kind": "set",
-                "value": "",
-                "variable": "slot2"
-              },
-              {
-                "id": "op-7",
-                "kind": "set",
-                "value": "",
-                "variable": "slot3"
-              },
-              {
-                "id": "op-8",
-                "kind": "set",
-                "value": "",
-                "variable": "slot4"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 300,
-            "y": 0
-          }
-        },
-        {
-          "id": "d1m-keep1",
-          "data": {
-            "text": "被吃掉不是不見了喔。",
-            "type": "dialogue",
-            "title": "被吃掉不是不見了喔。",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 2900,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep2",
-          "data": {
-            "text": "而且順序不是那樣。他不是從我腦子裡挖東西出來。",
-            "type": "dialogue",
-            "title": "而且順序不是那樣。他不是從我腦子",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3200,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep3",
-          "data": {
-            "text": "是我先忘記，他才吃得到。",
-            "type": "dialogue",
-            "title": "是我先忘記，他才吃得到。",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3500,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep4",
-          "data": {
-            "text": "我很容易分心。剛剛還在想一件事，看到別的就跑掉了。",
-            "type": "dialogue",
-            "title": "我很容易分心。剛剛還在想一件事，",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3800,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep5",
-          "data": {
-            "text": "跑掉的那件就不會再回來。這種事每天都在發生。",
-            "type": "dialogue",
-            "title": "跑掉的那件就不會再回來。這種事每",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 4100,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep6",
-          "data": {
-            "text": "所以他每天都有東西吃。我忘得多，他就吃得飽。",
-            "type": "dialogue",
-            "title": "所以他每天都有東西吃。我忘得多，",
-            "emotion": "開心",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 4400,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep7",
-          "data": {
-            "text": "被黑洞先生吃掉的東西一直都在他裡面。一件都不會少。\n他是黑洞嘛。",
-            "type": "dialogue",
-            "title": "被黑洞先生吃掉的東西一直都在他裡",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 4700,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep8",
-          "data": {
-            "text": "只是拿不回來。記憶進去以後就出不來了，連他自己都拿不到。",
-            "type": "dialogue",
-            "title": "只是拿不回來。記憶進去以後就出不",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5000,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep9",
-          "data": {
-            "text": "別的東西他都給得出來喔。筆、本子、麵包，他都會遞給你。只有記憶不行。",
-            "type": "dialogue",
-            "title": "別的東西他都給得出來喔。筆、本子",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5300,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep10",
-          "data": {
-            "text": "你想想看——有些事情你小時候記得，長大就忘光了對不對。",
-            "type": "dialogue",
-            "title": "你想想看——有些事情你小時候記得",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5600,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep11",
-          "data": {
-            "text": "那些事可能只是沒有那麼重要。也可能只是時間太久了。",
-            "type": "dialogue",
-            "title": "那些事可能只是沒有那麼重要。也可",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5900,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1m-keep12",
-          "data": {
-            "text": "那些大概也是被他吃掉的。它們沒有不見，只是你走遠了。",
-            "type": "dialogue",
-            "title": "那些大概也是被他吃掉的。它們沒有",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 6200,
-            "y": -260
-          }
-        },
-        {
-          "id": "d1n-mem-gate",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "放進記憶體",
-            "variableOps": []
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3600,
-            "y": -700
-          }
-        },
-        {
-          "id": "d1n-mem-s1",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "存進第 1 格",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "variable": "slot1",
-                "valueFrom": "pending"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "slotUsed"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3900,
-            "y": -920
-          }
-        },
-        {
-          "id": "d1n-mem-s2",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "存進第 2 格",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "variable": "slot2",
-                "valueFrom": "pending"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "slotUsed"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3900,
-            "y": -810
-          }
-        },
-        {
-          "id": "d1n-mem-s3",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "存進第 3 格",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "variable": "slot3",
-                "valueFrom": "pending"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "slotUsed"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3900,
-            "y": -700
-          }
-        },
-        {
-          "id": "d1n-mem-s4",
-          "data": {
-            "text": "",
-            "type": "setVariable",
-            "title": "存進第 4 格",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "variable": "slot4",
-                "valueFrom": "pending"
-              },
-              {
-                "id": "op-1",
-                "kind": "add",
-                "value": 1,
-                "variable": "slotUsed"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3900,
-            "y": -590
-          }
-        },
-        {
-          "id": "d1n-mem-shift",
-          "data": {
-            "text": "格莉奇說到一半停住了。\n「等一下。」\n她把手舉到眼前。\n翻過來，又翻回去。\n手心有一道很淺的壓痕。\n像剛剛握過有重量的東西。\n「我這隻手剛剛拿過東西。是什麼形狀的來著。」\n她握起來，鬆開，再握起來。\n想靠手記住那東西的形狀。\n可是想不起來。\n「……算了。應該不重要。」\n她把手放下。\n口袋裡有一張折得很整齊的保鮮膜。\n她沒有摸到。\n也不會知道那是誰折的。",
-            "type": "setVariable",
-            "title": "最舊的掉出去了",
-            "variableOps": [
-              {
-                "id": "op-0",
-                "kind": "set",
-                "variable": "slot1",
-                "valueFrom": "slot2"
-              },
-              {
-                "id": "op-1",
-                "kind": "set",
-                "variable": "slot2",
-                "valueFrom": "slot3"
-              },
-              {
-                "id": "op-2",
-                "kind": "set",
-                "variable": "slot3",
-                "valueFrom": "slot4"
-              },
-              {
-                "id": "op-3",
-                "kind": "set",
-                "variable": "slot4",
-                "valueFrom": "pending"
-              },
-              {
-                "id": "op-4",
-                "kind": "add",
-                "value": 1,
-                "variable": "overwroteCount"
-              }
-            ]
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 3900,
-            "y": -400
-          }
-        },
-        {
-          "id": "d1e-mem1",
-          "data": {
-            "text": "睡前我要把今天記得的東西唸一次。不然明天我不會知道今天發生過什麼。",
-            "type": "dialogue",
-            "title": "睡前我要把今天記得的東西唸一次。",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5200,
-            "y": -300
-          }
-        },
-        {
-          "id": "d1e-mem2",
-          "data": {
-            "text": "「{{slot1}}」、「{{slot2}}」、「{{slot3}}」、「{{slot4}}」。",
-            "type": "dialogue",
-            "title": "「{{slot1}}」、「{{s",
-            "emotion": "平常",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5500,
-            "y": -300
-          }
-        },
-        {
-          "id": "d1e-mem3",
-          "data": {
-            "text": "空的那幾格我沒有辦法告訴你裡面本來有什麼。空的就是空的。",
-            "type": "dialogue",
-            "title": "空的那幾格我沒有辦法告訴你裡面本",
-            "emotion": "發呆",
-            "speaker": "格莉奇",
-            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
-            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 5800,
-            "y": -300
-          }
-        },
-        {
-          "id": "d1e-mem4",
-          "data": {
-            "text": "黑洞先生在角落，沒有回應。可是他有在聽——他每天都在聽。",
-            "type": "dialogue",
-            "title": "旁白",
-            "speaker": "旁白",
-            "characterPosition": "center"
-          },
-          "type": "story",
-          "measured": {
-            "width": 306,
-            "height": 82
-          },
-          "position": {
-            "x": 6100,
-            "y": -300
-          }
-        }
-      ],
-      "updatedAt": "2026-08-21T03:22:32.246Z",
-      "description": "**這裡是入口。** 早：他出門前　中：只有格莉奇和玩家　晚：他回家、填守則、存檔教學。結尾自動跳 Day 2。"
-    },
-    {
       "id": "board-day2",
       "kind": "story",
       "mode": "story",
@@ -31459,6 +28544,2722 @@
         }
       ],
       "description": "早：從一句夢話開始，她第一次數門邊的靴子　中：六選一的事件池　晚：依中午的去處演三個版本"
+    },
+    {
+      "id": "board-day1",
+      "kind": "story",
+      "mode": "story",
+      "name": "Day 1・你是誰",
+      "edges": [
+        {
+          "id": "e1-d1m-boot-right-d1m-narr",
+          "source": "d1m-boot",
+          "target": "d1m-narr",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e2-d1m-narr-right-d1m-load",
+          "source": "d1m-narr",
+          "target": "d1m-load",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e3-d1m-load-right-d1m-hi",
+          "source": "d1m-load",
+          "target": "d1m-hi",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e4-d1m-hi-right-d1m-me",
+          "source": "d1m-hi",
+          "target": "d1m-me",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e5-d1m-me-right-d1m-4kb",
+          "source": "d1m-me",
+          "target": "d1m-4kb",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e6-d1m-4kb-right-d1m-clear",
+          "source": "d1m-4kb",
+          "target": "d1m-clear",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e7-d1m-clear-right-d1m-eaten",
+          "source": "d1m-clear",
+          "target": "d1m-eaten",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e9-d1m-door-right-d1m-narr2",
+          "source": "d1m-door",
+          "target": "d1m-narr2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e10-d1m-narr2-right-d1m-who",
+          "source": "d1m-narr2",
+          "target": "d1m-who",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e11-d1m-who-right-d1m-legs",
+          "source": "d1m-who",
+          "target": "d1m-legs",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e12-d1m-legs-right-d1m-boots",
+          "source": "d1m-legs",
+          "target": "d1m-boots",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e15-d1m-bye-right-d1m-close",
+          "source": "d1m-bye",
+          "target": "d1m-close",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e16-d1m-close-right-d1n-scene",
+          "source": "d1m-close",
+          "target": "d1n-scene",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e17-d1n-scene-right-d1n-alone",
+          "source": "d1n-scene",
+          "target": "d1n-alone",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e18-d1n-alone-right-d1n-you",
+          "source": "d1n-alone",
+          "target": "d1n-you",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e19-d1n-you-right-d1n-ask",
+          "source": "d1n-you",
+          "target": "d1n-ask",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e20-d1n-ask-right-d1n-store",
+          "source": "d1n-ask",
+          "target": "d1n-store",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e21-d1n-store-right-d1n-role",
+          "source": "d1n-store",
+          "target": "d1n-role",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e22-d1n-role-right-d1n-cost",
+          "source": "d1n-role",
+          "target": "d1n-cost",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e23-d1n-cost-right-d1n-note1",
+          "source": "d1n-cost",
+          "target": "d1n-note1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e24-d1n-note1-right-d1n-note2",
+          "source": "d1n-note1",
+          "target": "d1n-note2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e25-d1n-note2-right-d1n-note3",
+          "source": "d1n-note2",
+          "target": "d1n-note3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e26-d1n-note3-right-d1n-rules",
+          "source": "d1n-note3",
+          "target": "d1n-rules",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e27-d1n-rules-right-d1n-q",
+          "source": "d1n-rules",
+          "target": "d1n-q",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e28-d1n-q-choice-0-d1n-keep",
+          "source": "d1n-q",
+          "target": "d1n-keep",
+          "animated": true,
+          "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e29-d1n-q-choice-1-d1n-feed",
+          "source": "d1n-q",
+          "target": "d1n-feed",
+          "animated": true,
+          "sourceHandle": "choice-1"
+        },
+        {
+          "id": "e30-d1n-q-choice-2-d1n-give",
+          "source": "d1n-q",
+          "target": "d1n-give",
+          "animated": true,
+          "sourceHandle": "choice-2"
+        },
+        {
+          "id": "e32-d1n-feed-right-d1n-after",
+          "source": "d1n-feed",
+          "target": "d1n-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e33-d1n-give-right-d1n-after",
+          "source": "d1n-give",
+          "target": "d1n-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e34-d1n-after-right-d1e-scene",
+          "source": "d1n-after",
+          "target": "d1e-scene",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e35-d1e-scene-right-d1e-back",
+          "source": "d1e-scene",
+          "target": "d1e-back",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e38-d1e-rule1-right-d1e-rule2",
+          "source": "d1e-rule1",
+          "target": "d1e-rule2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e39-d1e-rule2-right-d1e-rule3",
+          "source": "d1e-rule2",
+          "target": "d1e-rule3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e40-d1e-rule3-right-d1e-rulein",
+          "source": "d1e-rule3",
+          "target": "d1e-rulein",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e41-d1e-rulein-right-d1e-rulever",
+          "source": "d1e-rulein",
+          "target": "d1e-rulever",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e42-d1e-rulever-right-d1e-save1",
+          "source": "d1e-rulever",
+          "target": "d1e-save1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e43-d1e-save1-right-d1e-save2",
+          "source": "d1e-save1",
+          "target": "d1e-save2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e44-d1e-save2-right-d1e-save3",
+          "source": "d1e-save2",
+          "target": "d1e-save3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e45-d1e-save3-right-d1e-save4",
+          "source": "d1e-save3",
+          "target": "d1e-save4",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e46-d1e-save4-right-d1e-saveq",
+          "source": "d1e-save4",
+          "target": "d1e-saveq",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e47-d1e-saveq-choice-0-d1e-saved",
+          "source": "d1e-saveq",
+          "target": "d1e-saved",
+          "animated": true,
+          "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e48-d1e-saveq-choice-1-d1e-notsaved",
+          "source": "d1e-saveq",
+          "target": "d1e-notsaved",
+          "animated": true,
+          "sourceHandle": "choice-1"
+        },
+        {
+          "id": "e49-d1e-saved-right-d1e-saved2",
+          "source": "d1e-saved",
+          "target": "d1e-saved2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e50-d1e-notsaved-right-d1e-notsaved2",
+          "source": "d1e-notsaved",
+          "target": "d1e-notsaved2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e51-d1e-saved2-right-d1e-sleep",
+          "source": "d1e-saved2",
+          "target": "d1e-sleep",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e52-d1e-notsaved2-right-d1e-sleep",
+          "source": "d1e-notsaved2",
+          "target": "d1e-sleep",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e53-d1e-hook1-right-d1e-hook2",
+          "source": "d1e-hook1",
+          "target": "d1e-hook2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e54-d1e-hook2-right-d1e-hook3",
+          "source": "d1e-hook2",
+          "target": "d1e-hook3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e55-d1e-sleep-right-d1e-hook1",
+          "source": "d1e-sleep",
+          "target": "d1e-hook1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e56-d1e-hook3-right-d1e-jump",
+          "source": "d1e-hook3",
+          "target": "d1e-jump",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e57-d1ng-ask-right-d1ng-in",
+          "source": "d1ng-ask",
+          "target": "d1ng-in",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e58-d1ng-in-right-d1ng-hub",
+          "source": "d1ng-in",
+          "target": "d1ng-hub",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e59-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "她給的",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e60-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "她給的。",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e61-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "不要數",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e62-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "不要數。",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e63-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "看妳睡",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e64-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "看妳睡。",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e65-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "以前",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e66-d1ng-hub-right-d1ng-yes",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "以前。",
+              "variable": "ngToken"
+            }
+          },
+          "source": "d1ng-hub",
+          "target": "d1ng-yes",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e67-d1ng-yes-right-d1ng-y1",
+          "source": "d1ng-yes",
+          "target": "d1ng-y1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e68-d1ng-y1-right-d1ng-y2",
+          "source": "d1ng-y1",
+          "target": "d1ng-y2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e69-d1ng-y2-right-d1ng-y3",
+          "source": "d1ng-y2",
+          "target": "d1ng-y3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e70-d1ng-y3-right-d1m-boot",
+          "source": "d1ng-y3",
+          "target": "d1m-boot",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e71-d1ng-hub-right-d1m-boot",
+          "source": "d1ng-hub",
+          "target": "d1m-boot",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e74-d1ng-q-choice-0-d1m-boot",
+          "source": "d1ng-q",
+          "target": "d1m-boot",
+          "animated": true,
+          "sourceHandle": "choice-0"
+        },
+        {
+          "id": "e75-d1ng-q-choice-1-d1ng-ask",
+          "source": "d1ng-q",
+          "target": "d1ng-ask",
+          "animated": true,
+          "sourceHandle": "choice-1"
+        },
+        {
+          "id": "e76-d1m-boots-right-d1m-bye",
+          "source": "d1m-boots",
+          "target": "d1m-bye",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e77-d1e-back-right-d1e-r-keep",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "keep",
+              "variable": "todayRoute"
+            }
+          },
+          "source": "d1e-back",
+          "target": "d1e-r-keep",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e78-d1e-back-right-d1e-r-give",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": "give",
+              "variable": "todayRoute"
+            }
+          },
+          "source": "d1e-back",
+          "target": "d1e-r-give",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e79-d1e-back-right-d1e-feet",
+          "source": "d1e-back",
+          "target": "d1e-feet",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e80-d1e-r-keep-right-d1e-rule1",
+          "source": "d1e-r-keep",
+          "target": "d1e-rule1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e81-d1e-r-give-right-d1e-rule1",
+          "source": "d1e-r-give",
+          "target": "d1e-rule1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e82-d1m-scene-right-d1m-wake",
+          "source": "d1m-scene",
+          "target": "d1m-wake",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e83-d1m-wake-right-d1ng-q",
+          "source": "d1m-wake",
+          "target": "d1ng-q",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e84-d1m-keep1-right-d1m-keep2",
+          "source": "d1m-keep1",
+          "target": "d1m-keep2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e85-d1m-keep2-right-d1m-keep3",
+          "source": "d1m-keep2",
+          "target": "d1m-keep3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e86-d1m-keep3-right-d1m-keep4",
+          "source": "d1m-keep3",
+          "target": "d1m-keep4",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e87-d1m-keep4-right-d1m-keep5",
+          "source": "d1m-keep4",
+          "target": "d1m-keep5",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e88-d1m-keep5-right-d1m-keep6",
+          "source": "d1m-keep5",
+          "target": "d1m-keep6",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e89-d1m-keep6-right-d1m-keep6b",
+          "source": "d1m-keep6",
+          "target": "d1m-keep6b",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e90-d1m-keep6b-right-d1m-keep6c",
+          "source": "d1m-keep6b",
+          "target": "d1m-keep6c",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e91-d1m-keep6c-right-d1m-keep6d",
+          "source": "d1m-keep6c",
+          "target": "d1m-keep6d",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e92-d1m-keep6d-right-d1m-keep6e",
+          "source": "d1m-keep6d",
+          "target": "d1m-keep6e",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e93-d1m-keep6e-right-d1m-keep6f",
+          "source": "d1m-keep6e",
+          "target": "d1m-keep6f",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e94-d1m-keep6f-right-d1m-keep6g",
+          "source": "d1m-keep6f",
+          "target": "d1m-keep6g",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e95-d1m-keep6g-right-d1m-keep7",
+          "source": "d1m-keep6g",
+          "target": "d1m-keep7",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e96-d1m-keep7-right-d1m-keep8",
+          "source": "d1m-keep7",
+          "target": "d1m-keep8",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e97-d1m-keep8-right-d1m-keep9",
+          "source": "d1m-keep8",
+          "target": "d1m-keep9",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e98-d1m-keep9-right-d1m-keep10",
+          "source": "d1m-keep9",
+          "target": "d1m-keep10",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e99-d1m-keep10-right-d1m-keep11",
+          "source": "d1m-keep10",
+          "target": "d1m-keep11",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e100-d1m-keep11-right-d1m-keep12",
+          "source": "d1m-keep11",
+          "target": "d1m-keep12",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e101-d1m-eaten-right-d1m-keep1",
+          "source": "d1m-eaten",
+          "target": "d1m-keep1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e102-d1m-keep12-right-d1m-door",
+          "source": "d1m-keep12",
+          "target": "d1m-door",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e103-d1n-mem-gate-right-d1n-mem-s1",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 0,
+              "variable": "slotUsed"
+            }
+          },
+          "source": "d1n-mem-gate",
+          "target": "d1n-mem-s1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e104-d1n-mem-gate-right-d1n-mem-s2",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 1,
+              "variable": "slotUsed"
+            }
+          },
+          "source": "d1n-mem-gate",
+          "target": "d1n-mem-s2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e105-d1n-mem-gate-right-d1n-mem-s3",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 2,
+              "variable": "slotUsed"
+            }
+          },
+          "source": "d1n-mem-gate",
+          "target": "d1n-mem-s3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e106-d1n-mem-gate-right-d1n-mem-s4",
+          "data": {
+            "condition": {
+              "op": "eq",
+              "kind": "variable",
+              "value": 3,
+              "variable": "slotUsed"
+            }
+          },
+          "source": "d1n-mem-gate",
+          "target": "d1n-mem-s4",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e107-d1n-mem-gate-right-d1n-mem-shift",
+          "source": "d1n-mem-gate",
+          "target": "d1n-mem-shift",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e108-d1n-keep-right-d1n-mem-gate",
+          "source": "d1n-keep",
+          "target": "d1n-mem-gate",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e109-d1n-mem-s1-right-d1n-after",
+          "source": "d1n-mem-s1",
+          "target": "d1n-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e110-d1n-mem-s2-right-d1n-after",
+          "source": "d1n-mem-s2",
+          "target": "d1n-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e111-d1n-mem-s3-right-d1n-after",
+          "source": "d1n-mem-s3",
+          "target": "d1n-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e112-d1n-mem-s4-right-d1n-after",
+          "source": "d1n-mem-s4",
+          "target": "d1n-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e113-d1n-mem-shift-right-d1n-after",
+          "source": "d1n-mem-shift",
+          "target": "d1n-after",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e114-d1e-mem1-right-d1e-mem2",
+          "source": "d1e-mem1",
+          "target": "d1e-mem2",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e115-d1e-mem2-right-d1e-mem3",
+          "source": "d1e-mem2",
+          "target": "d1e-mem3",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e116-d1e-mem3-right-d1e-mem4",
+          "source": "d1e-mem3",
+          "target": "d1e-mem4",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e117-d1e-feet-right-d1e-mem1",
+          "source": "d1e-feet",
+          "target": "d1e-mem1",
+          "animated": true,
+          "sourceHandle": "right"
+        },
+        {
+          "id": "e118-d1e-mem4-right-d1e-rule1",
+          "source": "d1e-mem4",
+          "target": "d1e-rule1",
+          "animated": true,
+          "sourceHandle": "right"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "d1m-scene",
+          "data": {
+            "bgm": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787213051881_bgm-theme.mp3",
+            "text": "窗外的天剛亮。這裡是一棟沒人要的大樓，最上面一層。",
+            "type": "scene",
+            "start": true,
+            "title": "第一天・早晨",
+            "bgmLoop": true,
+            "bgmVolume": 0.3,
+            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787242985373_bg-morning-v2.png"
+          },
+          "type": "story",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-boot",
+          "data": {
+            "text": "逼——嗶！",
+            "type": "dialogue",
+            "title": "逼——嗶！",
+            "emotion": "當機",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196243145_glitch-error.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-narr",
+          "data": {
+            "text": "床上那個女孩坐了起來。她是格莉奇，一個機器人。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-load",
+          "data": {
+            "text": "系統讀取中……（過久）",
+            "type": "dialogue",
+            "title": "系統讀取中……（過久）",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-hi",
+          "data": {
+            "text": "早安。今天也順利開機了。",
+            "type": "dialogue",
+            "title": "早安。今天也順利開機了。",
+            "emotion": "預設",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196216033_glitch-idle.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 1200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-me",
+          "data": {
+            "text": "我叫格莉奇。我的記憶體只有四 KB。",
+            "type": "dialogue",
+            "title": "我叫格莉奇。我的記憶體只有四 K",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 1500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-4kb",
+          "data": {
+            "text": "四 KB 有多小？大概就是：我一次只裝得下四件事。",
+            "type": "dialogue",
+            "title": "四 KB 有多小？大概就是：我一",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 1800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-clear",
+          "data": {
+            "text": "而且我每天睡醒，裡面會全部清空。所以昨天發生什麼，我完全不知道。",
+            "type": "dialogue",
+            "title": "而且我每天睡醒，裡面會全部清空。",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 2100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-eaten",
+          "data": {
+            "text": "清空的那些會去哪裡？會被我室友吃掉。",
+            "type": "dialogue",
+            "title": "清空的那些會去哪裡？會被我室友吃",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 2400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-door",
+          "data": {
+            "text": "我出門了。",
+            "type": "dialogue",
+            "title": "我出門了。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 2700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-narr2",
+          "data": {
+            "text": "一個穿西裝的黑影走過來。他的頭是一顆裝著星空的球。西裝底下沒有腿。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-who",
+          "data": {
+            "text": "這是黑洞先生。他是我室友，白天要去上班。",
+            "type": "dialogue",
+            "title": "這是黑洞先生。他是我室友，白天要",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-legs",
+          "data": {
+            "text": "他沒有腳。那叢觸手是他長出來撐住西裝用的。吃飽就多長幾隻，餓了就少長幾隻。",
+            "type": "dialogue",
+            "title": "他沒有腳。那叢觸手是他長出來撐住",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-boots",
+          "data": {
+            "text": "門邊堆著一疊沒人穿的短靴。他今天長出來的腳很少，多出來的靴子就堆在那裡。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-bye",
+          "data": {
+            "text": "那我走了。",
+            "type": "dialogue",
+            "title": "那我走了。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-close",
+          "data": {
+            "text": "門關上。房間裡剩下她一個。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-scene",
+          "data": {
+            "text": "太陽爬到窗戶正上方。廢棄大樓的中午安靜得聽得見管線的聲音。",
+            "type": "scene",
+            "title": "第一天・中午",
+            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787223994106_bg-noon.png"
+          },
+          "type": "story",
+          "position": {
+            "x": 5100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-alone",
+          "data": {
+            "text": "黑洞先生上班去了。這棟樓裡現在只剩我一個。",
+            "type": "dialogue",
+            "title": "他上班去了。這棟樓裡現在只剩我一",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-you",
+          "data": {
+            "text": "……啊，不對。還有你。",
+            "type": "dialogue",
+            "title": "……啊，不對。還有你。",
+            "emotion": "開心",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-ask",
+          "data": {
+            "text": "你是新來的吧？我沒印象。不過我對誰都沒印象，所以這不算什麼。\n先告訴我，你叫什麼？",
+            "type": "input",
+            "title": "先把你存起來",
+            "inputVariable": "playerName",
+            "inputPlaceholder": "輸入你的名字…",
+            "inputSuggestions": [
+              "記憶體",
+              "暫存檔",
+              "路過的人"
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 6000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-store",
+          "data": {
+            "text": "「{{playerName}}」放進第一格。\n四格裡的第一格。今天剩下三格。",
+            "type": "setVariable",
+            "title": "第一格：你的名字",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "slotUsed"
+              },
+              {
+                "id": "op-1",
+                "kind": "set",
+                "value": 1,
+                "variable": "dayCount"
+              },
+              {
+                "id": "op-2",
+                "kind": "set",
+                "value": 0,
+                "variable": "fedToday"
+              },
+              {
+                "id": "op-3",
+                "kind": "set",
+                "variable": "slot1",
+                "valueFrom": "playerName"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 6300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-role",
+          "data": {
+            "text": "你是我的外接記憶體。我裝不下的東西，可以交給你保管。",
+            "type": "dialogue",
+            "title": "你是我的外接記憶體。我裝不下的東",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-cost",
+          "data": {
+            "text": "不過交給你有一個條件：你要再來找我，我才拿得回來。你如果不回來，那東西一樣會不見。",
+            "type": "dialogue",
+            "title": "不過交給你有一個條件：你要再來找",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-note1",
+          "data": {
+            "text": "說到這個——我口袋裡有一張紙條。",
+            "type": "dialogue",
+            "title": "說到這個——我口袋裡有一張紙條。",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-note2",
+          "data": {
+            "text": "上面是我自己的字：「今天要跟黑洞先生說謝謝。」",
+            "type": "dialogue",
+            "title": "上面是我自己的字：「今天要跟他說",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-note3",
+          "data": {
+            "text": "可是我不知道要謝什麼。昨天的我沒有寫。",
+            "type": "dialogue",
+            "title": "可是我不知道要謝什麼。昨天的我沒",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-rules",
+          "data": {
+            "text": "喔對了。黑洞先生一天只吃得下一個。他是永遠吃不飽，不是永遠吃得下。",
+            "type": "dialogue",
+            "title": "所以這件事要放哪裡？留在我這裡，",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 8100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-q",
+          "data": {
+            "text": "「今天要跟他說謝謝」這件事，要放哪裡？\n（記憶體 {{slotUsed}}／4　黑洞先生今天吃了 {{fedToday}}／1）",
+            "type": "choice",
+            "title": "選擇",
+            "choices": [
+              "留在我這裡（明天睡醒就忘了）",
+              "給黑洞先生吃（他會長回一隻腳）",
+              "交給你保管（留得住，但你要回來）"
+            ],
+            "choiceMode": "branch"
+          },
+          "type": "story",
+          "position": {
+            "x": 8400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-keep",
+          "data": {
+            "text": "她把紙條摺好塞回口袋。",
+            "type": "setVariable",
+            "title": "留著",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "usedNote"
+              },
+              {
+                "id": "op-2",
+                "kind": "set",
+                "value": "keep",
+                "variable": "todayRoute"
+              },
+              {
+                "id": "op-2",
+                "kind": "set",
+                "value": "跟黑洞先生說謝謝",
+                "variable": "pending"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 8700,
+            "y": -240
+          }
+        },
+        {
+          "id": "d1n-feed",
+          "data": {
+            "text": "她把紙條留在桌上。\n門外有東西掉在地上的聲音。\n很遠，很輕，像一隻靴子落在別的靴子上面。",
+            "type": "setVariable",
+            "title": "餵他",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "usedNote"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "fedToday"
+              },
+              {
+                "id": "op-2",
+                "kind": "add",
+                "value": 1,
+                "variable": "fedCount"
+              },
+              {
+                "id": "op-3",
+                "kind": "add",
+                "value": 1,
+                "variable": "holeFeet"
+              },
+              {
+                "id": "op-4",
+                "kind": "set",
+                "value": "feed",
+                "variable": "todayRoute"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 8700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1n-give",
+          "data": {
+            "text": "她把紙條唸給你聽，唸了兩次。「今天要跟黑洞先生說謝謝。」現在這句話在你這裡。",
+            "type": "setVariable",
+            "title": "交給你",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "usedNote"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "givenCount"
+              },
+              {
+                "id": "op-2",
+                "kind": "set",
+                "value": "give",
+                "variable": "todayRoute"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 8700,
+            "y": 240
+          }
+        },
+        {
+          "id": "d1n-after",
+          "data": {
+            "text": "好。那我們等黑洞先生回來。",
+            "type": "dialogue",
+            "title": "好。那我們等他回來。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 9000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-scene",
+          "data": {
+            "text": "機櫃早就斷電了。整個房間只剩桌上那面螢幕還亮著。",
+            "type": "scene",
+            "title": "第一天・夜晚",
+            "background": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787242999310_bg-night-v2.png"
+          },
+          "type": "story",
+          "position": {
+            "x": 9300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-back",
+          "data": {
+            "text": "我回來了。",
+            "type": "dialogue",
+            "title": "我回來了。",
+            "emotion": "餓",
+            "speaker": "黑洞先生",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 9600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-feet",
+          "data": {
+            "text": "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。最上面那雙是剛剛才放上去的，鞋口還撐著。她沒有數，她從來不數。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 9900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-rule1",
+          "data": {
+            "text": "睡前要翻守則。這是我跟他一起寫的規矩，已經改到第一千零四版了。",
+            "type": "dialogue",
+            "title": "睡前要翻守則。這是我跟他一起寫的",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 10200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-rule2",
+          "data": {
+            "text": "為什麼有這麼多版？因為我每天都忘記，所以每天都要重新跟他約定一次。",
+            "type": "dialogue",
+            "title": "為什麼有這麼多版？因為我每天都忘",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 10500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-rule3",
+          "data": {
+            "text": "寫完的條文後面，留了一個空位，還沒寫字。每一版都會留一個，給那一天的我自己填。",
+            "type": "dialogue",
+            "title": "寫完的條文後面，留了一個空位，還",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 10800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-rulein",
+          "data": {
+            "text": "這個空位你幫我填。寫一句話，給明天的我。",
+            "type": "input",
+            "title": "填空位",
+            "inputVariable": "ruleLine1",
+            "inputPlaceholder": "寫一句話…",
+            "inputSuggestions": [
+              "今天發生的事，去問記憶體。",
+              "不要一個人把東西吃完。",
+              "明天的我，你好。"
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 11100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-rulever",
+          "data": {
+            "text": "她一筆一畫寫上去，寫得很慢。第一千零四版，完成。",
+            "type": "setVariable",
+            "title": "守則 +1",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "add",
+                "value": 1,
+                "variable": "ruleVersion"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 11400,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-save1",
+          "data": {
+            "text": "等一下。先別關。",
+            "type": "dialogue",
+            "title": "等一下。先別關。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 11700,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-save2",
+          "data": {
+            "text": "我明天醒來什麼都不記得。可是你不一樣——你可以把今天留住。",
+            "type": "dialogue",
+            "title": "我明天醒來什麼都不記得。可是你不",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12000,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-save3",
+          "data": {
+            "text": "看到畫面上那個存檔的按鈕嗎？按下去，選一格存起來。下次打開的時候記得按讀取。",
+            "type": "dialogue",
+            "title": "看到畫面上那個存檔的按鈕嗎？按下",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-save4",
+          "data": {
+            "text": "你要自己記得回來。我這邊沒有辦法叫你。",
+            "type": "dialogue",
+            "title": "外接記憶體要自己按存檔喔。我沒手",
+            "emotion": "餓",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp",
+            "characterId": "character-25c9632f-cd67-49d0-a4bd-2757b51127e7",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 12600,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-saveq",
+          "data": {
+            "text": "存檔了嗎？",
+            "type": "choice",
+            "title": "選擇",
+            "choices": [
+              "我存好了。",
+              "我不想存。"
+            ],
+            "choiceMode": "branch"
+          },
+          "type": "story",
+          "position": {
+            "x": 12900,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-saved",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "存了",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "savedOk"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 13200,
+            "y": -160
+          }
+        },
+        {
+          "id": "d1e-notsaved",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "沒存",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 0,
+                "variable": "savedOk"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 13200,
+            "y": 160
+          }
+        },
+        {
+          "id": "d1e-saved2",
+          "data": {
+            "text": "好。那明天見。",
+            "type": "dialogue",
+            "title": "好。那明天見。",
+            "emotion": "開心",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 13500,
+            "y": -160
+          }
+        },
+        {
+          "id": "d1e-notsaved2",
+          "data": {
+            "text": "……好吧。那明天見。",
+            "type": "dialogue",
+            "title": "……好吧。那明天見。",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 13500,
+            "y": 160
+          }
+        },
+        {
+          "id": "d1e-sleep",
+          "data": {
+            "text": "她躺回床上。螢幕的光慢慢暗下去。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 13800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-jump",
+          "data": {
+            "text": "天亮了。",
+            "type": "boardJump",
+            "title": "第二天",
+            "jumpNodeId": "d2m-scene",
+            "jumpBoardId": "board-day2"
+          },
+          "type": "story",
+          "position": {
+            "x": 14100,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1ng-ask",
+          "data": {
+            "text": "在她醒來之前。\n如果這不是你第一次來，你會知道一件她不知道的事。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": -900,
+            "y": -200
+          }
+        },
+        {
+          "id": "d1ng-in",
+          "data": {
+            "text": "寫一句這個房子裡有人說過、而她記不住的話。\n第一次來的話直接跳過就好。",
+            "type": "input",
+            "title": "暗號",
+            "inputVariable": "ngToken",
+            "inputPlaceholder": "（第一次來就留空）"
+          },
+          "type": "story",
+          "position": {
+            "x": -600,
+            "y": -200
+          }
+        },
+        {
+          "id": "d1ng-hub",
+          "data": {
+            "text": "……",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": -300,
+            "y": -200
+          }
+        },
+        {
+          "id": "d1ng-yes",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "你以前來過",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 1,
+                "variable": "ngPlus"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": -300,
+            "y": -520
+          }
+        },
+        {
+          "id": "d1ng-y1",
+          "data": {
+            "text": "你打的那幾個字留在畫面上，過了三秒才淡掉。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 0,
+            "y": -520
+          }
+        },
+        {
+          "id": "d1ng-y2",
+          "data": {
+            "text": "她還沒醒。她不會知道你打過什麼，明天也不會。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 300,
+            "y": -520
+          }
+        },
+        {
+          "id": "d1ng-y3",
+          "data": {
+            "text": "可是你知道。這一次你不是新來的。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 600,
+            "y": -520
+          }
+        },
+        {
+          "id": "d1e-hook1",
+          "data": {
+            "text": "明天我醒來，什麼都不記得。",
+            "type": "dialogue",
+            "title": "明天我醒來，什麼都不記得。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 14200,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-hook2",
+          "data": {
+            "text": "牆上有你的名字。可是牆會記得，我不會。",
+            "type": "dialogue",
+            "title": "牆上有你的名字。可是牆會記得，我",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 14500,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1e-hook3",
+          "data": {
+            "text": "所以你要回來。你回來我才找得到今天。",
+            "type": "dialogue",
+            "title": "所以你要回來。你回來我才找得到今",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 14800,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1ng-q",
+          "data": {
+            "text": "開始之前。\n你以前來過這裡嗎？",
+            "type": "choice",
+            "title": "選擇",
+            "choices": [
+              "我第一次來",
+              "我來過。我知道一件她不知道的事。"
+            ],
+            "choiceMode": "branch"
+          },
+          "type": "story",
+          "position": {
+            "x": -1500,
+            "y": -200
+          }
+        },
+        {
+          "id": "d1e-r-keep",
+          "data": {
+            "text": "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。她整個下午都在想那句謝謝要謝什麼。現在他就站在她面前，而她已經忘了自己想過。",
+            "type": "dialogue",
+            "title": "她留著",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4200,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1e-r-give",
+          "data": {
+            "text": "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。那句謝謝在你那裡。她看著他，什麼都沒說，因為她不知道自己有話要說。",
+            "type": "dialogue",
+            "title": "交給你了",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4200,
+            "y": 260
+          }
+        },
+        {
+          "id": "d1m-wake",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "開機：記憶體清空",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "value": 0,
+                "variable": "slotUsed"
+              },
+              {
+                "id": "op-1",
+                "kind": "set",
+                "value": 0,
+                "variable": "fedToday"
+              },
+              {
+                "id": "op-2",
+                "kind": "set",
+                "value": "",
+                "variable": "figured"
+              },
+              {
+                "id": "op-3",
+                "kind": "set",
+                "value": 0,
+                "variable": "lostBread"
+              },
+              {
+                "id": "op-4",
+                "kind": "set",
+                "value": "",
+                "variable": "pending"
+              },
+              {
+                "id": "op-5",
+                "kind": "set",
+                "value": "",
+                "variable": "slot1"
+              },
+              {
+                "id": "op-6",
+                "kind": "set",
+                "value": "",
+                "variable": "slot2"
+              },
+              {
+                "id": "op-7",
+                "kind": "set",
+                "value": "",
+                "variable": "slot3"
+              },
+              {
+                "id": "op-8",
+                "kind": "set",
+                "value": "",
+                "variable": "slot4"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 300,
+            "y": 0
+          }
+        },
+        {
+          "id": "d1m-keep1",
+          "data": {
+            "text": "被吃掉不是不見了喔。",
+            "type": "dialogue",
+            "title": "被吃掉不是不見了喔。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 2900,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep2",
+          "data": {
+            "text": "而且順序不是那樣。他不是從我腦子裡挖東西出來。",
+            "type": "dialogue",
+            "title": "而且順序不是那樣。他不是從我腦子",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3200,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep3",
+          "data": {
+            "text": "是我先忘記，他才吃得到。",
+            "type": "dialogue",
+            "title": "是我先忘記，他才吃得到。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3500,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep4",
+          "data": {
+            "text": "我很容易分心。剛剛還在想一件事，看到別的就跑掉了。",
+            "type": "dialogue",
+            "title": "我很容易分心。剛剛還在想一件事，",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 3800,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep5",
+          "data": {
+            "text": "跑掉的那件就不會再回來。這種事每天都在發生。",
+            "type": "dialogue",
+            "title": "跑掉的那件就不會再回來。這種事每",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4100,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep6",
+          "data": {
+            "text": "所以他每天都有東西吃。",
+            "type": "dialogue",
+            "title": "所以他每天都有東西吃。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4400,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep6b",
+          "data": {
+            "text": "而且他說我忘掉的東西特別好吃。",
+            "type": "dialogue",
+            "title": "而且他說我忘掉的東西特別好吃。",
+            "emotion": "開心",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 4700,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep6c",
+          "data": {
+            "text": "人也會忘記事情啊，可是人是慢慢忘的，忘到最後糊糊的一團。",
+            "type": "dialogue",
+            "title": "人也會忘記事情啊，可是人是慢慢忘",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5000,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep6d",
+          "data": {
+            "text": "黑洞先生說那個只能當零食，吃不飽。",
+            "type": "dialogue",
+            "title": "黑洞先生說那個只能當零食，吃不飽",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5300,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep6e",
+          "data": {
+            "text": "我不一樣。我是清空。一次掉出來一整件，邊邊角角都在。",
+            "type": "dialogue",
+            "title": "我不一樣。我是清空。一次掉出來一",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5600,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep6f",
+          "data": {
+            "text": "所以他才跟我住。別人那裡他只吃得到零食。",
+            "type": "dialogue",
+            "title": "所以他才跟我住。別人那裡他只吃得",
+            "emotion": "開心",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5900,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep6g",
+          "data": {
+            "text": "一整件要花一天才消化得完，所以他一天只吃得下一件。",
+            "type": "dialogue",
+            "title": "一整件要花一天才消化得完，所以他",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6200,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep7",
+          "data": {
+            "text": "被黑洞先生吃掉的東西一直都在他裡面。一件都不會少。\n他是黑洞嘛。",
+            "type": "dialogue",
+            "title": "被黑洞先生吃掉的東西一直都在他裡",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6500,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep8",
+          "data": {
+            "text": "只是拿不回來。記憶進去以後就出不來了，連他自己都拿不到。",
+            "type": "dialogue",
+            "title": "只是拿不回來。記憶進去以後就出不",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6800,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep9",
+          "data": {
+            "text": "別的東西他都給得出來喔。筆、本子、麵包，他都會遞給你。只有記憶不行。",
+            "type": "dialogue",
+            "title": "別的東西他都給得出來喔。筆、本子",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7100,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep10",
+          "data": {
+            "text": "你想想看——有些事情你小時候記得，長大就忘光了對不對。",
+            "type": "dialogue",
+            "title": "你想想看——有些事情你小時候記得",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7400,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep11",
+          "data": {
+            "text": "那些事可能只是沒有那麼重要。也可能只是時間太久了。",
+            "type": "dialogue",
+            "title": "那些事可能只是沒有那麼重要。也可",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 7700,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1m-keep12",
+          "data": {
+            "text": "那些大概也是被他吃掉的。它們沒有不見，只是你走遠了。",
+            "type": "dialogue",
+            "title": "那些大概也是被他吃掉的。它們沒有",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 8000,
+            "y": -260
+          }
+        },
+        {
+          "id": "d1n-mem-gate",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "放進記憶體",
+            "variableOps": []
+          },
+          "type": "story",
+          "position": {
+            "x": 3600,
+            "y": -700
+          }
+        },
+        {
+          "id": "d1n-mem-s1",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "存進第 1 格",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "variable": "slot1",
+                "valueFrom": "pending"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "slotUsed"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3900,
+            "y": -920
+          }
+        },
+        {
+          "id": "d1n-mem-s2",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "存進第 2 格",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "variable": "slot2",
+                "valueFrom": "pending"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "slotUsed"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3900,
+            "y": -810
+          }
+        },
+        {
+          "id": "d1n-mem-s3",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "存進第 3 格",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "variable": "slot3",
+                "valueFrom": "pending"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "slotUsed"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3900,
+            "y": -700
+          }
+        },
+        {
+          "id": "d1n-mem-s4",
+          "data": {
+            "text": "",
+            "type": "setVariable",
+            "title": "存進第 4 格",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "variable": "slot4",
+                "valueFrom": "pending"
+              },
+              {
+                "id": "op-1",
+                "kind": "add",
+                "value": 1,
+                "variable": "slotUsed"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3900,
+            "y": -590
+          }
+        },
+        {
+          "id": "d1n-mem-shift",
+          "data": {
+            "text": "格莉奇說到一半停住了。\n「等一下。」\n她把手舉到眼前。\n翻過來，又翻回去。\n手心有一道很淺的壓痕。\n像剛剛握過有重量的東西。\n「我這隻手剛剛拿過東西。是什麼形狀的來著。」\n她握起來，鬆開，再握起來。\n想靠手記住那東西的形狀。\n可是想不起來。\n「……算了。應該不重要。」\n她把手放下。\n口袋裡有一張折得很整齊的保鮮膜。\n她沒有摸到。\n也不會知道那是誰折的。",
+            "type": "setVariable",
+            "title": "最舊的掉出去了",
+            "variableOps": [
+              {
+                "id": "op-0",
+                "kind": "set",
+                "variable": "slot1",
+                "valueFrom": "slot2"
+              },
+              {
+                "id": "op-1",
+                "kind": "set",
+                "variable": "slot2",
+                "valueFrom": "slot3"
+              },
+              {
+                "id": "op-2",
+                "kind": "set",
+                "variable": "slot3",
+                "valueFrom": "slot4"
+              },
+              {
+                "id": "op-3",
+                "kind": "set",
+                "variable": "slot4",
+                "valueFrom": "pending"
+              },
+              {
+                "id": "op-4",
+                "kind": "add",
+                "value": 1,
+                "variable": "overwroteCount"
+              }
+            ]
+          },
+          "type": "story",
+          "position": {
+            "x": 3900,
+            "y": -400
+          }
+        },
+        {
+          "id": "d1e-mem1",
+          "data": {
+            "text": "睡前我要把今天記得的東西唸一次。不然明天我不會知道今天發生過什麼。",
+            "type": "dialogue",
+            "title": "睡前我要把今天記得的東西唸一次。",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5200,
+            "y": -300
+          }
+        },
+        {
+          "id": "d1e-mem2",
+          "data": {
+            "text": "「{{slot1}}」、「{{slot2}}」、「{{slot3}}」、「{{slot4}}」。",
+            "type": "dialogue",
+            "title": "「{{slot1}}」、「{{s",
+            "emotion": "平常",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5500,
+            "y": -300
+          }
+        },
+        {
+          "id": "d1e-mem3",
+          "data": {
+            "text": "空的那幾格我沒有辦法告訴你裡面本來有什麼。空的就是空的。",
+            "type": "dialogue",
+            "title": "空的那幾格我沒有辦法告訴你裡面本",
+            "emotion": "發呆",
+            "speaker": "格莉奇",
+            "character": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp",
+            "characterId": "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 5800,
+            "y": -300
+          }
+        },
+        {
+          "id": "d1e-mem4",
+          "data": {
+            "text": "黑洞先生在角落，沒有回應。可是他有在聽——他每天都在聽。",
+            "type": "dialogue",
+            "title": "旁白",
+            "speaker": "旁白",
+            "characterPosition": "center"
+          },
+          "type": "story",
+          "position": {
+            "x": 6100,
+            "y": -300
+          }
+        }
+      ],
+      "description": "**這裡是入口。** 早：他出門前　中：只有格莉奇和玩家　晚：他回家、填守則、存檔教學。結尾自動跳 Day 2。"
     }
   ],
   "locale": "zh-Hant",
@@ -31527,7 +31328,7 @@
       "label": "日本語"
     }
   ],
-  "updatedAt": "2026-08-21T03:35:22.442Z",
+  "updatedAt": "2026-08-21T03:44:40.805Z",
   "variables": [
     {
       "id": "playerName",
