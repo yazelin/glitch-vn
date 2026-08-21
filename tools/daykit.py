@@ -366,7 +366,19 @@ class Board:
         proj["boards"] = boards
         r = _put({"project": proj, "summary": summary})
         b = [x for x in r["boards"] if x["id"] == self.bid][0]
-        print(f"{self.name}：卡片 {len(b['nodes'])}  邊 {len(b['edges'])}")
+        # 這塊板用到的變數，推完之後確認還在。
+        # 平台不穩的時候整包 PUT 有可能把變數蓋掉，而卡片照樣存進去——
+        # 症狀是「動了不存在的變數」，但要跑 verify 才看得到,推的當下沒有任何徵兆。
+        have = {v["name"] for v in r.get("variables", [])}
+        used = {op["variable"] for n in self.nodes
+                for op in (n["data"].get("variableOps") or [])}
+        used |= {n["data"]["inputVariable"] for n in self.nodes
+                 if n["data"].get("inputVariable")}
+        used |= {e["data"]["condition"]["variable"] for e in self.edges
+                 if (e.get("data") or {}).get("condition")}
+        lost = sorted(used - have)
+        print(f"{self.name}：卡片 {len(b['nodes'])}  邊 {len(b['edges'])}"
+              + (f"　★ 變數不見了：{'、'.join(lost)}" if lost else ""))
         return r
 
 

@@ -18,7 +18,7 @@ b.add('d2m-lost2', {'text': '昨天沒有人幫我存下來。所以你昨天說
 b.add('d2m-lost3', {'text': '外接記憶體要自己按存檔。我說過了。', 'type': 'dialogue', 'title': '外接記憶體要自己按存檔。我說過了', 'emotion': '餓', 'speaker': '黑洞先生', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787203345974_blackhole-hungry.webp', 'characterId': 'character-25c9632f-cd67-49d0-a4bd-2757b51127e7', 'characterPosition': 'center'}, x=1800, y=220)
 b.add('d2m-relearn', {'text': '那……可以再告訴我一次嗎？這次記得存。', 'type': 'input', 'title': '再說一次你的名字', 'inputVariable': 'playerName', 'inputPlaceholder': '再輸入一次…'}, x=2100, y=220)
 b.add('d2m-ok1', {'text': '早安，{{playerName}}。', 'type': 'dialogue', 'title': '早安，{{playerName}', 'emotion': '開心', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196225907_glitch-happy.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=1200, y=-220)
-b.add('d2m-ok2', {'text': '我不記得你。可是牆上寫著你的名字，所以你昨天在。', 'type': 'dialogue', 'title': '我不記得你。可是牆上寫著你的名字', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=1500, y=-220)
+b.add('d2m-ok2', {'text': "我不記得你。可是牆上寫著你的名字。\n而且我今天醒得比較快。\n有人替我省下一格。", 'type': 'dialogue', 'title': '我不記得你。可是牆上寫著你的名字', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=1500, y=-220)
 b.add('d2m-join', {'text': '今天是第幾天我不知道。我從來不知道。', 'type': 'dialogue', 'title': '今天是第幾天我不知道。我從來不知', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=2400, y=0)
 b.add('d2m-rule', {'text': '可是守則知道。它已經改到第 {{ruleVersion}} 版了。', 'type': 'dialogue', 'title': '可是守則知道。它已經改到第 {{', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=2700, y=0)
 b.add('d2m-quote', {'text': '昨天那一版的空位上寫著——「{{ruleLine1}}」。那是你寫的。', 'type': 'dialogue', 'title': '昨天那一版的空位上寫著——「{{', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=3000, y=0)
@@ -111,8 +111,7 @@ for nid, route in (("d2n-keep", "keep"), ("d2n-feed", "feed"), ("d2n-give", "giv
     b.addops(nid, [{"variable": "todayRoute", "kind": "set", "value": route}])
 
 ex = 3600
-r_feed = b.say("d2e-r-feed", "他今天回來得比平常穩，走路的時候沒有搖。"
-               "她發現的那件事現在在他身上，而她連自己發現過什麼都不記得。",
+r_feed = b.say("d2e-r-feed", "黑洞先生今天回來得比平常穩，走路的時候沒有搖。\n格莉奇發現過一件事，現在在他身上。\n她連自己發現過什麼都不記得。",
                who=None, title="他吃掉了", x=ex, y=-260)
 r_keep = b.say("d2e-r-keep", "她想跟他講今天發現的那件事。話到嘴邊，"
                "她發現自己已經不確定那是什麼了。", who=None, title="她留著", x=ex, y=0)
@@ -224,13 +223,10 @@ b.link(pre[-1], dq)
 dx = 4300
 DEL = [
     ("name", "刪掉你",
-     "她把第一格清掉。\n"
-     "「好，空出來了。」她轉過來，看著螢幕。「……你是誰？」\n"
-     "牆上那個名字還在，可是她的腦子裡已經沒有了。她整天都會叫你「你」。",
+     "格莉奇把第一格清掉。\n「好，空出來了。」她轉過來，看著螢幕。「……你是誰？」\n牆上那個名字還在，可是她的腦子裡已經沒有了。\n她整天都會叫你「你」。",
      [{"variable": "slot1", "kind": "set", "value": ""}]),
     ("cache", "刪掉殘留快取",
-     "她把第二格清掉。什麼事都沒有發生。\n"
-     "「這個應該是垃圾吧。」她說。她說對了，可是她永遠不會知道自己說對了。",
+     "格莉奇把第二格清掉。什麼事都沒有發生。\n「這個應該是垃圾吧。」她說。\n她說對了，可是她永遠不會知道自己說對了。",
      [{"variable": "slot2", "kind": "set", "value": ""}]),
     ("sound", "刪掉那段聲音",
      "她把第三格清掉。\n"
@@ -262,10 +258,10 @@ b.link(back, "d2m-rule")
 # 晚上他會提到今天被吃掉的那一格。他一天只吃得下一件，所以中午餵他就不吃這個。
 ex2 = 5200
 EAT = [
-    ("name", "他今天吃到一個名字。他沒有說是誰的名字。", -300),
-    ("sound", "他今天吃到一段聲音。很小聲，在很晚的時候，像有人在揉什麼。", -100),
-    ("crack", "他今天吃到一道裂痕。門邊那疊靴子今天看起來完好如新。", 100),
-    ("cache", "他今天吃到一團什麼都不是的東西。他嚼了很久。", 300),
+    ("name", "黑洞先生今天吃到一個名字。\n他沒有說是誰的名字。", -300),
+    ("sound", "黑洞先生今天吃到一段聲音。\n那聲音很小，在很晚的時候。\n像有人在揉什麼。", -100),
+    ("crack", "黑洞先生今天吃到一道裂痕。\n門邊那疊靴子今天看起來完好如新。", 100),
+    ("cache", "黑洞先生今天吃到一團什麼都不是的東西。\n他嚼了很久。", 300),
 ]
 eat_nodes = []
 for tag, text, yy in EAT:
@@ -277,7 +273,7 @@ nm = b.chain([
     ("d2e-nm1", "什麼名字？", "平常", G),
     ("d2e-nm2", "妳的朋友。", "預設", HOLE),
     ("d2e-nm3", "我有朋友？", "當機", G),
-    ("d2e-nm4", "他沒有回答第二次。她站在原地，看著螢幕的方向，看了很久。", "平常", None),
+    ("d2e-nm4", "黑洞先生沒有回答第二次。\n她站在原地。\n她看著螢幕的方向，看了很久。", "平常", None),
     ("d2e-nm5", "如果我有朋友，那個人現在在哪裡？", "發呆", G),
     ("d2e-nm6", "她正在看著你。她不知道自己正在看著你。", "平常", None),
 ], x=ex2 + 300, y=-500, link_prev=False)
