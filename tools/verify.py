@@ -14,8 +14,10 @@ import json, pathlib, subprocess, sys
 T = pathlib.Path(__file__).resolve().parent
 subprocess.run([sys.executable, str(T / "pull.py")], check=True, stdout=subprocess.DEVNULL)
 P = json.load(open(T.parent / "backup/project.json"))
-DAYS = sorted([b for b in P["boards"] if b["id"].startswith("board-day")],
-              key=lambda b: int(b["id"].replace("board-day", "")))
+# 舊版（board-dayN）跟新前提版（board-v2-dayN）兩條線都要驗。
+# 線上跑的是 activeBoardId 那一條，另一條先建好放著對照。
+DAYS = sorted([b for b in P["boards"] if "day" in b["id"] and b["id"].startswith("board-")],
+              key=lambda b: (1 if "v2" in b["id"] else 0, int(b["id"].split("day")[-1])))
 bad = []
 
 print("── 玩法模擬 ──")

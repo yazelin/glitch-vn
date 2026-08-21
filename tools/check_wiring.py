@@ -23,7 +23,7 @@ d = json.load(urllib.request.urlopen(urllib.request.Request(
 
 ENDS = ("boardJump",)          # 這些型別本來就不用出邊
 # 刻意的終點。新增的死路一律報錯——這裡沒登記就是接漏了。
-TERMINALS = {"d7-fin", "end-common-3"}
+TERMINALS = {"d7-fin", "end-common-3", "d7-f9"}
 bad = []
 for b in d["boards"]:
     ids = {n["id"] for n in b["nodes"]}
