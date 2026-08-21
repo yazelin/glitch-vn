@@ -4,7 +4,7 @@
 文案手寫（這是要讀的東西，生不出來），但**數字從 project.json 拉**，
 免得改了劇本之後站上還寫著舊的張數。
 """
-import html, json, pathlib
+import html, json, pathlib, sys
 
 P = json.load(open(pathlib.Path.home() / "glitch-vn/backup/project.json"))
 DAYS = [b for b in P["boards"] if b["id"].startswith("board-day")]
@@ -17,6 +17,24 @@ VARS = len({op["variable"] for b in DAYS for n in b["nodes"]
             for op in (n["data"].get("variableOps") or [])}
            | {n["data"]["inputVariable"] for b in DAYS for n in b["nodes"]
               if n["data"].get("inputVariable")})
+# ── 推廣三件套（＋部落格）──────────────────────────────
+# skill 的 snippet 是「動畫既有的 BMC 按鈕」，所以連結要先做進 footer，
+# 它才有東西可以動。直接注入的小圓鈕版本不用這一段。
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from _icons import ICONS
+
+LINKS = [
+    ("gh",   "https://github.com/yazelin/glitch-vn", "原始碼"),
+    ("fb",   "https://www.facebook.com/yaze.lin.gm", "Facebook"),
+    ("bmc",  "https://buymeacoffee.com/yazelin",     "請亞澤喝咖啡"),
+    ("blog", "https://yazelin.github.io/",           "亞澤的部落格"),
+]
+
+def promo_links(cls="promo"):
+    return (f'<div class="{cls}">' + "".join(
+        f'<a href="{u}" target="_blank" rel="noopener" aria-label="{t}" title="{t}">'
+        f'{ICONS[k]}</a>' for k, u, t in LINKS) + "</div>")
+
 E = html.escape
 
 CSS = """
@@ -104,6 +122,12 @@ blockquote{margin:26px 0 0;padding:0 0 0 20px;border-left:2px solid var(--accent
 .links a:hover{border-color:var(--accent)}
 .links a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
+.promo{display:flex;gap:12px;margin-top:22px}
+.promo a{display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border:1px solid var(--rule);border-radius:2px;
+  color:var(--muted);background:var(--surface);transition:color .2s,border-color .2s}
+.promo a:hover{color:var(--accent);border-color:var(--accent)}
+.promo a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 footer{padding:52px 0 84px;border-top:1px solid var(--rule);
   color:var(--faint);font-size:13.5px}
 footer p{max-width:var(--measure);margin:0 0 8px}
@@ -339,6 +363,7 @@ HTML = f'''<title>做一個會忘記你的遊戲</title>
 <p>這頁的數字（{len(DAYS)} 天、{CARDS} 張卡、{EDGES} 條連線、{VARS} 個變數）
 是從遊戲檔案讀出來的，不是寫死的。改了劇本重跑 <span class="mono">tools/gen_about.py</span> 就同步。</p>
 <p>《格莉奇與黑洞先生》　MIT　林亞澤</p>
+{promo_links()}
 </footer>
 
 </div>
@@ -347,3 +372,14 @@ HTML = f'''<title>做一個會忘記你的遊戲</title>
 out = pathlib.Path.home() / "glitch-vn/docs/index.html"
 out.write_text(HTML, encoding="utf-8")
 print(f"寫好 {out}（{len(HTML)//1024} KB）")
+
+# 產生完之後套推廣三件套。**這一步一定要在產生器裡面。**
+# 手動套一次的話,下一次重生就沒了——這個專案已經在「改線上版不改腳本」上吃過兩次虧。
+import subprocess
+APPLY = pathlib.Path.home() / ".claude/skills/promo-footer/apply.py"
+if APPLY.exists():
+    r = subprocess.run([sys.executable, str(APPLY), str(out), "glitch-vn"],
+                       capture_output=True, text=True)
+    print("  推廣 footer:", r.stdout.strip() or r.stderr.strip())
+else:
+    print("  ★ 找不到 promo-footer skill,footer 沒套")
