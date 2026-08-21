@@ -499,7 +499,53 @@ class Board:
         self.link(prev, target, "right", cond=conds[-1])
         self.link(prev, fallthrough)
 
+    def split_narration(self):
+        """把混在台詞裡的括號旁白拆成獨立的旁白卡。
+
+        「（她走出去了。）」寫在格莉奇的對話卡裡，播放器會讓她**把括號唸出來**，
+        而且立繪還掛在旁邊。寫劇本的時候很自然就會這樣寫，所以靠自動拆，不靠記性。
+
+        原卡留第一段，後面每一段各長一張卡，原本的出線接到最後一張。
+        """
+        for n in list(self.nodes):
+            d = n["data"]
+            if d.get("type") != "dialogue" or d.get("speaker") not in (G, HOLE):
+                continue
+            lines = [l for l in (d.get("text") or "").split("\n") if l.strip()]
+            if not any(l.strip().startswith("（") and l.strip().endswith("）") for l in lines):
+                continue
+            runs = []
+            for l in lines:
+                nar = l.strip().startswith("（") and l.strip().endswith("）")
+                if runs and runs[-1][0] == nar:
+                    runs[-1][1].append(l)
+                else:
+                    runs.append((nar, [l]))
+            nid, x, y = n["id"], n["position"]["x"], n["position"]["y"]
+            outs = [e for e in self.edges if e["source"] == nid]
+            first_nar, first_lines = runs[0]
+            d["text"] = "\n".join(l.strip("（）") if first_nar else l for l in first_lines)
+            if first_nar:
+                d["speaker"] = "旁白"
+                for k in ("character", "characterId", "emotion"):
+                    d.pop(k, None)
+            d["title"] = d["text"][:16]
+            prev = nid
+            for i, (nar, ls) in enumerate(runs[1:], 1):
+                txt = "\n".join(l.strip("（）") if nar else l for l in ls)
+                cur = self.say(f"{nid}-n{i}", txt,
+                               who="旁白" if nar else d.get("speaker", G),
+                               face=d.get("emotion") or "平常",
+                               x=x + 40 * i, y=y + 70 * i)
+                self.link(prev, cur)
+                prev = cur
+            for e in outs:
+                e["source"] = prev
+                self._eid = getattr(self, "_eid", 0) + 1
+                e["id"] = f"e{self._eid}-{prev}-{e.get('sourceHandle','right')}-{e['target']}"
+
     def push(self, summary):
+        self.split_narration()
         proj = _get()
         boards = [b for b in proj["boards"] if b["id"] != self.bid]
         boards.append({"id": self.bid, "kind": "story", "mode": "story",

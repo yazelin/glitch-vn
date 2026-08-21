@@ -30,6 +30,8 @@
     tools/check_wiring.py    驗圖本身：斷頭邊、孤島、死路、選項沒接線
     tools/check_plain.py     線上卡片的可讀性（句子太長、代名詞太密）
     tools/check_script.py    同一套規則，但掃 design/script/*.md
+    （daykit.push() 會先跑 split_narration()：把寫在台詞裡的
+      「（她走出去了。）」自動拆成獨立的旁白卡，不然她會把括號唸出來）
     tools/export_script.py   把線上版印成可讀劇本（分支縮排）→ docs/script.txt
     art/                     背景原始檔（開播前／直播中／天花板）
     tools/dump_board.py      把一塊板子印成可讀劇本，拿去給人審
