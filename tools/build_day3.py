@@ -139,6 +139,22 @@ PLACES = [
      [("keptBoots", 'feet', '「靴子是裝腳的東西。」\n「可是角落地板上那些刮痕，是觸手磨出來的。細細的，一道一道。」\n「坐在那裡的人沒有腳。可是門邊那疊靴子，每一雙都是照著腳的形狀做的。」\n她抬起頭。\n「黑洞先生以前有腳嗎？」')]),
 ]
 
+# 他吃的是「她知道這件事」，不是東西本身。東西都還在原地，只是她不會再停下來看。
+FEED = {
+ "fridge": "東西還在冰箱裡，保鮮膜也還是那個折法。\n"
+           "只是她今天想了一下午的那件事，晚上就沒有再想起來了。\n"
+           "沒有人通知她那件事要走。",
+ "window": "圓印還在窗台上，一點都沒有變淡。\n"
+           "只是她以後走過去不會再停下來了。\n"
+           "那個印子會一直在那裡，等一個不會再問的人。",
+ "boots":  "裂痕還在。它今天晚上還會再裂長一點點。\n"
+           "只是她明天看到，會覺得那本來就是裂的。",
+ "rules":  "那兩行字還印在紙上，一個筆畫都沒有掉。\n"
+           "只是她明天翻到那一頁，會覺得那是別人寫的。",
+ "corner": "地板上那個圓還在，而且會愈來愈深。\n"
+           "只是不會再有人問它是怎麼來的了。",
+}
+
 q = b.choice("d3n-q", "今天要陪她去看哪裡？\n" + MEM,
              [p[2] for p in PLACES])
 b.link(b.prev, q)
@@ -209,7 +225,7 @@ for i, (key, seen, kept, name, go, finds, again, missed, label, combos) in enume
                       [{"variable": "fedToday", "kind": "add", "value": 1},
                        {"variable": "fedCount", "kind": "add", "value": 1},
                        {"variable": "holeFeet", "kind": "add", "value": 1}],
-                      text="她把這件事留在原地。晚上黑洞先生回來的時候，它已經不在了。",
+                      text=FEED[key],
                       title="餵他", x=2400 + len(finds) * 300, y=y + 90)
     n_give = b.setvar(f"d3n-{key}-give",
                       [{"variable": "givenCount", "kind": "add", "value": 1},
@@ -302,7 +318,7 @@ forgot = b.setvar("d3e-bread-forgot",
                    {"variable": "fedToday", "kind": "add", "value": 1},
                    {"variable": "fedCount", "kind": "add", "value": 1},
                    {"variable": "holeFeet", "kind": "add", "value": 1}],
-                  text="黑洞先生站起來，走到冰箱前面，打開，拿出那塊用保鮮膜包好的麵包。\n「那是什麼？」她問。\n他沒有回答。\n他把它整個放進嘴裡，連紙條一起。\n她看著他吃。\n那個包裝手法有點眼熟，可是想不起來在哪裡看過。",
+                  text="黑洞先生站起來，走到冰箱前面，打開，拿出那塊用保鮮膜包好的麵包。\n「那是什麼？」她問。\n他沒有回答。\n他把麵包收進西裝內袋。他不吃這種東西，從來沒有吃過。\n他吃掉的是「她烤過這塊麵包」這件事——那件事她今天弄丟了。\n她看著他收好。那個包裝手法有點眼熟，可是她想不起來在哪裡看過。",
                   title="她忘了麵包這件事", x=bx, y=-400)
 b.link(react_join, forgot, "right", cond={"variable": "lostBread", "op": "eq", "value": 1})
 
@@ -323,7 +339,7 @@ b_hole = b.setvar("d3e-bread-hole",
                    {"variable": "fedToday", "kind": "add", "value": 1},
                    {"variable": "fedCount", "kind": "add", "value": 1},
                    {"variable": "holeFeet", "kind": "add", "value": 1}],
-                  text="黑洞先生接過去，沒有拆保鮮膜就整個放進嘴裡。連紙條一起。\n格莉奇看著那張寫著自己字跡的紙條消失。\n她覺得自己好像應該難過，可是想不起來為什麼。",
+                  text="黑洞先生接過去，連紙條一起，收進西裝內袋。\n他不吃麵包。他吃的是她本來要對他說的那句謝謝——\n那句話她今天沒有說出口，所以那句話成了他的。\n她覺得自己好像應該難過，可是想不起來為什麼。",
                   title="給他吃了", x=bx + 1200, y=-160)
 b_self = b.setvar("d3e-bread-self",
                   [{"variable": "breadState", "kind": "set", "value": "self"}],
