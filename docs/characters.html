@@ -43,9 +43,8 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
 .key{display:grid;grid-template-columns:1fr minmax(0,25em) 1fr;align-items:end;
   margin:22px auto 0;max-width:66em}
 .key .lead{display:flex;justify-content:center}
-.key .lead img{width:100%;max-width:320px;height:auto;
-  filter:drop-shadow(0 18px 38px rgba(0,0,0,.6))}
-.key .lead.r img{max-width:360px}
+.key .lead img{height:clamp(300px,42vw,560px);width:auto;max-width:100%;
+  object-fit:contain;filter:drop-shadow(0 18px 38px rgba(0,0,0,.6))}
 .key .mid{padding:0 18px 60px;text-align:center}
 .mid h1{font-weight:600;font-size:clamp(32px,5.4vw,50px);line-height:1.24;
   margin:0 0 22px;text-wrap:balance}
@@ -63,7 +62,7 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
   .key .mid{grid-area:m;padding-bottom:20px}
   .key .lead.l{grid-area:l;justify-content:flex-end}
   .key .lead.r{grid-area:r;justify-content:flex-start}
-  .key .lead img,.key .lead.r img{max-width:180px}
+  .key .lead img{height:230px}
 }
 
 .rest{margin:74px auto 0;padding-top:32px;border-top:1px solid var(--hair)}
@@ -85,8 +84,11 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
 .note b{color:var(--text)}
 
 .cast{display:grid;gap:46px;margin-top:44px}
-.card{display:grid;grid-template-columns:210px 1fr;gap:30px;align-items:center}
-.card img{width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
+.card{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center}
+/* 照高度對齊，不照寬度。裁掉透明邊之後每個人的長寬比差很多。 */
+.card .pic{display:flex;justify-content:center;align-items:flex-end;height:400px}
+.card img{height:100%;width:auto;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
 .card h3{margin:0 0 2px;font-size:23px;font-weight:600}
 .card .id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;
   color:var(--faint);margin-bottom:14px}
@@ -96,7 +98,7 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
   font-size:17px;font-weight:600;line-height:1.85;color:var(--text)}
 @media (max-width:700px){
   .card{grid-template-columns:1fr;gap:16px;justify-items:center;text-align:center}
-  .card img{width:170px}
+  .card .pic{height:260px}
   .card q{border-left:0;border-top:2px solid var(--mint);padding:12px 0 0;text-align:center}
 }
 
@@ -154,31 +156,31 @@ footer a{color:var(--muted)}
 <h1>名單上的人</h1>
 <p>守則本第一頁上有七行。上面只有六個名字。</p></header>
 <div class="cast"><div class="card">
-<img src="img/glitch-full.webp" alt="格莉奇" loading="lazy">
+<div class="pic"><img src="img/glitch-full.webp" alt="格莉奇" loading="lazy"></div>
 <div><h3>格莉奇</h3>
 <div class="id">&nbsp;</div>
 <p>AI 虛擬主播，頻道兩年。她很聰明，講話正常，判斷力完整。壞掉的只有把記憶取出來那一步。</p><q>「我知道啊。我只是叫不出來。這兩件事不一樣。」</q></div></div><div class="card">
-<img src="img/blackhole-full.webp" alt="黑洞先生" loading="lazy">
+<div class="pic"><img src="img/blackhole-full.webp" alt="黑洞先生" loading="lazy"></div>
 <div><h3>黑洞先生</h3>
 <div class="id">&nbsp;</div>
 <p>她的室友。沒有腳，一叢穿短靴的觸手撐起西裝。他吃被忘掉的事，不吃任何食物。外套內側深不見底。</p><q>「像口袋裡有東西，可是那個口袋不是我的。」</q></div></div><div class="card">
-<img src="img/catgrass-full.webp" alt="貓草" loading="lazy">
+<div class="pic"><img src="img/catgrass-full.webp" alt="貓草" loading="lazy"></div>
 <div><h3>貓草</h3>
 <div class="id">@CatGrass_80</div>
 <p>開台第一天隨手滑進來的人，現在全勤、等級八十。他害怕頻道紅，因為小房間裡他才是被記得的那一個。</p><q>「我那天也在啊。」</q></div></div><div class="card">
-<img src="img/tower-full.webp" alt="鐵塔" loading="lazy">
+<div class="pic"><img src="img/tower-full.webp" alt="鐵塔" loading="lazy"></div>
 <div><h3>鐵塔</h3>
 <div class="id">@Tower_Manager</div>
 <p>經紀人。只看數據跟周邊庫存。他發現她的毛病有話題性，正在阻止她修好。</p><q>「妳今天聲音有點啞。明天少講一點話。」</q></div></div><div class="card">
-<img src="img/zerox-full.webp" alt="0X" loading="lazy">
-<div><h3>0X</h3>
-<div class="id">@Null_0X99</div>
+<div class="pic"><img src="img/zerox-full.webp" alt="0x" loading="lazy"></div>
+<div><h3>0x</h3>
+<div class="id">@Null_0x99</div>
 <p>同期出道的 AI，企業勢頂級歌姬，標榜零失誤。她把格莉奇當成必須抹除的恥辱。</p><q>「因為我全部都記得。」</q></div></div><div class="card">
-<img src="img/bambi-full.webp" alt="斑比" loading="lazy">
+<div class="pic"><img src="img/bambi-full.webp" alt="斑比" loading="lazy"></div>
 <div><h3>斑比</h3>
 <div class="id">@Bambi_Draft3</div>
 <p>接案繪師，畫她的立繪。為了畫出無瑕的神作，她把稿改到格莉奇開始懷疑自己記錯。</p><q>「妳是唯一一個每次都在看的人。」</q></div></div><div class="card">
-<img src="img/noah-full.webp" alt="諾亞" loading="lazy">
+<div class="pic"><img src="img/noah-full.webp" alt="諾亞" loading="lazy"></div>
 <div><h3>諾亞</h3>
 <div class="id">@Radio_Noah</div>
 <p>住頂樓修古董收音機。他至今不懂什麼是 VTuber，只知道隔壁那個小姑娘常常把自己鎖在門外。</p><q>「因為妳每次都是第一次問啊。」</q></div></div></div>

@@ -43,9 +43,8 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
 .key{display:grid;grid-template-columns:1fr minmax(0,25em) 1fr;align-items:end;
   margin:22px auto 0;max-width:66em}
 .key .lead{display:flex;justify-content:center}
-.key .lead img{width:100%;max-width:320px;height:auto;
-  filter:drop-shadow(0 18px 38px rgba(0,0,0,.6))}
-.key .lead.r img{max-width:360px}
+.key .lead img{height:clamp(300px,42vw,560px);width:auto;max-width:100%;
+  object-fit:contain;filter:drop-shadow(0 18px 38px rgba(0,0,0,.6))}
 .key .mid{padding:0 18px 60px;text-align:center}
 .mid h1{font-weight:600;font-size:clamp(32px,5.4vw,50px);line-height:1.24;
   margin:0 0 22px;text-wrap:balance}
@@ -63,7 +62,7 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
   .key .mid{grid-area:m;padding-bottom:20px}
   .key .lead.l{grid-area:l;justify-content:flex-end}
   .key .lead.r{grid-area:r;justify-content:flex-start}
-  .key .lead img,.key .lead.r img{max-width:180px}
+  .key .lead img{height:230px}
 }
 
 .rest{margin:74px auto 0;padding-top:32px;border-top:1px solid var(--hair)}
@@ -85,8 +84,11 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
 .note b{color:var(--text)}
 
 .cast{display:grid;gap:46px;margin-top:44px}
-.card{display:grid;grid-template-columns:210px 1fr;gap:30px;align-items:center}
-.card img{width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
+.card{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center}
+/* 照高度對齊，不照寬度。裁掉透明邊之後每個人的長寬比差很多。 */
+.card .pic{display:flex;justify-content:center;align-items:flex-end;height:400px}
+.card img{height:100%;width:auto;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
 .card h3{margin:0 0 2px;font-size:23px;font-weight:600}
 .card .id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;
   color:var(--faint);margin-bottom:14px}
@@ -96,7 +98,7 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
   font-size:17px;font-weight:600;line-height:1.85;color:var(--text)}
 @media (max-width:700px){
   .card{grid-template-columns:1fr;gap:16px;justify-items:center;text-align:center}
-  .card img{width:170px}
+  .card .pic{height:260px}
   .card q{border-left:0;border-top:2px solid var(--mint);padding:12px 0 0;text-align:center}
 }
 
@@ -168,7 +170,7 @@ footer a{color:var(--muted)}
 <div class="rest">
 <h2>名單上還有五個人</h2>
 <p class="sub">開台第一天在的那七個，兩年後散在各處。</p>
-<div class="strip"><a href="characters.html"><img src="img/catgrass-card.webp" alt="貓草" loading="lazy"><div class="nm">貓草</div></a><a href="characters.html"><img src="img/tower-card.webp" alt="鐵塔" loading="lazy"><div class="nm">鐵塔</div></a><a href="characters.html"><img src="img/zerox-card.webp" alt="0X" loading="lazy"><div class="nm">0X</div></a><a href="characters.html"><img src="img/bambi-card.webp" alt="斑比" loading="lazy"><div class="nm">斑比</div></a><a href="characters.html"><img src="img/noah-card.webp" alt="諾亞" loading="lazy"><div class="nm">諾亞</div></a></div>
+<div class="strip"><a href="characters.html"><img src="img/catgrass-card.webp" alt="貓草" loading="lazy"><div class="nm">貓草</div></a><a href="characters.html"><img src="img/tower-card.webp" alt="鐵塔" loading="lazy"><div class="nm">鐵塔</div></a><a href="characters.html"><img src="img/zerox-card.webp" alt="0x" loading="lazy"><div class="nm">0x</div></a><a href="characters.html"><img src="img/bambi-card.webp" alt="斑比" loading="lazy"><div class="nm">斑比</div></a><a href="characters.html"><img src="img/noah-card.webp" alt="諾亞" loading="lazy"><div class="nm">諾亞</div></a></div>
 </div>
 <div class="note">
 <p><b>格莉奇是 AI 虛擬主播。</b>她很聰明，講話正常，判斷力完整。

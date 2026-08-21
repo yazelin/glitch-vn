@@ -34,7 +34,7 @@ CAST = [
     ("tower", "鐵塔", "@Tower_Manager", "經紀人。只看數據跟周邊庫存。"
      "他發現她的毛病有話題性，正在阻止她修好。",
      "妳今天聲音有點啞。明天少講一點話。"),
-    ("zerox", "0X", "@Null_0X99", "同期出道的 AI，企業勢頂級歌姬，標榜零失誤。"
+    ("zerox", "0x", "@Null_0x99", "同期出道的 AI，企業勢頂級歌姬，標榜零失誤。"
      "她把格莉奇當成必須抹除的恥辱。",
      "因為我全部都記得。"),
     ("bambi", "斑比", "@Bambi_Draft3", "接案繪師，畫她的立繪。"
@@ -91,9 +91,8 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
 .key{display:grid;grid-template-columns:1fr minmax(0,25em) 1fr;align-items:end;
   margin:22px auto 0;max-width:66em}
 .key .lead{display:flex;justify-content:center}
-.key .lead img{width:100%;max-width:320px;height:auto;
-  filter:drop-shadow(0 18px 38px rgba(0,0,0,.6))}
-.key .lead.r img{max-width:360px}
+.key .lead img{height:clamp(300px,42vw,560px);width:auto;max-width:100%;
+  object-fit:contain;filter:drop-shadow(0 18px 38px rgba(0,0,0,.6))}
 .key .mid{padding:0 18px 60px;text-align:center}
 .mid h1{font-weight:600;font-size:clamp(32px,5.4vw,50px);line-height:1.24;
   margin:0 0 22px;text-wrap:balance}
@@ -111,7 +110,7 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
   .key .mid{grid-area:m;padding-bottom:20px}
   .key .lead.l{grid-area:l;justify-content:flex-end}
   .key .lead.r{grid-area:r;justify-content:flex-start}
-  .key .lead img,.key .lead.r img{max-width:180px}
+  .key .lead img{height:230px}
 }
 
 .rest{margin:74px auto 0;padding-top:32px;border-top:1px solid var(--hair)}
@@ -133,8 +132,11 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
 .note b{color:var(--text)}
 
 .cast{display:grid;gap:46px;margin-top:44px}
-.card{display:grid;grid-template-columns:210px 1fr;gap:30px;align-items:center}
-.card img{width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
+.card{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center}
+/* 照高度對齊，不照寬度。裁掉透明邊之後每個人的長寬比差很多。 */
+.card .pic{display:flex;justify-content:center;align-items:flex-end;height:400px}
+.card img{height:100%;width:auto;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
 .card h3{margin:0 0 2px;font-size:23px;font-weight:600}
 .card .id{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;
   color:var(--faint);margin-bottom:14px}
@@ -144,7 +146,7 @@ nav.top a.l:hover,nav.top a.l[aria-current]{color:var(--cy)}
   font-size:17px;font-weight:600;line-height:1.85;color:var(--text)}
 @media (max-width:700px){
   .card{grid-template-columns:1fr;gap:16px;justify-items:center;text-align:center}
-  .card img{width:170px}
+  .card .pic{height:260px}
   .card q{border-left:0;border-top:2px solid var(--mint);padding:12px 0 0;text-align:center}
 }
 
@@ -257,6 +259,32 @@ def render(md):
     return "".join(out)
 
 
+def build_images():
+    """從 art/ 的原始 PNG 生站台用的 WebP。
+
+    **先裁掉四周全透明的邊再縮。** 不裁的話每張的留白不一樣，
+    排在一起會有的大有的小。裁完之後每張的長寬比不同（0x 站得直、手垂著，
+    比別人窄很多），所以版面一律照**高度**對齊，不要照寬度。
+    """
+    from PIL import Image
+    import json
+    ART = ROOT / "art"
+    OUT = DOCS / "img"; OUT.mkdir(parents=True, exist_ok=True)
+    src = {n: ART / f"sprite-{n}.png" for n in
+           ("catgrass", "tower", "zerox", "bambi", "noah")}
+    # 這兩張的原始檔在 Larch 上，抓下來的副本放 art/
+    for n, f in (("glitch", "sprite-glitch.png"), ("blackhole", "sprite-blackhole.png")):
+        if (ART / f).exists():
+            src[n] = ART / f
+    for name, path in src.items():
+        im = Image.open(path).convert("RGBA")
+        im = im.crop(im.getchannel("A").getbbox())
+        for tag, h, q in (("card", 520, 82), ("full", 1100, 86)):
+            o = im.copy(); o.thumbnail((1200, h), Image.LANCZOS)
+            o.save(OUT / f"{name}-{tag}.webp", "WEBP", quality=q, method=6)
+    print(f"  立繪 {len(src)} 個角色 x 2 尺寸")
+
+
 PROMO = ('<div class="promo">' + "".join(
     f'<a href="{u}" target="_blank" rel="noopener" aria-label="{t}" title="{t}">{ICONS[k]}</a>'
     for k, u, t in LINKS) + "</div>")
@@ -313,7 +341,7 @@ for i, p in enumerate(chapters, 1):
 
 # ── 角色頁 ──────────────────────────────────────────────
 cards = "".join(f'''<div class="card">
-<img src="img/{k}-full.webp" alt="{html.escape(n)}" loading="lazy">
+<div class="pic"><img src="img/{k}-full.webp" alt="{html.escape(n)}" loading="lazy"></div>
 <div><h3>{html.escape(n)}</h3>
 <div class="id">{html.escape(i) or "&nbsp;"}</div>
 <p>{html.escape(d)}</p><q>「{html.escape(q)}」</q></div></div>''' for k, n, i, d, q in CAST)
@@ -366,6 +394,7 @@ home = """<div class="key">
     "一本繁體中文小說。兩年前開台第一天來了七個人，她答應要記住每一個，而她記得六個。",
     home, "index.html", wide=True), encoding="utf-8")
 
+build_images()
 print(f"寫好三頁：index / novel（{len(chapters)} 章、{chars} 字）/ characters")
 
 APPLY = pathlib.Path.home() / ".claude/skills/promo-footer/apply.py"
