@@ -40,9 +40,25 @@
 
 **產圖走 codex-imagegen（`$imagegen` / gpt-image），不走 gemini-web。**
 
+**一兩張就用本機**（序列，一張 60 到 90 秒）：
+
 ```bash
 ~/.claude/skills/codex-imagegen/codex-imagegen.sh "<prompt>" "<out.png>" ref-sprite.jpg </dev/null
 ```
+
+**一批就用 .11 的 codex-image-service**（同一個 `$imagegen` 後端，可是有非同步 job API
+＋多個 ChatGPT 帳號輪流，真的可以並行）：
+
+```bash
+B=https://ching-tech.ddns.net/codex-image
+K=$(cat ~/.config/codex-image/auth)
+curl -s "$B/v1/images/jobs" -H "Authorization: Bearer $K" -H 'content-type: application/json' \
+     -d '{"prompt":"...","n":1}'            # → 202 {"id":"img_...","status":"queued"}
+curl -s "$B/v1/images/jobs/<id>" -H "Authorization: Bearer $K"
+```
+
+端點：`/v1/images/generate`（同步）、`/v1/images/jobs`（非同步）、
+`/v1/images/jobs/{id}`（查）、`/v1/vision`（看圖回文字）。2026-08-22 實測都活著。
 
 拿 `glitch-plain` 當畫風參考圖，**綠幕**背景。一張約 60 到 90 秒，序列跑，
 `</dev/null` 不能少（`codex exec` 會吃 stdin，不加會一直掛著）。
