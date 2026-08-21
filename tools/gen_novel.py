@@ -78,8 +78,10 @@ a:hover{color:var(--mint)}
 .wrap{max-width:38em;margin:0 auto;padding:0 24px 100px}
 .wide{max-width:64em}
 
-nav.top{position:sticky;top:0;z-index:8;background:rgba(4,8,12,.92);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--hair)}
+/* 不要 backdrop-filter：它會把子元素的繪製裁在自己的邊框內，
+   hover 的外光會被切掉。底色是純色，模糊本來也沒有效果。 */
+nav.top{position:sticky;top:0;z-index:8;background:var(--bg);
+  border-bottom:1px solid var(--hair)}
 nav.top .in{max-width:64em;margin:0 auto;padding:11px 24px;display:flex;
   align-items:center;gap:18px;font-size:14px;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -106,7 +108,8 @@ nav.top a.l[aria-current]{color:var(--cy)}
 .cta{margin:36px 0 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
 .cta a{font-size:15px;text-decoration:none;padding:11px 26px;border-radius:var(--r);
-  border:1px solid var(--cy);color:var(--cy)}
+  border:1px solid var(--cy);color:var(--cy);position:relative}
+.cta a:hover{z-index:1}
 .cta a.solid{background:linear-gradient(135deg,var(--cy),var(--mint));color:var(--bg);
   font-weight:600;border-color:transparent}
 .cta a:hover{border-color:var(--mint);color:var(--mint);
@@ -128,8 +131,9 @@ nav.top a.l[aria-current]{color:var(--cy)}
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
 .strip{display:flex;align-items:flex-end;justify-content:center;flex-wrap:wrap;
   gap:clamp(10px,3vw,42px)}
-.strip a{text-decoration:none;color:var(--muted);text-align:center;
+.strip a{text-decoration:none;color:var(--muted);text-align:center;position:relative;
   padding:12px 10px 8px;border-radius:var(--r);transition:background .15s}
+.strip a:hover{z-index:1}
 .strip a:hover{background:var(--ink);color:var(--mint);
   text-shadow:0 0 9px rgba(124,243,192,.5)}
 .strip a:hover img{filter:drop-shadow(0 10px 22px rgba(0,0,0,.5))
@@ -174,13 +178,13 @@ header.bk h1{font-weight:600;font-size:clamp(30px,6vw,44px);line-height:1.3;
 header.bk p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.8;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
 hr.rule{border:0;border-top:1px solid var(--hair);margin:0}
-nav.toc{position:sticky;top:45px;z-index:5;display:flex;flex-wrap:wrap;gap:6px;
-  padding:10px 0;background:rgba(4,8,12,.94);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--hair);
+nav.toc{position:sticky;top:45px;z-index:5;display:flex;flex-wrap:wrap;gap:8px;
+  padding:14px 0;background:var(--bg);border-bottom:1px solid var(--hair);
   font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
 nav.toc a{text-decoration:none;color:var(--muted);border:1px solid var(--hair2);
   border-radius:var(--r);padding:4px 9px;background:var(--ink);white-space:nowrap}
-nav.toc a:hover{color:var(--mint);border-color:var(--mint);
+nav.toc a{position:relative}
+nav.toc a:hover{color:var(--mint);border-color:var(--mint);z-index:1;
   box-shadow:0 0 12px rgba(124,243,192,.22)}
 h2.ch{font-weight:600;font-size:20px;margin:56px 0 30px;color:var(--cy);
   font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.1em;
