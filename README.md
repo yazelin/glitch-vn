@@ -14,12 +14,14 @@
     design/novel.md          故事聖經：主軸、七個人、角色卡、寫法規則
     art/                     原始美術（三張背景、五張角色立繪，透明 PNG）
     docs/                    GitHub Pages 站台，程式生的，不要手改
-    tools/gen_novel.py       產生站台的那一支
+    tools/gen_novel.py       產生站台的那一支（首頁／本文／角色／sitemap／robots）
+    tools/gen_og.py          生 OG 分享圖與 favicon（合成，不是生成模型畫的）
     archive/                 舊版：做在 Larch 上的七天記憶遊戲。已經收掉
 
 ## 改完要跑的
 
-    python3 tools/gen_novel.py    # 重生站台（首頁／本文／角色）
+    python3 tools/gen_novel.py    # 重生站台（首頁／本文／角色／sitemap／robots）
+    python3 tools/gen_og.py       # 只有改標題或換主角立繪的時候才要重跑
 
 ## 寫作規則
 

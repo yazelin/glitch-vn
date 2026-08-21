@@ -73,8 +73,6 @@ body{margin:0;background:var(--bg);color:var(--text);
 img{max-width:100%;display:block}
 a{color:var(--cy)}
 a:hover{color:var(--mint)}
-.ui{font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
-.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
 .wrap{max-width:38em;margin:0 auto;padding:0 24px 100px}
 .wide{max-width:64em}
 
@@ -132,12 +130,12 @@ nav.top a.l[aria-current]{color:var(--cy)}
 .strip{display:flex;align-items:flex-end;justify-content:center;flex-wrap:wrap;
   gap:clamp(10px,3vw,42px)}
 .strip a{text-decoration:none;color:var(--muted);text-align:center;position:relative;
-  padding:12px 10px 8px;border-radius:var(--r);transition:background .15s}
-.strip a:hover{z-index:1}
-.strip a:hover{background:var(--ink);color:var(--mint);
+  padding:12px 10px 8px;transition:transform .18s ease,color .18s ease}
+.strip a:hover{z-index:1;color:var(--mint);transform:translateY(-6px);
   text-shadow:0 0 9px rgba(124,243,192,.5)}
-.strip a:hover img{filter:drop-shadow(0 10px 22px rgba(0,0,0,.5))
-  drop-shadow(0 0 14px rgba(124,243,192,.45))}
+.strip img{transition:filter .18s ease}
+.strip a:hover img{filter:drop-shadow(0 12px 24px rgba(0,0,0,.55))
+  drop-shadow(0 0 16px rgba(124,243,192,.5))}
 .strip img{height:230px;width:auto;filter:drop-shadow(0 10px 22px rgba(0,0,0,.5))}
 .strip .nm{font-size:13.5px;margin-top:8px;white-space:nowrap;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -313,29 +311,74 @@ PROMO = ('<div class="promo">' + "".join(
     for k, u, t in LINKS) + "</div>")
 
 
-def page(title, desc, body, cur, wide=False):
+BASE = "https://yazelin.github.io/glitch-vn/"
+
+JSONLD = """{"@context":"https://schema.org","@type":"Book","name":"格莉奇與黑洞先生",
+"inLanguage":"zh-Hant","bookFormat":"https://schema.org/EBook","numberOfPages":7,
+"url":"URL","image":"URLimg/og.jpg","genre":"科幻小說",
+"author":{"@type":"Person","name":"林亞澤","url":"https://yazelin.github.io/"},
+"description":"DESC","license":"https://opensource.org/licenses/MIT",
+"character":[CHARS]}""".replace("URL", BASE)
+
+
+def page(title, desc, body, cur, wide=False, ld=""):
+    """完整的 HTML 文件。
+
+    **一定要有 doctype。** 之前這幾頁是片段（第一行直接是 <title>），
+    瀏覽器會進 quirks mode，盒模型跟排版規則都會變，而且 <html lang> 掛不上去。
+    """
     nav = "".join(
         f'<a class="l" href="{h}"{" aria-current=\'page\'" if h == cur else ""}>{n}</a>'
         for h, n in (("index.html", "首頁"), ("novel.html", "閱讀"),
                      ("characters.html", "角色")))
-    return f'''<title>{html.escape(title)}</title>
+    t, d = html.escape(title), html.escape(desc)
+    canon = BASE + ("" if cur == "index.html" else cur)
+    return f'''<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="{html.escape(desc)}">
+<title>{t}</title>
+<meta name="description" content="{d}">
+<link rel="canonical" href="{canon}">
+<meta name="theme-color" content="#04080c">
+<meta name="author" content="林亞澤">
+<meta property="og:type" content="{"book" if cur == "index.html" else "article"}">
+<meta property="og:site_name" content="格莉奇與黑洞先生">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="{t}">
+<meta property="og:description" content="{d}">
+<meta property="og:url" content="{canon}">
+<meta property="og:image" content="{BASE}img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="格莉奇與黑洞先生，兩個角色站在標題兩側">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{t}">
+<meta name="twitter:description" content="{d}">
+<meta name="twitter:image" content="{BASE}img/og.jpg">
+<link rel="icon" href="img/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
 <style>{CSS}</style>
+{ld}
+</head>
+<body>
 <nav class="top"><div class="in">
 <a class="home" href="index.html">格莉奇與黑洞先生</a>{nav}
 </div></nav>
-<div class="wrap{" wide" if wide else ""}">
+<main class="wrap{" wide" if wide else ""}">
 {body}
 <footer>
 <p>《格莉奇與黑洞先生》　MIT　林亞澤　　角色設定正典在
 <a href="https://github.com/yazelin/ai-brain-site">ai-brain-site</a> 的 persona.json</p>
 {PROMO}
 </footer>
-</div>
+</main>
+</body>
+</html>
 '''
 
 
@@ -352,8 +395,9 @@ for i, p in enumerate(chapters, 1):
     body.append(render(md))
 
 (DOCS / "novel.html").write_text(page(
-    "格莉奇與黑洞先生",
-    "兩年前開台第一天來了七個人。她答應要記住每一個，而她記得六個。",
+    "全文閱讀・格莉奇與黑洞先生",
+    "全七章線上閱讀。她是 AI 虛擬主播，很聰明，壞掉的只有把記憶取出來那一步。"
+    "她的守則本第一頁有七行，上面只有六個名字。",
     f'''<header class="bk">
 <div class="eyebrow">全七章</div>
 <h1>格莉奇與黑洞先生</h1>
@@ -370,7 +414,8 @@ cards = "".join(f'''<div class="card">
 <p>{html.escape(d)}</p><q>「{html.escape(q)}」</q></div></div>''' for k, n, i, d, q in CAST)
 
 (DOCS / "characters.html").write_text(page(
-    "角色・格莉奇與黑洞先生", "七個人，加上一個沒有名字的第七行。",
+    "角色・格莉奇與黑洞先生",
+    "格莉奇、黑洞先生，還有開台第一天在的那五個人：貓草、鐵塔、0x、斑比、諾亞。",
     f'''<header class="bk"><div class="eyebrow">角色</div>
 <h1>名單上的人</h1>
 <p>守則本第一頁上有七行。上面只有六個名字。</p></header>
@@ -412,10 +457,25 @@ home = """<div class="key">
 上面只有六個名字。第七行是一句話，字跡是她自己的。</p>
 <p>全七章，約 CHARS 字。沒有機制，沒有選項，就是一本小說。</p>
 </div>""".replace("REST", rest).replace("CHARS", f"{chars:,}")
+HOME_DESC = ("一本繁體中文小說。兩年前開台第一天來了七個人，"
+             "她答應要記住每一個，而她記得六個。")
+ld = ('<script type="application/ld+json">'
+      + JSONLD.replace("DESC", HOME_DESC).replace(
+          "CHARS", ",".join('{"@type":"Person","name":"%s"}' % n for _, n, *_ in CAST))
+      + "</script>")
 (DOCS / "index.html").write_text(page(
-    "格莉奇與黑洞先生",
-    "一本繁體中文小說。兩年前開台第一天來了七個人，她答應要記住每一個，而她記得六個。",
-    home, "index.html", wide=True), encoding="utf-8")
+    "格莉奇與黑洞先生", HOME_DESC, home, "index.html", wide=True, ld=ld), encoding="utf-8")
+
+# sitemap 與 robots
+(DOCS / "sitemap.xml").write_text(
+    '<?xml version="1.0" encoding="UTF-8"?>\n'
+    '<urlset xmlns="http://www.sitemap s.org/schemas/sitemap/0.9">\n'.replace("sitemap s", "sitemaps")
+    + "".join(f"<url><loc>{BASE}{u}</loc><priority>{pr}</priority></url>\n"
+              for u, pr in (("", "1.0"), ("novel.html", "0.9"), ("characters.html", "0.7")))
+    + "</urlset>\n", encoding="utf-8")
+(DOCS / "robots.txt").write_text(
+    f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n", encoding="utf-8")
+print("  sitemap.xml / robots.txt")
 
 build_images()
 print(f"寫好三頁：index / novel（{len(chapters)} 章、{chars} 字）/ characters")
