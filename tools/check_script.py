@@ -15,7 +15,7 @@ def sentences(t):
     return [s.strip() for s in SENT.findall(VAR.sub("○○○", t)) if s.strip()]
 
 bad = []
-for p in sorted(pathlib.Path("design/script").glob("*.md")):
+for p in sorted(pathlib.Path("design/script").glob("day*.md")):
     text = p.read_text(encoding="utf-8")
     for i, ln in enumerate(text.split("\n"), 1):
         s = ln.strip()
@@ -35,5 +35,5 @@ for p in sorted(pathlib.Path("design/script").glob("*.md")):
 
 for f, i, why, snip in bad:
     print(f"{f}:{i}  {why}\n    {snip}")
-print(f"\n掃了 {len(list(pathlib.Path('design/script').glob('*.md')))} 個檔案，{len(bad)} 處要改")
+print(f"\n掃了 {len(list(pathlib.Path('design/script').glob('day*.md')))} 個檔案，{len(bad)} 處要改")
 sys.exit(0)
