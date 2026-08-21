@@ -22,7 +22,7 @@ d = json.load(urllib.request.urlopen(urllib.request.Request(
 
 problems = []
 for b in d["boards"]:
-    if not b["id"].startswith("board-day"):
+    if not ("day" in b["id"] and b["id"].startswith("board-")):
         continue
     nodes = b["nodes"]
     # 中午段 = 從標題含「中午」的場景卡開始，到下一張場景卡為止
@@ -55,7 +55,7 @@ for b in d["boards"]:
             if "他" in t and "黑洞先生" not in t and n["id"] in noon:
                 problems.append((b["id"], n["id"], "中午段他不在畫面上，用「他」會誤會", t))
 
-print(f"檢查 {sum(len(b['nodes']) for b in d['boards'] if b['id'].startswith('board-day'))} 張卡")
+print(f"檢查 {sum(len(b['nodes']) for b in d['boards'] if ("day" in b["id"] and b["id"].startswith("board-")))} 張卡")
 if not problems:
     print("代名詞沒有問題。")
 for bid, nid, why, t in problems:

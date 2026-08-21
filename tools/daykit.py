@@ -100,7 +100,8 @@ class Board:
                           [{"variable": "savesLeft", "kind": "add", "value": -1},
                            {"variable": "savedCount", "kind": "add", "value": 1}, *ops_hit],
                           text="", title="搶到了", x=bx, y=0)
-        miss = self.say(f"{key}-miss", "", who="旁白", x=bx, y=240, title="放著")
+        # 空的對話卡在播放器上是一張要點掉的空白框，所以用 setVariable 當中繼。
+        miss = self.setvar(f"{key}-miss", [], text="", title="放著", x=bx, y=240)
         # 次數用完就走不進搶答那條
         self.link(q, used, "choice-0",
                   cond={"variable": "savesLeft", "op": "lte", "value": 0})
