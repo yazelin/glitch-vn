@@ -338,7 +338,7 @@ class Board:
             outs.append((ok, no))
         return q, outs
 
-    def wake(self, key, prefill=(), looks=0, x=None, y=0):
+    def wake(self, key, prefill=(), looks=0, day=0, x=None, y=0):
         """開機：清空記憶格。她每天睡醒清空，所以每一天都要走這一步。
 
         prefill = 醒來就已經佔掉的格子（例如 Day 3 手裡那塊麵包）。
@@ -354,6 +354,8 @@ class Board:
                         "value": prefill[i] if i < len(prefill) else ""})
         if looks:
             ops.append({"variable": "looksLeft", "kind": "set", "value": looks})
+        if day:
+            ops.append({"variable": "dayNow", "kind": "set", "value": day})
         return self.setvar(f"{key}-wake", ops, text="", title="開機：記憶體清空", x=x, y=y)
 
     # ── 探索日用的零件 ────────────────────────────────────
@@ -405,7 +407,10 @@ class Board:
             c = self.setvar(
                 f"{key}-k{i+1}",
                 [{"variable": f"kept{i+1}", "kind": "set", "valueFrom": "pending"},
-                 {"variable": "keptCount", "kind": "add", "value": 1}],
+                 {"variable": "keptCount", "kind": "add", "value": 1},
+                 # 第四天的記憶考只考第一件，所以只有第一件要記是哪一天的。
+                 *([{"variable": "keptFrom1", "kind": "set", "valueFrom": "dayNow"}]
+                   if i == 0 else [])],
                 text="", title=f"第 {i+1} 件", x=x + 300, y=y + (i - n / 2) * 110)
             self.link(gate, c, "right",
                       cond={"variable": "keptCount", "op": "eq", "value": i})

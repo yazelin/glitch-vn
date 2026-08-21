@@ -23,7 +23,7 @@ b = Board("board-v2-day1", "新一・第一天：雜談", "開播前／直播中
 # ── 開播前 ────────────────────────────────────────────
 b.scene("d1-open", "第一天・開播前", "直播室的倒數顯示 08:00。房間裡只有一個人。", "早", start=True)
 b.prev = "d1-open"
-w = b.wake("d1")
+w = b.wake("d1", day=1)
 b.link("d1-open", w)
 b.prev = w
 b.addops(w, [{"variable": "savesLeft", "kind": "set", "value": 3},

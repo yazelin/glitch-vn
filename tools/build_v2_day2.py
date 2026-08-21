@@ -10,9 +10,10 @@ b = Board("board-v2-day2", "新一・第二天：遊戲實況", "指路。指錯
 
 b.scene("d2-open", "第二天・開播前", "直播室的倒數顯示 12:00。桌上攤著守則本。", "早", start=True)
 b.prev = "d2-open"
-w = b.wake("d2")
+# 這一天的玩法是指路，搶答只給一次——洞也只有一個。
+w = b.wake("d2", day=2)
 b.link("d2-open", w); b.prev = w
-b.addops(w, [{"variable": "savesLeft", "kind": "set", "value": 3},
+b.addops(w, [{"variable": "savesLeft", "kind": "set", "value": 1},
              {"variable": "savedCount", "kind": "set", "value": 0},
              {"variable": "settleAt", "kind": "set", "value": 0},
              {"variable": "deaths", "kind": "set", "value": 0}])
