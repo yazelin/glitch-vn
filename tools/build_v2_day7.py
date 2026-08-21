@@ -218,11 +218,16 @@ fin = b.setvar("d7-finjoin", [], text="", title="收尾", x=ex + 5000, y=0)
 for n in (p1[-1], p2, mid[-1], none[-1]): b.link(n, fin)
 b.prev = fin
 
+ngset = b.setvar("d7-ng", [{"variable": "ngPlus", "kind": "set", "value": 1}],
+                 text="", title="二週目旗標")
+b.link(fin, ngset)
+b.prev = ngset
+
 ri = b.add("d7-rule", {"type": "input", "title": "最後一句。你要留什麼給明天的她？",
                        "text": "守則本翻開。最後一頁。",
                        "inputVariable": "ruleLine",
                        "inputPlaceholder": "最後一句"})
-b.link(fin, ri); b.prev = ri
+b.link(ngset, ri); b.prev = ri
 b.chain([
  ("d7-f1", "她一筆一畫寫上去。", "平常", "旁白"),
  ("d7-f2", "好了。", "平常", G),

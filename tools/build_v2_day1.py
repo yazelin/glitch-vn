@@ -165,6 +165,29 @@ b.chain([
  ("d1-o11", "哈哈哈哈他說我很好笑！", "開心", G),
  ("d1-o12", "誰？", "餓", HOLE),
  ("d1-o13", "{{name}} 啊。今天新來的。我的記憶體。", "開心", G),
+])
+
+# 二週目：只有他認得出來。她不會，因為她每天都清空。
+ng = b.setvar("d1-ng", [], text="", title="以前來過嗎")
+b.link(b.prev, ng)
+nx = b.col()
+again = b.chain([
+ ("d1-ng1", "……", "飽", HOLE),
+ ("d1-ng2", "你。", "飽", HOLE),
+ ("d1-ng3", "他抬起頭，看向鏡頭。他是唯一發現鏡頭還開著的人。", "平常", "旁白"),
+ ("d1-ng4", "你以前是不是來過。", "飽", HOLE),
+ ("d1-ng5", "欸？你在跟誰講話？", "發呆", G),
+ ("d1-ng6", "沒有。", "飽", HOLE),
+], y=-250, x=nx, link_prev=False)
+# 這兩句是他越過她、直接對鏡頭外的玩家講的。代名詞檢查靠標題放行。
+for nid in ("d1-ng2", "d1-ng4"):
+    b.find(nid)["data"]["title"] = "對玩家"
+b.link(ng, again[0], "right", cond={"variable": "ngPlus", "op": "eq", "value": 1})
+njoin = b.setvar("d1-ngjoin", [], text="", title="接回主線", x=nx + 2000, y=0)
+b.link(ng, njoin); b.link(again[-1], njoin)
+b.prev = njoin
+
+b.chain([
  ("d1-o14", "天花板亮了一下，然後暗回去。", "平常", "旁白"),
  ("d1-o15", "嗯。", "飽", HOLE),
  ("d1-o16", "那我來整理一下今天的東西喔。", "平常", G),

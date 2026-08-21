@@ -9,7 +9,7 @@ import json, pathlib, collections
 
 P = json.load(open(pathlib.Path.home() / "glitch-vn/backup/project.json"))
 BOARDS = [b for b in P["boards"] if b["id"].startswith("board-day")]
-BOARDS.sort(key=lambda b: int(b["id"].replace("board-day", "")))
+BOARDS.sort(key=lambda b: int(b["id"].split("day")[-1]))
 N = {n["id"]: (b, n) for b in P["boards"] for n in b["nodes"]}
 
 OPTXT = {"eq": "＝", "neq": "≠", "gt": "＞", "gte": "≥", "lt": "＜", "lte": "≤"}

@@ -9,7 +9,7 @@
 
 離開碼非 0 代表有問題。
 """
-import json, pathlib, subprocess, sys
+import json, pathlib, subprocess, sys, tempfile
 
 T = pathlib.Path(__file__).resolve().parent
 subprocess.run([sys.executable, str(T / "pull.py")], check=True, stdout=subprocess.DEVNULL)
@@ -111,7 +111,9 @@ ALLOW = {
     "……不是那邊，是這邊":
         "Day 5 開場的夢話。這是劇情碎片(她夢裡在指某個方向),不是拿來製造洞見感的修辭",
 }
-dump = T.parent / "docs/script.txt"
+# 不要寫進 docs/script.txt——那是 export_script.py 的產出（有分支縮排的可讀劇本）。
+# 這裡只要一份給 speak-tw 掃的平鋪文字，丟暫存就好。
+dump = pathlib.Path(tempfile.gettempdir()) / "glitch-vn-speak-tw-dump.txt"
 with open(dump, "w") as f:
     for b in DAYS:
         f.write(subprocess.run([sys.executable, str(T / "dump_board.py"), b["id"]],

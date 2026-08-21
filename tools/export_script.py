@@ -10,8 +10,9 @@ dump_board.py 是把節點圖照順序印出來，分支會被攤平成一條直
 import collections, json, pathlib, sys
 
 P = json.load(open(pathlib.Path.home() / "glitch-vn/backup/project.json"))
-DAYS = sorted([b for b in P["boards"] if b["id"].startswith("board-day")],
-              key=lambda b: int(b["id"].replace("board-day", "")))
+# 線上跑的是新前提版。舊版的板子還在專案裡，但劇本輸出以線上那條為準。
+DAYS = sorted([b for b in P["boards"] if b["id"].startswith("board-v2-day")],
+              key=lambda b: int(b["id"].split("day")[-1]))
 OP = {"eq": "＝", "neq": "≠", "gt": "＞", "gte": "≥", "lt": "＜", "lte": "≤"}
 V = {v["name"]: (v.get("label") or v["name"]) for v in P["variables"]}
 out = []

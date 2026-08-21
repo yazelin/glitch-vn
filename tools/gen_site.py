@@ -14,8 +14,9 @@
 import html, json, pathlib, sys
 
 P = json.load(open(pathlib.Path.home() / "glitch-vn/backup/project.json"))
-DAYS = sorted([b for b in P["boards"] if b["id"].startswith("board-day")],
-              key=lambda b: int(b["id"].replace("board-day", "")))
+# 線上跑的是新前提版（board-v2-dayN）。舊版還在專案裡，但不上站。
+DAYS = sorted([b for b in P["boards"] if b["id"].startswith("board-v2-day")],
+              key=lambda b: int(b["id"].split("day")[-1]))
 V = {v["name"]: v for v in P["variables"]}
 E = html.escape
 # ── 推廣三件套（＋部落格）──────────────────────────────
@@ -111,7 +112,7 @@ def var_rows():
 
 # ── 每天的資料 ──────────────────────────────────────────
 def day_data(b):
-    d = {"num": int(b["id"].replace("board-day", "")), "name": b["name"],
+    d = {"num": int(b["id"].split("day")[-1]), "name": b["name"],
          "desc": b.get("description", ""), "cards": len(b["nodes"]),
          "choices": [], "inputs": [], "branches": []}
     seg = ""
@@ -332,56 +333,58 @@ parts = []
 parts.append(f'''<div class="wrap"><header class="hero">
 <div class="boot"><a href="index.html" style="color:inherit">← 製作記錄</a>　逼——嗶！　系統讀取中</div>
 <h1>格莉奇與黑洞先生<br>使用說明</h1>
-<p class="sub">一天一圈的視覺小說。她的記憶體只有 4KB，每天睡醒清空。
-你是她的外接記憶體——她裝不下的東西可以交給你保管，但你要回來，她才拿得回去。</p>
+<p class="sub">她是 VTuber。粉絲的名字就叫「記憶體」。
+直播的時候她旁邊有提示詞、有留言區，所以她記得住每一個人。
+下播之後那些全部關掉——而她會忘記把麥克風也關掉。</p>
 <div class="slots">
 {"".join(f'<div class="slot{" on" if i == 0 else ""}"></div>' for i in range(4))}
-<span class="cap">記憶體 1／4　你的名字放在第一格</span>
+<span class="cap">記憶體 1／4　這是她從直播帶得出去的東西</span>
 </div>
 </header>''')
 
 parts.append(f'''<section>
 <div class="eyebrow">一天的形狀</div>
-<h2>每一天都是同一個形狀</h2>
-<p>七天，每天走一樣的三段。變的是她在早上發現什麼、你在中午替她決定什麼，
-還有他晚上回來時<strong>會不會提到</strong>。</p>
+<h2>一天分三段，而三段裡的人數不一樣</h2>
+<p>七天，每天走一樣的三段。<strong>白天你是幾千分之一，晚上你是唯一的一個。</strong></p>
 <div class="segs">
-<div class="seg"><div class="t">早</div><p>她開機。發現一件她不記得自己做過的事。
-每天打斷開機流程的方式都不一樣。</p></div>
-<div class="seg"><div class="t">中</div><p>他去上班，只剩她跟你。
-今天那件事要放哪裡，你決定。</p></div>
-<div class="seg"><div class="t">晚</div><p>他回來，對你中午的選擇有反應。
-她寫一句守則給明天的自己，然後存檔。</p></div>
+<div class="seg"><div class="t">開播前</div><p>只有她。留言區還沒開，你插不上手。
+她在背今天的流程表，或是在調麥克風。</p></div>
+<div class="seg"><div class="t">直播中</div><p>幾千人。她卡住的那一秒，
+留言區刷起來，她挑一則唸出來——唸出來的才留得住。</p></div>
+<div class="seg"><div class="t">下播後</div><p>只有你。
+她忘記把麥克風關掉，鏡頭朝著天花板。你看不到她，你看得到光。</p></div>
 </div>
 </section>''')
 
 parts.append("""<section>
 <div class="eyebrow">記憶體</div>
-<h2>四格，而且看得見</h2>
-<p>她一次只裝得下四件事。<strong>四格的內容你看得到</strong>——選項與台詞會把它們唸出來，
-所以你隨時知道自己替她留了什麼。</p>
-<p>滿了不會問你要丟哪一格。<strong>最舊的那一件自己掉出去</strong>，她沒得挑，你也擋不住，
+<h2>四格不是她的全部記憶</h2>
+<p>她記得很多事——記得怎麼烤麵包、記得室友是誰、記得自己的頻道。
+<strong>四格是她今天從直播帶得出去的東西</strong>。提示詞一關，只有這四格跟著她走進下播之後。</p>
+<p>四格的內容你看得到，台詞會把它們唸出來。
+滿了不會問你要丟哪一格：<strong>最舊的那一件自己掉出去</strong>，她沒得挑，
 而且她連它存在過都不會知道。</p>
-<p>一件線索單獨看不出東西。<strong>兩件同時還在她腦子裡，她才拼得出來</strong>——
-而她一次只裝得下四件。所以「哪兩件同時還在」，就是你整天在決定的事。</p>
-<p>拼出來的東西會變成她那天晚上寫進守則的那句話。隔天早上她會唸出來，然後照做。
+<p>你一天只有三次搶答機會，而她一天會卡住五到六次。
+<strong>用在哪幾次是你的選擇。</strong>沒被你接住的，別的粉絲會補上，有時候補錯的。</p>
+<p>晚上她寫一句守則給明天的自己。隔天早上她會唸出來，然後照做，不會問為什麼。
 <strong>那是唯一活得過一個晚上的東西。</strong></p>
 </section>""")
 
 parts.append('''<section>
 <div class="eyebrow">核心選擇</div>
-<h2>三個去處</h2>
-<p>每天中午只有一件事要決定，而三個去處<strong>沒有一個是免費的</strong>。</p>
+<h2>睡前她會做三個動作</h2>
+<p>下播之後她把今天剩下的四件一件一件講給你聽。這三個是<strong>她睡前做的動作</strong>，
+不是「決定要忘掉什麼」——四件事這時候都還在她手上。忘記發生在半夜。</p>
 <div class="routes">
-<div class="route"><div class="who">留在她這裡</div><h3>她自己記著</h3>
-<p>今天她記得。明天睡醒清空，什麼都不剩。</p>
-<div class="cost">4KB 只有四格。滿了再留，會擠掉一件她不知道是什麼的舊事。</div></div>
-<div class="route"><div class="who">給黑洞先生吃</div><h3>他吃掉</h3>
-<p>東西消失，他長回一隻腳，門邊那疊沒人穿的短靴會少一雙。</p>
-<div class="cost">他一天只吃得下一件。這禮拜餵過他幾次，最後一天會結帳。</div></div>
-<div class="route"><div class="who">交給你保管</div><h3>你替她留著</h3>
-<p>留得住。她不會記得自己交出去過。</p>
-<div class="cost">你要回來，她才拿得回去。你不回來，那東西一樣不見。</div></div>
+<div class="route"><div class="who">她自己複誦一遍</div><h3>記住</h3>
+<p>今天晚上她還講得出來。明天可能還在。</p>
+<div class="cost">明天早上清空，能不能撐過去是運氣。</div></div>
+<div class="route"><div class="who">講給你聽，講兩次</div><h3>交給你保管</h3>
+<p>她自己不會記得講過。可是你記得。</p>
+<div class="cost">你要在第七天講出來，她才拿得回去。你不講，那件事就留在你那裡。</div></div>
+<div class="route"><div class="who">什麼都不做</div><h3>就讓它去吧</h3>
+<p>半夜它自己走掉。到了明天早上它就不在了，而他吃飽了。</p>
+<div class="cost">沒有人在餵誰。這就是長大——沒有人拿走那件事，只是你再也沒有想起過它。</div></div>
 </div>
 </section>''')
 
@@ -389,7 +392,7 @@ parts.append(f'''<section>
 <div class="eyebrow">存檔</div>
 <h2>存檔是玩法，不是功能</h2>
 <p>她沒有手幫你按。<strong>你不存檔，第二天她不認識你</strong>——你的名字、你昨天說的話，
-她那裡一格都沒有。存了，她開機會比較快，而且會叫你的名字。</p>
+她那裡一格都沒有。第二天她在玩一款有存檔點的遊戲，會抬頭說一句「這個好方便喔，我也想要一個」。</p>
 <p>這是這個遊戲唯一一個「介面上的動作」直接變成劇情的地方。</p>
 </section>''')
 
@@ -428,8 +431,7 @@ for d in DD:
             seen.add(k); uniq.append((v, op, val, t))
     if pool:
         n = len({b[2] for b in pool if b[0] == "todayEvent"})
-        blocks.append(f'<p class="note">中午是 {n} 選一的事件池，抽到已經出現過的會換下一個。'
-                      f'三個去處對每個事件都一樣，差別只在她發現的是什麼。</p>')
+        blocks.append(f'<p class="note">這一天有 {n} 選一的事件池，抽到已經出現過的會換下一個。</p>')
     if uniq:
         rows = "".join(f'<tr><td class="v">{E(v)} {E(op)} {E(str(val))}</td><td>{E(str(t or ""))}</td></tr>'
                        for v, op, val, t in uniq)
@@ -465,26 +467,27 @@ parts.append(f'''<section>
 </section>''')
 
 # 結局
-end_inner = ['<p>最後一天的結局由兩件事決定：中午你把那塊麵包放到哪裡，'
-             '還有<strong>這一整個禮拜你餵過他幾次</strong>。</p>']
+end_inner = ['<p>結局只有一個場景。<strong>它的長度跟內容，由你這七天交給自己保管、'
+             '而且在第七天真的講出來的那幾件決定。</strong></p>',
+             '<p>你留了很多件，她一件一件問，那一段很長。'
+             '你什麼都沒留，她問完一句就沒得問了，那一段很短很安靜。'
+             '你留了但記錯了，她照著你講的信——那件事從此就是錯的那個版本。</p>',
+             '<p>「玩家沒回來」不另外寫壞結局。沒存檔，第二天她就不認識你，'
+             '遊戲從第一天重來。那個代價已經在機制裡。</p>']
 if END:
     for seg, q, opts in END["choices"]:
         end_inner.append(choice_block(seg, q, opts))
-end_inner.append('''<p style="margin-top:20px">「留給黑洞先生」這條路會再分兩種。
-他一天只吃得下一件——前六天你每餵他一次，就花掉一次他的胃。
-<strong>帳單開在最後一天</strong>：餵過他的玩家，會看到他吃不下那塊她為他烤的麵包。</p>''')
 parts.append(f'''<section>
 <div class="eyebrow">結局</div>
-<h2>四個結局</h2>
-<p>三條路，其中一條依你這禮拜的行為再分兩種。</p>
+<h2>一個結局，長度是你決定的</h2>
+<p>不寫四條分支。第七天收尾就一個場景，她問「你怎麼會記得」之後能問的東西，
+就是你交給自己保管的那份清單。</p>
 {gate("結局條件與觸發方式", "重度劇透", "".join(end_inner))}
 {gate("二週目", "破關後再看", """
-<p>這個平台的變數新開一場就回預設，沒有內建的二週目。所以這個遊戲不靠平台——
-<strong>你本人就是存檔</strong>。</p>
-<p>開場會問你以前來過沒有。說來過，它會請你寫一句「這個房子裡有人說過、
-而她記不住的話」。答對了，最後一天會多一段：她還是不記得你，
-但這間房子裡有一個永遠不會忘的人。</p>
-<p>暗號都是遊戲裡真的出現過、而且猜不到的句子。標點有沒有打都收。</p>""")}
+<p>這個平台的變數新開一場就回預設，可是這個遊戲會記得你來過。</p>
+<p>第一天下播之後，她把你介紹給室友。<strong>如果你以前來過，
+他會抬起頭，看向鏡頭</strong>——他是唯一發現鏡頭還開著的人。</p>
+<p>她不會發現。她每天都清空。</p>""")}
 </section>''')
 
 parts.append(f'''<footer>
