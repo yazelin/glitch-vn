@@ -183,7 +183,7 @@ b.settext("d1n-feed", "她把紙條留在桌上。\n門外有東西掉在地上�
 for nid, route in (("d1n-keep", "keep"), ("d1n-feed", "feed"), ("d1n-give", "give")):
     b.addops(nid, [{"variable": "todayRoute", "kind": "set", "value": route}])
 
-FEET = "門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。"
+FEET = "門邊那疊沒穿的短靴今天矮了一點。\n"
 b.settext("d1e-feet", FEET + "最上面那雙是剛剛才放上去的，鞋口還撐著。她沒有數，她從來不數。")
 ex = 4200
 r_keep = b.say("d1e-r-keep", FEET + "她整個下午都在想那句謝謝要謝什麼。"

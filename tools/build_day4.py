@@ -116,9 +116,7 @@ tq = b.choice("d4m-tellq", "她問你昨天門邊有幾雙靴子。你知道答�
 b.link(b.prev, tq)
 tx = b.col()
 t_truth = b.setvar("d4m-t-truth", [{"variable": "toldFeet", "kind": "set", "value": "truth"}],
-    text="你把真的數字給她。\n"
-         "「所以多了。」她說。「多了幾雙我不知道，可是多了。」\n"
-         "她蹲回門邊，開始把靴子一雙一雙排開。",
+    text="你把真的數字給她。\n「所以少了。」她說。「少了幾雙我不知道，可是少了。」\n她蹲回門邊，開始把剩下的靴子一雙一雙排開。",
     title="說真話", x=tx, y=-200)
 t_same = b.setvar("d4m-t-same", [{"variable": "toldFeet", "kind": "set", "value": "same"}],
     text="你跟她說跟昨天一樣。\n"
@@ -221,8 +219,7 @@ b.pool("d4n", EVENTS, after_text="好。收工。")
 after_pool = b.prev
 sx = b.col()
 saw = b.setvar("d4n-saw", [{"variable": "sawBoot", "kind": "set", "value": 1}],
-    text="門邊有東西輕輕落下的聲音。\n"
-         "那疊短靴上面多了一雙。剛剛還沒有的。",
+    text="門邊有東西被拿走的聲音。\n那疊短靴少了一雙。剛剛還在的。",
     title="門邊多了一雙", x=sx, y=-200)
 b.link(after_pool, saw, "right", cond={"variable": "todayRoute", "op": "eq", "value": "feed"})
 
