@@ -82,7 +82,7 @@ by_board = collections.Counter(x[0] for x in bad)
 if not bad:
     print("接線全部正常。")
 for bid, msg in bad:
-    print(f"  ★ [{bid[-12:]}] {msg}")
+    print(f"  ★ [{bid.replace("board-","")}] {msg}")
 if bad:
     print("\n" + "　".join(f"{k[-12:]} {v}" for k, v in by_board.items()))
 sys.exit(1 if bad else 0)

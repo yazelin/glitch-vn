@@ -21,6 +21,8 @@ BG = {"早": A["bg-morning"], "中": A["bg-noon"], "晚": A["bg-night"]}
 ROUTES = ["留在我這裡（明天睡醒就忘了）",
           "給黑洞先生吃（他會長回一隻腳）",
           "交給你保管（留得住，但你要回來）"]
+# 新前提（VTuber 版）。她睡前做的三個動作，不是「決定要忘掉什麼」。
+NIGHT = ["她自己複誦一遍", "講給你聽，講兩次", "什麼都不做"]
 STATUS = "（記憶體 {{slotUsed}}／4　黑洞先生今天吃了 {{fedToday}}／1）"
 
 
@@ -68,6 +70,50 @@ class Board:
         else:
             d["speaker"] = "旁白"; d["title"] = title or "旁白"
         return self.add(nid, d, x, y)
+
+    def chat(self, nid, lines, title="留言區", x=None, y=0):
+        """留言區。玩家的留言只是幾千則裡的一則，所以假留言要真的長得像留言。
+
+        lines = ["小夜：你昨天說要開新企劃", ...]
+        """
+        return self.add(nid, {"type": "dialogue", "title": title,
+                              "text": "\n".join(lines), "speaker": "留言區"}, x, y)
+
+    def hole(self, key, ask, comments, answer, after_hit, after_miss,
+             ops_hit=(), x=None, y=0):
+        """她卡住的一個洞。玩家一天只有三次搶答，用在哪幾次是玩家的選擇。
+
+        搶答用次數不用亂數：`savesLeft` 用完之後那條路走不進去，
+        走進去的會扣一次。沒搶的洞由別的粉絲補，她照樣唸，有時候唸到錯的。
+        """
+        a = self.say(f"{key}-ask", ask, face="發呆")
+        if self.prev: self.link(self.prev, a)
+        c = self.chat(f"{key}-chat", comments)
+        self.link(a, c)
+        q = self.choice(f"{key}-q", f"要搶這一題嗎？（今天還剩 {{{{savesLeft}}}} 次）",
+                        [f"打字：「{answer}」", "這一題放著"])
+        self.link(c, q)
+        bx = self.col()
+        used = self.say(f"{key}-used", "你的搶答今天用完了。你看著別人搶。",
+                        who="旁白", x=bx, y=-240)
+        hit = self.setvar(f"{key}-hit",
+                          [{"variable": "savesLeft", "kind": "add", "value": -1},
+                           {"variable": "savedCount", "kind": "add", "value": 1}, *ops_hit],
+                          text="", title="搶到了", x=bx, y=0)
+        miss = self.say(f"{key}-miss", "", who="旁白", x=bx, y=240, title="放著")
+        # 次數用完就走不進搶答那條
+        self.link(q, used, "choice-0",
+                  cond={"variable": "savesLeft", "op": "lte", "value": 0})
+        self.link(q, hit, "choice-0")
+        self.link(q, miss, "choice-1")
+        h = self.say(f"{key}-after-hit", after_hit, face="開心", x=bx + 300, y=0)
+        self.link(hit, h)
+        m = self.say(f"{key}-after-miss", after_miss, face="平常", x=bx + 300, y=240)
+        self.link(miss, m); self.link(used, m)
+        end = self.setvar(f"{key}-end", [], text="", title="接回主線", x=bx + 600, y=0)
+        self.link(h, end); self.link(m, end)
+        self.prev = end
+        return end, hit
 
     def scene(self, nid, title, text, seg, bgm=None, start=False, x=None, y=0):
         d = {"type": "scene", "title": title, "text": text, "background": BG[seg]}
@@ -346,6 +392,85 @@ class Board:
         self.link(gate, shift)
         outs.append(shift)
         return gate, outs
+
+    def keepstore(self, key, x=0, y=0, n=6):
+        """玩家保管的東西存進 kept1…keptN。
+
+        跟 store() 不一樣的地方：**玩家不會忘記**，所以滿了不往前推，
+        多的那件只加計數不佔名額（第七天挑得出來的就是有名字的那幾件）。
+        """
+        gate = self.setvar(f"{key}-gate", [], text="", title="交給玩家保管", x=x, y=y)
+        outs = []
+        for i in range(n):
+            c = self.setvar(
+                f"{key}-k{i+1}",
+                [{"variable": f"kept{i+1}", "kind": "set", "valueFrom": "pending"},
+                 {"variable": "keptCount", "kind": "add", "value": 1}],
+                text="", title=f"第 {i+1} 件", x=x + 300, y=y + (i - n / 2) * 110)
+            self.link(gate, c, "right",
+                      cond={"variable": "keptCount", "op": "eq", "value": i})
+            outs.append(c)
+        over = self.setvar(f"{key}-over", [{"variable": "keptCount", "kind": "add", "value": 1}],
+                           text="", title="超過六件", x=x + 300, y=y + n * 60)
+        self.link(gate, over)
+        outs.append(over)
+        return gate, outs
+
+    def settle(self, key, x=0, y=0):
+        """下播後的四格結算。她睡前對還在手上的四件做三個動作之一。
+
+        空的格子跳過——空的格子沒有東西可以處置，硬演會變成點空白卡。
+
+        「交給你保管」要走共用的 keepstore，可是那個區塊不知道自己是從第幾格
+        進來的。用 `settleAt` 記現在做到第幾格，保管完再照這個數字回到下一格。
+        """
+        ks_gate, ks_outs = self.keepstore(f"{key}-ks", x=x + 1500, y=y - 500)
+        hub = self.setvar(f"{key}-kshub", [], text="", title="保管完", x=x + 1900, y=y - 500)
+        for o in ks_outs: self.link(o, hub)
+        after = self.setvar(f"{key}-done", [], text="", title="結算完", x=x + 2300, y=y + 1050)
+        gates, nexts = [], []
+        for i in range(4):
+            sy = y + i * 700
+            g = self.setvar(f"{key}-g{i+1}",
+                            [{"variable": "settleAt", "kind": "set", "value": i + 1}],
+                            text="", title=f"第 {i+1} 格", x=x, y=sy)
+            gates.append(g)
+        for i in range(4):
+            sy = y + i * 700
+            nxt = gates[i + 1] if i + 1 < 4 else after
+            nexts.append(nxt)
+            g = gates[i]
+            say = self.say(f"{key}-say{i+1}", f"第 {i+1} 件，{{{{slot{i+1}}}}}。",
+                           face="平常", x=x + 300, y=sy)
+            # 空格跳過（有條件的先判，所以這條要在無條件那條之前加）
+            self.link(g, nxt, "right", cond={"variable": f"slot{i+1}", "op": "eq", "value": ""})
+            self.link(g, say)
+            c = self.choice(f"{key}-q{i+1}", "這一件怎麼辦？", NIGHT, x=x + 600, y=sy)
+            self.link(say, c)
+            keep = self.say(f"{key}-keep{i+1}",
+                            f"{{{{slot{i+1}}}}}。{{{{slot{i+1}}}}}。好，記起來了。",
+                            face="開心", x=x + 900, y=sy - 200)
+            give = self.setvar(f"{key}-give{i+1}",
+                               [{"variable": "pending", "kind": "set", "valueFrom": f"slot{i+1}"}],
+                               text=f"{{{{name}}}}，你幫我記著喔。{{{{slot{i+1}}}}}。\n"
+                                    f"我再講一次，{{{{slot{i+1}}}}}。你記住了嗎？",
+                               title="交給你", x=x + 900, y=sy)
+            let = self.setvar(f"{key}-let{i+1}",
+                              [{"variable": "fedCount", "kind": "add", "value": 1},
+                               {"variable": "holeFeet", "kind": "add", "value": 1}],
+                              text="這件……算了。", title="讓它去", x=x + 900, y=sy + 200)
+            self.link(c, keep, "choice-0")
+            self.link(c, give, "choice-1")
+            self.link(c, let, "choice-2")
+            self.link(give, ks_gate)
+            self.link(keep, nxt); self.link(let, nxt)
+        # 保管完照 settleAt 回到下一格
+        for i in range(3):
+            self.link(hub, nexts[i], "right",
+                      cond={"variable": "settleAt", "op": "eq", "value": i + 1})
+        self.link(hub, after)
+        self.prev = after
+        return gates[0], after
 
     def andlink(self, src, conds, target, fallthrough, x=0, y=0, key=None):
         """條件的 AND。邊的條件一次只能比一個變數,所以串起來走。
