@@ -32,7 +32,9 @@
     tools/check_script.py    同一套規則，但掃 design/script/*.md
     （daykit.push() 會先跑 split_narration()：把寫在台詞裡的
       「（她走出去了。）」自動拆成獨立的旁白卡，不然她會把括號唸出來）
-    tools/export_script.py   把線上版印成可讀劇本（分支縮排）→ docs/script.txt
+    tools/script_walk.py     走圖產生「一條可讀劇本」的事件流（純文字版與 HTML 版共用）
+    tools/export_script.py   純文字劇本 → docs/script.txt
+    tools/gen_script_site.py 可讀的劇本頁 → docs/script.html
     art/                     背景原始檔（開播前／直播中／天花板）
     tools/dump_board.py      把一塊板子印成可讀劇本，拿去給人審
     tools/reverse_board.py   從線上版反推出建置腳本（腳本弄丟時用）
