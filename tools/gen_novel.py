@@ -47,6 +47,13 @@ header h1{font-weight:600;font-size:clamp(30px,6vw,44px);line-height:1.3;
 header p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.8;
   font-family:"Noto Sans TC",system-ui,sans-serif}
 hr.rule{border:0;border-top:1px solid var(--line);margin:0}
+/* 七章之後不給目錄的話，讀者要一路捲。黏在頂端，不擋字。 */
+nav.toc{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px;
+  padding:10px 0;background:var(--ground);border-bottom:1px solid var(--line);
+  font-family:"DM Mono",ui-monospace,monospace;font-size:12px}
+nav.toc a{text-decoration:none;color:var(--muted);border:1px solid var(--line);
+  border-radius:var(--r);padding:4px 9px;background:var(--surface);white-space:nowrap}
+nav.toc a:hover{color:var(--glitch);border-color:var(--glitch)}
 
 h2.ch{font-weight:600;font-size:21px;margin:56px 0 30px;color:var(--glitch);
   font-family:"DM Mono",ui-monospace,monospace;letter-spacing:.12em}
@@ -145,12 +152,16 @@ def render(md):
 
 
 chapters = sorted((ROOT / "novel").glob("ch*.md"))
-body = []
-for p in chapters:
+body, toc = [], []
+for i, p in enumerate(chapters, 1):
     md = p.read_text(encoding="utf-8")
     title = next((l[2:].strip() for l in md.split("\n") if l.startswith("# ")), p.stem)
-    body.append(f'<h2 class="ch" style="margin-top:34px">{E(title)}</h2>' if not body
-                else f'<hr class="rule"><h2 class="ch">{E(title)}</h2>')
+    # 「第一章・第一千零四版」→ 目錄只放後半，前半是編號
+    short = title.split("・")[-1]
+    toc.append(f'<a href="#c{i}">{i}・{E(short)}</a>')
+    head = f'<h2 class="ch" id="c{i}"'
+    body.append(f'{head} style="margin-top:34px">{E(title)}</h2>' if not body
+                else f'<hr class="rule">{head}>{E(title)}</h2>')
     body.append(render(md))
 
 promo = ('<div class="promo">' + "".join(
@@ -169,7 +180,7 @@ HTML = f'''<title>格莉奇與黑洞先生</title>
 <h1>格莉奇與黑洞先生</h1>
 <p>兩年前開台第一天來了七個人。她說，我要記住每一個來的人，我保證。</p>
 </header>
-<hr class="rule">
+<nav class="toc">{"".join(toc)}</nav>
 {"".join(body)}
 <footer>
 <p>目前寫到第 {len(chapters)} 章。這一頁只有小說，沒有機制。</p>
