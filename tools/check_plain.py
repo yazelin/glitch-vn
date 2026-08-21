@@ -36,6 +36,7 @@ for b in DAYS:
     prev_named = False
     for n in b["nodes"]:
         dd = n["data"]
+        sp = dd.get("speaker")
         t = (dd.get("text") or "").strip()
         if not t:
             prev_named = prev_named
@@ -56,6 +57,27 @@ for b in DAYS:
             if len(s_) > 30:
                 why.append(f"一句 {len(s_)} 字")
                 break
+        # 黑洞先生一次最多兩句短的。標成他卻講了一長串,通常是說話者標錯——
+        # 這種錯代名詞檢查抓不到（句子裡沒有你／妳）。Day 2 有一句這樣錯了很久。
+        if sp == "黑洞先生":
+            n_sent = len([x for x in re.split(r"[。！？\n]", t) if x.strip()])
+            # 三個五字短句是他的講法（「每天都數。每天我都說。每天妳都忘。」）,
+            # 用 OR 會把最好的台詞報成 bug。要句數多**而且**真的長才算。
+            if n_sent > 2 and len(t) > 26:
+                why.append(f"標成黑洞先生但講了 {n_sent} 句 / {len(t)} 字")
+        # 旁白被整段包引號:上一輪改寫留下來的痕跡。
+        # 只看頭尾是錯的規則——「台詞。」「台詞。」這種交錯也是頭尾都引號。
+        # 要看**第一個引號是不是到最後一個字才閉合**,那才是整段被包起來。
+        st = t.strip()
+        if sp in (None, "旁白") and st.startswith("「"):
+            depth = 0
+            for k, ch in enumerate(st):
+                depth += (ch == "「") - (ch == "」")
+                if depth == 0:
+                    if k == len(st) - 1:
+                        why.append("旁白被整段包了引號")
+                    break
+
         if why:
             problems.append((b["id"][-4:], n["id"], dd.get("speaker") or "旁白",
                              "、".join(why), t))
