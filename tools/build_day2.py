@@ -294,4 +294,14 @@ b.link(join2, "d2e-r-feed", "right", cond={"variable": "todayRoute", "op": "eq",
 b.link(join2, "d2e-r-keep", "right", cond={"variable": "todayRoute", "op": "eq", "value": "keep"})
 b.link(join2, "d2e-r-give")
 
+# 結尾的鉤子。這一天她剛剛才知道自己有一個朋友,而那個朋友就在螢幕外面。
+hook2 = b.chain([
+    ("d2e-hook1", "我今天知道了一件事。我有一個朋友。", "平常", G),
+    ("d2e-hook2", "明天我不會記得這件事。我連自己知道過都不會知道。", "平常", G),
+    ("d2e-hook3", "可是你會記得。所以明天你要來提醒我。", "平常", G),
+], x=6400, y=0, link_prev=False)
+b.unlink("d2e-sleep", "d2e-tbc")
+b.link("d2e-sleep", hook2[0])
+b.link(hook2[-1], "d2e-tbc")
+
 b.push('Day 2・靴子與裂痕：從線上版反推重建')

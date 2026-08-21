@@ -121,7 +121,14 @@ b.link('d1e-saved', 'd1e-saved2', 'right')
 b.link('d1e-notsaved', 'd1e-notsaved2', 'right')
 b.link('d1e-saved2', 'd1e-sleep', 'right')
 b.link('d1e-notsaved2', 'd1e-sleep', 'right')
-b.link('d1e-sleep', 'd1e-jump', 'right')
+# 結尾的鉤子。連載寫作的基本:每一集要給下一集一個理由。
+hook1 = b.chain([
+    ("d1e-hook1", "明天我醒來，什麼都不記得。", "平常", G),
+    ("d1e-hook2", "牆上有你的名字。可是牆會記得，我不會。", "平常", G),
+    ("d1e-hook3", "所以你要回來。你回來我才找得到今天。", "平常", G),
+], x=14200, y=0, link_prev=False)
+b.link('d1e-sleep', hook1[0])
+b.link(hook1[-1], 'd1e-jump')
 b.link('d1ng-ask', 'd1ng-in', 'right')
 b.link('d1ng-in', 'd1ng-hub', 'right')
 b.link('d1ng-hub', 'd1ng-yes', 'right', cond={'op': 'eq', 'value': '她給的', 'variable': 'ngToken'})

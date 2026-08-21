@@ -190,6 +190,9 @@ cur = b.setvar("d6e-rulever", [{"variable": "ruleVersion", "kind": "add", "value
 b.link(b.prev, cur); b.prev = cur
 b.chain([
     ("d6e-save",  "記得存檔。今天我把一個東西放到我自己拿不回來的地方了。", "平常", G),
+    ("d6e-hook1", "麵包在他那裡了。", "平常", G),
+    ("d6e-hook2", "明天我不會知道我給過他東西。我會以為冰箱一直都是空的。", "平常", G),
+    ("d6e-hook3", "所以明天如果他拿出一塊麵包，你要幫我想起來那是我的。", "平常", G),
     ("d6e-sleep", "她躺下來。西裝內袋的位置鼓起一小塊，在黑暗裡看不出形狀。", "平常", None),
 ])
 b.link(b.prev, b.jump("d6e-jump", "board-day7", "d7m-scene"))
