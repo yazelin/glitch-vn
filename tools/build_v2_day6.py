@@ -9,7 +9,7 @@ from daykit import Board, G, HOLE
 
 b = Board("board-v2-day6", "新一・第六天：提示詞掛掉", "五個洞，三次搶答。每救一個，就是她親口把下播後的事播出去。")
 
-b.scene("d6-open", "第六天・開播前", "直播室的倒數顯示 05:00。提示欄跑得好好的。", "早", start=True)
+b.scene("d6-open", "第六天・開播前", "直播室的倒數顯示 05:00。提示欄跑得好好的。", "開播前", start=True)
 b.prev = "d6-open"
 w = b.wake("d6", day=6, prefill=["今天就聊聊天"])
 b.link("d6-open", w); b.prev = w
@@ -26,7 +26,7 @@ b.chain([
  ("d6-p5", "這種最輕鬆了。", "開心", G),
 ])
 
-sc = b.scene("d6-live", "第六天・直播中", "留言區開了。", "中")
+sc = b.scene("d6-live", "第六天・直播中", "留言區開了。", "直播中")
 b.link(b.prev, sc); b.prev = sc
 b.chain([
  ("d6-l1", "逼——嗶！大家好，我是格莉奇！", "當機", G),
@@ -119,8 +119,9 @@ clr = b.setvar("d6-clear",
                text="四個格子是空的。", title="沒撐過去：四格清空", x=gx + 1200, y=250)
 b.link(bad[-1], clr)
 
-sc2 = b.scene("d6-off", "第六天・下播後", "鏡頭朝著天花板。麥克風還開著。很久都沒有聲音。", "晚")
+sc2 = b.scene("d6-off", "第六天・下播後", "鏡頭朝著天花板。麥克風還開著。很久都沒有聲音。", "下播後")
 b.link(ok[-1], sc2); b.link(clr, sc2); b.prev = sc2
+b.voiceonly = True   # 鏡頭朝天花板，看不到人
 b.chain([
  ("d6-o1", "門開了。外套被掛起來。", "平常", "旁白"),
  ("d6-o2", "怎麼了。", "餓", HOLE),

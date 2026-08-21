@@ -8,7 +8,7 @@ from daykit import Board, G, HOLE
 
 b = Board("board-v2-day7", "新一・第七天：週年回顧", "結算。她不記得的，你記得。")
 
-b.scene("d7-open", "第七天・開播前", "直播室的倒數顯示 60:00。今天要播很久。", "早", start=True)
+b.scene("d7-open", "第七天・開播前", "直播室的倒數顯示 60:00。今天要播很久。", "開播前", start=True)
 b.prev = "d7-open"
 w = b.wake("d7", day=7, prefill=["今天是兩週年"])
 b.link("d7-open", w); b.prev = w
@@ -26,7 +26,7 @@ b.chain([
  ("d7-p7", "好啦，反正大家會喜歡就好。", "開心", G),
 ])
 
-sc = b.scene("d7-live", "第七天・直播中", "留言區開了，刷滿了恭喜。", "中")
+sc = b.scene("d7-live", "第七天・直播中", "留言區開了，刷滿了恭喜。", "直播中")
 b.link(b.prev, sc); b.prev = sc
 b.chain([
  ("d7-l1", "逼——嗶！大家好，我是格莉奇！", "當機", G),
@@ -129,8 +129,9 @@ b.chain([
  ("d7-e6", "掰掰！", "開心", G),
 ])
 
-sc2 = b.scene("d7-off", "第七天・下播後", "鏡頭朝著天花板。麥克風還開著。", "晚")
+sc2 = b.scene("d7-off", "第七天・下播後", "鏡頭朝著天花板。麥克風還開著。", "下播後")
 b.link(b.prev, sc2); b.prev = sc2
+b.voiceonly = True   # 鏡頭朝天花板，看不到人
 b.chain([
  ("d7-o1", "門開了。外套被掛起來。", "平常", "旁白"),
  ("d7-o2", "今天好多人跟我講以前的事。", "平常", G),

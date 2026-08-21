@@ -15,7 +15,9 @@ CID = {G: "character-15c41e1f-ca37-424f-8c49-ac1031a42928",
        HOLE: "character-25c9632f-cd67-49d0-a4bd-2757b51127e7"}
 FACE = {"平常": A["glitch-plain"], "預設": A["glitch-idle"], "開心": A["glitch-happy"],
         "發呆": A["glitch-thinking"], "當機": A["glitch-error"], "睡著": A["glitch-sleep"]}
-BG = {"早": A["bg-morning"], "中": A["bg-noon"], "晚": A["bg-night"]}
+BG = {"早": A["bg-morning"], "中": A["bg-noon"], "晚": A["bg-night"],
+      # 新前提（VTuber 版）的三段。下播後那張是天花板——鏡頭倒在桌上忘了關。
+      "開播前": A["bg-pre"], "直播中": A["bg-live"], "下播後": A["bg-ceiling"]}
 
 # 三個去處的選項字面,五天共用同一組,玩家才學得起來
 ROUTES = ["留在我這裡（明天睡醒就忘了）",
@@ -48,6 +50,8 @@ class Board:
     def __init__(self, bid, name, desc):
         self.bid, self.name, self.desc = bid, name, desc
         self.nodes, self.edges, self.prev, self._x = [], [], None, 0
+        # 下播之後鏡頭朝著天花板，玩家看不到她。這個旗標一開，台詞就不帶立繪。
+        self.voiceonly = False
 
     def col(self, step=1):
         self._x += 300 * step
@@ -64,9 +68,10 @@ class Board:
         d = {"type": "dialogue", "title": title or text[:16], "text": text, "characterPosition": "center"}
         if who in (G, HOLE):
             d.update(speaker=who, characterId=CID[who],
-                     emotion=face if who == G else ("飽" if face == "飽" else "餓"),
-                     character=FACE[face] if who == G else
-                               (A["blackhole-full"] if face == "飽" else A["blackhole-hungry"]))
+                     emotion=face if who == G else ("飽" if face == "飽" else "餓"))
+            if not self.voiceonly:
+                d["character"] = (FACE[face] if who == G else
+                                  (A["blackhole-full"] if face == "飽" else A["blackhole-hungry"]))
         else:
             d["speaker"] = "旁白"; d["title"] = title or "旁白"
         return self.add(nid, d, x, y)

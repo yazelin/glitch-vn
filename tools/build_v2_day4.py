@@ -9,7 +9,7 @@ from daykit import Board, G, HOLE
 
 b = Board("board-v2-day4", "新一・第四天：讀粉絲來信", "寫信。她唸出你寫的，可是不記得那件事。")
 
-b.scene("d4-open", "第四天・開播前", "直播室的倒數顯示 20:00。桌上堆著一疊信。", "早", start=True)
+b.scene("d4-open", "第四天・開播前", "直播室的倒數顯示 20:00。桌上堆著一疊信。", "開播前", start=True)
 b.prev = "d4-open"
 w = b.wake("d4", day=4, prefill=["今天要讀大家的信"])
 b.link("d4-open", w); b.prev = w
@@ -26,7 +26,7 @@ b.chain([
  ("d4-p6", "等一下再看。等一下比較有感覺。", "平常", G),
 ])
 
-sc = b.scene("d4-live", "第四天・直播中", "留言區開了。", "中")
+sc = b.scene("d4-live", "第四天・直播中", "留言區開了。", "直播中")
 b.link(b.prev, sc); b.prev = sc
 b.chain([
  ("d4-l1", "逼——嗶！大家好，我是格莉奇！", "當機", G),
@@ -143,8 +143,9 @@ b.chain([
  ("d4-e3", "掰掰！明天要做菜喔！", "開心", G),
 ])
 
-sc2 = b.scene("d4-off", "第四天・下播後", "鏡頭朝著天花板。麥克風還開著。", "晚")
+sc2 = b.scene("d4-off", "第四天・下播後", "鏡頭朝著天花板。麥克風還開著。", "下播後")
 b.link(b.prev, sc2); b.prev = sc2
+b.voiceonly = True   # 鏡頭朝天花板，看不到人
 b.chain([
  ("d4-o1", "門開了。外套被掛起來。", "平常", "旁白"),
  ("d4-o2", "今天呢？", "餓", HOLE),
