@@ -40,10 +40,16 @@ def main():
     tmp = "/tmp/_bg.jpg"
     for p in sorted((ROOT / "art/out").glob("bg-*.png")):
         k = p.stem
-        if k in assets:
+        if k in assets and "--force" not in sys.argv:
             print(f"  跳過 {k}（已上傳）"); continue
         assets[k] = bg(p, k, tmp)
         print(f"  背景 {k}")
+    for p in sorted((ROOT / "art/avatar").glob("avatar-*.png")):
+        k = p.stem
+        if k in assets and "--force" not in sys.argv:
+            print(f"  跳過 {k}"); continue
+        assets[k] = put_media(f"{k}.png", p.read_bytes(), "image/png")
+        print(f"  頭像 {k}")
     for p in sorted((ROOT / "art").glob("sprite-*.png")):
         k = p.stem
         if k in assets:

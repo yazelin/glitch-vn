@@ -1,12 +1,19 @@
 {
- "bg-living-night": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353627616_bg-living-night.jpg",
- "bg-studio-2am": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353637882_bg-studio-2am.jpg",
- "bg-table-lamp": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353652130_bg-table-lamp.jpg",
+ "bg-living-night": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355492317_bg-living-night.jpg",
+ "bg-studio-2am": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355503285_bg-studio-2am.jpg",
+ "bg-table-lamp": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355519161_bg-table-lamp.jpg",
  "sprite-bambi": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353662553_sprite-bambi.png",
  "sprite-blackhole": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353676284_sprite-blackhole.png",
  "sprite-catgrass": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353686567_sprite-catgrass.png",
  "sprite-glitch": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353701830_sprite-glitch.png",
  "sprite-noah": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353716284_sprite-noah.png",
  "sprite-tower": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353726827_sprite-tower.png",
- "sprite-zerox": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353740639_sprite-zerox.png"
+ "sprite-zerox": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787353740639_sprite-zerox.png",
+ "avatar-bambi": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355533707_avatar-bambi.png",
+ "avatar-blackhole": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355544152_avatar-blackhole.png",
+ "avatar-catgrass": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355558040_avatar-catgrass.png",
+ "avatar-glitch": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355568820_avatar-glitch.png",
+ "avatar-noah": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355579996_avatar-noah.png",
+ "avatar-tower": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355593989_avatar-tower.png",
+ "avatar-zerox": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-13660cd5-81d0-4142-9264-5ccd99a3d889/1787355605023_avatar-zerox.png"
 }

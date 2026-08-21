@@ -83,3 +83,27 @@ gemini-web 這條線留給文字：出點子、寫設定、審稿、玩家模擬
 代價是色調比 `glitch-plain` 深、飽和度高，粉彩感沒有那麼重。
 這件事可以解釋成「格莉奇是粉彩的偶像，她周圍的人是現實的顏色」，
 可是那是解釋，不是設計。要統一的話就是重畫格莉奇那一張，不是把這五張洗淡。
+
+
+## 場景背景（2026-08-22）
+
+原始檔在 `out/`，站台不吃，是給 Larch 用的。
+
+**第一版整組跑掉了。** 我的 prompt 只寫「同樣的藍紫夜色」，codex 就往電影感的方向走：
+暗很多、飽和度低很多、厚塗、有景深。跟舊的房間擺在一起像兩個美術指導。
+
+**釘住的方式是把亮度跟上色手法寫成規則**，不要只描述顏色：
+
+- Same overall BRIGHTNESS as the references. Do NOT make this darker or more cinematic.
+- Same SATURATED blue-violet and lilac palette. Do NOT desaturate toward grey-blue.
+- Same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom.
+
+而且**參考圖給兩張**（同一個房間的不同時間），模型比較不會把單張當特例。
+
+另外：畫到有文字的道具（守則本攤開）一定要明講「頁面必須完全空白，
+不可以有任何看得懂的字」，不然會生出假中文。
+
+## 頭像 `avatar/`
+
+從立繪切出來的圓形頭像，七個角色各一張，512×512。用途見 `../larch/README.md`：
+播放器沒有大頭照功能，這是拿立繪圖層假出來的。

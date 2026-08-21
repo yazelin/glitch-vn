@@ -24,6 +24,9 @@ SPRITE = {G: "sprite-glitch", HOLE: "sprite-blackhole", "貓草": "sprite-catgra
           "諾亞": "sprite-noah"}
 # 立繪原檔高度差很多（0x 站得直、諾亞佝僂），縮放各自調過才會站得一樣高
 SCALE = {G: .82, HOLE: .86, "貓草": .84, "鐵塔": .90, "0x": .80, "斑比": .78, "諾亞": .84}
+AVATAR = {G: "avatar-glitch", HOLE: "avatar-blackhole", "貓草": "avatar-catgrass",
+          "鐵塔": "avatar-tower", "0x": "avatar-zerox", "斑比": "avatar-bambi",
+          "諾亞": "avatar-noah"}
 
 
 def api(data=None, method="GET", path="", tries=4):
@@ -105,8 +108,10 @@ class Chapter:
         旁白時把立繪清掉的話，人會一直消失又出現，讀起來是閃的。
         要讓畫面沒有人，就明講 stage() 清空。
         """
+        # **不要給 speaker: ""**，整個欄位不要帶。實測過的行為是
+        # 「沒有 speaker 的 dialogue 會變旁白」，空字串是沒驗過的狀態。
         return self._add({"type": "dialogue", "title": paras[0][:14],
-                          "text": "\n".join(paras), "speaker": "",
+                          "text": "\n".join(paras),
                           "characterLayers": self._layers()})
 
     def say(self, who, *lines):
@@ -129,16 +134,37 @@ class Chapter:
                           "characterLayers": self._layers(),
                           "dialogueLines": lines})
 
-    def chat(self, *msgs):
-        """留言區。它是介面不是人，所以不掛立繪。"""
-        return self._add({"type": "dialogue", "title": "留言區",
-                          "text": "\n".join(msgs), "speaker": "留言區",
-                          "characterLayers": self._layers()})
+    def chat(self, *msgs, who=None):
+        """留言區／訊息。
+
+        **播放器沒有大頭照這個東西**（bundle 裡 avatar 出現零次），
+        可是立繪圖層有 scale 跟 x/y，所以把切好的圓形頭像縮小擺在左下角，
+        效果就是聊天軟體的大頭貼。貓草人不在那個房間裡，用小頭像剛好把
+        「他在另一個空間」講清楚，比讓他站進客廳合理。
+
+        全部訊息都同一個人講的話（"貓草：…"），就掛他的頭像、掛他的名字。
+        """
+        if who is None:
+            who = None
+            names = {m.split("：", 1)[0] for m in msgs if "：" in m}
+            if len(names) == 1 and next(iter(names)) in AVATAR:
+                who = next(iter(names))
+        body = [m.split("：", 1)[1] if who and m.startswith(who + "：") else m
+                for m in msgs]
+        layers = self._layers()
+        if who:
+            layers = layers + [{"id": f"avatar-{who}", "url": A[AVATAR[who]],
+                                "position": "left", "x": -40, "y": 300,
+                                "scale": .22, "opacity": 1, "flipX": False}]
+        return self._add({"type": "dialogue", "title": f"{who or '留言區'}：{body[0][:12]}",
+                          "text": "\n".join(body), "speaker": who or "留言區",
+                          "characterId": self.cids.get(who) if who else None,
+                          "characterLayers": layers})
 
     def end(self, text="（第一章結束）"):
         """章末。**要標出來**，不然檢查工具分不出「刻意的終點」跟「接漏了」。"""
         return self._add({"type": "dialogue", "title": "章末", "text": text,
-                          "speaker": "", "chapterEnd": True})
+                          "chapterEnd": True})
 
     def jump(self, board_id, node_id, text="（下一章）"):
         return self._add({"type": "boardJump", "title": "下一章", "text": text,
