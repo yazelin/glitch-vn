@@ -32,7 +32,7 @@ b.add('d1n-you', {'text': '……啊，不對。還有你。', 'type': 'dialogue
 b.add('d1n-ask', {'text': '你是新來的吧？我沒印象。不過我對誰都沒印象，所以這不算什麼。\n先告訴我，你叫什麼？', 'type': 'input', 'title': '先把你存起來', 'inputVariable': 'playerName', 'inputPlaceholder': '輸入你的名字…', 'inputSuggestions': ['記憶體', '暫存檔', '路過的人']}, x=6000, y=0)
 b.add('d1n-store', {'text': '「{{playerName}}」放進了第一格。四格用掉一格。', 'type': 'setVariable', 'title': '第一格：你的名字', 'variableOps': [{'id': 'op-0', 'kind': 'set', 'value': 1, 'variable': 'slotUsed'}, {'id': 'op-1', 'kind': 'set', 'value': 1, 'variable': 'dayCount'}, {'id': 'op-2', 'kind': 'set', 'value': 0, 'variable': 'fedToday'}]}, x=6300, y=0)
 b.add('d1n-role', {'text': '你是我的外接記憶體。我裝不下的東西，可以交給你保管。', 'type': 'dialogue', 'title': '你是我的外接記憶體。我裝不下的東', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=6600, y=0)
-b.add('d1n-cost', {'text': '不過交給你有一個條件：你要再來找我，我才拿得回來。你如果不回來，那東西一樣會不見。', 'type': 'dialogue', 'title': '不過交給你有一個條件：你要再來找', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=6900, y=0)
+b.add('d1n-cost', {'text': '不過有個條件。你要再回來找我，我才拿得回來。\n你不回來的話，那東西就跟忘掉一樣。', 'type': 'dialogue', 'title': '不過交給你有一個條件：你要再來找', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=6900, y=0)
 b.add('d1n-note1', {'text': '說到這個——我口袋裡有一張紙條。', 'type': 'dialogue', 'title': '說到這個——我口袋裡有一張紙條。', 'emotion': '發呆', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=7200, y=0)
 b.add('d1n-note2', {'text': '上面是我自己的字：「今天要跟黑洞先生說謝謝。」', 'type': 'dialogue', 'title': '上面是我自己的字：「今天要跟他說', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=7500, y=0)
 b.add('d1n-note3', {'text': '可是我不知道要謝什麼。昨天的我沒有寫。', 'type': 'dialogue', 'title': '可是我不知道要謝什麼。昨天的我沒', 'emotion': '發呆', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787196233341_glitch-thinking.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=7800, y=0)
@@ -47,7 +47,7 @@ b.add('d1e-back', {'text': '我回來了。', 'type': 'dialogue', 'title': '我�
 b.add('d1e-feet', {'text': '門邊的靴子今天堆到 {{holeFeet}} 隻腳的高度。她沒有數，她從來不數。', 'type': 'dialogue', 'title': '旁白', 'speaker': '旁白', 'characterPosition': 'center'}, x=9900, y=0)
 b.add('d1e-rule1', {'text': '睡前要翻守則。這是我跟他一起寫的規矩，已經改到第一千零四版了。', 'type': 'dialogue', 'title': '睡前要翻守則。這是我跟他一起寫的', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=10200, y=0)
 b.add('d1e-rule2', {'text': '為什麼有這麼多版？因為我每天都忘記，所以每天都要重新跟他約定一次。', 'type': 'dialogue', 'title': '為什麼有這麼多版？因為我每天都忘', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=10500, y=0)
-b.add('d1e-rule3', {'text': '寫完的條文後面，留了一個空位，還沒寫字。每一版都會留一個，給那一天的我自己填。', 'type': 'dialogue', 'title': '寫完的條文後面，留了一個空位，還', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=10800, y=0)
+b.add('d1e-rule3', {'text': '每一版後面都會空一格出來。\n那一格是留給那天的我自己填的。', 'type': 'dialogue', 'title': '寫完的條文後面，留了一個空位，還', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=10800, y=0)
 b.add('d1e-rulein', {'text': '這個空位你幫我填。寫一句話，給明天的我。', 'type': 'input', 'title': '填空位', 'inputVariable': 'ruleLine1', 'inputPlaceholder': '寫一句話…', 'inputSuggestions': ['今天發生的事，去問記憶體。', '不要一個人把東西吃完。', '明天的我，你好。']}, x=11100, y=0)
 b.add('d1e-rulever', {'text': '她一筆一畫寫上去，寫得很慢。第一千零四版，完成。', 'type': 'setVariable', 'title': '守則 +1', 'variableOps': [{'id': 'op-0', 'kind': 'add', 'value': 1, 'variable': 'ruleVersion'}]}, x=11400, y=0)
 b.add('d1e-save1', {'text': '等一下。先別關。', 'type': 'dialogue', 'title': '等一下。先別關。', 'emotion': '平常', 'speaker': '格莉奇', 'character': 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-e14f9260-e4c0-4ce7-9d2d-70203cdec591/1787216668992_glitch-plain.webp', 'characterId': 'character-15c41e1f-ca37-424f-8c49-ac1031a42928', 'characterPosition': 'center'}, x=11700, y=0)
@@ -124,8 +124,8 @@ b.link('d1e-notsaved2', 'd1e-sleep', 'right')
 # 結尾的鉤子。連載寫作的基本:每一集要給下一集一個理由。
 hook1 = b.chain([
     ("d1e-hook1", "明天我醒來，什麼都不記得。", "平常", G),
-    ("d1e-hook2", "牆上有你的名字。可是牆會記得，我不會。", "平常", G),
-    ("d1e-hook3", "所以你要回來。你回來我才找得到今天。", "平常", G),
+    ("d1e-hook2", "牆上有你的名字。牆記得住，我記不住。", "平常", G),
+    ("d1e-hook3", "所以你要回來。你不回來的話，今天就沒有人記得了。", "平常", G),
 ], x=14200, y=0, link_prev=False)
 b.link('d1e-sleep', hook1[0])
 b.link(hook1[-1], 'd1e-jump')
@@ -233,7 +233,7 @@ canon = b.chain([
     ("d1m-keep9", "別的東西他都給得出來喔。筆、本子、麵包，他都會遞給你。只有記憶不行。", "平常", G),
     ("d1m-keep10","你想想看——有些事情你小時候記得，長大就忘光了對不對。", "平常", G),
     ("d1m-keep11","那些事可能只是沒有那麼重要。也可能只是時間太久了。", "平常", G),
-    ("d1m-keep12","那些大概也是被他吃掉的。它們沒有不見，只是你走遠了。", "平常", G),
+    ("d1m-keep12","那些大概也是被他吃掉的。它們沒有不見，只是你拿不到了。", "平常", G),
 ], x=2900, y=-260, link_prev=False)
 b.unlink("d1m-eaten", "d1m-door")
 b.link("d1m-eaten", canon[0])
