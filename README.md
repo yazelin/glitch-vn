@@ -15,7 +15,10 @@
 
 這裡放的是**建置工具**，遊戲本體在 Larch 上。
 
-    design/story.md          劇情設計（前提、世界規則、七天結構、結局）
+    design/novel.md          **現在的劇情設計**（七人主軸、角色卡、寫法規則）
+    novel/chNN.md            小說本文。這是主要產出，先寫小說再談機制
+    tools/gen_novel.py       小說閱讀頁 → docs/novel.html
+    design/story.md          舊的劇情設計（角色正典與世界規則還有效，七天結構作廢）
     design/script/dayN.md    完整台詞。**先在這裡寫好審好，再轉成 build 腳本**
     tools/daykit.py          共用的板子建構器（卡片、連線、條件、記憶格）
     tools/build_v2_dayN.py   線上這一版的劇本。改劇本改這裡，不要只改線上版
