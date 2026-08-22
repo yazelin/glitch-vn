@@ -134,10 +134,12 @@ if _vu.exists():
             d = n["data"]
             if (d.get("type") or "dialogue") != "dialogue":
                 continue
+            # speakText 優先，跟 novelkit._voice 用同一個規則：畫面上的字
+            # 跟要唸的字不一定一樣（系統訊息不唸）。
             items = ([(l.get("speaker"), l.get("text"), l.get("emotion"),
                        l.get("voiceUrl")) for l in d.get("dialogueLines") or []]
-                     or [(d.get("speaker"), d.get("text"), d.get("emotion"),
-                          d.get("voiceUrl"))])
+                     or [(d.get("speaker"), d.get("speakText") or d.get("text"),
+                          d.get("emotion"), d.get("voiceUrl"))])
             for sp, tx, em, u in items:
                 if not sp or not tx or not tx.strip():
                     continue

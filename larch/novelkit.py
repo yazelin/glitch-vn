@@ -41,7 +41,9 @@ def _voice(d):
             if u:
                 l["voiceUrl"] = u
     else:
-        u = VOICE_URLS.get(V.key(d.get("speaker"), d.get("text"),
+        # speakText：畫面上的字跟要唸的字不一樣時用它（系統訊息不唸，見 chat）
+        u = VOICE_URLS.get(V.key(d.get("speaker"),
+                                 d.get("speakText") or d.get("text"),
                                  d.get("emotion") or None))
         if u:
             d["voiceUrl"] = u
@@ -338,17 +340,25 @@ class Chapter:
                 who = next(iter(names))
         body = [m.split("：", 1)[1] if who and m.startswith(who + "：") else m
                 for m in msgs]
+        # **系統訊息不配音。** 「貓草已離線。」是介面吐出來的狀態，不是有人在
+        # 講話，唸出來很怪。它跟前面幾則留言黏在同一張卡上，所以整張一起被唸了。
+        # 這裡把它從要唸的文字裡拿掉，畫面上照舊顯示。
+        SPEAK_SKIP = ("已離線", "已上線", "已加入", "已退出")
+        say_body = [m for m in body if not any(x in m for x in SPEAK_SKIP)]
         extra = ()
         if who:
             extra = ({"id": f"avatar-{who}", "url": A[AVATAR[who]], "name": who,
                       "slot": "left", "scale": 1.0, "offsetX": 0, "offsetY": 0,
                       "enter": "slideLeft", "loop": "none"},)
-        return self._card({"type": "dialogue", "title": f"{who or '留言區'}：{body[0][:12]}",
-                           "text": "\n".join(body), "speaker": who or "留言區",
-                           "characterId": self.cids.get(who) if who else None,
-                           # 頭像用 slideLeft 滑進來，像訊息跳出來
-                           "transition": "fade", "transitionMs": 220},
-                          extra=extra)
+        d = {"type": "dialogue", "title": f"{who or '留言區'}：{body[0][:12]}",
+             "text": "\n".join(body), "speaker": who or "留言區",
+             "characterId": self.cids.get(who) if who else None,
+             # 頭像用 slideLeft 滑進來，像訊息跳出來
+             "transition": "fade", "transitionMs": 220}
+        # 配音查表用的是要唸的文字，跟畫面上的不一樣時另外記，見 _voice。
+        if say_body != body:
+            d["speakText"] = "\n".join(say_body)
+        return self._card(d, extra=extra)
 
     def branch(self, prompt, *arms, title="鏡頭"):
         """支線。**讀者不在這個世界裡**，他只是決定鏡頭要停在哪一樣東西上。

@@ -49,7 +49,9 @@ def utterances():
                 items = [(l.get("speaker"), l.get("text"), l.get("emotion"))
                          for l in lines]
             else:
-                items = [(d.get("speaker"), d.get("text"), d.get("emotion"))]
+                # speakText 優先：畫面上顯示的跟要唸的不一定一樣
+                items = [(d.get("speaker"), d.get("speakText") or d.get("text"),
+                          d.get("emotion"))]
             for sp, tx, emo in items:
                 if not sp or not tx or not tx.strip():
                     continue
