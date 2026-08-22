@@ -85,6 +85,13 @@ def main():
 
     # 沒有參考音的角色直接跳過，不要擋住其他人。貓草只打字不出聲，
     # 本來就可能整個不配——那不是缺漏，是設計。
+    # 外部配音的角色缺檔就是缺檔，不可以拿本機的聲音補（見 voice.EXTERNAL）
+    ext = sorted({s for s, _, _, _ in todo if s in getattr(V, "EXTERNAL", ())})
+    if ext:
+        n = len([1 for s, _, _, _ in todo if s in ext])
+        print(f"\n★ 跳過外部配音角色的 {n} 句：{ext}")
+        print("  那些要回頭從長檔補切，不可以就地生，不然會變成另一個人的聲音")
+        todo = [u for u in todo if u[0] not in ext]
     skip = sorted({s for s, _, _, _ in todo if not V.VOICE.get(s)})
     if skip:
         print(f"\n跳過（還沒選參考音）：{skip}")
