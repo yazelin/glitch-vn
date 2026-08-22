@@ -18,7 +18,7 @@ BASE = f"https://larch.yapiflow.com/api/agent/projects/{PROJ}"
 H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 A = json.loads((ROOT / "larch/assets.json").read_text())
 
-G, HOLE = "格莉奇", "黑洞先生"
+G, HOLE, NARRATOR = "格莉奇", "黑洞先生", "旁白"
 SPRITE = {G: "sprite-glitch", HOLE: "sprite-blackhole", "貓草": "sprite-catgrass",
           "鐵塔": "sprite-tower", "0x": "sprite-zerox", "斑比": "sprite-bambi",
           "諾亞": "sprite-noah"}
@@ -43,15 +43,15 @@ def api(data=None, method="GET", path="", tries=4):
 
 
 def ensure_characters():
-    """角色記錄。卡片上的 characterId 要對得上，播放器才認得出是誰在講。"""
+    """讀角色清單。**建立與維護在 setup_characters.py**，這裡只負責拿 id。
+
+    角色不是只有名字：平台的角色有 portraitUrl 跟 expressions，
+    卡片上的 emotion 要對得到 expressions 裡的情緒名，編輯器才顯示得出來。
+    """
     proj = api()
     have = {c["name"]: c["id"] for c in proj.get("characters", [])}
-    for name, key in SPRITE.items():
-        if name in have:
-            continue
-        r = api({"name": name, "avatar": A[key], "summary": ""}, "POST", "/characters")
-        have[name] = r.get("id") or r.get("character", {}).get("id")
-        print(f"  建角色 {name}")
+    missing = [n for n in list(SPRITE) + [NARRATOR] if n not in have]
+    assert not missing, f"角色還沒建：{missing}　先跑 setup_characters.py"
     return have
 
 
@@ -88,8 +88,18 @@ class Chapter:
         return out
 
     # ── 對外 ────────────────────────────────────────────
-    def scene(self, title, text, bg, start=False):
+    # 場景卡吃得下的畫面特效。這幾個是從官方範例專案裡確認出來的，
+    # 其他值沒驗過，不要亂填。
+    EFFECTS = ("rain", "snow", "embers", "flash", "stars3d")
+
+    def scene(self, title, text, bg, start=False, effect=None,
+              bgm=None, volume=.22):
         d = {"type": "scene", "title": title, "text": text, "background": A[bg]}
+        if effect:
+            assert effect in self.EFFECTS, f"沒驗過的特效：{effect}"
+            d["visualEffect"] = effect
+        if bgm:
+            d.update(bgm=A[bgm], bgmVolume=volume, bgmLoop=True)
         if start:
             d["start"] = True
         return self._add(d)
@@ -108,10 +118,11 @@ class Chapter:
         旁白時把立繪清掉的話，人會一直消失又出現，讀起來是閃的。
         要讓畫面沒有人，就明講 stage() 清空。
         """
-        # **不要給 speaker: ""**，整個欄位不要帶。實測過的行為是
-        # 「沒有 speaker 的 dialogue 會變旁白」，空字串是沒驗過的狀態。
+        # **旁白是一個角色。** 平台一定要有 speaker，留白會變成沒有名牌的怪狀態，
+        # 在編輯器裡看起來也像沒填完。做成沒有立繪的角色最乾淨。
         return self._add({"type": "dialogue", "title": paras[0][:14],
-                          "text": "\n".join(paras),
+                          "text": "\n".join(paras), "speaker": NARRATOR,
+                          "characterId": self.cids.get(NARRATOR),
                           "characterLayers": self._layers()})
 
     def say(self, who, *lines):
@@ -164,6 +175,7 @@ class Chapter:
     def end(self, text="（第一章結束）"):
         """章末。**要標出來**，不然檢查工具分不出「刻意的終點」跟「接漏了」。"""
         return self._add({"type": "dialogue", "title": "章末", "text": text,
+                          "speaker": NARRATOR, "characterId": self.cids.get(NARRATOR),
                           "chapterEnd": True})
 
     def jump(self, board_id, node_id, text="（下一章）"):

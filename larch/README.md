@@ -13,6 +13,35 @@
     dump.py          把板子印成可讀的樣子，驗節奏用（線上要登入才玩得到）
     assets.json      素材網址
 
+## 素材與角色：照平台的方式做，不要自己發明
+
+Larch 自己的「角色工坊」提示詞裡寫得很清楚，skill 文件沒提：
+
+    上傳素材   POST /media       {name, mimeType, base64, category}
+               category：scene 場景／character 立繪／prop 道具
+               **沒帶 category 全部會掉進道具。**
+
+    更新角色   POST /characters  {characterId, ...要改的欄位}
+               只覆蓋你傳的欄位。**帶 id 會變成新增一個重複角色，要帶 characterId。**
+               差分：expressions:[{name, emotion, imageUrl, kind:"expression"}]
+
+角色不是只有名字。`portraitUrl` 是基礎立繪，`expressions` 是表情差分，
+`secrets` 是「知道但不主動說」的東西。全部沒填的話，角色工坊那一頁會顯示
+「基礎立繪：尚未上傳／表情差分（0）」。
+
+`setup.py` 跑一次就會把素材與角色弄到一致。
+
+## 場景特效
+
+場景卡吃 `visualEffect`，官方範例裡確認過的值只有這五個：
+
+    rain  snow  embers  flash  stars3d
+
+另外還吃 `bgm` / `bgmVolume` / `bgmLoop`。
+
+第一章的客廳與茶几用 `snow`——書裡電視播的就是「雪」，
+而且第七章有一句「電視上的雪下了好幾層」。
+
 ## 用得到的兩個平台功能
 
 從前端 bundle 挖出來的，skill 文件沒寫：
@@ -43,6 +72,9 @@ dialogue 會變旁白」，空字串是沒驗過的狀態。
 講話時又出現，讀起來是閃的。要讓畫面沒有人就明講 `stage()` 清空。
 
 **右側角色不要 flipX。** 0x 耳邊的標籤、貓草胸前的徽章都是不對稱的，鏡射過去記號會跑到另一邊。
+
+**不要用「有沒有人被引用」來清孤兒素材。** 我這樣做過一次，把還在用的立繪整組刪掉了，
+因為判斷的當下角色欄位還沒寫進去。要清就用同名去重，並且以 `assets.json` 為準。
 
 **章末要標出來。** `end()` 會寫一個 `chapterEnd`，不然 `verify.py` 分不出
 「刻意的終點」跟「接漏了」。
