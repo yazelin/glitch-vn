@@ -6,7 +6,7 @@
 
 站台只有小說。立繪在 docs/img/，是 art/ 那批原始 PNG 縮出來的 WebP。
 """
-import html, pathlib, re, subprocess, sys
+import html, json, pathlib, re, subprocess, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from _icons import ICONS
@@ -150,6 +150,24 @@ nav.top a.l[aria-current]{color:var(--cy)}
   border:1px solid var(--hair);font-size:15.5px;line-height:1.95;color:var(--muted);
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
 .note b{color:var(--text)}
+
+/* 遊玩版的支線表。選項是三個並排的小卡，讀起來像分岔而不像清單。 */
+.routes{display:grid;gap:34px;margin-top:38px}
+.route{border:1px solid var(--hair);border-radius:var(--r);padding:22px 24px;
+  background:var(--ink)}
+.route .who{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;
+  letter-spacing:.18em;color:var(--cy);margin-bottom:10px}
+.route .q{font-size:16.5px;line-height:1.8;margin:0 0 16px;color:var(--text)}
+/* 三條分岔要並排才看得出是分岔。auto-fit 在這個容器寬度會掉成 2+1，所以寫死。 */
+.arms{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.arms{grid-template-columns:repeat(3,1fr)}}
+.arm{border:1px solid var(--hair2);border-radius:var(--r);padding:13px 15px;
+  font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
+.arm b{display:block;color:var(--mint);font-weight:600;font-size:14.5px;
+  margin-bottom:7px}
+.arm p{margin:0;font-size:13.5px;line-height:1.85;color:var(--muted)}
+.merge{margin:14px 0 0;font-size:13px;color:var(--muted);
+  font-family:ui-monospace,Menlo,Consolas,monospace}
 
 .cast{display:grid;gap:46px;margin-top:44px}
 .card{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center}
@@ -330,7 +348,7 @@ def page(title, desc, body, cur, wide=False, ld=""):
     nav = "".join(
         f'<a class="l" href="{h}"{" aria-current=\'page\'" if h == cur else ""}>{n}</a>'
         for h, n in (("index.html", "首頁"), ("novel.html", "閱讀"),
-                     ("characters.html", "角色")))
+                     ("characters.html", "角色"), ("vn.html", "遊玩版")))
     t, d = html.escape(title), html.escape(desc)
     canon = BASE + ("" if cur == "index.html" else cur)
     return f'''<!doctype html>
@@ -466,23 +484,74 @@ ld = ('<script type="application/ld+json">'
 (DOCS / "index.html").write_text(page(
     "格莉奇與黑洞先生", HOME_DESC, home, "index.html", wide=True, ld=ld), encoding="utf-8")
 
+# ── 遊玩版 ──────────────────────────────────────────────
+# **支線一個字都不寫進小說。** 小說站要能一路讀完不被打斷，
+# 那是使用者定的：先把讀的人當讀者，再談要不要讓他參與。
+# 所以支線只在這一頁介紹，資料從 design/vn-routes.json 讀
+# （由 larch/dump_routes.py 從線上專案抓下來，網站產生器不連網）。
+routes = json.loads((ROOT / "design/vn-routes.json").read_text(encoding="utf-8"))
+CARDS = 574          # larch/verify.py 印的七章卡片數總和
+rblocks = []
+for r in routes:
+    arms = "".join(
+        '<div class="arm"><b>{l}</b><p>{t}</p></div>'.format(
+            l=html.escape(a["label"]),
+            t=html.escape((a["text"][0] if a["text"] else "").split("\n")[0]))
+        for a in r["arms"])
+    rblocks.append(
+        f'<div class="route"><div class="who">{html.escape(r["chapter"])}</div>'
+        f'<p class="q">{html.escape(r["prompt"])}</p>'
+        f'<div class="arms">{arms}</div>'
+        f'<p class="merge">三條都看完接回同一張卡。主線一個字都沒有改。</p></div>')
+
+VN_DESC = ("《格莉奇與黑洞先生》的視覺小說版：立繪、場景、表情、配樂，"
+           "以及每章一個支線。支線只決定鏡頭停在哪一樣東西上，主線不變。")
+(DOCS / "vn.html").write_text(page(
+    "遊玩版・格莉奇與黑洞先生", VN_DESC,
+    f'''<header class="bk"><div class="eyebrow">視覺小說版</div>
+<h1>遊玩路徑</h1>
+<p>同一個故事，做成可以玩的版本。多了立繪、場景、表情差分與配樂，
+每一章多一個支線。</p></header>
+
+<div class="note">
+<p><b>支線不寫進小說。</b>這一站的<a href="novel.html">全文閱讀</a>是完整的七章，
+沒有選項、不會被打斷。想讀故事就讀那邊，這一頁只是說明遊玩版多了什麼。</p>
+<p><b>讀者不在這個世界裡。</b>沒有角色會對你說話，也沒有記憶考題。
+選項寫的是房間裡的東西，你決定的是鏡頭停在哪一樣上面。</p>
+<p><b>主線不會因為你的選擇而改變。</b>七個支線各三條，走完一律接回同一張卡。
+選了什麼都會走到第七章的同一個早上。</p>
+</div>
+
+<h2 class="ch" style="margin-top:52px">七個支線點</h2>
+{"".join(rblocks)}
+
+<div class="note">
+<p><b>規模。</b>七章共 {CARDS} 張卡、14 張場景背景、
+七個角色加旁白、23 張表情差分、11 首純音樂。</p>
+<p><b>平台是 Larch。</b>目前還沒有公開發佈，所以這一頁沒有試玩連結。
+發佈之後會補上。</p>
+</div>''',
+    "vn.html"), encoding="utf-8")
+
 # sitemap 與 robots
 (DOCS / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n'
     '<urlset xmlns="http://www.sitemap s.org/schemas/sitemap/0.9">\n'.replace("sitemap s", "sitemaps")
     + "".join(f"<url><loc>{BASE}{u}</loc><priority>{pr}</priority></url>\n"
-              for u, pr in (("", "1.0"), ("novel.html", "0.9"), ("characters.html", "0.7")))
+              for u, pr in (("", "1.0"), ("novel.html", "0.9"),
+                            ("characters.html", "0.7"), ("vn.html", "0.6")))
     + "</urlset>\n", encoding="utf-8")
 (DOCS / "robots.txt").write_text(
     f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n", encoding="utf-8")
 print("  sitemap.xml / robots.txt")
 
 build_images()
-print(f"寫好三頁：index / novel（{len(chapters)} 章、{chars} 字）/ characters")
+print(f"寫好四頁：index / novel（{len(chapters)} 章、{chars} 字）/ characters / vn"
+      f"　支線 {len(routes)} 個")
 
 APPLY = pathlib.Path.home() / ".claude/skills/promo-footer/apply.py"
 if APPLY.exists():
-    for f in ("index.html", "novel.html", "characters.html"):
+    for f in ("index.html", "novel.html", "characters.html", "vn.html"):
         r = subprocess.run([sys.executable, str(APPLY), str(DOCS / f), "glitch-vn"],
                            capture_output=True, text=True)
         print(f"  {f}: {(r.stdout or r.stderr).strip()}")

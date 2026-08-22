@@ -126,6 +126,24 @@ nav.top a.l[aria-current]{color:var(--cy)}
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
 .note b{color:var(--text)}
 
+/* 遊玩版的支線表。選項是三個並排的小卡，讀起來像分岔而不像清單。 */
+.routes{display:grid;gap:34px;margin-top:38px}
+.route{border:1px solid var(--hair);border-radius:var(--r);padding:22px 24px;
+  background:var(--ink)}
+.route .who{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;
+  letter-spacing:.18em;color:var(--cy);margin-bottom:10px}
+.route .q{font-size:16.5px;line-height:1.8;margin:0 0 16px;color:var(--text)}
+/* 三條分岔要並排才看得出是分岔。auto-fit 在這個容器寬度會掉成 2+1，所以寫死。 */
+.arms{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.arms{grid-template-columns:repeat(3,1fr)}}
+.arm{border:1px solid var(--hair2);border-radius:var(--r);padding:13px 15px;
+  font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
+.arm b{display:block;color:var(--mint);font-weight:600;font-size:14.5px;
+  margin-bottom:7px}
+.arm p{margin:0;font-size:13.5px;line-height:1.85;color:var(--muted)}
+.merge{margin:14px 0 0;font-size:13px;color:var(--muted);
+  font-family:ui-monospace,Menlo,Consolas,monospace}
+
 .cast{display:grid;gap:46px;margin-top:44px}
 .card{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center}
 /* 照高度對齊，不照寬度。裁掉透明邊之後每個人的長寬比差很多。 */
@@ -196,7 +214,7 @@ footer a{color:var(--muted)}
 </head>
 <body>
 <nav class="top"><div class="in">
-<a class="home" href="index.html">格莉奇與黑洞先生</a><a class="l" href="index.html">首頁</a><a class="l" href="novel.html" aria-current='page'>閱讀</a><a class="l" href="characters.html">角色</a>
+<a class="home" href="index.html">格莉奇與黑洞先生</a><a class="l" href="index.html">首頁</a><a class="l" href="novel.html" aria-current='page'>閱讀</a><a class="l" href="characters.html">角色</a><a class="l" href="vn.html">遊玩版</a>
 </div></nav>
 <main class="wrap">
 <header class="bk">
