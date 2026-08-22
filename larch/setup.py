@@ -131,6 +131,11 @@ def main():
         raw = local.read_bytes() if local.exists() else fetch(OLDA[key])
         assets[key] = upload(f"{key}.png", raw, "character")
         print(f"  character  {key}{'　（本地）' if local.exists() else ''}")
+    # BGM 走 prop（平台的 category 只有 scene／character／prop 三種，音檔歸道具）
+    for f in sorted((ROOT / "art/bgm").glob("*.mp3")):
+        if not need(f.stem): continue
+        assets[f.stem] = upload(f.name, f.read_bytes(), "prop", "audio/mpeg")
+        print(f"  prop       {f.stem}　BGM")
     for d in ("art/avatar", "art/chat"):
         for p in sorted((ROOT / d).glob("*.png")):
             if not need(p.stem): continue
