@@ -198,8 +198,13 @@ c.scene("隔天早上", "她翻開守則本第一頁。", "bg-table-lamp",
         transition="irisIn", ms=420, bgm="bgm-morning")
 c.stage((G, "left"))
 c.narrate("隔天早上她起來，走到茶几前面，翻開守則本第一頁。")
-c.narrate("日期。六個名字。")
-c.narrate("第七行是她的字。")
+# 那六個名字全書被列出來過四次。最後這一次也要列，讀者才看得出
+# 那句話站的是**第七行**的位置。
+c.narrate("日期。")
+c.narrate("@CatGrass_80", "@Tower_Manager", "@Null_0x99",
+          "@Bambi_Draft3", "@Radio_Noah", "@考完就刪")
+c.say(G, "一、二、三、四、五、六。", emotion="平靜")
+c.narrate("然後是第七行。那一行是她的字。")
 c.narrate("還有一個。他就在客廳。去問他今天累不累。")
 c.narrate("她看了三秒。")
 c.narrate("她不知道為什麼要問這個。她甚至可以列出四種解釋，其中兩種她自己都覺得很有說服力。",
