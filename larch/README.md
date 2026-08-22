@@ -42,6 +42,49 @@ Larch 自己的「角色工坊」提示詞裡寫得很清楚，skill 文件沒�
 第一章的客廳與茶几用 `snow`——書裡電視播的就是「雪」，
 而且第七章有一句「電視上的雪下了好幾層」。
 
+## 演出詞彙表（2026-08-22 從市集挖的）
+
+市集上別人發佈的作品**可以直接抓下來讀，不用登入**：
+
+    GET https://larch.yapiflow.com/api/marketplace/{發佈 id}?play=1
+
+回的是完整的專案 JSON。這是目前為止最有用的一份資料來源——
+skill 文件與範例專案都沒有這麼完整。以下全部是從那裡讀出來的實際用值：
+
+**舞台 `stage.actors[]`**（比 `characterLayers` 多了動畫，兩個都要寫）
+
+    {id, url, name, slot, scale, offsetX, offsetY, enter, loop, loopSpeed, loopStrength}
+    slot    left / center / right
+    enter   fade zoom spring bounce blur glide riseUp swoopIn
+            walkInLeft arcLeft arcRight slideLeft slideRight slideDown
+    loop    breathe nod sway shiver hop pulse none
+
+**`loop` 是關鍵。** 沒有 loop 的立繪就是一張不會動的貼圖；
+市集上的作品幾乎每個角色都掛 `breathe`。
+
+**轉場**（掛在**對話卡**上，不是只有場景卡）
+
+    transition    fade wipeLeft wipeRight blurCut flash irisIn fadeBlack none
+    transitionMs  一般 260–420
+
+**畫面特效** `visualEffect`
+
+    rain snow embers flash stars3d petals vignette speedLines none
+
+**專案設定** `settings`（`larch/settings.py` 在管）
+
+    titleScreenEnabled / titleScreen{frame, layers[{id,kind,role,x,y,size,align,width}]}
+    titleCoverShade / titleCoverPositionX / titleCoverPositionY / projectThumbnail
+    dialogueUi{preset, presentation, fontFamily, fontSize, nameFontSize,
+               textColor, speakerColor, accentColor, borderColor,
+               panelColor, panelOpacity, panelWidth, panelPadding, borderRadius}
+    cgGalleryEnabled / cgGallerySource / cgGalleryItems[{url,title}]
+    cursorMode / cursorImage / cursorEffects{effects:[squash,tilt,ripple,trail,particles]}
+    stageFit / keepActorsInFrame / textSpeed / typingEffect / autoAdvanceDelay
+
+**沒有這些的專案跟有這些的專案，差的是「像不像一款遊戲」。**
+第一版我什麼都沒設，所以沒有開始畫面，對話框是預設的灰盒子，立繪不會呼吸。
+
 ## 用得到的兩個平台功能
 
 從前端 bundle 挖出來的，skill 文件沒寫：

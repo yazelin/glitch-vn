@@ -24,6 +24,16 @@ SPRITE = {G: "sprite-glitch", HOLE: "sprite-blackhole", "貓草": "sprite-catgra
           "諾亞": "sprite-noah"}
 # 立繪原檔高度差很多（0x 站得直、諾亞佝僂），縮放各自調過才會站得一樣高
 SCALE = {G: .82, HOLE: .86, "貓草": .84, "鐵塔": .90, "0x": .80, "斑比": .78, "諾亞": .84}
+# 演出詞彙表。全部從市集上別人發佈的專案裡挖出來的（GET /api/marketplace/{id}?play=1，
+# 不用登入），不是猜的。
+ENTER = ("fade", "zoom", "spring", "bounce", "blur", "glide", "riseUp", "swoopIn",
+         "walkInLeft", "arcLeft", "arcRight", "slideLeft", "slideRight", "slideDown")
+LOOP = ("breathe", "nod", "sway", "shiver", "hop", "pulse", "none")
+TRANSITION = ("fade", "wipeLeft", "wipeRight", "blurCut", "flash", "irisIn",
+              "fadeBlack", "none")
+EFFECT = ("rain", "snow", "embers", "flash", "stars3d", "petals", "vignette",
+          "speedLines", "none")
+
 AVATAR = {G: "avatar-glitch", HOLE: "avatar-blackhole", "貓草": "avatar-catgrass",
           "鐵塔": "avatar-tower", "0x": "avatar-zerox", "斑比": "avatar-bambi",
           "諾亞": "avatar-noah"}
@@ -74,29 +84,44 @@ class Chapter:
         self.prev = nid
         return nid
 
-    def _layers(self, speaking=None):
+    def _stage(self, speaking=None, extra=()):
+        """舞台。**用 stage.actors，不要只用 characterLayers。**
+
+        actors 多了兩個 characterLayers 沒有的東西：`enter` 進場動畫、
+        `loop` 待機動畫。沒有 loop 的立繪就是一張不會動的貼圖。
+        `breathe` 是呼吸，市集上的作品幾乎每個角色都掛這個。
+        """
+        actors = []
+        for name, pos in self.cast:
+            actors.append({"id": f"actor-{name}-{pos}", "url": A[SPRITE[name]],
+                           "name": name, "slot": pos, "scale": SCALE[name],
+                           "offsetX": 0, "offsetY": 0,
+                           "enter": "fade", "loop": "breathe",
+                           "loopSpeed": 1, "loopStrength": 1})
+        actors += list(extra)
+        return actors
+
+    def _layers(self, speaking=None, extra=()):
+        """舊的 characterLayers。編輯器某些地方還在讀它，所以兩個都寫。"""
         out = []
         for name, pos in self.cast:
-            key = SPRITE[name]
-            out.append({"id": f"layer-{name}-{pos}", "url": A[key], "position": pos,
-                        "x": 0, "y": 0, "scale": SCALE[name],
-                        # 沒在講話的人壓暗，一眼看得出誰在說
+            out.append({"id": f"layer-{name}-{pos}", "url": A[SPRITE[name]],
+                        "position": pos, "x": 0, "y": 0, "scale": SCALE[name],
                         "opacity": 1 if (speaking is None or name == speaking) else .55,
-                        # 不要翻轉：0x 耳邊的標籤、貓草胸前的徽章都是不對稱的，
-                        # 鏡射過去記號會跑到另一邊。
+                        # 不要翻轉：0x 耳邊的標籤、貓草胸前的徽章都是不對稱的。
                         "flipX": False})
-        return out
+        return out + [{"id": e["id"], "url": e["url"], "position": e["slot"],
+                       "x": e["offsetX"], "y": e["offsetY"], "scale": e["scale"],
+                       "opacity": 1, "flipX": False} for e in extra]
 
     # ── 對外 ────────────────────────────────────────────
-    # 場景卡吃得下的畫面特效。這幾個是從官方範例專案裡確認出來的，
-    # 其他值沒驗過，不要亂填。
-    EFFECTS = ("rain", "snow", "embers", "flash", "stars3d")
-
     def scene(self, title, text, bg, start=False, effect=None,
-              bgm=None, volume=.22):
-        d = {"type": "scene", "title": title, "text": text, "background": A[bg]}
+              bgm=None, volume=.22, transition="fade", ms=340):
+        d = {"type": "scene", "title": title, "text": text, "background": A[bg],
+             "transition": transition, "transitionMs": ms}
+        assert transition in TRANSITION, f"沒有這個轉場：{transition}"
         if effect:
-            assert effect in self.EFFECTS, f"沒驗過的特效：{effect}"
+            assert effect in EFFECT, f"沒有這個特效：{effect}"
             d["visualEffect"] = effect
         if bgm:
             d.update(bgm=A[bgm], bgmVolume=volume, bgmLoop=True)
@@ -112,6 +137,11 @@ class Chapter:
                      for i, w in enumerate(who)]
         return self.cast
 
+    def _card(self, d, speaking=None, extra=()):
+        d["characterLayers"] = self._layers(speaking, extra)
+        d["stage"] = {"actors": self._stage(speaking, extra)}
+        return self._add(d)
+
     def narrate(self, *paras):
         """旁白。沒有名字，可是**台上的人要留著**。
 
@@ -120,17 +150,16 @@ class Chapter:
         """
         # **旁白是一個角色。** 平台一定要有 speaker，留白會變成沒有名牌的怪狀態，
         # 在編輯器裡看起來也像沒填完。做成沒有立繪的角色最乾淨。
-        return self._add({"type": "dialogue", "title": paras[0][:14],
-                          "text": "\n".join(paras), "speaker": NARRATOR,
-                          "characterId": self.cids.get(NARRATOR),
-                          "characterLayers": self._layers()})
+        return self._card({"type": "dialogue", "title": paras[0][:14],
+                           "text": "\n".join(paras), "speaker": NARRATOR,
+                           "characterId": self.cids.get(NARRATOR)})
 
-    def say(self, who, *lines):
-        """一個人講一段。"""
-        return self._add({"type": "dialogue", "title": f"{who}：{lines[0][:12]}",
-                          "text": "\n".join(lines), "speaker": who,
-                          "characterId": self.cids.get(who),
-                          "characterLayers": self._layers(who)})
+    def say(self, who, *lines, emotion="平靜"):
+        """一個人講一段。emotion 要對得到角色的 expressions，播放器才換得了臉。"""
+        return self._card({"type": "dialogue", "title": f"{who}：{lines[0][:12]}",
+                           "text": "\n".join(lines), "speaker": who,
+                           "emotion": emotion,
+                           "characterId": self.cids.get(who)}, speaking=who)
 
     def talk(self, *pairs):
         """一來一往裝在同一張卡。pairs = (講者, 台詞) 一串。
@@ -139,11 +168,10 @@ class Chapter:
         """
         lines = [{"id": f"l{i}", "speaker": w, "text": t,
                   "emotion": ""} for i, (w, t) in enumerate(pairs)]
-        return self._add({"type": "dialogue", "title": f"{pairs[0][0]}：{pairs[0][1][:10]}",
-                          "text": pairs[0][1], "speaker": pairs[0][0],
-                          "characterId": self.cids.get(pairs[0][0]),
-                          "characterLayers": self._layers(),
-                          "dialogueLines": lines})
+        return self._card({"type": "dialogue", "title": f"{pairs[0][0]}：{pairs[0][1][:10]}",
+                           "text": pairs[0][1], "speaker": pairs[0][0],
+                           "characterId": self.cids.get(pairs[0][0]),
+                           "dialogueLines": lines})
 
     def chat(self, *msgs, who=None):
         """留言區／訊息。
@@ -162,15 +190,17 @@ class Chapter:
                 who = next(iter(names))
         body = [m.split("：", 1)[1] if who and m.startswith(who + "：") else m
                 for m in msgs]
-        layers = self._layers()
+        extra = ()
         if who:
-            layers = layers + [{"id": f"avatar-{who}", "url": A[AVATAR[who]],
-                                "position": "left", "x": -40, "y": 300,
-                                "scale": .22, "opacity": 1, "flipX": False}]
-        return self._add({"type": "dialogue", "title": f"{who or '留言區'}：{body[0][:12]}",
-                          "text": "\n".join(body), "speaker": who or "留言區",
-                          "characterId": self.cids.get(who) if who else None,
-                          "characterLayers": layers})
+            extra = ({"id": f"avatar-{who}", "url": A[AVATAR[who]], "name": who,
+                      "slot": "left", "scale": .22, "offsetX": -40, "offsetY": 300,
+                      "enter": "slideLeft", "loop": "none"},)
+        return self._card({"type": "dialogue", "title": f"{who or '留言區'}：{body[0][:12]}",
+                           "text": "\n".join(body), "speaker": who or "留言區",
+                           "characterId": self.cids.get(who) if who else None,
+                           # 頭像用 slideLeft 滑進來，像訊息跳出來
+                           "transition": "fade", "transitionMs": 220},
+                          extra=extra)
 
     def end(self, text="（第一章結束）"):
         """章末。**要標出來**，不然檢查工具分不出「刻意的終點」跟「接漏了」。"""
