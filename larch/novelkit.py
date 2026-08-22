@@ -78,7 +78,10 @@ AVATAR = {G: "chat-glitch", HOLE: "chat-blackhole", "貓草": "chat-catgrass",
 EXPR = {
     G: {"平靜": "glitch-plain", "開心": "glitch-happy", "發呆": "glitch-thinking",
         "驚訝": "glitch-idle", "當機": "glitch-error", "想睡": "glitch-sleep",
-        "難過": "face-glitch-sad", "笑": "face-glitch-laugh", "在算": "face-glitch-count"},
+        "難過": "face-glitch-sad", "笑": "face-glitch-laugh", "在算": "face-glitch-count",
+        # 洩氣跟難過共用同一張臉。第七章那句「……喔。」用它，
+        # 語氣另外在 voice.EMO 分開（配音要洩氣，不要吃驚）。
+        "洩氣": "face-glitch-sad"},
     # **不要用 blackhole-full／hungry。** 那是舊版七天記憶遊戲的素材，
     # 「吃飽」是當時的機制，所以美術畫的是**身形**變化（肩膀變寬、軀幹變厚），
     # 不是表情差分。沿用舊素材要看圖，不能只看檔名。

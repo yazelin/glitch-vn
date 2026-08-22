@@ -9,3 +9,4 @@ art/voice/*.mp3
 # 複檢資料夾是 art/voice 的複本，聽完就沒用了，進 git 等於同一批檔案存兩份。
 art/voice/review/
 art/voice/jobs.json
+art/voice/redo/

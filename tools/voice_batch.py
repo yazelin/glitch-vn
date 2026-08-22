@@ -25,15 +25,19 @@ import argparse, json, pathlib, sys, time
 F0_LO, F0_HI, TRIES = 0.87, 1.25, 4
 
 
-def _f0(path):
-    """中位基頻。取不到就回 0（當作通過，不要因為量不到而卡住）。"""
+def _f0(path, fmin=60, fmax=520):
+    """中位基頻。取不到就回 0（當作通過，不要因為量不到而卡住）。
+
+    範圍放太寬 pyin 會八度誤判——把 100Hz 的男聲報成 200Hz。知道大概的音域時
+    就把 fmin／fmax 框起來。
+    """
     import numpy as np, librosa
     y, sr = librosa.load(str(path), sr=16000, mono=True)
     if len(y) < sr * 0.15:
         return 0.0
     # **用 pyin 不要用 yin。** yin 快，但把好的（0.98）跟失手的（0.92）擠在一起
     # 分不開；pyin 量同一批是 0.90～0.95 對 0.74～0.83，中間有乾淨的空隙。
-    f, _, _ = librosa.pyin(y, fmin=60, fmax=520, sr=sr)
+    f, _, _ = librosa.pyin(y, fmin=fmin, fmax=fmax, sr=sr)
     f = f[~np.isnan(f)]
     return float(np.median(f)) if len(f) else 0.0
 

@@ -29,9 +29,10 @@ def main():
         if not d.exists() or d.stat().st_size != f.stat().st_size:
             shutil.copy(f, d)
             n += 1
-        # **已經傳上 Larch 的不要覆蓋。** 同一句用兩個來源沒有好處，
-        # 而且換網址等於讓已經掛好的卡片重指一次。
-        urls.setdefault(f.stem, f"{SITE}/{f.name}")
+        # **這一份一律是 Pages 的網址，不要跟 Larch 的混在一起。**
+        # 混著用的話，哪天 Larch 專案刪掉，小說站就有一百多句會壞。
+        # Larch 的網址記在 urls-larch.json，要切換過去再整份換。
+        urls[f.stem] = f"{SITE}/{f.name}"
     MAP.write_text(json.dumps(urls, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"複製 {n} 個 → {DST}，網址表 {len(urls)} 筆")
 

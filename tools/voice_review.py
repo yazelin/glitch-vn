@@ -53,11 +53,24 @@ def main():
         f = next((OUT / f"{k}{x}" for x in (".wav", ".mp3")
                   if (OUT / f"{k}{x}").exists()), None)
         if f:
-            have.append((w, t, e, k, f, _f0(f), sf.info(str(f)).duration))
+            have.append([w, t, e, k, f, _f0(f), sf.info(str(f)).duration])
     ref = {}
     for w in {x[0] for x in have}:
         vals = [x[5] for x in have if x[0] == w and x[5] > 0]
         ref[w] = statistics.median(vals) if vals else 0
+
+    # **第二遍要限制搜尋範圍。** pyin 會八度誤判：諾亞那句長台詞在上限 520 時
+    # 報 201Hz（他的中位是 109），限制到 200 就變 140——聽起來完全正常，
+    # 是被加倍了。用角色自己的中位數框住範圍，假警報就消失。
+    for x in have:
+        r = ref[x[0]]
+        if not r:
+            continue
+        v = _f0(x[4], fmin=max(60, r * 0.5), fmax=r * 1.8)
+        # **量不到就沿用第一遍的值，不要當成沒有聲音。** 收窄範圍會讓
+        # 短句一個有聲幀都抓不到，那是量測的限制，不是檔案壞掉。
+        if v:
+            x[5] = v
     print("各角色的中位音高：",
           {w: round(v) for w, v in sorted(ref.items(), key=lambda x: -x[1])})
 
@@ -65,11 +78,15 @@ def main():
     for w, t, e, k, f, got, dur in have:
         # 字數對長度：正常大約每秒四點三個字。差太多就是沒唸完或黏到別的。
         r = got / ref[w] if ref[w] else 1.0
-        want = max(len(t.replace("\n", "")) / 4.3, 0.35)
+        # **要把角色的語速算進去。** 旁白跑 1.15 倍速，不除掉的話他每一句
+        # 都會被判「太短」——那批二十八句的旗標有一大半是這樣來的。
+        want = max(len(t.replace("\n", "")) / 4.3 / V.VOICE[w][2], 0.35)
         why = []
-        # 一兩個字的句子 pyin 常常一個有聲幀都抓不到，那不代表沒有聲音。
-        # 太短的只看長度，不看音高。
-        if dur < 0.55:
+        # **一秒以下不檢查音高。** pyin 在短音檔上常常一個有聲幀都抓不到，
+        # 那不代表沒有聲音——「雪。」0.77 秒、RMS 0.05，pyin 給零幀，
+        # yin 量得到 103Hz，是黑洞先生的正常音域。門檻設 0.55 太低，
+        # 單字句本來就落在 0.7～0.9 秒。這種句子只看長度。
+        if dur < 1.0:
             pass
         elif got == 0:
             why.append("沒有聲音")
