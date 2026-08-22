@@ -19,6 +19,8 @@ import collections, json, os, pathlib, runpy, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "larch"))
 OUT = ROOT / "art/voice"
+# 每一句「當時實際唸出去的文字」。替身表改了就靠它抓出該重生的句子。
+SPOKEN = ROOT / "art/voice/spoken.json"
 
 
 def utterances():
@@ -74,6 +76,16 @@ def main():
     have = ({p.stem for p in OUT.glob("*.wav")} | {p.stem for p in OUT.glob("*.mp3")}
             | {p.stem for p in (ROOT / "docs/voice").glob("*.mp3")})
     todo = [u for u in us if u[3] not in have]
+    # **替身表改了，已經生好的檔不會自動重生。** 檔名是從畫面上的文字算雜湊的，
+    # 而替身只改要唸的文字，所以加一條替身之後那句的檔名一個字都沒變，工具看到
+    # 檔案在就跳過了。實際發生過：「斑比自己轉的」加了替身，線上還是舊錄音。
+    # 所以把每一句「當時實際唸的文字」記下來，跟現在算出來的不一樣就重生。
+    spoken = json.loads(SPOKEN.read_text()) if SPOKEN.exists() else {}
+    stale = [u for u in us if u[3] in have and u[3] in spoken
+             and spoken[u[3]] != V.to_speech(u[1])]
+    if stale:
+        print(f"替身表改過，{len(stale)} 句要重生")
+        todo += stale
     if "--who" in args:
         who = args[args.index("--who") + 1]
         todo = [u for u in todo if u[0] == who]
@@ -110,6 +122,9 @@ def main():
                      "prompt_wav": str(ROOT / ref) if not ref.startswith("/") else ref,
                      "prompt_text": ptext, "speed": speed,
                      "instruct": V.instruct(who, emo)})
+    spoken.update({k: V.to_speech(t) for _, t, _, k in todo})
+    SPOKEN.write_text(json.dumps(spoken, ensure_ascii=False, indent=0),
+                      encoding="utf-8")
     jf = ROOT / "art/voice/jobs.json"
     jf.write_text(json.dumps(jobs, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\n寫好 {len(jobs)} 個工作 → {jf}")

@@ -1,0 +1,34 @@
+{
+ "v-2e253a0a623c7466": {
+  "speaker": "畫面裡的她",
+  "text": "我要記住每一個來的人。我保證。",
+  "source": "/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/認真-1.wav",
+  "said": "'/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/認真-1.wav' 用這個",
+  "when": "2026-08-22T14:46:30.127Z",
+  "match": 1.0
+ },
+ "v-f64d2d9c787495b5": {
+  "speaker": "格莉奇",
+  "text": "兩則。第三則是斑比自己轉的。",
+  "source": "/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/轉平-2.wav",
+  "said": "'/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/轉平-2.wav' 用這個吧",
+  "when": "2026-08-22T19:57:53.812Z",
+  "match": 0.92
+ },
+ "v-b88a680d2421d253": {
+  "speaker": "格莉奇",
+  "text": "我這個禮拜是不是來過了。",
+  "source": "/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/壓旋律-台灣腔說話.wav",
+  "said": "'/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/壓旋律-台灣腔說話.wav'  這個你再用來配別句看看",
+  "when": "2026-08-22T11:32:36.270Z",
+  "match": 1.0
+ },
+ "v-0490edcfdb93f0dd": {
+  "speaker": "格莉奇",
+  "text": "你講得好像剛剛是我把他們找來的。",
+  "source": "/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/柔-放柔-e.wav",
+  "said": "'/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/柔-放柔-e.wav' 這個",
+  "when": "2026-08-22T16:16:48.519Z",
+  "match": 0.87
+ }
+}
