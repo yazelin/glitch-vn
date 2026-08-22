@@ -2,11 +2,10 @@
 """小說版的檢查。線性的東西要驗的東西少，可是還是不能靠眼睛。"""
 import json, pathlib, sys, urllib.request
 
-PROJ = "project-13660cd5-81d0-4142-9264-5ccd99a3d889"
-KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
-p = json.load(urllib.request.urlopen(urllib.request.Request(
-    f"https://larch.yapiflow.com/api/agent/projects/{PROJ}",
-    headers={"Authorization": f"Bearer {KEY}"}), timeout=180))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from config import PROJ, BASE, H, ROOT, STORE, api  # noqa: E402
+
+p = api()
 bad = []
 cids = {c["id"] for c in p.get("characters", [])}
 for b in p["boards"]:

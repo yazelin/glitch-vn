@@ -2,11 +2,10 @@
 """把板子印成可讀的樣子。線上要登入才玩得到，這是我自己驗節奏用的。"""
 import json, pathlib, sys, urllib.request
 
-PROJ = "project-13660cd5-81d0-4142-9264-5ccd99a3d889"
-KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
-p = json.load(urllib.request.urlopen(urllib.request.Request(
-    f"https://larch.yapiflow.com/api/agent/projects/{PROJ}",
-    headers={"Authorization": f"Bearer {KEY}"}), timeout=180))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from config import PROJ, BASE, H, ROOT, STORE, api  # noqa: E402
+
+p = api()
 want = sys.argv[1] if len(sys.argv) > 1 else None
 for b in p["boards"]:
     if want and b["id"] != want:

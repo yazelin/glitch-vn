@@ -8,16 +8,11 @@
 """
 import base64, json, pathlib, urllib.request
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-PROJ = "project-13660cd5-81d0-4142-9264-5ccd99a3d889"
-KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
-B = f"https://larch.yapiflow.com/api/agent/projects/{PROJ}"
-H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from config import PROJ, BASE, H, ROOT, STORE, api  # noqa: E402
 
 
-def api(d=None, m="GET", path=""):
-    return json.load(urllib.request.urlopen(urllib.request.Request(
-        B + path, json.dumps(d).encode() if d else None, H, method=m), timeout=300))
 
 
 def main():

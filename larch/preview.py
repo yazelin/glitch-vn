@@ -11,8 +11,9 @@
 import json, pathlib, sys, urllib.request
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-PROJ = "project-13660cd5-81d0-4142-9264-5ccd99a3d889"
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from config import PROJ, BASE, H, ROOT, STORE, api  # noqa: E402
+
 K = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 W, H = 1920, 1080
 SERIF = "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc"

@@ -11,11 +11,10 @@
 """
 import json, pathlib, time, urllib.error, urllib.request
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-PROJ = "project-13660cd5-81d0-4142-9264-5ccd99a3d889"
-KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
-BASE = f"https://larch.yapiflow.com/api/agent/projects/{PROJ}"
-H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from config import PROJ, BASE, H, ROOT, STORE, api  # noqa: E402
+
 A = json.loads((ROOT / "larch/assets.json").read_text())
 
 G, HOLE, NARRATOR = "格莉奇", "黑洞先生", "旁白"
@@ -44,18 +43,6 @@ AVATAR = {G: "chat-glitch", HOLE: "chat-blackhole", "貓草": "chat-catgrass",
           "鐵塔": "chat-tower", "0x": "chat-zerox", "斑比": "chat-bambi",
           "諾亞": "chat-noah"}
 
-
-def api(data=None, method="GET", path="", tries=4):
-    body = json.dumps(data).encode() if data is not None else None
-    for i in range(tries):
-        try:
-            return json.load(urllib.request.urlopen(
-                urllib.request.Request(BASE + path, body, H, method=method), timeout=240))
-        except urllib.error.HTTPError as e:
-            if e.code < 500 or i == tries - 1:
-                raise
-            print(f"  Larch 回 {e.code}，{2**i*5} 秒後重試")
-            time.sleep(2 ** i * 5)
 
 
 def ensure_characters():

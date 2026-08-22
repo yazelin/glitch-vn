@@ -17,19 +17,11 @@
 import base64, json, pathlib, sys, urllib.request
 from PIL import Image
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-PROJ = "project-13660cd5-81d0-4142-9264-5ccd99a3d889"
-KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
-B = f"https://larch.yapiflow.com/api/agent/projects/{PROJ}"
-H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
-STORE = ROOT / "larch/assets.json"
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from config import PROJ, BASE, H, ROOT, STORE, api  # noqa: E402
+
 OLDA = json.loads((ROOT / "backup/assets.json").read_text())
 
-
-def api(data=None, method="GET", path=""):
-    body = json.dumps(data).encode() if data is not None else None
-    return json.load(urllib.request.urlopen(
-        urllib.request.Request(B + path, body, H, method=method), timeout=300))
 
 
 def upload(name, raw, category, mime="image/png"):
