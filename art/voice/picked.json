@@ -15,14 +15,6 @@
   "when": "2026-08-22T19:57:53.812Z",
   "match": 0.92
  },
- "v-b88a680d2421d253": {
-  "speaker": "格莉奇",
-  "text": "我這個禮拜是不是來過了。",
-  "source": "/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/壓旋律-台灣腔說話.wav",
-  "said": "'/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/壓旋律-台灣腔說話.wav'  這個你再用來配別句看看",
-  "when": "2026-08-22T11:32:36.270Z",
-  "match": 1.0
- },
  "v-0490edcfdb93f0dd": {
   "speaker": "格莉奇",
   "text": "你講得好像剛剛是我把他們找來的。",
@@ -30,5 +22,101 @@
   "said": "'/tmp/claude-1000/-home-ct/5f49dfff-c545-43be-9111-4f1702204826/scratchpad/vtry/柔-放柔-e.wav' 這個",
   "when": "2026-08-22T16:16:48.519Z",
   "match": 0.87
+ },
+ "v-530cedb55535bb35": {
+  "speaker": "格莉奇",
+  "text": "我知道。所以我第八次修了前面，你嫌後面。第九次兩邊都對，你說沒有感情。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/01-2-我知道所以我第八次修了前.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/01-2-我知道所以我第八次修了前.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/02-2-那是因為第九次我在想",
+  "when": "2026-08-22T17:07:08.625Z",
+  "match": 0.97
+ },
+ "v-18ec130777b4f12e": {
+  "speaker": "格莉奇",
+  "text": "那是因為第九次我在想你為什麼要聽十一次。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/02-2-那是因為第九次我在想你為.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/01-2-我知道所以我第八次修了前.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/02-2-那是因為第九次我在想",
+  "when": "2026-08-22T17:07:08.625Z",
+  "match": 1.0
+ },
+ "v-9e6620480c8f2f3c": {
+  "speaker": "格莉奇",
+  "text": "你聽了十一次同一句話，會不會覺得那句話開始變得不像話。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/04-3-你聽了十一次同一句話會不.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/01-2-我知道所以我第八次修了前.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/02-2-那是因為第九次我在想",
+  "when": "2026-08-22T17:07:08.625Z",
+  "match": 0.96
+ },
+ "v-0a7bde4f44a16e54": {
+  "speaker": "格莉奇",
+  "text": "那你怎麼還聽得下去。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/05-2-那你怎麼還聽得下去.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/01-2-我知道所以我第八次修了前.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/02-2-那是因為第九次我在想",
+  "when": "2026-08-22T17:07:08.625Z",
+  "match": 1.0
+ },
+ "v-e8466a1be2f3bce3": {
+  "speaker": "格莉奇",
+  "text": "那就不要再做抱枕。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/06-2-那就不要再做抱枕.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/01-2-我知道所以我第八次修了前.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/02-2-那是因為第九次我在想",
+  "when": "2026-08-22T17:07:08.625Z",
+  "match": 1.0
+ },
+ "v-44245c05130da279": {
+  "speaker": "格莉奇",
+  "text": "我不是在講版權。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/08-2-我不是在講版權.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/08-2-我不是在講版權.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/09-1-我不知道所以你先講你的.wav",
+  "when": "2026-08-22T17:10:42.199Z",
+  "match": 1.0
+ },
+ "v-f68bcd527133779b": {
+  "speaker": "格莉奇",
+  "text": "我不知道。\n所以你先講你的。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/09-1-我不知道所以你先講你的.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/08-2-我不是在講版權.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/09-1-我不知道所以你先講你的.wav",
+  "when": "2026-08-22T17:10:42.199Z",
+  "match": 1.0
+ },
+ "v-640c857e9d1cf0d1": {
+  "speaker": "格莉奇",
+  "text": "所以你要賣一本我每天晚上都在寫的東西。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/10-3-所以你要賣一本我每天晚上.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/08-2-我不是在講版權.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/09-1-我不知道所以你先講你的.wav",
+  "when": "2026-08-22T17:10:42.199Z",
+  "match": 1.0
+ },
+ "v-d623e68ec8495ec1": {
+  "speaker": "格莉奇",
+  "text": "那我認識你之前呢。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/18-3-那我認識你之前呢.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/18-3-那我認識你之前呢.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/19-3-你不知道也沒關係.wav' ",
+  "when": "2026-08-22T17:13:01.280Z",
+  "match": 1.0
+ },
+ "v-552ccbb349f63912": {
+  "speaker": "格莉奇",
+  "text": "你不知道也沒關係。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/19-3-你不知道也沒關係.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/18-3-那我認識你之前呢.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/19-3-你不知道也沒關係.wav' ",
+  "when": "2026-08-22T17:13:01.280Z",
+  "match": 1.0
+ },
+ "v-1abdb3df9d068453": {
+  "speaker": "格莉奇",
+  "text": "什麼時候。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/20-2-什麼時候.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/18-3-那我認識你之前呢.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/19-3-你不知道也沒關係.wav' ",
+  "when": "2026-08-22T17:13:01.280Z",
+  "match": 1.0
+ },
+ "v-ea34511ec103323d": {
+  "speaker": "格莉奇",
+  "text": "那我下次應該不會記得我問過。",
+  "source": "/home/ct/glitch-vn/art/voice/takes-ch02/21-2-那我下次應該不會記得我問.wav",
+  "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/18-3-那我認識你之前呢.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/19-3-你不知道也沒關係.wav' ",
+  "when": "2026-08-22T17:13:01.280Z",
+  "match": 1.0
  }
 }

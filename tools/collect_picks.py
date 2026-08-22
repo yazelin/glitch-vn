@@ -9,7 +9,8 @@
 來源是這台機器上的 session 逐字稿：使用者訊息裡帶 .wav 路徑、而且語氣是
 肯定的那些。比對方式是把那支錄音轉出來，跟七章的台詞做模糊比對。
 
-    python3 tools/collect_picks.py <逐字稿.jsonl>
+    python3 tools/collect_picks.py <逐字稿.jsonl>   # 建檔
+    python3 tools/collect_picks.py --check          # 站上那支還是挑的那支嗎
 """
 import difflib, json, pathlib, re, subprocess, sys
 
@@ -34,11 +35,41 @@ def messages(jsonl):
         c = d.get("message", {}).get("content")
         if isinstance(c, list):
             c = "".join(x.get("text", "") for x in c if isinstance(x, dict))
-        if isinstance(c, str) and len(c) <= 700 and "task-notification" not in c:
+        if isinstance(c, str) and len(c) <= 2500 and "task-notification" not in c:
             yield d.get("timestamp", ""), c.strip()
 
 
+def dur(p):
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", str(p)], capture_output=True, text=True)
+    return float(r.stdout or 0)
+
+
+def check():
+    """挑過的錄音有沒有被後來的重生蓋掉。比長度就夠——重生出來的長度一定不同。"""
+    got = json.loads(OUT.read_text())
+    bad = 0
+    for k, v in sorted(got.items()):
+        src, inst = pathlib.Path(v["source"]), ROOT / f"art/voice/{k}.mp3"
+        if not src.exists():
+            print(f"  來源不見了 {k}　{src.name}")
+            continue
+        if not inst.exists():
+            print(f"  站上沒有這句 {k}")
+            bad += 1
+            continue
+        a, b = dur(src), dur(inst)
+        if abs(a - b) > 0.25:
+            print(f"  ★ 被蓋掉了 {k} {v['speaker']}　挑的 {a:.2f}s／站上 {b:.2f}s"
+                  f"\n      {v['text'][:34]}\n      來源 {src}")
+            bad += 1
+    print(f"\n{len(got)} 筆挑選，{bad} 筆對不上")
+    return bad
+
+
 def main():
+    if "--check" in sys.argv:
+        sys.exit(1 if check() else 0)
     import voice as V
     sys.path.insert(0, str(ROOT / "tools"))
     from gen_voice import utterances
@@ -46,11 +77,20 @@ def main():
 
     picks = {}
     for ts, c in messages(sys.argv[1]):
-        if not YES.search(c) or NO.search(c):
+        paths = [f for f in re.findall(r"'(/[^']+\.wav)'", c)
+                 if pathlib.Path(f).exists()]
+        if not paths:
             continue
-        for f in re.findall(r"'(/[^']+\.wav)'", c):
-            if pathlib.Path(f).exists():
-                picks[f] = (ts, c.replace("\n", " ")[:120])
+        # takes-ch02/ 底下的檔本身就是「一句三選一」的選項，使用者貼出來就是選它。
+        # 貼一整批、末尾補一句退回（「11-2 <-這個可能要改」）的情況，退掉最後一支。
+        batch = all("takes-ch02/" in f for f in paths)
+        if batch:
+            if NO.search(c):
+                paths = paths[:-1]
+        elif not YES.search(c) or NO.search(c):
+            continue
+        for f in paths:
+            picks[f] = (ts, c.replace("\n", " ")[:120])
     print(f"逐字稿裡肯定語氣的挑選：{len(picks)} 支")
 
     lines = {k: (w, V.to_speech(t), t) for w, t, e, k in utterances()}

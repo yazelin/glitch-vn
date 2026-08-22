@@ -171,6 +171,28 @@ if _a.exists() and _d.exists():
     else:
         print(f"發佈：art 與 docs 一致（{len(A)} 個檔）")
 
+# **挑選過的錄音有沒有被重生蓋掉。** 檔名是內容雜湊，重生就是就地覆蓋，
+# 使用者聽過幾十支才挑出來的那一支會安靜地消失（實際發生過一次）。
+_pk = ROOT / "art/voice/picked.json"
+if _pk.exists():
+    import subprocess as _sp
+    _p = json.loads(_pk.read_text())
+    _lost = []
+    for _k, _v in _p.items():
+        _src, _ins = pathlib.Path(_v["source"]), ROOT / f"art/voice/{_k}.mp3"
+        if not _src.exists() or not _ins.exists():
+            continue
+        _d = [float(_sp.run(["ffprobe", "-v", "error", "-show_entries",
+              "format=duration", "-of", "csv=p=0", str(x)],
+              capture_output=True, text=True).stdout or 0) for x in (_src, _ins)]
+        if abs(_d[0] - _d[1]) > 0.25:
+            _lost.append(_k)
+    if _lost:
+        bad.append(f"挑選過的錄音被蓋掉 {len(_lost)} 句"
+                   f"（跑 python3 tools/collect_picks.py --check 看是哪幾句）")
+    else:
+        print(f"挑選：{len(_p)} 句使用者指名的錄音都還在")
+
 print()
 for x in bad: print("  ★", x)
 for x in warn: print("  ・", x)
