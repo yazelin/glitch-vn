@@ -129,7 +129,7 @@ c.say(G, "下一個。")
 # ── 五 ──────────────────────────────────────────────
 c.stage()
 c.scene("茶几", "那天晚上她回到家。", "bg-table-lamp")
-c.stage((G, "left"))
+c.stage((G, "farRight"))
 c.narrate("那天晚上她回到家，把外套掛好，坐到茶几前面。")
 c.narrate("第一頁先抄。這是規矩。")
 c.narrate("@CatGrass_80", "@Tower_Manager", "@Null_0x99",

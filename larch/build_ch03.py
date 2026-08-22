@@ -141,7 +141,7 @@ c.narrate("然後她就走了。她走路的節奏沒有變，一步都沒有亂
 # ── 五 ──────────────────────────────────────────────
 c.stage()
 c.scene("茶几", "那天晚上她回到家。", "bg-table-lamp", effect="snow")
-c.stage((G, "left"))
+c.stage((G, "farRight"))
 c.narrate("那天晚上她回到家，把外套掛好，坐到茶几前面，翻開守則本。")
 c.narrate("第一頁先抄。這是規矩。")
 c.narrate("抄到第三行的時候，她停了一下。")

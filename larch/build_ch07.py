@@ -182,7 +182,7 @@ c.talk((G, "那是同一天嗎。"), (HOLE, "同一天。"), emotion="深夜家�
 c.stage()
 c.scene("茶几", "那天晚上她抄守則本，抄得比平常慢。", "bg-table-lamp",
         bgm="bgm-reveal")
-c.stage((G, "left"))
+c.stage((G, "farRight"))
 c.narrate("第一頁先抄。這是規矩。")
 c.narrate("六個名字。她一個一個抄過去，抄到 @考完就刪 的時候她停了半秒，然後繼續。")
 c.narrate("然後是第七行。")
@@ -200,7 +200,7 @@ c.narrate("然後她寫了別的東西。")
 c.stage()
 c.scene("隔天早上", "她翻開守則本第一頁。", "bg-table-lamp",
         transition="irisIn", ms=420, bgm="bgm-morning")
-c.stage((G, "left"))
+c.stage((G, "farRight"))
 c.narrate("隔天早上她起來，走到茶几前面，翻開守則本第一頁。")
 # 那六個名字全書被列出來過四次。最後這一次也要列，讀者才看得出
 # 那句話站的是**第七行**的位置。
@@ -213,7 +213,7 @@ c.say(G, "一、二、三、四、五、六。", emotion="平靜")
 c.narrate("然後是第七行。那一行是她的字。")
 c.narrate("還有一個。他就在客廳。去問他今天累不累。")
 c.scene("茶几", "她看了三秒。", "bg-table-lamp", transition="fade", bgm="bgm-morning")
-c.stage((G, "left"))
+c.stage((G, "farRight"))
 c.narrate("她看了三秒。")
 c.narrate("她不知道為什麼要問這個。她甚至可以列出四種解釋，其中兩種她自己都覺得很有說服力。",
           "可是那是她的字，她認得自己的字，而這一行的寫法跟前面那些不一樣："
