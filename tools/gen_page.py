@@ -112,9 +112,50 @@ def render(name, plate, lines, ink, right_half, blur):  # right_half 已停用
     print(f"  {name:22s} {len(lines)} 行　字級 {size}　欄寬 {colw}　→ {p.name}")
 
 
+# 道具上的字。**這條路跟本子那條不一樣**：道具要保留透明背景（render 會轉成
+# 不透明），而且範圍要用物件本身的外框，不是畫面裡的亮區。
+PROPS = {
+    # 旁白唸「品項那一欄寫著：天線用同軸線 3M」，紙上空白的話畫面在跟台詞打架
+    "prop-receipt": ["電子材料行", "————", "天線用同軸線 3M",
+                     "$180", "————", "謝謝惠顧"],
+}
+
+
+def render_prop(name, lines, ink=(74, 66, 80)):
+    src = ROOT / "art/face" / f"{name}.png"
+    if not src.exists():
+        print(f"  ★ 缺去背圖 {name}"); return
+    im = Image.open(src).convert("RGBA")
+    x0, y0, x1, y1 = im.getbbox()               # 用物件本身的外框
+    pad_x = int((x1 - x0) * 0.16)
+    pad_y = int((y1 - y0) * 0.14)
+    x0, x1 = x0 + pad_x, x1 - pad_x
+    y0, y1 = y0 + pad_y, y1 - pad_y
+    colw, colh = x1 - x0, y1 - y0
+    step = colh / len(lines)
+    size = int(step * 0.66)
+    while size > 8:
+        f = ImageFont.truetype(KAI, size, index=0)
+        if max(f.getbbox(t)[2] for t in lines) <= colw:
+            break
+        size -= 2
+    f = ImageFont.truetype(KAI, size, index=0)
+    d = ImageDraw.Draw(im)
+    rnd = random.Random(name)
+    for i, t in enumerate(lines):
+        w = f.getbbox(t)[2]
+        d.text((x0 + (colw - w) / 2 + rnd.uniform(-3, 3),
+                y0 + i * step + rnd.uniform(-2, 2)), t, font=f, fill=ink + (232,))
+    out = ROOT / "art/face-text"; out.mkdir(exist_ok=True)
+    im.save(out / f"{name}.png")
+    print(f"  {name:22s} {len(lines)} 行　字級 {size}　寬 {colw}　→ art/face-text/")
+
+
 def main():
     for name, (plate, lines, ink, rh, blur) in PAGES.items():
         render(name, plate, lines, ink, rh, blur)
+    for name, lines in PROPS.items():
+        render_prop(name, lines)
 
 
 if __name__ == "__main__":

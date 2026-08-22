@@ -12,14 +12,17 @@
 import pathlib, sys
 from PIL import Image
 
-SRC = pathlib.Path("art/face")          # 去背好的道具在這裡
+# 疊過字的版本優先（art/face-text），沒有才用純去背的（art/face）
+SRC = pathlib.Path("art/face")
+TEXTED = pathlib.Path("art/face-text")
 OUT = pathlib.Path("art/prop"); OUT.mkdir(exist_ok=True)
 W, H = 900, 1600                        # 跟立繪等高，寬一點好放橫的東西
 SIZE = float(sys.argv[1]) if len(sys.argv) > 1 else 0.30   # 物件高度佔畫布幾成
 TOP = float(sys.argv[2]) if len(sys.argv) > 2 else 0.16    # 上緣在畫布的幾成高
 
 for p in sorted(SRC.glob("prop-*.png")):
-    im = Image.open(p).convert("RGBA")
+    t = TEXTED / p.name
+    im = Image.open(t if t.exists() else p).convert("RGBA")
     bbox = im.getbbox()                 # 先裁掉四周的透明邊，不然大小不一致
     if bbox:
         im = im.crop(bbox)
