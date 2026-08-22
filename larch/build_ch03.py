@@ -154,7 +154,7 @@ c.narrate("她把這件事想了大概兩秒。世界很小，網路上撞 ID �
 c.narrate("然後她做了她每天都做的那件事。")
 c.narrate("她照著抄了下去。")
 c.narrate("@Bambi_Draft3", "@Radio_Noah", "@考完就刪")
-c.narrate("還有一個。不要問他是誰。")
+c.narrate("還有一個。不要問他是誰。", emotion="唸紙上的字")
 c.stage()
 c.narrate("她闔上本子，關掉燈。", "走廊上的燈今天大概也已經全部熄了。")
 

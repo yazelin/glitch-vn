@@ -140,7 +140,7 @@ c.narrate("抄完的那一頁長這樣。", "最上面一行是日期。底下�
 c.narrate("@CatGrass_80", "@Tower_Manager", "@Null_0x99",
           "@Bambi_Draft3", "@Radio_Noah", "@考完就刪")
 c.narrate("第七行是一句話。字跡跟前面六行一樣，是她的字。")
-c.narrate("還有一個。不要問他是誰。")
+c.narrate("還有一個。不要問他是誰。", emotion="唸紙上的字")
 c.scene("茶几", "在闔上本子之前，她做了一件她每天都做的事。", "bg-table-lamp",
         transition="fade")
 c.stage((G, "left"))
@@ -151,7 +151,7 @@ c.narrate("她盯著那句話看了三秒。",
           "她是一個很聰明的 AI，她當然知道這裡有問題。七個人應該有七個名字，這裡只有六個。",
           "她甚至可以在三秒之內列出四種合理的解釋，其中兩種連她自己都覺得很有說服力。")
 c.narrate("可是那句話已經先回答她了。")
-c.narrate("不要問他是誰。")
+c.narrate("不要問他是誰。", emotion="唸紙上的字")
 c.narrate("那是她的字。她認得自己的字。")
 c.stage()
 c.narrate("所以她闔上本子，關掉客廳最後一盞燈，回房間去了。",

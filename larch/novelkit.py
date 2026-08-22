@@ -258,7 +258,7 @@ class Chapter:
         d["stage"] = {"actors": self._stage(speaking, extra, emotion, face)}
         return self._add(d)
 
-    def narrate(self, *paras, face=None, props=()):
+    def narrate(self, *paras, face=None, props=(), emotion=None):
         """旁白。沒有名字，可是**台上的人要留著**。
 
         旁白時把立繪清掉的話，人會一直消失又出現，讀起來是閃的。
@@ -266,10 +266,14 @@ class Chapter:
         """
         # **旁白是一個角色。** 平台一定要有 speaker，留白會變成沒有名牌的怪狀態，
         # 在編輯器裡看起來也像沒填完。做成沒有立繪的角色最乾淨。
-        return self._card({"type": "dialogue", "title": paras[0][:14],
-                           "text": "\n".join(paras), "speaker": NARRATOR,
-                           "characterId": self.cids.get(NARRATOR)},
-                          face=face, extra=tuple(props))
+        # emotion 在旁白身上不是表情，是**唸法**：唸紙上的字跟描述動作要不一樣。
+        # 見 voice.EMO 的「唸紙上的字」。旁白沒有立繪，所以不影響畫面。
+        d = {"type": "dialogue", "title": paras[0][:14],
+             "text": "\n".join(paras), "speaker": NARRATOR,
+             "characterId": self.cids.get(NARRATOR)}
+        if emotion:
+            d["emotion"] = emotion
+        return self._card(d, face=face, extra=tuple(props))
 
     def _avatar(self, who):
         """只以訊號存在的人用大頭貼：貓草在留言區、鐵塔在耳機裡，兩個都不在這個房間。
