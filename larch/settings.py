@@ -78,7 +78,18 @@ def main():
         "cgGalleryItems": [{"url": assets[k], "title": t} for k, t in (
             ("bg-studio-2am", "直播室・凌晨兩點"),
             ("bg-living-night", "客廳・電視播的是雪"),
-            ("bg-table-lamp", "守則本・第一千零四版"))],
+            ("bg-table-lamp", "守則本・第一千零四版"),
+            ("bg-booth", "錄音間・第十一次"),
+            ("bg-greenroom", "休息室・兩點五十分"),
+            ("bg-studio-day", "聯動・猜歌"),
+            ("bg-corridor", "後台走廊・燈一段一段熄"),
+            ("bg-bambi-studio", "斑比的工作室・七個馬克杯"),
+            ("bg-apartment-hall", "門口・凌晨一點"),
+            ("bg-noah-shop", "諾亞的店・沒有一台是好的"),
+            ("bg-stairs", "樓梯口・兩個人點了一下頭"),
+            ("bg-street-day", "車站前・你最近忘記過什麼"),
+            ("bg-office-14f", "十四樓・一盆真的植物"),
+            ("bg-kitchen-morning", "廚房・她開始找麵粉"))],
     })
     p["settings"] = s
     r = api({"project": p, "summary": "標題畫面、對話框樣式、封面、CG 收藏"}, "PUT")

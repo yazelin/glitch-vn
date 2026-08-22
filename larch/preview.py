@@ -6,7 +6,8 @@
 自己看過再推上去。這不是像素級精準，可是「頭貼太低」「立繪太小」這種
 問題一眼就看得出來。
 
-用法：python3 larch/preview.py <卡片index> [out.jpg]
+用法：python3 larch/preview.py <章 id> <卡片index> [out.jpg]
+      python3 larch/preview.py <卡片index> [out.jpg]      （預設第一章）
 """
 import json, pathlib, sys, urllib.request
 from PIL import Image, ImageDraw, ImageFont
@@ -33,12 +34,17 @@ def grab(url):
 
 
 def main():
-    idx = int(sys.argv[1]) if len(sys.argv) > 1 else 8
-    out = sys.argv[2] if len(sys.argv) > 2 else "/tmp/preview.jpg"
+    argv = sys.argv[1:]
+    bid = argv.pop(0) if argv and not argv[0].isdigit() else None
+    idx = int(argv[0]) if argv else 8
+    out = argv[1] if len(argv) > 1 else "/tmp/preview.jpg"
     p = json.load(urllib.request.urlopen(urllib.request.Request(
         f"https://larch.yapiflow.com/api/agent/projects/{PROJ}",
         headers={"Authorization": f"Bearer {K}"}), timeout=180))
-    nodes = p["boards"][0]["nodes"]
+    board = next((b for b in p["boards"] if b["id"] == bid), None) if bid \
+        else p["boards"][0]
+    assert board, f"沒有這一章：{bid}　有的是 {[b['id'] for b in p['boards']]}"
+    nodes = board["nodes"]
     d = nodes[idx]["data"]
     # 背景取最近一張場景卡的
     bgurl = next((n["data"]["background"] for n in reversed(nodes[:idx + 1])
