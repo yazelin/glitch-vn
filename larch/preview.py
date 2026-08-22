@@ -54,7 +54,9 @@ def main():
 
     # 對話框（照 settings.dialogueUi 的值畫）
     ui = p["settings"]["dialogueUi"]
-    panel_h = int(H * .30)
+    # **對話框要抓高一點。** presentation:"gradient" 會往上暈開，
+    # 實際遮到的範圍比面板本身高很多；我抓 30% 的時候誤判過一次。
+    panel_h = int(H * .45)
     ov = Image.new("RGBA", (W, panel_h), (4, 8, 12, int(255 * ui["panelOpacity"])))
     canvas.paste(Image.alpha_composite(
         canvas.crop((0, H - panel_h, W, H)).convert("RGBA"), ov).convert("RGB"),

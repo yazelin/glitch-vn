@@ -15,10 +15,16 @@ W, H = 640, 1600          # 跟立繪同尺寸
 D = 330                    # 圓形直徑
 TOP = float(sys.argv[1]) if len(sys.argv) > 1 else 0.40   # 圓形上緣在畫布的幾成高
 LEFT = 34
+FLIP = {"catgrass"}        # 臉朝畫面外的，只有這一個
 for p in sorted(AV.glob("avatar-*.png")):
     head = Image.open(p).convert("RGBA").resize((D, D), Image.LANCZOS)
-    # **不要鏡射。** 立繪原本就畫成臉略朝右（朝畫面內），擺左邊剛好。
-    # 我鏡射過一次，結果眼睛跑到圓的左邊變成朝外，比原本糟。
+    # 頭貼永遠擺畫面左側，所以臉要朝右（朝畫面內）。
+    # **逐個看過才決定要不要鏡射**：七個裡只有貓草是真的朝外（臉在圓的左半、
+    # 視線往左下），其他六個都接近正面，鏡了反而破壞。
+    # 判斷方法：把頭貼放大、畫一條中線，看臉偏哪一邊。縮圖看不出來，我看錯過一次。
+    # 只鏡射頭部特寫是安全的——貓草的貓徽章在胸前，不在這個範圍內。
+    if p.stem.split("-", 1)[1] in FLIP:
+        head = head.transpose(Image.FLIP_LEFT_RIGHT)
     canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     canvas.alpha_composite(head, (LEFT, int(H * TOP)))
     canvas.save(OUT / p.name.replace("avatar-", "chat-"))
