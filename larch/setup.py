@@ -104,22 +104,34 @@ PROFILE = {
 
 
 def main():
-    assets = {}
+    # **沿用既有的 assets.json，不要從空的重建。** 從空的開始有兩個後果：
+    # 每次都重傳一次（素材庫長出一堆重複），而且會蓋掉別支腳本加的鍵（封面）。
+    force = "--force" in sys.argv
+    assets = json.loads(STORE.read_text()) if STORE.exists() else {}
+
+    def need(k):
+        return force or k not in assets
+
     print("素材（帶 category）")
     for p in sorted((ROOT / "art/out").glob("bg-*.png")):
+        if not need(p.stem): continue
         im = bg16x9(p); im.save("/tmp/_b.jpg", quality=88, optimize=True)
         assets[p.stem] = upload(f"{p.stem}.jpg", pathlib.Path("/tmp/_b.jpg").read_bytes(),
                                 "scene", "image/jpeg")
         print(f"  scene      {p.stem}")
     for p in sorted((ROOT / "art").glob("sprite-*.png")):
+        if not need(p.stem): continue
         assets[p.stem] = upload(p.name, p.read_bytes(), "character")
         print(f"  character  {p.stem}")
     for key in [k for v in FACES.values() for _, k in v]:
+        if not need(key): continue
         assets[key] = upload(f"{key}.png", fetch(OLDA[key]), "character")
         print(f"  character  {key}")
-    for p in sorted((ROOT / "art/avatar").glob("avatar-*.png")):
-        assets[p.stem] = upload(p.name, p.read_bytes(), "prop")
-        print(f"  prop       {p.stem}")
+    for d in ("art/avatar", "art/chat"):
+        for p in sorted((ROOT / d).glob("*.png")):
+            if not need(p.stem): continue
+            assets[p.stem] = upload(p.name, p.read_bytes(), "prop")
+            print(f"  prop       {p.stem}")
     STORE.write_text(json.dumps(assets, ensure_ascii=False, indent=1), encoding="utf-8")
 
     print("\n角色（POST /characters，帶 characterId）")

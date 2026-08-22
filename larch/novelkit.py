@@ -23,7 +23,10 @@ SPRITE = {G: "sprite-glitch", HOLE: "sprite-blackhole", "貓草": "sprite-catgra
           "鐵塔": "sprite-tower", "0x": "sprite-zerox", "斑比": "sprite-bambi",
           "諾亞": "sprite-noah"}
 # 立繪原檔高度差很多（0x 站得直、諾亞佝僂），縮放各自調過才會站得一樣高
-SCALE = {G: .82, HOLE: .86, "貓草": .84, "鐵塔": .90, "0x": .80, "斑比": .78, "諾亞": .84}
+# 市集專案的 scale 實測都在 0.90～1.04，我原本 0.78～0.90 整組偏小。
+# 每個人的立繪原檔高度不一樣，所以各自微調，讓他們站起來差不多高。
+SCALE = {G: .96, HOLE: 1.0, "貓草": .98, "鐵塔": 1.04, "0x": .94,
+         "斑比": .92, "諾亞": .98}
 # 演出詞彙表。全部從市集上別人發佈的專案裡挖出來的（GET /api/marketplace/{id}?play=1，
 # 不用登入），不是猜的。
 ENTER = ("fade", "zoom", "spring", "bounce", "blur", "glide", "riseUp", "swoopIn",
@@ -32,11 +35,14 @@ LOOP = ("breathe", "nod", "sway", "shiver", "hop", "pulse", "none")
 TRANSITION = ("fade", "wipeLeft", "wipeRight", "blurCut", "flash", "irisIn",
               "fadeBlack", "none")
 EFFECT = ("rain", "snow", "embers", "flash", "stars3d", "petals", "vignette",
-          "speedLines", "none")
+          "speedLines", "fog", "shake", "none")
+SLOT = ("farLeft", "left", "center", "right", "farRight")
 
-AVATAR = {G: "avatar-glitch", HOLE: "avatar-blackhole", "貓草": "avatar-catgrass",
-          "鐵塔": "avatar-tower", "0x": "avatar-zerox", "斑比": "avatar-bambi",
-          "諾亞": "avatar-noah"}
+# 聊天頭像：跟立繪同尺寸的透明畫布，圓形放在左下角。
+# **定位做在圖裡，不要用 offsetX/offsetY**——那兩個的單位是小數不是像素。
+AVATAR = {G: "chat-glitch", HOLE: "chat-blackhole", "貓草": "chat-catgrass",
+          "鐵塔": "chat-tower", "0x": "chat-zerox", "斑比": "chat-bambi",
+          "諾亞": "chat-noah"}
 
 
 def api(data=None, method="GET", path="", tries=4):
@@ -131,8 +137,10 @@ class Chapter:
 
     def stage(self, *who):
         """設定台上有誰。('格莉奇','left') 或直接給名字（自動排位）。"""
-        slots = ["center"] if len(who) == 1 else ["left", "right"] if len(who) == 2 \
-            else ["left", "center", "right"]
+        # 站位有五個：farLeft left center right farRight
+        slots = (["center"], ["left", "right"], ["left", "center", "right"],
+                 ["farLeft", "left", "right", "farRight"],
+                 ["farLeft", "left", "center", "right", "farRight"])[len(who) - 1]
         self.cast = [w if isinstance(w, tuple) else (w, slots[i])
                      for i, w in enumerate(who)]
         return self.cast
@@ -193,7 +201,7 @@ class Chapter:
         extra = ()
         if who:
             extra = ({"id": f"avatar-{who}", "url": A[AVATAR[who]], "name": who,
-                      "slot": "left", "scale": .22, "offsetX": -40, "offsetY": 300,
+                      "slot": "left", "scale": 1.0, "offsetX": 0, "offsetY": 0,
                       "enter": "slideLeft", "loop": "none"},)
         return self._card({"type": "dialogue", "title": f"{who or '留言區'}：{body[0][:12]}",
                            "text": "\n".join(body), "speaker": who or "留言區",
