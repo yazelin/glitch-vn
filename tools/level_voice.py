@@ -54,9 +54,11 @@ def main():
 
     done = 0
     for w, f in files:
+        # **備份一定要用現在的檔覆蓋。** 原本寫成「沒有才備份」，於是重跑時
+        # 會從舊備份處理，把後來換上去的新版本蓋回去（實際發生過：剛裝好的
+        # 三句被舊版洗掉）。備份的語意是「這次處理前的樣子」，不是「最初的」。
         b = BACK / f.name
-        if not b.exists():
-            b.write_bytes(f.read_bytes())
+        b.write_bytes(f.read_bytes())
         m = measure(b)
         if not m:
             print("量不到", f.name)
