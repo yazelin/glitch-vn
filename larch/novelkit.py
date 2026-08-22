@@ -226,7 +226,7 @@ class Chapter:
 
     # ── 對外 ────────────────────────────────────────────
     def scene(self, title, text, bg, start=False, effect=None,
-              bgm=None, volume=.22, transition="fade", ms=340):
+              bgm=None, volume=.32, transition="fade", ms=340):
         d = {"type": "scene", "title": title, "text": text, "background": A[bg],
              "transition": transition, "transitionMs": ms}
         assert transition in TRANSITION, f"沒有這個轉場：{transition}"
