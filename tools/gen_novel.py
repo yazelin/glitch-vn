@@ -66,6 +66,35 @@ CSS = """
   --text:#dfe8ec; --muted:#93a3ac; --faint:#68787f;
   --r:3px;
 }
+/* ── 有聲書 ──────────────────────────────────────────
+   配音是為視覺小說生的，這裡同一段文字配同一個聲音。
+   照這個站的規則走：青色是靜止色，綠是 hover 色。 */
+.ab{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:40;
+  display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:999px;
+  background:var(--win);border:1px solid var(--hair2);box-shadow:0 6px 26px #000a;
+  max-width:min(92vw,540px)}
+.ab button{width:38px;height:38px;border-radius:999px;border:1px solid var(--hair2);
+  background:var(--sunk);color:var(--cy);cursor:pointer;font-size:13px;flex:none;
+  font-family:inherit;line-height:1}
+.ab button:hover{color:var(--mint);border-color:var(--mint);
+  filter:drop-shadow(0 0 9px rgba(124,243,192,.65))}
+.abTxt{min-width:0;flex:1;line-height:1.3}
+.abTxt b{display:block;font-size:.86rem;color:var(--text)}
+.abTxt span{font-size:.76rem;color:var(--muted)}
+.abOpen{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:40;
+  padding:10px 20px;border-radius:999px;border:1px solid var(--hair2);
+  background:var(--win);color:var(--cy);cursor:pointer;font-size:.86rem;
+  font-family:inherit;box-shadow:0 6px 26px #000a}
+.abOpen:hover{color:var(--mint);border-color:var(--mint);
+  filter:drop-shadow(0 0 9px rgba(124,243,192,.65))}
+/* 正在唸的那一段。外框用 box-shadow 撐開，不用 padding——
+   加 padding 會讓段落在播到的時候跳動一下。 */
+.abOn{background:rgba(37,194,232,.10);border-radius:4px;
+  box-shadow:0 0 0 8px rgba(37,194,232,.10)}
+/* 控制列是固定定位，會蓋住捲到最底的那一段。開著的時候把正文墊高。 */
+body.abOn2{padding-bottom:92px}
+@media (max-width:520px){.abTxt span{display:none}}
+
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);
   font-family:"Noto Serif TC",Georgia,serif;font-size:18px;line-height:2.05;
@@ -237,8 +266,15 @@ footer a{color:var(--muted)}
 """
 
 
-def render(md):
+def render(md, idbase=None):
+    """回傳 HTML。給了 idbase 就順便回傳每一段的原文，並且替段落編號。
+
+    **有聲書的對應要建在這一份清單上。** 另外拿 md 重切一次的話，兩邊的
+    分段規則只要有一點不同（這裡在 chat 與 quote 互換時會提前 flush），
+    索引就會錯開，而錯開不會報錯，只會播錯段落。
+    """
     out, buf, mode = [], [], None
+    blocks = []
 
     def inline(t):
         t = E(t)
@@ -251,15 +287,19 @@ def render(md):
         if not buf:
             mode = None
             return
+        i = ""
+        if idbase and mode != "pre":
+            i = f' id="{idbase}-{len(blocks)}"'
+            blocks.append("\n".join(buf))
         if mode == "chat":
-            out.append('<div class="chat">' + "".join(
+            out.append(f'<div class="chat"{i}>' + "".join(
                 f"<div>{inline(l)}</div>" for l in buf) + "</div>")
         elif mode == "quote":
-            out.append("<blockquote><p>" + "<br>".join(inline(l) for l in buf) + "</p></blockquote>")
+            out.append(f"<blockquote{i}><p>" + "<br>".join(inline(l) for l in buf) + "</p></blockquote>")
         elif mode == "pre":
             out.append("<pre>" + "\n".join(html.escape(l) for l in buf) + "</pre>")
         else:
-            out.append("<p>" + "<br>".join(inline(l) for l in buf) + "</p>")
+            out.append(f"<p{i}>" + "<br>".join(inline(l) for l in buf) + "</p>")
         buf, mode = [], None
 
     inpre = False
@@ -295,7 +335,7 @@ def render(md):
         mode = mode or "p"
         buf.append(line)
     flush()
-    return "".join(out)
+    return ("".join(out), blocks) if idbase else "".join(out)
 
 
 def build_images():
@@ -339,7 +379,7 @@ JSONLD = """{"@context":"https://schema.org","@type":"Book","name":"格莉奇與
 "character":[CHARS]}""".replace("URL", BASE)
 
 
-def page(title, desc, body, cur, wide=False, ld=""):
+def page(title, desc, body, cur, wide=False, ld="", js=""):
     """完整的 HTML 文件。
 
     **一定要有 doctype。** 之前這幾頁是片段（第一行直接是 <title>），
@@ -395,6 +435,7 @@ def page(title, desc, body, cur, wide=False, ld=""):
 {PROMO}
 </footer>
 </main>
+{f"<script>{js}</script>" if js else ""}
 </body>
 </html>
 '''
@@ -403,6 +444,11 @@ def page(title, desc, body, cur, wide=False, ld=""):
 # ── 本文 ────────────────────────────────────────────────
 chapters = sorted((ROOT / "novel").glob("ch*.md"))
 body, toc = [], []
+sys.path.insert(0, str(ROOT / "tools"))
+import map_audio as MA
+_vn = MA.vn_lines()
+_urls = json.loads((ROOT / "art/voice/urls.json").read_text(encoding="utf-8"))
+steps = []
 for i, p in enumerate(chapters, 1):
     md = p.read_text(encoding="utf-8")
     title = next((l[2:].strip() for l in md.split("\n") if l.startswith("# ")), p.stem)
@@ -410,7 +456,37 @@ for i, p in enumerate(chapters, 1):
     body.append((f'<h2 class="ch" id="c{i}" style="margin-top:34px">' if not body
                  else f'<hr class="rule"><h2 class="ch" id="c{i}">')
                 + html.escape(title) + "</h2>")
-    body.append(render(md))
+    htm, blocks = render(md, idbase=f"b{i}")
+    body.append(htm)
+    for ps, k in MA.align(blocks, _vn.get(i, [])):
+        if k in _urls:
+            # **小說站要用相對路徑。** urls.json 存的是絕對網址（Larch 的卡片需要），
+            # 但站台跟音檔同源，寫死網域的話本機開來測就會全部 404，而 404 會
+            # 觸發播放器的「跳過壞檔」，看起來像每一百毫秒閃過一段。
+            u = _urls[k].replace("https://yazelin.github.io/glitch-vn/", "")
+            steps.append({"p": [f"b{i}-{x}" for x in ps], "u": u})
+print(f"有聲書：{len(steps)} 步")
+
+# ── 有聲書 ──────────────────────────────────────────────
+# 配音是為視覺小說生的，小說站直接沿用：同一段文字，同一個聲音。
+# 段落編號由 render() 給，對應在同一份清單上算出來，不會錯位。
+# 播放器本體在 tools/audiobook.js。**不要塞回這裡當字串。**
+# 之前用 repr 存，改一個字就要處理逸出，有一次把真換行寫進單引號字串裡，
+# 整支程式的語法就壞了——而且產站失敗是靜默的，頁面照樣寫出來，只是沒有播放器。
+JS_TPL = (pathlib.Path(__file__).resolve().parent / "audiobook.js").read_text(encoding="utf-8")
+
+AUDIO = """
+<div class="ab" id="ab" hidden>
+  <button id="abPlay" aria-label="播放">▶</button>
+  <div class="abTxt"><b id="abNow">有聲書</b><span id="abSub">按播放，或點任何一段從那裡開始</span></div>
+  <button id="abRate" aria-label="速度">1×</button>
+  <button id="abClose" aria-label="關閉">✕</button>
+</div>
+<button class="abOpen" id="abOpen">▶ 聽有聲書</button>
+"""
+
+
+NOVEL_JS = JS_TPL.replace("%%STEPS%%", json.dumps(steps, ensure_ascii=False, separators=(",", ":")))
 
 (DOCS / "novel.html").write_text(page(
     "全文閱讀・格莉奇與黑洞先生",
@@ -422,7 +498,8 @@ for i, p in enumerate(chapters, 1):
 <p>兩年前開台第一天來了七個人。她說，我要記住每一個來的人，我保證。</p>
 </header>
 <nav class="toc">{"".join(toc)}</nav>
-{"".join(body)}''', "novel.html"), encoding="utf-8")
+{"".join(body)}
+{AUDIO}''', "novel.html", js=NOVEL_JS), encoding="utf-8")
 
 # ── 角色頁 ──────────────────────────────────────────────
 cards = "".join(f'''<div class="card">

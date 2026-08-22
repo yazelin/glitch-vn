@@ -17,6 +17,36 @@ from config import PROJ, BASE, H, ROOT, STORE, api  # noqa: E402
 
 A = json.loads((ROOT / "larch/assets.json").read_text())
 
+# 配音網址表：代號 → 網址（tools/upload_voice.py 產生）。還沒生配音就是空的，
+# 建置照樣跑得動——沒有網址的句子單純沒有聲音，不會壞。
+_VU = ROOT / "art/voice/urls.json"
+VOICE_URLS = json.loads(_VU.read_text(encoding="utf-8")) if _VU.exists() else {}
+
+
+def _voice(d):
+    """把 voiceUrl 掛上卡片。**多人卡片一定要掛在行上**，卡片層只吃得下一個聲音。
+
+    查表的鍵一定要跟 tools/gen_voice.py 收句子時算的一模一樣：
+    單人卡用卡片的 speaker/text/emotion，多人卡用每一行自己的三個欄位。
+    差一個欄位就全部對不上，而且不會報錯，只會安靜地沒有聲音。
+    """
+    if not VOICE_URLS:
+        return d
+    import voice as V
+    lines = d.get("dialogueLines")
+    if lines:
+        for l in lines:
+            u = VOICE_URLS.get(V.key(l.get("speaker"), l.get("text"),
+                                     l.get("emotion") or None))
+            if u:
+                l["voiceUrl"] = u
+    else:
+        u = VOICE_URLS.get(V.key(d.get("speaker"), d.get("text"),
+                                 d.get("emotion") or None))
+        if u:
+            d["voiceUrl"] = u
+    return d
+
 G, HOLE, NARRATOR = "格莉奇", "黑洞先生", "旁白"
 SPRITE = {G: "sprite-glitch", HOLE: "sprite-blackhole", "貓草": "sprite-catgrass",
           "鐵塔": "sprite-tower", "0x": "sprite-zerox", "斑比": "sprite-bambi",
@@ -219,6 +249,8 @@ class Chapter:
         return self.cast
 
     def _card(self, d, speaking=None, extra=(), emotion=None, face=None):
+        if (d.get("type") or "dialogue") == "dialogue":
+            _voice(d)
         d["characterLayers"] = self._layers(speaking, extra, emotion, face)
         d["stage"] = {"actors": self._stage(speaking, extra, emotion, face)}
         return self._add(d)

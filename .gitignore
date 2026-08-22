@@ -1,2 +1,11 @@
 docs/script.txt
 __pycache__/
+
+# 配音：**只留 docs/voice 那一份。** art/voice 是工作區，docs/voice 是發佈出去的
+# 同一批檔案，兩份都進 git 等於 46MB 存兩次。重生一次要跑四十七分鐘 GPU，
+# 所以成品要留（gen_voice 會把 docs/voice 也算成「已經生過」）。
+art/voice/*.wav
+art/voice/*.mp3
+# 複檢資料夾是 art/voice 的複本，聽完就沒用了，進 git 等於同一批檔案存兩份。
+art/voice/review/
+art/voice/jobs.json

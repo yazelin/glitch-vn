@@ -4,8 +4,10 @@
 照 Larch 自己的角色工坊提示詞來做，不要自己發明：
 
   上傳素材   POST /media   {name, mimeType, base64, category}
-             category: scene 場景／character 立繪／prop 道具
+             category: scene 場景／character 立繪／prop 道具／voice 配音
              **沒帶 category 全部會掉進道具。**
+             voice 是後來實測出來的（平台記成 category=voice、type=audio），
+             不在早期那三種裡面。配音檔用它，BGM 沿用 prop。
 
   更新角色   POST /characters  {characterId, ...要改的欄位}
              只覆蓋你傳的欄位，其餘保留。**用 id 會變成新增一個重複角色。**

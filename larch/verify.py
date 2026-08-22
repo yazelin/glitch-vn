@@ -120,6 +120,38 @@ for b in p["boards"]:
             else:
                 on.pop(who, None)
 
+# ── 配音有沒有掛齊 ───────────────────────────────────
+# **鍵算錯不會報錯，只會安靜地沒有聲音。** 查表的鍵是「講者＋台詞＋情緒」，
+# 少一個欄位就全部對不上，而那要聽完六百多句才發現。這裡直接數。
+import voice as V
+_vu = ROOT / "art/voice/urls.json"
+if _vu.exists():
+    urls = json.loads(_vu.read_text(encoding="utf-8"))
+    want = got = 0
+    miss = []
+    for b in p["boards"]:
+        for n in b["nodes"]:
+            d = n["data"]
+            if (d.get("type") or "dialogue") != "dialogue":
+                continue
+            items = ([(l.get("speaker"), l.get("text"), l.get("emotion"),
+                       l.get("voiceUrl")) for l in d.get("dialogueLines") or []]
+                     or [(d.get("speaker"), d.get("text"), d.get("emotion"),
+                          d.get("voiceUrl"))])
+            for sp, tx, em, u in items:
+                if not sp or not tx or not tx.strip():
+                    continue
+                if V.key(sp, tx, em or None) not in urls:
+                    continue          # 這一句本來就沒生（例如只有標點）
+                want += 1
+                if u:
+                    got += 1
+                elif len(miss) < 5:
+                    miss.append(f"{b['id']}：{n['id']} {sp}「{tx[:14]}」")
+    print(f"\n配音：有網址的 {want} 句，掛上 {got} 句")
+    for x in miss:
+        bad.append(f"配音沒掛上　{x}")
+
 print()
 for x in bad: print("  ★", x)
 for x in warn: print("  ・", x)
