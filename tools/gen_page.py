@@ -41,12 +41,19 @@ PAGES = {
 }
 
 
-def bright_box(img):
-    """找出畫面裡最大的一塊平坦亮區＝紙頁或螢幕。回傳它的外接框。"""
+def bright_box(img, screen=False):
+    """找出畫面裡最大的一塊平坦亮區＝紙頁或螢幕。回傳它的外接框。
+
+    **螢幕要另外判。** 亮的藍色螢幕飽和度很高，會被「低飽和」那個條件排除掉，
+    結果框到檯燈或桌面，字級被壓到看不見。
+    """
     a = np.asarray(img.convert("RGB")).astype(np.int16)
     lum = a.mean(2)
     sat = a.max(2) - a.min(2)
-    m = (lum > lum.max() * 0.62) & (sat < 90)
+    if screen:
+        m = (a[..., 2] - a[..., 0] > 18) & (lum > 55)
+    else:
+        m = (lum > lum.max() * 0.62) & (sat < 90)
     m = ndimage.binary_opening(m, np.ones((9, 9)))
     lab, n = ndimage.label(m)
     if not n:
@@ -57,22 +64,25 @@ def bright_box(img):
     return xs.min(), ys.min(), xs.max(), ys.max()
 
 
-def render(name, plate, lines, ink, right_half, blur):
+def render(name, plate, lines, ink, right_half, blur):  # right_half 已停用
     src = ROOT / "art/out" / f"{plate}.png"
     if not src.exists():
         print(f"  ★ 缺底圖 {plate}"); return
     img = Image.open(src).convert("RGB")
-    x0, y0, x1, y1 = bright_box(img)
-    if right_half:                      # 本子攤開時字寫在右頁
-        x0 = x0 + int((x1 - x0) * 0.52)
+    x0, y0, x1, y1 = bright_box(img, screen=(plate == "plate-screen"))
+    # **用整個攤開的寬度，不要只用右半頁。** 只用右頁的話欄寬剩一半，
+    # 字級被寬度卡死，讀不出來就白做了。
     pad = int((x1 - x0) * 0.07)
     x0, x1 = x0 + pad, x1 - pad
-    y0, y1 = y0 + int((y1 - y0) * 0.10), y1 - int((y1 - y0) * 0.08)
+    y0, y1 = y0 + int((y1 - y0) * 0.06), y1 - int((y1 - y0) * 0.08)
+    # **文字要留在畫面上半部。** 對話框的漸層會蓋掉下面將近一半，
+    # 而這幾張的重點就是最後一行——被蓋住等於這張圖白做。
+    y1 = min(y1, int(img.height * 0.46))
     colw, colh = x1 - x0, y1 - y0
     step = colh / len(lines)
 
     # 字級自動縮到最長的一行放得下，而且不超過行高
-    size = int(step * 0.56)
+    size = int(step * 0.78)   # 行距吃緊，字級盡量吃滿一行
     while size > 8:
         f = ImageFont.truetype(KAI, size, index=0)
         if max(f.getbbox(t)[2] for t in lines) <= colw:

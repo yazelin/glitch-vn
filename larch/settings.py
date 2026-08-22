@@ -50,13 +50,15 @@ def main():
         # **按鈕是 layer，不會自己出現。** kind:"button" 配 action:start/continue/gallery，
         # 語言選單是 kind:"language"。只放文字層的話畫面上一個按鈕都沒有。
         # 兩個角色站在左右，所以文字與按鈕全部排在中間那一欄。
+        # **文字三層的 x/y 是使用者在平台上調過的，讀回來寫進這裡。**
+        # 這一支會整包覆蓋 titleScreen，所以在平台上調完要記得回寫，不然下次跑就洗掉。
         "titleScreen": {"frame": "none", "bgmVolume": 0.4, "layers": [
             {"id": "eyebrow", "kind": "text", "role": "eyebrow",
-             "x": 33, "y": 13, "size": 1, "align": "center", "width": 34},
+             "x": 43.87, "y": 16.29, "size": 1, "align": "center", "width": 34},
             {"id": "name", "kind": "text", "role": "title",
-             "x": 30, "y": 18, "size": 5.4, "align": "center", "width": 40},
+             "x": 45.41, "y": 22.66, "size": 5.4, "align": "center", "width": 40},
             {"id": "description", "kind": "text", "role": "description",
-             "x": 32, "y": 33, "size": 1.2, "align": "center", "width": 36},
+             "x": 45.48, "y": 32.45, "size": 1.2, "align": "center", "width": 36},
             {"id": "action-start", "kind": "button", "action": "start",
              "icon": True, "x": 37, "y": 50, "size": 1.35, "width": 26},
             {"id": "action-continue", "kind": "button", "action": "continue",
@@ -66,8 +68,9 @@ def main():
             {"id": "languages", "kind": "language", "x": 37, "y": 82, "size": 1.1},
         ]},
         # 配色跟小說站同一套（ai-brain-site 的 --bg #04080c、--cy #25c2e8、--mint #7cf3c0）
+        # fontFamily 使用者在平台上改成 sans，讀回來收進這裡
         "dialogueUi": {"preset": "custom", "presentation": "gradient",
-                       "fontFamily": "serif", "fontSize": 25, "nameFontSize": 18,
+                       "fontFamily": "sans", "fontSize": 25, "nameFontSize": 18,
                        "textColor": "#dfe8ec", "speakerColor": "#25c2e8",
                        "accentColor": "#7cf3c0", "borderColor": "#25c2e8",
                        "panelColor": "#04080c", "panelOpacity": 0.82,

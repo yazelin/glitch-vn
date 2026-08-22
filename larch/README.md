@@ -165,6 +165,8 @@ skill 文件與範例專案都沒有這麼完整。以下全部是從那裡讀�
 
 **專案設定** `settings`（`larch/settings.py` 在管）
 
+**在平台上調過的東西要回寫。** `settings.py` 是整包覆蓋 `titleScreen`，所以在編輯器裡拖過標題文字的位置之後，要把新的 x/y 讀回來寫進程式碼，不然下一次跑那一支就洗掉了。讀法：`api()` 回的 `settings.titleScreen.layers`。
+
     titleScreenEnabled / titleScreen{frame, layers[{id,kind,role,x,y,size,align,width}]}
     titleCoverShade / titleCoverPositionX / titleCoverPositionY / projectThumbnail
     dialogueUi{preset, presentation, fontFamily, fontSize, nameFontSize,
