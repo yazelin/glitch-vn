@@ -244,9 +244,11 @@ class Chapter:
                      ("桌上冷掉的披薩", ("……",)))
         """
         assert 2 <= len(arms) <= 4, "選項給兩到四個"
-        cid = self._add({"type": "choice", "title": title, "text": prompt,
-                         "choices": [a[0] for a in arms],
-                         "choiceMode": "branch", "choicePlacement": "center"})
+        # **選項卡也要帶立繪。** 用 _add 的話台上的人會在這一張消失、選完又出現，
+        # 跟旁白清掉立繪是同一個坑。
+        cid = self._card({"type": "choice", "title": title, "text": prompt,
+                          "choices": [a[0] for a in arms],
+                          "choiceMode": "branch", "choicePlacement": "center"})
         ends = []
         for i, (label, paras) in enumerate(arms):
             self.prev = None            # 這一條的第一張由 choice 的 handle 接
