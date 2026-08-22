@@ -45,6 +45,9 @@ def main():
     ap.add_argument("--max", type=int, default=180)
     ap.add_argument("--n", type=int, default=9)
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--only", default=None,
+                    help="只重做這些代號（逗號分隔）。用來挑出音高偏高的那批"
+                         "——它們幾乎都是短句，短句一句一生特別容易飆高。")
     a = ap.parse_args()
 
     import gen_voice as gv, voice as V
@@ -53,6 +56,10 @@ def main():
             for w, t, e, k in gv.utterances() if w == a.who]
     if not rows:
         sys.exit(f"找不到 {a.who}")
+    if a.only:
+        want = set(a.only.split(","))
+        rows = [r for r in rows if r[3] in want]
+        print(f"只重做 {len(rows)} 句")
     gs = [g for g in groups(rows, a.max, a.n) if len(g) > 1]
     solo = sum(1 for g in groups(rows, a.max, a.n) if len(g) == 1)
     print(f"{a.who} 共 {len(rows)} 句 → {len(gs)} 段（另有 {solo} 句單獨，不動）")
