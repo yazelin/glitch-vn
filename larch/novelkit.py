@@ -61,6 +61,20 @@ EXPR = {
 }
 
 
+# 背景配哪一首 BGM。寫成表而不是散在各章，是因為同一個場景在七章裡出現很多次，
+# 靠人記會漂。要換的地方（第七章的客廳與茶几是全書的轉折）在 build 腳本裡明寫 bgm=。
+BGM_FOR = {
+    "title-cover": "bgm-title",
+    "bg-studio-2am": "bgm-studio", "bg-studio-day": "bgm-collab",
+    "bg-living-night": "bgm-living", "bg-table-lamp": "bgm-notebook",
+    "bg-booth": "bgm-work", "bg-greenroom": "bgm-cold", "bg-corridor": "bgm-cold",
+    "bg-office-14f": "bgm-cold", "bg-bambi-studio": "bgm-studio",
+    "bg-apartment-hall": "bgm-living", "bg-noah-shop": "bgm-shop",
+    "bg-stairs": "bgm-shop", "bg-street-day": "bgm-street",
+    "bg-kitchen-morning": "bgm-morning",
+}
+
+
 def art(name, emotion=None):
     """這個角色現在該用哪一張圖。沒有對應的差分就回基礎立繪。"""
     key = EXPR.get(name, {}).get(emotion or "")
@@ -86,6 +100,7 @@ class Chapter:
         self.bid, self.name, self.desc, self.cids = bid, name, desc, cids
         self.nodes, self.edges, self.prev, self._x, self._n = [], [], None, 0, 0
         self.pending = []       # 支線走完等著接回主線的那幾張
+        self._bgm = None        # 現在在播哪一首，一樣就不重下（會從頭重播）
         self.cast = []          # 目前站在台上的人 [(名字, 位置)]
 
     # ── 內部 ────────────────────────────────────────────
@@ -145,8 +160,12 @@ class Chapter:
         if effect:
             assert effect in EFFECT, f"沒有這個特效：{effect}"
             d["visualEffect"] = effect
-        if bgm:
+        # 沒指定就照背景查表。**同一首不要重下**，重下等於從頭重播，
+        # 連著三場都是茶几的話音樂會一直跳回開頭。
+        bgm = bgm or BGM_FOR.get(bg)
+        if bgm and bgm in A and bgm != self._bgm:
             d.update(bgm=A[bgm], bgmVolume=volume, bgmLoop=True)
+            self._bgm = bgm
         if start:
             d["start"] = True
         return self._add(d)

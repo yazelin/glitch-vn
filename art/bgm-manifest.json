@@ -1,0 +1,46 @@
+[
+ {
+  "name": "bgm-title",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Slow ambient lo-fi theme. Solo Rhodes electric piano playing one simple four-note motif over a distant warm synth pad. No drums. Melancholy but gentle, the feeling of a room where someone has been waiting a long time."
+ },
+ {
+  "name": "bgm-studio",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Late-night lo-fi hip hop. Dusty vinyl crackle, soft brushed drums around 70 bpm, muted Rhodes chords, round sub bass. Sleepy, empty, after everyone has left."
+ },
+ {
+  "name": "bgm-living",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Very sparse ambient. Low analog drone, faint television static, one sustained cello note that barely moves. Almost no melody. Cold, still, snow on a dead channel."
+ },
+ {
+  "name": "bgm-notebook",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Minimal solo felt piano, close-miked, room tone audible. One short phrase repeating with tiny variations, patient and ritual, like copying the same page every night. No drums, no bass."
+ },
+ {
+  "name": "bgm-work",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Cold minimal electronic. Dry pulsing bass note, clicky percussion, clean sine tones, around 90 bpm. Businesslike and efficient with no warmth at all."
+ },
+ {
+  "name": "bgm-collab",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Bright synth pop instrumental. Arpeggiated saw lead, four-on-the-floor drums around 118 bpm, glossy and slightly mechanical, a stage performance that is technically perfect and a little inhuman."
+ },
+ {
+  "name": "bgm-cold",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Tense ambient. Low string swell, long metallic reverb tail, an irregular soft pulse like a heartbeat that is not quite regular. An empty corridor where the lights go out one section at a time."
+ },
+ {
+  "name": "bgm-shop",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Warm nostalgic instrumental. Old valve radio tone, gentle nylon-string guitar, soft accordion, faint AM static between stations, slow waltz feel. An old man repairing something nobody will listen to."
+ },
+ {
+  "name": "bgm-street",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Light daytime instrumental. Clean electric guitar, brushed snare, upright bass, walking tempo around 96 bpm. Pleasant afternoon on a busy street, but heard from slightly too far away."
+ },
+ {
+  "name": "bgm-reveal",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Emotional ambient. Slowly rising strings over sustained piano chords, tape saturation, restrained throughout. It builds but never breaks into a climax; it just keeps opening."
+ },
+ {
+  "name": "bgm-morning",
+  "prompt": "Instrumental only. No vocals, no singing, no lyrics, no spoken word, no choir. Lo-fi analog production: tape hiss, gentle saturation, muted highs, plenty of space. Loopable, no fade-in, no big drop. Warm gentle morning instrumental. Soft acoustic guitar fingerpicking, light Rhodes, low sunlight through a kitchen window. Hopeful and small. No drum build."
+ }
+]

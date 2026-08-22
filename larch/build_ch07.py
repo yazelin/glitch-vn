@@ -46,7 +46,8 @@ c.say(X, "@Zero_Point。", "那個 ID 是 @Zero_Point。他那天一句話都沒
 
 # ── 二 ──────────────────────────────────────────────
 c.stage()
-c.scene("客廳", "門打開的時候，客廳的電視開著，播的是雪。", "bg-living-night", effect="snow")
+c.scene("客廳", "門打開的時候，客廳的電視開著，播的是雪。", "bg-living-night",
+        effect="snow", bgm="bgm-reveal")
 c.narrate("回家的路上她把那七個字反覆看了很多次，"
           "看到她確定自己不會在下一個轉角把它弄丟為止。",
           "她甚至把它打在手機的備忘錄裡，然後截圖，然後把截圖設成桌布。")
@@ -141,7 +142,8 @@ c.talk((G, "那是同一天嗎。"), (HOLE, "同一天。"))
 
 # ── 五 ──────────────────────────────────────────────
 c.stage()
-c.scene("茶几", "那天晚上她抄守則本，抄得比平常慢。", "bg-table-lamp")
+c.scene("茶几", "那天晚上她抄守則本，抄得比平常慢。", "bg-table-lamp",
+        bgm="bgm-reveal")
 c.stage((G, "left"))
 c.narrate("第一頁先抄。這是規矩。")
 c.narrate("六個名字。她一個一個抄過去，抄到 @考完就刪 的時候她停了半秒，然後繼續。")
@@ -158,7 +160,8 @@ c.narrate("然後她寫了別的東西。")
 
 # ── 六 ──────────────────────────────────────────────
 c.stage()
-c.scene("隔天早上", "她翻開守則本第一頁。", "bg-table-lamp", transition="irisIn", ms=420)
+c.scene("隔天早上", "她翻開守則本第一頁。", "bg-table-lamp",
+        transition="irisIn", ms=420, bgm="bgm-morning")
 c.stage((G, "left"))
 c.narrate("隔天早上她起來，走到茶几前面，翻開守則本第一頁。")
 c.narrate("日期。六個名字。")
@@ -170,7 +173,8 @@ c.narrate("她不知道為什麼要問這個。她甚至可以列出四種解釋
           "前面那些是要她知道，這一行是要她去做。")
 c.narrate("所以她走出房間。")
 c.stage()
-c.scene("客廳", "客廳的電視開著，播的是雪。", "bg-living-night", effect="snow")
+c.scene("客廳", "客廳的電視開著，播的是雪。", "bg-living-night",
+        effect="snow", bgm="bgm-morning")
 c.stage((HOLE, "right"))
 c.narrate("客廳的電視開著，播的是雪。",
           "黑洞先生坐在沙發上，西裝下襬垂到地板，短靴排成一列。")
@@ -180,7 +184,9 @@ c.narrate("黑洞先生轉過頭來。")
 c.narrate("他看著她。他看了很久，久到電視上的雪下了好幾層，"
           "久到她開始覺得自己是不是問錯了什麼。")
 c.talk((HOLE, "不累。"), (G, "喔。那就好。"))
-c.stage((HOLE, "right"))
+c.stage()
+c.scene("廚房", "她走去廚房，開始找麵粉。", "bg-kitchen-morning", transition="wipeRight")
+c.stage((G, "left"))
 c.narrate("她走去廚房，開始找麵粉。她不知道自己為什麼要烤麵包。",
           "她只知道現在很想烤，而且她的手知道要怎麼做。")
 
@@ -195,6 +201,10 @@ c.branch("這個早上，這間房子裡有三個地方同時在發生事情。"
          ("門邊",
           ("門邊那疊短靴今天少了一雙。",
            "少掉的那一雙在沙發前面的地板上，靴口朝著客廳，像是有人剛剛才從裡面站起來。")))
+c.stage()
+c.scene("客廳", "客廳裡，黑洞先生把外套的內側拉開了一點點。", "bg-living-night",
+        effect="snow", transition="fade", bgm="bgm-morning")
+c.stage((HOLE, "right"))
 c.narrate("客廳裡，黑洞先生把外套的內側拉開了一點點，又拉回去。")
 c.narrate("裡面還是黑的。")
 c.narrate("可是今天有一個很小的地方亮了一下，"
