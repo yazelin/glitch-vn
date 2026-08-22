@@ -26,7 +26,9 @@ def main():
     n = 0
     for f in sorted(SRC.glob("*.mp3")):
         d = DST / f.name
-        if not d.exists() or d.stat().st_size != f.stat().st_size:
+        # **要比內容，不可以只比大小。** 統一響度之後有些檔大小剛好一樣，
+        # 用大小判斷就整批跳過，線上還是舊的聲音（實際發生過）。
+        if not d.exists() or d.read_bytes() != f.read_bytes():
             shutil.copy(f, d)
             n += 1
         # **這一份一律是 Pages 的網址，不要跟 Larch 的混在一起。**
