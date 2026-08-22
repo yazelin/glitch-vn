@@ -45,10 +45,20 @@ def fetch(url):
 SPRITE = {"格莉奇": "sprite-glitch", "黑洞先生": "sprite-blackhole", "貓草": "sprite-catgrass",
           "鐵塔": "sprite-tower", "0x": "sprite-zerox", "斑比": "sprite-bambi",
           "諾亞": "sprite-noah"}
-FACES = {  # 現成的差分。剩下五個角色的差分還沒畫。
+# 表情差分。**要跟 novelkit 的 EXPR 對得起來**，卡片上的 emotion 就是查這張表。
+FACES = {
     "格莉奇": [("平靜", "glitch-plain"), ("開心", "glitch-happy"), ("發呆", "glitch-thinking"),
-             ("驚訝", "glitch-idle"), ("當機", "glitch-error"), ("想睡", "glitch-sleep")],
+             ("驚訝", "glitch-idle"), ("當機", "glitch-error"), ("想睡", "glitch-sleep"),
+             ("難過", "face-glitch-sad")],
     "黑洞先生": [("平靜", "blackhole-idle"), ("飽", "blackhole-full"), ("餓", "blackhole-hungry")],
+    "鐵塔": [("公事", "face-tower-brief"), ("疲憊", "face-tower-tired"),
+           ("難得的溫柔", "face-tower-warm")],
+    "0x": [("意外", "face-zerox-startled"), ("壓著", "face-zerox-held"),
+           ("要走", "face-zerox-leaving")],
+    "斑比": [("不安", "face-bambi-anxious"), ("被說中", "face-bambi-moved"),
+           ("專注", "face-bambi-focus")],
+    "諾亞": [("想事情", "face-noah-puzzle"), ("笑", "face-noah-smile")],
+    "貓草": [("發酸", "face-catgrass-sour"), ("彆扭", "face-catgrass-sulky")],
 }
 PROFILE = {
     "旁白": ("旁白", "說故事的那個聲音。不是人，沒有立繪。",
@@ -117,8 +127,10 @@ def main():
         print(f"  character  {p.stem}")
     for key in [k for v in FACES.values() for _, k in v]:
         if not need(key): continue
-        assets[key] = upload(f"{key}.png", fetch(OLDA[key]), "character")
-        print(f"  character  {key}")
+        local = ROOT / "art/face" / f"{key}.png"
+        raw = local.read_bytes() if local.exists() else fetch(OLDA[key])
+        assets[key] = upload(f"{key}.png", raw, "character")
+        print(f"  character  {key}{'　（本地）' if local.exists() else ''}")
     for d in ("art/avatar", "art/chat"):
         for p in sorted((ROOT / d).glob("*.png")):
             if not need(p.stem): continue

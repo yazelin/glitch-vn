@@ -31,9 +31,25 @@ for b in p["boards"]:
             if not L.get("url"): bad.append(f"{b['id']}：{nid} 有立繪圖層沒有圖")
         if d.get("type") == "scene" and not d.get("background"):
             bad.append(f"{b['id']}：{nid} 場景卡沒有背景")
-    # 線性檢查：分岔在小說版是不該出現的
+    # 主線是線性的，只有 choice 卡可以分岔，而且每一條都要接回同一張主線卡。
     for s, t in out.items():
-        if len(t) > 1: bad.append(f"{b['id']}：{s} 有 {len(t)} 條出邊，小說版應該是線性的")
+        if len(t) <= 1: continue
+        if N[s]["data"].get("type") != "choice":
+            bad.append(f"{b['id']}：{s} 有 {len(t)} 條出邊，可是它不是選項卡")
+        elif len(t) != len(N[s]["data"].get("choices") or []):
+            bad.append(f"{b['id']}：{s} 有 {len(t)} 條出邊，選項卻有 "
+                       f"{len(N[s]['data'].get('choices') or [])} 個")
+    # 支線一定要匯流：每一條走到底都要落在同一張主線卡上
+    for n in b["nodes"]:
+        if n["data"].get("type") != "choice": continue
+        ends = set()
+        for t0 in out.get(n["id"], []):
+            seen, cur = set(), t0
+            while cur and cur not in seen and len(out.get(cur, [])) == 1:
+                seen.add(cur); cur = out[cur][0]
+            ends.add(cur)
+        if len(ends) > 1:
+            bad.append(f"{b['id']}：{n['id']} 的支線沒有匯流，落在 {sorted(ends)}")
     kinds = {}
     for n in b["nodes"]:
         k = n["data"].get("type") or "dialogue"

@@ -43,6 +43,29 @@ AVATAR = {G: "chat-glitch", HOLE: "chat-blackhole", "貓草": "chat-catgrass",
           "鐵塔": "chat-tower", "0x": "chat-zerox", "斑比": "chat-bambi",
           "諾亞": "chat-noah"}
 
+# 表情差分。**卡片填 emotion 還不夠**——市集上的作品是把舞台那個角色的 url
+# 一起換成差分圖，兩個都寫播放器才換得了臉。只填 emotion 的話畫面不會動。
+EXPR = {
+    G: {"平靜": "glitch-plain", "開心": "glitch-happy", "發呆": "glitch-thinking",
+        "驚訝": "glitch-idle", "當機": "glitch-error", "想睡": "glitch-sleep",
+        "難過": "face-glitch-sad"},
+    HOLE: {"平靜": "blackhole-idle", "飽": "blackhole-full", "餓": "blackhole-hungry"},
+    "鐵塔": {"公事": "face-tower-brief", "疲憊": "face-tower-tired",
+           "難得的溫柔": "face-tower-warm"},
+    "0x": {"意外": "face-zerox-startled", "壓著": "face-zerox-held",
+           "要走": "face-zerox-leaving"},
+    "斑比": {"不安": "face-bambi-anxious", "被說中": "face-bambi-moved",
+           "專注": "face-bambi-focus"},
+    "諾亞": {"想事情": "face-noah-puzzle", "笑": "face-noah-smile"},
+    "貓草": {"發酸": "face-catgrass-sour", "彆扭": "face-catgrass-sulky"},
+}
+
+
+def art(name, emotion=None):
+    """這個角色現在該用哪一張圖。沒有對應的差分就回基礎立繪。"""
+    key = EXPR.get(name, {}).get(emotion or "")
+    return A[key] if key and key in A else A[SPRITE[name]]
+
 
 
 def ensure_characters():
@@ -62,6 +85,7 @@ class Chapter:
     def __init__(self, bid, name, desc, cids):
         self.bid, self.name, self.desc, self.cids = bid, name, desc, cids
         self.nodes, self.edges, self.prev, self._x, self._n = [], [], None, 0, 0
+        self.pending = []       # 支線走完等著接回主線的那幾張
         self.cast = []          # 目前站在台上的人 [(名字, 位置)]
 
     # ── 內部 ────────────────────────────────────────────
@@ -71,13 +95,16 @@ class Chapter:
         self._x += 300
         self.nodes.append({"id": nid, "type": "story",
                            "position": {"x": self._x, "y": 0}, "data": data})
-        if self.prev:
-            self.edges.append({"id": f"e{self._n}", "source": self.prev,
+        # 支線的每一條末端都接到下一張主線卡，這就是匯流點
+        srcs = self.pending or ([self.prev] if self.prev else [])
+        for k, s0 in enumerate(srcs):
+            self.edges.append({"id": f"e{self._n}-{k}", "source": s0,
                                "target": nid, "sourceHandle": "right", "animated": True})
+        self.pending = []
         self.prev = nid
         return nid
 
-    def _stage(self, speaking=None, extra=()):
+    def _stage(self, speaking=None, extra=(), emotion=None):
         """舞台。**用 stage.actors，不要只用 characterLayers。**
 
         actors 多了兩個 characterLayers 沒有的東西：`enter` 進場動畫、
@@ -86,7 +113,8 @@ class Chapter:
         """
         actors = []
         for name, pos in self.cast:
-            actors.append({"id": f"actor-{name}-{pos}", "url": A[SPRITE[name]],
+            actors.append({"id": f"actor-{name}-{pos}",
+                           "url": art(name, emotion if name == speaking else None),
                            "name": name, "slot": pos, "scale": SCALE[name],
                            "offsetX": 0, "offsetY": 0,
                            "enter": "fade", "loop": "breathe",
@@ -94,11 +122,12 @@ class Chapter:
         actors += list(extra)
         return actors
 
-    def _layers(self, speaking=None, extra=()):
+    def _layers(self, speaking=None, extra=(), emotion=None):
         """舊的 characterLayers。編輯器某些地方還在讀它，所以兩個都寫。"""
         out = []
         for name, pos in self.cast:
-            out.append({"id": f"layer-{name}-{pos}", "url": A[SPRITE[name]],
+            out.append({"id": f"layer-{name}-{pos}",
+                        "url": art(name, emotion if name == speaking else None),
                         "position": pos, "x": 0, "y": 0, "scale": SCALE[name],
                         "opacity": 1 if (speaking is None or name == speaking) else .55,
                         # 不要翻轉：0x 耳邊的標籤、貓草胸前的徽章都是不對稱的。
@@ -132,9 +161,9 @@ class Chapter:
                      for i, w in enumerate(who)]
         return self.cast
 
-    def _card(self, d, speaking=None, extra=()):
-        d["characterLayers"] = self._layers(speaking, extra)
-        d["stage"] = {"actors": self._stage(speaking, extra)}
+    def _card(self, d, speaking=None, extra=(), emotion=None):
+        d["characterLayers"] = self._layers(speaking, extra, emotion)
+        d["stage"] = {"actors": self._stage(speaking, extra, emotion)}
         return self._add(d)
 
     def narrate(self, *paras):
@@ -154,19 +183,26 @@ class Chapter:
         return self._card({"type": "dialogue", "title": f"{who}：{lines[0][:12]}",
                            "text": "\n".join(lines), "speaker": who,
                            "emotion": emotion,
-                           "characterId": self.cids.get(who)}, speaking=who)
+                           "characterId": self.cids.get(who)},
+                          speaking=who, emotion=emotion)
 
-    def talk(self, *pairs):
+    def talk(self, *pairs, emotion=None, who=None):
         """一來一往裝在同一張卡。pairs = (講者, 台詞) 一串。
 
         一句一張卡的話，兩個人鬥嘴會變成點十次滑鼠。dialogueLines 就是為這個存在的。
         """
+        # 一張卡只有一個舞台，所以差分掛在 who（預設第一個講話的人）身上。
+        face = who or pairs[0][0]
         lines = [{"id": f"l{i}", "speaker": w, "text": t,
-                  "emotion": ""} for i, (w, t) in enumerate(pairs)]
-        return self._card({"type": "dialogue", "title": f"{pairs[0][0]}：{pairs[0][1][:10]}",
-                           "text": pairs[0][1], "speaker": pairs[0][0],
-                           "characterId": self.cids.get(pairs[0][0]),
-                           "dialogueLines": lines})
+                  "emotion": emotion if (emotion and w == face) else ""}
+                 for i, (w, t) in enumerate(pairs)]
+        d = {"type": "dialogue", "title": f"{pairs[0][0]}：{pairs[0][1][:10]}",
+             "text": pairs[0][1], "speaker": pairs[0][0],
+             "characterId": self.cids.get(pairs[0][0]),
+             "dialogueLines": lines}
+        if emotion:
+            d["emotion"] = emotion
+        return self._card(d, speaking=face, emotion=emotion)
 
     def chat(self, *msgs, who=None):
         """留言區／訊息。
@@ -196,6 +232,36 @@ class Chapter:
                            # 頭像用 slideLeft 滑進來，像訊息跳出來
                            "transition": "fade", "transitionMs": 220},
                           extra=extra)
+
+    def branch(self, prompt, *arms, title="鏡頭"):
+        """支線。**讀者不在這個世界裡**，他只是決定鏡頭要停在哪一樣東西上。
+
+        所以選項寫的是房間裡的東西，不是「你要做什麼」；旁白也不對讀者說話。
+        每一條走完都接回主線的下一張卡，主線一個字都不會變。
+
+            c.branch("客廳裡還有三樣東西。",
+                     ("門邊那疊短靴", ("……", "……")),
+                     ("桌上冷掉的披薩", ("……",)))
+        """
+        assert 2 <= len(arms) <= 4, "選項給兩到四個"
+        cid = self._add({"type": "choice", "title": title, "text": prompt,
+                         "choices": [a[0] for a in arms],
+                         "choiceMode": "branch", "choicePlacement": "center"})
+        ends = []
+        for i, (label, paras) in enumerate(arms):
+            self.prev = None            # 這一條的第一張由 choice 的 handle 接
+            first = None
+            for para in paras:
+                nid = self._card({"type": "dialogue", "title": f"{label}：{para[:10]}",
+                                  "text": para, "speaker": NARRATOR,
+                                  "characterId": self.cids.get(NARRATOR)})
+                first = first or nid
+            self.edges.append({"id": f"ec{self._n}-{i}", "source": cid, "target": first,
+                               "sourceHandle": f"choice-{i}", "targetHandle": "top",
+                               "label": label, "animated": True})
+            ends.append(self.prev)
+        self.prev, self.pending = None, ends
+        return cid
 
     def end(self, text="（第一章結束）"):
         """章末。**要標出來**，不然檢查工具分不出「刻意的終點」跟「接漏了」。"""
