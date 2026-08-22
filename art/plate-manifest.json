@@ -1,0 +1,42 @@
+[
+ {
+  "name": "plate-rulebook",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg"
+  ],
+  "prompt": "A close top-down view of a THICK old leather notebook lying open on a low wooden table under a warm desk lamp. Dark brown leather, worn corners, the spine cracked from use. The two open pages fill most of the frame. A pen rests in the gutter. **Every page and every screen must be COMPLETELY BLANK — pure empty paper, no writing, no printed lines, no letters, no numbers, no symbols, no smudges that look like text.** The text will be added afterwards by hand. Lofi anime art. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet, lilac and cyan palette; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. "
+ },
+ {
+  "name": "plate-sample",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg"
+  ],
+  "prompt": "A close top-down view of a BRAND NEW leather-bound notebook lying open on a clean desk, still crisp, sharp corners, neat stitching, a paper band and an opened courier box edge visible at the frame corner. The two open pages fill most of the frame. **Every page and every screen must be COMPLETELY BLANK — pure empty paper, no writing, no printed lines, no letters, no numbers, no symbols, no smudges that look like text.** The text will be added afterwards by hand. Lofi anime art. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet, lilac and cyan palette; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. "
+ },
+ {
+  "name": "plate-screen",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg"
+  ],
+  "prompt": "A close view of a computer monitor on a desk, seen slightly from the side, filling most of the frame. The screen is a FLAT EVEN GLOW with nothing on it at all. A stylus and a graphics tablet lie in front. **Every page and every screen must be COMPLETELY BLANK — pure empty paper, no writing, no printed lines, no letters, no numbers, no symbols, no smudges that look like text.** The text will be added afterwards by hand. Lofi anime art. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet, lilac and cyan palette; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. "
+ },
+ {
+  "name": "prop-book-closed",
+  "size": "1024x1024",
+  "refs": [
+   "art/ref-room.jpg"
+  ],
+  "prompt": "A single object: a thick dark brown leather notebook, CLOSED, seen at a three-quarter angle, worn corners, a thin ribbon marker hanging out. Nothing else in frame. Background is a single flat pure green #00FF00, perfectly even, only that colour. No shadow, no ground, no gradient, no vignette, no reflection. Nothing on the object may be green. Crisp edges. Leave a margin, the object must not touch the frame. No text, no watermark, no border. Lofi anime art. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet, lilac and cyan palette; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. "
+ },
+ {
+  "name": "prop-receipt",
+  "size": "1024x1024",
+  "refs": [
+   "art/ref-room.jpg"
+  ],
+  "prompt": "A single object: a small old paper receipt, slightly curled at the corners, yellowed, seen flat from above. **The receipt is completely blank — no printing at all.** Nothing else in frame. Background is a single flat pure green #00FF00, perfectly even, only that colour. No shadow, no ground, no gradient, no vignette, no reflection. Nothing on the object may be green. Crisp edges. Leave a margin, the object must not touch the frame. No text, no watermark, no border. Lofi anime art. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet, lilac and cyan palette; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. "
+ }
+]
