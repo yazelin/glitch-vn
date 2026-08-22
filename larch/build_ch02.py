@@ -2,7 +2,7 @@
 """第二章・限時預購。本文在 novel/ch02.md。"""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from novelkit import Chapter, ensure_characters, G, HOLE
+from novelkit import Chapter, ensure_characters, prop, G, HOLE
 
 cids = ensure_characters()
 c = Chapter("ch02", "第二章・限時預購",
@@ -91,6 +91,8 @@ c.narrate("皮面的手感很扎實，車線整齊，翻開的時候書脊會發
 c.narrate("第一頁印著手寫感的示範內容，用的是那種模擬鋼筆的字體。",
           "示範內容是隨便寫的，就是那種為了讓客人知道「這裡可以寫字」而存在的假字。")
 c.narrate("她翻到第一頁。")
+c.stage()
+c.scene("樣品・第一頁", "上面有七行。", "page-sample", transition="irisIn", ms=420)
 c.narrate("上面有七行。")
 c.narrate("七個假名字，排成一列，字體歪歪的，模仿手寫。")
 c.narrate("她盯著那七行看。")
@@ -99,6 +101,8 @@ c.narrate("她的處理器沒有停。她可以同時告訴你這個字體叫什
 c.narrate("只有一件事她算不出來：她不知道自己為什麼一直在看那一頁。")
 c.narrate("她把樣品闔上，又打開，又翻到第一頁。")
 c.narrate("七行。")
+c.scene("錄音間", "她說給自己聽的。", "bg-booth", transition="fade")
+c.stage(G)
 c.say(G, "……七。", emotion="發呆")
 c.narrate("錄音間裡沒有人。她說給自己聽的。")
 
@@ -110,7 +114,8 @@ c.narrate("黑洞先生看了一眼，繼續看電視。今天播的還是雪。
 c.stage((G, "left"), (HOLE, "right"))
 c.talk((G, "這是假的。周邊。"), (HOLE, "嗯。"), (G, "你要嗎。"))
 c.narrate("黑洞先生轉過頭來。他看那本假的本子看了很久，久到她開始覺得自己問錯了什麼。",
-          "然後他伸手把它拿過去，拉開外套內側，放進去。", face=(HOLE, "拉開外套"))
+          "然後他伸手把它拿過去，拉開外套內側，放進去。", face=(HOLE, "拉開外套"),
+          props=(prop("prop-book-closed", slot="center", scale=.34),))
 c.talk((G, "那是假的欸。"), (HOLE, "我知道。"))
 c.narrate("她笑了一下。她本來想再說點什麼，"
           "可是那個要說的東西在她伸手去拿的時候已經不在了，就像每天都會發生的那樣。")

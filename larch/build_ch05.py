@@ -2,7 +2,7 @@
 """第五章・第一次問。本文在 novel/ch05.md。"""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from novelkit import Chapter, ensure_characters, G, HOLE
+from novelkit import Chapter, ensure_characters, prop, G, HOLE
 
 cids = ensure_characters()
 c = Chapter("ch05", "第五章・第一次問",
@@ -102,7 +102,8 @@ c.narrate("他把盒子拉出來，掀開。裡面有兩把傘、一隻手套、
 c.talk((G, "螺絲起子是我借你的。"), (N, "是我借妳的。"), (G, "……喔。"),
        (N, "已經三年了。不過沒關係，我有很多支。"), emotion="和藹", who=N)
 c.narrate("她拿起那張紙。那是一張收據，很舊，邊角捲起來。上面印的日期是兩年多以前。",
-          "品項那一欄寫著：天線用同軸線 3M。")
+          "品項那一欄寫著：天線用同軸線 3M。",
+          props=(prop("prop-receipt", slot="center", scale=.3),))
 c.narrate("她看著那張收據看了很久。")
 c.talk((G, "這個是我買的？"), (N, "是啊。"), (G, "我買天線的線幹嘛。"),
        (N, "妳說妳要接一個東西。妳那天很緊張。"), (G, "我緊張什麼。"),

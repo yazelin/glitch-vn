@@ -137,6 +137,19 @@ def main():
         raw = local.read_bytes() if local.exists() else fetch(OLDA[key])
         assets[key] = upload(f"{key}.png", raw, "character")
         print(f"  character  {key}{'　（本地）' if local.exists() else ''}")
+    # 疊好字的本子與螢幕是整幅畫面，走 scene（當特寫用）
+    for f in sorted((ROOT / "art/page").glob("*.png")):
+        if not need(f.stem): continue
+        im = Image.open(f).convert("RGB"); im.save("/tmp/_p.jpg", quality=90, optimize=True)
+        assets[f.stem] = upload(f"{f.stem}.jpg", pathlib.Path("/tmp/_p.jpg").read_bytes(),
+                                "scene", "image/jpeg")
+        print(f"  scene      {f.stem}　特寫")
+    # 單一物件的透明 PNG 走 prop，擺在角色旁邊
+    for f in sorted((ROOT / "art/face").glob("prop-*.png")):
+        if not need(f.stem): continue
+        assets[f.stem] = upload(f.name, f.read_bytes(), "prop")
+        print(f"  prop       {f.stem}")
+
     # BGM 走 prop（平台的 category 只有 scene／character／prop 三種，音檔歸道具）
     for f in sorted((ROOT / "art/bgm").glob("*.mp3")):
         if not need(f.stem): continue

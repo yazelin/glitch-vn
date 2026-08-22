@@ -132,11 +132,17 @@ c.narrate("這很重要。抄。")
 c.narrate("她就抄了。")
 
 # ── 四 ──────────────────────────────────────────────
+# 講到那一頁的時候，那一頁要看得到。文字是疊上去的，跟劇情逐字對得上。
+c.stage()
+c.scene("守則本・第一千零四版", "抄完的那一頁長這樣。", "page-rulebook-1004",
+        transition="irisIn", ms=420)
 c.narrate("抄完的那一頁長這樣。", "最上面一行是日期。底下是七個項目。")
 c.narrate("@CatGrass_80", "@Tower_Manager", "@Null_0x99",
           "@Bambi_Draft3", "@Radio_Noah", "@考完就刪")
 c.narrate("第七行是一句話。字跡跟前面六行一樣，是她的字。")
 c.narrate("還有一個。不要問他是誰。")
+c.scene("茶几", "在闔上本子之前，她做了一件她每天都做的事。", "bg-table-lamp",
+        transition="fade")
 c.stage((G, "left"))
 c.narrate("在闔上本子之前，她做了一件她每天都做的事。", "她數了一次。")
 c.say(G, "一、二、三、四、五、六。", emotion="發呆")

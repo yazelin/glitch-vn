@@ -17,6 +17,10 @@ c.narrate("0x 的公司在十四樓，會客室裡沒有多餘的東西：一張
 c.talk((X, "妳只有十五分鐘。"), (G, "用不到。"))
 c.narrate("格莉奇把平板推過去。螢幕上是斑比那張截圖，開台第五天，三百六十的畫質，"
           "字的筆畫全部黏成一塊一塊的色塊。")
+c.stage()
+c.scene("平板上的那張截圖", "開台第五天。", "page-day5", transition="blurCut", ms=380)
+c.scene("十四樓會客室", "0x 看了那張圖零點四秒。", "bg-office-14f", transition="fade")
+c.stage((G, "left"), (X, "right"))
 c.say(G, "第七行。")
 c.narrate("0x 看了那張圖零點四秒。跟她答題的速度一樣。")
 c.talk((X, "妳想問什麼。"), (G, "妳記得那個 ID。"), (X, "記得。"), (G, "那是誰。"))
@@ -200,12 +204,16 @@ c.stage((G, "left"))
 c.narrate("隔天早上她起來，走到茶几前面，翻開守則本第一頁。")
 # 那六個名字全書被列出來過四次。最後這一次也要列，讀者才看得出
 # 那句話站的是**第七行**的位置。
+c.stage()
+c.scene("守則本・隔天早上", "日期。", "page-rulebook-final", transition="irisIn", ms=480)
 c.narrate("日期。")
 c.narrate("@CatGrass_80", "@Tower_Manager", "@Null_0x99",
           "@Bambi_Draft3", "@Radio_Noah", "@考完就刪")
 c.say(G, "一、二、三、四、五、六。", emotion="平靜")
 c.narrate("然後是第七行。那一行是她的字。")
 c.narrate("還有一個。他就在客廳。去問他今天累不累。")
+c.scene("茶几", "她看了三秒。", "bg-table-lamp", transition="fade", bgm="bgm-morning")
+c.stage((G, "left"))
 c.narrate("她看了三秒。")
 c.narrate("她不知道為什麼要問這個。她甚至可以列出四種解釋，其中兩種她自己都覺得很有說服力。",
           "可是那是她的字，她認得自己的字，而這一行的寫法跟前面那些不一樣："

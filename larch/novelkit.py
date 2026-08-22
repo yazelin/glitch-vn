@@ -83,6 +83,17 @@ BGM_FOR = {
 }
 
 
+def prop(key, slot="right", scale=.42, enter="fade"):
+    """把一樣東西擺進畫面。角色在講某個東西的時候，那個東西應該看得到。
+
+    平台沒有「道具」這種卡，可是 stage.actors 吃任何一張圖——
+    留言區的大頭貼就是這樣做的。這裡同一招用在本子、收據上。
+    """
+    return {"id": f"prop-{key}-{slot}", "url": A[key], "name": "",
+            "slot": slot, "scale": scale, "offsetX": 0, "offsetY": 0,
+            "enter": enter, "loop": "none"}
+
+
 def _emo(name, speaking, emotion, face):
     """這個角色這一張要用哪個表情。
 
@@ -208,7 +219,7 @@ class Chapter:
         d["stage"] = {"actors": self._stage(speaking, extra, emotion, face)}
         return self._add(d)
 
-    def narrate(self, *paras, face=None):
+    def narrate(self, *paras, face=None, props=()):
         """旁白。沒有名字，可是**台上的人要留著**。
 
         旁白時把立繪清掉的話，人會一直消失又出現，讀起來是閃的。
@@ -218,7 +229,8 @@ class Chapter:
         # 在編輯器裡看起來也像沒填完。做成沒有立繪的角色最乾淨。
         return self._card({"type": "dialogue", "title": paras[0][:14],
                            "text": "\n".join(paras), "speaker": NARRATOR,
-                           "characterId": self.cids.get(NARRATOR)}, face=face)
+                           "characterId": self.cids.get(NARRATOR)},
+                          face=face, extra=tuple(props))
 
     def _avatar(self, who):
         """只以訊號存在的人用大頭貼：貓草在留言區、鐵塔在耳機裡，兩個都不在這個房間。
