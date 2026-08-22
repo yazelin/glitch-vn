@@ -360,7 +360,7 @@ class Chapter:
             d["speakText"] = "\n".join(say_body)
         return self._card(d, extra=extra)
 
-    def branch(self, prompt, *arms, title="鏡頭"):
+    def branch(self, prompt, *arms, title="鏡頭", emotion=None):
         """支線。**讀者不在這個世界裡**，他只是決定鏡頭要停在哪一樣東西上。
 
         所以選項寫的是房間裡的東西，不是「你要做什麼」；旁白也不對讀者說話。
@@ -381,9 +381,13 @@ class Chapter:
             self.prev = None            # 這一條的第一張由 choice 的 handle 接
             first = None
             for para in paras:
-                nid = self._card({"type": "dialogue", "title": f"{label}：{para[:10]}",
-                                  "text": para, "speaker": NARRATOR,
-                                  "characterId": self.cids.get(NARRATOR)})
+                # 支線裡的旁白也要能給唸法（描述動作、唸紙上的字……）
+                pd = {"type": "dialogue", "title": f"{label}：{para[:10]}",
+                      "text": para, "speaker": NARRATOR,
+                      "characterId": self.cids.get(NARRATOR)}
+                if emotion:
+                    pd["emotion"] = emotion
+                nid = self._card(pd)
                 first = first or nid
             self.edges.append({"id": f"ec{self._n}-{i}", "source": cid, "target": first,
                                "sourceHandle": f"choice-{i}", "targetHandle": "top",

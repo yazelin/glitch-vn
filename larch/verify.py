@@ -154,6 +154,23 @@ if _vu.exists():
     for x in miss:
         bad.append(f"配音沒掛上　{x}")
 
+# ── art/voice 與 docs/voice 要一致 ──────────────────
+# **這個坑踩過兩次。** 一次是 publish_voice 只比檔案大小，換了內容但大小
+# 剛好一樣的一百九十二個檔被整批跳過；一次是手動刪檔重生之後忘了同步，
+# 六十六個檔在 docs 裡根本不存在。兩次都是聽的人先發現的。
+_a = ROOT / "art/voice"
+_d = ROOT / "docs/voice"
+if _a.exists() and _d.exists():
+    A = {p.name: p.read_bytes() for p in _a.glob("*.mp3")}
+    D = {p.name: p.read_bytes() for p in _d.glob("*.mp3")}
+    miss = [n for n in A if n not in D]
+    diff = [n for n in A if n in D and A[n] != D[n]]
+    if miss or diff:
+        bad.append(f"docs/voice 沒跟上：缺 {len(miss)} 個、內容不同 {len(diff)} 個"
+                   f"（跑 python3 tools/publish_voice.py）")
+    else:
+        print(f"發佈：art 與 docs 一致（{len(A)} 個檔）")
+
 print()
 for x in bad: print("  ★", x)
 for x in warn: print("  ・", x)

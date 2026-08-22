@@ -110,6 +110,46 @@ def align(chars, times, want, numbered=False):
     return spans
 
 
+
+def vad_chars(y, sr, m, ZH, top_db=32, gap=0.30):
+    """用靜音切段，逐段辨識，回傳字元流與每個字的時間。
+
+    **這比整檔辨識準得多。** 長檔一次丟給 whisper 會漏字（八分鐘的檔
+    原文 1943 字只吐 1286 字），時間戳也飄。切成一句上下的短段之後，
+    每一段幾乎不會漏，時間就用該段的起迄平均分配給它的字。
+
+    段落跟句子不是一對一：MiniMax 會把幾句短的連著唸成一段，
+    長句子中間停頓又會被切成兩段。所以這裡只負責產生準確的字元流，
+    對齊仍然交給 align()。
+    """
+    import tempfile, pathlib
+    import soundfile as sf, librosa
+
+    iv = librosa.effects.split(y, top_db=top_db)
+    segs, cur = [], [iv[0]]
+    for i in range(len(iv) - 1):
+        if (iv[i + 1][0] - iv[i][1]) / sr > gap:
+            segs.append((cur[0][0], cur[-1][1])); cur = []
+        cur.append(iv[i + 1])
+    segs.append((cur[0][0], cur[-1][1]))
+    print(f"VAD 切出 {len(segs)} 段，逐段辨識")
+
+    chars, times = "", []
+    for a0, b0 in segs:
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tf:
+            sf.write(tf.name, y[a0:b0], sr)
+            t = norm(m.transcribe(tf.name, language="zh", initial_prompt=ZH)["text"])
+        pathlib.Path(tf.name).unlink(missing_ok=True)
+        if not t:
+            continue
+        t0, t1 = a0 / sr, b0 / sr
+        step = (t1 - t0) / len(t)
+        for i, ch in enumerate(t):
+            chars += ch
+            times.append((t0 + i * step, t0 + (i + 1) * step))
+    return chars, times
+
+
 def snap(t, quiet, limit=0.45):
     """把切點推到最近的靜音中心，推不動就原地不動。"""
     best, bd = t, limit
@@ -148,50 +188,15 @@ def main():
     # 拿去跟正體原文比字元會全部不像，驗收就會謊報一堆失敗。
     ZH = "以下是正體中文的台灣用語對白。"
 
-    # **長檔要分段辨識。** 八分鐘的檔一次丟進去，whisper 只吐得出 1286 字
-    # （原文 1943 字），中間整段漏掉，對齊就從那裡開始全錯。切成一分鐘上下
-    # 的塊分別辨識，再把時間位移加回去。切點放在靜音上，不要切在字中間。
-    segs = []
-    if len(y) / sr > 90:
-        marks, last = [0.0], 0.0
-        for g0, g1 in quiet:
-            if g0 - last > 55:
-                marks.append((g0 + g1) / 2); last = (g0 + g1) / 2
-        marks.append(len(y) / sr)
-        print(f"長檔分成 {len(marks)-1} 塊辨識")
-        import tempfile, soundfile as sf2
-        for i in range(len(marks) - 1):
-            a0, a1 = marks[i], marks[i + 1]
-            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tf:
-                sf2.write(tf.name, y[int(a0 * sr):int(a1 * sr)], sr)
-                rr = m.transcribe(tf.name, language="zh", word_timestamps=True,
-                                  initial_prompt=ZH)
-            for sg in rr["segments"]:
-                for w in sg.get("words", []):
-                    w = dict(w, start=w["start"] + a0, end=w["end"] + a0)
-                    segs.append(w)
-            pathlib.Path(tf.name).unlink(missing_ok=True)
-    else:
-        r = m.transcribe(a.take, language="zh", word_timestamps=True,
-                         initial_prompt=ZH)
-        segs = [w for sg in r["segments"] for w in sg.get("words", [])]
-
-    chars, times = "", []
-    for w in segs:
-        c = norm(w["word"])
-        if not c:
-            continue
-        step = (w["end"] - w["start"]) / len(c)
-        for i, ch in enumerate(c):
-            chars += ch
-            times.append((w["start"] + i * step, w["start"] + (i + 1) * step))
-
-    # 音檔裡有「第N句」就走編號對齊
+    # **先切段再逐段辨識**（見 vad_chars），字元流才準；對齊仍然用 align()。
+    chars, times = vad_chars(y, sr, m, ZH)
     numbered = chars.count("句") >= len(rows) * 0.5
     if numbered:
         print("偵測到編號，用編號當錨點")
-    spans = align(chars, times, [norm(t) for t, _, _ in rows], numbered)
-    miss = [i for i, s in enumerate(spans) if s is None]
+    # **要拿替身版的文字去對齊。** 錄音是照 design/台詞/*.txt 唸的，那份已經
+    # 套過 voice.SUB（闔→合、行→航……）。拿原文去比，長句會整句對不上。
+    spans = align(chars, times, [norm(V.to_speech(t)) for t, _, _ in rows], numbered)
+    miss = [i for i, x in enumerate(spans) if x is None]
     print(f"辨識 {len(chars)} 字，對上 {len(spans)-len(miss)}/{len(rows)} 句")
 
     # **只信起點，不信終點。** 終點常常抓歪：同一批裡出現過零長度、
@@ -231,7 +236,7 @@ def main():
     for key, text in cuts:
         f = out / f"{key}.wav"
         got = norm(m.transcribe(str(f), language="zh", initial_prompt=ZH)["text"])
-        want = norm(text)
+        want = norm(V.to_speech(text))
         r = difflib.SequenceMatcher(None, got, want, autojunk=False).ratio()
         if r < 0.7:
             bad += 1
