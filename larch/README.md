@@ -71,6 +71,21 @@ skill 文件與範例專案都沒有這麼完整。以下全部是從那裡讀�
 
     rain snow embers flash stars3d petals vignette speedLines none
 
+**標題畫面的兩個坑**
+
+一、**按鈕是 layer，不會自己出現。** 只放三層文字的話，畫面上一個按鈕都沒有：
+
+    {"id":"action-start",    "kind":"button", "action":"start",    "icon":true, x,y,size,width}
+    {"id":"action-continue", "kind":"button", "action":"continue", ...}
+    {"id":"action-gallery",  "kind":"button", "action":"gallery",  ...}
+    {"id":"languages",       "kind":"language", x,y,size}
+
+二、**標題畫面吃的是第一張卡的背景**，不是 `projectThumbnail`。
+`projectThumbnail` 是市集與列表的縮圖。所以：
+
+    第一張卡的背景   乾淨的封面（沒有文字，文字交給 layer 畫）
+    projectThumbnail 有標題燒上去的那張（縮圖要自己站得住）
+
 **專案設定** `settings`（`larch/settings.py` 在管）
 
     titleScreenEnabled / titleScreen{frame, layers[{id,kind,role,x,y,size,align,width}]}

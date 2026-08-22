@@ -22,15 +22,19 @@ def api(d=None, m="GET", path=""):
 
 def main():
     assets = json.loads((ROOT / "larch/assets.json").read_text())
-    cover = assets.get("cover")
-    if not cover:
-        raw = (ROOT / "docs/img/og.jpg").read_bytes()
-        cover = api({"name": "cover.jpg", "mimeType": "image/jpeg", "category": "scene",
-                     "base64": base64.b64encode(raw).decode()}, "POST", "/media")["asset"]["url"]
-        assets["cover"] = cover
-        (ROOT / "larch/assets.json").write_text(
-            json.dumps(assets, ensure_ascii=False, indent=1), encoding="utf-8")
-        print("  封面上傳完成")
+    # **標題畫面吃的是第一張卡的背景**，不是這裡。這個是市集與列表的縮圖，
+    # 所以用有標題燒在上面的 OG 圖才對。
+    # 第一張卡的背景是 title-cover（乾淨的，文字交給 titleScreen 的 layer 畫）。
+    for key, f in (("title-cover", "title-cover.jpg"), ("cover", "og.jpg")):
+        if key not in assets:
+            raw = (ROOT / "docs/img" / f).read_bytes()
+            assets[key] = api({"name": f, "mimeType": "image/jpeg", "category": "scene",
+                               "base64": base64.b64encode(raw).decode()},
+                              "POST", "/media")["asset"]["url"]
+            print(f"  上傳 {f}")
+    cover = assets["cover"]
+    (ROOT / "larch/assets.json").write_text(
+        json.dumps(assets, ensure_ascii=False, indent=1), encoding="utf-8")
 
     p = api()
     s = dict(p.get("settings") or {})
@@ -48,13 +52,23 @@ def main():
         "titleCoverShade": 0.62,
         "titleCoverPositionX": 50,
         "titleCoverPositionY": 46,
-        "titleScreen": {"frame": "none", "layers": [
+        # **按鈕是 layer，不會自己出現。** kind:"button" 配 action:start/continue/gallery，
+        # 語言選單是 kind:"language"。只放文字層的話畫面上一個按鈕都沒有。
+        # 兩個角色站在左右，所以文字與按鈕全部排在中間那一欄。
+        "titleScreen": {"frame": "none", "bgmVolume": 0.4, "layers": [
             {"id": "eyebrow", "kind": "text", "role": "eyebrow",
-             "x": 6, "y": 16, "size": 1, "align": "left", "width": 40},
+             "x": 33, "y": 13, "size": 1, "align": "center", "width": 34},
             {"id": "name", "kind": "text", "role": "title",
-             "x": 6, "y": 24, "size": 6, "align": "left", "width": 70},
+             "x": 30, "y": 18, "size": 5.4, "align": "center", "width": 40},
             {"id": "description", "kind": "text", "role": "description",
-             "x": 6, "y": 42, "size": 1.15, "align": "left", "width": 44},
+             "x": 32, "y": 33, "size": 1.2, "align": "center", "width": 36},
+            {"id": "action-start", "kind": "button", "action": "start",
+             "icon": True, "x": 37, "y": 50, "size": 1.35, "width": 26},
+            {"id": "action-continue", "kind": "button", "action": "continue",
+             "icon": True, "x": 37, "y": 60, "size": 1.35, "width": 26},
+            {"id": "action-gallery", "kind": "button", "action": "gallery",
+             "icon": True, "x": 37, "y": 70, "size": 1.35, "width": 26},
+            {"id": "languages", "kind": "language", "x": 37, "y": 82, "size": 1.1},
         ]},
         # 配色跟小說站同一套（ai-brain-site 的 --bg #04080c、--cy #25c2e8、--mint #7cf3c0）
         "dialogueUi": {"preset": "custom", "presentation": "gradient",
