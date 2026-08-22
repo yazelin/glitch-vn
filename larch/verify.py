@@ -57,6 +57,21 @@ for b in p["boards"]:
     lines = sum(len(n["data"].get("dialogueLines") or []) for n in b["nodes"])
     print(f"{b['name']}：{len(b['nodes'])} 卡　{kinds}　多句對話 {lines} 句")
     print(f"  起點 {start or '★ 沒有起點卡'}")
+# ── 跨章的站位 ───────────────────────────────────────
+# **場景卡與跳章卡沒寫 stage 的話，播放器會保留上一張的人。**
+# 第二章結尾黑洞先生站著，跳到第三章他就跟著出現在開頭。
+# 修法是這兩種卡也寫一個演員數為零的 stage（市集的場景卡就是這樣清台的）。
+for b in p["boards"]:
+    for n in (b["nodes"][0], b["nodes"][-1]):
+        d = n["data"]
+        who = [a["name"] for a in (d.get("stage") or {}).get("actors", [])]
+        where = "章首" if n is b["nodes"][0] else "章末"
+        if "stage" not in d:
+            bad.append(f"{b['id']}：{n['id']}（{where}）沒有 stage 欄位，"
+                       f"播放器會沿用上一張的人")
+        elif who:
+            bad.append(f"{b['id']}：{n['id']}（{where}）台上還有 {'／'.join(who)}")
+
 # ── 站位的兩個常見錯 ─────────────────────────────────
 # 一、旁白講到某個人在場，可是台上沒有他
 # 二、某個人站在台上很久，中間沒有講話也沒有被提到

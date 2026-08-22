@@ -48,15 +48,22 @@ AVATAR = {G: "chat-glitch", HOLE: "chat-blackhole", "貓草": "chat-catgrass",
 EXPR = {
     G: {"平靜": "glitch-plain", "開心": "glitch-happy", "發呆": "glitch-thinking",
         "驚訝": "glitch-idle", "當機": "glitch-error", "想睡": "glitch-sleep",
-        "難過": "face-glitch-sad"},
-    HOLE: {"平靜": "blackhole-idle", "飽": "blackhole-full", "餓": "blackhole-hungry"},
+        "難過": "face-glitch-sad", "笑": "face-glitch-laugh", "在算": "face-glitch-count"},
+    # **不要用 blackhole-full／hungry。** 那是舊版七天記憶遊戲的素材，
+    # 「吃飽」是當時的機制，所以美術畫的是**身形**變化（肩膀變寬、軀幹變厚），
+    # 不是表情差分。沿用舊素材要看圖，不能只看檔名。
+    HOLE: {"平靜": "blackhole-idle", "轉頭": "face-blackhole-turn",
+           "看著她": "face-blackhole-look", "拉開外套": "face-blackhole-coat",
+           "不回答": "face-blackhole-still", "點頭": "face-blackhole-nod"},
     "鐵塔": {"公事": "face-tower-brief", "疲憊": "face-tower-tired",
-           "難得的溫柔": "face-tower-warm"},
+           "難得的溫柔": "face-tower-warm", "掛掉": "face-tower-leave"},
     "0x": {"意外": "face-zerox-startled", "壓著": "face-zerox-held",
-           "要走": "face-zerox-leaving"},
+           "要走": "face-zerox-leaving", "唱歌": "face-zerox-sing",
+           "完全的平": "face-zerox-flat"},
     "斑比": {"不安": "face-bambi-anxious", "被說中": "face-bambi-moved",
-           "專注": "face-bambi-focus"},
-    "諾亞": {"想事情": "face-noah-puzzle", "笑": "face-noah-smile"},
+           "專注": "face-bambi-focus", "累": "face-bambi-tired"},
+    "諾亞": {"想事情": "face-noah-puzzle", "笑": "face-noah-smile",
+           "在修東西": "face-noah-work", "和藹": "face-noah-warm"},
     "貓草": {"發酸": "face-catgrass-sour", "彆扭": "face-catgrass-sulky"},
 }
 
@@ -65,7 +72,8 @@ EXPR = {
 # 靠人記會漂。要換的地方（第七章的客廳與茶几是全書的轉折）在 build 腳本裡明寫 bgm=。
 BGM_FOR = {
     "title-cover": "bgm-title",
-    "bg-studio-2am": "bgm-studio", "bg-studio-day": "bgm-collab",
+    "bg-studio-2am": "bgm-studio", "bg-studio-day": "bgm-studio",
+    "bg-collab-studio": "bgm-collab",
     "bg-living-night": "bgm-living", "bg-table-lamp": "bgm-notebook",
     "bg-booth": "bgm-work", "bg-greenroom": "bgm-cold", "bg-corridor": "bgm-cold",
     "bg-office-14f": "bgm-cold", "bg-bambi-studio": "bgm-studio",
@@ -73,6 +81,18 @@ BGM_FOR = {
     "bg-stairs": "bgm-shop", "bg-street-day": "bgm-street",
     "bg-kitchen-morning": "bgm-morning",
 }
+
+
+def _emo(name, speaking, emotion, face):
+    """這個角色這一張要用哪個表情。
+
+    **旁白卡也要能換表情。** 「他轉過頭來」「他看了很久」「0x 唱得很好」
+    這些最好的節拍全部寫在旁白裡，只換「正在講話的人」的話一張都用不到。
+    所以 face=(角色, 表情) 是獨立於 speaking 的一條路，而且不會把別人調暗。
+    """
+    if face and name == face[0]:
+        return face[1]
+    return emotion if name == speaking else None
 
 
 def art(name, emotion=None):
@@ -119,7 +139,7 @@ class Chapter:
         self.prev = nid
         return nid
 
-    def _stage(self, speaking=None, extra=(), emotion=None):
+    def _stage(self, speaking=None, extra=(), emotion=None, face=None):
         """舞台。**用 stage.actors，不要只用 characterLayers。**
 
         actors 多了兩個 characterLayers 沒有的東西：`enter` 進場動畫、
@@ -129,7 +149,7 @@ class Chapter:
         actors = []
         for name, pos in self.cast:
             actors.append({"id": f"actor-{name}-{pos}",
-                           "url": art(name, emotion if name == speaking else None),
+                           "url": art(name, _emo(name, speaking, emotion, face)),
                            "name": name, "slot": pos, "scale": SCALE[name],
                            "offsetX": 0, "offsetY": 0,
                            "enter": "fade", "loop": "breathe",
@@ -137,12 +157,12 @@ class Chapter:
         actors += list(extra)
         return actors
 
-    def _layers(self, speaking=None, extra=(), emotion=None):
+    def _layers(self, speaking=None, extra=(), emotion=None, face=None):
         """舊的 characterLayers。編輯器某些地方還在讀它，所以兩個都寫。"""
         out = []
         for name, pos in self.cast:
             out.append({"id": f"layer-{name}-{pos}",
-                        "url": art(name, emotion if name == speaking else None),
+                        "url": art(name, _emo(name, speaking, emotion, face)),
                         "position": pos, "x": 0, "y": 0, "scale": SCALE[name],
                         "opacity": 1 if (speaking is None or name == speaking) else .55,
                         # 不要翻轉：0x 耳邊的標籤、貓草胸前的徽章都是不對稱的。
@@ -168,7 +188,10 @@ class Chapter:
             self._bgm = bgm
         if start:
             d["start"] = True
-        return self._add(d)
+        # **場景卡也要寫 stage。** 沒寫的話播放器保留上一張的人；章與章之間就會
+        # 把上一章最後站著的人帶進來（第二章結尾黑洞先生還在，第三章開頭他就出現了）。
+        # 市集的場景卡要嘛沒有 stage、要嘛帶一個演員數為零的 stage——後者才是清台。
+        return self._card(d)
 
     def stage(self, *who):
         """設定台上有誰。('格莉奇','left') 或直接給名字（自動排位）。"""
@@ -180,12 +203,12 @@ class Chapter:
                      for i, w in enumerate(who)]
         return self.cast
 
-    def _card(self, d, speaking=None, extra=(), emotion=None):
-        d["characterLayers"] = self._layers(speaking, extra, emotion)
-        d["stage"] = {"actors": self._stage(speaking, extra, emotion)}
+    def _card(self, d, speaking=None, extra=(), emotion=None, face=None):
+        d["characterLayers"] = self._layers(speaking, extra, emotion, face)
+        d["stage"] = {"actors": self._stage(speaking, extra, emotion, face)}
         return self._add(d)
 
-    def narrate(self, *paras):
+    def narrate(self, *paras, face=None):
         """旁白。沒有名字，可是**台上的人要留著**。
 
         旁白時把立繪清掉的話，人會一直消失又出現，讀起來是閃的。
@@ -195,7 +218,7 @@ class Chapter:
         # 在編輯器裡看起來也像沒填完。做成沒有立繪的角色最乾淨。
         return self._card({"type": "dialogue", "title": paras[0][:14],
                            "text": "\n".join(paras), "speaker": NARRATOR,
-                           "characterId": self.cids.get(NARRATOR)})
+                           "characterId": self.cids.get(NARRATOR)}, face=face)
 
     def say(self, who, *lines, emotion="平靜"):
         """一個人講一段。emotion 要對得到角色的 expressions，播放器才換得了臉。"""
@@ -286,13 +309,16 @@ class Chapter:
 
     def end(self, text="（第一章結束）"):
         """章末。**要標出來**，不然檢查工具分不出「刻意的終點」跟「接漏了」。"""
-        return self._add({"type": "dialogue", "title": "章末", "text": text,
-                          "speaker": NARRATOR, "characterId": self.cids.get(NARRATOR),
-                          "chapterEnd": True})
+        self.cast = []
+        return self._card({"type": "dialogue", "title": "章末", "text": text,
+                           "speaker": NARRATOR, "characterId": self.cids.get(NARRATOR),
+                           "chapterEnd": True})
 
     def jump(self, board_id, node_id, text="（下一章）"):
-        return self._add({"type": "boardJump", "title": "下一章", "text": text,
-                          "jumpBoardId": board_id, "jumpNodeId": node_id})
+        # **跳下一章之前把台上清空。** 不清的話下一章開頭會出現上一章最後站著的人。
+        self.cast = []
+        return self._card({"type": "boardJump", "title": "下一章", "text": text,
+                           "jumpBoardId": board_id, "jumpNodeId": node_id})
 
     def push(self, summary):
         proj = api()

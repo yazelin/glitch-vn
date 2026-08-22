@@ -49,15 +49,21 @@ SPRITE = {"格莉奇": "sprite-glitch", "黑洞先生": "sprite-blackhole", "貓
 FACES = {
     "格莉奇": [("平靜", "glitch-plain"), ("開心", "glitch-happy"), ("發呆", "glitch-thinking"),
              ("驚訝", "glitch-idle"), ("當機", "glitch-error"), ("想睡", "glitch-sleep"),
-             ("難過", "face-glitch-sad")],
-    "黑洞先生": [("平靜", "blackhole-idle"), ("飽", "blackhole-full"), ("餓", "blackhole-hungry")],
+             ("難過", "face-glitch-sad"), ("笑", "face-glitch-laugh"),
+             ("在算", "face-glitch-count")],
+    "黑洞先生": [("平靜", "blackhole-idle"), ("轉頭", "face-blackhole-turn"),
+             ("看著她", "face-blackhole-look"), ("拉開外套", "face-blackhole-coat"),
+             ("不回答", "face-blackhole-still"), ("點頭", "face-blackhole-nod")],
+             # 飽／餓是舊版遊戲機制的身形變化，已經退場，見 novelkit.EXPR
     "鐵塔": [("公事", "face-tower-brief"), ("疲憊", "face-tower-tired"),
-           ("難得的溫柔", "face-tower-warm")],
+           ("難得的溫柔", "face-tower-warm"), ("掛掉", "face-tower-leave")],
     "0x": [("意外", "face-zerox-startled"), ("壓著", "face-zerox-held"),
-           ("要走", "face-zerox-leaving")],
+           ("要走", "face-zerox-leaving"), ("唱歌", "face-zerox-sing"),
+           ("完全的平", "face-zerox-flat")],
     "斑比": [("不安", "face-bambi-anxious"), ("被說中", "face-bambi-moved"),
-           ("專注", "face-bambi-focus")],
-    "諾亞": [("想事情", "face-noah-puzzle"), ("笑", "face-noah-smile")],
+           ("專注", "face-bambi-focus"), ("累", "face-bambi-tired")],
+    "諾亞": [("想事情", "face-noah-puzzle"), ("笑", "face-noah-smile"),
+           ("在修東西", "face-noah-work"), ("和藹", "face-noah-warm")],
     "貓草": [("發酸", "face-catgrass-sour"), ("彆扭", "face-catgrass-sulky")],
 }
 PROFILE = {

@@ -1,0 +1,11 @@
+[
+ {
+  "name": "bg-collab-studio",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A RENTED BROADCAST STUDIO BOOTH inside a venue, set up for one presenter: a large ring light on a stand, a broadcast microphone on a boom arm, a single monitor on a slim desk, a padded acoustic wall panel behind, a cable run taped to the floor, a closed soundproof door with a small window on the right. THIS IS NOT A BEDROOM. Absolutely no bed, no server rack, no posters, no personal clutter. It is rented, tidy and slightly impersonal. Evening: no window to outside, the room is lit by the ring light and the monitor. Lofi anime background art, no people. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet, lilac and cyan palette, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. All screens must be a flat blank glow with no readable text of any kind."
+ }
+]
