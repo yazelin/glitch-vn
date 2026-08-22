@@ -10,6 +10,20 @@
 做法是對齊：台詞原文我們有，whisper 給每個字的時間點，用原文去比對辨識結果
 就知道每一句落在哪一段。靜音只用來微調切點，把切點推到最近的停頓上。
 
+**規模會決定難度。** 十句到五十句的檔一次到位（10/10、18/18、26/26、50/50），
+一百五十二句那份試了五次才成，過程中學到的三件事都是反直覺的：
+
+  一、**對齊只能在附近找。** 拿每一句去比對「剩下的全部字元」，短句（「欸。」
+      「喔。」）會在幾百字外找到假匹配，一跳過去後面全錯——152 句只對上 36 句。
+  二、**長檔要分段辨識**，八分鐘一次丟進去 whisper 會整段漏掉（1943 字只吐
+      1286 字）。但分段單獨做反而更糟（95 → 40），因為對齊本身就不穩，
+      分段又給它更多噪音。三件事要一起做才有用。
+  三、**編號是求助用的，不是指揮用的。** 服務唸出來的「第N句」是很好的錨點，
+      但直接把指標推到編號之後會從 130 掉到 61：辨識出來的編號本身會錯，
+      推到錯的位置後面就全歪。只在附近找不到的時候才回頭問它。
+
+最後那一版：146/152 對上。
+
 用法：
     python3 tools/split_take.py 諾亞 take.mp3 -o art/voice/noah/
 """
@@ -26,23 +40,73 @@ def norm(s):
     return re.sub(r"[^\w]", "", s)
 
 
-def align(chars, times, want):
+def _cn2int(s):
+    """把「第37句」裡的數字轉成整數。whisper 有時吐阿拉伯數字有時吐國字。"""
+    if s.isdigit():
+        return int(s)
+    D = {"零": 0, "一": 1, "二": 2, "三": 3, "四": 4,
+         "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+    if "百" in s or len(s) > 4:
+        return None
+    if "十" in s:
+        a, _, b = s.partition("十")
+        return (D.get(a, 1) if a else 1) * 10 + (D.get(b, 0) if b else 0)
+    return D.get(s)
+
+
+def align(chars, times, want, numbered=False):
     """把每一句原文對到字元流上，回傳每一句的 (起, 迄) 秒。
 
-    用 difflib 找最長相符片段當錨點——辨識一定有錯字，硬比對會整句對不上。
+    **只在附近找，而且要求匹配比例。** 早期版本拿每一句去跟「剩下的全部字元」
+    比對，短句（「欸。」「喔。」）很容易在幾百字之外找到假的匹配點，一旦跳過去
+    後面就全錯——一百五十二句的長檔只對上三十幾句就是這樣。
     """
     import difflib
-    spans, cur = [], 0
-    for w in want:
-        m = difflib.SequenceMatcher(None, chars[cur:], w, autojunk=False)
-        blocks = [b for b in m.get_matching_blocks() if b.size]
-        if not blocks:
+    # **有編號就用編號當錨點。** 服務唸出來的「第N句」比台詞本身可靠得多：
+    # 台詞可能只有兩三個字（「你要嗎。」「黑洞先生。」），比例門檻一嚴就對不上，
+    # 連續十二句一起漏掉；編號永遠是完整的一串，而且唯一。
+    marks = {}
+    if numbered:
+        import re as _re
+        for m2 in _re.finditer(r"第([0-9零一二三四五六七八九十百]+)句", chars):
+            n = _cn2int(m2.group(1))
+            if n and n not in marks:
+                marks[n] = m2.end()
+
+    spans, pos = [], 0
+    for idx, w in enumerate(want, 1):
+        if not w:
             spans.append(None)
             continue
-        a0 = cur + blocks[0].a
-        a1 = cur + blocks[-1].a + blocks[-1].size
-        spans.append((times[a0][0], times[min(a1, len(times)) - 1][1]))
-        cur = a1
+        # 往前看的範圍：這一句的長度乘三再加緩衝。中間夾雜的東西（服務唸出來的
+        # 「第N句」、辨識錯的字）都在這個範圍內，跳得過去。
+        def find(start):
+            wn = chars[start:start + len(w) * 3 + 120]
+            if not wn:
+                return None
+            b = difflib.SequenceMatcher(None, wn, w, autojunk=False) \
+                .find_longest_match(0, len(wn), 0, len(w))
+            need = 1 if (numbered and len(w) <= 4) else max(2, int(len(w) * 0.45))
+            return b if b.size >= need else None
+
+        blk = find(pos)
+        base = pos
+        # **編號是求助用的，不是指揮用的。** 直接把指標推到編號之後會更糟
+        # （130 → 61）：辨識出來的編號本身會錯，一推到錯的位置後面就全歪。
+        # 只有在附近找不到的時候才回頭問編號。
+        if blk is None and idx in marks:
+            base = marks[idx]
+            blk = find(base)
+        if blk is None:
+            spans.append(None)
+            continue
+        a0 = base + max(0, blk.a - blk.b)                 # 把匹配段往回推到句首
+        a1 = min(len(times), a0 + len(w))
+        if a1 <= a0:
+            spans.append(None)
+            continue
+        spans.append((times[a0][0], times[a1 - 1][1]))
+        pos = a1
     return spans
 
 
@@ -83,19 +147,50 @@ def main():
     # **一定要給 initial_prompt 逼它出正體。** 不給的話 whisper 吐簡體，
     # 拿去跟正體原文比字元會全部不像，驗收就會謊報一堆失敗。
     ZH = "以下是正體中文的台灣用語對白。"
-    r = m.transcribe(a.take, language="zh", word_timestamps=True, initial_prompt=ZH)
-    chars, times = "", []
-    for s in r["segments"]:
-        for w in s.get("words", []):
-            c = norm(w["word"])
-            if not c:
-                continue
-            step = (w["end"] - w["start"]) / len(c)
-            for i, ch in enumerate(c):
-                chars += ch
-                times.append((w["start"] + i * step, w["start"] + (i + 1) * step))
 
-    spans = align(chars, times, [norm(t) for t, _, _ in rows])
+    # **長檔要分段辨識。** 八分鐘的檔一次丟進去，whisper 只吐得出 1286 字
+    # （原文 1943 字），中間整段漏掉，對齊就從那裡開始全錯。切成一分鐘上下
+    # 的塊分別辨識，再把時間位移加回去。切點放在靜音上，不要切在字中間。
+    segs = []
+    if len(y) / sr > 90:
+        marks, last = [0.0], 0.0
+        for g0, g1 in quiet:
+            if g0 - last > 55:
+                marks.append((g0 + g1) / 2); last = (g0 + g1) / 2
+        marks.append(len(y) / sr)
+        print(f"長檔分成 {len(marks)-1} 塊辨識")
+        import tempfile, soundfile as sf2
+        for i in range(len(marks) - 1):
+            a0, a1 = marks[i], marks[i + 1]
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tf:
+                sf2.write(tf.name, y[int(a0 * sr):int(a1 * sr)], sr)
+                rr = m.transcribe(tf.name, language="zh", word_timestamps=True,
+                                  initial_prompt=ZH)
+            for sg in rr["segments"]:
+                for w in sg.get("words", []):
+                    w = dict(w, start=w["start"] + a0, end=w["end"] + a0)
+                    segs.append(w)
+            pathlib.Path(tf.name).unlink(missing_ok=True)
+    else:
+        r = m.transcribe(a.take, language="zh", word_timestamps=True,
+                         initial_prompt=ZH)
+        segs = [w for sg in r["segments"] for w in sg.get("words", [])]
+
+    chars, times = "", []
+    for w in segs:
+        c = norm(w["word"])
+        if not c:
+            continue
+        step = (w["end"] - w["start"]) / len(c)
+        for i, ch in enumerate(c):
+            chars += ch
+            times.append((w["start"] + i * step, w["start"] + (i + 1) * step))
+
+    # 音檔裡有「第N句」就走編號對齊
+    numbered = chars.count("句") >= len(rows) * 0.5
+    if numbered:
+        print("偵測到編號，用編號當錨點")
+    spans = align(chars, times, [norm(t) for t, _, _ in rows], numbered)
     miss = [i for i, s in enumerate(spans) if s is None]
     print(f"辨識 {len(chars)} 字，對上 {len(spans)-len(miss)}/{len(rows)} 句")
 

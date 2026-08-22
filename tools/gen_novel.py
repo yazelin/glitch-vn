@@ -69,6 +69,9 @@ CSS = """
 /* ── 有聲書 ──────────────────────────────────────────
    配音是為視覺小說生的，這裡同一段文字配同一個聲音。
    照這個站的規則走：青色是靜止色，綠是 hover 色。 */
+/* **hidden 要自己擋。** .ab 設了 display:flex，優先權高過瀏覽器對 [hidden]
+   的預設 display:none，所以控制列會從載入就顯示，跟「聽有聲書」那顆疊在一起。 */
+.ab[hidden],.abOpen[hidden]{display:none}
 .ab{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:40;
   display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:999px;
   background:var(--win);border:1px solid var(--hair2);box-shadow:0 6px 26px #000a;
@@ -91,7 +94,9 @@ CSS = """
    加 padding 會讓段落在播到的時候跳動一下。 */
 .abOn{background:rgba(37,194,232,.10);border-radius:4px;
   box-shadow:0 0 0 8px rgba(37,194,232,.10)}
-/* 控制列是固定定位，會蓋住捲到最底的那一段。開著的時候把正文墊高。 */
+/* 控制列與「聽有聲書」都是固定定位，會蓋住捲到最底的那一段。
+   **兩種狀態都要墊高**，不是只有播放中——沒播的時候那顆鈕照樣浮在最底下。 */
+body{padding-bottom:78px}
 body.abOn2{padding-bottom:92px}
 @media (max-width:520px){.abTxt span{display:none}}
 
