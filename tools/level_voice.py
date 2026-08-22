@@ -16,12 +16,17 @@
     python3 tools/level_voice.py --dry      # 只量不改
 """
 import argparse, json, pathlib, subprocess, sys
+import hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "larch"))
 OUT = ROOT / "art/voice"
 BACK = OUT / "pre-level"
+# 壓過的檔記在這裡（檔名 → 壓完的雜湊）。有些很短或很輕的句子受真峰值限制，
+# 壓到底也搆不到目標，只靠「離目標多遠」判斷的話它們每一次重跑都會再壓一遍，
+# 每一遍多一代 mp3 轉檔損失。
+LEDGER = OUT / "levelled.json"
 TARGET_I, TARGET_TP, TARGET_LRA = -18.0, -2.0, 9.0
 
 
@@ -35,6 +40,10 @@ def measure(p):
     s = r.stderr
     i = s.rfind("{")
     return json.loads(s[i:]) if i >= 0 else None
+
+
+def sha(p):
+    return hashlib.sha1(p.read_bytes()).hexdigest()[:16]
 
 
 def main():
@@ -52,17 +61,26 @@ def main():
         return
     BACK.mkdir(parents=True, exist_ok=True)
 
+    led = json.loads(LEDGER.read_text()) if LEDGER.exists() else {}
+
     done = 0
     for w, f in files:
         # **備份一定要用現在的檔覆蓋。** 原本寫成「沒有才備份」，於是重跑時
         # 會從舊備份處理，把後來換上去的新版本蓋回去（實際發生過：剛裝好的
         # 三句被舊版洗掉）。備份的語意是「這次處理前的樣子」，不是「最初的」。
-        b = BACK / f.name
-        b.write_bytes(f.read_bytes())
-        m = measure(b)
+        if led.get(f.name) == sha(f):
+            continue
+        m = measure(f)
         if not m:
             print("量不到", f.name)
             continue
+        # **已經在目標範圍內的就跳過。** 每壓一次多一代 mp3 轉檔損失，
+        # 全批重跑幾次就聽得出來。容差開 1 dB：loudnorm 的 linear 模式固定
+        # 會低目標約 0.5 dB，容差設 0.5 的話每一次重跑都會全部再壓一遍。
+        if abs(float(m["input_i"]) - TARGET_I) <= 1.0:
+            continue
+        b = BACK / f.name
+        b.write_bytes(f.read_bytes())
         # 兩段式：把第一段量到的值餵回去，loudnorm 才知道要怎麼壓
         af = (f"loudnorm=I={TARGET_I}:TP={TARGET_TP}:LRA={TARGET_LRA}:"
               f"measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
@@ -71,9 +89,11 @@ def main():
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(b), "-af", af,
                         "-ar", "16000", "-ac", "1", "-b:a", "64k", str(f)],
                        capture_output=True)
+        led[f.name] = sha(f)
         done += 1
         if done % 50 == 0:
             print(f"  {done}/{len(files)}", flush=True)
+    LEDGER.write_text(json.dumps(led, indent=0), encoding="utf-8")
     print(f"統一了 {done} 個（原檔在 {BACK}）")
 
 
