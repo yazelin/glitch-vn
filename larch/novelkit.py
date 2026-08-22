@@ -220,15 +220,30 @@ class Chapter:
                            "text": "\n".join(paras), "speaker": NARRATOR,
                            "characterId": self.cids.get(NARRATOR)}, face=face)
 
-    def say(self, who, *lines, emotion="平靜"):
-        """一個人講一段。emotion 要對得到角色的 expressions，播放器才換得了臉。"""
+    def _avatar(self, who):
+        """只以訊號存在的人用大頭貼：貓草在留言區、鐵塔在耳機裡，兩個都不在這個房間。
+        （視訊會議看得到本人，那裡用全身立繪——看得到跟聽得到不一樣。）"""
+        return ({"id": f"avatar-{who}", "url": A[AVATAR[who]], "name": who,
+                 "slot": "left", "scale": 1.0, "offsetX": 0, "offsetY": 0,
+                 "enter": "slideLeft", "loop": "none"},)
+
+    def say(self, who, *lines, emotion="平靜", remote=False):
+        """一個人講一段。emotion 要對得到角色的 expressions，播放器才換得了臉。
+
+        remote=True：他不在這個房間，只有聲音（耳機、電話）。掛大頭貼。
+        """
+        if remote:
+            return self._card({"type": "dialogue", "title": f"{who}：{lines[0][:12]}",
+                               "text": "\n".join(lines), "speaker": who,
+                               "characterId": self.cids.get(who)},
+                              extra=self._avatar(who))
         return self._card({"type": "dialogue", "title": f"{who}：{lines[0][:12]}",
                            "text": "\n".join(lines), "speaker": who,
                            "emotion": emotion,
                            "characterId": self.cids.get(who)},
                           speaking=who, emotion=emotion)
 
-    def talk(self, *pairs, emotion=None, who=None):
+    def talk(self, *pairs, emotion=None, who=None, remote=None):
         """一來一往裝在同一張卡。pairs = (講者, 台詞) 一串。
 
         一句一張卡的話，兩個人鬥嘴會變成點十次滑鼠。dialogueLines 就是為這個存在的。
@@ -244,7 +259,9 @@ class Chapter:
              "dialogueLines": lines}
         if emotion:
             d["emotion"] = emotion
-        return self._card(d, speaking=face, emotion=emotion)
+        # remote=名字：那個人不在房間裡，只有聲音。掛他的大頭貼。
+        extra = self._avatar(remote) if remote else ()
+        return self._card(d, speaking=face, emotion=emotion, extra=extra)
 
     def chat(self, *msgs, who=None):
         """留言區／訊息。

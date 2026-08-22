@@ -57,6 +57,18 @@ for b in p["boards"]:
     lines = sum(len(n["data"].get("dialogueLines") or []) for n in b["nodes"])
     print(f"{b['name']}：{len(b['nodes'])} 卡　{kinds}　多句對話 {lines} 句")
     print(f"  起點 {start or '★ 沒有起點卡'}")
+# ── 旁白不要幫別人講話 ───────────────────────────────
+# 整張卡的每一段都是「…」的旁白卡，名牌會寫「旁白」可是內容是別人的台詞。
+# 小說裡靠引號就分得出來，視覺小說分不出來——讀者只看得到名牌。
+for b0 in p["boards"]:
+    for n in b0["nodes"]:
+        d = n["data"]
+        if d.get("speaker") != "旁白":
+            continue
+        ls = [x.strip() for x in (d.get("text") or "").split("\n") if x.strip()]
+        if ls and all(x.startswith("「") and x.endswith("」") for x in ls):
+            bad.append(f"{b0['id']}：{n['id']} 旁白在唸別人的台詞，要給講者　{ls[0][:18]}")
+
 # ── 跨章的站位 ───────────────────────────────────────
 # **場景卡與跳章卡沒寫 stage 的話，播放器會保留上一張的人。**
 # 第二章結尾黑洞先生站著，跳到第三章他就跟著出現在開頭。
