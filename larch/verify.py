@@ -49,6 +49,10 @@ CAST = ["格莉奇", "黑洞先生", "貓草", "鐵塔", "0x", "斑比", "諾亞
 QUIET = 6
 for b in p["boards"]:
     on = {}
+    # 只在留言區出現的人（大頭貼）不算「在場」，旁白寫「貓草沒有回」不是站位漏掉。
+    inperson = {a["name"] for n in b["nodes"]
+                for a in (n["data"].get("stage") or {}).get("actors", [])
+                if "chat-" not in a.get("url", "")}
     for i, n in enumerate(b["nodes"]):
         d = n["data"]
         names = {a["name"] for a in (d.get("stage") or {}).get("actors", [])}
@@ -59,7 +63,7 @@ for b in p["boards"]:
         # 「第三則是斑比自己轉的」不要抓（那只是提到名字）。
         heads = {l.strip()[:6] for l in (d.get("text") or "").split("\n")}
         for who in CAST:
-            present = (d.get("speaker") == "旁白"
+            present = (who in inperson and d.get("speaker") == "旁白"
                        and any(h.startswith(who) for h in heads))
             if present and who not in names:
                 warn.append(f"{b['id']}：{n['id']} 旁白說「{who}」在場，可是台上沒有他")
