@@ -83,11 +83,15 @@ BGM_FOR = {
 }
 
 
-def prop(key, slot="right", scale=.42, enter="fade"):
+def prop(key, slot="center", scale=1.0, enter="fade"):
     """把一樣東西擺進畫面。角色在講某個東西的時候，那個東西應該看得到。
 
     平台沒有「道具」這種卡，可是 stage.actors 吃任何一張圖——
     留言區的大頭貼就是這樣做的。這裡同一招用在本子、收據上。
+
+    **scale 用 1.0，位置烤在圖裡。** 立繪貼齊畫面底部，所以小圖會沉到腳邊
+    再被對話框蓋掉（本子掉在地上、收據只露一個角，兩個都發生過）。
+    `offsetY` 也救不了，那個欄位是小數不是像素。見 tools/make_prop_card.py。
     """
     return {"id": f"prop-{key}-{slot}", "url": A[key], "name": "",
             "slot": slot, "scale": scale, "offsetX": 0, "offsetY": 0,

@@ -115,7 +115,7 @@ c.stage((G, "left"), (HOLE, "right"))
 c.talk((G, "這是假的。周邊。"), (HOLE, "嗯。"), (G, "你要嗎。"))
 c.narrate("黑洞先生轉過頭來。他看那本假的本子看了很久，久到她開始覺得自己問錯了什麼。",
           "然後他伸手把它拿過去，拉開外套內側，放進去。", face=(HOLE, "拉開外套"),
-          props=(prop("prop-book-closed", slot="center", scale=.34),))
+          props=(prop("prop-book-closed"),))
 c.talk((G, "那是假的欸。"), (HOLE, "我知道。"))
 c.narrate("她笑了一下。她本來想再說點什麼，"
           "可是那個要說的東西在她伸手去拿的時候已經不在了，就像每天都會發生的那樣。")

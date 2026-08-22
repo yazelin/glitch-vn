@@ -144,8 +144,9 @@ def main():
         assets[f.stem] = upload(f"{f.stem}.jpg", pathlib.Path("/tmp/_p.jpg").read_bytes(),
                                 "scene", "image/jpeg")
         print(f"  scene      {f.stem}　特寫")
-    # 單一物件的透明 PNG 走 prop，擺在角色旁邊
-    for f in sorted((ROOT / "art/face").glob("prop-*.png")):
+    # 單一物件的透明 PNG 走 prop。**上傳的是 art/prop/ 那一份**——
+    # 位置烤在圖裡（見 tools/make_prop_card.py），不是原始的去背圖。
+    for f in sorted((ROOT / "art/prop").glob("prop-*.png")):
         if not need(f.stem): continue
         assets[f.stem] = upload(f.name, f.read_bytes(), "prop")
         print(f"  prop       {f.stem}")
