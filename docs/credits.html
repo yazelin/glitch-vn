@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>殺青・格莉奇與黑洞先生</title>
+<meta name="description" content="《格莉奇與黑洞先生》片尾謝幕。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#04080c; --ink:#0b1a22; --hair:rgba(255,255,255,.07);
+  --cy:#25c2e8; --mint:#7cf3c0; --purple:#b78bff;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#68787f;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text); overflow:hidden;
+  font-family:"Noto Serif TC",Georgia,serif; -webkit-text-size-adjust:100%;
+}
+/* 舞台。整頁就是一塊黑幕，字卷從下方往上走。 */
+#stage{position:fixed; inset:0; overflow:hidden; cursor:grab}
+#stage.drag{cursor:grabbing}
+#stage::before{ /* 上下暗角，讓進出畫面的字自然淡掉 */
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  background:linear-gradient(180deg,var(--bg) 0%,transparent 14%,transparent 86%,var(--bg) 100%);
+}
+#track{
+  /* 收成一欄。放任滿版的話劇照會飄到寬螢幕的兩端，跟文字脫節。 */
+  position:absolute; left:50%; top:100%; width:min(760px,100%);
+  padding:0 24px 40vh; text-align:center; will-change:transform;
+}
+.role{margin:52px 0 6px; font-size:12px; letter-spacing:.34em; color:var(--faint)}
+.name{font-size:20px; line-height:1.5; color:var(--text)}
+.name small{display:block; margin-top:6px; font-size:12px; letter-spacing:.06em; color:var(--muted)}
+.h{
+  margin:76px 0 20px; font-size:13px; letter-spacing:.5em; color:var(--cy);
+  text-indent:.5em;
+}
+.quip{margin:14px 0; font-size:14px; line-height:2; color:var(--muted)}
+.film{margin:14vh 0 0; font-size:30px; letter-spacing:.14em}
+.sub{margin:10px 0 0; font-size:12px; letter-spacing:.42em; color:var(--faint)}
+.epi{
+  margin:88px auto 0; max-width:22em; font-size:17px; line-height:2.1;
+  color:var(--mint);
+}
+/* 演員表：立繪卡片排成格 */
+.cast{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr));
+  gap:14px; max-width:620px; margin:0 auto;
+}
+.c-card{background:var(--ink); border:1px solid var(--hair); border-radius:3px; overflow:hidden}
+.c-pic{aspect-ratio:3/4; background:#060d12}
+.c-pic img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block}
+.c-nm{padding:7px 4px 9px; font-size:13px; letter-spacing:.08em}
+.c-nm span{display:block; font-size:11px; color:var(--faint); letter-spacing:.04em}
+/* 花絮劇照：左右錯開，跟著字卷一起飄上去 */
+.still{margin:56px 0; max-width:440px}
+.still.left{margin-right:auto}
+.still.right{margin-left:auto}
+.still.wide{max-width:620px; margin-left:auto; margin-right:auto}
+.s-frame{border:1px solid var(--hair); background:var(--ink); padding:8px}
+.s-img{position:relative; aspect-ratio:16/9; overflow:hidden; background:#060d12}
+.s-img img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.86)}
+.badge,.take{
+  position:absolute; top:8px; font-size:10px; letter-spacing:.16em;
+  padding:3px 7px; background:rgba(4,8,12,.78); color:var(--muted);
+}
+.badge{left:8px; color:var(--purple)}
+.take{right:8px; font-variant-numeric:tabular-nums}
+.s-cap{margin-top:9px; font-size:12px; letter-spacing:.06em; color:var(--faint)}
+/* 控制列 */
+#ctrl{
+  position:fixed; left:0; right:0; bottom:0; z-index:5;
+  display:flex; align-items:center; gap:14px; justify-content:center;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,transparent,rgba(4,8,12,.9) 42%);
+}
+button{
+  font:inherit; font-size:13px; letter-spacing:.14em; color:var(--text);
+  background:var(--ink); border:1px solid var(--hair); border-radius:3px;
+  padding:7px 18px; cursor:pointer;
+}
+button:hover{border-color:var(--cy)}
+button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
+.hint{font-size:11px; letter-spacing:.1em; color:var(--faint)}
+@media (max-width:520px){
+  .film{font-size:23px} .name{font-size:17px} .still{margin:40px 0}
+  .h{letter-spacing:.36em}
+}
+@media (prefers-reduced-motion:reduce){ #track{transition:none} }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="track">
+    <div class="film">格莉奇與黑洞先生</div>
+    <div class="sub">全 七 章　・　殺 青</div>
+
+    <div class="role">原作・劇本</div>
+    <div class="name">林亞澤<small>七章，二十二萬字的第一千零四版</small></div>
+
+    <div class="still left">
+      <div class="s-frame"><div class="s-img">
+        <img src="img/bg-studio-2am.webp" alt="深夜的直播間" loading="lazy">
+        <span class="badge">● 花絮</span><span class="take">TAKE 04</span>
+      </div></div>
+      <div class="s-cap">NG · 兩點四十，她還沒關台</div>
+    </div>
+
+    <div class="role">視覺・立繪・場景</div>
+    <div class="name">AI 生成＋人工修版<small>去背、表情差分、站位校正</small></div>
+
+    <div class="role">配音・全書 699 句</div>
+    <div class="name">CosyVoice3 · MiniMax<small>自架生成，逐句試聽定案</small></div>
+
+    <div class="h">登 場 人 物</div>
+    <div class="cast">
+      <div class="c-card"><div class="c-pic"><img src="img/glitch-card.webp" alt="格莉奇" loading="lazy"></div><div class="c-nm">格莉奇<span>4KB 的她</span></div></div>
+      <div class="c-card"><div class="c-pic"><img src="img/blackhole-card.webp" alt="黑洞先生" loading="lazy"></div><div class="c-nm">黑洞先生<span>永遠吃不飽</span></div></div>
+      <div class="c-card"><div class="c-pic"><img src="img/catgrass-card.webp" alt="貓草" loading="lazy"></div><div class="c-nm">貓草<span>只打字</span></div></div>
+      <div class="c-card"><div class="c-pic"><img src="img/tower-card.webp" alt="鐵塔" loading="lazy"></div><div class="c-nm">鐵塔<span>從來不說再見</span></div></div>
+      <div class="c-card"><div class="c-pic"><img src="img/zerox-card.webp" alt="0x" loading="lazy"></div><div class="c-nm">0x<span>記錄精準</span></div></div>
+      <div class="c-card"><div class="c-pic"><img src="img/bambi-card.webp" alt="斑比" loading="lazy"></div><div class="c-nm">斑比<span>從來不打折</span></div></div>
+      <div class="c-card"><div class="c-pic"><img src="img/noah-card.webp" alt="諾亞" loading="lazy"></div><div class="c-nm">諾亞<span>話不多</span></div></div>
+    </div>
+
+    <div class="still right">
+      <div class="s-frame"><div class="s-img">
+        <img src="img/bg-table-lamp.webp" alt="檯燈下的茶几" loading="lazy">
+        <span class="badge">● 花絮</span><span class="take">TAKE 11</span>
+      </div></div>
+      <div class="s-cap">幕後 · 本子換到第一千零四本</div>
+    </div>
+
+    <div class="h">場 景</div>
+    <div class="name">直播間・錄音間・客廳・茶几<small>諾亞的店・斑比的工作室・十四樓會客室</small></div>
+
+    <div class="h">配 樂</div>
+    <div class="name">Felt and Silence<small>茶几・她寫本子的地方</small></div>
+    <div class="name">Warm Static<small>客廳的夜・錄音間</small></div>
+    <div class="name">Static in the Static<small>諾亞的店</small></div>
+    <div class="name">Felt and Hiss<small>早晨的廚房</small></div>
+
+    <div class="still left">
+      <div class="s-frame"><div class="s-img">
+        <img src="img/bg-noah-shop.webp" alt="諾亞的店" loading="lazy">
+        <span class="badge">● 花絮</span><span class="take">TAKE 07</span>
+      </div></div>
+      <div class="s-cap">NG · 那條線捲得太整齊了，重來</div>
+    </div>
+
+    <div class="h">平 台</div>
+    <div class="name">Larch<small>larch.yapiflow.com　視覺小說創作平台</small></div>
+    <div class="quip">謝謝站方把這個工具做出來，<br>也謝謝在上面創作的每一個人。</div>
+
+    <div class="h">也 一 併 感 謝</div>
+    <div class="quip">
+      感謝那台飲水機，一秒一滴，從沒有停過<br>
+      感謝第七行，空著等了一千零四天<br>
+      感謝所有唸錯的字，你們讓我們學會了替身<br>
+      製作過程沒有任何記憶體受損<br>
+      但有幾句台詞英勇犧牲
+    </div>
+
+    <div class="still wide">
+      <div class="s-frame"><div class="s-img">
+        <img src="img/bg-living-night.webp" alt="夜裡的客廳" loading="lazy">
+        <span class="badge">● 全體卡司</span><span class="take">B-ROLL</span>
+      </div></div>
+      <div class="s-cap">殺青這天，沙發上還是黑的</div>
+    </div>
+
+    <div class="role">致</div>
+    <div class="name">每一個願意<br>被別人記住一點點的人</div>
+
+    <div class="epi">我會記得你一點點。</div>
+    <div class="quip" style="margin-top:6px">——　敬　每一位回來的讀者</div>
+  </div>
+</div>
+
+<div id="ctrl">
+  <button id="pause">暫停</button>
+  <button id="top">回片頭</button>
+  <span class="hint" id="hint">滾輪或拖曳可前後翻閱</span>
+</div>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const track = document.getElementById('track');
+  const btnPause = document.getElementById('pause');
+  const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (matchMedia('(hover:none)').matches)
+    document.getElementById('hint').textContent = '上下滑動可前後翻閱';
+
+  // pos 是「字卷往上走了多少」。track 從 top:100% 開始，所以 pos 0 = 完全在畫面下方。
+  let pos = 0, paused = reduced, last = 0;
+  const SPEED = 48;                         // px/秒
+  const maxPos = () => track.scrollHeight + innerHeight * 0.35;
+  // 置中靠 translateX(-50%)，不要用 margin-left 的百分比——那是對整個舞台寬度算的。
+  const apply = () => { track.style.transform = `translate(-50%,${-pos}px)`; };
+  const clamp = () => { pos = Math.max(0, Math.min(maxPos(), pos)); };
+
+  btnPause.textContent = paused ? '播放' : '暫停';
+  btnPause.onclick = () => {
+    paused = !paused;
+    btnPause.textContent = paused ? '播放' : '暫停';
+  };
+  document.getElementById('top').onclick = () => { pos = 0; apply(); };
+
+  stage.addEventListener('wheel', e => { pos += e.deltaY * 0.7; clamp(); apply(); },
+                         { passive: true });
+
+  // 拖曳：滑鼠與觸控共用一組 pointer 事件
+  let dragY = null;
+  stage.addEventListener('pointerdown', e => {
+    dragY = e.clientY; stage.classList.add('drag'); stage.setPointerCapture(e.pointerId);
+  });
+  stage.addEventListener('pointermove', e => {
+    if (dragY === null) return;
+    pos += (dragY - e.clientY) * 1.1; dragY = e.clientY; clamp(); apply();
+  });
+  const drop = () => { dragY = null; stage.classList.remove('drag'); };
+  stage.addEventListener('pointerup', drop);
+  stage.addEventListener('pointercancel', drop);
+
+  addEventListener('keydown', e => {
+    if (e.key === ' ') { e.preventDefault(); btnPause.click(); }
+    if (e.key === 'ArrowDown') { pos += 60; clamp(); apply(); }
+    if (e.key === 'ArrowUp') { pos -= 60; clamp(); apply(); }
+  });
+
+  // 嵌在 iframe 裡的時候，把進度回報給外面那一頁。
+  // 外層可以用來做「播完自動關閉」或顯示進度，不需要碰這一頁的內部。
+  let lastSent = -1;
+  const report = () => {
+    if (parent === window) return;
+    const p = Math.round(pos / maxPos() * 100);
+    if (p === lastSent) return;
+    lastSent = p;
+    parent.postMessage({ from: 'glitch-credits', progress: p,
+                         done: p >= 100 }, '*');
+  };
+
+  const tick = t => {
+    if (!last) last = t;
+    const dt = (t - last) / 1000; last = t;
+    if (!paused && dragY === null) {
+      pos += SPEED * dt;
+      if (pos >= maxPos()) paused = true, btnPause.textContent = '播放';
+      clamp(); apply();
+    }
+    report();
+    requestAnimationFrame(tick);
+  };
+  apply();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
