@@ -36,8 +36,11 @@ PAGES = {
                                      "@Text_Goes_Here"], (52, 48, 64), True, 0),
     # 兩年前的串流截圖：三百六十的畫質。先疊字，再降採樣、再模糊——
     # 要的效果是「數得出七行、可是第七行讀不出來」，那是第四章的關鍵。
+    # **這張是劇透的關鍵。** 第四章的重點是「數得出七行、第七行讀不出來，
+    # 只看得出開頭像一個 @」。糊得不夠就等於直接把 @Zero_Point 寫在螢幕上，
+    # 第四章到第七章之間的懸念全部作廢。
     "page-day5": ("plate-screen", ["開台第五天"] + IDS + ["@Zero_Point"],
-                  (232, 238, 248), False, 1.8),
+                  (232, 238, 248), False, 7.0),
 }
 
 
@@ -72,7 +75,7 @@ def render(name, plate, lines, ink, right_half, blur):  # right_half 已停用
     x0, y0, x1, y1 = bright_box(img, screen=(plate == "plate-screen"))
     # **用整個攤開的寬度，不要只用右半頁。** 只用右頁的話欄寬剩一半，
     # 字級被寬度卡死，讀不出來就白做了。
-    pad = int((x1 - x0) * 0.07)
+    pad = int((x1 - x0) * 0.13)
     x0, x1 = x0 + pad, x1 - pad
     y0, y1 = y0 + int((y1 - y0) * 0.06), y1 - int((y1 - y0) * 0.08)
     # **文字要留在畫面上半部。** 對話框的漸層會蓋掉下面將近一半，
@@ -102,7 +105,7 @@ def render(name, plate, lines, ink, right_half, blur):  # right_half 已停用
     if blur:
         # 先降採樣再放回來，才像低碼率的串流截圖；只糊不降採樣看起來只是失焦
         w, h = layer.size
-        layer = layer.resize((w // 4, h // 4), Image.BILINEAR).resize((w, h), Image.BILINEAR)
+        layer = layer.resize((w // 10, h // 10), Image.BILINEAR).resize((w, h), Image.BILINEAR)
         layer = layer.filter(ImageFilter.GaussianBlur(blur))
     img = Image.alpha_composite(img.convert("RGBA"), layer).convert("RGB")
     p = OUT / f"{name}.png"; img.save(p)
