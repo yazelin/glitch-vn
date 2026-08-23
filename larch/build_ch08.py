@@ -8,7 +8,9 @@ Larch 這邊只放一層薄殼。改片尾的字或圖只要動那一頁，不�
 """
 import novelkit as nk
 
-CREDITS_URL = "https://yazelin.github.io/glitch-vn/credits.html"
+# **帶 ?bg=none。** 不帶的話片尾自己也畫一張放映廳，跟卡片背景那張疊在一起，
+# 變成戲院裡面又有一個戲院。透明模式讓卡片的背景透出來。
+CREDITS_URL = "https://yazelin.github.io/glitch-vn/credits.html?bg=none"
 
 cids = nk.ensure_characters()
 c = nk.Chapter("ch08", "謝幕", "片尾字卷與全體謝幕", cids)

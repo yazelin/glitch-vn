@@ -108,7 +108,9 @@ body.clear #stage::before{
              rgba(4,8,12,.25) 84%,rgba(4,8,12,.92) 100%);
 }
 body.clear #track{text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6)}
-body.clear #ctrl{background:linear-gradient(180deg,transparent,rgba(4,8,12,.82) 42%)}
+/* 嵌在 Larch 裡的時候不要顯示自己的控制列：卡片下面已經有平台的控制列，
+   兩排按鈕疊在一起很亂，而且讀者按不到我們這一排。 */
+body.clear #ctrl{display:none}
 @media (max-width:520px){
   .film{font-size:28px} .name{font-size:20px} .still{margin:40px 0}
   .h{letter-spacing:.36em}
