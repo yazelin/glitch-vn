@@ -98,6 +98,17 @@ button{
 button:hover{border-color:var(--cy)}
 button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
 .hint{font-size:11px; letter-spacing:.1em; color:var(--faint)}
+/* 透明模式（網址帶 ?bg=none）：自己不畫背景，讓底下那一層透出來。
+   給 Larch 用的——場景圖掛在卡片上，這一頁疊上去只出字。
+   字要壓在別人的圖上，所以補一層陰影，不然亮背景會吃掉字。 */
+body.clear{background:transparent}
+body.clear #hall{display:none}
+body.clear #stage::before{
+  background:linear-gradient(180deg,rgba(4,8,12,.92) 0%,rgba(4,8,12,.25) 16%,
+             rgba(4,8,12,.25) 84%,rgba(4,8,12,.92) 100%);
+}
+body.clear #track{text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6)}
+body.clear #ctrl{background:linear-gradient(180deg,transparent,rgba(4,8,12,.82) 42%)}
 @media (max-width:520px){
   .film{font-size:28px} .name{font-size:20px} .still{margin:40px 0}
   .h{letter-spacing:.36em}
@@ -204,6 +215,10 @@ button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
 
 <script>
 (() => {
+  // ?bg=none：不畫自己的背景，疊在別人的場景圖上（見 body.clear）
+  if (new URLSearchParams(location.search).get('bg') === 'none')
+    document.body.classList.add('clear');
+
   const stage = document.getElementById('stage');
   const track = document.getElementById('track');
   const btnPause = document.getElementById('pause');
