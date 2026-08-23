@@ -76,7 +76,9 @@ for b0 in p["boards"]:
 for b in p["boards"]:
     for n in (b["nodes"][0], b["nodes"][-1]):
         d = n["data"]
-        who = [a["name"] for a in (d.get("stage") or {}).get("actors", [])]
+        # actor-none 是清台用的透明演員，不是台上的人（見 novelkit.GHOST）。
+        who = [a["name"] for a in (d.get("stage") or {}).get("actors", [])
+               if a.get("id") != "actor-none"]
         where = "章首" if n is b["nodes"][0] else "章末"
         if "stage" not in d:
             bad.append(f"{b['id']}：{n['id']}（{where}）沒有 stage 欄位，"
@@ -192,6 +194,26 @@ if _pk.exists():
                    f"（跑 python3 tools/collect_picks.py --check 看是哪幾句）")
     else:
         print(f"挑選：{len(_p)} 句使用者指名的錄音都還在")
+
+# **背景樂的響度要一致。** 只壓換上去的那幾支、留著沒換的不動，
+# 同一個專案就有兩種標準，混著聽有幾場特別吵（聯動直播室那場中過）。
+import subprocess as _sp2
+_bgm = ROOT / "art/bgm"
+if _bgm.exists():
+    _lv = []
+    for _f in sorted(_bgm.glob("*.mp3")):
+        _r = _sp2.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(_f), "-af",
+                       "loudnorm=I=-18:TP=-2:LRA=9:print_format=json", "-f", "null", "-"],
+                      capture_output=True, text=True)
+        _i = _r.stderr.rfind("{")
+        if _i >= 0:
+            _lv.append((_f.stem, float(json.loads(_r.stderr[_i:])["input_i"])))
+    _out = [n for n, v in _lv if abs(v + 18.0) > 1.0]
+    if _out:
+        bad.append(f"背景樂響度不一致：{_out}（跑 python3 tools/level_bgm.py --fix）")
+    elif _lv:
+        _sp = max(v for _, v in _lv) - min(v for _, v in _lv)
+        print(f"背景樂：{len(_lv)} 支響度差 {_sp:.1f} dB")
 
 print()
 for x in bad: print("  ★", x)
