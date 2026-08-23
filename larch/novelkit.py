@@ -396,12 +396,44 @@ class Chapter:
         self.prev, self.pending = None, ends
         return cid
 
-    def end(self, text="（第一章結束）"):
-        """章末。**要標出來**，不然檢查工具分不出「刻意的終點」跟「接漏了」。"""
+    def end(self, text="（第一章結束）", who=None, emotion=None):
+        """章末。**要標出來**，不然檢查工具分不出「刻意的終點」跟「接漏了」。
+
+        who 給名字的話換那個人講（謝幕那句是格莉奇說的，不是旁白）。
+        """
         self.cast = []
-        return self._card({"type": "dialogue", "title": "章末", "text": text,
-                           "speaker": NARRATOR, "characterId": self.cids.get(NARRATOR),
-                           "chapterEnd": True})
+        d = {"type": "dialogue", "title": "章末", "text": text,
+             "speaker": who or NARRATOR,
+             "characterId": self.cids.get(who or NARRATOR), "chapterEnd": True}
+        if emotion:
+            d["emotion"] = emotion
+        return self._card(d)
+
+    def credits(self, url, title="片尾謝幕", text=""):
+        """片尾字卷。**用 miniGame 卡片，不是自己畫。**
+
+        Larch 的 miniGame 卡片會拿 miniGameHtml 開一個 iframe，靠 postMessage
+        溝通（larch:ready 開場、larch:set 寫變數、larch:complete 結束往下走）。
+        這裡塞的只是一層薄殼：載入 Pages 上的殺青頁，再把那一頁的「播完了」
+        轉成 larch:complete。內容留在 Pages，改字改圖不用動 Larch。
+        """
+        self.cast = []
+        shell = (
+            '<!doctype html><html lang="zh-Hant"><meta charset="utf-8">'
+            '<style>html,body{margin:0;height:100%;background:#04080c}'
+            'iframe{width:100%;height:100%;border:0;display:block}</style>'
+            f'<iframe src="{url}" allow="fullscreen"></iframe><script>'
+            "parent.postMessage({type:'larch:ready'},'*');"
+            "addEventListener('message',function(e){var d=e.data;"
+            "if(!d||d.from!=='glitch-credits')return;"
+            "if(d.done)parent.postMessage({type:'larch:complete',result:'complete',"
+            "eventName:'Glitch.CreditsDone',payload:{}},'*');});"
+            '</script></html>')
+        return self._add({"type": "miniGame", "title": title, "text": text,
+                          "miniGameHtml": shell, "miniGamePresentation": "fullscreen",
+                          "miniGameSkippable": True,
+                          "miniGameReadVars": [], "miniGameWriteVars": [],
+                          "miniGameNote": f"薄殼而已，內容在 {url}"})
 
     def jump(self, board_id, node_id, text="（下一章）"):
         # **跳下一章之前把台上清空。** 不清的話下一章開頭會出現上一章最後站著的人。

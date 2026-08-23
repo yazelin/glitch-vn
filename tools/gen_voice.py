@@ -77,14 +77,14 @@ def main():
     # 少了它，重新 clone 之後會把六百多句全部重生一次。
     have = ({p.stem for p in OUT.glob("*.wav")} | {p.stem for p in OUT.glob("*.mp3")}
             | {p.stem for p in (ROOT / "docs/voice").glob("*.mp3")})
+    # **挑選過的錄音不重生。** 檔名是內容雜湊，重生就是就地覆蓋，一次整批重生
+    # 可以把幾十次試聽的結果洗掉（實際發生過一次）。見 tools/collect_picks.py。
+    picked = set(json.loads(PICKED.read_text())) if PICKED.exists() else set()
     todo = [u for u in us if u[3] not in have and u[3] not in picked]
     # **替身表改了，已經生好的檔不會自動重生。** 檔名是從畫面上的文字算雜湊的，
     # 而替身只改要唸的文字，所以加一條替身之後那句的檔名一個字都沒變，工具看到
     # 檔案在就跳過了。實際發生過：「斑比自己轉的」加了替身，線上還是舊錄音。
     # 所以把每一句「當時實際唸的文字」記下來，跟現在算出來的不一樣就重生。
-    # **挑選過的錄音不重生。** 檔名是內容雜湊，重生就是就地覆蓋，一次整批重生
-    # 可以把幾十次試聽的結果洗掉（實際發生過一次）。見 tools/collect_picks.py。
-    picked = set(json.loads(PICKED.read_text())) if PICKED.exists() else set()
     spoken = json.loads(SPOKEN.read_text()) if SPOKEN.exists() else {}
     stale = [u for u in us if u[3] in have and u[3] in spoken
              and spoken[u[3]] != V.to_speech(u[1]) and u[3] not in picked]
