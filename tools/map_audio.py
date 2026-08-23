@@ -79,9 +79,14 @@ def vn_lines():
                 d = n["data"]
                 if (d.get("type") or "dialogue") != "dialogue":
                     continue
+                # **算鍵要用 speakText，跟 gen_voice 一致。** 畫面上顯示的跟
+                # 要唸的不一定一樣（「貓草已離線。」畫面要有、聲音不要），
+                # 用 text 算出來的鍵會對到「會把系統訊息唸出來」的那一版舊檔。
                 items = ([(l.get("speaker"), l.get("text"), l.get("emotion"))
                           for l in d.get("dialogueLines") or []]
-                         or [(d.get("speaker"), d.get("text"), d.get("emotion"))])
+                         or [(d.get("speaker"),
+                              d.get("speakText") or d.get("text"),
+                              d.get("emotion"))])
                 for sp, tx, em in items:
                     if sp and tx and tx.strip():
                         rows.append((norm(tx), V.key(sp, tx, em or None), tx))
