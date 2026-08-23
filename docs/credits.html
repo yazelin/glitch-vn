@@ -22,28 +22,40 @@ body{
 }
 /* 舞台。整頁就是一塊黑幕，字卷從下方往上走。 */
 #stage{position:fixed; inset:0; overflow:hidden; cursor:grab}
+/* 放映廳。固定不動，字卷從它前面走過去，像坐在後排看片尾。
+   壓得很暗是必要的：字要壓在上面，太亮就讀不動了。 */
+#hall{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:url("img/bg-credits-cinema.webp") center/cover no-repeat;
+  opacity:.5;
+}
+#hall::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(120% 80% at 50% 34%,rgba(4,8,12,.42),rgba(4,8,12,.9) 68%);
+}
 #stage.drag{cursor:grabbing}
 #stage::before{ /* 上下暗角，讓進出畫面的字自然淡掉 */
   content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
   background:linear-gradient(180deg,var(--bg) 0%,transparent 14%,transparent 86%,var(--bg) 100%);
 }
 #track{
+  z-index:2;
   /* 收成一欄。放任滿版的話劇照會飄到寬螢幕的兩端，跟文字脫節。 */
   position:absolute; left:50%; top:100%; width:min(760px,100%);
   padding:0 24px 40vh; text-align:center; will-change:transform;
 }
-.role{margin:52px 0 6px; font-size:12px; letter-spacing:.34em; color:var(--faint)}
-.name{font-size:20px; line-height:1.5; color:var(--text)}
-.name small{display:block; margin-top:6px; font-size:12px; letter-spacing:.06em; color:var(--muted)}
+.role{margin:52px 0 6px; font-size:13px; letter-spacing:.34em; color:var(--muted)}
+.name{font-size:24px; line-height:1.5; color:var(--text)}
+.name small{display:block; margin-top:7px; font-size:14px; letter-spacing:.06em; color:var(--muted)}
 .h{
-  margin:76px 0 20px; font-size:13px; letter-spacing:.5em; color:var(--cy);
+  margin:80px 0 22px; font-size:15px; letter-spacing:.5em; color:var(--cy);
   text-indent:.5em;
 }
-.quip{margin:14px 0; font-size:14px; line-height:2; color:var(--muted)}
-.film{margin:14vh 0 0; font-size:30px; letter-spacing:.14em}
-.sub{margin:10px 0 0; font-size:12px; letter-spacing:.42em; color:var(--faint)}
+.quip{margin:16px 0; font-size:16px; line-height:2; color:var(--muted)}
+.film{margin:14vh 0 0; font-size:38px; letter-spacing:.14em}
+.sub{margin:12px 0 0; font-size:13px; letter-spacing:.42em; color:var(--muted)}
 .epi{
-  margin:88px auto 0; max-width:22em; font-size:17px; line-height:2.1;
+  margin:88px auto 0; max-width:22em; font-size:21px; line-height:2.1;
   color:var(--mint);
 }
 /* 演員表：立繪卡片排成格 */
@@ -54,8 +66,8 @@ body{
 .c-card{background:var(--ink); border:1px solid var(--hair); border-radius:3px; overflow:hidden}
 .c-pic{aspect-ratio:3/4; background:#060d12}
 .c-pic img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block}
-.c-nm{padding:7px 4px 9px; font-size:13px; letter-spacing:.08em}
-.c-nm span{display:block; font-size:11px; color:var(--faint); letter-spacing:.04em}
+.c-nm{padding:8px 4px 10px; font-size:15px; letter-spacing:.08em}
+.c-nm span{display:block; font-size:12px; color:var(--faint); letter-spacing:.04em}
 /* 花絮劇照：左右錯開，跟著字卷一起飄上去 */
 .still{margin:56px 0; max-width:440px}
 .still.left{margin-right:auto}
@@ -70,7 +82,7 @@ body{
 }
 .badge{left:8px; color:var(--purple)}
 .take{right:8px; font-variant-numeric:tabular-nums}
-.s-cap{margin-top:9px; font-size:12px; letter-spacing:.06em; color:var(--faint)}
+.s-cap{margin-top:10px; font-size:13px; letter-spacing:.06em; color:var(--faint)}
 /* 控制列 */
 #ctrl{
   position:fixed; left:0; right:0; bottom:0; z-index:5;
@@ -87,7 +99,7 @@ button:hover{border-color:var(--cy)}
 button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
 .hint{font-size:11px; letter-spacing:.1em; color:var(--faint)}
 @media (max-width:520px){
-  .film{font-size:23px} .name{font-size:17px} .still{margin:40px 0}
+  .film{font-size:28px} .name{font-size:20px} .still{margin:40px 0}
   .h{letter-spacing:.36em}
 }
 @media (prefers-reduced-motion:reduce){ #track{transition:none} }
@@ -95,6 +107,7 @@ button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
 </head>
 <body>
 <div id="stage">
+  <div id="hall"></div>
   <div id="track">
     <div class="film">格莉奇與黑洞先生</div>
     <div class="sub">全 七 章　・　殺 青</div>
@@ -114,7 +127,8 @@ button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
     <div class="name">AI 生成＋人工修版<small>去背、表情差分、站位校正</small></div>
 
     <div class="role">配音・全書 699 句</div>
-    <div class="name">CosyVoice3 · MiniMax<small>自架生成，逐句試聽定案</small></div>
+    <div class="name">CosyVoice3<small>本機自架，逐句試聽定案</small></div>
+    <div class="name">MiniMax<small>Larch 平台提供</small></div>
 
     <div class="h">登 場 人 物</div>
     <div class="cast">
@@ -139,6 +153,7 @@ button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
     <div class="name">直播間・錄音間・客廳・茶几<small>諾亞的店・斑比的工作室・十四樓會客室</small></div>
 
     <div class="h">配 樂</div>
+    <div class="name">Suno<small>四首都是生成的，逐首試聽選進來</small></div>
     <div class="name">Felt and Silence<small>茶几・她寫本子的地方</small></div>
     <div class="name">Warm Static<small>客廳的夜・錄音間</small></div>
     <div class="name">Static in the Static<small>諾亞的店</small></div>
@@ -197,7 +212,9 @@ button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
     document.getElementById('hint').textContent = '上下滑動可前後翻閱';
 
   // pos 是「字卷往上走了多少」。track 從 top:100% 開始，所以 pos 0 = 完全在畫面下方。
-  let pos = 0, paused = reduced, last = 0;
+  // **一開始就讓字卷進到畫面一半。** 從 pos 0 起跑的話畫面全黑，
+  // 讀者不知道有東西要來，很可能直接關掉。
+  let pos = innerHeight * 0.5, paused = reduced, last = 0;
   const SPEED = 48;                         // px/秒
   const maxPos = () => track.scrollHeight + innerHeight * 0.35;
   // 置中靠 translateX(-50%)，不要用 margin-left 的百分比——那是對整個舞台寬度算的。
@@ -209,7 +226,7 @@ button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
     paused = !paused;
     btnPause.textContent = paused ? '播放' : '暫停';
   };
-  document.getElementById('top').onclick = () => { pos = 0; apply(); };
+  document.getElementById('top').onclick = () => { pos = innerHeight * 0.5; apply(); };
 
   stage.addEventListener('wheel', e => { pos += e.deltaY * 0.7; clamp(); apply(); },
                          { passive: true });
