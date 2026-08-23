@@ -471,7 +471,14 @@ class Chapter:
         proj["boards"].append({"id": self.bid, "kind": "story", "mode": "story",
                                "name": self.name, "description": self.desc,
                                "nodes": self.nodes, "edges": self.edges})
-        proj.setdefault("activeBoardId", self.bid)
+        # **重建一章不可以把板子順序打亂。** push 是「先移除再附加」，
+        # 所以每重建一章那章就跑到陣列最後，章節選單照陣列順序顯示的話
+        # 讀者看到的就是亂序（實測跑成 ch01/ch03/ch04/ch06/ch08/ch02/ch05/ch07）。
+        proj["boards"].sort(key=lambda b: b["id"])
+        # 起點固定在第一章。故事流程是靠卡片上的 boardJump 串的
+        # （ch01→…→ch08，只有 ch08 帶 chapterEnd），跟這個欄位無關；
+        # 這裡只是讓編輯器開起來停在第一章。
+        proj["activeBoardId"] = "ch01"
         r = api({"project": proj, "summary": summary}, "PUT")
         b = [x for x in r["boards"] if x["id"] == self.bid][0]
         print(f"{self.name}：卡片 {len(b['nodes'])}　邊 {len(b['edges'])}")
