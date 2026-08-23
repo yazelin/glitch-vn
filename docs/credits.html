@@ -27,11 +27,11 @@ body{
 #hall{
   position:absolute; inset:0; z-index:0; pointer-events:none;
   background:url("img/bg-credits-cinema.webp") center/cover no-repeat;
-  opacity:.5;
+  opacity:.46;
 }
 #hall::after{
   content:""; position:absolute; inset:0;
-  background:radial-gradient(120% 80% at 50% 34%,rgba(4,8,12,.42),rgba(4,8,12,.9) 68%);
+  background:linear-gradient(180deg,rgba(4,8,12,.62) 0%,rgba(4,8,12,.66) 58%,rgba(4,8,12,.3) 100%);
 }
 #stage.drag{cursor:grabbing}
 #stage::before{ /* 上下暗角，讓進出畫面的字自然淡掉 */
