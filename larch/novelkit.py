@@ -101,7 +101,7 @@ EXPR = {
     "斑比": {"不安": "face-bambi-anxious", "被說中": "face-bambi-moved",
            "專注": "face-bambi-focus", "累": "face-bambi-tired"},
     "諾亞": {"想事情": "face-noah-puzzle", "笑": "face-noah-smile",
-           "在修東西": "face-noah-work", "和藹": "face-noah-warm"},
+           "在修東西": "face-noah-work", "撬鎖": "face-noah-pick", "和藹": "face-noah-warm"},
     "貓草": {"發酸": "face-catgrass-sour", "彆扭": "face-catgrass-sulky"},
 }
 
