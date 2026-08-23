@@ -118,5 +118,13 @@
   "said": "'/home/ct/glitch-vn/art/voice/takes-ch02/18-3-那我認識你之前呢.wav' '/home/ct/glitch-vn/art/voice/takes-ch02/19-3-你不知道也沒關係.wav' ",
   "when": "2026-08-22T17:13:01.280Z",
   "match": 1.0
+ },
+ "v-0c66a0598e551d6a": {
+  "speaker": "格莉奇",
+  "text": "謝謝你看到這裡。\n我會記住大家的。\n所以，大家也一定要記住我唷。",
+  "source": "art/voice/picked-src/v-0c66a0598e551d6a.mp3",
+  "said": "謝幕那段，速度 0.88、放慢很珍惜地說",
+  "when": "2026-08-23",
+  "match": 1.0
  }
 }
