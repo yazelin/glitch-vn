@@ -121,6 +121,11 @@ BGM_FOR = {
 }
 
 
+# 清台用的透明演員。名字留空，stage_audit 這類工具靠 id 認得出「這張其實是空台」。
+GHOST = {"id": "actor-none", "url": A["sprite-none"], "name": "", "slot": "center",
+         "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}
+
+
 def prop(key, slot="center", scale=1.0, enter="fade"):
     """把一樣東西擺進畫面。角色在講某個東西的時候，那個東西應該看得到。
 
@@ -208,7 +213,13 @@ class Chapter:
                            "enter": "fade", "loop": "breathe",
                            "loopSpeed": 1, "loopStrength": 1})
         actors += list(extra)
-        return actors
+        # **台上沒人的時候要放一個看不見的演員。**
+        # 播放器是「有新的才換，沒有就留著」：actors 給空陣列它不會清台，
+        # 會把上一張的人留到下一張。實測過五種給空值的寫法（空陣列、
+        # 連欄位都不給、加 props、character:null、clearStage:true）全部無效，
+        # 換成「給一個透明的演員」四種寫法全部有效。
+        # 所以清台的做法是換人，不是不給人。sprite-none 是一張 8×8 全透明圖。
+        return actors or [GHOST]
 
     def _layers(self, speaking=None, extra=(), emotion=None, face=None):
         """舊的 characterLayers。編輯器某些地方還在讀它，所以兩個都寫。"""
@@ -220,9 +231,13 @@ class Chapter:
                         "opacity": 1 if (speaking is None or name == speaking) else .55,
                         # 不要翻轉：0x 耳邊的標籤、貓草胸前的徽章都是不對稱的。
                         "flipX": False})
-        return out + [{"id": e["id"], "url": e["url"], "position": e["slot"],
-                       "x": e["offsetX"], "y": e["offsetY"], "scale": e["scale"],
-                       "opacity": 1, "flipX": False} for e in extra]
+        out += [{"id": e["id"], "url": e["url"], "position": e["slot"],
+                 "x": e["offsetX"], "y": e["offsetY"], "scale": e["scale"],
+                 "opacity": 1, "flipX": False} for e in extra]
+        # 同上：空的話留著上一張的人，所以放透明的那一張。
+        return out or [{"id": "layer-none", "url": A["sprite-none"],
+                        "position": "center", "x": 0, "y": 0, "scale": 0.01,
+                        "opacity": 1, "flipX": False}]
 
     # ── 對外 ────────────────────────────────────────────
     def scene(self, title, text, bg, start=False, effect=None,
@@ -243,7 +258,8 @@ class Chapter:
             d["start"] = True
         # **場景卡也要寫 stage。** 沒寫的話播放器保留上一張的人；章與章之間就會
         # 把上一章最後站著的人帶進來（第二章結尾黑洞先生還在，第三章開頭他就出現了）。
-        # 市集的場景卡要嘛沒有 stage、要嘛帶一個演員數為零的 stage——後者才是清台。
+        # **空陣列不是清台。** 播放器是「有新的才換」，給空陣列它會把上一張的人留著。
+        # 清台靠一個透明的演員（見 GHOST 與 _stage），這是實測出來的。
         return self._card(d)
 
     def stage(self, *who):

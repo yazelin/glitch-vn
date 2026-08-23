@@ -39,8 +39,10 @@ def scenes(nodes):
                 cur[1] += "（場景卡沒清台）" if "stage" not in d else "（清台）"
         if cur is None:
             cur = [i, "（章首）", "", [], set()]
+        # id 是 actor-none 的那個是清台用的透明演員，不是台上的人。
         actors = [a.get("name") or a.get("id")
-                  for a in (d.get("stage") or {}).get("actors") or []]
+                  for a in (d.get("stage") or {}).get("actors") or []
+                  if a.get("id") != "actor-none"]
         cur[3].append([a for a in actors if not str(a).startswith("avatar-")])
         lines = d.get("dialogueLines") or []
         for s in ([l.get("speaker") for l in lines] if lines else [d.get("speaker")]):
