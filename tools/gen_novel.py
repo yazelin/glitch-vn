@@ -673,7 +673,7 @@ ld = ('<script type="application/ld+json">'
 # 所以支線只在這一頁介紹，資料從 design/vn-routes.json 讀
 # （由 larch/dump_routes.py 從線上專案抓下來，網站產生器不連網）。
 routes = json.loads((ROOT / "design/vn-routes.json").read_text(encoding="utf-8"))
-CARDS = 574          # larch/verify.py 印的七章卡片數總和
+CARDS = 619          # larch/verify.py 印的七章卡片數總和（謝幕那章另外 5 張）
 rblocks = []
 for r in routes:
     arms = "".join(
@@ -694,7 +694,11 @@ VN_DESC = ("《格莉奇與黑洞先生》的視覺小說版：立繪、場景�
     f'''<header class="bk"><div class="eyebrow">視覺小說版</div>
 <h1>遊玩路徑</h1>
 <p>同一個故事，做成可以玩的版本。多了立繪、場景、表情差分與配樂，
-每一章多一個支線。</p></header>
+每一章多一個支線。</p>
+<p class="cta">
+<a class="solid" href="https://larch.yapiflow.com/play/market/a2a10427-7326-4a86-b806-c2476fc1c22a">在 Larch 上玩</a>
+<a href="https://www.youtube.com/watch?v=J9OMebCjr9Y">看完整遊玩（六十分鐘）</a>
+</p></header>
 
 <div class="note">
 <p><b>支線不寫進小說。</b>這一站的<a href="novel.html">全文閱讀</a>是完整的七章，
@@ -709,10 +713,12 @@ VN_DESC = ("《格莉奇與黑洞先生》的視覺小說版：立繪、場景�
 {"".join(rblocks)}
 
 <div class="note">
-<p><b>規模。</b>七章共 {CARDS} 張卡、14 張場景背景、
-七個角色加旁白、23 張表情差分、11 首純音樂。</p>
-<p><b>平台是 Larch。</b>目前還沒有公開發佈，所以這一頁沒有試玩連結。
-發佈之後會補上。</p>
+<p><b>規模。</b>七章共 {CARDS} 張卡、18 張場景背景、
+七個角色加旁白共八種聲音、28 張表情差分、11 首純音樂，
+全書七百句配音。</p>
+<p><b>平台是 Larch。</b>卡片、分支、變數、立繪站位、表情差分、背景樂
+都是現成的，不用自己寫播放器；整部作品是用它的 agent API 建出來的，
+每一張卡都在版本控制裡。<a href="https://larch.yapiflow.com">去看看</a>。</p>
 </div>''',
     "vn.html"), encoding="utf-8")
 
