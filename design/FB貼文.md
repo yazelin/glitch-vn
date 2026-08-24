@@ -6,7 +6,7 @@
 
 寫之前也先讀 `yaze-journal/projects/fb-post-style.md`。這篇守的規則：
 第一句要 hook（發文是一圖配全文，預覽只露第一句）、正文零 URL、
-連結全放首則留言、不用 emoji、禁用詞（接住／身段／長出／改出得意）、
+連結全放首則留言、不用 emoji、禁用詞（接住／身段／長出／改出得意）、<!-- speak-tw-ok 這行是在列清單，不是在用那些詞 -->
 抓調性不照抄例句。交稿前跑 `~/speak-tw/bin/speak-tw --public`。
 
 配圖用 `art/og-fb.jpg`（OG 圖的 FB 變體，眉標寫「視覺小說・全七章・全程配音」）。
