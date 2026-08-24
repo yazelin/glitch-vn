@@ -155,6 +155,23 @@ nav.top a.l[aria-current]{color:var(--cy)}
   .strip .nm{font-size:12px}
 }
 
+/* 時間軸 */
+.tl{list-style:none;margin:0;padding:0;max-width:46em}
+.tl li{display:grid;gap:14px;align-items:baseline;
+  padding:11px 0;border-top:1px solid var(--hair)}
+.tl li.era{grid-template-columns:7.5em 1fr 4.5em}
+.tl li.ev{grid-template-columns:7.5em 1fr 4.5em}
+.tl li.head{display:block;border-top:0;padding:34px 0 2px}
+.tl .day{font-size:13px;letter-spacing:.14em;color:var(--cy)}
+.tl .when,.tl .clock{font-size:13px;color:var(--muted);line-height:1.85}
+.tl .when{color:var(--mint)}
+.tl li p{margin:0;line-height:1.85}
+.tl .src{font-size:12px;color:var(--faint);text-align:right;white-space:nowrap}
+.guess{margin-left:.35em;color:var(--purple)}
+.legend{margin:14px 0 0;font-size:13px;color:var(--muted)}
+@media(max-width:620px){
+  .tl li.era,.tl li.ev{grid-template-columns:1fr;gap:3px;padding:13px 0}
+  .tl .src{text-align:left}}
 .note{margin:56px 0 0;padding:24px 26px;background:var(--ink);border-radius:var(--r);
   border:1px solid var(--hair);font-size:15.5px;line-height:1.95;color:var(--muted);
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -248,7 +265,7 @@ footer a{color:var(--muted)}
 </head>
 <body>
 <nav class="top"><div class="in">
-<a class="home" href="index.html">格莉奇與黑洞先生</a><a class="l" href="index.html">首頁</a><a class="l" href="novel.html">閱讀</a><a class="l" href="characters.html">角色</a><a class="l" href="vn.html" aria-current='page'>遊玩版</a>
+<a class="home" href="index.html">格莉奇與黑洞先生</a><a class="l" href="index.html">首頁</a><a class="l" href="novel.html">閱讀</a><a class="l" href="characters.html">角色</a><a class="l" href="timeline.html">時間軸</a><a class="l" href="vn.html" aria-current='page'>遊玩版</a>
 </div></nav>
 <main class="wrap">
 <header class="bk"><div class="eyebrow">視覺小說版</div>

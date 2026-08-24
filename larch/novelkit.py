@@ -33,6 +33,7 @@ def _voice(d):
     if not VOICE_URLS:
         return d
     import voice as V
+    got = False
     lines = d.get("dialogueLines")
     if lines:
         for l in lines:
@@ -40,6 +41,7 @@ def _voice(d):
                                      l.get("emotion") or None))
             if u:
                 l["voiceUrl"] = u
+                got = True
     else:
         # speakText：畫面上的字跟要唸的字不一樣時用它（系統訊息不唸，見 chat）
         u = VOICE_URLS.get(V.key(d.get("speaker"),
@@ -47,6 +49,15 @@ def _voice(d):
                                  d.get("emotion") or None))
         if u:
             d["voiceUrl"] = u
+            got = True
+    # **掛了聲音就要標 voiceMode，不然匯出的單檔 HTML 一句都不會播。**
+    # 線上播放器不看這個欄位，所以線上一切正常、匯出版整個沒聲音，而且不報錯。
+    # 匯出的程式裡那道閘是：
+    #     if (d.voiceMode && d.voiceMode!=='off' && d.voiceMode!=='realtime') playVoice(...)
+    # 它只讀卡片層的 d.voiceMode，不會去看 project.languages 裡的那個。
+    # 多人卡片的 voiceUrl 掛在行上，可是閘讀的是卡片，所以這裡標在卡片上。
+    if got:
+        d["voiceMode"] = "shared"
     return d
 
 G, HOLE, NARRATOR = "格莉奇", "黑洞先生", "旁白"

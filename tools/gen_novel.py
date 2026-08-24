@@ -180,6 +180,23 @@ nav.top a.l[aria-current]{color:var(--cy)}
   .strip .nm{font-size:12px}
 }
 
+/* 時間軸 */
+.tl{list-style:none;margin:0;padding:0;max-width:46em}
+.tl li{display:grid;gap:14px;align-items:baseline;
+  padding:11px 0;border-top:1px solid var(--hair)}
+.tl li.era{grid-template-columns:7.5em 1fr 4.5em}
+.tl li.ev{grid-template-columns:7.5em 1fr 4.5em}
+.tl li.head{display:block;border-top:0;padding:34px 0 2px}
+.tl .day{font-size:13px;letter-spacing:.14em;color:var(--cy)}
+.tl .when,.tl .clock{font-size:13px;color:var(--muted);line-height:1.85}
+.tl .when{color:var(--mint)}
+.tl li p{margin:0;line-height:1.85}
+.tl .src{font-size:12px;color:var(--faint);text-align:right;white-space:nowrap}
+.guess{margin-left:.35em;color:var(--purple)}
+.legend{margin:14px 0 0;font-size:13px;color:var(--muted)}
+@media(max-width:620px){
+  .tl li.era,.tl li.ev{grid-template-columns:1fr;gap:3px;padding:13px 0}
+  .tl .src{text-align:left}}
 .note{margin:56px 0 0;padding:24px 26px;background:var(--ink);border-radius:var(--r);
   border:1px solid var(--hair);font-size:15.5px;line-height:1.95;color:var(--muted);
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -393,7 +410,8 @@ def page(title, desc, body, cur, wide=False, ld="", js=""):
     nav = "".join(
         f'<a class="l" href="{h}"{" aria-current=\'page\'" if h == cur else ""}>{n}</a>'
         for h, n in (("index.html", "首頁"), ("novel.html", "閱讀"),
-                     ("characters.html", "角色"), ("vn.html", "遊玩版")))
+                     ("characters.html", "角色"), ("timeline.html", "時間軸"),
+                     ("vn.html", "遊玩版")))
     t, d = html.escape(title), html.escape(desc)
     canon = BASE + ("" if cur == "index.html" else cur)
     return f'''<!doctype html>
@@ -521,6 +539,89 @@ cards = "".join(f'''<div class="card">
 <p>守則本第一頁上有七行。上面只有六個名字。</p></header>
 <div class="cast">{cards}</div>''', "characters.html", wide=True), encoding="utf-8")
 
+# ── 時間軸 ──────────────────────────────────────────────
+# **○ 是推的，其餘是正文寫死的。** 兩種一定要分開標，不然讀者會把推論當成
+# 書裡寫過的東西，我們自己下次也分不出來。
+#
+# 排法的兩個判斷（2026-08-24 定）：
+#   一、第六章「坐下來查那六個名字」放在第一次去店裡之後。她要先在鞋盒裡
+#       看過那張兩年多前的收據，才有東西可查。
+#   二、第五章的「那個禮拜」與第六章的「那個禮拜五」是同一週，所以那兩章
+#       在時間上交錯，不是先後。
+BEFORE = [
+    ("22 年前", "諾亞裝了這棟樓的門鎖", "五"),
+    ("3 年前", "她跟諾亞借了螺絲起子。所以她住在這裡比開台早", "五"),
+    ("2 年多前", "她跟諾亞買 3M 天線同軸線。那天她很緊張", "五"),
+    ("開台前", "守則本比頻道老。開台那天本子大約在第 275 版", "四"),
+    ("開台第 1 天", "七個人。考完就刪說他要刪帳號，她回「你留著的話我就會記得你」，然後說了那句保證", "六"),
+    ("開台第 5 天", "斑比截到守則本第一頁，第七行是一個 @ 開頭的字串", "四"),
+    ("第 2 個禮拜", "她唱了那首歌，說「這首是我寫給還沒來的人的」。台上九個人。他決定留下", "七"),
+    ("第 3 個禮拜", "她一個一個私訊最早那七個，問要不要幫她記。0x 說不要，他說好，同一天搬進來", "七"),
+    ("之後約 500 版", "她每天把他寫在第七行。每天讀到、每天想不起來、每天難過一次", "七"),
+    ("約 7 個月前", "她寫不下去了，改寫成「還有一個。不要問他是誰」，把前面全部撕掉。紙在他外套裡。那時大約第 803 版", "四、七"),
+]
+DAYS = [
+    (1, "凌晨兩點十四分", "兩週年紀念直播剛結束，同時觀看人數是一。她沒有關台", "一之一", 1),
+    (1, "兩點四十", "十一點半該做的事晚了三個多小時。她抄守則本，闔上，關掉客廳最後一盞燈", "一之三、四", 1),
+    (2, "白天", "錄第十一次，鐵塔終於說可以了。視訊會議上他提了《守則本》限時預購", "二之一、二", 1),
+    (3, "", "樣品是隔天寄到的。皮面、車線，書籤上印著她兩年前的簽名", "二之三", 1),
+    (3, "晚上", "她把樣品帶回家，放在茶几上", "二之四", 1),
+    (4, "下午三點", "聯動彩排。0x 兩點五十分就到了。晚上直播猜歌", "三之一", 1),
+    (4, "晚上", "她回到家，把外套掛好，坐到茶几前面，翻開守則本", "三之五", 1),
+    (5, "", "斑比的工作室。第四十版立繪。她說「這一版的嘴角有一邊比較高」", "四之一", 1),
+    (5, "晚上", "回家之後她往前翻本子，翻了大概兩百版，翻到撕痕。她算出本子比頻道老", "四之五", 1),
+    (6, "凌晨一點", "她又把自己鎖在門外。諾亞從樓下上來，拿一根細金屬條，弄了十秒，門開了", "五之一", 1),
+    (7, "下午", "第一次去他的店。買線，一次一百二。待了大概一個小時", "五之二、三", 1),
+    (7, "離開之前", "她看到桌子底下那個鞋盒，側面寫著樓下小姑娘。裡面有兩把傘、一隻手套、一支螺絲起子、一張兩年多前的收據", "五之四", 1),
+    (8, "", "她花兩個小時查那六個名字。私訊貓草。去找開台第一天的存檔，發現自己刪掉了，只剩別人重傳的剪輯", "六之一～三", 0),
+    (9, "晚上七點多", "走廊上碰到黑洞先生。他剛下班，諾亞剛好下樓倒垃圾。兩個人點了一下頭，各走各的", "五之五", 0),
+    (9, "", "第二次去店裡。這一次沒有寫進正文，只從「來過三次」推得出來", "五之六", 0),
+    (10, "上午", "第三次去店裡。「我這個禮拜是不是來過了。」「來過三次。」「連這次。」他把那一百二十塊放進鞋盒，再備好下一條線", "五之六", 1),
+    (10, "下午", "外景。「你最近忘記過什麼。」第四個人放慢腳步，看了她三秒", "六之四", 1),
+    (10, "晚上", "她回到家抄本子。抄到第六行手沒有停，那個帳號已經刪除了，可是名單就是名單", "六之五", 1),
+    (11, "", "0x 的公司在十四樓。「妳只有十五分鐘。」她拿到了那七個字", "七之一", 1),
+    (11, "回家的路上", "她把那七個字反覆看了很多次", "七之一", 1),
+    (11, "晚上", "客廳那一場。「所以我從來沒有變成一行字。」那天晚上她抄守則本，抄得比平常慢，第七行她寫了別的東西", "七之三、五", 1),
+    (12, "早上", "她翻開第一頁。第七行寫著「還有一個。他就在客廳。去問他今天累不累」。所以她走出房間", "七之六", 1),
+]
+
+GUESS = '<span class="guess" title="正文沒有明說，照前後文推的">○</span>'
+
+def _cell(text, src, fixed):
+    mark = "" if fixed else GUESS
+    return ('<p>%s%s</p><span class="src">%s</span>'
+            % (html.escape(text), mark, html.escape(src)))
+
+def tl_before():
+    # 開場前沒有時鐘，所以用「年代 | 事件 | 出處」三欄，不留空欄
+    return "".join('<li class="era"><span class="when">%s</span>%s</li>'
+                   % (html.escape(w), _cell(t, s2, 1)) for w, t, s2 in BEFORE)
+
+def tl_days():
+    out, last = [], None
+    for d, clock, text, src, fixed in DAYS:
+        if d != last:
+            out.append('<li class="head"><span class="day">第 %d 天</span></li>' % d)
+            last = d
+        out.append('<li class="ev"><span class="clock">%s</span>%s</li>'
+                   % (html.escape(clock), _cell(text, src, fixed)))
+    return "".join(out)
+
+TL_BODY = ('<header class="bk"><div class="eyebrow">時間軸</div>'
+  '<h1>這十二天</h1>'
+  '<p>正文沒有標日期，這一頁是照書裡的時間語排出來的。底下有劇透。</p>'
+  '<p class="legend">' + GUESS + '　這一條正文沒有明說，是照前後文推的。沒有標記的都寫在書裡。</p>'
+  '</header>'
+  '<h2>在故事開始之前</h2><ul class="tl">' + tl_before() + '</ul>'
+  '<h2>正文的十二天</h2><ul class="tl days">' + tl_days() + '</ul>'
+  '<p class="note">第五章與第六章是同一個禮拜，在時間上交錯。書把它們分成兩章講，'
+  '是因為那個禮拜有兩件事同時在走：她一次一次去那間店，以及她坐下來查那六個名字。</p>')
+
+(DOCS / "timeline.html").write_text(page(
+    "時間軸・格莉奇與黑洞先生",
+    "全書從哪一天走到哪一天。開台前的那些年，加上正文的十二天。",
+    TL_BODY, "timeline.html"), encoding="utf-8")
+
 # ── 首頁 ────────────────────────────────────────────────
 # 主角是前兩個。七個人等重排一列的話，看不出來這本書是誰的故事。
 rest = "".join(
@@ -628,12 +729,12 @@ VN_DESC = ("《格莉奇與黑洞先生》的視覺小說版：立繪、場景�
 print("  sitemap.xml / robots.txt")
 
 build_images()
-print(f"寫好四頁：index / novel（{len(chapters)} 章、{chars} 字）/ characters / vn"
+print(f"寫好五頁：index / novel（{len(chapters)} 章、{chars} 字）/ characters / timeline / vn"
       f"　支線 {len(routes)} 個")
 
 APPLY = pathlib.Path.home() / ".claude/skills/promo-footer/apply.py"
 if APPLY.exists():
-    for f in ("index.html", "novel.html", "characters.html", "vn.html"):
+    for f in ("index.html", "novel.html", "characters.html", "timeline.html", "vn.html"):
         r = subprocess.run([sys.executable, str(APPLY), str(DOCS / f), "glitch-vn"],
                            capture_output=True, text=True)
         print(f"  {f}: {(r.stdout or r.stderr).strip()}")
