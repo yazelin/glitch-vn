@@ -50,12 +50,14 @@ def _voice(d):
         if u:
             d["voiceUrl"] = u
             got = True
-    # **掛了聲音就要標 voiceMode，不然匯出的單檔 HTML 一句都不會播。**
-    # 線上播放器不看這個欄位，所以線上一切正常、匯出版整個沒聲音，而且不報錯。
-    # 匯出的程式裡那道閘是：
+    # **真正讓匯出版有聲音的開關在 project.languages，不在這裡。**
+    # 匯出的播放器有一道閘：
     #     if (d.voiceMode && d.voiceMode!=='off' && d.voiceMode!=='realtime') playVoice(...)
-    # 它只讀卡片層的 d.voiceMode，不會去看 project.languages 裡的那個。
-    # 多人卡片的 voiceUrl 掛在行上，可是閘讀的是卡片，所以這裡標在卡片上。
+    # 它讀卡片層的 d.voiceMode。可是**卡片上自己寫的 voiceMode 會被匯出程序丟掉**
+    # （雲端存得下、匯出的 JSON 裡是 0 個），匯出時是從
+    # `project.languages[].voiceMode` 複製到每張卡的。所以那個欄位要設在語言上，
+    # 見 larch/setup_language.py。實測：語言加上去之後匯出的 JSON 立刻有 145 個。
+    # 這裡照樣標一份當備援——線上播放器不看它，也不會壞事。
     if got:
         d["voiceMode"] = "shared"
     return d
