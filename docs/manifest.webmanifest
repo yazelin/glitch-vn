@@ -1,0 +1,52 @@
+{
+  "id": "/glitch-vn/",
+  "name": "格莉奇與黑洞先生",
+  "short_name": "格莉奇",
+  "description": "一本繁體中文小說。兩年前開台第一天來了七個人，她答應要記住每一個來的人。她記得六個。每一句都能點來聽。",
+  "lang": "zh-Hant",
+  "dir": "ltr",
+  "start_url": "/glitch-vn/",
+  "scope": "/glitch-vn/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#04080c",
+  "theme_color": "#04080c",
+  "categories": ["books", "entertainment"],
+  "icons": [
+    {
+      "src": "img/icon-v2-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-v2-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-v2-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "img/shot-narrow.webp",
+      "sizes": "540x1110",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "全文閱讀，每一句都能點來聽"
+    },
+    {
+      "src": "img/shot-wide.webp",
+      "sizes": "1280x800",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "名單上的七個人"
+    }
+  ]
+}

@@ -25,6 +25,9 @@
     tools/gen_art.py         批次產圖，走 .11 的 codex-image
     tools/gen_bgm.py         批次產 BGM，走 .11 的 suno-web，一律純音樂
     tools/cut_faces.py       表情差分去背（綠幕→清內部殘留→負控制驗收）
+    tools/make_icons.py      PWA 圖示（從立繪按實際 ink 邊界裁，不是目測置中）
+    tools/update_sw.py       用內容 hash 產 sw.js 的快取版號，別手動 bump
+    tools/offline_test.mjs   離線包驗收（配負控制：沒下載時語音必須是解不出來的）
     larch/                   視覺小說版：一章一支 build 腳本，見 larch/README.md
     archive/                 舊版：做在 Larch 上的七天記憶遊戲。已經收掉
 
@@ -34,6 +37,23 @@
     python3 tools/gen_og.py       # 只有改標題或換主角立繪的時候才要重跑
     python3 larch/dump_routes.py  # 改了支線之後，把遊玩版那一頁的資料抓下來
     python3 larch/build_all.py    # 重建 Larch 上的七章
+    python3 tools/update_sw.py    # 動到 docs/ 就要跑，不跑瀏覽器不知道有新版
+    node tools/offline_test.mjs   # 動到 sw.js 或離線清單就要跑
+
+## 離線（PWA）
+
+站台是可安裝的離線 App。快取分兩層：`SHELL`（六頁＋manifest＋icon＋字型，每次
+部署換版）與 `ASSET`（立繪、場景、612 句語音，只有同名檔換內容才動）。共用一個
+版本名的話，改一行字就把二十幾 MB 音檔整包刪掉重抓，而 `cache.put` 失敗是靜默的。
+
+**語音不放 install。** 那是全有全無的窗口，排最後、檔案最大的最容易靜默掉，症狀
+是「圖都在、按播放沒有聲音」。改成頁尾一顆按鈕，下載完回頭逐項 `cache.match`
+實查才敢說「已可離線」——不准數 fetch 成功次數，配額不足時 fetch 照回 200。
+
+**字型自架，不要用 Google Fonts CDN**（跨域，SW 快取不到，離線一定壞）。只切站上
+真的用得到的 1184 字。**加新文字之後要重切**，不然新字會掉到系統字型。
+
+    NODE_PATH=$(npm root) node ~/pwa-skill/tools/pwa-check.mjs docs   # 在有 playwright 的 repo 底下跑
 
 ## 小說與遊玩版的分界
 

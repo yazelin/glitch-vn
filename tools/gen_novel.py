@@ -53,6 +53,14 @@ def E(t):
 
 
 CSS = """
+/* **字型自架,不要用 Google Fonts CDN。** 那是跨域,SW 快取不到,離線一定壞。
+   只切這個站真的用得到的字(1184 字),用 tools/../pwa-skill/selfhost-font.py 產生。
+   **加新文字之後要重切**,不然新字會掉到系統字型,同一行兩種臉。 */
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:400;
+  font-display:swap;src:url("fonts/noto-serif-tc-400.woff2") format("woff2")}
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:600;
+  font-display:swap;src:url("fonts/noto-serif-tc-600.woff2") format("woff2")}
+
 /* 配色對齊 ai-brain-site（格莉奇OS）：--bg #04080c、--ink #0b1a22、--cy #25c2e8。
    **那邊的規則是：青色是靜止色，綠（mint #7cf3c0）是 hover 色，而且 hover 會發綠光**
    （drop-shadow 0 0 9px rgba(124,243,192,.65)）。紫色 #b78bff 只做少量點綴。
@@ -276,6 +284,12 @@ code,var{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
   color:var(--mint);background:var(--sunk);border-radius:var(--r);padding:1px 6px;
   font-style:normal}
 strong{font-weight:600}
+.dl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+.dl button{font:inherit;font-size:.86rem;color:var(--ink);background:none;
+  border:1px solid var(--hair);border-radius:999px;padding:5px 14px;cursor:pointer}
+.dl button:hover:not(:disabled){color:var(--mint);border-color:var(--mint)}
+.dl button:disabled{opacity:.5;cursor:default}
+.dl span{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
 footer{margin-top:78px;padding-top:24px;border-top:1px solid var(--hair);
   color:var(--faint);font-size:14px;line-height:1.85;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -438,13 +452,66 @@ def page(title, desc, body, cur, wide=False, ld="", js=""):
 <meta name="twitter:title" content="{t}">
 <meta name="twitter:description" content="{d}">
 <meta name="twitter:image" content="{BASE}img/og.jpg">
-<link rel="icon" href="img/icon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="img/icon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
+<link rel="icon" href="img/icon-v2-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/icon-v2-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="格莉奇">
+<link rel="preload" as="font" type="font/woff2" href="fonts/noto-serif-tc-400.woff2" crossorigin>
 <style>{CSS}</style>
 {ld}
+<script>
+/* **每一頁都要註冊。** 章節頁、角色頁都可能被單獨分享，只掛首頁的話
+   從那些連結進來的人完全看不到安裝選項。這段由 page() 統一產生。 */
+if ('serviceWorker' in navigator) addEventListener('load', function () {{
+  navigator.serviceWorker.register('sw.js').then(function (reg) {{
+    /* 自動重載要監聽 controllerchange，不是 state==='installed'——
+       後者新 SW 還沒接管，reload 仍被舊 SW 控制拿到舊快取。
+       而且只在「本來就有舊 SW」時才重載，首次造訪不要。 */
+    if (!navigator.serviceWorker.controller) return;
+    var reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {{
+      if (reloaded) return; reloaded = true; location.reload();
+    }});
+  }}).catch(function () {{}});
+
+  /* 離線語音包。**完成度回頭問 SW 逐項實查**，不數 fetch 成功次數——
+     配額不足時 cache.put 會失敗而 fetch 照回 200，徽章就會謊報。 */
+  navigator.serviceWorker.ready.then(function (reg) {{
+    var box = document.getElementById('dl'), go = document.getElementById('dlGo'),
+        msg = document.getElementById('dlMsg');
+    if (!box || !reg.active) return;
+    function ask(type, cb) {{
+      var ch = new MessageChannel();
+      ch.port1.onmessage = function (ev) {{ cb(ev.data); }};
+      reg.active.postMessage({{ type: type }}, [ch.port2]);
+    }}
+    function show(d) {{
+      if (d.tick != null) {{ msg.textContent = d.tick + ' / ' + d.total; return; }}
+      box.hidden = false;
+      if (d.have >= d.total) {{
+        go.disabled = true; go.textContent = '語音已可離線';
+        msg.textContent = d.total + ' 句';
+      }} else {{
+        msg.textContent = d.have ? '已有 ' + d.have + ' / ' + d.total : '約 24 MB';
+      }}
+    }}
+    ask('status', show);
+    go.addEventListener('click', function () {{
+      go.disabled = true; go.textContent = '下載中';
+      ask('warm', function (d) {{
+        show(d);
+        if (d.done && d.have < d.total) {{
+          go.disabled = false; go.textContent = '補齊剩下的';
+          msg.textContent = '缺 ' + (d.total - d.have) + ' 句，再按一次';
+        }}
+      }});
+    }});
+  }});
+}});
+</script>
 </head>
 <body>
 <nav class="top"><div class="in">
@@ -453,6 +520,9 @@ def page(title, desc, body, cur, wide=False, ld="", js=""):
 <main class="wrap{" wide" if wide else ""}">
 {body}
 <footer>
+<div class="dl" id="dl" hidden>
+  <button id="dlGo">下載語音，離線也能聽</button><span id="dlMsg"></span>
+</div>
 <p>《格莉奇與黑洞先生》　MIT　林亞澤　　角色設定正典在
 <a href="https://github.com/yazelin/ai-brain-site">ai-brain-site</a> 的 persona.json</p>
 {PROMO}
@@ -489,6 +559,16 @@ for i, p in enumerate(chapters, 1):
             u = _urls[k].replace("https://yazelin.github.io/glitch-vn/", "")
             steps.append({"p": [f"b{i}-{x}" for x in ps], "u": u})
 print(f"有聲書：{len(steps)} 步")
+
+# ── 離線清單 ────────────────────────────────────────────
+# sw.js 讀這一份來暖快取。**不要把 730 個音檔寫死在 sw.js 的 precache 裡**：
+# install 是全有全無的窗口，排在最後、檔案最大的音檔最容易靜默掉，
+# 結果就是「圖都在、按播放沒有聲音」。語音改成使用者按鈕觸發、逐項實查。
+(DOCS / "offline.json").write_text(json.dumps({
+    "img": sorted("img/" + f.name for f in (DOCS / "img").iterdir() if f.is_file()),
+    "voice": sorted({d["u"] for d in steps}),
+}, ensure_ascii=False), encoding="utf-8")
+
 
 # ── 有聲書 ──────────────────────────────────────────────
 # 配音是為視覺小說生的，小說站直接沿用：同一段文字，同一個聲音。

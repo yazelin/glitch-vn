@@ -2,13 +2,23 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>殺青・格莉奇與黑洞先生</title>
 <meta name="description" content="《格莉奇與黑洞先生》片尾謝幕。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
+<link rel="icon" href="img/icon-v2-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/icon-v2-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#04080c">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="preload" as="font" type="font/woff2" href="fonts/noto-serif-tc-400.woff2" crossorigin>
 <style>
+/* **字型自架,不要用 Google Fonts CDN。** 那是跨域,SW 快取不到,離線一定壞。
+   只切這個站真的用得到的字(1184 字),用 tools/../pwa-skill/selfhost-font.py 產生。
+   **加新文字之後要重切**,不然新字會掉到系統字型,同一行兩種臉。 */
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:400;
+  font-display:swap;src:url("fonts/noto-serif-tc-400.woff2") format("woff2")}
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:600;
+  font-display:swap;src:url("fonts/noto-serif-tc-600.woff2") format("woff2")}
 :root{
   --bg:#04080c; --ink:#0b1a22; --hair:rgba(255,255,255,.07);
   --cy:#25c2e8; --mint:#7cf3c0; --purple:#b78bff;
@@ -294,6 +304,13 @@ body.clear #ctrl{display:none}
   apply();
   requestAnimationFrame(tick);
 })();
+</script>
+<script>
+/* 這一頁會被 Larch 的 miniGame 卡片用 iframe 載，也可能被單獨分享。
+   同源註冊，順便讓片尾在離線時也開得起來。 */
+if ('serviceWorker' in navigator) addEventListener('load', function () {
+  navigator.serviceWorker.register('sw.js').catch(function () {});
+});
 </script>
 </body>
 </html>
