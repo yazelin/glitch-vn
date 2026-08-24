@@ -70,6 +70,31 @@ https://larch.yapiflow.com
 原始碼、素材、工具全部公開：
 https://github.com/yazelin/glitch-vn
 
+▍這支影片是怎麼錄的
+自動玩一次錄下來的，沒有人在旁邊按滑鼠。做法照 promo-video 這份管線，
+不過它內建的錄影不收聲音，所以另外寫了一支：畫面走 x11grab，
+聲音走一個獨立的音訊接收端，翻頁靠攔截播放器的語音元素，
+每一句配音播完才點下一張。腳本在 glitch-vn 的 tools/capture。
+
+▍用到的工具（都是公開的）
+promo-video　把專案變成宣傳片的零成本管線
+https://yazelin.github.io/promo-video-skill/
+
+codex-imagegen　用訂閱額度生圖
+https://yazelin.github.io/codex-imagegen-skill/
+
+tts　大量合成語音會撞到的東西
+https://github.com/yazelin/tts-skill
+
+cutout　平底色去背
+https://github.com/yazelin/cutout-skill
+
+larch-vn　在 Larch 上做視覺小說
+https://github.com/yazelin/larch-vn-skill
+
+speak-tw　中文行文檢查
+https://github.com/yazelin/speak-tw
+
 ▍角色
 格莉奇　虛擬主播，愛拿「我只有 4KB」當口頭禪
 黑洞先生　她的室友，永遠吃不飽
