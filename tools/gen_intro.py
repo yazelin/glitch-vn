@@ -155,6 +155,14 @@ REF = {
 TAKE = ROOT / "art/voice/intro-take.json"
 
 
+# **外部配音的角色頁音檔，不可以就地重生。** 諾亞的角色頁那兩段是 Larch 的
+# MiniMax「詼諧長者」生的（音訊素材/minimax/諾亞-詼諧長者-角色頁2句.mp3，
+# 用 tools/split_take.py 那一套的做法切開）。本機 zero-shot 複製得住音高，
+# 複製不住年齡感：同一支參考音生出來 F0 對得上（112 vs 111），頻譜重心卻亮一截，
+# 聽起來就不是老人了。要補新句子就回 Larch 生一份長檔再切。
+KEEP = {"noah", "view-noah-blackhole"}
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     only = sys.argv[sys.argv.index("--only") + 1:] if "--only" in sys.argv else None
@@ -185,6 +193,8 @@ def main():
         fresh[slug] = sig
         stale = took.get(slug) != sig or not pathlib.Path(job["out"]).exists()
         want = (only is None and stale) or ("--all" in sys.argv) or (only and who in only)
+        if slug in KEEP and pathlib.Path(job["out"]).exists():
+            want = False   # 外部配音，就地生會變成另一個人
         print(f"  {who:5s} → {slug:22s} {len(text):3d} 字　{pathlib.Path(ref).name}"
               f"　{'重生' if want else '沒變，跳過'}")
         if want:
