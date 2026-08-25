@@ -10,7 +10,7 @@
 
 /* cache:start — tools/update_sw.py 產生，勿手改 */
 const SHELL_CACHE = 'gvn-shell-1f26dbc41b';
-const ASSET_CACHE = 'gvn-assets-4f7c5556ee';
+const ASSET_CACHE = 'gvn-assets-e0cfae77e1';
 /* cache:end */
 
 const KEEP = [SHELL_CACHE, ASSET_CACHE];
