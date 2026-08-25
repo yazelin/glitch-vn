@@ -41,10 +41,14 @@ button.spot{appearance:none;text-align:left;cursor:pointer;color:inherit;font:in
 button.spot:hover,button.spot:focus-visible{border-color:var(--cyan);outline:none}
 button.spot:active{transform:scale(.985)}
 button.spot[disabled]{opacity:.32;cursor:default}
+button.spot.locked[disabled]{opacity:.55}
 button.spot[disabled]:hover{border-color:var(--line)}
 .name{font-weight:600;font-size:clamp(14px,1.9vw,16px)}
 .who{color:var(--lilac);font-size:clamp(12px,1.6vw,13px)}
 .who.unknown{color:var(--dim)}
+.who.hint{color:var(--dim);font-size:clamp(11px,1.5vw,12.5px);line-height:1.45}
+button.spot.locked{background:transparent;border-style:dashed;opacity:.5}
+button.spot.locked .name{color:var(--dim);font-weight:500}
 footer{flex:none;display:flex;gap:.8em;align-items:center}
 button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;
   font-size:clamp(12px,1.6vw,14px);background:none;border:1px solid var(--line);
@@ -77,18 +81,33 @@ var SLOTS=['上午','下午','晚上','深夜'];
 // 空手而回本來就是這款的一部分（見設計文件三之一），所以預設是開著。
 var SPOTS=[
  {id:'lobby',   name:'一樓',        live:['管理員','管理員','','']},
- {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null]},
+ {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null],
+  hint:'有人說樓上那間什麼都留著。我需要一個壞掉的東西。'},
  {id:'street',  name:'車站前那條街', live:['路人','路人','路人','']},
  {id:'busstop', name:'公車站',      live:['路人','路人','路人','']},
  {id:'metro',   name:'捷運出口',    live:['路人','路人','路人','']},
  {id:'store',   name:'便利商店',    live:['店員','店員','店員','店員']},
- {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null]},
- {id:'laundry', name:'自助洗衣店',  live:['','','','']},
- {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null]},
- {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比']},
- {id:'booth',   name:'錄音間門口',  live:['鐵塔','鐵塔',null,null]},
- {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全']}
+ {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null],
+  hint:'他等那顆管子等兩個禮拜了。他走不開。'},
+ {id:'laundry', name:'自助洗衣店',  live:['','','',''],
+  hint:'隔壁那家深夜也開。'},
+ {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null],
+  hint:'他說他都在那裡買。'},
+ {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'],
+  hint:'畫她的人。名字我還沒問到。'},
+ // **booth 永遠是灰的，而且提示永遠是那一句。** 玩家會一直看到它，一直進不去。
+ // 那是刻意的挫折，而且它會讓「深夜在便利商店撞到鐵塔」變成整款最好的一個瞬間。
+ {id:'booth',   name:'錄音間門口',  live:['鐵塔','鐵塔',null,null],
+  hint:'經紀公司在哪裡我知道了。可是我進不去。', sealed:true},
+ // tower14 在設計的解鎖表裡漏掉了（它列在「走不進去的」那一組，可是沒說什麼時候出現）。
+ // 照既有規則補：提示講他缺什麼，不講該去問誰，而且只講他知道的。
+ {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全'],
+  hint:'那個 AI 是哪一家公司的，我還沒查到。'},
+ // trust 3 的私人地方**不顯示提示**（沒有 hint），開了才會出現在板上。
+ // 它們不該被當成待辦事項，玩家要自己走到那裡。
+ {id:'catgrass_home', name:'貓草家', live:[null,null,'貓草','貓草']}
 ];
+
 
 // 訪客：某個人剛好也在。[地點, 時段, 機率]
 // 黑洞先生那一條是正典（第五章、調查篇第二天）：他只在一樓的晚上，七點多。
@@ -129,8 +148,8 @@ function go(spotId){
 
 function start(){
   var slot=num(values.slot,0), day=num(values.day,1);
-  var open=list(values.unlocked), met=list(values.met);
-  if(!open.length) open=['lobby','street','busstop','metro','store'];
+  var open_=list(values.unlocked), met=list(values.met);
+  if(!open_.length) open_=['lobby','street','busstop','metro','store'];
 
   document.getElementById('when').textContent='第 '+day+' 天 ・ '+SLOTS[slot];
   document.getElementById('hint').textContent='去一個地方就過一個時段';
@@ -138,13 +157,20 @@ function start(){
   var grid=document.getElementById('grid');
   grid.textContent='';
   SPOTS.forEach(function(s){
-    if(open.indexOf(s.id)<0) return;
+    var open = open_.indexOf(s.id)>=0 && !s.sealed;
+    // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
+    if(!open && !s.hint) return;
     var live=s.live[slot];
     var b=document.createElement('button');
     b.className='spot'; b.type='button';
     var n=document.createElement('span'); n.className='name'; n.textContent=s.name;
     var w=document.createElement('span'); w.className='who';
-    if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
+    if(!open){
+      // 看得到，可是灰的。提示是他自己的判斷，不是系統指令。
+      b.className='spot locked'; b.disabled=true;
+      w.className='who hint'; w.textContent=s.hint;
+    }
+    else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
     else if(met.indexOf(live)>=0){ w.textContent=live; }
     else { w.textContent='沒去過'; w.className='who unknown'; }

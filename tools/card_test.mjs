@@ -52,15 +52,23 @@ const msgs = () => page.evaluate(() => window.__msgs);
 
 console.log('\n=== 調查板 ===');
 {
-  const V = { day: 3, slot: 2, unlocked: 'lobby,street,store,roof,studio', met: '管理員,諾亞' };
+  const V = { day: 3, slot: 2, unlocked: 'lobby,street,busstop,metro,store', met: '管理員,店員' };
   const fr = await open('board.html', V);
 
   const when = await fr.locator('#when').textContent();
   ok('標頭顯示第幾天與時段', when.includes('第 3 天') && when.includes('晚上'), when);
 
-  const spots = fr.locator('button.spot');
-  const n = await spots.count();
-  ok('只畫解鎖過的地點', n === 5, `畫了 ${n} 個，unlocked 給了 5 個`);
+  const openSpots = fr.locator('button.spot:not(.locked)');
+  ok('解鎖的畫成可點的', (await openSpots.count()) === 5, `${await openSpots.count()} 個`);
+  // 沒開又有提示的要看得到（灰的），沒開又沒提示的（trust 3 私人地方）根本不畫。
+  const locked = fr.locator('button.spot.locked');
+  ok('沒開但有提示的畫成灰的', (await locked.count()) === 7, `${await locked.count()} 個`);
+  ok('貓草家沒開就不畫',
+     (await fr.locator('button.spot', { hasText: '貓草家' }).count()) === 0);
+  const roofHint = fr.locator('button.spot.locked', { hasText: '頂樓收音機店' });
+  ok('提示用他自己的口氣',
+     (await roofHint.locator('.who').textContent()).includes('我需要一個壞掉的東西'));
+  ok('灰的點不下去', await roofHint.isDisabled());
 
   // **一樓的晚上一定要進得去**，那是黑洞先生唯一會出現的時段。
   // 「沒有常駐」不等於「沒開」，這一條之前寫錯過，把全作最重要的一場關掉了。
@@ -68,10 +76,10 @@ console.log('\n=== 調查板 ===');
   ok('一樓晚上進得去', !(await lobby.isDisabled()));
   ok('一樓晚上標「開著，可能沒人」', (await lobby.locator('.who').textContent()) === '開著，可能沒人');
 
-  const roof = fr.locator('button.spot', { hasText: '頂樓收音機店' });
-  ok('去過的人才顯示名字', (await roof.locator('.who').textContent()) === '諾亞');
-  const studio = fr.locator('button.spot', { hasText: '斑比工作室' });
-  ok('沒去過的人只顯示「沒去過」', (await studio.locator('.who').textContent()) === '沒去過');
+  const store = fr.locator('button.spot:not(.locked)', { hasText: '便利商店' });
+  ok('去過的人才顯示名字', (await store.locator('.who').textContent()) === '店員');
+  const street = fr.locator('button.spot:not(.locked)', { hasText: '車站前那條街' });
+  ok('沒去過的人只顯示「沒去過」', (await street.locator('.who').textContent()) === '沒去過');
 
   await fr.locator('button.spot', { hasText: '一樓' }).click();
   await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
@@ -88,10 +96,23 @@ console.log('\n=== 調查板 ===');
      `here="${sets.here}"（一樓晚上常駐是空，黑洞先生 60%）`);
 }
 
+console.log('\n=== 調查板：錄音間門口永遠進不去 ===');
+{
+  const fr = await open('board.html',
+    { day: 5, slot: 0, unlocked: 'lobby,store,booth,catgrass_home', met: '管理員,店員,貓草' });
+  const booth = fr.locator('button.spot', { hasText: '錄音間門口' });
+  ok('unlocked 裡有 booth 也照樣是灰的', (await booth.getAttribute('class')).includes('locked'));
+  ok('booth 點不下去', await booth.isDisabled());
+  ok('booth 的提示永遠是那一句',
+     (await booth.locator('.who').textContent()).includes('可是我進不去'));
+  ok('貓草家解鎖之後就畫出來，而且沒有提示',
+     (await fr.locator('button.spot:not(.locked)', { hasText: '貓草家' }).count()) === 1);
+}
+
 console.log('\n=== 調查板：深夜之後換日 ===');
 {
   const fr = await open('board.html', { day: 3, slot: 3, unlocked: 'store', met: '店員,貓草' });
-  await fr.locator('button.spot', { hasText: '便利商店' }).click();
+  await fr.locator('button.spot:not(.locked)', { hasText: '便利商店' }).click();
   await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
   const sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
   ok('深夜之後 slot 歸零', sets.slot === 0, `slot=${sets.slot}`);
