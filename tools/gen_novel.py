@@ -284,6 +284,11 @@ code,var{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
   color:var(--mint);background:var(--sunk);border-radius:var(--r);padding:1px 6px;
   font-style:normal}
 strong{font-weight:600}
+.ex{margin-top:52px}
+.ex:first-of-type{margin-top:18px}
+.exwhy{font-size:.86rem;line-height:1.9;color:var(--muted);margin:0 0 26px;
+  border-left:2px solid var(--hair);padding-left:14px}
+.exwhy span{display:block;font-size:.74rem;letter-spacing:.08em;margin-bottom:4px}
 .say{display:inline-flex;align-items:center;gap:7px;margin-top:11px;
   font:inherit;font-size:.78rem;letter-spacing:.04em;color:var(--muted);
   background:none;border:1px solid var(--hair);border-radius:999px;
@@ -433,6 +438,7 @@ def page(title, desc, body, cur, wide=False, ld="", js=""):
     nav = "".join(
         f'<a class="l" href="{h}"{" aria-current=\'page\'" if h == cur else ""}>{n}</a>'
         for h, n in (("index.html", "首頁"), ("novel.html", "閱讀"),
+                     ("extras.html", "番外"),
                      ("characters.html", "角色"), ("timeline.html", "時間軸"),
                      ("vn.html", "遊玩版")))
     t, d = html.escape(title), html.escape(desc)
@@ -865,13 +871,65 @@ VN_DESC = ("《格莉奇與黑洞先生》的視覺小說版：立繪、場景�
 </div>''',
     "vn.html"), encoding="utf-8")
 
+# ── 番外頁 ──────────────────────────────────────────────
+# 書外的短篇。**一篇一個檔**，放 novel/番外/，檔名就是篇名。
+# 格式刻意做得很鬆，因為這裡的東西是想到才寫的：
+#
+#     <!-- 內部筆記包在 HTML 註解裡，不會公開 -->
+#     # 篇名
+#     日期：2026-08-24
+#     起因：有讀者問……          ← 公開，顯示在篇名底下
+#     ---
+#     正文（沿用 render()，跟正文七章同一套排版）
+#
+# **起因要公開。** 這一頁的價值有一半在「有人問了什麼，所以補了這一段」，
+# 只放故事的話讀者看不出它為什麼存在。內部的正典檢查清單是給寫的人看的，
+# 包在註解裡，publish 的時候會被整段拿掉。
+EX_DIR = ROOT / "novel/番外"
+
+
+def read_extra(p):
+    md = re.sub(r"<!--.*?-->", "", p.read_text(encoding="utf-8"), flags=re.S)
+    head, _, body = md.partition("\n---\n")
+    title, date, why = p.stem, "", ""
+    for ln in head.split("\n"):
+        ln = ln.strip()
+        if ln.startswith("# "):
+            title = ln[2:].strip()
+        elif ln.startswith("日期："):
+            date = ln[3:].strip()
+        elif ln.startswith("起因："):
+            why = ln[3:].strip()
+    return {"title": title, "date": date, "why": why, "body": body.strip()}
+
+
+extras = sorted((read_extra(f) for f in EX_DIR.glob("*.md")),
+                key=lambda d: d["date"], reverse=True)
+EX_BODY = ('<header class="bk"><div class="eyebrow">番外</div>'
+  '<h1>書外的日子</h1>'
+  '<p>正文之外的短篇。多半是有人問了什麼，而那個答案用講的不如用寫的。</p>'
+  '<p class="legend">底下有劇透。七章還沒讀完的話先別往下。</p></header>'
+  + "".join(
+    '<article class="ex"><h2 class="ch">%s</h2>'
+    '<p class="exwhy"><span>%s</span>%s</p>%s</article>'
+    % (html.escape(d["title"]), html.escape(d["date"]),
+       html.escape(d["why"]), render(d["body"]))
+    for d in extras))
+
+(DOCS / "extras.html").write_text(page(
+    "番外・格莉奇與黑洞先生",
+    "正文之外的短篇。多半是有人問了什麼，而那個答案用講的不如用寫的。",
+    EX_BODY, "extras.html"), encoding="utf-8")
+print(f"  extras.html：{len(extras)} 篇")
+
 # sitemap 與 robots
 (DOCS / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n'
     '<urlset xmlns="http://www.sitemap s.org/schemas/sitemap/0.9">\n'.replace("sitemap s", "sitemaps")
     + "".join(f"<url><loc>{BASE}{u}</loc><priority>{pr}</priority></url>\n"
               for u, pr in (("", "1.0"), ("novel.html", "0.9"),
-                            ("characters.html", "0.7"), ("vn.html", "0.6")))
+                            ("characters.html", "0.7"), ("extras.html", "0.6"),
+                            ("timeline.html", "0.5"), ("vn.html", "0.6")))
     + "</urlset>\n", encoding="utf-8")
 (DOCS / "robots.txt").write_text(
     f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n", encoding="utf-8")

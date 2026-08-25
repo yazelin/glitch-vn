@@ -17,7 +17,7 @@ DOCS = ROOT / "docs"
 SW = DOCS / "sw.js"
 
 SHELL = ["index.html", "novel.html", "characters.html", "timeline.html",
-         "vn.html", "credits.html", "manifest.webmanifest"]
+         "extras.html", "vn.html", "credits.html", "manifest.webmanifest"]
 
 
 def shell_hash():
@@ -26,6 +26,10 @@ def shell_hash():
         f = DOCS / n
         h.update(f.read_bytes() if f.exists() else b"")
     for p in sorted(DOCS.glob("img/icon-*.png")):
+        h.update(p.read_bytes())
+    # 字型也在 SHELL_FILES 裡。**加了新文字要重切字型**，而重切之後如果版號沒動，
+    # 舊使用者拿到的還是舊子集，新字會掉到系統字型——同一行兩種臉，而且不會報錯。
+    for p in sorted(DOCS.glob("fonts/*.woff2")):
         h.update(p.read_bytes())
     return h.hexdigest()[:10]
 
