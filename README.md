@@ -31,6 +31,8 @@
     tools/offline_test.mjs   離線包驗收（配負控制：沒下載時語音必須是解不出來的）
     tools/gen_intro.py       角色頁的配音：自我介紹，加上「別人怎麼說」
     tools/check_intro.py     逐段重新辨識比對原文。**判準是拼音不是字**
+    tools/check_sync.py      確認格莉奇OS 與部落格的自介跟這裡是同一份
+    tools/scan_voice_f0.py   量基頻，抓出被換成別人聲音的句子
     tools/say_test.mjs       自介鈕驗收（真的按下去，不是檢查 HTML 有沒有那顆鈕）
     tools/contrast_test.mjs  量算出來的顏色對比。**--ink 是面板底色不是文字色**，
                              用錯會變成黑底黑字，肉眼在某些螢幕上還「看得到一點」
@@ -48,6 +50,7 @@
     node tools/contrast_test.mjs  # 動到配色就要跑
     python3 tools/gen_intro.py    # 只重生「唸出來的字或表演指示變了」的
     .venv/bin/python tools/check_intro.py --reroll 3   # 驗發音，錯的自動重生
+    python3 tools/check_sync.py   # 改了自介就要跑：另外兩個站是複製過去的
 
 ## 角色頁的配音
 
@@ -70,6 +73,13 @@
     同音同調   她→他、立繪→例會、勢→室      ASR 分不出來，不是配音的問題
     同音不同調 背(bèi)→杯(bēi)、數(shù)→書(shū)  聲調唸錯，列成「要聽」
     不同音     憶(yì)→物(wù)、禪(chán)→呢(ne)   唸錯字，直接判 FAIL
+
+### 自介有三份
+
+音檔與逐字稿的唯一事實來源在這裡，**格莉奇OS 與部落格各複製一份過去**
+（SW 的 scope 只到各站底下，指到 `/glitch-vn/` 的音檔離線抓不到）。
+而複製是靠人記得，已經漏過一次：改寫了黑洞先生的自介、推了小說站，
+另外兩個站停在舊版，是使用者聽出來的。改完自介一定要跑 `tools/check_sync.py`。
 
 ### 唸錯了怎麼修
 
