@@ -68,6 +68,7 @@
     node tools/card_test.mjs           # 實跑 postMessage 契約，sandbox 跟正式一樣
     python3 tools/vars.py              # 掃出所有變數，抓命名衝突
     python3 tools/vars.py --cards      # 比對插件卡跟設計文件有沒有分家
+    python3 tools/tone.py              # 掃台詞有沒有走味（旁白在猜／加溫度／金句／神祕化）
     python3 tools/gen_page.py          # 重生玩家筆記那幾頁（行首 ~ 代表被劃掉）
 
 ## 改完要跑的
