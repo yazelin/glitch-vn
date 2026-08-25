@@ -3,7 +3,10 @@
 import http from 'node:http';
 import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { join, extname } from 'node:path';
-import { chromium } from 'playwright';
+// playwright 沒裝在這個 repo，ESM 的 import 不吃 NODE_PATH，所以指到別的 repo 那一份。
+import { createRequire } from 'node:module';
+const { chromium } = createRequire(import.meta.url)(
+  process.env.PW || '/home/ct/line-sticker-studio/node_modules/playwright');
 const ROOT = '/home/ct/glitch-vn/docs';
 const MIME = { '.html':'text/html; charset=utf-8', '.js':'text/javascript', '.json':'application/json',
   '.webmanifest':'application/manifest+json', '.webp':'image/webp', '.png':'image/png',
