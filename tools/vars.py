@@ -10,6 +10,10 @@
 
     python3 tools/vars.py            # 印帳
     python3 tools/vars.py --check    # 只有衝突才印，有衝突就 exit 1（給 CI 用）
+    python3 tools/vars.py --cards    # 比對兩張插件卡跟設計文件有沒有走鐘
+
+--cards 抓的是**實作跟設計慢慢分家**這件事：卡片裡的地點代號、線索代號
+是寫死在 HTML 裡的，設計文件改了不會有人記得回去改卡片，而且不會報錯。
 """
 import collections, pathlib, re, sys
 
@@ -69,6 +73,40 @@ def conflicts(hits):
     return out
 
 
+def cards():
+    """比對 larch/cards 裡兩張卡的硬編碼跟設計文件。"""
+    docs = "\n".join(f.read_text(encoding="utf-8") for f in DOCS)
+    bad = 0
+
+    board = (ROOT / "larch/cards/board.html").read_text(encoding="utf-8")
+    ids = set(re.findall(r"\{id:'([a-z0-9_]+)'", board))
+    print(f"調查板：{len(ids)} 個地點")
+    for i in sorted(ids - LOC):
+        print(f"  ★ 卡片有、LOC 沒登記：{i}"); bad += 1
+    for i in sorted(LOC - ids):
+        print(f"  ★ LOC 有、卡片沒畫：{i}"); bad += 1
+    gates = set(re.findall(r"gate:'([a-z0-9_]+)'", board))
+    for g in sorted(gates):
+        if f"`{g}`" not in docs:
+            print(f"  ★ 閘沒寫進設計文件：{g}"); bad += 1
+
+    notes = (ROOT / "larch/cards/notes.html").read_text(encoding="utf-8")
+    codes = set(re.findall(r"\['((?:clue|see|name)_[a-z0-9]+)'", notes))
+    print(f"調查筆記：{len(codes)} 個代號")
+    for c in sorted(codes):
+        if c.startswith("name_"):
+            continue          # 六個 ID 的代號是卡片自己的，設計文件不列
+        if f"`{c}`" not in docs:
+            print(f"  ★ 代號沒寫進設計文件：{c}"); bad += 1
+    # 反向：設計文件有的 see_* 卡片要畫得出來，不然玩家永遠看不到那一份目擊
+    for c in sorted(set(re.findall(r"`(see_[a-z]+)`", docs))):
+        if c not in codes and c != "see_zero":   # see_zero 是拒答，本來就沒有內容
+            print(f"  ★ 設計文件有、筆記卡沒畫：{c}"); bad += 1
+
+    print("\n卡片跟設計對得起來" if not bad else f"\n★ {bad} 處對不起來")
+    sys.exit(1 if bad else 0)
+
+
 def main():
     check = "--check" in sys.argv
     hits = scan()
@@ -105,4 +143,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--cards" in sys.argv:
+        cards()
+    else:
+        main()
