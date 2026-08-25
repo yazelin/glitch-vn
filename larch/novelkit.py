@@ -343,13 +343,24 @@ class Chapter:
 
         真的要合的話先改這裡：現在非 who 的那幾行 emotion 是空字串，而配音的
         檔名是 sha1(講者|文字|情緒)，所以合併會讓那 54 句的鍵變掉、音檔對不上，
-        **而且不會報錯，只會安靜地沒有聲音**。要先讓 talk 收逐行的情緒。
+        **而且不會報錯，只會安靜地沒有聲音**。
+
+        **pairs 可以是二元組也可以是三元組**：`("諾亞", "有啊。")` 沿用整張卡的
+        emotion（只掛在 who 身上，其餘行是空的），`("諾亞", "有啊。", "笑")`
+        則是那一行自己的情緒。混用沒問題。
+
+        **有了三元組才寫得出多句卡。** 配音的鍵是 sha1(講者|文字|情緒)，
+        非主講者那幾行如果只能是空情緒，同一句話放進多句卡跟放進單句卡
+        就會算出不同的鍵，音檔對不上，而且不會報錯，只會安靜地沒有聲音。
         """
         # 一張卡只有一個舞台，所以差分掛在 who（預設第一個講話的人）身上。
         face = who or pairs[0][0]
+        norm = [(p + ("",))[:3] if len(p) == 2 else p for p in pairs]
         lines = [{"id": f"l{i}", "speaker": w, "text": t,
-                  "emotion": emotion if (emotion and w == face) else ""}
-                 for i, (w, t) in enumerate(pairs)]
+                  # 逐行情緒優先；沒填的才沿用整張卡的（而且只有 who 沿用，
+                  # 這是既有行為，改掉會讓已經生好的 54 句鍵變掉）
+                  "emotion": e or (emotion if (emotion and w == face) else "")}
+                 for i, (w, t, e) in enumerate(norm)]
         d = {"type": "dialogue", "title": f"{pairs[0][0]}：{pairs[0][1][:10]}",
              "text": pairs[0][1], "speaker": pairs[0][0],
              "characterId": self.cids.get(pairs[0][0]),
