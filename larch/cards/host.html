@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>插件卡測試殼</title>
+<!--
+  假的 Larch 宿主，只給開發看。**iframe 的 sandbox 跟正式一模一樣**
+  （allow-scripts，沒有 allow-same-origin），所以卡片如果偷用 localStorage
+  會在這裡就炸掉，而不是上線才發現。
+
+  跑法：python3 -m http.server 8199 -d larch/cards
+        然後開 http://localhost:8199/host.html
+-->
+<style>
+*{box-sizing:border-box}
+body{margin:0;display:grid;grid-template-columns:minmax(0,1fr) 340px;height:100vh;
+  font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b0a12;color:#ddd}
+iframe{width:100%;height:100%;border:0;background:#12101d}
+aside{border-left:1px solid #2e2a44;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+h2{margin:0;font-size:13px;color:#7fd6e8;letter-spacing:.08em}
+button{font:inherit;cursor:pointer;background:#1a1729;color:#ddd;border:1px solid #2e2a44;
+  border-radius:6px;padding:5px 10px}
+button:hover{border-color:#7fd6e8}
+textarea{width:100%;height:150px;background:#12101d;color:#ddd;border:1px solid #2e2a44;
+  border-radius:6px;padding:8px;font:inherit;font-size:12px}
+#log{flex:1;white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.5;
+  background:#12101d;border:1px solid #2e2a44;border-radius:6px;padding:8px;min-height:160px}
+.set{color:#b39ddb}.done{color:#7fd6e8}.ready{color:#6a6a80}
+</style></head>
+<body>
+<iframe id="f" sandbox="allow-scripts"></iframe>
+<aside>
+  <h2>卡片</h2>
+  <div><button data-card="board.html">調查板</button> <button data-card="notes.html">調查筆記</button></div>
+  <h2>larch:init 的 values</h2>
+  <textarea id="vals"></textarea>
+  <div><button id="reload">重載並送 init</button> <button id="clear">清 log</button></div>
+  <h2>收到的訊息</h2>
+  <div id="log"></div>
+</aside>
+<script>
+var DEFAULT = {
+  day: 3, slot: 2,
+  unlocked: "lobby,street,busstop,metro,store,roof,parts,laundry,figure,studio,booth,tower14",
+  met: "管理員,諾亞,店員,路人,斑比,鐵塔,櫃檯",
+  notes: "name_cat,name_tower,name_zero,name_bambi,name_noah,name_del," +
+         "see_admin,see_noah,see_clerk,see_parts,see_bambi,see_cat,see_guard," +
+         "clue_real,clue_notfix,clue_notebook,clue_older",
+  notes_free: JSON.stringify(["他說「因為你問了」。我不知道那是什麼意思。"])
+};
+var card = "board.html";
+var f = document.getElementById('f'), log = document.getElementById('log');
+document.getElementById('vals').value = JSON.stringify(DEFAULT, null, 1);
+
+function say(cls, txt){
+  var d = document.createElement('div');
+  d.className = cls; d.textContent = txt;
+  log.appendChild(d); log.scrollTop = log.scrollHeight;
+}
+function load(){
+  log.textContent = '';
+  f.src = card + '?t=' + Math.random();
+}
+window.addEventListener('message', function(e){
+  var d = e.data; if(!d || !d.type) return;
+  if(d.type === 'larch:ready'){
+    say('ready', 'larch:ready');
+    var vals;
+    try { vals = JSON.parse(document.getElementById('vals').value); }
+    catch(err){ say('set', 'values JSON 壞了：' + err.message); return; }
+    f.contentWindow.postMessage({
+      type: 'larch:init', values: vals, variables: vals,
+      assets: [], characters: [], locale: 'zh-Hant'
+    }, '*');
+  } else if(d.type === 'larch:set'){
+    say('set', 'larch:set  ' + d.name + ' = ' + JSON.stringify(d.value));
+  } else if(d.type === 'larch:complete'){
+    say('done', 'larch:complete  result=' + JSON.stringify(d.result) +
+                '  payload=' + JSON.stringify(d.payload));
+  } else {
+    say('set', d.type);
+  }
+});
+document.querySelectorAll('[data-card]').forEach(function(b){
+  b.addEventListener('click', function(){ card = b.dataset.card; load(); });
+});
+document.getElementById('reload').addEventListener('click', load);
+document.getElementById('clear').addEventListener('click', function(){ log.textContent=''; });
+load();
+</script></body></html>

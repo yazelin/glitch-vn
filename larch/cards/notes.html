@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>調查筆記</title>
+<!--
+  《格莉奇與黑洞先生・調查篇》調查筆記（Larch miniGame 卡）
+
+  契約同 board.html，抄自 Larch 線上 bundle 裡它自己產生的內建卡片樣板。
+  iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
+  **這一份自己不存任何東西**，玩家打的字一律 larch:set 寫回變數，
+  由播放器的存檔（larch-save-<projectId> 裡的 values）負責持久化。
+
+  miniGameReadVars ：notes notes_free
+  miniGameWriteVars：notes_free
+
+  notes 是逗號分隔的代號（clue_* / see_* / name_*），**存代號不存全文**，
+  因為 values 是整包 JSON 塞進一格 localStorage，長度有限。全文查下面的表展開。
+
+  兩條硬規矩（見設計文件四之二）：
+  一、系統記的照他寫的樣子記，包括寫錯的、漏掉的，不偷偷幫他修正。
+  二、玩家打的字系統不准動，也不影響任何判定。
+-->
+<style>
+:root{
+  --paper:#12101d; --panel:#1a1729; --line:#2e2a44;
+  --ink:#e8e6f2; --dim:#9a94b8; --cyan:#7fd6e8; --lilac:#b39ddb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);
+  font:16px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  -webkit-text-size-adjust:100%}
+.wrap{height:100%;display:flex;flex-direction:column;padding:2.5vh 4vw;gap:1.6vh;overflow:hidden}
+nav{flex:none;display:flex;gap:.4em;flex-wrap:wrap}
+nav button{appearance:none;cursor:pointer;font:inherit;color:var(--dim);
+  font-size:clamp(13px,1.8vw,15px);background:none;border:0;border-bottom:2px solid transparent;
+  padding:.35em .7em}
+nav button[aria-selected="true"]{color:var(--cyan);border-bottom-color:var(--cyan)}
+nav button:focus-visible{outline:1px solid var(--lilac);outline-offset:2px}
+main{flex:1;overflow-y:auto;padding-right:.5em}
+.empty{color:var(--dim);font-size:clamp(13px,1.7vw,15px)}
+ol.names{margin:0;padding:0;list-style:none;counter-reset:n}
+ol.names li{counter-increment:n;display:flex;gap:.9em;align-items:baseline;
+  padding:.5em 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+ol.names li::before{content:counter(n) "、";color:var(--dim);flex:none}
+ol.names li.blank{color:var(--dim)}
+ol.names li.blank .id{font-style:italic}
+.id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.95em}
+.sight{display:grid;gap:.9em;grid-template-columns:repeat(auto-fill,minmax(min(240px,46vw),1fr))}
+.sight .card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:.8em .9em}
+.sight .from{color:var(--lilac);font-size:.85em;margin-bottom:.3em}
+.qa{margin:0 0 1.4em}
+.qa h3{margin:0 0 .35em;font-size:clamp(14px,1.8vw,16px);color:var(--lilac);font-weight:600}
+.qa p{margin:0 0 .4em;padding-left:.9em;border-left:2px solid var(--line)}
+textarea{width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--line);
+  border-radius:8px;padding:.7em;font:inherit;font-size:clamp(13px,1.7vw,15px);resize:vertical;
+  min-height:4.5em}
+textarea:focus{outline:none;border-color:var(--cyan)}
+.free li{list-style:none;display:flex;gap:.7em;align-items:flex-start;
+  padding:.5em 0;border-bottom:1px solid var(--line)}
+.free ul{margin:0 0 1em;padding:0}
+.free .txt{flex:1;white-space:pre-wrap;word-break:break-word}
+.free .del{appearance:none;cursor:pointer;background:none;border:0;color:var(--dim);
+  font:inherit;font-size:1.1em;line-height:1;padding:0 .2em}
+.free .del:hover{color:var(--ink)}
+.row{display:flex;gap:.7em;align-items:center;margin-top:.5em}
+.count{color:var(--dim);font-size:.85em;font-variant-numeric:tabular-nums;margin-left:auto}
+.count.over{color:#e8907f}
+button.act{appearance:none;cursor:pointer;font:inherit;color:var(--ink);background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;padding:.5em 1.1em;font-size:clamp(13px,1.7vw,15px)}
+button.act:hover,button.act:focus-visible{border-color:var(--cyan);outline:none}
+button.act[disabled]{opacity:.35;cursor:default}
+footer{flex:none;display:flex;justify-content:flex-end}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div class="wrap">
+  <nav id="tabs"></nav>
+  <main id="page"></main>
+  <footer><button class="act" id="close">收起來</button></footer>
+</div>
+<script>
+var values={}, vars={}, done=false, free=[], tab=0, dirty=false;
+var MAXLEN=200, MAXNOTE=50;
+
+function setVar(n,v){ if(n) parent.postMessage({type:'larch:set',name:n,value:v},'*'); }
+function finish(result,payload){ if(done)return; done=true;
+  parent.postMessage({type:'larch:complete',result:result,payload:payload},'*'); }
+function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
+function el(t,cls,txt){ var e=document.createElement(t); if(cls)e.className=cls;
+  if(txt!=null)e.textContent=txt; return e; }
+
+// 守則本第一頁那六個。順序照正典（build_ch07.py:210）。
+var NAMES=[
+ ['name_cat',  '@CatGrass_80'],
+ ['name_tower','@Tower_Manager'],
+ ['name_zero', '@Null_0x99'],
+ ['name_bambi','@Bambi_Draft3'],
+ ['name_noah', '@Radio_Noah'],
+ ['name_del',  '@考完就刪']
+];
+
+// 七份「那個穿西裝的先生」。**並排就是機關**，不加任何「這些描述不一致」的提示。
+var SIGHT=[
+ ['see_admin', '管理員',      '很高。西裝。帽子我沒印象。他都走樓梯。'],
+ ['see_noah',  '諾亞',        '金色的帽子。短靴擦得很亮。我們點過頭很多次了。'],
+ ['see_clerk', '便利商店店員','他買過東西嗎……我不確定他有沒有進來過。'],
+ ['see_parts', '材料行老闆',  '有一個穿西裝的來問過真空管。是不是他我不知道。'],
+ ['see_bambi', '斑比',        '她有提過一個室友。我沒問。客戶的事我不問。'],
+ ['see_cat',   '貓草',        '她講過「我室友」。就這樣。從來沒露過臉。'],
+ ['see_guard', '保全',        '監視器上常常有一個人站在對面。我沒下去問過。']
+];
+
+// 主線線索。分組是「誰講的」。
+var CLUES=[
+ ['clue_real',    '斑比',  '我改到第四十版，她每次都說「這一版的嘴角有一邊比較高」。她記得畫面，記不得上一版。'],
+ ['clue_notfix',  '鐵塔',  '妳問我為什麼不修。妳先告訴我修好之後她賣什麼。'],
+ ['clue_cantfix', '0x',    '調回來的那個會先停頓一下再回答。'],
+ ['clue_notebook','管理員','她一天到晚掉東西，可是那本子從來沒掉過。'],
+ ['clue_older',   '諾亞',  '她拿那本子來墊過東西。我看到日期。比她開始那個什麼播還早。']
+];
+
+var TABS=['名單','目擊','問答','空白頁'];
+
+function has(code){ return list(values.notes).indexOf(code)>=0; }
+
+function drawNames(m){
+  var got=NAMES.filter(function(n){ return has(n[0]); });
+  if(!got.length){ m.appendChild(el('p','empty','還沒有。')); return; }
+  var ol=el('ol','names');
+  got.forEach(function(n){
+    var li=el('li'); li.appendChild(el('span','id',n[1])); ol.appendChild(li);
+  });
+  // 第七行永遠是空的。**不解釋為什麼**。
+  if(got.length>=6){
+    var li=el('li','blank'); li.appendChild(el('span','id','（　）')); ol.appendChild(li);
+  }
+  m.appendChild(ol);
+}
+
+function drawSight(m){
+  var got=SIGHT.filter(function(s){ return has(s[0]); });
+  if(!got.length){ m.appendChild(el('p','empty','還沒有人跟他提過那個人。')); return; }
+  var g=el('div','sight');
+  got.forEach(function(s){
+    var c=el('div','card');
+    c.appendChild(el('div','from',s[1]));
+    c.appendChild(el('div',null,s[2]));
+    g.appendChild(c);
+  });
+  m.appendChild(g);
+}
+
+function drawQA(m){
+  var got=CLUES.filter(function(c){ return has(c[0]); });
+  if(!got.length){ m.appendChild(el('p','empty','還沒有問到什麼。')); return; }
+  var by={}, order=[];
+  got.forEach(function(c){ if(!by[c[1]]){ by[c[1]]=[]; order.push(c[1]); } by[c[1]].push(c[2]); });
+  order.forEach(function(who){
+    var d=el('div','qa'); d.appendChild(el('h3',null,who));
+    by[who].forEach(function(t){ d.appendChild(el('p',null,t)); });
+    m.appendChild(d);
+  });
+}
+
+function saveFree(){ setVar('notes_free', JSON.stringify(free)); dirty=false; }
+
+function drawFree(m){
+  var box=el('div','free');
+  var ul=el('ul');
+  free.forEach(function(t,i){
+    var li=el('li');
+    li.appendChild(el('span','txt',t));
+    var b=el('button','del','×'); b.type='button'; b.title='刪掉這一則';
+    b.addEventListener('click',function(){ free.splice(i,1); saveFree(); render(); });
+    li.appendChild(b); ul.appendChild(li);
+  });
+  box.appendChild(ul);
+
+  var ta=el('textarea'); ta.placeholder='自己寫點什麼。系統不會動這一頁。';
+  ta.maxLength=MAXLEN;
+  var row=el('div','row');
+  var add=el('button','act','記下來'); add.type='button';
+  var cnt=el('span','count','0 / '+MAXLEN);
+  ta.addEventListener('input',function(){
+    cnt.textContent=ta.value.length+' / '+MAXLEN;
+    cnt.className='count'+(ta.value.length>=MAXLEN?' over':'');
+  });
+  add.addEventListener('click',function(){
+    var t=ta.value.trim();
+    if(!t) return;
+    if(free.length>=MAXNOTE){ cnt.textContent='寫滿了（'+MAXNOTE+' 則）'; cnt.className='count over'; return; }
+    free.push(t.slice(0,MAXLEN)); saveFree(); render();
+  });
+  row.appendChild(add); row.appendChild(cnt);
+  box.appendChild(ta); box.appendChild(row);
+  m.appendChild(box);
+}
+
+function render(){
+  var nav=document.getElementById('tabs'); nav.textContent='';
+  TABS.forEach(function(name,i){
+    var b=el('button',null,name); b.type='button';
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-selected', i===tab ? 'true' : 'false');
+    b.addEventListener('click',function(){ tab=i; render(); });
+    nav.appendChild(b);
+  });
+  var m=document.getElementById('page'); m.textContent='';
+  [drawNames,drawSight,drawQA,drawFree][tab](m);
+}
+
+function start(){
+  try{
+    var raw=values.notes_free;
+    var parsed=typeof raw==='string' && raw ? JSON.parse(raw) : [];
+    free=Array.isArray(parsed)?parsed.filter(function(x){return typeof x==='string';}):[];
+  }catch(e){ free=[]; }
+  render();
+  document.getElementById('close').addEventListener('click',function(){
+    if(dirty) saveFree();
+    finish('closed',{notes:free.length});
+  });
+}
+
+parent.postMessage({type:'larch:ready'},'*');
+window.addEventListener('message',function(e){
+  var d=e.data; if(!d||d.type!=='larch:init')return;
+  values=d.values||{}; vars=d.variables||{};
+  for(var k in vars) values[k]=vars[k];
+  try{ start(); }catch(err){ finish('error',{message:String(err)}); }
+});
+</script></body></html>

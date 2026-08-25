@@ -70,16 +70,20 @@ function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){re
 
 var SLOTS=['上午','下午','晚上','深夜'];
 
-// 地點：代號、名字、每個時段的常駐（null 代表沒人）
+// 地點：代號、名字、每個時段的狀態
+//   '名字' = 那個人常駐　　''  = 開著可是沒有常駐　　null = 這個時間進不去
+// **「沒有常駐」跟「沒開」是兩件事。** 一樓的晚上沒有常駐（管理員下班了），
+// 可是那正是黑洞先生唯一會出現的時段，寫成 null 等於把全作最重要的一場關掉。
+// 空手而回本來就是這款的一部分（見設計文件三之一），所以預設是開著。
 var SPOTS=[
- {id:'lobby',   name:'一樓',        live:['管理員','管理員',null,null]},
+ {id:'lobby',   name:'一樓',        live:['管理員','管理員','','']},
  {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null]},
- {id:'street',  name:'車站前那條街', live:['路人','路人','路人',null]},
- {id:'busstop', name:'公車站',      live:['路人','路人','路人',null]},
- {id:'metro',   name:'捷運出口',    live:['路人','路人','路人',null]},
+ {id:'street',  name:'車站前那條街', live:['路人','路人','路人','']},
+ {id:'busstop', name:'公車站',      live:['路人','路人','路人','']},
+ {id:'metro',   name:'捷運出口',    live:['路人','路人','路人','']},
  {id:'store',   name:'便利商店',    live:['店員','店員','店員','店員']},
  {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null]},
- {id:'laundry', name:'自助洗衣店',  live:[null,null,'空','空']},
+ {id:'laundry', name:'自助洗衣店',  live:['','','','']},
  {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null]},
  {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比']},
  {id:'booth',   name:'錄音間門口',  live:['鐵塔','鐵塔',null,null]},
@@ -104,7 +108,7 @@ var VISITS=[
 function whoIsThere(spotId, slot){
   var out=[], s=null, i;
   for(i=0;i<SPOTS.length;i++) if(SPOTS[i].id===spotId) s=SPOTS[i];
-  if(s && s.live[slot] && s.live[slot]!=='空') out.push(s.live[slot]);
+  if(s && s.live[slot]) out.push(s.live[slot]);
   for(i=0;i<VISITS.length;i++){
     var v=VISITS[i];
     if(v[0]===spotId && v[1]===slot && Math.random()<v[3] && out.indexOf(v[2])<0) out.push(v[2]);
@@ -140,8 +144,8 @@ function start(){
     b.className='spot'; b.type='button';
     var n=document.createElement('span'); n.className='name'; n.textContent=s.name;
     var w=document.createElement('span'); w.className='who';
-    if(!live){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
-    else if(live==='空'){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
+    if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
+    else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
     else if(met.indexOf(live)>=0){ w.textContent=live; }
     else { w.textContent='沒去過'; w.className='who unknown'; }
     b.appendChild(n); b.appendChild(w);
