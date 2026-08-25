@@ -13,3 +13,13 @@ art/voice/redo/
 art/voice/batch/
 takes-ch*/
 .venv/
+
+# 《調查篇》的新背景：只把最終要上傳的 16:9 JPEG 進 git（art/bg-investigation/）。
+# art/out 已經有 112MB 全尺寸 PNG 了，git 歷史刪不掉，這一批不再往裡面加。
+art/out/bg-store-night.png
+art/out/bg-parts.png
+art/out/bg-busstop.png
+art/out/bg-metro.png
+art/out/bg-laundry.png
+art/out/bg-figure.png
+art/out/bg-catgrass-home.png

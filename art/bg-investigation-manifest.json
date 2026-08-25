@@ -1,0 +1,65 @@
+[
+ {
+  "name": "bg-store-night",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CONVENIENCE STORE INTERIOR LATE AT NIGHT: a hot-food counter with a stainless oden pot of simmering broth and skewers, a tall glass drinks fridge glowing cold, a magazine rack, a coffee machine, a wire basket of steamed buns, a checkout counter with a small mat. Through the front window a dark empty street with one street lamp. THIS IS NOT A BEDROOM. No bed, no computer desk. Flat overhead fluorescent light, slightly too bright for the hour, cold cyan on every surface. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ },
+ {
+  "name": "bg-parts",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CRAMPED SECOND-HAND ELECTRONIC PARTS SHOP: floor-to-ceiling wooden drawer cabinets with hundreds of tiny drawers, cardboard trays of connectors and capacitors on a counter, coils of wire hanging from hooks, a boxy old CRT television on a high shelf switched on showing only a pale blue glow, a stool, a narrow aisle. THIS IS NOT A BEDROOM. No bed, no gaming setup. Warm tungsten bulb overhead, cold blue spill from the CRT. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ },
+ {
+  "name": "bg-busstop",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CITY BUS STOP SHELTER AT DUSK, no people: a steel-and-glass shelter, a bench with three moulded seats, a tall route sign on a pole with blank unreadable strips, a bin, wet pavement reflecting the sign light, a row of low shopfronts across the road with their shutters half down. Cool violet dusk sky, warm sodium street lamp. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ },
+ {
+  "name": "bg-metro",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A METRO STATION EXIT SEEN FROM THE BOTTOM OF THE STAIRS, no people: wide tiled steps rising toward a bright rectangle of daylight, a stainless handrail down the middle, glazed cream wall tiles, a directional sign overhead with blank unreadable panels, a strip of ceiling lights. Cold fluorescent below, warm daylight spilling down from above. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ },
+ {
+  "name": "bg-laundry",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SELF-SERVICE LAUNDROMAT LATE AT NIGHT, no people: a row of six front-loading washing machines with round glass doors, one tumbling, a row of dryers above, a long folding table, four plastic chairs against the window, a coin-change machine, a wheeled laundry basket. THIS IS NOT A BEDROOM. Flat fluorescent light, one tube slightly failing, dark street outside the glass front. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ },
+ {
+  "name": "bg-figure",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SMALL ANIME FIGURE AND MERCHANDISE SHOP, no people: tall glass display cabinets packed with tiny stylised collectible figures, shelves of blank-covered boxes, rows of small acrylic stands, a gachapon machine by the door, narrow aisle, spotlights in the cabinet ceilings. THIS IS NOT A BEDROOM. No bed. Warm cabinet spotlights against cool ambient light. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ },
+ {
+  "name": "bg-catgrass-home",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SMALL ONE-ROOM APARTMENT AT NIGHT, no people, lived in by a devoted fan: one entire wall of shelving filled with small acrylic stands, plush toys and neatly aligned merchandise boxes, a computer desk with two monitors both switched off, a good microphone on an arm pushed aside, a swivel chair, a floor cushion, a low bed against the far wall with the duvet pulled straight, curtains fully closed. One warm desk lamp is the only light, cyan and violet ambience from a standby LED. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ }
+]

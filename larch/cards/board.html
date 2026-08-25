@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>調查板</title>
+<!--
+  《格莉奇與黑洞先生・調查篇》調查板（Larch miniGame 卡）
+
+  契約是從 Larch 線上 bundle 裡它自己產生的內建卡片樣板抄下來的，不是猜的：
+    送出 {type:'larch:ready'}
+    收到 {type:'larch:init', values, variables, assets, characters, locale}
+    寫入 {type:'larch:set', name, value}     只有 miniGameWriteVars 清單裡的名字會被接受
+    結束 {type:'larch:complete', result, payload}
+  iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
+  所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
+
+  miniGameReadVars ：day slot unlocked met
+  miniGameWriteVars：day slot dest here
+
+  一次開板等於一個時段。玩家只選地點，時間自己往前走（深夜之後換日）。
+-->
+<style>
+:root{
+  --paper:#12101d; --panel:#1a1729; --line:#2e2a44;
+  --ink:#e8e6f2; --dim:#9a94b8; --cyan:#7fd6e8; --lilac:#b39ddb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);
+  font:16px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  -webkit-text-size-adjust:100%}
+.wrap{height:100%;display:flex;flex-direction:column;padding:3vh 4vw;gap:2vh;overflow:hidden}
+header{flex:none;display:flex;align-items:baseline;gap:.8em;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(15px,2.4vw,20px);font-weight:600;letter-spacing:.06em}
+.when{color:var(--cyan);font-size:clamp(13px,2vw,17px);font-variant-numeric:tabular-nums}
+.hint{color:var(--dim);font-size:clamp(11px,1.5vw,13px);margin-left:auto}
+.grid{flex:1;display:grid;gap:1.4vh 1.4vw;overflow-y:auto;
+  grid-template-columns:repeat(auto-fill,minmax(min(200px,44vw),1fr));align-content:start}
+button.spot{appearance:none;text-align:left;cursor:pointer;color:inherit;font:inherit;
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:.85em .95em;display:flex;flex-direction:column;gap:.25em;
+  transition:border-color .15s,transform .1s}
+button.spot:hover,button.spot:focus-visible{border-color:var(--cyan);outline:none}
+button.spot:active{transform:scale(.985)}
+button.spot[disabled]{opacity:.32;cursor:default}
+button.spot[disabled]:hover{border-color:var(--line)}
+.name{font-weight:600;font-size:clamp(14px,1.9vw,16px)}
+.who{color:var(--lilac);font-size:clamp(12px,1.6vw,13px)}
+.who.unknown{color:var(--dim)}
+footer{flex:none;display:flex;gap:.8em;align-items:center}
+button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;
+  font-size:clamp(12px,1.6vw,14px);background:none;border:1px solid var(--line);
+  border-radius:8px;padding:.5em 1.1em}
+button.skip:hover,button.skip:focus-visible{color:var(--ink);border-color:var(--lilac);outline:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div class="wrap">
+  <header>
+    <h1>今天要去哪</h1><span class="when" id="when"></span>
+    <span class="hint" id="hint"></span>
+  </header>
+  <div class="grid" id="grid"></div>
+  <footer><button class="skip" id="skip">這一段不出門</button></footer>
+</div>
+<script>
+var values={}, vars={}, done=false;
+function setVar(n,v){ if(n) parent.postMessage({type:'larch:set',name:n,value:v},'*'); }
+function finish(result,payload){ if(done)return; done=true;
+  parent.postMessage({type:'larch:complete',result:result,payload:payload},'*'); }
+function num(v,d){ var n=Number(v); return isNaN(n)?d:n; }
+function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
+
+var SLOTS=['上午','下午','晚上','深夜'];
+
+// 地點：代號、名字、每個時段的常駐（null 代表沒人）
+var SPOTS=[
+ {id:'lobby',   name:'一樓',        live:['管理員','管理員',null,null]},
+ {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null]},
+ {id:'street',  name:'車站前那條街', live:['路人','路人','路人',null]},
+ {id:'busstop', name:'公車站',      live:['路人','路人','路人',null]},
+ {id:'metro',   name:'捷運出口',    live:['路人','路人','路人',null]},
+ {id:'store',   name:'便利商店',    live:['店員','店員','店員','店員']},
+ {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null]},
+ {id:'laundry', name:'自助洗衣店',  live:[null,null,'空','空']},
+ {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null]},
+ {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比']},
+ {id:'booth',   name:'錄音間門口',  live:['鐵塔','鐵塔',null,null]},
+ {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全']}
+];
+
+// 訪客：某個人剛好也在。[地點, 時段, 機率]
+// 黑洞先生那一條是正典（第五章、調查篇第二天）：他只在一樓的晚上，七點多。
+// 0.6 不是 1.0，因為每一次都遇到會把那一場的份量磨掉。
+var VISITS=[
+ ['lobby',  2,'黑洞先生',0.60],
+ ['store',  3,'貓草',    1.00],
+ ['store',  3,'鐵塔',    0.25],
+ ['store',  2,'斑比',    0.20],
+ ['figure', 1,'貓草',    0.40],
+ ['figure', 2,'貓草',    0.40],
+ ['laundry',3,'貓草',    0.20],
+ ['laundry',2,'斑比',    0.30],
+ ['parts',  1,'諾亞',    0.15]
+];
+
+function whoIsThere(spotId, slot){
+  var out=[], s=null, i;
+  for(i=0;i<SPOTS.length;i++) if(SPOTS[i].id===spotId) s=SPOTS[i];
+  if(s && s.live[slot] && s.live[slot]!=='空') out.push(s.live[slot]);
+  for(i=0;i<VISITS.length;i++){
+    var v=VISITS[i];
+    if(v[0]===spotId && v[1]===slot && Math.random()<v[3] && out.indexOf(v[2])<0) out.push(v[2]);
+  }
+  return out;
+}
+
+function go(spotId){
+  var slot=num(values.slot,0), day=num(values.day,1);
+  var here=whoIsThere(spotId,slot);
+  setVar('here', here.join(','));
+  setVar('dest', spotId);
+  // 一次開板等於一個時段。深夜之後換日。
+  if(slot>=3){ setVar('slot',0); setVar('day',day+1); }
+  else { setVar('slot',slot+1); }
+  finish(spotId,{day:day,slot:slot,here:here});
+}
+
+function start(){
+  var slot=num(values.slot,0), day=num(values.day,1);
+  var open=list(values.unlocked), met=list(values.met);
+  if(!open.length) open=['lobby','street','busstop','metro','store'];
+
+  document.getElementById('when').textContent='第 '+day+' 天 ・ '+SLOTS[slot];
+  document.getElementById('hint').textContent='去一個地方就過一個時段';
+
+  var grid=document.getElementById('grid');
+  grid.textContent='';
+  SPOTS.forEach(function(s){
+    if(open.indexOf(s.id)<0) return;
+    var live=s.live[slot];
+    var b=document.createElement('button');
+    b.className='spot'; b.type='button';
+    var n=document.createElement('span'); n.className='name'; n.textContent=s.name;
+    var w=document.createElement('span'); w.className='who';
+    if(!live){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
+    else if(live==='空'){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
+    else if(met.indexOf(live)>=0){ w.textContent=live; }
+    else { w.textContent='沒去過'; w.className='who unknown'; }
+    b.appendChild(n); b.appendChild(w);
+    if(!b.disabled) b.addEventListener('click',function(){ go(s.id); });
+    grid.appendChild(b);
+  });
+
+  document.getElementById('skip').addEventListener('click',function(){
+    if(slot>=3){ setVar('slot',0); setVar('day',day+1); }
+    else { setVar('slot',slot+1); }
+    setVar('dest',''); setVar('here','');
+    finish('rest',{day:day,slot:slot});
+  });
+}
+
+parent.postMessage({type:'larch:ready'},'*');
+window.addEventListener('message',function(e){
+  var d=e.data; if(!d||d.type!=='larch:init')return;
+  values=d.values||{}; vars=d.variables||{};
+  // 授權可讀的那份（variables）優先，values 是後備。
+  for(var k in vars) values[k]=vars[k];
+  try{ start(); }catch(err){ finish('error',{message:String(err)}); }
+});
+</script></body></html>
