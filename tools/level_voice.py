@@ -49,13 +49,27 @@ def sha(p):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--who", default=None)
+    ap.add_argument("--intro", action="store_true",
+                    help="改壓角色頁那批（自介與別人怎麼說）")
     ap.add_argument("--dry", action="store_true")
     a = ap.parse_args()
 
-    import gen_voice as gv
-    rows = [(w, k) for w, t, e, k in gv.utterances()
-            if not a.who or w == a.who]
-    files = [(w, OUT / f"{k}.mp3") for w, k in rows if (OUT / f"{k}.mp3").exists()]
+    if a.intro:
+        # **角色頁那批也要壓，而且要壓同一個目標。** clone 會把參考音的音量
+        # 一起複製過去，實測 15 支從 -11.5 到 -24.8，差 13.2 dB（四倍以上）。
+        # 讀者是在同一頁上一顆一顆按過去的，落差比書裡更明顯。
+        # **指名保留的那一份也要壓**（art/voice/intro/picked/），
+        # 不然下次 gen_intro 會把沒壓過的那一份複製回 docs/。
+        D = ROOT / "docs/voice"
+        files = [("角色頁", f) for f in
+                 sorted(D.glob("intro-*.mp3")) + sorted(D.glob("view-*.mp3"))]
+        files += [("指名保留", f) for f in
+                  sorted((ROOT / "art/voice/intro/picked").glob("*.mp3"))]
+    else:
+        import gen_voice as gv
+        rows = [(w, k) for w, t, e, k in gv.utterances()
+                if not a.who or w == a.who]
+        files = [(w, OUT / f"{k}.mp3") for w, k in rows if (OUT / f"{k}.mp3").exists()]
     print(f"{len(files)} 個檔")
     if a.dry:
         return
@@ -79,7 +93,8 @@ def main():
         # 會低目標約 0.5 dB，容差設 0.5 的話每一次重跑都會全部再壓一遍。
         if abs(float(m["input_i"]) - TARGET_I) <= 1.0:
             continue
-        b = BACK / f.name
+        b = (BACK / ("intro-" + f.parent.name + "-" + f.name)
+             if a.intro else BACK / f.name)
         b.write_bytes(f.read_bytes())
         # 兩段式：把第一段量到的值餵回去，loudnorm 才知道要怎麼壓
         af = (f"loudnorm=I={TARGET_I}:TP={TARGET_TP}:LRA={TARGET_LRA}:"
