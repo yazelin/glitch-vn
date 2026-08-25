@@ -262,6 +262,15 @@ code,var{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
   color:var(--mint);background:var(--sunk);border-radius:var(--r);padding:1px 6px;
   font-style:normal}
 strong{font-weight:600}
+.say{display:inline-flex;align-items:center;gap:7px;margin-top:11px;
+  font:inherit;font-size:.78rem;letter-spacing:.04em;color:var(--muted);
+  background:none;border:1px solid var(--hair);border-radius:999px;
+  padding:4px 13px;cursor:pointer}
+.say:hover,.say[aria-pressed=true]{color:var(--mint);border-color:var(--mint)}
+.say b{font-weight:400;font-size:.7rem}
+.said{margin:9px 0 0;font-size:.84rem;line-height:1.85;color:var(--muted);
+  border-left:2px solid var(--hair);padding-left:12px;display:none}
+.said[data-on]{display:block;border-left-color:var(--mint)}
 .dl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
 .dl button{font:inherit;font-size:.86rem;color:var(--ink);background:none;
   border:1px solid var(--hair);border-radius:999px;padding:5px 14px;cursor:pointer}

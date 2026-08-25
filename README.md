@@ -28,6 +28,8 @@
     tools/make_icons.py      PWA 圖示（從立繪按實際 ink 邊界裁，不是目測置中）
     tools/update_sw.py       用內容 hash 產 sw.js 的快取版號，別手動 bump
     tools/offline_test.mjs   離線包驗收（配負控制：沒下載時語音必須是解不出來的）
+    tools/gen_intro.py       角色頁的自我介紹配音，一個角色一段
+    tools/say_test.mjs       自介鈕驗收（真的按下去，不是檢查 HTML 有沒有那顆鈕）
     larch/                   視覺小說版：一章一支 build 腳本，見 larch/README.md
     archive/                 舊版：做在 Larch 上的七天記憶遊戲。已經收掉
 
@@ -39,6 +41,7 @@
     python3 larch/build_all.py    # 重建 Larch 上的七章
     python3 tools/update_sw.py    # 動到 docs/ 就要跑，不跑瀏覽器不知道有新版
     node tools/offline_test.mjs   # 動到 sw.js 或離線清單就要跑
+    python3 tools/gen_intro.py    # 改了角色自介的文字才要跑（會跑模型，約十分鐘）
 
 ## 離線（PWA）
 

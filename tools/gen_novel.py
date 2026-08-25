@@ -284,6 +284,15 @@ code,var{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
   color:var(--mint);background:var(--sunk);border-radius:var(--r);padding:1px 6px;
   font-style:normal}
 strong{font-weight:600}
+.say{display:inline-flex;align-items:center;gap:7px;margin-top:11px;
+  font:inherit;font-size:.78rem;letter-spacing:.04em;color:var(--muted);
+  background:none;border:1px solid var(--hair);border-radius:999px;
+  padding:4px 13px;cursor:pointer}
+.say:hover,.say[aria-pressed=true]{color:var(--mint);border-color:var(--mint)}
+.say b{font-weight:400;font-size:.7rem}
+.said{margin:9px 0 0;font-size:.84rem;line-height:1.85;color:var(--muted);
+  border-left:2px solid var(--hair);padding-left:12px;display:none}
+.said[data-on]{display:block;border-left-color:var(--mint)}
 .dl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
 .dl button{font:inherit;font-size:.86rem;color:var(--ink);background:none;
   border:1px solid var(--hair);border-radius:999px;padding:5px 14px;cursor:pointer}
@@ -566,7 +575,9 @@ print(f"有聲書：{len(steps)} 步")
 # 結果就是「圖都在、按播放沒有聲音」。語音改成使用者按鈕觸發、逐項實查。
 (DOCS / "offline.json").write_text(json.dumps({
     "img": sorted("img/" + f.name for f in (DOCS / "img").iterdir() if f.is_file()),
-    "voice": sorted({d["u"] for d in steps}),
+    # 角色頁的自介也要進離線包：那是「還沒開始讀」的人第一個會按的東西。
+    "voice": sorted({d["u"] for d in steps}
+                    | {f"voice/{f.name}" for f in (DOCS / "voice").glob("intro-*.mp3")}),
 }, ensure_ascii=False), encoding="utf-8")
 
 
@@ -605,11 +616,63 @@ NOVEL_JS = JS_TPL.replace("%%STEPS%%", json.dumps(steps, ensure_ascii=False, sep
 {AUDIO}''', "novel.html", js=NOVEL_JS), encoding="utf-8")
 
 # ── 角色頁 ──────────────────────────────────────────────
+# 自我介紹配音（tools/gen_intro.py 生的）。**在讀之前先認識聲音**，
+# 所以七段都不碰第七章的答案。音檔還沒生的角色就不長按鈕出來，
+# 不要長一顆按下去沒有反應的鈕。
+_intro = ROOT / "art/voice/intro.json"
+INTRO = json.loads(_intro.read_text(encoding="utf-8")) if _intro.exists() else {}
+
+
+SAY_JS = """
+/* 角色自介。**一次只播一個**：七張卡同時出聲比沒有聲音還糟。
+   同一顆再按一次是停止，不是從頭再播——按鈕上的圖示就是這麼寫的。 */
+(function () {
+  var cur = null, curBtn = null;
+  function stop() {
+    if (cur) { cur.pause(); cur.currentTime = 0; }
+    if (curBtn) {
+      curBtn.setAttribute('aria-pressed', 'false');
+      curBtn.firstChild.textContent = '\u25b6';
+      var t = document.getElementById('said-' + curBtn.dataset.say);
+      if (t) t.removeAttribute('data-on');
+    }
+    cur = null; curBtn = null;
+  }
+  document.querySelectorAll('.say').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var mine = curBtn === b;
+      stop();
+      if (mine) return;
+      cur = new Audio('voice/intro-' + b.dataset.say + '.mp3');
+      curBtn = b;
+      b.setAttribute('aria-pressed', 'true');
+      b.firstChild.textContent = '\u25a0';
+      var t = document.getElementById('said-' + b.dataset.say);
+      if (t) t.setAttribute('data-on', '1');
+      cur.addEventListener('ended', stop);
+      /* 檔案掉了也要把按鈕收回去，不然它會一直停在「播放中」 */
+      cur.addEventListener('error', stop);
+      cur.play().catch(stop);
+    });
+  });
+})();
+"""
+
+
+def say(slug, name):
+    d = INTRO.get(slug)
+    if not d or not (DOCS / f"voice/intro-{slug}.mp3").exists():
+        return ""
+    return (f'<button class="say" data-say="{slug}" aria-pressed="false">'
+            f'<b>\u25b6</b>聽{html.escape(name)}說</button>'
+            f'<p class="said" id="said-{slug}">{html.escape(d["text"])}</p>')
+
+# ── 角色頁 ──────────────────────────────────────────────
 cards = "".join(f'''<div class="card">
 <div class="pic"><img src="img/{k}-full.webp" alt="{html.escape(n)}" loading="lazy"></div>
 <div><h3>{html.escape(n)}</h3>
 <div class="id">{html.escape(i) or "&nbsp;"}</div>
-<p>{html.escape(d)}</p><q>「{html.escape(q)}」</q></div></div>''' for k, n, i, d, q in CAST)
+<p>{html.escape(d)}</p><q>「{html.escape(q)}」</q>{say(k, n)}</div></div>''' for k, n, i, d, q in CAST)
 
 (DOCS / "characters.html").write_text(page(
     "角色・格莉奇與黑洞先生",
@@ -617,7 +680,7 @@ cards = "".join(f'''<div class="card">
     f'''<header class="bk"><div class="eyebrow">角色</div>
 <h1>名單上的人</h1>
 <p>守則本第一頁上有七行。上面只有六個名字。</p></header>
-<div class="cast">{cards}</div>''', "characters.html", wide=True), encoding="utf-8")
+<div class="cast">{cards}</div>''', "characters.html", wide=True, js=SAY_JS), encoding="utf-8")
 
 # ── 時間軸 ──────────────────────────────────────────────
 # **○ 是推的，其餘是正文寫死的。** 兩種一定要分開標，不然讀者會把推論當成
