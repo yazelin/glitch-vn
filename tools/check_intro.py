@@ -89,8 +89,10 @@ def main():
             # 每一版都會報一次，而那從來不是配音的問題。
             if re.search(r"[A-Za-z]", x + y):
                 continue
-            # 語氣詞的聲調沒有對錯（喔／哦、嗯／恩），跳過
-            if set(x) <= set("喔哦噢嗯恩啊阿耶欸唷喲呀哪") or set(y) <= set("喔哦噢嗯恩啊阿耶欸唷喲呀哪"):
+            # **語助詞與結構助詞一律跳過。** 它們是輕聲，寫成哪個字全看 ASR 心情：
+            # 「啦」寫成「了」、「收著」的著（輕聲 zhe）寫成「中」，都不是唸錯。
+            PARTICLE = set("喔哦噢嗯恩啊阿耶欸唷喲呀哪啦了嘛呢吧的著地得麼囉喏")
+            if set(x) <= PARTICLE or set(y) <= PARTICLE:
                 continue
             tx, ty = lazy_pinyin(x, style=Style.TONE3), lazy_pinyin(y, style=Style.TONE3)
             if tx == ty:
@@ -99,9 +101,15 @@ def main():
             # **同音不同調不可以跳過。** 「背(bèi)→杯(bēi)」「數(shù)→書(shū)」
             # 就長這樣，而那是真的唸錯，使用者聽得出來。它也可能只是 ASR 挑錯字，
             # 所以列成「要聽」而不是直接判死。
-            kind = "字音" if px != py else "聲調"
+            # **ㄣ／ㄥ 不算唸錯字。** 台灣華語這兩個韻尾近乎合流（全勤／全情、
+            # 因為／英為），ASR 分不出來，判 FAIL 只會製造雜訊。列成「要聽」。
+            nasal = lambda t: [re.sub(r"ng(\d?)$", r"n\1", w) for w in t]
+            if px != py and nasal(px) == nasal(py):
+                kind = "鼻音"
+            else:
+                kind = "字音" if px != py else "聲調"
             real.append((kind, f"「{x}」({'/'.join(tx)}) 唸成「{y}」({'/'.join(ty)})"))
-        hard = [r for r in real if r[0] == "字音"]
+        hard = [r for r in real if r[0] == "字音"]   # 聲調與鼻音只是「要聽」
         if hard:
             bad += 1
             failed.append(slug)
