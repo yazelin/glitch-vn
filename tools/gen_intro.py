@@ -20,7 +20,7 @@
 而它不會報錯——檔案還是舊的，驗收也就驗到舊的那一份。這裡自己記帳（intro-take.json）
 比對送進模型的字與指示，變了就把舊 wav 刪掉再跑。
 """
-import hashlib, json, os, pathlib, subprocess, sys
+import hashlib, json, os, pathlib, shutil, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "larch"))
@@ -162,6 +162,12 @@ TAKE = ROOT / "art/voice/intro-take.json"
 # 聽起來就不是老人了。要補新句子就回 Larch 生一份長檔再切。
 KEEP = {"noah", "view-noah-blackhole"}
 
+# **使用者指名保留的錄音。** 同一句生幾版挑一版是這條管線的常態，
+# 而挑好的那一版只要被下一次重生蓋掉就永遠回不來了（wav 生成前會先 unlink）。
+# 放一份進 art/voice/intro/picked/，這裡就不再生它，直接用那一份。
+# 這跟書裡台詞的 art/voice/picked.json 是同一件事。
+PICKED = ROOT / "art/voice/intro/picked"
+
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
@@ -195,6 +201,8 @@ def main():
         want = (only is None and stale) or ("--all" in sys.argv) or (only and who in only)
         if slug in KEEP and pathlib.Path(job["out"]).exists():
             want = False   # 外部配音，就地生會變成另一個人
+        if (PICKED / f"{slug}.mp3").exists():
+            want = False   # 使用者指名的那一版，不要重生
         print(f"  {who:5s} → {slug:22s} {len(text):3d} 字　{pathlib.Path(ref).name}"
               f"　{'重生' if want else '沒變，跳過'}")
         if want:
@@ -230,7 +238,13 @@ def main():
 
     TAKE.write_text(json.dumps(fresh, ensure_ascii=False, indent=1), encoding="utf-8")
     DOCS.mkdir(parents=True, exist_ok=True)
+    for f in sorted(PICKED.glob("*.mp3")):
+        name = f.stem if f.stem.startswith("view-") else f"intro-{f.stem}"
+        shutil.copy2(f, DOCS / f"{name}.mp3")
+        print(f"  指名保留　{f.stem}")
     for w in sorted(OUT.glob("*.wav")):
+        if (PICKED / f"{w.stem}.mp3").exists():
+            continue
         # 自介是 intro-<角色>.mp3，看法是 view-<誰>-<講誰>.mp3。
         # 檔名本身就說得出那是什麼，前端不必再組前綴。
         name = w.stem if w.stem.startswith("view-") else f"intro-{w.stem}"
