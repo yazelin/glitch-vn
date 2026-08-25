@@ -52,7 +52,7 @@ INTRO = {
     # 想澄清，可是**替自己辯解正好是他不會做的事**。
     # 他是什麼、吃什麼，卡片上那段介紹已經寫了，自介不必再解釋一次，
     # 這裡只留他的聲音。溫柔要從「她不必抱歉」看出來，不是講出來。
-    "黑洞先生": ("blackhole", None,
+    "黑洞先生": ("blackhole", "溫和",
               "我是她的室友。"
               "她忘掉的事我收著。收得很好，不會弄丟。"
               "她不必為那個跟我抱歉。她也沒有抱歉過。這樣很好。"
@@ -163,7 +163,9 @@ def main():
     SLUG = {w: v[0] for w, v in INTRO.items()}
     # 自介與「別人怎麼說」走同一條管線：同一個角色不可以有兩種聲音。
     items = ([(w, v[0], v[1], v[2], None) for w, v in INTRO.items()]
-             + [(w, f"view-{SLUG[w]}-{ab}", None, t, ab) for w, ab, t in VIEWS])
+             # 「別人怎麼說」沿用該角色自介的表演指示：同一個人在講話，
+             # 沒有理由自介溫和、講別人的時候忽然變冷。
+             + [(w, f"view-{SLUG[w]}-{ab}", INTRO[w][1], t, ab) for w, ab, t in VIEWS])
     for who, slug, emo, text, about in items:
         ref, ptext, speed = REF.get(who) or V.VOICE[who]
         ref = str(ROOT / ref) if not ref.startswith("/") else ref
@@ -186,7 +188,11 @@ def main():
         print(f"  {who:5s} → {slug:22s} {len(text):3d} 字　{pathlib.Path(ref).name}"
               f"　{'重生' if want else '沒變，跳過'}")
         if want:
-            pathlib.Path(job["out"]).unlink(missing_ok=True)
+            # **--dry 不可以刪檔。** 乾跑是「看它打算做什麼」，
+            # 之前把 unlink 寫在這裡，跑一次 --dry 就把舊音檔清掉了，
+            # 而且畫面上只印「重生」，看不出檔案已經不見。
+            if "--dry" not in sys.argv:
+                pathlib.Path(job["out"]).unlink(missing_ok=True)
             jobs.append(job)
     def save():
         (ROOT / "art/voice/intro.json").write_text(

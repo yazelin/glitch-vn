@@ -8,43 +8,11 @@
   "instruct": "用台灣腔的中文說，不要唱，很開心、語速偏快"
  },
  {
-  "out": "/home/ct/glitch-vn/art/voice/intro/blackhole.wav",
-  "text": "我是她的室友。她忘掉的事我收著。收得很好，不會弄丟。她不必為那個跟我抱歉。她也沒有抱歉過。這樣很好。其他的我沒有要講。",
-  "prompt_wav": "/home/ct/glitch-vn/voice-ref/blackhole.wav",
-  "prompt_text": "沙發上的東西妳看得到，可是妳只看得到今天的我。妳有寫我，妳把我寫在第七行，妳寫了大概五百次。",
-  "speed": 0.95,
-  "instruct": "用台灣腔的中文說，低沉平穩，不帶起伏"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/catgrass.wav",
-  "text": "我？貓草。等級八十，全勤。開台第一天我就在了，那天總共七個人，你自己去算。我不是什麼老粉……我只是剛好每天都有空。你不要跟她講我這樣說。",
-  "prompt_wav": "/home/ct/下載/cosyvoice-test/jinn-casting3/27-原聲.wav",
-  "prompt_text": "於上班時間親洽辦公室",
-  "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用年輕、隨便、有點吊兒郎當的語氣說"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/view-blackhole-noah.wav",
-  "text": "頂樓那位。他收著她掉的東西，等她自己上去拿。她每次都當第一次問，他每次都當第一次答。我看過很多人。做得到這個的不多。",
-  "prompt_wav": "/home/ct/glitch-vn/voice-ref/blackhole.wav",
-  "prompt_text": "沙發上的東西妳看得到，可是妳只看得到今天的我。妳有寫我，妳把我寫在第七行，妳寫了大概五百次。",
-  "speed": 0.95,
-  "instruct": "用台灣腔的中文說，低沉平穩，不帶起伏"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/view-catgrass-zerox.wav",
-  "text": "0x 喔……她那種的我看不下去，全部都對，一次都不會出錯。出錯才好看啊。……我不是說格莉奇出錯好看，我不是那個意思。",
-  "prompt_wav": "/home/ct/下載/cosyvoice-test/jinn-casting3/27-原聲.wav",
-  "prompt_text": "於上班時間親洽辦公室",
-  "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用年輕、隨便、有點吊兒郎當的語氣說"
- },
- {
   "out": "/home/ct/glitch-vn/art/voice/intro/view-glitch-catgrass.wav",
   "text": "貓草是全勤喔！等級八十！他每次都說他只是剛好有空。可是「剛好有空」兩年欸。這個我有記起來。",
   "prompt_wav": "/home/ct/glitch-vn/voice-ref/glitch.wav",
   "prompt_text": "有五百次。這首是我知道的那一首。一、二、三、四、五、六。",
   "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用平常講話的語氣，不要唱"
+  "instruct": "用台灣腔的中文說，不要唱，很開心、語速偏快"
  }
 ]
