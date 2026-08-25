@@ -1,0 +1,11 @@
+[
+ {
+  "name": "plate-notepad",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "Lofi anime still life, no people. A SMALL POCKET NOTEBOOK LYING OPEN on a cheap desk, seen from almost straight above, filling the upper half of the frame: cheap ruled paper, both facing pages COMPLETELY BLANK, a thin wire spiral along the spine, one corner slightly curled, a cheap ballpoint pen resting across the lower page, a chipped mug and a phone face-down beside it. The paper is the brightest thing in the picture. Late-night desk lamp from the left, cool violet ambience elsewhere. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. **ABSOLUTELY NO TEXT, NO WRITING, NO MARKS ON THE PAGES — the pages must be completely blank.** The text is composited later."
+ }
+]

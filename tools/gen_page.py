@@ -39,6 +39,18 @@ PAGES = {
     # **這張是劇透的關鍵。** 第四章的重點是「數得出七行、第七行讀不出來，
     # 只看得出開頭像一個 @」。糊得不夠就等於直接把 @Zero_Point 寫在螢幕上，
     # 第四章到第七章之間的懸念全部作廢。
+    # 玩家的筆記。**跟她的守則本刻意長得不一樣**：她的是攤開的厚本子，
+    # 他的是一本便宜的口袋記事本。同一款遊戲裡兩本本子，一本抄得很整齊，
+    # 一本劃得亂七八糟。
+    "page-note-mid": ("plate-notepad",
+                      ["第六天", "她改到第四十版", "每次都說同一句話",
+                       "那不是裝的", "~結論：她是裝的"], (38, 36, 52), False, 0),
+    "page-note-strike": ("plate-notepad",
+                         ["第十一天", "~這棟樓沒有東西", "~他們在演一場很長的戲",
+                          "~我快查到了", "我不知道我在查什麼"], (38, 36, 52), False, 0),
+    # 最後那一頁只有一行，所以它會被排得很大。那是刻意的。
+    "page-note-last": ("plate-notepad",
+                       ["早上下樓的時候看一下信箱那邊"], (38, 36, 52), False, 0),
     "page-day5": ("plate-screen", ["開台第五天"] + IDS + ["@Zero_Point"],
                   (232, 238, 248), False, 7.0),
 }
@@ -69,6 +81,10 @@ def bright_box(img, screen=False):
 
 def render(name, plate, lines, ink, right_half, blur):  # right_half 已停用
     src = ROOT / "art/out" / f"{plate}.png"
+    # **底圖也吃 .jpg。** 新的底圖只留 jpg（2MB 的無損 PNG 進 git 沒有意義，
+    # 它只是拿來疊字的底），舊的四張 png 照舊。
+    if not src.exists():
+        src = ROOT / "art/out" / f"{plate}.jpg"
     if not src.exists():
         print(f"  ★ 缺底圖 {plate}"); return
     img = Image.open(src).convert("RGB")
@@ -95,10 +111,22 @@ def render(name, plate, lines, ink, right_half, blur):  # right_half 已停用
 
     layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
     rnd = random.Random(name)           # 固定亂數，重跑結果一樣
-    for i, t in enumerate(lines):
+    for i, raw in enumerate(lines):
+        # **行首的 ~ 代表這一行被他自己劃掉。** 後段的筆記上劃掉的比留下的多，
+        # 那是《調查篇》整段信心崩解的視覺（見 design/調查篇-信心.md）。
+        struck = raw.startswith("~")
+        t = raw[1:] if struck else raw
         dx, dy = rnd.uniform(-5, 5), rnd.uniform(-3, 3)
         tile = Image.new("RGBA", (colw + 120, int(step) + 60), (0, 0, 0, 0))
-        ImageDraw.Draw(tile).text((30, 12), t, font=f, fill=ink + (240,))
+        d = ImageDraw.Draw(tile)
+        d.text((30, 12), t, font=f, fill=ink + (240,))
+        if struck:
+            # 手劃的線：兩端超出字、中間高度有一點漂，而且不是完全水平。
+            bb = f.getbbox(t)
+            y = 12 + (bb[1] + bb[3]) / 2
+            x_a, x_b = 30 + bb[0] - size * .18, 30 + bb[2] + size * .22
+            d.line([(x_a, y + rnd.uniform(-2, 2)), (x_b, y + rnd.uniform(-2, 2))],
+                   fill=ink + (235,), width=max(2, size // 22))
         tile = tile.rotate(rnd.uniform(-1.0, 1.0), resample=Image.BICUBIC,
                            center=(0, tile.height // 2))
         layer.alpha_composite(tile, (int(x0 + dx - 30), int(y0 + i * step + dy - 12)))
