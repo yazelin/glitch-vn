@@ -25,3 +25,5 @@ art/out/bg-figure.png
 art/out/bg-catgrass-home.png
 # 玩家筆記那幾頁是 gen_page.py 兩秒重生的中間產物，底圖留 art/out/plate-notepad.jpg 就夠。
 art/page/page-note-*.png
+art/out/bg-catgrass-door.png
+art/out/bg-street-night.png
