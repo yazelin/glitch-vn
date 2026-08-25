@@ -13,8 +13,14 @@
   iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
   所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
 
-  miniGameReadVars ：day slot unlocked met
+  miniGameReadVars ：day slot met
+                     open_roof open_laundry open_figure open_parts
+                     open_studio open_tower14 open_catgrass_home
   miniGameWriteVars：day slot dest here
+
+  **解鎖是一個地點一個布林，不是一串逗號清單。** 清單要「讀出來、加一個、寫回去」，
+  而普通對話卡做不到那件事（它只能設一個值）。布林的話，管理員講完那句話的那張卡
+  直接把 open_roof 設成 true 就好。誰在哪裡開哪一個，見 design/調查篇-變數.md。
 
   一次開板等於一個時段。玩家只選地點，時間自己往前走（深夜之後換日）。
 -->
@@ -81,19 +87,19 @@ var SLOTS=['上午','下午','晚上','深夜'];
 // 空手而回本來就是這款的一部分（見設計文件三之一），所以預設是開著。
 var SPOTS=[
  {id:'lobby',   name:'一樓',        live:['管理員','管理員','','']},
- {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null],
+ {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null], gate:'open_roof',
   hint:'有人說樓上那間什麼都留著。我需要一個壞掉的東西。'},
  {id:'street',  name:'車站前那條街', live:['路人','路人','路人','']},
  {id:'busstop', name:'公車站',      live:['路人','路人','路人','']},
  {id:'metro',   name:'捷運出口',    live:['路人','路人','路人','']},
  {id:'store',   name:'便利商店',    live:['店員','店員','店員','店員']},
- {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null],
+ {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null], gate:'open_parts',
   hint:'他等那顆管子等兩個禮拜了。他走不開。'},
- {id:'laundry', name:'自助洗衣店',  live:['','','',''],
+ {id:'laundry', name:'自助洗衣店',  live:['','','',''], gate:'open_laundry',
   hint:'隔壁那家深夜也開。'},
- {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null],
+ {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null], gate:'open_figure',
   hint:'他說他都在那裡買。'},
- {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'],
+ {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'], gate:'open_studio',
   hint:'畫她的人。名字我還沒問到。'},
  // **booth 永遠是灰的，而且提示永遠是那一句。** 玩家會一直看到它，一直進不去。
  // 那是刻意的挫折，而且它會讓「深夜在便利商店撞到鐵塔」變成整款最好的一個瞬間。
@@ -101,11 +107,11 @@ var SPOTS=[
   hint:'經紀公司在哪裡我知道了。可是我進不去。', sealed:true},
  // tower14 在設計的解鎖表裡漏掉了（它列在「走不進去的」那一組，可是沒說什麼時候出現）。
  // 照既有規則補：提示講他缺什麼，不講該去問誰，而且只講他知道的。
- {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全'],
+ {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全'], gate:'open_tower14',
   hint:'那個 AI 是哪一家公司的，我還沒查到。'},
  // trust 3 的私人地方**不顯示提示**（沒有 hint），開了才會出現在板上。
  // 它們不該被當成待辦事項，玩家要自己走到那裡。
- {id:'catgrass_home', name:'貓草家', live:[null,null,'貓草','貓草']}
+ {id:'catgrass_home', name:'貓草家', live:[null,null,'貓草','貓草'], gate:'open_catgrass_home'}
 ];
 
 
@@ -148,8 +154,9 @@ function go(spotId){
 
 function start(){
   var slot=num(values.slot,0), day=num(values.day,1);
-  var open_=list(values.unlocked), met=list(values.met);
-  if(!open_.length) open_=['lobby','street','busstop','metro','store'];
+  var met=list(values.met);
+  // gate 沒填的就是一開始就有的（一樓、車站前那條街、公車站、捷運出口、便利商店）。
+  function isOpen(s){ return s.sealed ? false : (!s.gate || values[s.gate]===true || values[s.gate]==='true'); }
 
   document.getElementById('when').textContent='第 '+day+' 天 ・ '+SLOTS[slot];
   document.getElementById('hint').textContent='去一個地方就過一個時段';
@@ -157,7 +164,7 @@ function start(){
   var grid=document.getElementById('grid');
   grid.textContent='';
   SPOTS.forEach(function(s){
-    var open = open_.indexOf(s.id)>=0 && !s.sealed;
+    var open = isOpen(s);
     // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
     if(!open && !s.hint) return;
     var live=s.live[slot];

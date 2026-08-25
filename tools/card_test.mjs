@@ -52,7 +52,7 @@ const msgs = () => page.evaluate(() => window.__msgs);
 
 console.log('\n=== 調查板 ===');
 {
-  const V = { day: 3, slot: 2, unlocked: 'lobby,street,busstop,metro,store', met: '管理員,店員' };
+  const V = { day: 3, slot: 2, met: '管理員,店員' };   // 什麼都沒開，只有一開始那五個
   const fr = await open('board.html', V);
 
   const when = await fr.locator('#when').textContent();
@@ -63,7 +63,7 @@ console.log('\n=== 調查板 ===');
   // 沒開又有提示的要看得到（灰的），沒開又沒提示的（trust 3 私人地方）根本不畫。
   const locked = fr.locator('button.spot.locked');
   ok('沒開但有提示的畫成灰的', (await locked.count()) === 7, `${await locked.count()} 個`);
-  ok('貓草家沒開就不畫',
+  ok('貓草家的閘沒開就不畫',
      (await fr.locator('button.spot', { hasText: '貓草家' }).count()) === 0);
   const roofHint = fr.locator('button.spot.locked', { hasText: '頂樓收音機店' });
   ok('提示用他自己的口氣',
@@ -96,12 +96,29 @@ console.log('\n=== 調查板 ===');
      `here="${sets.here}"（一樓晚上常駐是空，黑洞先生 60%）`);
 }
 
+console.log('\n=== 調查板：一顆布林開一個地方 ===');
+{
+  // **解鎖要能被一張普通對話卡打開。** 逗號清單要「讀出來、加一個、寫回去」，
+  // 對話卡做不到；布林的話管理員講完那句話直接把 open_roof 設 true 就好。
+  const shut = await open('board.html', { day: 2, slot: 0, met: '管理員' });
+  ok('open_roof 沒設，頂樓是灰的',
+     (await shut.locator('button.spot', { hasText: '頂樓收音機店' }).getAttribute('class')).includes('locked'));
+  const opened = await open('board.html', { day: 2, slot: 0, open_roof: true, met: '管理員,諾亞' });
+  const roofOpen = opened.locator('button.spot', { hasText: '頂樓收音機店' });
+  ok('open_roof = true，頂樓就開了', !(await roofOpen.getAttribute('class')).includes('locked'));
+  ok('開了之後顯示常駐的人', (await roofOpen.locator('.who').textContent()) === '諾亞');
+  // 字串 'true' 也要吃（Larch 的變數型別可能是文字）
+  const asText = await open('board.html', { day: 2, slot: 0, open_roof: 'true', met: '管理員,諾亞' });
+  ok('字串 true 也算開',
+     !(await asText.locator('button.spot', { hasText: '頂樓收音機店' }).getAttribute('class')).includes('locked'));
+}
+
 console.log('\n=== 調查板：錄音間門口永遠進不去 ===');
 {
   const fr = await open('board.html',
-    { day: 5, slot: 0, unlocked: 'lobby,store,booth,catgrass_home', met: '管理員,店員,貓草' });
+    { day: 5, slot: 0, open_catgrass_home: true, met: '管理員,店員,貓草' });
   const booth = fr.locator('button.spot', { hasText: '錄音間門口' });
-  ok('unlocked 裡有 booth 也照樣是灰的', (await booth.getAttribute('class')).includes('locked'));
+  ok('booth 不管怎樣都是灰的', (await booth.getAttribute('class')).includes('locked'));
   ok('booth 點不下去', await booth.isDisabled());
   ok('booth 的提示永遠是那一句',
      (await booth.locator('.who').textContent()).includes('可是我進不去'));
@@ -111,7 +128,7 @@ console.log('\n=== 調查板：錄音間門口永遠進不去 ===');
 
 console.log('\n=== 調查板：深夜之後換日 ===');
 {
-  const fr = await open('board.html', { day: 3, slot: 3, unlocked: 'store', met: '店員,貓草' });
+  const fr = await open('board.html', { day: 3, slot: 3, met: '店員,貓草' });
   await fr.locator('button.spot:not(.locked)', { hasText: '便利商店' }).click();
   await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
   const sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
