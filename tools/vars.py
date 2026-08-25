@@ -24,8 +24,10 @@ DOCS = sorted(ROOT.glob("design/調查篇*.md"))
 PAT = re.compile(r"`([a-z][a-z0-9_]*(?:_[一-鿿0-9x]+)?)`")
 
 # 地點代號不是變數（它們是 dest 的值）。單獨列一組，不進「其他旗標」。
+# 板上的十二個目的地。**貓草家不在裡面**：trust 3 那五個私人地方是
+# 「場景不是地點」（設計文件一之三），在原本那個地點裡多開一段。
 LOC = {"lobby", "roof", "street", "busstop", "metro", "store", "parts",
-       "laundry", "figure", "studio", "booth", "tower14", "catgrass_home"}
+       "laundry", "figure", "studio", "booth", "tower14"}
 # 程式識別字與 Larch 的欄位名，掃到了也不是這款的狀態。
 IGNORE = {"novelkit", "to_speech", "values", "variables", "who", "face", "speaker",
           "remote", "choices", "cids", "branch", "emotion", "scene", "talk", "narrate",

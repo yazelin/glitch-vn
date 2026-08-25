@@ -1,0 +1,20 @@
+[
+ {
+  "name": "bg-catgrass-door",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "Lofi anime background art, no people. AN APARTMENT CORRIDOR OUTSIDE ONE FLAT DOOR, LATE AT NIGHT: a plain steel door with a peephole and a small blank nameplate holder, a worn doormat, a folded cardboard box leaning against the wall, an umbrella stand, a bare corridor ceiling light two doors down leaving this doorway half in shadow, painted concrete walls with scuff marks at bag height, a fire hose cabinet further along. THIS IS NOT A BEDROOM. No bed, no furniture. Cold corridor fluorescent from the left, violet night spilling from a window at the end. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ },
+ {
+  "name": "bg-street-night",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "Lofi anime background art, no people. THE SAME BUSY STREET IN FRONT OF A TRAIN STATION BUT AT THREE IN THE MORNING, COMPLETELY EMPTY: shop shutters rolled fully down in a long row, a tall advertising light box still glowing with a blank panel, one traffic light on amber flash, wet asphalt reflecting the lamps, a stack of bundled newspapers by a closed kiosk, bare trees along the kerb. No cars, no people. Sodium street lamps against a deep violet sky. IMPORTANT STYLE RULES: same overall BRIGHTNESS as the reference images, do NOT make this darker or more cinematic; same SATURATED blue-violet and lilac palette with cyan accents, do NOT desaturate toward grey; same FLAT lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom. No readable text anywhere."
+ }
+]

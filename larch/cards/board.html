@@ -15,7 +15,7 @@
 
   miniGameReadVars ：day slot met
                      open_roof open_laundry open_figure open_parts
-                     open_studio open_tower14 open_catgrass_home
+                     open_studio open_tower14
   miniGameWriteVars：day slot dest here
 
   **解鎖是一個地點一個布林，不是一串逗號清單。** 清單要「讀出來、加一個、寫回去」，
@@ -109,10 +109,14 @@ var SPOTS=[
  // 照既有規則補：提示講他缺什麼，不講該去問誰，而且只講他知道的。
  {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全'], gate:'open_tower14',
   hint:'那個 AI 是哪一家公司的，我還沒查到。'},
- // trust 3 的私人地方**不顯示提示**（沒有 hint），開了才會出現在板上。
- // 它們不該被當成待辦事項，玩家要自己走到那裡。
- {id:'catgrass_home', name:'貓草家', live:[null,null,'貓草','貓草'], gate:'open_catgrass_home'}
 ];
+
+// **trust 3 的那五個私人地方不在這張表上。**（貓草家、斑比工作室那面牆、
+// 諾亞的鞋盒、管理員的失物箱、保全的監視器）
+// 設計文件一之三寫得很清楚：「這五個是場景不是地點：在原本那個地點裡多開一段。」
+// 做成板上的一格會讓玩家不請自來敲貓草家的門，而那正是這個角色不可能接受的事
+// ——正典裡他要先講「你不要寫出去喔」才讓人進去。
+// 它們是 scene 代號（catgrass_door、catgrass_home），不是 dest。
 
 
 // 訪客：某個人剛好也在。[地點, 時段, 機率]

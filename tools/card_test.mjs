@@ -63,7 +63,8 @@ console.log('\n=== 調查板 ===');
   // 沒開又有提示的要看得到（灰的），沒開又沒提示的（trust 3 私人地方）根本不畫。
   const locked = fr.locator('button.spot.locked');
   ok('沒開但有提示的畫成灰的', (await locked.count()) === 7, `${await locked.count()} 個`);
-  ok('貓草家的閘沒開就不畫',
+  // trust 3 那五個私人地方是「場景不是地點」，板上永遠不該有它們。
+  ok('貓草家不在板上（那是場景不是地點）',
      (await fr.locator('button.spot', { hasText: '貓草家' }).count()) === 0);
   const roofHint = fr.locator('button.spot.locked', { hasText: '頂樓收音機店' });
   ok('提示用他自己的口氣',
@@ -116,14 +117,14 @@ console.log('\n=== 調查板：一顆布林開一個地方 ===');
 console.log('\n=== 調查板：錄音間門口永遠進不去 ===');
 {
   const fr = await open('board.html',
-    { day: 5, slot: 0, open_catgrass_home: true, met: '管理員,店員,貓草' });
+    { day: 5, slot: 0, met: '管理員,店員,貓草' });
   const booth = fr.locator('button.spot', { hasText: '錄音間門口' });
   ok('booth 不管怎樣都是灰的', (await booth.getAttribute('class')).includes('locked'));
   ok('booth 點不下去', await booth.isDisabled());
   ok('booth 的提示永遠是那一句',
      (await booth.locator('.who').textContent()).includes('可是我進不去'));
-  ok('貓草家解鎖之後就畫出來，而且沒有提示',
-     (await fr.locator('button.spot:not(.locked)', { hasText: '貓草家' }).count()) === 1);
+  ok('設什麼變數貓草家都不會出現在板上',
+     (await fr.locator('button.spot', { hasText: '貓草家' }).count()) === 0);
 }
 
 console.log('\n=== 調查板：深夜之後換日 ===');
