@@ -36,8 +36,39 @@
     tools/say_test.mjs       自介鈕驗收（真的按下去，不是檢查 HTML 有沒有那顆鈕）
     tools/contrast_test.mjs  量算出來的顏色對比。**--ink 是面板底色不是文字色**，
                              用錯會變成黑底黑字，肉眼在某些螢幕上還「看得到一點」
+    tools/prune_voice.py     清掉沒人用的配音。**--selfcheck 一定要過**（見下）
+    tools/map_audio.py       小說段落對回配音檔，產生 design/audiobook.json
     larch/                   視覺小說版：一章一支 build 腳本，見 larch/README.md
+    larch/cards/             插件卡（Larch 的 miniGame），單檔 HTML，見下面「調查篇」
     archive/                 舊版：做在 Larch 上的七天記憶遊戲。已經收掉
+
+### 《調查篇》：外傳，設計中
+
+玩家扮演一個對不明現象有興趣的普通人，在同一棟樓附近打聽格莉奇的事。
+**直到最後都不能真的找到格莉奇跟黑洞先生**，那是這款最大的規矩。
+
+    design/調查篇.md              總設計：這個故事在講什麼、核心迴圈、硬約束
+    design/調查篇-場景.md         十二個地點、線索表、問答矩陣、關係與解鎖
+    design/調查篇-變數.md         **實作的時候唯一要看的表**：誰讀誰寫、七個閘誰打開
+    design/調查篇-信心.md         他的信心怎麼掉下來：四次遭遇、三階段筆記、最後那一頁
+    design/調查篇-第一天-定稿.md  第一天，16 格 81 張卡
+    design/調查篇-橋段.md         第一批六場
+    design/調查篇-第二天.md       第二天，初稿
+    larch/cards/board.html        調查板：選地點、算遇到誰、時間往前走
+    larch/cards/notes.html        調查筆記：名單／目擊／問答／空白頁
+    larch/cards/host.html         假的 Larch 宿主，開發用
+    art/bg-investigation/         七張新場景背景
+
+**動這條線之前先讀 `design/調查篇.md` 的「零、這個故事在講什麼」。**
+那一節是用來擋一個具體的失敗：材料（熬夜、記不得、自己的字自己不認得）
+跟恐怖片的材料一模一樣，不先讀就會寫成恐怖片。已經發生過一次。
+
+驗收：
+
+    node tools/card_test.mjs           # 實跑 postMessage 契約，sandbox 跟正式一樣
+    python3 tools/vars.py              # 掃出所有變數，抓命名衝突
+    python3 tools/vars.py --cards      # 比對插件卡跟設計文件有沒有分家
+    python3 tools/gen_page.py          # 重生玩家筆記那幾頁（行首 ~ 代表被劃掉）
 
 ## 改完要跑的
 
@@ -51,6 +82,10 @@
     python3 tools/gen_intro.py    # 只重生「唸出來的字或表演指示變了」的
     .venv/bin/python tools/check_intro.py --reroll 3   # 驗發音，錯的自動重生
     python3 tools/check_sync.py   # 改了自介就要跑：另外兩個站是複製過去的
+    python3 tools/map_audio.py    # 改了小說正文或 VN 台詞就要跑
+    python3 tools/prune_voice.py  # 只列不刪。**要刪之前先跑 --selfcheck**：
+                                  # 它 glob 的是檔名，而保留清單只裝 v-<hex>，
+                                  # 所以角色頁那 15 段自介曾經被整批誤刪過
 
 ## 角色頁的配音
 
