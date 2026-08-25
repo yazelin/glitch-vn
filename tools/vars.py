@@ -102,7 +102,7 @@ def cards():
             print(f"  ★ 代號沒寫進設計文件：{c}"); bad += 1
     # 反向：設計文件有的 see_* 卡片要畫得出來，不然玩家永遠看不到那一份目擊
     for c in sorted(set(re.findall(r"`(see_[a-z]+)`", docs))):
-        if c not in codes and c != "see_zero":   # see_zero 是拒答，本來就沒有內容
+        if c not in codes:
             print(f"  ★ 設計文件有、筆記卡沒畫：{c}"); bad += 1
 
     print("\n卡片跟設計對得起來" if not bad else f"\n★ {bad} 處對不起來")

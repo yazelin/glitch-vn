@@ -142,7 +142,7 @@ console.log('\n=== 調查筆記 ===');
 {
   const V = {
     notes: 'name_cat,name_tower,name_zero,name_bambi,name_noah,name_del,' +
-           'see_admin,see_noah,see_guard,clue_real,clue_older',
+           'see_admin,see_noah,see_guard,see_zero,clue_real,clue_older',
     notes_free: JSON.stringify(['他說「因為你問了」。'])
   };
   const fr = await open('notes.html', V);
@@ -154,7 +154,11 @@ console.log('\n=== 調查筆記 ===');
 
   await fr.locator('nav button', { hasText: '目擊' }).click();
   const cards = fr.locator('.sight .card');
-  ok('只並排已經拿到的那幾份', (await cards.count()) === 3, `畫了 ${await cards.count()} 份`);
+  ok('只並排已經拿到的那幾份', (await cards.count()) === 4, `畫了 ${await cards.count()} 份`);
+  // 0x 那一列是拒答，可是它一樣要並排出來：那一份的內容就是「她不講」。
+  const zero = fr.locator('.sight .card', { hasText: '0x' });
+  ok('0x 那一列畫得出來，內容是「不回答」',
+     (await zero.locator('div').last().textContent()) === '不回答。');
   const all = await fr.locator('main').textContent();
   ok('不加「這些描述不一致」之類的提示', !/不一致|矛盾|不同|注意/.test(all));
 
