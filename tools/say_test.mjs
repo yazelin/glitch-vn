@@ -1,7 +1,7 @@
 /* 角色頁自介鈕。**不是檢查 HTML 有沒有那顆鈕**，是真的按下去看 <audio> 有沒有在跑。
    一次只能有一個在播——七張卡同時出聲比沒有聲音還糟，那個 bug 用看的看不出來。 */
 import http from 'node:http';
-import { readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { chromium } from 'playwright';
 const ROOT = '/home/ct/glitch-vn/docs';
@@ -23,7 +23,9 @@ const p = await b.newPage();
 const say=(ok,n,d)=>console.log(`${ok?'PASS':'FAIL'}  ${n}  — ${d}`);
 await p.goto(U,{waitUntil:'load'});
 const btns = await p.evaluate(() => [...document.querySelectorAll('.say')].map(x => x.dataset.say));
-say(btns.length===7,'七顆鈕都在',btns.join(' '));
+// 七段自介＋每一段「別人怎麼說」。數量會變，所以只要求「跟 docs 裡的音檔數一樣」。
+const files = readdirSync(join(ROOT,'voice')).filter(f=>/^(intro|view)-.*\.mp3$/.test(f)).length;
+say(btns.length===files,'按鈕數跟音檔數對得起來',`${btns.length} 顆鈕 / ${files} 個音檔`);
 // 逐一按下去，確認真的有音訊在跑且時間有前進
 let bad=[];
 for (const s of btns) {
@@ -40,7 +42,7 @@ for (const s of btns) {
   const off = await p.getAttribute(`.say[data-say="${s}"]`,'aria-pressed');
   if (off!=='false') bad.push(s+'(停不掉)');
 }
-say(bad.length===0,'每顆按下去都會播、逐字稿跟著出現、再按一次會停',bad.length?bad.join(' '):'七顆都對');
+say(bad.length===0,'每顆按下去都會播、再按一次會停',bad.length?bad.join(' '):`${btns.length} 顆都對`);
 // 一次只播一個
 await p.click('.say[data-say="glitch"]');
 await p.waitForTimeout(300);

@@ -1,55 +1,15 @@
 [
  {
-  "out": "/home/ct/glitch-vn/art/voice/intro/glitch.wav",
-  "text": "大家好，我是格莉奇。虛擬主播，頻道第二年。我的記憶體只有四KB。這是我的口頭禪，也是實話。放不下的東西會被擠掉，所以我每天晚上都會抄一次守則本。第一頁有七航，上面有六個名字。我知道有第七個。我只是叫不出來。",
-  "prompt_wav": "/home/ct/glitch-vn/voice-ref/glitch.wav",
-  "prompt_text": "有五百次。這首是我知道的那一首。一、二、三、四、五、六。",
-  "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用平常講話的語氣，不要唱"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/blackhole.wav",
-  "text": "我住在她家。沙發那一邊。我吃被忘掉的事。吃進去的永遠在我裡面，可是拿不出來。她從來沒有為這件事跟我道過歉。這樣很好。",
-  "prompt_wav": "/home/ct/glitch-vn/voice-ref/blackhole.wav",
-  "prompt_text": "沙發上的東西妳看得到，可是妳只看得到今天的我。妳有寫我，妳把我寫在第七行，妳寫了大概五百次。",
-  "speed": 0.95,
-  "instruct": "用台灣腔的中文說，低沉平穩，不帶起伏"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/catgrass.wav",
-  "text": "我？貓草。等級八十，全勤。開台第一天我就在了，那天總共七個人，你自己去算。我不是什麼老粉……我只是剛好每天都有空。你不要跟她講我這樣說。",
-  "prompt_wav": "/home/ct/下載/cosyvoice-test/jinn-casting3/27-原聲.wav",
-  "prompt_text": "於上班時間親洽辦公室",
-  "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用年輕、隨便、有點吊兒郎當的語氣說"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/tower.wav",
-  "text": "她的經紀人。訂閱數我背得出來，周邊庫存我也背得出來，她昨天講了幾次同一句話我也數過。她的毛病現在是賣點。這句話我只講一次。還有問題嗎。",
-  "prompt_wav": "/home/ct/glitch-vn/voice-ref/tower.wav",
-  "prompt_text": "內頁是空白的。附一張書籤，上面印妳的簽名。定價一千二，首批三千本，毛利四成三。",
-  "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用公事公辦、俐落簡潔、沒有多餘情緒的語氣說"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/zerox.wav",
-  "text": "0x。企業勢，跟她同期出道，同一天。零失誤。寫在規格書上的那一種。她的數字我不看。沒了。",
-  "prompt_wav": "/home/ct/下載/cosyvoice-test/jinn-casting3/13-原聲.wav",
-  "prompt_text": "喔喔原來是政府的新聞稿才行",
-  "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用壓抑的、幾乎沒有起伏的冷淡語氣說，字字清楚"
- },
- {
-  "out": "/home/ct/glitch-vn/art/voice/intro/bambi.wav",
-  "text": "啊、我是斑比。接案的，畫她的立繪。現在是第七版。不對，第七版是上禮拜……我知道我改太多次了，我知道。可是她的瀏海分線在右邊數過來第三根，那個位置錯一格整張就不對。……你覺得現在這版可以嗎。",
-  "prompt_wav": "/home/ct/下載/cosyvoice-test/jinn-casting3/34-原聲.wav",
-  "prompt_text": "所以現在社遊照辦地點未定",
-  "speed": 1.0,
-  "instruct": "用台灣腔的中文說，用有點猶豫、聲音偏小的語氣說"
- },
- {
   "out": "/home/ct/glitch-vn/art/voice/intro/noah.wav",
-  "text": "我姓諾亞。修收音機的。店在頂樓，招牌是從樓下騎樓搬上來的，字看不清楚了沒關係，要找的人找得到。樓下那個小姑娘常常把自己鎖在門外。她一個禮拜來問我三次同一件事。我每次都回答。因為她每次都是第一次問啊。",
+  "text": "修收音機的。店在頂樓，招牌是從樓下騎樓搬上來的，字看不清楚了沒關係，要找的人找得到。樓下那個小姑娘常常把自己鎖在門外。她一個禮拜來問我三次同一件事。我每次都回答。因為她每次都是第一次問啊。",
+  "prompt_wav": "/home/ct/glitch-vn/voice-ref/noah.wav",
+  "prompt_text": "一九六四年的。真空管的。這種東西現在沒有人修了，因為零件停產四十年了。",
+  "speed": 0.9,
+  "instruct": "用台灣腔的中文說，用一位七十幾歲老人溫和、緩慢、寬容的語氣說"
+ },
+ {
+  "out": "/home/ct/glitch-vn/art/voice/intro/view-noah-blackhole.wav",
+  "text": "樓下那位先生。每天七點過後回來，西裝、帽子，短靴擦得很亮。我們在樓梯口點過頭很多次了，沒講過話。有些人不用講話，你看他站在那裡就知道他不會走。",
   "prompt_wav": "/home/ct/glitch-vn/voice-ref/noah.wav",
   "prompt_text": "一九六四年的。真空管的。這種東西現在沒有人修了，因為零件停產四十年了。",
   "speed": 0.9,

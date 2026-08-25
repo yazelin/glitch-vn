@@ -29,8 +29,11 @@
     tools/make_icons.py      PWA 圖示（從立繪按實際 ink 邊界裁，不是目測置中）
     tools/update_sw.py       用內容 hash 產 sw.js 的快取版號，別手動 bump
     tools/offline_test.mjs   離線包驗收（配負控制：沒下載時語音必須是解不出來的）
-    tools/gen_intro.py       角色頁的自我介紹配音，一個角色一段
+    tools/gen_intro.py       角色頁的配音：自我介紹，加上「別人怎麼說」
+    tools/check_intro.py     逐段重新辨識比對原文。**判準是拼音不是字**
     tools/say_test.mjs       自介鈕驗收（真的按下去，不是檢查 HTML 有沒有那顆鈕）
+    tools/contrast_test.mjs  量算出來的顏色對比。**--ink 是面板底色不是文字色**，
+                             用錯會變成黑底黑字，肉眼在某些螢幕上還「看得到一點」
     larch/                   視覺小說版：一章一支 build 腳本，見 larch/README.md
     archive/                 舊版：做在 Larch 上的七天記憶遊戲。已經收掉
 
@@ -42,7 +45,43 @@
     python3 larch/build_all.py    # 重建 Larch 上的七章
     python3 tools/update_sw.py    # 動到 docs/ 就要跑，不跑瀏覽器不知道有新版
     node tools/offline_test.mjs   # 動到 sw.js 或離線清單就要跑
-    python3 tools/gen_intro.py    # 改了角色自介的文字才要跑（會跑模型，約十分鐘）
+    node tools/contrast_test.mjs  # 動到配色就要跑
+    python3 tools/gen_intro.py    # 只重生「唸出來的字或表演指示變了」的
+    .venv/bin/python tools/check_intro.py --reroll 3   # 驗發音，錯的自動重生
+
+## 角色頁的配音
+
+兩種：**自我介紹**（一個角色一段）與**別人怎麼說**（一個角色對另一個角色的看法）。
+都在 `tools/gen_intro.py` 的 `INTRO` 與 `VIEWS` 裡，跟全書共用同一組參考音，
+**不可以另外選角**：角色頁聽到的聲音跟書裡不是同一個人的話，這個功能就是反效果。
+
+「別人怎麼說」**只寫書裡真的有交集的組合**（諾亞與黑洞先生在樓梯口點過頭、
+鐵塔請斑比重畫本子、聯動企劃是兩邊經紀人談的），而且**只放觀察不放事件**：
+寫「我看他每天七點回來」可以，寫「他跟我說過他為什麼留下來」不行，那等於在正文之外偷加一場戲。
+
+### 驗收：判準是拼音，不是字
+
+`check_intro.py` 逐段重新辨識再比對原文。一開始只比整段字串相似度，結果 103 字的
+自介裡「記憶體」唸成「記物體」、「口頭禪」唸成「口頭呢」，相似度還有 0.96，
+檢查照樣綠燈。**局部的錯字被整段長度稀釋掉了**，是使用者自己聽出來的。
+
+現在逐一比對每個差異的拼音：
+
+    同音同調   她→他、立繪→例會、勢→室      ASR 分不出來，不是配音的問題
+    同音不同調 背(bèi)→杯(bēi)、數(shù)→書(shū)  聲調唸錯，列成「要聽」
+    不同音     憶(yì)→物(wù)、禪(chán)→呢(ne)   唸錯字，直接判 FAIL
+
+### 唸錯了怎麼修
+
+**先分清楚是系統性的還是手氣。** 同一句生六版：
+
+- 六版全錯 → 系統性，用同音替身（`voice.SUB`）。「零失誤」被唸成「零一五」、
+  「背得出來」的背唸成 bēi，都是這種。真的救不了就改寫，
+  「口頭禪」那個 chán 音六版全錯而且替身也救不了，那句話就不要用那個詞。
+- 一半一半 → 手氣，替身沒有用，**重生幾版挑一版**：`check_intro.py --reroll 3`。
+
+**voice_batch 看到 wav 已存在就跳過**，所以改了文字直接跑會得到「要生 0」而且不報錯。
+`gen_intro.py` 自己記帳（`art/voice/intro-take.json`）比對送進模型的字與指示，變了才刪舊檔重跑。
 
 ## 離線（PWA）
 

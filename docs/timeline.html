@@ -49,7 +49,7 @@
   --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
   --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
   --cy:#25c2e8; --cy-d:#17a0c4; --mint:#7cf3c0; --purple:#b78bff;
-  --text:#dfe8ec; --muted:#93a3ac; --faint:#68787f;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84;
   --r:3px;
 }
 /* ── 有聲書 ──────────────────────────────────────────
@@ -262,6 +262,12 @@ code,var{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
   color:var(--mint);background:var(--sunk);border-radius:var(--r);padding:1px 6px;
   font-style:normal}
 strong{font-weight:600}
+.views{margin-top:20px;padding-top:16px;border-top:1px solid var(--hair)}
+.views h4{margin:0 0 10px;font-size:.72rem;font-weight:400;letter-spacing:.12em;
+  color:var(--faint)}
+.view{margin-bottom:14px}
+.view:last-child{margin-bottom:0}
+.view .said{font-size:.82rem}
 .ex{margin-top:52px}
 .ex:first-of-type{margin-top:18px}
 .exwhy{font-size:.86rem;line-height:1.9;color:var(--muted);margin:0 0 26px;
@@ -273,15 +279,21 @@ strong{font-weight:600}
   padding:4px 13px;cursor:pointer}
 .say:hover,.say[aria-pressed=true]{color:var(--mint);border-color:var(--mint)}
 .say b{font-weight:400;font-size:.7rem}
+/* **逐字稿一直顯示，不要按了才出現。** 讀者是來認識角色的，
+   那段文字本身就是內容；藏起來只有按下去的人看得到，而且會撐開版面。
+   播放中只換左邊那條線的顏色。 */
 .said{margin:9px 0 0;font-size:.84rem;line-height:1.85;color:var(--muted);
-  border-left:2px solid var(--hair);padding-left:12px;display:none}
-.said[data-on]{display:block;border-left-color:var(--mint)}
-.dl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
-.dl button{font:inherit;font-size:.86rem;color:var(--ink);background:none;
-  border:1px solid var(--hair);border-radius:999px;padding:5px 14px;cursor:pointer}
+  border-left:2px solid var(--hair);padding-left:12px}
+.said[data-on]{border-left-color:var(--mint);color:var(--text)}
+/* **--ink 是深色面板的底色，不是文字色**（文字色是 --text）。
+   這顆鈕本來寫成 color:var(--ink)，在 --bg 上等於黑底黑字，
+   要 hover 過去才看得見。頁尾的東西本來就不顯眼，更禁不起這種錯。 */
+.dl{display:flex;align-items:baseline;gap:4px 12px;flex-wrap:wrap;margin:0 0 16px}
+.dl button{font:inherit;font-size:.86rem;color:var(--text);background:none;
+  border:1px solid var(--hair2);border-radius:999px;padding:6px 16px;cursor:pointer}
 .dl button:hover:not(:disabled){color:var(--mint);border-color:var(--mint)}
-.dl button:disabled{opacity:.5;cursor:default}
-.dl span{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.dl button:disabled{opacity:.55;cursor:default}
+.dl span{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
 footer{margin-top:78px;padding-top:24px;border-top:1px solid var(--hair);
   color:var(--faint);font-size:14px;line-height:1.85;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -324,9 +336,11 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {
       box.hidden = false;
       if (d.have >= d.total) {
         go.disabled = true; go.textContent = '語音已可離線';
-        msg.textContent = d.total + ' 句';
+        msg.textContent = '全書 ' + d.total + ' 句都在這台裝置上了';
       } else {
-        msg.textContent = d.have ? '已有 ' + d.have + ' / ' + d.total : '約 24 MB';
+        msg.textContent = d.have
+          ? '全書 ' + d.total + ' 句配音，已有 ' + d.have + ' 句'
+          : '全書 ' + d.total + ' 句配音，約 24 MB。下載之後沒有網路也聽得到';
       }
     }
     ask('status', show);
@@ -352,7 +366,7 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {
 <header class="bk"><div class="eyebrow">時間軸</div><h1>這十二天</h1><p>正文沒有標日期，這一頁是照書裡的時間語排出來的。底下有劇透。</p><p class="legend"><span class="guess" title="正文沒有明說，照前後文推的">○</span>　這一條正文沒有明說，是照前後文推的。沒有標記的都寫在書裡。</p></header><h2>在故事開始之前</h2><ul class="tl"><li class="era"><span class="when">22 年前</span><p>諾亞裝了這棟樓的門鎖</p><span class="src">五</span></li><li class="era"><span class="when">3 年前</span><p>她跟諾亞借了螺絲起子。所以她住在這裡比開台早</p><span class="src">五</span></li><li class="era"><span class="when">2 年多前</span><p>她跟諾亞買 3M 天線同軸線。那天她很緊張</p><span class="src">五</span></li><li class="era"><span class="when">開台前</span><p>守則本比頻道老。開台那天本子大約在第 275 版</p><span class="src">四</span></li><li class="era"><span class="when">開台第 1 天</span><p>七個人。考完就刪說他要刪帳號，她回「你留著的話我就會記得你」，然後說了那句保證</p><span class="src">六</span></li><li class="era"><span class="when">開台第 5 天</span><p>斑比截到守則本第一頁，第七行是一個 @ 開頭的字串</p><span class="src">四</span></li><li class="era"><span class="when">第 2 個禮拜</span><p>她唱了那首歌，說「這首是我寫給還沒來的人的」。台上九個人。他決定留下</p><span class="src">七</span></li><li class="era"><span class="when">第 3 個禮拜</span><p>她一個一個私訊最早那七個，問要不要幫她記。0x 說不要，他說好，同一天搬進來</p><span class="src">七</span></li><li class="era"><span class="when">之後約 500 版</span><p>她每天把他寫在第七行。每天讀到、每天想不起來、每天難過一次</p><span class="src">七</span></li><li class="era"><span class="when">約 7 個月前</span><p>她寫不下去了，改寫成「還有一個。不要問他是誰」，把前面全部撕掉。紙在他外套裡。那時大約第 803 版</p><span class="src">四、七</span></li></ul><h2>正文的十二天</h2><ul class="tl days"><li class="head"><span class="day">第 1 天</span></li><li class="ev"><span class="clock">凌晨兩點十四分</span><p>兩週年紀念直播剛結束，同時觀看人數是一。她沒有關台</p><span class="src">一之一</span></li><li class="ev"><span class="clock">兩點四十</span><p>十一點半該做的事晚了三個多小時。她抄守則本，闔上，關掉客廳最後一盞燈。那一版是第一千零四版，第一章的篇名就是它</p><span class="src">一之三、四</span></li><li class="head"><span class="day">第 2 天</span></li><li class="ev"><span class="clock">白天</span><p>錄第十一次，鐵塔終於說可以了。視訊會議上他提了《守則本》限時預購</p><span class="src">二之一、二</span></li><li class="head"><span class="day">第 3 天</span></li><li class="ev"><span class="clock"></span><p>樣品是隔天寄到的。皮面、車線，書籤上印著她兩年前的簽名</p><span class="src">二之三</span></li><li class="ev"><span class="clock">晚上</span><p>她把樣品帶回家，放在茶几上</p><span class="src">二之四</span></li><li class="head"><span class="day">第 4 天</span></li><li class="ev"><span class="clock">下午三點</span><p>聯動彩排。0x 兩點五十分就到了。晚上直播猜歌</p><span class="src">三之一</span></li><li class="ev"><span class="clock">晚上</span><p>她回到家，把外套掛好，坐到茶几前面，翻開守則本</p><span class="src">三之五</span></li><li class="head"><span class="day">第 5 天</span></li><li class="ev"><span class="clock"></span><p>斑比的工作室。第四十版立繪。她說「這一版的嘴角有一邊比較高」</p><span class="src">四之一</span></li><li class="ev"><span class="clock">晚上</span><p>回家之後她往前翻本子。最新那一頁是第一千零七版，往前翻了大概兩百版，翻到撕痕。她算出本子比頻道老</p><span class="src">四之五</span></li><li class="head"><span class="day">第 6 天</span></li><li class="ev"><span class="clock">凌晨一點</span><p>她又把自己鎖在門外。諾亞從樓下上來，拿一根細金屬條，弄了十秒，門開了</p><span class="src">五之一</span></li><li class="head"><span class="day">第 7 天</span></li><li class="ev"><span class="clock">下午</span><p>第一次去他的店。買線，一次一百二。待了大概一個小時</p><span class="src">五之二、三</span></li><li class="ev"><span class="clock">離開之前</span><p>她看到桌子底下那個鞋盒，側面寫著樓下小姑娘。裡面有兩把傘、一隻手套、一支螺絲起子、一張兩年多前的收據</p><span class="src">五之四</span></li><li class="head"><span class="day">第 8 天</span></li><li class="ev"><span class="clock"></span><p>她花兩個小時查那六個名字。私訊貓草。去找開台第一天的存檔，發現自己刪掉了，只剩別人重傳的剪輯<span class="guess" title="正文沒有明說，照前後文推的">○</span></p><span class="src">六之一～三</span></li><li class="head"><span class="day">第 9 天</span></li><li class="ev"><span class="clock">晚上七點多</span><p>走廊上碰到黑洞先生。他剛下班，諾亞剛好下樓倒垃圾。兩個人點了一下頭，各走各的<span class="guess" title="正文沒有明說，照前後文推的">○</span></p><span class="src">五之五</span></li><li class="ev"><span class="clock"></span><p>第二次去店裡。這一次沒有寫進正文，只從「來過三次」推得出來<span class="guess" title="正文沒有明說，照前後文推的">○</span></p><span class="src">五之六</span></li><li class="head"><span class="day">第 10 天</span></li><li class="ev"><span class="clock">上午</span><p>第三次去店裡。「我這個禮拜是不是來過了。」「來過三次。」「連這次。」他把那一百二十塊放進鞋盒，再備好下一條線</p><span class="src">五之六</span></li><li class="ev"><span class="clock">下午</span><p>外景。「你最近忘記過什麼。」第四個人放慢腳步，看了她三秒</p><span class="src">六之四</span></li><li class="ev"><span class="clock">晚上</span><p>她回到家抄本子。抄到第六行手沒有停，那個帳號已經刪除了，可是名單就是名單</p><span class="src">六之五</span></li><li class="head"><span class="day">第 11 天</span></li><li class="ev"><span class="clock"></span><p>0x 的公司在十四樓。「妳只有十五分鐘。」她拿到了那七個字</p><span class="src">七之一</span></li><li class="ev"><span class="clock">回家的路上</span><p>她把那七個字反覆看了很多次</p><span class="src">七之一</span></li><li class="ev"><span class="clock">晚上</span><p>客廳那一場。「所以我從來沒有變成一行字。」那天晚上她抄守則本，抄得比平常慢，第七行她寫了別的東西</p><span class="src">七之三、五</span></li><li class="head"><span class="day">第 12 天</span></li><li class="ev"><span class="clock">早上</span><p>她翻開第一頁。第七行寫著「還有一個。他就在客廳。去問他今天累不累」。所以她走出房間</p><span class="src">七之六</span></li></ul><p class="note">守則本一天一版，可是<strong>正文只講出兩個版號</strong>：第一天的第一千零四版，與第五天的第一千零七版。中間那幾天沒有寫出來，這一頁也就不替它們補上號碼。</p><p class="note">第五章與第六章是同一個禮拜，在時間上交錯。書把它們分成兩章講，是因為那個禮拜有兩件事同時在走：她一次一次去那間店，以及她坐下來查那六個名字。</p>
 <footer>
 <div class="dl" id="dl" hidden>
-  <button id="dlGo">下載語音，離線也能聽</button><span id="dlMsg"></span>
+  <button id="dlGo">下載語音包</button><span id="dlMsg"></span>
 </div>
 <p>《格莉奇與黑洞先生》　MIT　林亞澤　　角色設定正典在
 <a href="https://github.com/yazelin/ai-brain-site">ai-brain-site</a> 的 persona.json</p>

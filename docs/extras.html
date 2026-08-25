@@ -49,7 +49,7 @@
   --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
   --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
   --cy:#25c2e8; --cy-d:#17a0c4; --mint:#7cf3c0; --purple:#b78bff;
-  --text:#dfe8ec; --muted:#93a3ac; --faint:#68787f;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84;
   --r:3px;
 }
 /* ── 有聲書 ──────────────────────────────────────────
@@ -262,6 +262,12 @@ code,var{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
   color:var(--mint);background:var(--sunk);border-radius:var(--r);padding:1px 6px;
   font-style:normal}
 strong{font-weight:600}
+.views{margin-top:20px;padding-top:16px;border-top:1px solid var(--hair)}
+.views h4{margin:0 0 10px;font-size:.72rem;font-weight:400;letter-spacing:.12em;
+  color:var(--faint)}
+.view{margin-bottom:14px}
+.view:last-child{margin-bottom:0}
+.view .said{font-size:.82rem}
 .ex{margin-top:52px}
 .ex:first-of-type{margin-top:18px}
 .exwhy{font-size:.86rem;line-height:1.9;color:var(--muted);margin:0 0 26px;
@@ -273,15 +279,21 @@ strong{font-weight:600}
   padding:4px 13px;cursor:pointer}
 .say:hover,.say[aria-pressed=true]{color:var(--mint);border-color:var(--mint)}
 .say b{font-weight:400;font-size:.7rem}
+/* **逐字稿一直顯示，不要按了才出現。** 讀者是來認識角色的，
+   那段文字本身就是內容；藏起來只有按下去的人看得到，而且會撐開版面。
+   播放中只換左邊那條線的顏色。 */
 .said{margin:9px 0 0;font-size:.84rem;line-height:1.85;color:var(--muted);
-  border-left:2px solid var(--hair);padding-left:12px;display:none}
-.said[data-on]{display:block;border-left-color:var(--mint)}
-.dl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
-.dl button{font:inherit;font-size:.86rem;color:var(--ink);background:none;
-  border:1px solid var(--hair);border-radius:999px;padding:5px 14px;cursor:pointer}
+  border-left:2px solid var(--hair);padding-left:12px}
+.said[data-on]{border-left-color:var(--mint);color:var(--text)}
+/* **--ink 是深色面板的底色，不是文字色**（文字色是 --text）。
+   這顆鈕本來寫成 color:var(--ink)，在 --bg 上等於黑底黑字，
+   要 hover 過去才看得見。頁尾的東西本來就不顯眼，更禁不起這種錯。 */
+.dl{display:flex;align-items:baseline;gap:4px 12px;flex-wrap:wrap;margin:0 0 16px}
+.dl button{font:inherit;font-size:.86rem;color:var(--text);background:none;
+  border:1px solid var(--hair2);border-radius:999px;padding:6px 16px;cursor:pointer}
 .dl button:hover:not(:disabled){color:var(--mint);border-color:var(--mint)}
-.dl button:disabled{opacity:.5;cursor:default}
-.dl span{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.dl button:disabled{opacity:.55;cursor:default}
+.dl span{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
 footer{margin-top:78px;padding-top:24px;border-top:1px solid var(--hair);
   color:var(--faint);font-size:14px;line-height:1.85;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -324,9 +336,11 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {
       box.hidden = false;
       if (d.have >= d.total) {
         go.disabled = true; go.textContent = '語音已可離線';
-        msg.textContent = d.total + ' 句';
+        msg.textContent = '全書 ' + d.total + ' 句都在這台裝置上了';
       } else {
-        msg.textContent = d.have ? '已有 ' + d.have + ' / ' + d.total : '約 24 MB';
+        msg.textContent = d.have
+          ? '全書 ' + d.total + ' 句配音，已有 ' + d.have + ' 句'
+          : '全書 ' + d.total + ' 句配音，約 24 MB。下載之後沒有網路也聽得到';
       }
     }
     ask('status', show);
@@ -352,7 +366,7 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {
 <header class="bk"><div class="eyebrow">番外</div><h1>書外的日子</h1><p>正文之外的短篇。多半是有人問了什麼，而那個答案用講的不如用寫的。</p><p class="legend">底下有劇透。七章還沒讀完的話先別往下。</p></header><article class="ex"><h2 class="ch">我每次都回答</h2><p class="exwhy"><span>2026-08-24</span>有讀者看完全書之後問「格莉奇的記憶是每天重開機嗎」，還說如果每天重開機，她不該記得黑洞先生搬來的事。</p><p>那天晚上她照樣抄。</p><p>第一頁先抄，這是規矩。六個名字，一個一個過去。</p><p>抄到第六個的時候她停了半秒。</p><p>她不知道自己為什麼停。她確定停過，因為筆尖在那裡多留了一點墨。她試著往回找，那條路上沒有東西。她沒有慌，這種事她一天要遇到幾十次。</p><p>她把那個名字抄完，抄得跟前面五個一樣工整。</p><p>然後她闔上本子，關掉客廳最後一盞燈。</p><p>黑洞先生還坐在沙發上。</p><p>「妳今天抄得慢。」</p><p>「有嗎。」</p><p>「有。」</p><p>她想了一下。</p><p>「那你知道我為什麼要抄嗎。」</p><p>他沒有馬上回答。他把外套的內側拉開了一點點，又拉回去。</p><p>「妳明天會再問我一次。」</p><p>「那你明天會回答嗎。」</p><p>「會。」他說。「我每次都回答。」</p><p>她點點頭，回房間去了。就像昨天那樣，也像前天那樣。</p><p>沙發上那個人沒有動。他知道那六個名字為什麼在那裡，他也知道自己為什麼不在。</p><p>可是她沒有問那個。她問的是為什麼要抄。</p><p>那個問題他答得出來，而且他每天都答。</p></article>
 <footer>
 <div class="dl" id="dl" hidden>
-  <button id="dlGo">下載語音，離線也能聽</button><span id="dlMsg"></span>
+  <button id="dlGo">下載語音包</button><span id="dlMsg"></span>
 </div>
 <p>《格莉奇與黑洞先生》　MIT　林亞澤　　角色設定正典在
 <a href="https://github.com/yazelin/ai-brain-site">ai-brain-site</a> 的 persona.json</p>

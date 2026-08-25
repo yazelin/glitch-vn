@@ -49,7 +49,7 @@
   --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
   --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
   --cy:#25c2e8; --cy-d:#17a0c4; --mint:#7cf3c0; --purple:#b78bff;
-  --text:#dfe8ec; --muted:#93a3ac; --faint:#68787f;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84;
   --r:3px;
 }
 /* ── 有聲書 ──────────────────────────────────────────
@@ -262,6 +262,12 @@ code,var{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
   color:var(--mint);background:var(--sunk);border-radius:var(--r);padding:1px 6px;
   font-style:normal}
 strong{font-weight:600}
+.views{margin-top:20px;padding-top:16px;border-top:1px solid var(--hair)}
+.views h4{margin:0 0 10px;font-size:.72rem;font-weight:400;letter-spacing:.12em;
+  color:var(--faint)}
+.view{margin-bottom:14px}
+.view:last-child{margin-bottom:0}
+.view .said{font-size:.82rem}
 .ex{margin-top:52px}
 .ex:first-of-type{margin-top:18px}
 .exwhy{font-size:.86rem;line-height:1.9;color:var(--muted);margin:0 0 26px;
@@ -273,15 +279,21 @@ strong{font-weight:600}
   padding:4px 13px;cursor:pointer}
 .say:hover,.say[aria-pressed=true]{color:var(--mint);border-color:var(--mint)}
 .say b{font-weight:400;font-size:.7rem}
+/* **逐字稿一直顯示，不要按了才出現。** 讀者是來認識角色的，
+   那段文字本身就是內容；藏起來只有按下去的人看得到，而且會撐開版面。
+   播放中只換左邊那條線的顏色。 */
 .said{margin:9px 0 0;font-size:.84rem;line-height:1.85;color:var(--muted);
-  border-left:2px solid var(--hair);padding-left:12px;display:none}
-.said[data-on]{display:block;border-left-color:var(--mint)}
-.dl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
-.dl button{font:inherit;font-size:.86rem;color:var(--ink);background:none;
-  border:1px solid var(--hair);border-radius:999px;padding:5px 14px;cursor:pointer}
+  border-left:2px solid var(--hair);padding-left:12px}
+.said[data-on]{border-left-color:var(--mint);color:var(--text)}
+/* **--ink 是深色面板的底色，不是文字色**（文字色是 --text）。
+   這顆鈕本來寫成 color:var(--ink)，在 --bg 上等於黑底黑字，
+   要 hover 過去才看得見。頁尾的東西本來就不顯眼，更禁不起這種錯。 */
+.dl{display:flex;align-items:baseline;gap:4px 12px;flex-wrap:wrap;margin:0 0 16px}
+.dl button{font:inherit;font-size:.86rem;color:var(--text);background:none;
+  border:1px solid var(--hair2);border-radius:999px;padding:6px 16px;cursor:pointer}
 .dl button:hover:not(:disabled){color:var(--mint);border-color:var(--mint)}
-.dl button:disabled{opacity:.5;cursor:default}
-.dl span{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.dl button:disabled{opacity:.55;cursor:default}
+.dl span{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
 footer{margin-top:78px;padding-top:24px;border-top:1px solid var(--hair);
   color:var(--faint);font-size:14px;line-height:1.85;
   font-family:system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
@@ -324,9 +336,11 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {
       box.hidden = false;
       if (d.have >= d.total) {
         go.disabled = true; go.textContent = '語音已可離線';
-        msg.textContent = d.total + ' 句';
+        msg.textContent = '全書 ' + d.total + ' 句都在這台裝置上了';
       } else {
-        msg.textContent = d.have ? '已有 ' + d.have + ' / ' + d.total : '約 24 MB';
+        msg.textContent = d.have
+          ? '全書 ' + d.total + ' 句配音，已有 ' + d.have + ' 句'
+          : '全書 ' + d.total + ' 句配音，約 24 MB。下載之後沒有網路也聽得到';
       }
     }
     ask('status', show);
@@ -372,7 +386,7 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {
 
 <footer>
 <div class="dl" id="dl" hidden>
-  <button id="dlGo">下載語音，離線也能聽</button><span id="dlMsg"></span>
+  <button id="dlGo">下載語音包</button><span id="dlMsg"></span>
 </div>
 <p>《格莉奇與黑洞先生》　MIT　林亞澤　　角色設定正典在
 <a href="https://github.com/yazelin/ai-brain-site">ai-brain-site</a> 的 persona.json</p>
