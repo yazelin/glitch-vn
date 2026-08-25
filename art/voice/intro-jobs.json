@@ -1,18 +1,18 @@
 [
  {
-  "out": "/home/ct/glitch-vn/art/voice/intro/noah.wav",
-  "text": "修收音機的。店在頂樓，招牌是從樓下騎樓搬上來的，字看不清楚了沒關係，要找的人找得到。樓下那個小姑娘常常把自己鎖在門外。她一個禮拜來問我三次同一件事。我每次都回答。因為她每次都是第一次問啊。",
-  "prompt_wav": "/home/ct/glitch-vn/voice-ref/noah.wav",
-  "prompt_text": "一九六四年的。真空管的。這種東西現在沒有人修了，因為零件停產四十年了。",
-  "speed": 0.9,
-  "instruct": "用台灣腔的中文說，用一位七十幾歲老人溫和、緩慢、寬容的語氣說"
+  "out": "/home/ct/glitch-vn/art/voice/intro/glitch.wav",
+  "text": "大家好，我是格莉奇。虛擬主播，頻道第二年。我的記憶體只有四KB。這句話我每天都要講一次。真的沒有那麼少啦。可是我手邊確實放不下，滿了就把最舊的一整件擠掉。所以我每天晚上都會抄一次守則本。第一頁有七航，上面有六個名字。我知道有第七個。我只是叫不出來。",
+  "prompt_wav": "/home/ct/glitch-vn/voice-ref/glitch.wav",
+  "prompt_text": "有五百次。這首是我知道的那一首。一、二、三、四、五、六。",
+  "speed": 1.0,
+  "instruct": "用台灣腔的中文說，不要唱，很開心、語速偏快"
  },
  {
-  "out": "/home/ct/glitch-vn/art/voice/intro/view-noah-blackhole.wav",
-  "text": "樓下那位先生。每天七點過後回來，西裝、帽子，短靴擦得很亮。我們在樓梯口點過頭很多次了，沒講過話。有些人不用講話，你看他站在那裡就知道他不會走。",
-  "prompt_wav": "/home/ct/glitch-vn/voice-ref/noah.wav",
-  "prompt_text": "一九六四年的。真空管的。這種東西現在沒有人修了，因為零件停產四十年了。",
-  "speed": 0.9,
-  "instruct": "用台灣腔的中文說，用一位七十幾歲老人溫和、緩慢、寬容的語氣說"
+  "out": "/home/ct/glitch-vn/art/voice/intro/view-glitch-catgrass.wav",
+  "text": "貓草是全勤喔！等級八十！他每次都說他只是剛好有空。可是「剛好有空」兩年欸。這個我有記起來。",
+  "prompt_wav": "/home/ct/glitch-vn/voice-ref/glitch.wav",
+  "prompt_text": "有五百次。這首是我知道的那一首。一、二、三、四、五、六。",
+  "speed": 1.0,
+  "instruct": "用台灣腔的中文說，用平常講話的語氣，不要唱"
  }
 ]
