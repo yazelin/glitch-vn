@@ -31,7 +31,12 @@ def main():
     fix = "--fix" in sys.argv
     total = 0
     for d in (ROOT / "art/voice", ROOT / "docs/voice"):
-        orphans = [p for p in sorted(d.glob("*.mp3")) if p.stem not in keep]
+        # **只掃 v- 開頭的。** keep 裡面裝的全部是 sha1 算出來的 v-<hex>，
+        # 所以任何不是那個命名的檔一定不在 keep 裡，glob("*.mp3") 會把它們
+        # 通通當成孤兒。角色頁那 15 段自介（intro-*.mp3、view-*.mp3）
+        # 就是這樣被刪掉的（2026-08-26），而且刪完不會報錯，
+        # 只是重建頁面之後那 15 顆播放鈕整批消失。
+        orphans = [p for p in sorted(d.glob("v-*.mp3")) if p.stem not in keep]
         print(f"{d.relative_to(ROOT)}：{len(orphans)} 個孤兒")
         total += len(orphans)
         if fix:
@@ -46,5 +51,26 @@ def main():
         print("記得跑 python3 tools/publish_voice.py 讓網址表跟上。")
 
 
+def selfcheck():
+    """孤兒判定的自我檢查。**只驗一件事：非 v- 命名的檔不可以被當成孤兒。**
+
+    這一條是踩出來的，見 main() 裡那段註解。
+    """
+    import tempfile
+    with tempfile.TemporaryDirectory() as t:
+        d = pathlib.Path(t)
+        for n in ("v-deadbeefdeadbeef.mp3", "intro-glitch.mp3", "view-noah-blackhole.mp3"):
+            (d / n).write_bytes(b"")
+        keep = {"v-0123456789abcdef"}
+        orphans = [p.name for p in sorted(d.glob("v-*.mp3")) if p.stem not in keep]
+        assert orphans == ["v-deadbeefdeadbeef.mp3"], orphans
+        wide = [p.name for p in sorted(d.glob("*.mp3")) if p.stem not in keep]
+        assert "intro-glitch.mp3" in wide, "負控制失效：舊的寫法應該會誤判"
+    print("selfcheck 過：intro-／view- 不會被當成孤兒，而且舊寫法確實會誤判")
+
+
 if __name__ == "__main__":
-    main()
+    if "--selfcheck" in sys.argv:
+        selfcheck()
+    else:
+        main()

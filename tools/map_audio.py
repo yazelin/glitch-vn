@@ -145,7 +145,14 @@ def main():
     per = vn_lines()
     out, tot_p, tot_s = {}, 0, 0
     for ch in sorted(per):
-        md = (ROOT / f"novel/ch{ch:02d}.md").read_text(encoding="utf-8")
+        # **第八章是片尾，沒有小說正文。** 不跳過的話這裡會 FileNotFoundError，
+        # 而且整支腳本從此跑不完 —— 對應表就再也沒有重生過，
+        # 有聲書會一直指著舊的音檔（2026-08 抓到 44 步是舊的）。
+        src = ROOT / f"novel/ch{ch:02d}.md"
+        if not src.exists():
+            print(f"第{ch}章　沒有小說正文（片尾），跳過")
+            continue
+        md = src.read_text(encoding="utf-8")
         paras = paragraphs(md)
         steps = align(paras, per[ch])
         rows = [{"paras": ps, "url": urls[k]} for ps, k in steps if k in urls]
