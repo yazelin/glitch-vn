@@ -6,7 +6,7 @@ import pathlib, json, pathlib, urllib.request
 
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 PROJ = "project-e14f9260-e4c0-4ce7-9d2d-70203cdec591"
-BASE = f"https://larch.yapiflow.com/api/agent/projects/{PROJ}"
+BASE = f"https://larch.ink/api/agent/projects/{PROJ}"
 H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 A = json.loads((pathlib.Path(__file__).resolve().parent.parent / "backup" / "assets.json").read_text())
 

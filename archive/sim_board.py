@@ -14,7 +14,7 @@ K = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 P = "project-e14f9260-e4c0-4ce7-9d2d-70203cdec591"
 
 d = json.load(urllib.request.urlopen(urllib.request.Request(
-    f"https://larch.yapiflow.com/api/agent/projects/{P}",
+    f"https://larch.ink/api/agent/projects/{P}",
     headers={"Authorization": f"Bearer {K}"}), timeout=120))
 BID = sys.argv[1]
 b = [x for x in d["boards"] if x["id"] == BID][0]

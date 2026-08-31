@@ -7,7 +7,7 @@ import json, pathlib, time, urllib.error, urllib.request
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PROJ = "project-bec1644c-0dfe-4447-86c0-0c592e2f939f"
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
-BASE = f"https://larch.yapiflow.com/api/agent/projects/{PROJ}"
+BASE = f"https://larch.ink/api/agent/projects/{PROJ}"
 H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 STORE = ROOT / "larch/assets.json"
 

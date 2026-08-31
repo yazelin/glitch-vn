@@ -39,7 +39,7 @@ def main():
     idx = int(argv[0]) if argv else 8
     out = argv[1] if len(argv) > 1 else "/tmp/preview.jpg"
     p = json.load(urllib.request.urlopen(urllib.request.Request(
-        f"https://larch.yapiflow.com/api/agent/projects/{PROJ}",
+        f"https://larch.ink/api/agent/projects/{PROJ}",
         headers={"Authorization": f"Bearer {K}"}), timeout=180))
     board = next((b for b in p["boards"] if b["id"] == bid), None) if bid \
         else p["boards"][0]

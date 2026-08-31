@@ -18,7 +18,7 @@ import json, pathlib, urllib.request
 
 K = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 P = "project-e14f9260-e4c0-4ce7-9d2d-70203cdec591"
-BASE = f"https://larch.yapiflow.com/api/agent/projects/{P}"
+BASE = f"https://larch.ink/api/agent/projects/{P}"
 H = {"Authorization": f"Bearer {K}", "Content-Type": "application/json"}
 
 TOKENS = ["她給的", "她給的。", "不要數", "不要數。", "看妳睡", "看妳睡。", "以前", "以前。"]

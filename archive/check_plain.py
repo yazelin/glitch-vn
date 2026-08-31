@@ -17,7 +17,7 @@ import json, os, pathlib, re, sys, urllib.request
 K = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 P = "project-e14f9260-e4c0-4ce7-9d2d-70203cdec591"
 d = json.load(urllib.request.urlopen(urllib.request.Request(
-    f"https://larch.yapiflow.com/api/agent/projects/{P}",
+    f"https://larch.ink/api/agent/projects/{P}",
     headers={"Authorization": f"Bearer {K}"}), timeout=120))
 DAYS = sorted([b for b in d["boards"] if b["id"].startswith(("board-day", "board-v2-day"))],
               key=lambda b: int(b["id"].split("day")[-1]) + (100 if "v2" in b["id"] else 0))

@@ -123,7 +123,7 @@ Larch 自己的「角色工坊」提示詞裡寫得很清楚，skill 文件沒�
 
 市集上別人發佈的作品**可以直接抓下來讀，不用登入**：
 
-    GET https://larch.yapiflow.com/api/marketplace/{發佈 id}?play=1
+    GET https://larch.ink/api/marketplace/{發佈 id}?play=1
 
 回的是完整的專案 JSON。這是目前為止最有用的一份資料來源——
 skill 文件與範例專案都沒有這麼完整。以下全部是從那裡讀出來的實際用值：

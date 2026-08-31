@@ -33,7 +33,7 @@
 一萬兩千字，七百句配音。這支影片從第一句放到最後一句，內容沒有剪，只拿掉了開頭的載入畫面。
 
 ▍自己玩一次
-https://larch.yapiflow.com/play/market/a2a10427-7326-4a86-b806-c2476fc1c22a
+https://larch.ink/play/market/a2a10427-7326-4a86-b806-c2476fc1c22a
 
 ▍只想讀文字（附逐句朗讀的有聲書）
 https://yazelin.github.io/glitch-vn/novel.html
@@ -51,7 +51,7 @@ https://yazelin.github.io/glitch-vn/novel.html
 
 ▍平台：Larch
 這部作品跑在 Larch 上，一個做視覺小說的平台。
-https://larch.yapiflow.com
+https://larch.ink
 
 用它的理由很實際：卡片、分歧、變數、立繪站位、表情差分、背景樂、
 片尾的小遊戲卡，這些都是現成的，不用自己寫播放器。它也有 agent API，

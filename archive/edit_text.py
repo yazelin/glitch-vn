@@ -8,7 +8,7 @@
 import pathlib, json, sys, urllib.request
 K = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 P = "project-e14f9260-e4c0-4ce7-9d2d-70203cdec591"
-BASE = f"https://larch.yapiflow.com/api/agent/projects/{P}"
+BASE = f"https://larch.ink/api/agent/projects/{P}"
 H = {"Authorization": f"Bearer {K}", "Content-Type": "application/json"}
 proj = json.load(urllib.request.urlopen(urllib.request.Request(BASE, headers=H), timeout=120))
 hits = []
