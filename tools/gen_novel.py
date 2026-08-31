@@ -455,7 +455,7 @@ JSONLD = """{"@context":"https://schema.org","@type":"Book","name":"格莉奇與
 "inLanguage":"zh-Hant","bookFormat":"https://schema.org/EBook","numberOfPages":7,
 "url":"URL","image":"URLimg/og.jpg","genre":"科幻小說",
 "author":{"@type":"Person","name":"林亞澤","url":"https://yazelin.github.io/"},
-"description":"DESC","license":"https://opensource.org/licenses/MIT",
+"description":"DESC","license":"https://creativecommons.org/licenses/by-nc/4.0/",
 "character":[CHARS]}""".replace("URL", BASE)
 
 
@@ -570,7 +570,7 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {{
 <div class="dl" id="dl" hidden>
   <button id="dlGo">下載語音包</button><span id="dlMsg"></span>
 </div>
-<p>《格莉奇與黑洞先生》　MIT　林亞澤　　角色設定正典在
+<p>《格莉奇與黑洞先生》　<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh_TW">CC BY-NC 4.0</a>　林亞澤　　角色設定正典在
 <a href="https://github.com/yazelin/ai-brain-site">ai-brain-site</a> 的 persona.json</p>
 {PROMO}
 </footer>

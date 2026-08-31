@@ -137,6 +137,6 @@ GitHub https://github.com/yazelin
 Facebook https://www.facebook.com/yaze.lin.gm
 請亞澤喝咖啡 https://buymeacoffee.com/yazelin
 
-作品採用 CC BY-NC，工具的部分是 MIT。
+作品（小說、立繪、配音）採用 CC BY-NC 4.0，工具與程式碼是 MIT。
 
 #視覺小說 #視覺小說製作 #Larch #AI創作 #獨立創作 #有聲書 #原創小說

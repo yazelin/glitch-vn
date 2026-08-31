@@ -205,5 +205,9 @@
 
 ## 授權
 
-MIT，林亞澤。角色（格莉奇、黑洞先生）的設定正典在
+**雙軌**：小說正文、立繪、配音與站台內容是 **CC BY-NC 4.0**（見 `LICENSE`），
+工具與程式碼是 **MIT**（見 `LICENSE-CODE`）。兩者都是林亞澤。
+
+創作內容可以自由分享改作、須標示出處、不可商用；商業使用含角色授權要先問過。
+角色（格莉奇、黑洞先生）的設定正典在
 [ai-brain-site](https://github.com/yazelin/ai-brain-site) 的 `persona.json`。
