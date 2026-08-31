@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""生分享用的 OG 圖（1200x630）與 favicon。
+"""生分享用的 OG 圖（1200x630）、寬幅橫幅（1600x520）與 favicon。
 
 不用生成模型畫：這張圖的內容是既有的立繪加標題，用合成的比較準、字比較利，
 而且改標題重跑就好。字型用系統的 Noto Serif CJK TC。
@@ -52,6 +52,40 @@ d.text((cx, 452), "她記得六個。", font=f(SERIF, 44), fill=MINT, anchor="mm
 
 c.save(IMG / "og.jpg", quality=88, optimize=True)
 print(f"  og.jpg 1200x630  {(IMG / 'og.jpg').stat().st_size // 1024} KB")
+
+# ── 寬幅橫幅 1600x520 ──────────────────────────────────
+# 給 Larch 個人頁那種寬版頭圖用。**不要拿 og.jpg 去裁**：3.08:1 太扁，
+# 全身立繪塞進去只剩一條，字也會被壓到沒有空間。改成只留上半身、字橫排。
+def bust(name, h, keep=0.52):
+    """上半身：從去背後的 bbox 取上面 keep 的比例，再縮到高度 h。"""
+    im = Image.open(ROOT / f"art/sprite-{name}.png").convert("RGBA")
+    im = im.crop(im.getchannel("A").getbbox())
+    im = im.crop((0, 0, im.width, int(im.height * keep)))
+    im.thumbnail((900, h), Image.LANCZOS)
+    return im
+
+
+W2, H2 = 1600, 520
+w = Image.new("RGB", (W2, H2), BG)
+d2 = ImageDraw.Draw(w)
+for x in range(W2):
+    tt = x / W2
+    d2.line([(x, H2 - 5), (x, H2)], fill=(int(0x25 + (0x7c - 0x25) * tt),
+                                          int(0xc2 + (0xf3 - 0xc2) * tt),
+                                          int(0xe8 + (0xc0 - 0xe8) * tt)))
+
+gb, bb = bust("glitch", 500), bust("blackhole", 520)
+w.paste(gb, (24, H2 - 5 - gb.height), gb)
+w.paste(bb, (W2 - bb.width - 16, H2 - 5 - bb.height), bb)
+
+cx2 = W2 // 2
+d2.text((cx2, 132), "繁體中文小說・全七章", font=f(MONO, 24), fill=CY, anchor="mm")
+d2.text((cx2, 214), "格莉奇與黑洞先生", font=f(SERIF, 72), fill=TEXT, anchor="mm")
+d2.text((cx2, 296), "她說，我要記住每一個來的人，我保證。", font=f(SERIF_R, 27), fill=MUTED, anchor="mm")
+d2.text((cx2, 370), "她記得六個。", font=f(SERIF, 40), fill=MINT, anchor="mm")
+
+w.save(IMG / "og-wide.jpg", quality=88, optimize=True)
+print(f"  og-wide.jpg 1600x520  {(IMG / 'og-wide.jpg').stat().st_size // 1024} KB")
 
 # favicon：格莉奇的頭，方形去背 PNG
 gg = Image.open(ROOT / "art/sprite-glitch.png").convert("RGBA")
