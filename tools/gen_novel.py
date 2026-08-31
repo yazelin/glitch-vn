@@ -79,6 +79,24 @@ CSS = """
    照這個站的規則走：青色是靜止色，綠是 hover 色。 */
 /* **hidden 要自己擋。** .ab 設了 display:flex，優先權高過瀏覽器對 [hidden]
    的預設 display:none，所以控制列會從載入就顯示，跟「聽有聲書」那顆疊在一起。 */
+/* ── 色票 ──────────────────────────────────────────────
+   色塊要夠大才看得出色差：48px 高是實測下限，再小的話 #3e3761 跟 #4e4675
+   在筆電螢幕上看起來一樣。 */
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pal .sw{flex:1 1 132px;min-width:132px;border:1px solid var(--hair2);border-radius:var(--r);
+  overflow:hidden;background:var(--win)}
+.pal .sw i{display:block;height:48px}
+.pal .sw span{display:block;padding:6px 8px;font-size:.78rem;color:var(--muted);line-height:1.5}
+.pal .sw b{display:block;color:var(--text);font-weight:400;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;
+  word-break:break-all}  /* rgba() 那兩格會超出格子，要允許斷行 */
+.pal .sw em{display:block;font-style:normal;color:var(--muted);font-size:.72rem}
+/* **不要用 --faint。** 它配在 --win 上只有 4.26:1，沒到 WCAG 一般文字的 4.5:1，
+   而這行小字就是佔比與對比數字，看不清楚等於沒有。--muted 是 6.99:1。 */
+.palsec{margin-top:48px;padding-top:24px;border-top:1px solid var(--hair2)}
+.palsec h3{margin:24px 0 0;font-size:.95rem;color:var(--muted);font-weight:400}
+.palrule{color:var(--muted);font-size:.88rem;line-height:1.8;margin:8px 0}
+
 .ab[hidden],.abOpen[hidden]{display:none}
 .ab{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:40;
   display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:999px;
@@ -706,11 +724,67 @@ def say(slug, name):
             f'<p class="said" id="said-{slug}">{html.escape(d["text"])}</p>')
 
 # ── 角色頁 ──────────────────────────────────────────────
+# ── 配色 ────────────────────────────────────────────────
+# **一份資料兩個用途**：站台自己在用的顏色，以及拿去別處（Larch 個人頁、
+# 投影片、周邊）要抄的顏色。所以這一節同時列畫面色與立繪色，並寫明何時用哪組。
+# 兩者對不上是常態（正典寫發光色，立繪畫的是粉彩），混用會出現「顏色很像
+# 但就是不對」的圖。
+PAL = json.loads((ROOT / "design/palette.json").read_text(encoding="utf-8"))
+
+# **站台的值與 palette.json 必須一致。** 不檢查的話，改了 :root 而忘記改資料檔，
+# 色卡就會安靜地變成過期的說明書，而那要等有人拿去用了才會發現。
+_root = re.search(r":root\{(.*?)\}", CSS, re.S).group(1)
+_live = dict((k, v.strip()) for k, v in re.findall(r"--([\w-]+):\s*([^;]+);", _root))
+_bad = [k for k, d in PAL["site"].items() if _live.get(k) != d["hex"]]
+_new = sorted(set(_live) - set(PAL["site"]))
+if _bad or _new:
+    raise SystemExit(f"design/palette.json 跟 :root 對不上：{_bad or _new}（改完 :root 要一起改資料檔）")
+
+
+def _lum(h):
+    c = [int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+    f = [x / 12.92 if x <= .03928 else ((x + .055) / 1.055) ** 2.4 for x in c]
+    return .2126 * f[0] + .7152 * f[1] + .0722 * f[2]
+
+
+def contrast(a, b):
+    la, lb = _lum(a), _lum(b)
+    return (max(la, lb) + .05) / (min(la, lb) + .05)
+
+
+def swatch(hex_, label, sub=""):
+    return (f'<div class="sw"><i style="background:{hex_}"></i>'
+            f'<span>{html.escape(label)}<b>{html.escape(hex_)}</b>'
+            + (f'<em>{html.escape(sub)}</em>' if sub else "") + '</span></div>')
+
+
+def cast_swatches(name):
+    d = PAL["cast"].get(name, {})
+    out = [swatch(c["hex"], c["name"], "正典") for c in d.get("canon", [])]
+    # **頭部色排在立繪色前面。** 那是識別色（髮、帽、眼），面積比不過衣服，
+    # 可是「像不像這個人」看的是它。
+    art = sorted(d.get("art", []), key=lambda c: c.get("region") != "頭部")
+    out += [swatch(c["hex"], "頭部" if c.get("region") == "頭部" else "立繪",
+                   f'佔比 {c["share"] * 100:.1f}%') for c in art]
+    return f'<div class="pal">{"".join(out)}</div>' if out else ""
+
+
+_site_rows = "".join(
+    swatch(d["hex"], d["role"] or k,
+           f'{contrast(d["hex"], PAL["site"]["bg"]["hex"]):.1f}:1')
+    if d["hex"].startswith("#") else swatch(d["hex"], d["role"] or k, "疊在底色上")
+    for k, d in PAL["site"].items() if k != "r")
+
+PALETTE_HTML = ('<section class="palsec"><h2>配色</h2>'
+                + "".join(f'<p class="palrule">{r.replace("**", "")}</p>' for r in PAL["rules"])
+                + f'<h3>畫面色・站台 CSS 變數（括號是對底色的對比）</h3>'
+                + f'<div class="pal">{_site_rows}</div></section>')
+
 cards = "".join(f'''<div class="card">
 <div class="pic"><img src="img/{k}-full.webp" alt="{html.escape(n)}" loading="lazy"></div>
 <div><h3>{html.escape(n)}</h3>
 <div class="id">{html.escape(i) or "&nbsp;"}</div>
-<p>{html.escape(d)}</p><q>「{html.escape(q)}」</q>{say(k, n)}{others(k)}</div></div>''' for k, n, i, d, q in CAST)
+<p>{html.escape(d)}</p><q>「{html.escape(q)}」</q>{say(k, n)}{others(k)}{cast_swatches(n)}</div></div>''' for k, n, i, d, q in CAST)
 
 (DOCS / "characters.html").write_text(page(
     "角色・格莉奇與黑洞先生",
@@ -718,7 +792,7 @@ cards = "".join(f'''<div class="card">
     f'''<header class="bk"><div class="eyebrow">角色</div>
 <h1>名單上的人</h1>
 <p>守則本第一頁上有七行。上面只有六個名字。</p></header>
-<div class="cast">{cards}</div>''', "characters.html", wide=True, js=SAY_JS), encoding="utf-8")
+<div class="cast">{cards}</div>{PALETTE_HTML}''', "characters.html", wide=True, js=SAY_JS), encoding="utf-8")
 
 # ── 時間軸 ──────────────────────────────────────────────
 # **○ 是推的，其餘是正文寫死的。** 兩種一定要分開標，不然讀者會把推論當成

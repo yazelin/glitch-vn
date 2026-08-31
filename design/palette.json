@@ -1,0 +1,413 @@
+{
+ "_readme": "glitch-vn 的顏色單一事實來源。site 那組是站台 CSS 變數的副本，值必須跟 tools/gen_novel.py 的 :root 一致（gen_novel 會檢查，不一致就報錯）。cast.*.art 由 tools/sample_palette.py --write 從立繪量出來，不要手改。cast.*.canon 是文字正典寫死的 hex，來源在 ai-brain-site/persona.json。",
+ "rules": [
+  "**兩組色不要混用。** 畫面色（site 與 canon）是螢幕發光調，給站台 UI、Larch 個人頁、投影片用；立繪色（art）是粉彩調，給生新圖、漫畫、周邊當參考。",
+  "同一個角色兩組對不上是正常的：正典寫她的髮色是 #7cf3c0，立繪實際量到最接近的是 #accfe4，差 70/255。拿 #7cf3c0 去生圖，出來的會比現有立繪亮一截。",
+  "站台的用色規則：青（--cy）是靜止色，薄荷（--mint）是 hover 色。",
+  "art 那組照面積與彩度各取前幾名，再加一份頭部區取樣（站姿立繪的髮色全身量不到）。佔比低於 0.5% 的不收，那多半是量化平均出來的假色。"
+ ],
+ "site": {
+  "bg": {
+   "hex": "#04080c",
+   "role": "底色。整站背景"
+  },
+  "ink": {
+   "hex": "#0b1a22",
+   "role": "墨底。章節分隔與深色塊"
+  },
+  "win": {
+   "hex": "#11161b",
+   "role": "面板。卡片、控制列、視窗"
+  },
+  "sunk": {
+   "hex": "#0a1319",
+   "role": "下沉面。輸入框、內嵌區塊"
+  },
+  "hair": {
+   "hex": "rgba(255,255,255,.07)",
+   "role": "分隔線（淡）"
+  },
+  "hair2": {
+   "hex": "rgba(255,255,255,.12)",
+   "role": "分隔線（明顯）"
+  },
+  "cy": {
+   "hex": "#25c2e8",
+   "role": "主色・靜止。連結與按鈕的預設狀態"
+  },
+  "cy-d": {
+   "hex": "#17a0c4",
+   "role": "主色・深。按下與邊框"
+  },
+  "mint": {
+   "hex": "#7cf3c0",
+   "role": "強調・hover。滑過與播放中"
+  },
+  "purple": {
+   "hex": "#b78bff",
+   "role": "第二強調。次要標記、她的另一半髮色"
+  },
+  "text": {
+   "hex": "#dfe8ec",
+   "role": "正文"
+  },
+  "muted": {
+   "hex": "#93a3ac",
+   "role": "次要文字"
+  },
+  "faint": {
+   "hex": "#6d7d84",
+   "role": "最淡文字。註記與時間戳"
+  },
+  "r": {
+   "hex": "3px",
+   "role": "圓角半徑"
+  }
+ },
+ "cast": {
+  "格莉奇": {
+   "canon": [
+    {
+     "hex": "#7cf3c0",
+     "name": "cyber mint・髮色起點",
+     "source": "ai-brain-site/persona.json characters.glitch.identity"
+    },
+    {
+     "hex": "#b78bff",
+     "name": "neon purple・髮色漸層終點",
+     "source": "ai-brain-site/persona.json characters.glitch.identity"
+    }
+   ],
+   "sprite": "art/sprite-glitch.png",
+   "art": [
+    {
+     "hex": "#c3bced",
+     "share": 0.0379,
+     "sat": 0.21
+    },
+    {
+     "hex": "#fdebe9",
+     "share": 0.0364,
+     "sat": 0.08
+    },
+    {
+     "hex": "#babbe8",
+     "share": 0.0321,
+     "sat": 0.2
+    },
+    {
+     "hex": "#281c41",
+     "share": 0.0208,
+     "sat": 0.57
+    },
+    {
+     "hex": "#3e3761",
+     "share": 0.0311,
+     "sat": 0.43
+    },
+    {
+     "hex": "#68538c",
+     "share": 0.0125,
+     "sat": 0.41
+    },
+    {
+     "hex": "#caeef4",
+     "share": 0.1017,
+     "sat": 0.17,
+     "region": "頭部"
+    },
+    {
+     "hex": "#d2e7f7",
+     "share": 0.0771,
+     "sat": 0.15,
+     "region": "頭部"
+    }
+   ]
+  },
+  "黑洞先生": {
+   "canon": [],
+   "_note": "persona.json 只有文字（金色軟呢帽、深色西裝、星雲質感的頭），沒有 hex",
+   "sprite": "art/sprite-blackhole.png",
+   "art": [
+    {
+     "hex": "#232c3b",
+     "share": 0.0525,
+     "sat": 0.41
+    },
+    {
+     "hex": "#283140",
+     "share": 0.0459,
+     "sat": 0.38
+    },
+    {
+     "hex": "#202028",
+     "share": 0.0431,
+     "sat": 0.2
+    },
+    {
+     "hex": "#39598d",
+     "share": 0.0268,
+     "sat": 0.6
+    },
+    {
+     "hex": "#06090f",
+     "share": 0.0186,
+     "sat": 0.6
+    },
+    {
+     "hex": "#243658",
+     "share": 0.0094,
+     "sat": 0.59
+    },
+    {
+     "hex": "#b8874c",
+     "share": 0.1584,
+     "sat": 0.59,
+     "region": "頭部"
+    },
+    {
+     "hex": "#536488",
+     "share": 0.097,
+     "sat": 0.39,
+     "region": "頭部"
+    }
+   ]
+  },
+  "貓草": {
+   "sprite": "art/sprite-catgrass.png",
+   "art": [
+    {
+     "hex": "#403868",
+     "share": 0.0403,
+     "sat": 0.46
+    },
+    {
+     "hex": "#5a4b81",
+     "share": 0.0382,
+     "sat": 0.42
+    },
+    {
+     "hex": "#645282",
+     "share": 0.0305,
+     "sat": 0.37
+    },
+    {
+     "hex": "#060623",
+     "share": 0.026,
+     "sat": 0.83
+    },
+    {
+     "hex": "#15163a",
+     "share": 0.0238,
+     "sat": 0.64
+    },
+    {
+     "hex": "#29255a",
+     "share": 0.0235,
+     "sat": 0.59
+    },
+    {
+     "hex": "#4a4170",
+     "share": 0.0902,
+     "sat": 0.42,
+     "region": "頭部"
+    },
+    {
+     "hex": "#eed5d6",
+     "share": 0.0735,
+     "sat": 0.11,
+     "region": "頭部"
+    }
+   ]
+  },
+  "鐵塔": {
+   "sprite": "art/sprite-tower.png",
+   "art": [
+    {
+     "hex": "#261e4e",
+     "share": 0.0505,
+     "sat": 0.62
+    },
+    {
+     "hex": "#352b56",
+     "share": 0.0405,
+     "sat": 0.5
+    },
+    {
+     "hex": "#1e1641",
+     "share": 0.0373,
+     "sat": 0.66
+    },
+    {
+     "hex": "#241756",
+     "share": 0.0147,
+     "sat": 0.73
+    },
+    {
+     "hex": "#331f70",
+     "share": 0.0178,
+     "sat": 0.72
+    },
+    {
+     "hex": "#1e154c",
+     "share": 0.0171,
+     "sat": 0.72
+    },
+    {
+     "hex": "#3c3364",
+     "share": 0.1229,
+     "sat": 0.49,
+     "region": "頭部"
+    },
+    {
+     "hex": "#f3ccc6",
+     "share": 0.0928,
+     "sat": 0.19,
+     "region": "頭部"
+    }
+   ]
+  },
+  "0x": {
+   "sprite": "art/sprite-zerox.png",
+   "art": [
+    {
+     "hex": "#272548",
+     "share": 0.0508,
+     "sat": 0.49
+    },
+    {
+     "hex": "#d5d2eb",
+     "share": 0.0497,
+     "sat": 0.11
+    },
+    {
+     "hex": "#1a1937",
+     "share": 0.0342,
+     "sat": 0.55
+    },
+    {
+     "hex": "#17142e",
+     "share": 0.0307,
+     "sat": 0.57
+    },
+    {
+     "hex": "#0f0c1b",
+     "share": 0.0235,
+     "sat": 0.56
+    },
+    {
+     "hex": "#d7d3ec",
+     "share": 0.1044,
+     "sat": 0.11,
+     "region": "頭部"
+    },
+    {
+     "hex": "#d3d0e9",
+     "share": 0.1036,
+     "sat": 0.11,
+     "region": "頭部"
+    },
+    {
+     "hex": "#16162c",
+     "share": 0.0458,
+     "sat": 0.5,
+     "region": "頭部"
+    }
+   ]
+  },
+  "斑比": {
+   "sprite": "art/sprite-bambi.png",
+   "art": [
+    {
+     "hex": "#f2adef",
+     "share": 0.0443,
+     "sat": 0.29
+    },
+    {
+     "hex": "#b164d7",
+     "share": 0.035,
+     "sat": 0.53
+    },
+    {
+     "hex": "#423f7c",
+     "share": 0.035,
+     "sat": 0.49
+    },
+    {
+     "hex": "#080715",
+     "share": 0.0229,
+     "sat": 0.67
+    },
+    {
+     "hex": "#1d1f4f",
+     "share": 0.0302,
+     "sat": 0.63
+    },
+    {
+     "hex": "#16163b",
+     "share": 0.0266,
+     "sat": 0.63
+    },
+    {
+     "hex": "#f0a6eb",
+     "share": 0.1155,
+     "sat": 0.31,
+     "region": "頭部"
+    },
+    {
+     "hex": "#fdf1f0",
+     "share": 0.0902,
+     "sat": 0.05,
+     "region": "頭部"
+    }
+   ]
+  },
+  "諾亞": {
+   "sprite": "art/sprite-noah.png",
+   "art": [
+    {
+     "hex": "#957d96",
+     "share": 0.033,
+     "sat": 0.17
+    },
+    {
+     "hex": "#3e3851",
+     "share": 0.031,
+     "sat": 0.31
+    },
+    {
+     "hex": "#35314d",
+     "share": 0.0304,
+     "sat": 0.36
+    },
+    {
+     "hex": "#040307",
+     "share": 0.0243,
+     "sat": 0.57
+    },
+    {
+     "hex": "#0d0811",
+     "share": 0.0249,
+     "sat": 0.53
+    },
+    {
+     "hex": "#181a2d",
+     "share": 0.0186,
+     "sat": 0.47
+    },
+    {
+     "hex": "#ecb2a3",
+     "share": 0.1116,
+     "sat": 0.31,
+     "region": "頭部"
+    },
+    {
+     "hex": "#cab1c3",
+     "share": 0.0865,
+     "sat": 0.12,
+     "region": "頭部"
+    }
+   ]
+  }
+ }
+}

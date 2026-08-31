@@ -57,6 +57,24 @@
    照這個站的規則走：青色是靜止色，綠是 hover 色。 */
 /* **hidden 要自己擋。** .ab 設了 display:flex，優先權高過瀏覽器對 [hidden]
    的預設 display:none，所以控制列會從載入就顯示，跟「聽有聲書」那顆疊在一起。 */
+/* ── 色票 ──────────────────────────────────────────────
+   色塊要夠大才看得出色差：48px 高是實測下限，再小的話 #3e3761 跟 #4e4675
+   在筆電螢幕上看起來一樣。 */
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pal .sw{flex:1 1 132px;min-width:132px;border:1px solid var(--hair2);border-radius:var(--r);
+  overflow:hidden;background:var(--win)}
+.pal .sw i{display:block;height:48px}
+.pal .sw span{display:block;padding:6px 8px;font-size:.78rem;color:var(--muted);line-height:1.5}
+.pal .sw b{display:block;color:var(--text);font-weight:400;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;
+  word-break:break-all}  /* rgba() 那兩格會超出格子，要允許斷行 */
+.pal .sw em{display:block;font-style:normal;color:var(--muted);font-size:.72rem}
+/* **不要用 --faint。** 它配在 --win 上只有 4.26:1，沒到 WCAG 一般文字的 4.5:1，
+   而這行小字就是佔比與對比數字，看不清楚等於沒有。--muted 是 6.99:1。 */
+.palsec{margin-top:48px;padding-top:24px;border-top:1px solid var(--hair2)}
+.palsec h3{margin:24px 0 0;font-size:.95rem;color:var(--muted);font-weight:400}
+.palrule{color:var(--muted);font-size:.88rem;line-height:1.8;margin:8px 0}
+
 .ab[hidden],.abOpen[hidden]{display:none}
 .ab{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:40;
   display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:999px;

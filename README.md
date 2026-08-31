@@ -75,6 +75,9 @@
 
     python3 tools/gen_novel.py    # 重生站台（四頁＋sitemap／robots）
     python3 tools/gen_og.py       # 只有改標題或換主角立繪的時候才要重跑
+    python3 tools/sample_palette.py --write   # 換立繪之後重量顏色，寫進 design/palette.json
+                                  # 改了 CSS 的 :root 要一起改 palette.json 的 site，
+                                  # 不然 gen_novel 會擋下來（那份資料就是色卡的來源）
     python3 larch/dump_routes.py  # 改了支線之後，把遊玩版那一頁的資料抓下來
     python3 larch/build_all.py    # 重建 Larch 上的七章
     python3 tools/update_sw.py    # 動到 docs/ 就要跑，不跑瀏覽器不知道有新版
