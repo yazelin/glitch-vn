@@ -34,7 +34,7 @@
 ## 首則留言
 
     影片　https://youtu.be/J9OMebCjr9Y
-    玩玩看　https://larch.ink/play/market/a2a10427-7326-4a86-b806-c2476fc1c22a
+    玩玩看　https://larch.ink/play/market/yaze/glitch
     讀小說（附朗讀）　https://yazelin.github.io/glitch-vn/novel.html
     原始碼　https://github.com/yazelin/glitch-vn
     Larch 平台　https://larch.ink

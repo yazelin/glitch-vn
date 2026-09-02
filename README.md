@@ -9,7 +9,7 @@
 線上閱讀：[yazelin.github.io/glitch-vn](https://yazelin.github.io/glitch-vn/)
 （每一句都能點來聽）
 
-視覺小說版：[在 Larch 上玩](https://larch.ink/play/market/a2a10427-7326-4a86-b806-c2476fc1c22a)
+視覺小說版：[在 Larch 上玩](https://larch.ink/play/market/yaze/glitch)（Larch 七日創作者挑戰・最佳人氣。短網址跟著帳號與 slug 走，改名就會壞；不會變的是 UUID 版 `larch.ink/play/market/a2a10427-7326-4a86-b806-c2476fc1c22a`）
 
 六十分鐘完整遊玩：[YouTube](https://youtu.be/J9OMebCjr9Y)　·　[原始檔](https://github.com/yazelin/glitch-vn/releases/tag/v1.0-play)（330 MB，程式自動玩一次錄的，見 `tools/capture`）
 
