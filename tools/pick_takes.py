@@ -8,7 +8,7 @@
 檔名回報，用 tools/install_take.py 裝上去。
 
 用法：
-    ~/CosyVoice/.venv/bin/python tools/pick_takes.py 格莉奇 --ch 2 -n 3
+    ~/voice-venv/bin/python tools/pick_takes.py 格莉奇 --ch 2 -n 3
 """
 import argparse, json, os, pathlib, re, runpy, subprocess, sys
 
@@ -73,7 +73,7 @@ def main():
     (out / "keys.tsv").write_text(
         "\n".join(f"{i:02d}\t{k}\t{t.replace(chr(10),' ')}"
                   for i, (t, e, k) in enumerate(rows, 1)), encoding="utf-8")
-    py = pathlib.Path.home() / "CosyVoice/.venv/bin/python"
+    py = pathlib.Path.home() / "voice-venv/bin/python"
     env = dict(os.environ, MODELSCOPE_OFFLINE="1", HF_HUB_OFFLINE="1")
     subprocess.check_call([str(py), "-u", str(ROOT / "tools/voice_batch.py"),
                            "--jobs", str(jf)], env=env)

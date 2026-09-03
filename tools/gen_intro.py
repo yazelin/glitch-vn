@@ -234,7 +234,7 @@ def main():
         return
 
     # **一定要用 CosyVoice 的 venv 跑**，系統 python 沒有 torchaudio。
-    py = pathlib.Path.home() / "CosyVoice/.venv/bin/python"
+    py = pathlib.Path.home() / "voice-venv/bin/python"
     env = dict(os.environ, MODELSCOPE_OFFLINE="1", HF_HUB_OFFLINE="1")
     rc = subprocess.call([str(py), "-u", str(ROOT / "tools/voice_batch.py"),
                           "--jobs", str(ROOT / "art/voice/intro-jobs.json")], env=env)

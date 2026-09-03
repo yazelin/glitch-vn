@@ -11,9 +11,9 @@
 **要用 CosyVoice 的 venv 跑**，系統 python 沒有 librosa（挑選那一步要量音高）。
 
 用法：
-    ~/CosyVoice/.venv/bin/python tools/redo_voice.py 這是假的   # 用台詞的一部分找
-    ~/CosyVoice/.venv/bin/python tools/redo_voice.py v-1234abcd  # 或直接給代號
-    ~/CosyVoice/.venv/bin/python tools/redo_voice.py 這是假的 -n 6  # 生幾版（預設 5）
+    ~/voice-venv/bin/python tools/redo_voice.py 這是假的   # 用台詞的一部分找
+    ~/voice-venv/bin/python tools/redo_voice.py v-1234abcd  # 或直接給代號
+    ~/voice-venv/bin/python tools/redo_voice.py 這是假的 -n 6  # 生幾版（預設 5）
 """
 import argparse, json, pathlib, statistics, subprocess, sys, os
 
@@ -68,7 +68,7 @@ def main():
                          "instruct": V.instruct(w, e)})
     jf = tmp / "jobs.json"
     jf.write_text(json.dumps(jobs, ensure_ascii=False, indent=1), encoding="utf-8")
-    py = pathlib.Path.home() / "CosyVoice/.venv/bin/python"
+    py = pathlib.Path.home() / "voice-venv/bin/python"
     env = dict(os.environ, MODELSCOPE_OFFLINE="1", HF_HUB_OFFLINE="1")
     subprocess.check_call([str(py), "-u", str(ROOT / "tools/voice_batch.py"),
                            "--jobs", str(jf)], env=env)

@@ -13,8 +13,8 @@
 沒通過驗收的那幾段不覆蓋，保留原本的檔。
 
 用法：
-    ~/CosyVoice/.venv/bin/python tools/batch_voice.py 格莉奇
-    ~/CosyVoice/.venv/bin/python tools/batch_voice.py 格莉奇 --max 200 --dry
+    ~/voice-venv/bin/python tools/batch_voice.py 格莉奇
+    ~/voice-venv/bin/python tools/batch_voice.py 格莉奇 --max 200 --dry
 """
 import argparse, difflib, json, os, pathlib, subprocess, sys
 
@@ -79,7 +79,7 @@ def main():
              "instruct": g[0][4]} for i, g in enumerate(gs)]
     jf = tmp / "jobs.json"
     jf.write_text(json.dumps(jobs, ensure_ascii=False, indent=1), encoding="utf-8")
-    py = pathlib.Path.home() / "CosyVoice/.venv/bin/python"
+    py = pathlib.Path.home() / "voice-venv/bin/python"
     env = dict(os.environ, MODELSCOPE_OFFLINE="1", HF_HUB_OFFLINE="1")
     subprocess.check_call([str(py), "-u", str(ROOT / "tools/voice_batch.py"),
                            "--jobs", str(jf)], env=env)

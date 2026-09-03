@@ -138,7 +138,7 @@ def main():
 
     # **一定要用 CosyVoice 的 venv 跑**，系統 python 沒有 torchaudio。
     # 離線旗標也不能省：modelscope 會去抓 FST 檔然後卡住。
-    py = pathlib.Path.home() / "CosyVoice/.venv/bin/python"
+    py = pathlib.Path.home() / "voice-venv/bin/python"
     env = dict(os.environ, MODELSCOPE_OFFLINE="1", HF_HUB_OFFLINE="1")
     rc = subprocess.call([str(py), "-u", str(ROOT / "tools/voice_batch.py"),
                           "--jobs", str(jf)], env=env)

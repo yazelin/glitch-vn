@@ -23,7 +23,7 @@ import difflib, json, os, pathlib, re, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 INTRO = ROOT / "art/voice/intro"
-COSY = pathlib.Path.home() / "CosyVoice/.venv/bin/python"
+COSY = pathlib.Path.home() / "voice-venv/bin/python"
 
 ASR_SNIPPET = r'''
 import sys, pathlib, whisper

@@ -20,7 +20,7 @@
 
 要 librosa，跑在 CosyVoice 的 venv：
 
-    ~/CosyVoice/.venv/bin/python tools/scan_voice_f0.py
+    ~/voice-venv/bin/python tools/scan_voice_f0.py
 """
 import io, pathlib, statistics, sys
 
