@@ -54,6 +54,8 @@
     design/調查篇-第一天-定稿.md  第一天，16 格 81 張卡
     design/調查篇-橋段.md         第一批六場
     design/調查篇-第二天.md       第二天，初稿
+    design/調查篇-缺卡.md        三格缺卡的草稿：貓草一階碎念、studio 到訪卡、
+                                 四之一→五之一 的閘。**未審**
     larch/cards/board.html        調查板：選地點、算遇到誰、時間往前走
     larch/cards/notes.html        調查筆記：名單／目擊／問答／空白頁
     larch/cards/host.html         假的 Larch 宿主，開發用
