@@ -57,7 +57,17 @@ LINE_ANY = re.compile(r"^>\s?(.*)$")
 # 觸發決定這一段什麼時候播（＝邊的條件），變數決定它寫什麼。
 # 只抓文字，判讀留給下一層，因為寫法還沒統一（「`day >= 4`」與「第四天以後」並存）。
 META = re.compile(r"^\*\*(觸發|變數|線索|問誰|地點・時段|給什麼|新資訊)\*\*[：:]?\s*(.*)$")
-SECTION = re.compile(r"^#{2,5}\s+(.*?)\s*$")
+SECTION = re.compile(r"^(#{2,5})\s+(.*?)\s*$")
+# 這些節不是台詞，是給人看的註解，可是裡面常有 `>` 引用（範例、對照），
+# 不跳過的話會被當成卡片。標題含任一關鍵字就整節跳過（直到下一個同級或更高的標題）。
+SKIP = ["排卡註", "觸發條件一覽", "格式", "配音", "讀音", "待拍板", "總表", "評審",
+        "刪除線", "情緒", "規矩", "哪裡不可以", "這一列", "信任怎麼升", "照改的",
+        "問題成立", "只接受一半", "沒抓到", "驗過的", "兩個敘述聲音", "節奏",
+        "在整篇的位置", "拼起來之後", "沒有寫的", "判決", "連帶要改", "走不走得到",
+        "走得到嗎", "變數", "機制", "丟掉的", "自我約束", "收尾門檻", "跟結局的接口",
+        "落差", "為什麼是這一行", "缺的格子", "他在這一款裡", "他現在是誰",
+        "表上那一列", "各補什麼", "我自己抓到", "判決怎麼處理", "卡數", "標點",
+        "共用音檔", "為什麼一張", "不可以做的事", "自己驗過"]
 
 VAR = re.compile(r"\*\*→\s*(?:解鎖\s*)?`([^`]+)`\s*(?:←\\s*(\\S+)|＋\\s*(\\d+))?")
 
@@ -73,11 +83,19 @@ def parse_file(path):
             cards.append(cur)
         cur = None
 
-    sec, meta_now = None, {}
+    stack, meta_now, skip_lvl = [], {}, None   # stack = [(level, text)]
     for i, ln in enumerate(lines, 1):
         if h := SECTION.match(ln):
             flush()
-            sec, meta_now = h.group(1), {}
+            lvl, text = len(h.group(1)), h.group(2)
+            stack = [(l, t) for l, t in stack if l < lvl] + [(lvl, text)]
+            meta_now = {}
+            if skip_lvl is not None and lvl <= skip_lvl:
+                skip_lvl = None
+            if skip_lvl is None and any(k in text for k in SKIP):
+                skip_lvl = lvl
+            continue
+        if skip_lvl is not None:
             continue
         if mm := META.match(ln):
             key, val = mm.group(1), mm.group(2).strip()
@@ -99,7 +117,9 @@ def parse_file(path):
                    # novelkit 的 say(remote=True) 就是這個，掛大頭貼不掛立繪。
                    "remote": "remote" in meta,
                    "scene": scene, "slot": slot, "meta": meta,
-                   "section": sec, "trigger": dict(meta_now),
+                   "section": stack[-1][1] if stack else None,
+                   "headings": [t for _, t in stack],      # 由外到內
+                   "trigger": dict(meta_now),
                    "lines": [], "vars": [], "file": path.stem, "line": i}
             continue
         if BREAK.match(ln):
