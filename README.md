@@ -218,3 +218,14 @@
 創作內容可以自由分享改作、須標示出處、不可商用；商業使用含角色授權要先問過。
 角色（格莉奇、黑洞先生）的設定正典在
 [ai-brain-site](https://github.com/yazelin/ai-brain-site) 的 `persona.json`。
+
+### 《調查篇》的建置（做到一半）
+
+    larch/inv/parse.py       把設計文件的台詞解析成卡片結構。**這一支不碰 Larch。**
+                             設計文件是事實來源，三百多張卡手抄一次要好幾天而且隔天就過期。
+                             跑 `python3 larch/inv/parse.py` 看摘要，`--json` 匯出，
+                             `--show N` 印前 N 張卡的內容。
+
+**還沒寫的**：把解析出來的卡片推上 Larch 的那一層。推之前要知道一件事——
+帶條件的邊只能用整包 `PUT /projects/:id` 推，`POST /nodes` 會把 `edge.data.condition`
+靜默丟掉，卡片還在但變成走不到的孤島，不驗看不出來。
