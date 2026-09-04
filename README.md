@@ -37,6 +37,10 @@
     tools/contrast_test.mjs  量算出來的顏色對比。**--ink 是面板底色不是文字色**，
                              用錯會變成黑底黑字，肉眼在某些螢幕上還「看得到一點」
     tools/prune_voice.py     清掉沒人用的配音。**--selfcheck 一定要過**（見下）
+    tools/check_palette.py   **色票與色溫驗收**。立繪照 design/palette.json 的
+                             cast.*.spec 量佔比（調查篇是先設計後產圖，spec 才是
+                             事實來源）；背景照時段量 R−B。**兩個都有上緣**——
+                             只判下緣的話，曬白的黃昏調會被當成清亮的上午放過
     tools/map_audio.py       小說段落對回配音檔，產生 design/audiobook.json
     larch/                   視覺小說版：一章一支 build 腳本，見 larch/README.md
     larch/cards/             插件卡（Larch 的 miniGame），單檔 HTML，見下面「調查篇」
@@ -78,6 +82,7 @@
     python3 tools/gen_novel.py    # 重生站台（四頁＋sitemap／robots）
     python3 tools/gen_og.py       # 只有改標題或換主角立繪的時候才要重跑
     python3 tools/sample_palette.py --write   # 換立繪之後重量顏色，寫進 design/palette.json
+    python3 tools/check_palette.py           # 色票與色溫驗收，見下
                                   # 改了 CSS 的 :root 要一起改 palette.json 的 site，
                                   # 不然 gen_novel 會擋下來（那份資料就是色卡的來源）
     python3 larch/dump_routes.py  # 改了支線之後，把遊玩版那一頁的資料抓下來
