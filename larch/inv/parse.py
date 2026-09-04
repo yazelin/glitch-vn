@@ -37,7 +37,13 @@ DOCS = [d for d in sorted(ROOT.glob("design/調查篇*.md"))
         if d.stem not in OBSOLETE]
 
 # 卡頭：**旁白**（`scene: store`，深夜） / **talk**（貓草／玩家） / **玩家**（筆記）
-HEAD = re.compile(r"^\*\*(旁白|talk|玩家|特寫卡)\*\*(?:（(.*?)）)?\s*$")
+# 卡頭有兩類：固定的四種，以及**單一講者用自己的名字當卡頭**
+# （格莉奇全作都是這種，她只在螢幕與喇叭上出現，括號裡帶 `remote`）。
+FIXED = ["旁白", "talk", "玩家", "特寫卡"]
+CAST = ["格莉奇", "黑洞先生", "貓草", "鐵塔", "0x", "斑比", "諾亞",
+        "管理員", "店員", "保全", "材料行老闆", "櫃檯", "住戶",
+        "路人", "路人乙", "高中生", "阿姨", "送貨的", "發傳單的", "上班族"]
+HEAD = re.compile(r"^\*\*(" + "|".join(FIXED + CAST) + r")\*\*(?:（(.*?)）)?\s*$")
 SCENE = re.compile(r"`scene:\s*([a-z_0-9]+)`")
 SLOT = re.compile(r"(上午|下午|晚上|深夜)")
 BREAK = re.compile(r"^──+\s*$")
@@ -47,7 +53,13 @@ LINE_SPK = re.compile(r"^>\s*\*\*(.+?)\*\*[：:]\s*(.*)$")
 LINE_DIR = re.compile(r"^>\s*\*(.+)\*\s*$")
 LINE_ANY = re.compile(r"^>\s?(.*)$")
 # **→ `var` ← true** 或 **→ `met_貓草` ＋1**
-VAR = re.compile(r"\*\*→\s*`([^`]+)`\s*(?:←\s*(\S+)|＋\s*(\d+))")
+# 段落層的 metadata。這些不是卡片，是**建置真正需要的東西**：
+# 觸發決定這一段什麼時候播（＝邊的條件），變數決定它寫什麼。
+# 只抓文字，判讀留給下一層，因為寫法還沒統一（「`day >= 4`」與「第四天以後」並存）。
+META = re.compile(r"^\*\*(觸發|變數|線索|問誰|地點・時段|給什麼|新資訊)\*\*[：:]?\s*(.*)$")
+SECTION = re.compile(r"^#{2,5}\s+(.*?)\s*$")
+
+VAR = re.compile(r"\*\*→\s*(?:解鎖\s*)?`([^`]+)`\s*(?:←\\s*(\\S+)|＋\\s*(\\d+))?")
 
 
 def parse_file(path):
@@ -61,7 +73,16 @@ def parse_file(path):
             cards.append(cur)
         cur = None
 
+    sec, meta_now = None, {}
     for i, ln in enumerate(lines, 1):
+        if h := SECTION.match(ln):
+            flush()
+            sec, meta_now = h.group(1), {}
+            continue
+        if mm := META.match(ln):
+            key, val = mm.group(1), mm.group(2).strip()
+            meta_now[key] = (meta_now.get(key, "") + " " + val).strip()
+            continue
         m = HEAD.match(ln)
         if m:
             flush()
@@ -70,9 +91,15 @@ def parse_file(path):
                 scene = s.group(1)
             if t := SLOT.search(meta):
                 slot = t.group(1)
-            cur = {"kind": {"旁白": "narrate", "talk": "talk",
-                            "玩家": "note", "特寫卡": "plate"}[kind],
+            kmap = {"旁白": "narrate", "talk": "talk",
+                    "玩家": "note", "特寫卡": "plate"}
+            cur = {"kind": kmap.get(kind, "say"),
+                   "speaker": None if kind in FIXED else kind,
+                   # remote＝他不在這個房間，只有訊號（螢幕、喇叭、耳機）。
+                   # novelkit 的 say(remote=True) 就是這個，掛大頭貼不掛立繪。
+                   "remote": "remote" in meta,
                    "scene": scene, "slot": slot, "meta": meta,
+                   "section": sec, "trigger": dict(meta_now),
                    "lines": [], "vars": [], "file": path.stem, "line": i}
             continue
         if BREAK.match(ln):
@@ -116,7 +143,7 @@ def main():
 
     docs = [d for d in DOCS if not a.file or a.file in d.stem]
     allc, allp = [], []
-    print(f"{'檔案':30s} {'卡':>5} {'旁白':>5} {'對話':>5} {'筆記':>5} {'變數':>5}")
+    print(f"{'檔案':30s} {'卡':>5} {'旁白':>5} {'對話':>5} {'獨白':>5} {'筆記':>5} {'變數':>5}")
     for d in docs:
         cards, probs = parse_file(d)
         allc += cards
@@ -124,7 +151,7 @@ def main():
         k = lambda t: sum(1 for c in cards if c["kind"] == t)
         nv = sum(len(c["vars"]) for c in cards)
         print(f"{d.stem:30s} {len(cards):5d} {k('narrate'):5d} {k('talk'):5d} "
-              f"{k('note'):5d} {nv:5d}")
+              f"{k('say'):5d} {k('note'):5d} {nv:5d}")
     print(f"{'合計':30s} {len(allc):5d}")
 
     spk = {}
@@ -136,6 +163,11 @@ def main():
         f"{w} {n}" for w, n in sorted(spk.items(), key=lambda x: -x[1])[:10]))
     scenes = sorted({c["scene"] for c in allc if c["scene"]})
     print("抓到的場景代號：", "、".join(scenes) or "（無）")
+    rem = sum(1 for c in allc if c.get("remote"))
+    print(f"remote 卡（只有訊號、不掛立繪）：{rem} 張")
+    trig = sum(1 for c in allc if c.get("trigger", {}).get("觸發"))
+    secs = len({(c["file"], c["section"]) for c in allc if c.get("section")})
+    print(f"帶觸發條件的卡：{trig} 張，分佈在 {secs} 個段落")
 
     if a.show:
         for c in allc[:a.show]:
