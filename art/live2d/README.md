@@ -156,10 +156,10 @@ GIMP 這條放棄了：3.2.4 的 `-b` 批次在 snap 下掛住，script-fu API �
 
 ## .moc3 匯出實測成功（2026-09-05）
 
-**整條路徑在 Ubuntu 上跑得通，不必開 Windows。** 產物在 `export/`：
+**整條路徑在 Ubuntu 上跑得通，不必開 Windows。** 產物在 `../../docs/live2d/model/`（放 docs 底下，GitHub Pages 直接服務）：
 
 ```
-glitch.moc3                 23,360 B   MOC3 / version 6 / little-endian
+glitch.moc3                 19,328 B   MOC3 / version 5 / little-endian
 glitch.model3.json             155 B
 glitch.cdi3.json             2,122 B   27 個參數
 glitch.2048/texture_00.png   2.4 MB    2048×2048 RGBA
@@ -189,6 +189,60 @@ xdotool 點不到。**但每個對話框本身都是獨立視窗**，抓得到�
 
 ### 相容性退路
 
-匯出用的是 `For SDK 5.3 / Cubism5.3`，moc3 version byte = 6（最新）。
-**若 Larch 的 Cubism Core 較舊而載不動，回 Export settings 把 Export Version 改成舊一點的
-SDK 重匯即可** —— 這個模型沒用到任何新功能，往下相容不會損失東西。
+**Export Version 一定要選 SDK 5.0 或更舊。** 一開始用預設的 `For SDK 5.3 / Cubism5.3`
+匯出，moc3 version byte = 6，而**公開發行的 Cubism Core 只到 5.1.0、支援的 moc3 最高是 5**，
+`Moc.fromArrayBuffer` 直接回 null（不丟例外，pixi-live2d-display 只報 `Unknown error`）。
+改選 SDK 5.0 重匯得到 version byte 5 就正常了。官方樣本（Hiyori）的 moc3 是 version byte 3，
+所以 Larch 那邊同樣吃不下 v6——這一項跟平台收不收無關，本來就要改。
+
+驗法（本機 Playwright，不靠目測）：
+
+```js
+Live2DCubismCore.Version.csmGetLatestMocVersion()   // Core 支援的最高版本
+new Uint8Array(mocBuffer)[4]                        // 檔案自己的版本
+!!Live2DCubismCore.Moc.fromArrayBuffer(mocBuffer)   // 真正的判準
+```
+
+**匯入後的 ArtMesh 名字是 `ArtMesh0`…`ArtMesh32`，不是 PSD 圖層名。** parts 也是空的。
+所以 runtime 沒辦法用名字定位圖層（想在網頁端把眼皮關掉就辦不到）。
+rigging 的時候要自己在 Cubism 裡把 ArtMesh 改名、編好 Part，否則之後很難處理。
+
+## 展示頁
+
+`docs/live2d/index.html` → <https://yazelin.github.io/glitch-vn/live2d/>
+載入結果寫在 `window.__demo`（`{status, params, drawables, size}`），
+用 Playwright 讀那個驗收，不判讀畫面。
+
+---
+
+# Larch 不收自訂 Live2D 模型（2026-09-05 實測）
+
+把 `export/` 的模型加進素材包，`PUT /api/agent/asset-packs/<id>` 回 **403**：
+
+> 目前只能使用 Yayapipi Studio 提供的 Live2D 官方模型；一般用戶不能上傳、匯入或替換其他 Live2D 模型。
+
+素材包沒有被動到（123 筆原封不動，是寫入前就被擋）。**這是平台政策，不是技術問題。**
+
+## Larch 裡 Live2D 怎麼用（讀官方示範作品得到）
+
+`GET https://larch.ink/api/marketplace/official-live2d-breathing-stage?play=1`（免登入）
+
+Live2D actor 跟一般立繪 actor 用同一組欄位，沒有任何專屬欄位：
+
+```jsonc
+{"id":"layer-l2d-mao", "characterId":"l2d-mao", "name":"虹色Mao",
+ "url":"https://cdn.jsdelivr.net/gh/Live2D/CubismWebSamples@5-r.5/Samples/Resources/Mao/Mao.model3.json",
+ "slot":"left", "offsetX":0, "offsetY":0, "scale":0.78, "enter":"fade"}
+```
+
+角色定義也一樣，`portraitUrl` 直接放 model3.json。**差別只在 url 指向 `.model3.json`，
+播放器自己認。** 所以我們的模型格式上完全塞得進去——但素材包端點會擋。
+版子端點（`PUT /projects/:id/boards/:boardId`）也許沒有同一道檢查，
+**但那是繞過平台明示的規則，不要做。**
+
+## 這個模型能去哪
+
+1. **跟 Larch 作者提。** 正當路徑。若對方鬆綁或願意收，直接掛上去就能動。
+2. **放自己的網站。** 用 Cubism Web SDK，掛在 `yazelin.github.io/glitch-vn`
+   或格莉奇 OS 站。完全自己控制，沒有平台限制，反而是更合適的家。
+3. **Larch 裡繼續用靜態立繪。** 現況就是這樣，actor 掛 `loop:"breathe"` 已經有呼吸感。
