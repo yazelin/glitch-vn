@@ -47,6 +47,13 @@ BG = {
     "catgrass_home": ("bg-catgrass-home", "bg-catgrass-home"),
 }
 NARRATOR = "旁白"
+# 一個地點哪些時段開著（design/調查篇-場景.md 二「時段與誰在」那張表）。
+# 規則自己沒寫時段時用這個當預設：顧店那九格的 L1 只寫了 roof 沒寫時段，
+# 可是諾亞的店本來就只在上午／下午／晚上開。
+LOC_SLOTS = {"lobby": [0, 1, 2, 3], "roof": [0, 1, 2], "street": [0, 1, 2],
+             "studio": [1, 2, 3], "booth": [0, 1], "tower14": [0, 1, 2, 3],
+             "store": [0, 1, 2, 3], "parts": [0, 1], "busstop": [0, 1, 2],
+             "metro": [0, 1, 2], "laundry": [0, 1, 2, 3], "figure": [1, 2]}
 
 # ── 地點與時段：從標題堆疊解析 ──────────────────────────────
 # 解析順序（先中的贏）：觸發裡的 dest== 或代號 → 標題堆疊裡的反引號代號
@@ -309,6 +316,9 @@ def build(cards):
                     rule["slots"] = slots
         if rule["dest"]:
             notes = [x for x in notes if x != "判不出地點"]
+            if not rule["slots"]:
+                rule["slots"] = LOC_SLOTS.get(rule["dest"], [])
+                rule["slots_from"] = "地點預設"
         if not rule["slots"]:
             rule["slots"] = slots_from_headings(heads)
         first = prev = None
