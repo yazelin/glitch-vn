@@ -13,7 +13,7 @@
   iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
   所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
 
-  miniGameReadVars ：day slot met
+  miniGameReadVars ：day slot met dest
                      open_roof open_laundry open_figure open_parts
                      open_studio open_tower14
   miniGameWriteVars：day slot dest here
@@ -145,18 +145,24 @@ function whoIsThere(spotId, slot){
   return out;
 }
 
+// 一次開板等於一個時段。深夜之後換日。
+// **時間在回到板上的時候才推進**，出門時不動：不然那一趟的選單與規則讀到的是下一個時段
+// （上午去一樓，選單寫下午；2026-09-07 抓到）。板一開、發現 dest 還留著上一趟的目的地，就推進並清掉。
+function advance(){
+  var slot=num(values.slot,0), day=num(values.day,1);
+  if(slot>=3){ values.slot=0; values.day=day+1; setVar('slot',0); setVar('day',day+1); }
+  else { values.slot=slot+1; setVar('slot',slot+1); }
+}
 function go(spotId){
   var slot=num(values.slot,0), day=num(values.day,1);
   var here=whoIsThere(spotId,slot);
   setVar('here', here.join(','));
   setVar('dest', spotId);
-  // 一次開板等於一個時段。深夜之後換日。
-  if(slot>=3){ setVar('slot',0); setVar('day',day+1); }
-  else { setVar('slot',slot+1); }
   finish(spotId,{day:day,slot:slot,here:here});
 }
 
 function start(){
+  if(values.dest){ advance(); setVar('dest',''); setVar('here',''); }
   var slot=num(values.slot,0), day=num(values.day,1);
   var met=list(values.met);
   // gate 沒填的就是一開始就有的（一樓、車站前那條街、公車站、捷運出口、便利商店）。
@@ -191,8 +197,7 @@ function start(){
   });
 
   document.getElementById('skip').addEventListener('click',function(){
-    if(slot>=3){ setVar('slot',0); setVar('day',day+1); }
-    else { setVar('slot',slot+1); }
+    advance();
     setVar('dest',''); setVar('here','');
     finish('rest',{day:day,slot:slot});
   });

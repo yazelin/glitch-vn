@@ -201,6 +201,8 @@ def parse_trigger(text):
         elif re.fullmatch(r"-?\d+", val):
             val = int(val)
         rule["conds"].append({"variable": var, "op": op, "value": val})
+    for m in re.finditer(r"`(hasItem|lacksItem)\s+([a-z0-9_]+)`", text):
+        rule["conds"].append({"variable": "inventory", "op": m.group(1), "value": m.group(2)})
     if rule["dest"] is None:
         locs = [a or b for a, b in BARE_LOC.findall(text)]
         if locs:
@@ -224,9 +226,9 @@ class Board:
     def __init__(self):
         self.nodes, self.edges, self.n, self.x = [], [], 0, 0
 
-    def add(self, data):
+    def add(self, data, nid=None):
         self.n += 1
-        nid = f"{BID}-{self.n:03d}"
+        nid = nid or f"{BID}-{self.n:03d}"
         self.x += 300
         self.nodes.append({"id": nid, "type": "story",
                            "position": {"x": self.x, "y": 0}, "data": data})
@@ -239,6 +241,69 @@ class Board:
             e["data"] = {"condition": {"kind": "variable", **cond}}
         self.edges.append(e)
         return e
+
+
+def expand_rec(b, prev, c, sid, tapes):
+    """錄音巨集：prev ─rec_ok─▶ 選擇（開錄音機／不開）─0─▶ 反應 talk ─▶ 取得道具 ─▶（接下一張）
+                     └─預設──────────────────────────────────────────────▶（接下一張）
+    回傳「下一張卡要接在哪些節點後面」的匯流節點 id。
+    Larch 一個出口只認第一條成立的邊，所以 prev 的兩條邊順序是條件在前、預設在後。"""
+    who = c["meta"].strip()
+    reaction = [l for l in c["lines"] if l.get("speaker")]
+    quote = " ".join(l["text"] for l in c["lines"] if not l.get("speaker") and not l.get("direction"))
+    item_id = "rec_" + TAPE_ID.get(who, re.sub(r"[^a-z0-9]", "", who.lower()) or f"{sid}")
+    name = f"錄音・{who}"
+    tapes.append({"id": item_id, "name": name, "who": who, "quote": quote})
+    choice = b.add({"type": "choice", "title": f"錄音：{who}", "text": "錄音機在包包裡。",
+                    "choices": ["開錄音機", "不開"], "choiceMode": "branch", "segment": sid})
+    b.edge(prev, choice, {"variable": "rec_ok", "op": "eq", "value": True})
+    # 匯流點：一張空的 setVariable 卡（沒有字會自動跳過），兩條路都接到它，下一張卡再接它
+    merge = b.add({"type": "setVariable", "title": "（匯流）", "text": "", "variableOps": [], "segment": sid})
+    b.edge(prev, merge)
+    grant = b.add({"type": "plugin", "title": f"取得：{name}", "text": "",
+                   "pluginId": "larch-inventory", "pluginCardId": "grant-item",
+                   "pluginVersion": "1.9.0", "pluginName": "背包系統", "pluginCardName": "取得道具",
+                   "pluginIcon": "box", "pluginColor": "#78a67d",
+                   "pluginPresentation": "fullscreen", "pluginSkippable": False,
+                   "pluginValues": {"autoCollect": False, "itemId": item_id, "itemName": name,
+                                    "itemImage": "", "itemNote": quote, "itemCount": 1,
+                                    "hideAfterCollect": True, "bagVar": "inventory", "countVar": "inventoryCount",
+                                    "consumable": False, "effectKind": "set", "effectVar": "open_tape",
+                                    "effectValue": "true", "storyNodeId": ""},
+                   "pluginReadVars": ["inventory", "inventoryCount"],
+                   "pluginWriteVars": ["inventory", "inventoryCount", "pluginResult"],
+                   "segment": sid})
+    if reaction:
+        dl = [{"id": f"l{i}", "speaker": l["speaker"], "text": l["text"], "emotion": ""}
+              for i, l in enumerate(reaction)]
+        react = b.add({"type": "dialogue", "title": f"{who}：對錄音機", "text": reaction[0]["text"],
+                       "speaker": reaction[0]["speaker"], "dialogueLines": dl, "segment": sid})
+        b.edge(choice, react); b.edges[-1]["sourceHandle"] = "choice-0"
+        b.edge(react, grant)
+    else:
+        b.edge(choice, grant); b.edges[-1]["sourceHandle"] = "choice-0"
+    b.edge(choice, merge); b.edges[-1]["sourceHandle"] = "choice-1"
+    b.edge(grant, merge)
+    return merge
+
+
+TAPE_ID = {"諾亞": "noah", "店員": "clerk", "便利商店店員": "clerk", "材料行老闆": "parts",
+           "保全": "guard", "斑比": "bambi", "管理員": "admin"}
+
+
+def var_value(raw):
+    """「**→ `see_x`**」沒寫值＝設 true；「← true**」那個 ** 是 markdown 的粗體收尾，要剝掉；
+    true/false/整數轉型，其餘留字串。之前直接把 None 與 'true**' 寫進去，旗標從來沒真的變 true（2026-09-07 抓到）。"""
+    if raw is None:
+        return True
+    v = str(raw).strip().rstrip("*").strip()
+    if v in ("true", "是"):
+        return True
+    if v in ("false", "否"):
+        return False
+    if re.fullmatch(r"-?\d+", v):
+        return int(v)
+    return v
 
 
 def card_node(c):
@@ -277,7 +342,7 @@ def build(cards):
     board_id = b.add({"type": "miniGame", "title": "調查板", "text": "選一個地方去。",
                       "miniGameHtml": "@@larch/cards/board.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
-                      "miniGameReadVars": ["day", "slot", "met"] + [f"open_{k}" for k in
+                      "miniGameReadVars": ["day", "slot", "met", "dest"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")],
                       "miniGameWriteVars": ["day", "slot", "dest", "here"], "start": True})
     # 2. 每個地點：入口場景 → 選單
@@ -303,7 +368,7 @@ def build(cards):
             segs.append(cur)
             cur_key = key
         cur["cards"].append(c)
-    rules, unresolved, orphans = [], [], []
+    rules, unresolved, orphans, tapes = [], [], [], []
     for i, s in enumerate(segs):
         sid = f"seg{i:03d}"
         rule, notes = parse_trigger(s["trigger"])
@@ -357,6 +422,8 @@ def build(cards):
         # 標題括號裡寫的條件（「Ａ一・她叫什麼名字（`met_諾亞 >= 2`）」）也是觸發。
         # 觸發列寫在段落層、卡片在更深一層標題底下時 meta 會被標題重置，所以標題是更可靠的來源。
         if not rule["conds"]:
+            for m in re.finditer(r"`(hasItem|lacksItem)\s+([a-z0-9_]+)`", " ".join(heads)):
+                rule["conds"].append({"variable": "inventory", "op": m.group(1), "value": m.group(2)})
             for m in EXPR.finditer(" ".join(heads)):
                 var, op, val = m.group(1), OPS[m.group(2)], m.group(3).strip()
                 if var in ("dest", "slot"):
@@ -371,24 +438,81 @@ def build(cards):
         if not any(c["variable"] == "day" for c in rule["conds"]):
             rule["conds"] = rule["conds"] + day_conds(s["cards"][0]["file"], heads)
         first = prev = None
+        back_id = None          # 這一段的回板卡，背包巨集的「沒挑到」要接到它，所以先預留 id
+        pending_bag = None      # 背包巨集：下一張卡要接在 pick 條件邊後面
         for c in s["cards"]:
+            if c["kind"] == "rec":
+                if not prev:
+                    continue    # 錄音前面一定要有一張卡（錄的是它）
+                prev = expand_rec(b, prev, c, sid, tapes)
+                first = first or prev
+                continue
+            if c["kind"] == "bag":
+                if not back_id:
+                    back_id = f"{BID}-back-{sid}"
+                # 錄音卷的使用效果是 open_tape=true（HUD 隨時重聽用）。在劇情裡打開背包挑它時
+                # 這個效果也會發，interrupt 卡就會插播，回來又停在背包卡上（2026-09-07 實測）。
+                # 所以 interrupt 的條件多一項 in_bag == false：進背包場景前設 true，挑完或放棄都設回 false。
+                gate = b.add({"type": "setVariable", "title": "（進背包）", "text": "",
+                              "variableOps": [{"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": True}],
+                              "segment": sid})
+                if prev:
+                    b.edge(prev, gate)
+                first = first or gate
+                prev = gate
+                bag = b.add({"type": "plugin", "title": f"背包：{c['meta']}", "text": "",
+                             "pluginId": "larch-inventory", "pluginCardId": "open-bag",
+                             "pluginVersion": "1.9.0", "pluginName": "背包系統", "pluginCardName": "打開背包",
+                             "pluginIcon": "backpack", "pluginColor": "#6f9474",
+                             "pluginPresentation": "inline", "pluginSkippable": True,
+                             "pluginValues": {"title": "拿什麼出來", "bagVar": "inventory",
+                                              "pickVar": "inventoryLastUsed", "consume": False, "allowSkip": True,
+                                              "emptyText": "包包裡沒有東西。"},
+                             "pluginReadVars": ["inventory", "inventoryCount", "inventoryLastUsed"],
+                             "pluginWriteVars": ["inventory", "inventoryCount", "inventoryLastUsed", "pluginResult"],
+                             "segment": sid})
+                if prev:
+                    b.edge(prev, bag)
+                first = first or bag
+                pending_bag = (bag, c["meta"].strip())   # 條件邊接下一張時才掛，預設邊排在它後面
+                prev = bag
+                continue
             d = card_node(c)
             if not d:
                 continue
             d["segment"] = sid
             for v in c["vars"]:
                 d.setdefault("variableOps", []).append(
-                    {"variable": v["name"], "kind": "add" if v["add"] else "set",
-                     "value": int(v["add"]) if v["add"] else v["set"]})
+                    {"id": f"op-{v['name']}", "variable": v["name"], "kind": "add" if v["add"] else "set",
+                     "value": int(v["add"]) if v["add"] else var_value(v["set"])})
             nid = b.add(d)
-            if prev:
+            if pending_bag:
+                bag, want = pending_bag
+                b.edge(bag, nid, {"variable": "inventoryLastUsed", "op": "eq", "value": want})
+                d.setdefault("variableOps", []).extend([
+                    {"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": False},
+                    {"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}])
+                leave = b.add({"type": "setVariable", "title": "（放棄，出背包）", "text": "",
+                               "variableOps": [{"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": False},
+                                               {"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}],
+                               "segment": sid})
+                b.edge(bag, leave)              # 預設：沒挑到就回板。一定排在條件邊後面
+                b.edge(leave, back_id)
+                pending_bag = None
+            elif prev:
                 b.edge(prev, nid)
             first = first or nid
             prev = nid
         if not first:
             continue
+        if pending_bag:                          # 背包卡是最後一張：只剩預設邊
+            leave = b.add({"type": "setVariable", "title": "（出背包）", "text": "",
+                           "variableOps": [{"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": False}],
+                           "segment": sid})
+            b.edge(pending_bag[0], leave)
+            b.edge(leave, back_id)
         back = b.add({"type": "boardJump", "title": "回調查板", "jumpBoardId": BID,
-                      "jumpNodeId": board_id})
+                      "jumpNodeId": board_id}, nid=back_id)
         b.edge(prev, back)
         if rule and rule["dest"] in ("catgrass_door", "catgrass_home"):
             rule["scene_only"] = rule["dest"]
@@ -402,7 +526,7 @@ def build(cards):
         else:
             orphans.append({"segment": sid, "file": s["key"][0], "section": s["key"][1],
                             "trigger": s["trigger"], "notes": notes})
-    return b, rules, unresolved, orphans, len(segs)
+    return b, rules, unresolved, orphans, len(segs), tapes
 
 
 def variables():
@@ -426,7 +550,7 @@ def main():
     for d in P.DOCS:
         cs, _ = P.parse_file(d)
         cards += cs
-    b, rules, unresolved, orphans, nseg = build(cards)
+    b, rules, unresolved, orphans, nseg, tapes = build(cards)
     vs = variables()
 
     # 可達性：每個段落入口都要有一條 pick 邊
@@ -439,7 +563,7 @@ def main():
     reachable = {e["target"] for e in b.edges if e.get("data", {}).get("condition", {}).get("variable") == "pick"}
     unreached = [s for s, nid in firsts.items() if nid not in reachable]
 
-    print(f"卡片 {len(cards)} 張 → 節點 {len(b.nodes)}、邊 {len(b.edges)}、變數 {len(vs)}")
+    print(f"卡片 {len(cards)} 張 → 節點 {len(b.nodes)}、邊 {len(b.edges)}、變數 {len(vs)}、錄音 {len(tapes)} 卷")
     print(f"段落 {nseg} 條：接上選單 {len(rules)} 條、判不出地點 {len(orphans)} 條、判讀有保留 {len(unresolved)} 條")
     print(f"段落入口沒有任何 pick 邊進來的：{len(unreached)} 條")
     print(f"時段判讀：任一 {sum(1 for r in rules if len(r['slots'])==4)}、指定 {sum(1 for r in rules if 0<len(r['slots'])<4)}、沒寫 {sum(1 for r in rules if not r['slots'])}")
@@ -455,13 +579,13 @@ def main():
     if a.out:
         out = pathlib.Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps({"boardId": BID, "nodes": b.nodes, "edges": b.edges,
-                                   "variables": vs, "rules": rules,
+                                   "variables": vs, "rules": rules, "tapes": tapes,
                                    "unresolved": unresolved, "orphans": orphans},
                                   ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"\n寫出 {out}")
     # 自我檢查：兩種路由變數以外不可以有任何條件邊
     bad = [e for e in b.edges if e.get("data") and
-           e["data"]["condition"]["variable"] not in ("dest", "pick")]
+           e["data"]["condition"]["variable"] not in ("dest", "pick", "rec_ok", "inventoryLastUsed")]
     assert not bad, f"有 {len(bad)} 條邊掛了 dest/pick 以外的條件，複合判斷不該變成邊"
     return 0
 

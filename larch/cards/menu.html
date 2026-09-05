@@ -71,7 +71,16 @@ function norm(v){
   if(typeof v==='string' && v.trim()!=='' && isFinite(Number(v))) return Number(v);
   return v==null?'':v;
 }
+function hasItem(inv, id){
+  var arr=[]; try{ arr=JSON.parse(inv||'[]'); }catch(e){ arr=[]; }
+  if(!Array.isArray(arr)) return false;
+  for(var i=0;i<arr.length;i++){ var it=arr[i]||{}; var k=String(it.id||it.n||'').trim().toLowerCase();
+    var q=(it.q===undefined)?1:Number(it.q); if(k===String(id).toLowerCase() && q>0) return true; }
+  return false;
+}
 function cmp(a,op,b){
+  if(op==='hasItem') return hasItem(a,b);
+  if(op==='lacksItem') return !hasItem(a,b);
   a=norm(a); b=norm(b);
   switch(op){
     case 'gt': return a>b; case 'gte': return a>=b; case 'lt': return a<b; case 'lte': return a<=b;

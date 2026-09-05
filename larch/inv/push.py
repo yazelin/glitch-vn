@@ -134,7 +134,7 @@ def label_of(section):
     # 「二・一Ａ 那台螢幕」→「那台螢幕」；「池一・信箱第三排（一張卡）」→「信箱第三排」
     s = re.sub(r"（.*?）", "", section)
     # 只剝「二、」「二之三・」「Ａ・」「池一・」「格一・」「甲・」這種序號，「一樓」的一不能剝
-    num = r"(?:[一二三四五六七八九十]+(?:之[一二三四五六七八九十]+)?|[ＡＢＣＤ甲乙丙丁]|池[一二三四五六七八九十]+|格[一二三四五六七八九十]+|[0-9]+)"
+    num = r"(?:[一二三四五六七八九十]+(?:之[一二三四五六七八九十]+)?|[ＡＢＣＤ甲乙丙丁][一二三四五六七八九十]*|池[一二三四五六七八九十]+|格[一二三四五六七八九十]+|[0-9]+)"
     s = re.sub(r"^(?:" + num + r"[、・\.]\s*)+", "", s)
     return s.strip() or section
 
@@ -229,17 +229,41 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                                "interruptCondition": {"kind": "variable", "variable": "open_notes",
                                                       "op": "eq", "value": True},
                                "interruptOnce": False, "interruptExit": "return"}, 0, 0)
+    # 筆記卡查的是 notes 逗號清單，可是故事卡只會把 see_x／clue_x 設成 true（對話卡設不了清單）。
+    # 所以卡片端 has() 也認旗標，這裡把 notes.html 裡出現的每一個代號列進白名單並宣告成變數。
+    note_codes = sorted(set(re.findall(r"'((?:see|clue|name)_[a-z_]+)'", notes_html)))
     add_node("inv-notes", {"type": "miniGame", "title": "調查筆記", "text": "",
                            "miniGameHtml": notes_html, "miniGamePresentation": "fullscreen",
                            "miniGameSkippable": True, "miniGameFrame": {"showButton": False, "showTitle": False},
-                           "miniGameReadVars": ["notes", "notes_free", "met", "page1"],
+                           "miniGameReadVars": ["notes", "notes_free", "met", "page1"] + note_codes,
                            "miniGameWriteVars": ["notes_free", "page1", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
+    tapes = board.get("tapes", [])
+    if tapes:
+        add_node("inv-tape-int", {"type": "interrupt", "title": "播錄音", "text": "",
+                                  # 兩個條件都要成立：有人用了一卷，而且不是在劇情的背包卡裡用的
+                                  "interruptCondition": {"kind": "variable", "variable": "open_tape", "op": "eq", "value": True,
+                                                         "match": "all",
+                                                         "conditions": [{"variable": "open_tape", "op": "eq", "value": True},
+                                                                        {"variable": "in_bag", "op": "eq", "value": False}]},
+                                  "interruptOnce": False, "interruptExit": "return"}, 0, 0)
+        for i, t in enumerate(tapes):
+            nid = f"inv-tape-{t['id']}"
+            add_node(nid, {"type": "dialogue", "title": f"播：{t['name']}", "text": t["quote"],
+                           "speaker": t["who"], "remote": True,
+                           "variableOps": [{"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}]},
+                     400 + i * 320, 900)
+            add_edge("inv-tape-int", nid, {"variable": "inventoryLastUsed", "op": "eq", "value": t["name"]})
+        # 沒對到任何一卷（不該發生）：關掉旗標就回去
+        add_node("inv-tape-none", {"type": "setVariable", "title": "（沒有這一卷）", "text": "",
+                                   "variableOps": [{"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}]},
+                 0, 900)
+        add_edge("inv-tape-int", "inv-tape-none")
 
     # 變數
     vs = {v["name"]: v for v in board["variables"]}
     for name, val in sorted(cond_vars):
-        if name in vs:
+        if name in vs or name == "inventory":   # inventory 的預設值在下面那張表，hasItem 條件不可以把它蓋成空字串
             continue
         t, _ = infer_type(val)
         default = False if t == "boolean" else 0 if t == "number" else ""
@@ -252,8 +276,13 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("phone_ringing", "boolean", False, "永遠不會響"),
         ("rec_ok", "boolean", False, "錄音機清過毛了"),
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
+        ("open_tape", "boolean", False, "播錄音（HUD 用了哪一卷）"),
+        ("in_bag", "boolean", False, "劇情正在開背包（擋掉 HUD 重聽的插播）"),
     ]:
         vs.setdefault(name, {"id": name, "name": name, "label": label, "type": t, "defaultValue": default})
+
+    for code in note_codes:
+        vs.setdefault(code, {"id": code, "name": code, "label": code, "type": "boolean", "defaultValue": False})
 
     # 版面：板與地點在左邊兩欄；每一段一列
     pos = {board_id: (0, 0)}
@@ -279,6 +308,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             prev = next((e["source"] for e in edges if e["target"] == n["id"]), None)
             px, py = pos.get(prev, (1400, 3200))
             n["position"] = {"x": px + 320, "y": py}
+    for n in nodes:
+        n.setdefault("position", {"x": 0, "y": 0})
     nodes[[n["id"] for n in nodes].index("inv-rest")]["position"] = {"x": 0, "y": 300}
     nodes[[n["id"] for n in nodes].index("inv-notes-int")]["position"] = {"x": 0, "y": 600}
     nodes[[n["id"] for n in nodes].index("inv-notes")]["position"] = {"x": 400, "y": 600}
@@ -307,6 +338,8 @@ def settings_patch(settings):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--set", action="append", default=[],
+                    help="測試用：覆寫變數預設值，例 --set rec_ok=true。驗完要再推一次正常版")
     a = ap.parse_args()
     board = json.loads(BOARD_JSON.read_text(encoding="utf-8"))
     state = load_state()
@@ -341,6 +374,13 @@ def main():
 
     # 3. 組 payload（順便上傳缺的背景）
     nodes, edges, vs, st = assemble(board, state, pid=pid, real_bid=bid)
+    for kv in a.set:
+        k, v = kv.split("=", 1)
+        v = True if v == "true" else False if v == "false" else int(v) if re.fullmatch(r"-?\d+", v) else v
+        for var in vs:
+            if var["name"] == k:
+                var["defaultValue"] = v
+                print(f"★ 測試覆寫 {k} = {v!r}（驗完要重推正常版）")
     print("payload：", json.dumps(st, ensure_ascii=False))
 
     # 4. 專案設定與變數（整包 PUT 會清版子，所以在推版子之前做）

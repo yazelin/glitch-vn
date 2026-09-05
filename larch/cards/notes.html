@@ -171,7 +171,9 @@ function drawPage1(m){
   box.appendChild(ol); m.appendChild(box);
 }
 
-function has(code){ return list(values.notes).indexOf(code)>=0; }
+// 兩種來源都算：notes 清單裡有代號，或者那個代號本身是 true 的旗標
+// （故事卡只設得了單一變數，設不了清單，見 design/調查篇-變數.md 五）。
+function has(code){ var v=values[code]; return list(values.notes).indexOf(code)>=0 || v===true || v==='true'; }
 
 function drawNames(m){
   var got=NAMES.filter(function(n){ return has(n[0]); });

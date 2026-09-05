@@ -92,8 +92,8 @@ console.log('\n=== 調查板 ===');
   const done = m.find(x => x.type === 'larch:complete');
 
   ok('寫回 dest', sets.dest === 'lobby', JSON.stringify(sets.dest));
-  ok('時段往前走一格', sets.slot === 3, `slot=${sets.slot}`);
-  ok('沒有跨日（還沒到深夜）', sets.day === undefined, `day=${sets.day}`);
+  ok('出門時不動時段（那一趟的選單要讀到當下的時段）', sets.slot === undefined, `slot=${sets.slot}`);
+  ok('沒有跨日', sets.day === undefined, `day=${sets.day}`);
   ok('完成事件帶目的地', done && done.result === 'lobby');
   ok('here 一定含常駐的管理員或晚上的黑洞先生',
      typeof sets.here === 'string' && (sets.here.includes('黑洞先生') || sets.here === ''),
@@ -196,15 +196,29 @@ console.log('\n=== 調查筆記：第一頁 ===');
   ok('收起來時把 open_notes 設回 false', last.open_notes === false);
 }
 
-console.log('\n=== 調查板：深夜之後換日 ===');
+console.log('\n=== 調查板：回到板上才推進時間，深夜之後換日 ===');
 {
-  const fr = await open('board.html', { day: 3, slot: 3, met: '店員,貓草' });
-  await fr.locator('button.spot:not(.locked)', { hasText: '便利商店' }).click();
+  // 上一趟去了便利商店（dest 還留著）、那一趟是第 3 天深夜：板一開就換日並清掉 dest
+  const fr = await open('board.html', { day: 3, slot: 3, dest: 'store', here: '店員,貓草', met: '店員,貓草' });
+  await page.waitForTimeout(200);
+  let sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('回到板上 slot 歸零', sets.slot === 0, `slot=${sets.slot}`);
+  ok('回到板上 day 加一', sets.day === 4, `day=${sets.day}`);
+  ok('dest 清掉', sets.dest === '', JSON.stringify(sets.dest));
+  ok('標頭顯示推進後的時間', (await fr.locator('#when').textContent()).includes('第 4 天'));
+  // 這一趟深夜去便利商店：貓草必定在，時段不動
+  const fr2 = await open('board.html', { day: 3, slot: 3, met: '店員,貓草' });
+  await fr2.locator('button.spot:not(.locked)', { hasText: '便利商店' }).click();
   await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
-  const sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
-  ok('深夜之後 slot 歸零', sets.slot === 0, `slot=${sets.slot}`);
-  ok('深夜之後 day 加一', sets.day === 4, `day=${sets.day}`);
+  sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
   ok('深夜便利商店貓草必定在', String(sets.here).includes('貓草'), `here="${sets.here}"`);
+  ok('出門時 slot 不動', sets.slot === undefined, `slot=${sets.slot}`);
+  // 不出門：直接推進
+  const fr3 = await open('board.html', { day: 3, slot: 3, met: '' });
+  await fr3.locator('#skip').click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('不出門直接換日', sets.day === 4 && sets.slot === 0, `day=${sets.day} slot=${sets.slot}`);
 }
 
 console.log('\n=== 調查筆記 ===');

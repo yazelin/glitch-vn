@@ -40,7 +40,11 @@ DOCS = [d for d in sorted(ROOT.glob("design/調查篇*.md"))
 # 卡頭有兩類：固定的四種，以及**單一講者用自己的名字當卡頭**
 # （格莉奇全作都是這種，她只在螢幕與喇叭上出現，括號裡帶 `remote`）。
 GENERIC_HEADS = {"台詞", "排卡註", "配音", "接線", "變數"}
-FIXED = ["旁白", "talk", "玩家", "特寫卡"]
+# 錄音／背包是建置巨集，不是台詞卡（見 design/調查篇-背包與謎題.md 三之三、三之四）：
+#   **錄音**（保全）            → 有 rec_ok 才出現的選擇卡「開錄音機／不開」＋取得道具卡。
+#                                引言裡帶講者的行是他對錄音機的反應，沒講者的一行是錄到的那一句（道具備註）。
+#   **背包**（錄音・保全）       → 打開背包卡；挑中括號裡那一件才接下一張，否則直接回調查板。
+FIXED = ["旁白", "talk", "玩家", "特寫卡", "錄音", "背包"]
 CAST = ["格莉奇", "黑洞先生", "貓草", "鐵塔", "0x", "斑比", "諾亞",
         "管理員", "店員", "保全", "材料行老闆", "櫃檯", "住戶",
         "路人", "路人乙", "高中生", "阿姨", "送貨的", "發傳單的", "上班族"]
@@ -82,7 +86,7 @@ def parse_file(path):
 
     def flush():
         nonlocal cur
-        if cur and cur["lines"]:
+        if cur and (cur["lines"] or cur["kind"] == "bag"):
             cards.append(cur)
         cur = None
 
@@ -121,7 +125,7 @@ def parse_file(path):
             if t := SLOT.search(meta):
                 slot = t.group(1)
             kmap = {"旁白": "narrate", "talk": "talk",
-                    "玩家": "note", "特寫卡": "plate"}
+                    "玩家": "note", "特寫卡": "plate", "錄音": "rec", "背包": "bag"}
             cur = {"kind": kmap.get(kind, "say"),
                    "speaker": None if kind in FIXED else kind,
                    # remote＝他不在這個房間，只有訊號（螢幕、喇叭、耳機）。
