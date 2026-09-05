@@ -28,6 +28,10 @@
     tools/cut_faces.py       表情差分去背（綠幕→清內部殘留→負控制驗收）
     tools/make_icons.py      PWA 圖示（從立繪按實際 ink 邊界裁，不是目測置中）
     tools/update_sw.py       用內容 hash 產 sw.js 的快取版號，別手動 bump
+    art/live2d/              格莉奇的 Live2D 模型。build.py 把 sprite-glitch.png 切成 34 層、
+                             mkpsd.py 組成 Cubism 讀得懂的 PSD、run-cubism.sh 在 Wine 底下開
+                             Cubism Editor（Ubuntu 也做得完，見該資料夾 README）。
+                             export/ 是給 Larch 用的 runtime 檔，layers/ 與 .psd 不進 git
     tools/offline_test.mjs   離線包驗收（配負控制：沒下載時語音必須是解不出來的）
     tools/gen_intro.py       角色頁的配音：自我介紹，加上「別人怎麼說」
     tools/check_intro.py     逐段重新辨識比對原文。**判準是拼音不是字**

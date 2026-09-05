@@ -27,3 +27,8 @@ art/out/bg-catgrass-home.png
 art/page/page-note-*.png
 art/out/bg-catgrass-door.png
 art/out/bg-street-night.png
+
+# Live2D：中間產物不進 git，兩支腳本從 art/sprite-glitch.png 重生得出來。
+# art/live2d/export/ 要進（Larch 素材包指著那些網址），*.cmo3 也一定要進（rigging 的唯一原始檔，重生不了）。
+art/live2d/layers/
+art/live2d/glitch.psd
