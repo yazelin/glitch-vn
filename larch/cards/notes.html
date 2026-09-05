@@ -10,8 +10,13 @@
   **這一份自己不存任何東西**，玩家打的字一律 larch:set 寫回變數，
   由播放器的存檔（larch-save-<projectId> 裡的 values）負責持久化。
 
-  miniGameReadVars ：notes notes_free
-  miniGameWriteVars：notes_free
+  miniGameReadVars ：notes notes_free met page1
+  miniGameWriteVars：notes_free page1 open_notes
+
+  「第一頁」（2026-09-06，design/調查篇-背包與謎題.md 六之二）：
+  六個 ID 都抄到了（name_* 六個都在 notes 裡）才出現。每一行左邊是 ID，右邊選她見過的誰，
+  或「查不到」。第七行鎖死。填錯不罰、不對答案、不提示，存進 page1（代號=人名，逗號分隔）。
+  這張卡由背包裡的守則本觸發（open_notes），收起來時把 open_notes 設回 false，interrupt 卡才會放人回去。
 
   notes 是逗號分隔的代號（clue_* / see_* / name_*），**存代號不存全文**，
   因為 values 是整包 JSON 塞進一格 localStorage，長度有限。全文查下面的表展開。
@@ -69,6 +74,14 @@ button.act{appearance:none;cursor:pointer;font:inherit;color:var(--ink);backgrou
   border:1px solid var(--line);border-radius:8px;padding:.5em 1.1em;font-size:clamp(13px,1.7vw,15px)}
 button.act:hover,button.act:focus-visible{border-color:var(--cyan);outline:none}
 button.act[disabled]{opacity:.35;cursor:default}
+.p1 ol{margin:0;padding:0;list-style:none}
+.p1 li{display:flex;gap:1em;align-items:center;padding:.5em 0;border-bottom:1px solid var(--line)}
+.p1 .id{flex:1}
+.p1 select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:6px;padding:.3em .5em;max-width:46%}
+.p1 li.seven{color:var(--dim)}
+.p1 li.seven .her{font-style:italic;flex:1}
+.p1 li.seven .mine{color:var(--dim)}
 footer{flex:none;display:flex;justify-content:flex-end}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head>
@@ -107,6 +120,8 @@ var SIGHT=[
  ['see_bambi', '斑比',        '她有提過一個室友。我沒問。客戶的事我不問。'],
  ['see_cat',   '貓草',        '她講過「我室友」。就這樣。從來沒露過臉。'],
  ['see_guard', '保全',        '監視器上常常有一個人站在對面。我沒下去問過。'],
+ // 播保全那段錄音給管理員聽之後他補的（design/調查篇-背包與謎題.md 三之四用途乙）
+ ['see_stairs','管理員',      '他都走樓梯。監視器照不到樓梯。'],
  // 0x 那一列是**拒答**，可是它一樣要並排出來：那一份的內容就是「她不講」。
  // 少了它，玩家看到的是七份互相矛盾的描述；有了它，第八格是一片空白，
  // 而那一格是唯一一個知道答案的人留下的。故事在 asked_0x_黑洞 之後把
@@ -120,10 +135,41 @@ var CLUES=[
  ['clue_notfix',  '鐵塔',  '妳問我為什麼不修。妳先告訴我修好之後她賣什麼。'],
  ['clue_cantfix', '0x',    '調回來的那個會先停頓一下再回答。'],
  ['clue_notebook','管理員','她一天到晚掉東西，可是那本子從來沒掉過。'],
- ['clue_older',   '諾亞',  '她拿那本子來墊過東西。我看到日期。比她開始那個什麼播還早。']
+ ['clue_older',   '諾亞',  '她拿那本子來墊過東西。我看到日期。比她開始那個什麼播還早。'],
+ ['clue_same_pause','諾亞','兩段。同一句。停頓在同一個位置。他沒有在背，他每次都是這樣講。']
 ];
 
 var TABS=['名單','目擊','問答','空白頁'];
+// 第一頁只在六個 ID 都抄到之後才有。people 是她見過的人（met），加一個「查不到」。
+var UNKNOWN='查不到';
+function hasAllNames(){ return NAMES.every(function(n){ return has(n[0]); }); }
+function page1Map(){
+  var m={}; list(values.page1).forEach(function(kv){ var i=kv.indexOf('='); if(i>0) m[kv.slice(0,i)]=kv.slice(i+1); });
+  return m;
+}
+function savePage1(m){
+  var out=[]; for(var k in m) if(m[k]) out.push(k+'='+m[k]);
+  values.page1=out.join(','); setVar('page1', values.page1);
+}
+function drawPage1(m){
+  var people=list(values.met).filter(function(p){ return p && p!=='路人'; });
+  var cur=page1Map();
+  var box=el('div','p1'); var ol=el('ol');
+  NAMES.forEach(function(n){
+    var li=el('li'); li.appendChild(el('span','id',n[1]));
+    var sel=el('select'); sel.setAttribute('aria-label',n[1]+' 是誰');
+    var o0=el('option',null,'　'); o0.value=''; sel.appendChild(o0);
+    people.concat([UNKNOWN]).forEach(function(p){ var o=el('option',null,p); o.value=p; if(cur[n[0]]===p)o.selected=true; sel.appendChild(o); });
+    sel.addEventListener('change',function(){ cur[n[0]]=sel.value; savePage1(cur); });
+    li.appendChild(sel); ol.appendChild(li);
+  });
+  // 第七行。左邊是她寫在牆上那句，右邊是我寫的。**沒有下拉，不解釋。**
+  var li7=el('li','seven');
+  li7.appendChild(el('span','her','還有一個。不要問他是誰。'));
+  li7.appendChild(el('span','mine','還有一個。'));
+  ol.appendChild(li7);
+  box.appendChild(ol); m.appendChild(box);
+}
 
 function has(code){ return list(values.notes).indexOf(code)>=0; }
 
@@ -201,8 +247,11 @@ function drawFree(m){
 }
 
 function render(){
+  var tabs=TABS.slice(), draws=[drawNames,drawSight,drawQA,drawFree];
+  if(hasAllNames()){ tabs.unshift('第一頁'); draws.unshift(drawPage1); }
+  if(tab>=tabs.length) tab=0;
   var nav=document.getElementById('tabs'); nav.textContent='';
-  TABS.forEach(function(name,i){
+  tabs.forEach(function(name,i){
     var b=el('button',null,name); b.type='button';
     b.setAttribute('role','tab');
     b.setAttribute('aria-selected', i===tab ? 'true' : 'false');
@@ -210,7 +259,7 @@ function render(){
     nav.appendChild(b);
   });
   var m=document.getElementById('page'); m.textContent='';
-  [drawNames,drawSight,drawQA,drawFree][tab](m);
+  draws[tab](m);
 }
 
 function start(){
@@ -222,6 +271,7 @@ function start(){
   render();
   document.getElementById('close').addEventListener('click',function(){
     if(dirty) saveFree();
+    setVar('open_notes', false);   // interrupt 卡靠這個放人回原處
     finish('closed',{notes:free.length});
   });
 }

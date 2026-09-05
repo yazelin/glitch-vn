@@ -83,6 +83,33 @@ def loc_from_headings(headings):
     return None, None
 
 
+CN_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10, "十一": 11}
+# 整份檔都是同一天的
+FILE_DAY = {"調查篇-第一天-定稿": 1, "調查篇-第二天": 2}
+
+
+def day_conds(file, headings):
+    """從檔名與標題讀出這一段哪幾天才會播。回 conds 清單（可能是空的）。
+    「第五到第七天之間」→ 5..7；「第八到第十一天之間」→ 8..11；「最後一天」→ >= 11；
+    「第二天」→ == 2。判不出來就不加，寧可少擋不要亂擋。"""
+    if file in FILE_DAY:
+        return [{"variable": "day", "op": "eq", "value": FILE_DAY[file]}]
+    text = " ".join(headings)
+    m = re.search(r"第([一二三四五六七八九十]+)到第([一二三四五六七八九十]+)天", text)
+    if m:
+        return [{"variable": "day", "op": "gte", "value": CN_NUM[m.group(1)]},
+                {"variable": "day", "op": "lte", "value": CN_NUM[m.group(2)]}]
+    if "最後一天" in text or "最後那一頁" in text:
+        return [{"variable": "day", "op": "gte", "value": 11}]
+    m = re.search(r"第([一二三四五六七八九十]+)天(以後|之後|起)", text)
+    if m:
+        return [{"variable": "day", "op": "gte", "value": CN_NUM[m.group(1)]}]
+    m = re.search(r"第([一二三四五六七八九十]+)天", text)
+    if m:
+        return [{"variable": "day", "op": "eq", "value": CN_NUM[m.group(1)]}]
+    return []
+
+
 def slots_from_headings(headings):
     text = " ".join(headings)
     if "任一" in text:
@@ -317,10 +344,19 @@ def build(cards):
         if rule["dest"]:
             notes = [x for x in notes if x != "判不出地點"]
             if not rule["slots"]:
-                rule["slots"] = LOC_SLOTS.get(rule["dest"], [])
-                rule["slots_from"] = "地點預設"
+                # 標題自己寫了時段（「一樓晚上」）就用它，沒寫才退到地點預設
+                hs = slots_from_headings(heads)
+                if hs and len(hs) < 4:
+                    rule["slots"] = hs
+                    rule["slots_from"] = "標題"
+                else:
+                    rule["slots"] = LOC_SLOTS.get(rule["dest"], [])
+                    rule["slots_from"] = "地點預設"
         if not rule["slots"]:
             rule["slots"] = slots_from_headings(heads)
+        # 日期閘：觸發裡沒寫 day 的，從檔名與標題補
+        if not any(c["variable"] == "day" for c in rule["conds"]):
+            rule["conds"] = rule["conds"] + day_conds(s["cards"][0]["file"], heads)
         first = prev = None
         for c in s["cards"]:
             d = card_node(c)

@@ -32,3 +32,6 @@ art/out/bg-street-night.png
 # art/live2d/export/ 要進（Larch 素材包指著那些網址），*.cmo3 也一定要進（rigging 的唯一原始檔，重生不了）。
 art/live2d/layers/
 art/live2d/glitch.psd
+# 調查篇推送層的私人預覽連結與 dry-run 產物
+larch/inv/preview.json
+larch/inv/out/payload.json

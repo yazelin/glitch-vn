@@ -11760,7 +11760,7 @@
    "data": {
     "type": "dialogue",
     "title": "筆記：第一天。晴。我從樓下",
-    "text": "第一天。晴。我從樓下開始問起。",
+    "text": "第一天。晴。我從樓下開始問起。\n本子是她的周邊，一千二。內頁空白，文案說可以自己寫。第一頁我先留著。",
     "speaker": "玩家",
     "segment": "seg080"
    }
@@ -12285,6 +12285,11 @@
     "variableOps": [
      {
       "variable": "clue_older",
+      "kind": "set",
+      "value": null
+     },
+     {
+      "variable": "rec_ok",
       "kind": "set",
       "value": null
      }
@@ -19379,15 +19384,23 @@
    "file": "調查篇-信心",
    "dest": "lobby",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "gte",
+     "value": 5
+    },
+    {
+     "variable": "day",
+     "op": "lte",
+     "value": 7
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg001",
@@ -19395,15 +19408,23 @@
    "file": "調查篇-信心",
    "dest": "lobby",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "gte",
+     "value": 8
+    },
+    {
+     "variable": "day",
+     "op": "lte",
+     "value": 11
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg002",
@@ -19416,7 +19437,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "gte",
+     "value": 11
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
    "slots_from": "地點預設"
@@ -20169,15 +20196,12 @@
    "file": "調查篇-橋段",
    "dest": "lobby",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    2
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg051",
@@ -20320,14 +20344,12 @@
    "file": "調查篇-橋段",
    "dest": "studio",
    "slots": [
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg061",
@@ -20335,14 +20357,12 @@
    "file": "調查篇-橋段",
    "dest": "roof",
    "slots": [
-    0,
-    1,
-    2
+    3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg062",
@@ -20350,15 +20370,12 @@
    "file": "調查篇-橋段",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg063",
@@ -20366,15 +20383,12 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg064",
@@ -20382,15 +20396,12 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg065",
@@ -20398,15 +20409,12 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg066",
@@ -20414,15 +20422,12 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg067",
@@ -20430,15 +20435,12 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg068",
@@ -20446,15 +20448,12 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg069",
@@ -20462,15 +20461,12 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg070",
@@ -20478,15 +20474,13 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
     2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg071",
@@ -20494,15 +20488,13 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
     2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg072",
@@ -20632,15 +20624,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "lobby",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    0
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg081",
@@ -20648,14 +20643,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "roof",
    "slots": [
-    0,
-    1,
-    2
+    1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg082",
@@ -20663,14 +20662,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "street",
    "slots": [
-    0,
-    1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg083",
@@ -20678,15 +20681,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "lobby",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg084",
@@ -20694,15 +20700,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "lobby",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg085",
@@ -20710,14 +20719,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "street",
    "slots": [
-    0,
-    1,
-    2
+    0
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg086",
@@ -20725,14 +20738,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "street",
    "slots": [
-    0,
-    1,
-    2
+    1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg087",
@@ -20740,14 +20757,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "busstop",
    "slots": [
-    0,
-    1,
-    2
+    0
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg088",
@@ -20755,14 +20776,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "busstop",
    "slots": [
-    0,
-    1,
-    2
+    1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg089",
@@ -20770,14 +20795,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "busstop",
    "slots": [
-    0,
-    1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg090",
@@ -20785,14 +20814,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "metro",
    "slots": [
-    0,
-    1,
-    2
+    0
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg091",
@@ -20800,14 +20833,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "metro",
    "slots": [
-    0,
-    1,
-    2
+    1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg092",
@@ -20815,14 +20852,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "metro",
    "slots": [
-    0,
-    1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg093",
@@ -20830,15 +20871,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    0
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg094",
@@ -20846,15 +20890,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg095",
@@ -20862,15 +20909,18 @@
    "file": "調查篇-第一天-定稿",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg097",
@@ -20878,15 +20928,18 @@
    "file": "調查篇-第二天",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    0
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg098",
@@ -20894,14 +20947,18 @@
    "file": "調查篇-第二天",
    "dest": "street",
    "slots": [
-    0,
-    1,
-    2
+    1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg099",
@@ -20909,15 +20966,18 @@
    "file": "調查篇-第二天",
    "dest": "lobby",
    "slots": [
-    0,
-    1,
-    2,
-    3
+    2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   },
   {
    "segment": "seg100",
@@ -20930,7 +20990,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "eq",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
    "slots_from": "地點預設"
@@ -20941,15 +21007,12 @@
    "file": "調查篇-缺卡",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "slots_from": "標題"
   }
  ],
  "unresolved": [

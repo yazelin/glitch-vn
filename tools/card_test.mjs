@@ -43,7 +43,10 @@ async function open(card, values) {
     window.addEventListener('message', e => { if (e.data && e.data.type) window.__msgs.push(e.data); });
     document.getElementById('vals').value = JSON.stringify(v);
   }, values);
-  await page.click(`[data-card="${card}"]`);
+  // 殼上沒有按鈕的卡（測試臨時產的）直接改殼的 card 變數重載
+  const btn = page.locator(`[data-card="${card}"]`);
+  if (await btn.count()) await btn.click();
+  else await page.evaluate(c => { window.card = c; window.load(); }, card);
   await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:ready'), { timeout: 8000 });
   await page.waitForTimeout(350);
   return page.frameLocator('#f');
@@ -127,6 +130,72 @@ console.log('\n=== 調查板：錄音間門口永遠進不去 ===');
      (await fr.locator('button.spot', { hasText: '貓草家' }).count()) === 0);
 }
 
+console.log('\n=== 選單：規則住在卡片裡，Larch 只認 pick ===');
+{
+  // 獨立打開時 RULES 是空的，這裡把一組規則塞進去再測（推送層注入的形狀一模一樣）。
+  const inject = async (rules) => {
+    await page.goto(`http://localhost:${PORT}/host.html`, { waitUntil: 'load' });
+    const html = fs.readFileSync(path.join(DIR, 'menu.html'), 'utf8')
+      .replace('/*@@RULES@@*/[]', JSON.stringify(rules)).replace('@@LOC_NAME@@', '一樓').replace('@@LOC@@', 'lobby');
+    fs.writeFileSync(path.join(DIR, '_menu_test.html'), html);
+  };
+  const RULES = [
+    { seg: 'segA', label: '那台螢幕', slots: [0, 1], conds: [{ variable: 'met_管理員', op: 'gte', value: 2 }], who: ['管理員'] },
+    { seg: 'segB', label: '失物箱', slots: [0, 1], conds: [{ variable: 'trust_管理員', op: 'eq', value: 3 }], who: ['管理員'] },
+    { seg: 'segC', label: '信箱第三排', slots: [0, 1], conds: [], who: [] },
+    { seg: 'segD', label: '第二次擦身而過', slots: [2], conds: [], who: ['黑洞先生'] },
+  ];
+  await inject(RULES);
+  let fr = await open('_menu_test.html', { day: 2, slot: 0, here: '管理員', 'met_管理員': 2, 'trust_管理員': 1 });
+  let labels = await fr.locator('button.seg .label').allTextContents();
+  ok('時段對、人在、條件過的才列出來', JSON.stringify(labels) === JSON.stringify(['那台螢幕', '信箱第三排']), JSON.stringify(labels));
+  fr = await open('_menu_test.html', { day: 2, slot: 0, here: '管理員', 'met_管理員': '2', 'trust_管理員': '3' });
+  labels = await fr.locator('button.seg .label').allTextContents();
+  ok('變數是字串也照數字比（trust=\"3\" 開失物箱）', labels.includes('失物箱'), JSON.stringify(labels));
+  fr = await open('_menu_test.html', { day: 2, slot: 2, here: '' });
+  labels = await fr.locator('button.seg .label').allTextContents();
+  ok('晚上沒人：黑洞先生那一段不出現，無人段落也不在晚上', labels.length === 0, JSON.stringify(labels));
+  fr = await open('_menu_test.html', { day: 2, slot: 2, here: '黑洞先生' });
+  labels = await fr.locator('button.seg .label').allTextContents();
+  ok('黑洞先生在，擦身而過那一段出現', JSON.stringify(labels) === JSON.stringify(['第二次擦身而過']), JSON.stringify(labels));
+  await fr.locator('button.seg').first().click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  let sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('選了就寫 pick=段落代號', sets.pick === 'segD', JSON.stringify(sets.pick));
+  fr = await open('_menu_test.html', { day: 2, slot: 0, here: '管理員', 'met_管理員': 0 });
+  await fr.locator('#skip').click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  const mm = await msgs();
+  sets = Object.fromEntries(mm.filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('先走：pick 清空，完成事件 leave', sets.pick === '' && mm.find(x => x.type === 'larch:complete').result === 'leave');
+  fs.unlinkSync(path.join(DIR, '_menu_test.html'));
+}
+
+console.log('\n=== 調查筆記：第一頁 ===');
+{
+  const five = 'name_cat,name_tower,name_zero,name_bambi,name_noah';
+  let fr = await open('notes.html', { notes: five, met: '管理員,諾亞,店員,路人' });
+  ok('六個 ID 沒抄齊，沒有第一頁', (await fr.locator('nav button', { hasText: '第一頁' }).count()) === 0);
+  fr = await open('notes.html', { notes: five + ',name_del', met: '管理員,諾亞,店員,路人,貓草', page1: 'name_noah=諾亞' });
+  ok('抄齊了第一頁在最前面', (await fr.locator('nav button').first().textContent()) === '第一頁');
+  const rows = fr.locator('.p1 li');
+  ok('七行', (await rows.count()) === 7, `${await rows.count()} 行`);
+  ok('第七行沒有下拉', (await rows.nth(6).locator('select').count()) === 0);
+  ok('第七行左邊是她的字、右邊是我的字',
+     (await rows.nth(6).textContent()).includes('不要問他是誰') && (await rows.nth(6).textContent()).includes('還有一個。'));
+  const opts = await rows.first().locator('option').allTextContents();
+  ok('下拉是見過的人加「查不到」，路人不算', !opts.includes('路人') && opts.includes('查不到') && opts.includes('貓草'), JSON.stringify(opts));
+  ok('已填的讀回來', (await rows.nth(4).locator('select').inputValue()) === '諾亞');
+  await rows.nth(5).locator('select').selectOption('查不到');
+  await rows.nth(0).locator('select').selectOption('管理員');   // 填錯不罰：系統照她填的記
+  await fr.locator('#close').click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  const all = (await msgs()).filter(x => x.type === 'larch:set');
+  const last = {}; all.forEach(x => { last[x.name] = x.value; });
+  ok('page1 照填的存，錯的也存', last.page1.includes('name_del=查不到') && last.page1.includes('name_cat=管理員') && last.page1.includes('name_noah=諾亞'), last.page1);
+  ok('收起來時把 open_notes 設回 false', last.open_notes === false);
+}
+
 console.log('\n=== 調查板：深夜之後換日 ===');
 {
   const fr = await open('board.html', { day: 3, slot: 3, met: '店員,貓草' });
@@ -146,6 +215,9 @@ console.log('\n=== 調查筆記 ===');
     notes_free: JSON.stringify(['他說「因為你問了」。'])
   };
   const fr = await open('notes.html', V);
+  // 六個 ID 抄齊之後第一頁排最前面，名單要點過去看
+  ok('六個 ID 齊了就有第一頁', (await fr.locator('nav button', { hasText: '第一頁' }).count()) === 1);
+  await fr.locator('nav button', { hasText: '名單' }).click();
 
   const items = fr.locator('ol.names li');
   ok('六個名字加上空的第七行', (await items.count()) === 7, `畫了 ${await items.count()} 行`);

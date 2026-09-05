@@ -63,10 +63,11 @@
     design/調查篇-第一天-定稿.md  第一天，16 格 81 張卡
     design/調查篇-橋段.md         第一批六場
     design/調查篇-第二天.md       第二天，初稿
+    design/調查篇-背包與謎題.md   第二屆創作者挑戰：背包怎麼接、誰給錄音、玩家在哪一頁交答案
     design/調查篇-缺卡.md        三格缺卡的草稿：貓草一階碎念、studio 到訪卡、
                                  四之一→五之一 的閘。**未審**
     larch/cards/board.html        調查板：選地點、算遇到誰、時間往前走
-    larch/cards/notes.html        調查筆記：名單／目擊／問答／空白頁
+    larch/cards/notes.html        調查筆記：第一頁（六 ID 對人）／名單／目擊／問答／空白頁
     larch/cards/host.html         假的 Larch 宿主，開發用
     art/bg-investigation/         七張新場景背景
 
@@ -250,7 +251,19 @@ build.py 有自我檢查：任何一條邊掛了 dest／pick 以外的條件就 
 標題堆疊裡的反引號代號與人名 → 標題裡的中文地名。標題堆疊含 L1，
 因為橋段的每一場都是 L1 且標題就帶代號與時段。
 
-**還沒寫的**：把 board.json 推上 Larch 的那一層。推之前要知道一件事——
-帶條件的邊只能用整包 `PUT /projects/:id/boards/:boardId` 推，`POST /nodes` 會把
-`edge.data.condition` 靜默丟掉，卡片還在但變成走不到的孤島，不驗看不出來。
-另外選單卡（`larch/cards/menu.html`）還不存在，它要吃 board.json 的 `rules`。
+    larch/inv/push.py        **唯一會碰 Larch 的一支。** 第一次跑會建新專案（id 存在
+                             larch/inv/state.json，**調查篇是獨立專案，不是正文那個**），
+                             上傳缺的背景、PUT 專案設定與變數（開背包插件）、
+                             用 `PUT /boards/:id` 整包推版子（帶條件的邊才留得住），
+                             推完回讀比對卡數與條件邊數，最後印免登入預覽網址。
+                             `--dry` 只組 payload 寫到 larch/inv/out/payload.json。
+                             它另外補三種 build.py 沒有的節點：板與選單的「沒選到就回板」預設邊、
+                             翻開守則本的 interrupt 卡（背包 HUD 的常駐入口）。
+
+    larch/cards/menu.html    地點選單：這一個時段在這裡能問什麼。規則（時段、誰在、變數條件）
+                             由 push.py 注入，Larch 只認它寫回的 `pick`。
+
+**2026-09-06 已推上新專案**（467 張卡、113 條條件邊，回讀一致）。還沒做的：
+段落標籤還是設計文件的節標題，要換成玩家看得懂的文案；白天版背景沒畫（先用夜版）；
+五個新角色沒有立繪；台詞增補三處（見 `design/調查篇-背包與謎題.md` 九）。
+參賽脈絡與背包、謎題的設計在 `design/調查篇-背包與謎題.md`。

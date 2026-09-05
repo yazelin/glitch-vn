@@ -1,0 +1,13 @@
+{
+ "projectId": "project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4",
+ "boardId": "board-main",
+ "assets": {
+  "bg-street-night": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1788639288880_bg-street-night.jpg",
+  "bg-store-night": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1788639318551_bg-store-night.jpg",
+  "bg-parts": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1788639347936_bg-parts.jpg",
+  "bg-busstop": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1788639378335_bg-busstop.jpg",
+  "bg-metro": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1788639408536_bg-metro.jpg",
+  "bg-laundry": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1788639437350_bg-laundry.jpg",
+  "bg-figure": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1788639463834_bg-figure.jpg"
+ }
+}

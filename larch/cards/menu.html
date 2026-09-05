@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>選單</title>
+<!--
+  《格莉奇與黑洞先生・調查篇》地點選單（Larch miniGame 卡）
+
+  契約同 board.html。這一張是「到了一個地點之後，這一個時段可以問什麼」。
+  複合判斷（地點 × 時段 × 誰在 × 變數）全部住在這裡，Larch 那邊只認一個變數：
+  選了哪一段就 larch:set pick=<段落代號>，出邊照 pick 路由（larch/inv/build.py）。
+
+  RULES 由推送層（larch/inv/push.py）在推上去之前注入，每一個地點一份，
+  所以同一份 HTML 在十二個地點各自不同。本檔獨立打開時 RULES 是空的。
+
+  miniGameReadVars ：day slot here 以及 RULES 裡出現的每一個變數（推送層算）
+  miniGameWriteVars：pick
+
+  ponytail: 段落標籤直接用設計文件的節標題。玩家看得懂的文案要另外寫，等台詞定稿再補。
+-->
+<style>
+:root{
+  --paper:#12101d; --panel:#1a1729; --line:#2e2a44;
+  --ink:#e8e6f2; --dim:#9a94b8; --cyan:#7fd6e8; --lilac:#b39ddb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:transparent;color:var(--ink);
+  font:16px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  -webkit-text-size-adjust:100%}
+body.ready{background:rgba(18,16,29,.82)}
+.wrap{height:100%;display:flex;flex-direction:column;padding:3vh 4vw;gap:2vh;overflow:hidden}
+header{flex:none;display:flex;align-items:baseline;gap:.8em;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(15px,2.4vw,20px);font-weight:600;letter-spacing:.06em}
+.when{color:var(--cyan);font-size:clamp(13px,2vw,17px)}
+.who{color:var(--lilac);font-size:clamp(12px,1.7vw,14px);margin-left:auto}
+.list{flex:1;display:flex;flex-direction:column;gap:1.2vh;overflow-y:auto;padding-right:.4em}
+button.seg{appearance:none;text-align:left;cursor:pointer;color:inherit;font:inherit;
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:.8em 1em;display:flex;flex-direction:column;gap:.2em;transition:border-color .15s}
+button.seg:hover,button.seg:focus-visible{border-color:var(--cyan);outline:none}
+.label{font-weight:600;font-size:clamp(14px,1.9vw,16px)}
+.sub{color:var(--dim);font-size:clamp(11px,1.5vw,12.5px)}
+.empty{color:var(--dim)}
+footer{flex:none;display:flex;justify-content:flex-end}
+button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;
+  font-size:clamp(12px,1.6vw,14px);background:none;border:1px solid var(--line);
+  border-radius:8px;padding:.45em 1em}
+button.skip:hover,button.skip:focus-visible{border-color:var(--cyan);color:var(--ink);outline:none}
+</style></head>
+<body><div class="wrap">
+  <header><h1 id="loc"></h1><span class="when" id="when"></span><span class="who" id="who"></span></header>
+  <div class="list" id="list"></div>
+  <footer><button class="skip" id="skip" type="button">先走</button></footer>
+</div>
+<script>
+var LOC = "@@LOC@@";
+var LOC_NAME = "@@LOC_NAME@@";
+var RULES = /*@@RULES@@*/[];
+var SLOTS = ['上午','下午','晚上','深夜'];
+var values = {}, done = false;
+
+function setVar(n,v){ if(n) parent.postMessage({type:'larch:set',name:n,value:v},'*'); }
+function finish(result,payload){ if(done)return; done=true;
+  parent.postMessage({type:'larch:complete',result:result,payload:payload},'*'); }
+function num(v,d){ var n=Number(v); return isFinite(n)&&v!==''&&v!=null?n:d; }
+function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
+function el(t,cls,txt){ var e=document.createElement(t); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
+
+// 跟播放器同一套：布林字串當布林、數字字串當數字，其餘按字串比。
+function norm(v){
+  if(v==='true')return true; if(v==='false')return false;
+  if(typeof v==='string' && v.trim()!=='' && isFinite(Number(v))) return Number(v);
+  return v==null?'':v;
+}
+function cmp(a,op,b){
+  a=norm(a); b=norm(b);
+  switch(op){
+    case 'gt': return a>b; case 'gte': return a>=b; case 'lt': return a<b; case 'lte': return a<=b;
+    case 'neq': return a!==b; default: return a===b;
+  }
+}
+function passes(r, slot, here){
+  if(r.slots && r.slots.length && r.slots.indexOf(slot)<0) return false;
+  var i;
+  for(i=0;i<(r.conds||[]).length;i++){
+    var c=r.conds[i];
+    if(!cmp(values[c.variable], c.op, c.value)) return false;
+  }
+  if(r.who && r.who.length){
+    var hit=false;
+    for(i=0;i<r.who.length;i++) if(here.indexOf(r.who[i])>=0) hit=true;
+    if(!hit) return false;
+  }
+  return true;
+}
+
+function start(){
+  document.body.className='ready';
+  var slot=num(values.slot,0), day=num(values.day,1);
+  var here=list(values.here);
+  document.getElementById('loc').textContent=LOC_NAME||LOC;
+  document.getElementById('when').textContent='第 '+day+' 天 ・ '+SLOTS[slot];
+  document.getElementById('who').textContent=here.length?here.join('、')+' 在':'這裡沒有人';
+  var box=document.getElementById('list'); box.textContent='';
+  var ok=RULES.filter(function(r){ return passes(r, slot, here); });
+  if(!ok.length){
+    box.appendChild(el('p','empty','這個時間這裡問不到什麼。'));
+  }
+  ok.forEach(function(r){
+    var b=el('button','seg'); b.type='button';
+    b.appendChild(el('span','label',r.label||r.seg));
+    if(r.who && r.who.length) b.appendChild(el('span','sub',r.who.join('、')));
+    b.addEventListener('click',function(){ setVar('pick', r.seg); finish(r.seg,{seg:r.seg}); });
+    box.appendChild(b);
+  });
+  document.getElementById('skip').addEventListener('click',function(){
+    setVar('pick',''); finish('leave',{});
+  });
+}
+
+parent.postMessage({type:'larch:ready'},'*');
+window.addEventListener('message',function(e){
+  var d=e.data; if(!d||d.type!=='larch:init')return;
+  values=d.values||{}; var vars=d.variables||{};
+  for(var k in vars) values[k]=vars[k];
+  try{ start(); }catch(err){ finish('error',{message:String(err)}); }
+});
+</script></body></html>
