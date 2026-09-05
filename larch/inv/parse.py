@@ -39,6 +39,7 @@ DOCS = [d for d in sorted(ROOT.glob("design/調查篇*.md"))
 # 卡頭：**旁白**（`scene: store`，深夜） / **talk**（貓草／玩家） / **玩家**（筆記）
 # 卡頭有兩類：固定的四種，以及**單一講者用自己的名字當卡頭**
 # （格莉奇全作都是這種，她只在螢幕與喇叭上出現，括號裡帶 `remote`）。
+GENERIC_HEADS = {"台詞", "排卡註", "配音", "接線", "變數"}
 FIXED = ["旁白", "talk", "玩家", "特寫卡"]
 CAST = ["格莉奇", "黑洞先生", "貓草", "鐵塔", "0x", "斑比", "諾亞",
         "管理員", "店員", "保全", "材料行老闆", "櫃檯", "住戶",
@@ -127,7 +128,9 @@ def parse_file(path):
                    # novelkit 的 say(remote=True) 就是這個，掛大頭貼不掛立繪。
                    "remote": "remote" in meta,
                    "scene": scene, "slot": slot, "meta": meta,
-                   "section": stack[-1][1] if stack else None,
+                   # 段落鍵取最深一層**有意義的**標題。「台詞」「排卡註」這種每一格底下都有的
+                   # 通用標題要跳過，不然 Ａ一、Ａ二、Ｃ 全被合成一段、觸發條件一起丟掉（2026-09-06 抓到）。
+                   "section": next((t for _, t in reversed(stack) if t.strip() not in GENERIC_HEADS), None),
                    "headings": [t for _, t in stack],      # 由外到內
                    "trigger": dict(meta_now),
                    "lines": [], "vars": [], "file": path.stem, "line": i}

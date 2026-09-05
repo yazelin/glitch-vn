@@ -354,6 +354,19 @@ def build(cards):
                     rule["slots_from"] = "地點預設"
         if not rule["slots"]:
             rule["slots"] = slots_from_headings(heads)
+        # 標題括號裡寫的條件（「Ａ一・她叫什麼名字（`met_諾亞 >= 2`）」）也是觸發。
+        # 觸發列寫在段落層、卡片在更深一層標題底下時 meta 會被標題重置，所以標題是更可靠的來源。
+        if not rule["conds"]:
+            for m in EXPR.finditer(" ".join(heads)):
+                var, op, val = m.group(1), OPS[m.group(2)], m.group(3).strip()
+                if var in ("dest", "slot"):
+                    continue
+                val = (val == "true") if val in ("true", "false") else int(val) if re.fullmatch(r"-?\d+", val) else val
+                rule["conds"].append({"variable": var, "op": op, "value": val})
+            # 「`trust_管理員` 3」這種沒寫運算子的，當作等於
+            for m in re.finditer(r"`(trust_[^`]+|met_[^`]+|noah_stage)`\s+([0-9])\b", " ".join(heads)):
+                if not any(c["variable"] == m.group(1) for c in rule["conds"]):
+                    rule["conds"].append({"variable": m.group(1), "op": "eq", "value": int(m.group(2))})
         # 日期閘：觸發裡沒寫 day 的，從檔名與標題補
         if not any(c["variable"] == "day" for c in rule["conds"]):
             rule["conds"] = rule["conds"] + day_conds(s["cards"][0]["file"], heads)
