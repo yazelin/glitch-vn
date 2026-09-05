@@ -20967,6 +20967,16 @@
    ],
    "conds": [
     {
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 2
+    },
+    {
+     "variable": "trust_管理員",
+     "op": "lte",
+     "value": 2
+    },
+    {
      "variable": "trust_管理員",
      "op": "eq",
      "value": 3
@@ -21026,7 +21036,8 @@
     }
    ],
    "or": false,
-   "dest_from": "總表"
+   "dest_from": "總表",
+   "label": "把保全那一段放給他聽"
   },
   {
    "segment": "seg007",
@@ -21208,7 +21219,8 @@
     }
    ],
    "or": false,
-   "dest_from": "總表（該人預設）"
+   "dest_from": "總表（該人預設）",
+   "label": "把信箱那一頁拿給他看"
   },
   {
    "segment": "seg018",
@@ -21220,7 +21232,18 @@
     1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 4
+    },
+    {
+     "variable": "see_admin",
+     "op": "eq",
+     "value": true
+    }
+   ],
    "or": false,
    "dest_from": "總表"
   },
@@ -21262,7 +21285,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_斑比_格莉奇",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "dest_from": "總表"
   },
@@ -21276,7 +21305,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_斑比_黑洞",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "dest_from": "總表"
   },
@@ -21290,7 +21325,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_斑比_鐵塔",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "dest_from": "總表"
   },
@@ -21859,10 +21900,19 @@
    "slots": [
     2
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "day",
+     "op": "gte",
+     "value": 2
+    },
+    {
+     "variable": "hole_sightings",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg058",
@@ -21875,9 +21925,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg059",
@@ -21890,9 +21938,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg060",
@@ -21905,9 +21951,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg061",
@@ -21920,9 +21964,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg062",
@@ -21935,9 +21977,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg063",
@@ -21950,9 +21990,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg064",
@@ -21965,9 +22003,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg065",
@@ -21980,9 +22016,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg066",
@@ -21995,9 +22029,7 @@
     2
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg067",
@@ -22040,9 +22072,7 @@
     3
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "or": false
   },
   {
    "segment": "seg070",
@@ -22051,14 +22081,16 @@
    "dest": "tower14",
    "slots": [
     0,
-    1,
-    2,
-    3
+    1
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "conds": [
+    {
+     "variable": "met_櫃檯",
+     "op": "eq",
+     "value": 10
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg071",
@@ -22068,10 +22100,14 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg072",
@@ -22081,10 +22117,14 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg073",
@@ -22094,10 +22134,14 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg074",
@@ -22107,10 +22151,14 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg075",
@@ -22120,10 +22168,14 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg076",
@@ -22133,10 +22185,14 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg077",
@@ -22146,10 +22202,14 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg078",
@@ -22157,13 +22217,16 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    2,
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg079",
@@ -22171,13 +22234,16 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    2,
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 0
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg080",
@@ -22185,13 +22251,13 @@
    "file": "調查篇-橋段2",
    "dest": "figure",
    "slots": [
+    0,
     1,
-    2
+    2,
+    3
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg081",
@@ -22199,13 +22265,13 @@
    "file": "調查篇-橋段2",
    "dest": "figure",
    "slots": [
+    0,
     1,
-    2
+    2,
+    3
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg082",
@@ -22213,13 +22279,13 @@
    "file": "調查篇-橋段2",
    "dest": "figure",
    "slots": [
+    0,
     1,
-    2
+    2,
+    3
    ],
    "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg083",
@@ -22227,9 +22293,6 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [
@@ -22237,11 +22300,14 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 3
+    },
+    {
+     "variable": "clue_list",
+     "op": "eq",
+     "value": true
     }
    ],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg084",
@@ -22250,20 +22316,21 @@
    "dest": "lobby",
    "slots": [
     0,
-    1,
-    2,
-    3
+    1
    ],
    "conds": [
     {
      "variable": "trust_管理員",
      "op": "eq",
      "value": 3
+    },
+    {
+     "variable": "seen_lostbox",
+     "op": "eq",
+     "value": false
     }
    ],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "地點預設"
+   "or": false
   },
   {
    "segment": "seg085",
@@ -22273,10 +22340,19 @@
    "slots": [
     3
    ],
-   "conds": [],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "conds": [
+    {
+     "variable": "trust_保全",
+     "op": "eq",
+     "value": 3
+    },
+    {
+     "variable": "guard_told",
+     "op": "eq",
+     "value": false
+    }
+   ],
+   "or": false
   },
   {
    "segment": "seg086",
@@ -22301,11 +22377,14 @@
      "variable": "strikes",
      "op": "gte",
      "value": 3
+    },
+    {
+     "variable": "clue_list",
+     "op": "eq",
+     "value": true
     }
    ],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "or": false
   },
   {
    "segment": "seg087",
@@ -22779,11 +22858,14 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 1
+    },
+    {
+     "variable": "open_figure",
+     "op": "eq",
+     "value": false
     }
    ],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題"
+   "or": false
   },
   {
    "segment": "seg113",
@@ -22795,9 +22877,14 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "open_studio",
+     "op": "eq",
+     "value": true
+    }
+   ],
    "or": false,
-   "dest_from": "卡頭 scene",
    "slots_from": "地點預設"
   }
  ],

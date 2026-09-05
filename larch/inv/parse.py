@@ -91,12 +91,17 @@ def parse_file(path):
         cur = None
 
     stack, meta_now, skip_lvl = [], {}, None   # stack = [(level, text)]
+    meta_lvl = 99                              # 目前 meta 是在哪一級標題底下收的
     for i, ln in enumerate(lines, 1):
         if h := SECTION.match(ln):
             flush()
             lvl, text = len(h.group(1)), h.group(2)
             stack = [(l, t) for l, t in stack if l < lvl] + [(lvl, text)]
-            meta_now = {}
+            # meta（觸發／變數／選單）屬於寫它的那一節。更深一層的標題（「#### 台詞」）不清掉它，
+            # 同級或更高的標題才清。之前每個標題都清，段落層的觸發列全部丟掉（2026-09-07 抓到）。
+            if lvl <= meta_lvl:
+                meta_now = {}
+                meta_lvl = 99
             # scene/slot 只在同一節內黏著。換到 L2/L3 就重設，不然 0x 那張卡
             # 會繼承上一節鐵塔的 `booth`（2026-09-05 抓到的 bug）。
             # 兩份文件的 L2 意思不同：問答矩陣的 L2 是「人」（換人＝換地點，要重設），
@@ -115,6 +120,7 @@ def parse_file(path):
         if mm := META.match(ln):
             key, val = mm.group(1), mm.group(2).strip()
             meta_now[key] = (meta_now.get(key, "") + " " + val).strip()
+            meta_lvl = min(meta_lvl, stack[-1][0] if stack else 99)
             continue
         m = HEAD.match(ln)
         if m:
