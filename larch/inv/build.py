@@ -101,6 +101,10 @@ def load_table():
         if not m or m.group(1) in ("問誰", "缺什麼", "硬缺", "看骰子", "刻意空手", "不在表上"):
             continue
         who, label, cell = m.group(1), m.group(3), m.group(4)
+        # 「一、總表」那一段有兩張表：前面是「問誰＼關於誰」的 ○／— 格子矩陣，
+        # 表頭、分隔線、每一列都會被上面的正則吃到。只留地點欄真的寫了地點的列。
+        if not (cell.startswith("同上") or TABLE_LOC.search(cell)):
+            continue
         if cell.startswith("同上"):
             dest, slots = last
         else:

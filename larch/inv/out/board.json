@@ -16093,7 +16093,7 @@
   },
   {
    "id": "e97",
-   "source": "inv-007",
+   "source": "inv-011",
    "target": "inv-095",
    "sourceHandle": "right",
    "animated": true,
@@ -16398,7 +16398,7 @@
   },
   {
    "id": "e128",
-   "source": "inv-015",
+   "source": "inv-023",
    "target": "inv-127",
    "sourceHandle": "right",
    "animated": true,
@@ -16420,7 +16420,7 @@
   },
   {
    "id": "e130",
-   "source": "inv-015",
+   "source": "inv-023",
    "target": "inv-130",
    "sourceHandle": "right",
    "animated": true,
@@ -16791,7 +16791,7 @@
   },
   {
    "id": "e167",
-   "source": "inv-017",
+   "source": "inv-005",
    "target": "inv-166",
    "sourceHandle": "right",
    "animated": true,
@@ -16813,7 +16813,7 @@
   },
   {
    "id": "e169",
-   "source": "inv-017",
+   "source": "inv-005",
    "target": "inv-169",
    "sourceHandle": "right",
    "animated": true,
@@ -19590,7 +19590,11 @@
    "section": "第二次的筆記（全款只出現一次）",
    "file": "調查篇-問答矩陣",
    "dest": "roof",
-   "slots": [],
+   "slots": [
+    0,
+    1,
+    2
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -19715,7 +19719,7 @@
    "segment": "seg022",
    "section": "一、場面（三格共用）",
    "file": "調查篇-問答矩陣",
-   "dest": "street",
+   "dest": "booth",
    "slots": [
     0,
     1
@@ -19779,7 +19783,10 @@
    "section": "收尾（三格共用）",
    "file": "調查篇-問答矩陣",
    "dest": "booth",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -19789,7 +19796,10 @@
    "section": "三、那一張卡（三格都在裡面）",
    "file": "調查篇-問答矩陣",
    "dest": "tower14",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -19860,8 +19870,10 @@
    "segment": "seg033",
    "section": "實際台詞（用格三示範，其餘四格照這個形狀套）",
    "file": "調查篇-問答矩陣",
-   "dest": "store",
-   "slots": [],
+   "dest": "laundry",
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -19870,8 +19882,10 @@
    "segment": "seg034",
    "section": "七、她是不是真的會忘（格一裡的死路）",
    "file": "調查篇-問答矩陣",
-   "dest": "store",
-   "slots": [],
+   "dest": "laundry",
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -19956,7 +19970,12 @@
    "section": "三之二、洗衣店那一句（`open_laundry`）",
    "file": "調查篇-問答矩陣",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    0,
+    1,
+    2,
+    3
+   ],
    "conds": [
     {
      "variable": "day",
@@ -19982,7 +20001,12 @@
    "section": "四之一、關於格莉奇",
    "file": "調查篇-問答矩陣",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    0,
+    1,
+    2,
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -19992,7 +20016,12 @@
    "section": "四之二、關於黑洞先生（`hole_sightings` 1 到 2）",
    "file": "調查篇-問答矩陣",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    0,
+    1,
+    2,
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20002,7 +20031,12 @@
    "section": "四之三、關於黑洞先生（`hole_sightings >= 3`）",
    "file": "調查篇-問答矩陣",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    0,
+    1,
+    2,
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20025,7 +20059,12 @@
    "section": "四之五、洗衣店那一句",
    "file": "調查篇-問答矩陣",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    0,
+    1,
+    2,
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20035,7 +20074,10 @@
    "section": "進場（兩張，跟甲乙共用）",
    "file": "調查篇-問答矩陣",
    "dest": "parts",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20045,7 +20087,10 @@
    "section": "甲、問她・關於那個穿西裝的",
    "file": "調查篇-問答矩陣",
    "dest": "parts",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20055,7 +20100,10 @@
    "section": "甲之二、再問一次（第二次）",
    "file": "調查篇-問答矩陣",
    "dest": "parts",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20065,7 +20113,10 @@
    "section": "甲之三、再問一次（第三次，她的頂點）",
    "file": "調查篇-問答矩陣",
    "dest": "parts",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20074,8 +20125,12 @@
    "segment": "seg048",
    "section": "乙、問她・關於諾亞",
    "file": "調查篇-問答矩陣",
-   "dest": "parts",
-   "slots": [],
+   "dest": "roof",
+   "slots": [
+    0,
+    1,
+    2
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"
@@ -20084,8 +20139,12 @@
    "segment": "seg049",
    "section": "乙之二、再問一次",
    "file": "調查篇-問答矩陣",
-   "dest": "parts",
-   "slots": [],
+   "dest": "roof",
+   "slots": [
+    0,
+    1,
+    2
+   ],
    "conds": [],
    "or": false,
    "dest_from": "總表（該人預設）"

@@ -226,6 +226,26 @@
                              跑 `python3 larch/inv/parse.py` 看摘要，`--json` 匯出，
                              `--show N` 印前 N 張卡的內容。
 
-**還沒寫的**：把解析出來的卡片推上 Larch 的那一層。推之前要知道一件事——
-帶條件的邊只能用整包 `PUT /projects/:id` 推，`POST /nodes` 會把 `edge.data.condition`
-靜默丟掉，卡片還在但變成走不到的孤島，不驗看不出來。
+    larch/inv/build.py       把解析出來的卡片組成 Larch 的節點、邊、變數、觸發表，
+                             寫到 larch/inv/out/board.json。**仍然不碰 Larch。**
+                             跑 `python3 larch/inv/build.py --out larch/inv/out/board.json`
+                             看驗證報告：幾條段落接上路由、幾條判不出地點、
+                             幾條觸發判讀有保留（留給人拍板的）。
+
+**路由架構（為什麼邊那麼簡單）**：Larch 一條邊只掛一個條件，而設計的觸發是
+地點 × 時段 × 多個變數 × 或，硬塞會串一堆閘門節點。所以複合判斷住在調查板與
+選單兩張插件卡的 JS 裡，Larch 只路由兩個單一變數：
+
+    調查板 ──dest==地點──▶ 地點入口 ──▶ 選單 ──pick==段落──▶ 段落 ──boardJump──▶ 調查板
+
+build.py 有自我檢查：任何一條邊掛了 dest／pick 以外的條件就 assert 失敗。
+
+**地點與時段的來源**（先中的贏）：觸發裡的 `dest ==`／代號 → 問答矩陣總表
+（對得到的列覆寫；對不到的子節用該人第一列當預設）→ 卡頭自己的 `scene:` →
+標題堆疊裡的反引號代號與人名 → 標題裡的中文地名。標題堆疊含 L1，
+因為橋段的每一場都是 L1 且標題就帶代號與時段。
+
+**還沒寫的**：把 board.json 推上 Larch 的那一層。推之前要知道一件事——
+帶條件的邊只能用整包 `PUT /projects/:id/boards/:boardId` 推，`POST /nodes` 會把
+`edge.data.condition` 靜默丟掉，卡片還在但變成走不到的孤島，不驗看不出來。
+另外選單卡（`larch/cards/menu.html`）還不存在，它要吃 board.json 的 `rules`。
