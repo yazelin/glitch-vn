@@ -14436,11 +14436,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "筆記：第一天結束。\n拿到三",
-    "text": "第一天結束。\n拿到三件事：她會掉整袋菜不會掉本子、那本本子比頻道老、\n她一個禮拜問同一個問題三次而且沒有人覺得奇怪。\n結論：她是真的。",
-    "speaker": "玩家",
-    "segment": "seg095"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -14451,10 +14450,11 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：第一天結束。\n拿到三",
+    "text": "第一天結束。\n拿到三件事：她會掉整袋菜不會掉本子、那本本子比頻道老、\n她一個禮拜問同一個問題三次而且沒有人覺得奇怪。\n結論：她是真的。",
+    "speaker": "玩家",
+    "segment": "seg096"
    }
   },
   {
@@ -14465,11 +14465,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "自動門開了又關。冰櫃的壓縮機",
-    "text": "自動門開了又關。冰櫃的壓縮機在響。\n收銀台旁邊立著一個紙板人形，比真人矮一點，笑得很用力。",
-    "speaker": "旁白",
-    "segment": "seg096"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -14481,11 +14480,26 @@
    },
    "data": {
     "type": "dialogue",
+    "title": "自動門開了又關。冰櫃的壓縮機",
+    "text": "自動門開了又關。冰櫃的壓縮機在響。\n收銀台旁邊立著一個紙板人形，比真人矮一點，笑得很用力。",
+    "speaker": "旁白",
+    "segment": "seg097"
+   }
+  },
+  {
+   "id": "inv-430",
+   "type": "story",
+   "position": {
+    "x": 129000,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
     "title": "格莉奇：……買兩件就送一張。",
     "text": "……買兩件就送一張。送完為止喔。\n逼——嗶！ <!-- speak-tw-ok 正典口頭禪 -->",
     "speaker": "格莉奇",
     "remote": true,
-    "segment": "seg096",
+    "segment": "seg097",
     "variableOps": [
      {
       "variable": "deadend_clerk",
@@ -14496,10 +14510,10 @@
    }
   },
   {
-   "id": "inv-430",
+   "id": "inv-431",
    "type": "story",
    "position": {
-    "x": 129000,
+    "x": 129300,
     "y": 0
    },
    "data": {
@@ -14545,14 +14559,14 @@
       "emotion": ""
      }
     ],
-    "segment": "seg096"
+    "segment": "seg097"
    }
   },
   {
-   "id": "inv-431",
+   "id": "inv-432",
    "type": "story",
    "position": {
-    "x": 129300,
+    "x": 129600,
     "y": 0
    },
    "data": {
@@ -14560,7 +14574,7 @@
     "title": "筆記：她在每一台螢幕上。沒",
     "text": "她在每一台螢幕上。沒有一個人認識她。",
     "speaker": "玩家",
-    "segment": "seg096",
+    "segment": "seg097",
     "variableOps": [
      {
       "variable": "store",
@@ -14571,10 +14585,10 @@
    }
   },
   {
-   "id": "inv-432",
+   "id": "inv-433",
    "type": "story",
    "position": {
-    "x": 129600,
+    "x": 129900,
     "y": 0
    },
    "data": {
@@ -14620,22 +14634,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg096"
-   }
-  },
-  {
-   "id": "inv-433",
-   "type": "story",
-   "position": {
-    "x": 129900,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：深夜的常客。每次都一",
-    "text": "深夜的常客。每次都一樣。\n我今天問了兩個人「有沒有人一直重複」，兩個人都想得出一個。\n這個城市裡重複的人比我想的多。",
-    "speaker": "玩家",
-    "segment": "seg096"
+    "segment": "seg097"
    }
   },
   {
@@ -14646,10 +14645,11 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：深夜的常客。每次都一",
+    "text": "深夜的常客。每次都一樣。\n我今天問了兩個人「有沒有人一直重複」，兩個人都想得出一個。\n這個城市裡重複的人比我想的多。",
+    "speaker": "玩家",
+    "segment": "seg097"
    }
   },
   {
@@ -14660,11 +14660,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "廣告看板每十五秒換一次。他站",
-    "text": "廣告看板每十五秒換一次。他站在對面數了六輪。\n她出現兩次。",
-    "speaker": "旁白",
-    "segment": "seg097"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -14672,6 +14671,21 @@
    "type": "story",
    "position": {
     "x": 130800,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "廣告看板每十五秒換一次。他站",
+    "text": "廣告看板每十五秒換一次。他站在對面數了六輪。\n她出現兩次。",
+    "speaker": "旁白",
+    "segment": "seg098"
+   }
+  },
+  {
+   "id": "inv-437",
+   "type": "story",
+   "position": {
+    "x": 131100,
     "y": 0
    },
    "data": {
@@ -14717,22 +14731,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg097"
-   }
-  },
-  {
-   "id": "inv-437",
-   "type": "story",
-   "position": {
-    "x": 131100,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：「真的假的有差嗎。」",
-    "text": "「真的假的有差嗎。」\n我今天被問倒了。我想不出一句話回他。",
-    "speaker": "玩家",
-    "segment": "seg097"
+    "segment": "seg098"
    }
   },
   {
@@ -14743,10 +14742,11 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：「真的假的有差嗎。」",
+    "text": "「真的假的有差嗎。」\n我今天被問倒了。我想不出一句話回他。",
+    "speaker": "玩家",
+    "segment": "seg098"
    }
   },
   {
@@ -14757,11 +14757,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "信箱牆前面站著一個人。\n很高",
-    "text": "信箱牆前面站著一個人。\n很高。深色西裝。手上拿著一個信封，正在看上面的字。",
-    "speaker": "旁白",
-    "segment": "seg098"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -14769,6 +14768,21 @@
    "type": "story",
    "position": {
     "x": 132000,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "信箱牆前面站著一個人。\n很高",
+    "text": "信箱牆前面站著一個人。\n很高。深色西裝。手上拿著一個信封，正在看上面的字。",
+    "speaker": "旁白",
+    "segment": "seg099"
+   }
+  },
+  {
+   "id": "inv-441",
+   "type": "story",
+   "position": {
+    "x": 132300,
     "y": 0
    },
    "data": {
@@ -14850,7 +14864,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg098",
+    "segment": "seg099",
     "variableOps": [
      {
       "variable": "hole_sightings",
@@ -14858,21 +14872,6 @@
       "value": null
      }
     ]
-   }
-  },
-  {
-   "id": "inv-441",
-   "type": "story",
-   "position": {
-    "x": 132300,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "他把信封收進外套內側，點了一",
-    "text": "他把信封收進外套內側，點了一下頭，走上樓梯。\n短靴踩在磁磚上有很輕的聲音。",
-    "speaker": "旁白",
-    "segment": "seg098"
    }
   },
   {
@@ -14884,10 +14883,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：晚上七點多，一樓遇到",
-    "text": "晚上七點多，一樓遇到一個住戶。\n高個子，穿西裝。沒問到名字。\n我問的是本子。他回答的是人。\n他說「因為你問了」。我不知道那是什麼意思。",
-    "speaker": "玩家",
-    "segment": "seg098"
+    "title": "他把信封收進外套內側，點了一",
+    "text": "他把信封收進外套內側，點了一下頭，走上樓梯。\n短靴踩在磁磚上有很輕的聲音。",
+    "speaker": "旁白",
+    "segment": "seg099"
    }
   },
   {
@@ -14898,10 +14897,11 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：晚上七點多，一樓遇到",
+    "text": "晚上七點多，一樓遇到一個住戶。\n高個子，穿西裝。沒問到名字。\n我問的是本子。他回答的是人。\n他說「因為你問了」。我不知道那是什麼意思。",
+    "speaker": "玩家",
+    "segment": "seg099"
    }
   },
   {
@@ -14912,11 +14912,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "筆記：第二天。\n便利商店的",
-    "text": "第二天。\n便利商店的店員不認識她。街上的人不在乎是真是假。\n一樓遇到一個住戶，講了三句話，什麼都沒問到。\n結論：這棟樓沒有東西。明天換一個方向。",
-    "speaker": "玩家",
-    "segment": "seg099"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -14927,10 +14926,11 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：第二天。\n便利商店的",
+    "text": "第二天。\n便利商店的店員不認識她。街上的人不在乎是真是假。\n一樓遇到一個住戶，講了三句話，什麼都沒問到。\n結論：這棟樓沒有東西。明天換一個方向。",
+    "speaker": "玩家",
+    "segment": "seg100"
    }
   },
   {
@@ -14941,11 +14941,25 @@
     "y": 0
    },
    "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-447",
+   "type": "story",
+   "position": {
+    "x": 134100,
+    "y": 0
+   },
+   "data": {
     "type": "dialogue",
     "title": "兩點十分。\n冰櫃的壓縮機還在",
     "text": "兩點十分。\n冰櫃的壓縮機還在響。\n紙板人形還在收銀台旁邊，笑得跟上次一樣用力。\n貓草坐在靠窗那一桌。關東煮，兩顆蘿蔔，一杯無糖。\n桌上多了一個紙袋，摺口壓得很平。",
     "speaker": "旁白",
-    "segment": "seg100",
+    "segment": "seg101",
     "variableOps": [
      {
       "variable": "open_figure",
@@ -14956,10 +14970,10 @@
    }
   },
   {
-   "id": "inv-447",
+   "id": "inv-448",
    "type": "story",
    "position": {
-    "x": 134100,
+    "x": 134400,
     "y": 0
    },
    "data": {
@@ -15035,7 +15049,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg100",
+    "segment": "seg101",
     "variableOps": [
      {
       "variable": "met_貓草",
@@ -15043,21 +15057,6 @@
       "value": null
      }
     ]
-   }
-  },
-  {
-   "id": "inv-448",
-   "type": "story",
-   "position": {
-    "x": 134400,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：深夜的便利商店。靠窗",
-    "text": "深夜的便利商店。靠窗那一桌。他今天先開口。\n他講的是抱枕在出清，一個四百八變成買一送一。他說他不會退。\n他把店的位置講給我聽，我沒有問。\n他今天一次都沒有提到她。",
-    "speaker": "玩家",
-    "segment": "seg100"
    }
   },
   {
@@ -15069,10 +15068,25 @@
    },
    "data": {
     "type": "dialogue",
+    "title": "筆記：深夜的便利商店。靠窗",
+    "text": "深夜的便利商店。靠窗那一桌。他今天先開口。\n他講的是抱枕在出清，一個四百八變成買一送一。他說他不會退。\n他把店的位置講給我聽，我沒有問。\n他今天一次都沒有提到她。",
+    "speaker": "玩家",
+    "segment": "seg101"
+   }
+  },
+  {
+   "id": "inv-450",
+   "type": "story",
+   "position": {
+    "x": 135000,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
     "title": "鐵門拉到一半。裡面亮著，外面",
     "text": "鐵門拉到一半。裡面亮著，外面沒有招牌。\n桌上七個馬克杯，六個是空的。\n靠牆那一面用布蓋著，布的下緣壓著一排圖釘。\n她背對著門，手上那支筆沒有停。",
     "speaker": "旁白",
-    "segment": "seg100",
+    "segment": "seg101",
     "variableOps": [
      {
       "variable": "met_斑比",
@@ -15083,10 +15097,10 @@
    }
   },
   {
-   "id": "inv-450",
+   "id": "inv-451",
    "type": "story",
    "position": {
-    "x": 135000,
+    "x": 135300,
     "y": 0
    },
    "data": {
@@ -15114,14 +15128,14 @@
       "emotion": ""
      }
     ],
-    "segment": "seg100"
+    "segment": "seg101"
    }
   },
   {
-   "id": "inv-451",
+   "id": "inv-452",
    "type": "story",
    "position": {
-    "x": 135300,
+    "x": 135600,
     "y": 0
    },
    "data": {
@@ -16043,7 +16057,7 @@
   },
   {
    "id": "e93",
-   "source": "inv-015",
+   "source": "inv-009",
    "target": "inv-093",
    "sourceHandle": "right",
    "animated": true,
@@ -16196,7 +16210,7 @@
   },
   {
    "id": "e108",
-   "source": "inv-011",
+   "source": "inv-013",
    "target": "inv-108",
    "sourceHandle": "right",
    "animated": true,
@@ -16610,7 +16624,7 @@
   },
   {
    "id": "e150",
-   "source": "inv-015",
+   "source": "inv-025",
    "target": "inv-150",
    "sourceHandle": "right",
    "animated": true,
@@ -18959,13 +18973,6 @@
   },
   {
    "id": "e425",
-   "source": "inv-426",
-   "target": "inv-427",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e426",
    "source": "inv-015",
    "target": "inv-422",
    "sourceHandle": "right",
@@ -18980,87 +18987,58 @@
    }
   },
   {
-   "id": "e427",
-   "source": "inv-428",
-   "target": "inv-429",
+   "id": "e426",
+   "source": "inv-427",
+   "target": "inv-428",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e428",
+   "id": "e427",
    "source": "inv-429",
    "target": "inv-430",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e429",
+   "id": "e428",
    "source": "inv-430",
    "target": "inv-431",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e430",
+   "id": "e429",
    "source": "inv-431",
    "target": "inv-432",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e431",
+   "id": "e430",
    "source": "inv-432",
    "target": "inv-433",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e432",
+   "id": "e431",
    "source": "inv-433",
    "target": "inv-434",
    "sourceHandle": "right",
    "animated": true
   },
   {
+   "id": "e432",
+   "source": "inv-434",
+   "target": "inv-435",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e433",
    "source": "inv-015",
-   "target": "inv-428",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg096"
-    }
-   }
-  },
-  {
-   "id": "e434",
-   "source": "inv-435",
-   "target": "inv-436",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e435",
-   "source": "inv-436",
-   "target": "inv-437",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e436",
-   "source": "inv-437",
-   "target": "inv-438",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e437",
-   "source": "inv-007",
-   "target": "inv-435",
+   "target": "inv-429",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -19073,37 +19051,30 @@
    }
   },
   {
-   "id": "e438",
-   "source": "inv-439",
-   "target": "inv-440",
+   "id": "e434",
+   "source": "inv-436",
+   "target": "inv-437",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e439",
-   "source": "inv-440",
-   "target": "inv-441",
+   "id": "e435",
+   "source": "inv-437",
+   "target": "inv-438",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e440",
-   "source": "inv-441",
-   "target": "inv-442",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e441",
-   "source": "inv-442",
-   "target": "inv-443",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e442",
-   "source": "inv-003",
+   "id": "e436",
+   "source": "inv-438",
    "target": "inv-439",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e437",
+   "source": "inv-007",
+   "target": "inv-436",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -19116,16 +19087,37 @@
    }
   },
   {
-   "id": "e443",
-   "source": "inv-444",
-   "target": "inv-445",
+   "id": "e438",
+   "source": "inv-440",
+   "target": "inv-441",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e444",
-   "source": "inv-003",
+   "id": "e439",
+   "source": "inv-441",
+   "target": "inv-442",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e440",
+   "source": "inv-442",
+   "target": "inv-443",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e441",
+   "source": "inv-443",
    "target": "inv-444",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e442",
+   "source": "inv-003",
+   "target": "inv-440",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -19138,44 +19130,16 @@
    }
   },
   {
-   "id": "e445",
-   "source": "inv-446",
-   "target": "inv-447",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e446",
-   "source": "inv-447",
-   "target": "inv-448",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e447",
-   "source": "inv-448",
-   "target": "inv-449",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e448",
-   "source": "inv-449",
-   "target": "inv-450",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e449",
-   "source": "inv-450",
-   "target": "inv-451",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e450",
-   "source": "inv-015",
+   "id": "e443",
+   "source": "inv-445",
    "target": "inv-446",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e444",
+   "source": "inv-003",
+   "target": "inv-445",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -19184,6 +19148,56 @@
      "variable": "pick",
      "op": "eq",
      "value": "seg100"
+    }
+   }
+  },
+  {
+   "id": "e445",
+   "source": "inv-447",
+   "target": "inv-448",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e446",
+   "source": "inv-448",
+   "target": "inv-449",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e447",
+   "source": "inv-449",
+   "target": "inv-450",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e448",
+   "source": "inv-450",
+   "target": "inv-451",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e449",
+   "source": "inv-451",
+   "target": "inv-452",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e450",
+   "source": "inv-015",
+   "target": "inv-447",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg101"
     }
    }
   }
@@ -19398,7 +19412,10 @@
    "section": "Ａ・那台螢幕",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [
     {
      "variable": "met_管理員",
@@ -19412,14 +19429,17 @@
     }
    ],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg004",
    "section": "Ｂ・失物箱",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [
     {
      "variable": "trust_管理員",
@@ -19428,14 +19448,17 @@
     }
    ],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg005",
    "section": "二、問管理員・關於黑洞先生",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [
     {
      "variable": "hole_sightings",
@@ -19449,14 +19472,17 @@
     }
    ],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg006",
    "section": "三、問管理員・關於諾亞",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [
     {
      "variable": "met_諾亞",
@@ -19465,77 +19491,99 @@
     }
    ],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg007",
    "section": "池一・信箱第三排（一張卡）",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg008",
    "section": "池二・打字機的色帶（一張卡）",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg009",
    "section": "池三・頂樓的排水口（一張卡）",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg010",
    "section": "池四・電梯保養（一張卡）",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg011",
    "section": "池五・三樓那台腳踏車（一張卡）",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg012",
    "section": "第三次（同一天，同一件事）",
    "file": "調查篇-問答矩陣",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg013",
    "section": "台詞",
    "file": "調查篇-問答矩陣",
    "dest": "roof",
-   "slots": [],
+   "slots": [
+    0,
+    1,
+    2
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表"
   },
   {
    "segment": "seg014",
@@ -19545,7 +19593,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "人名"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg015",
@@ -19558,17 +19606,22 @@
     3
    ],
    "conds": [],
-   "or": false
+   "or": false,
+   "dest_from": "總表"
   },
   {
    "segment": "seg016",
    "section": "台詞",
    "file": "調查篇-問答矩陣",
    "dest": "studio",
-   "slots": [],
+   "slots": [
+    1,
+    2,
+    3
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg017",
@@ -19577,11 +19630,12 @@
    "dest": "studio",
    "slots": [
     1,
-    2
+    2,
+    3
    ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg018",
@@ -19589,11 +19643,13 @@
    "file": "調查篇-問答矩陣",
    "dest": "studio",
    "slots": [
+    1,
+    2,
     3
    ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg019",
@@ -19601,7 +19657,6 @@
    "file": "調查篇-問答矩陣",
    "dest": "studio",
    "slots": [
-    0,
     1,
     2,
     3
@@ -19613,14 +19668,19 @@
      "value": true
     }
    ],
-   "or": false
+   "or": false,
+   "dest_from": "總表"
   },
   {
    "segment": "seg020",
    "section": "五之三、第三次問同一格",
    "file": "調查篇-問答矩陣",
    "dest": "studio",
-   "slots": [],
+   "slots": [
+    1,
+    2,
+    3
+   ],
    "conds": [
     {
      "variable": "asked_斑比_",
@@ -19629,15 +19689,17 @@
     }
    ],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg021",
    "section": "六、路上問不到（`store` 或 `laundry`・晚上）",
    "file": "調查篇-問答矩陣",
-   "dest": "store",
+   "dest": "studio",
    "slots": [
-    2
+    1,
+    2,
+    3
    ],
    "conds": [
     {
@@ -19646,7 +19708,8 @@
      "value": 0
     }
    ],
-   "or": true
+   "or": true,
+   "dest_from": "總表"
   },
   {
    "segment": "seg022",
@@ -19669,37 +19732,47 @@
      "value": false
     }
    ],
-   "or": false
+   "or": false,
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg023",
    "section": "格一・問鐵塔關於格莉奇",
    "file": "調查篇-問答矩陣",
    "dest": "booth",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg024",
    "section": "格二・問鐵塔關於 0x",
    "file": "調查篇-問答矩陣",
    "dest": "booth",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg025",
    "section": "格三・問鐵塔關於斑比",
    "file": "調查篇-問答矩陣",
    "dest": "booth",
-   "slots": [],
+   "slots": [
+    0,
+    1
+   ],
    "conds": [],
    "or": true,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg026",
@@ -19709,17 +19782,17 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg027",
    "section": "三、那一張卡（三格都在裡面）",
    "file": "調查篇-問答矩陣",
-   "dest": "booth",
+   "dest": "tower14",
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg028",
@@ -19731,7 +19804,7 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg029",
@@ -19743,7 +19816,7 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg030",
@@ -19755,7 +19828,7 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg031",
@@ -19768,7 +19841,7 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg032",
@@ -19781,7 +19854,7 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg033",
@@ -19791,7 +19864,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg034",
@@ -19801,7 +19874,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg035",
@@ -19826,7 +19899,8 @@
      "value": false
     }
    ],
-   "or": false
+   "or": false,
+   "dest_from": "總表"
   },
   {
    "segment": "seg036",
@@ -19851,7 +19925,8 @@
      "value": 1
     }
    ],
-   "or": false
+   "or": false,
+   "dest_from": "總表"
   },
   {
    "segment": "seg037",
@@ -19859,9 +19934,6 @@
    "file": "調查篇-問答矩陣",
    "dest": "store",
    "slots": [
-    0,
-    1,
-    2,
     3
    ],
    "conds": [
@@ -19876,7 +19948,8 @@
      "value": false
     }
    ],
-   "or": false
+   "or": false,
+   "dest_from": "總表"
   },
   {
    "segment": "seg038",
@@ -19901,7 +19974,8 @@
      "value": false
     }
    ],
-   "or": false
+   "or": false,
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg039",
@@ -19911,7 +19985,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg040",
@@ -19921,7 +19995,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg041",
@@ -19931,17 +20005,20 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg042",
    "section": "四之四、關於貓草（第三次以後）",
    "file": "調查篇-問答矩陣",
-   "dest": "store",
-   "slots": [],
+   "dest": "figure",
+   "slots": [
+    1,
+    2
+   ],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表"
   },
   {
    "segment": "seg043",
@@ -19951,7 +20028,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg044",
@@ -19961,7 +20038,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg045",
@@ -19971,7 +20048,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg046",
@@ -19981,7 +20058,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg047",
@@ -19991,7 +20068,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg048",
@@ -20001,7 +20078,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg049",
@@ -20011,14 +20088,16 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "總表（該人預設）"
   },
   {
    "segment": "seg050",
    "section": "台詞",
    "file": "調查篇-橋段",
    "dest": "lobby",
-   "slots": [],
+   "slots": [
+    2
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20130,7 +20209,9 @@
    "section": "Ｂ・頂樓收音機店（隔天，有他的時段）",
    "file": "調查篇-橋段",
    "dest": "roof",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20140,7 +20221,9 @@
    "section": "台詞",
    "file": "調查篇-橋段",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20150,7 +20233,9 @@
    "section": "第一次",
    "file": "調查篇-橋段2",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20160,7 +20245,9 @@
    "section": "甲・這家店（第一次）",
    "file": "調查篇-橋段2",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20170,7 +20257,9 @@
    "section": "第二次",
    "file": "調查篇-橋段2",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20180,7 +20269,9 @@
    "section": "甲・那一句（第二次）",
    "file": "調查篇-橋段2",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20190,7 +20281,9 @@
    "section": "第三次",
    "file": "調查篇-橋段2",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20200,7 +20293,9 @@
    "section": "甲・那一份（第三次）",
    "file": "調查篇-橋段2",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20210,7 +20305,9 @@
    "section": "他先開口（第三次。甲跟乙兩條路都會經過，被轉身的話這一張不演）",
    "file": "調查篇-橋段2",
    "dest": "store",
-   "slots": [],
+   "slots": [
+    3
+   ],
    "conds": [],
    "or": false,
    "dest_from": "卡頭 scene"
@@ -20221,7 +20318,8 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    2
+    2,
+    3
    ],
    "conds": [],
    "or": false,
@@ -20233,7 +20331,8 @@
    "file": "調查篇-橋段2",
    "dest": "store",
    "slots": [
-    2
+    2,
+    3
    ],
    "conds": [],
    "or": false,
@@ -20307,7 +20406,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "標題代號"
   },
   {
    "segment": "seg079",
@@ -20317,7 +20416,7 @@
    "slots": [],
    "conds": [],
    "or": false,
-   "dest_from": "卡頭 scene"
+   "dest_from": "標題代號"
   },
   {
    "segment": "seg080",
@@ -20512,7 +20611,7 @@
    "dest_from": "卡頭 scene"
   },
   {
-   "segment": "seg096",
+   "segment": "seg097",
    "section": "場景一・便利商店（第二天・上午）",
    "file": "調查篇-第二天",
    "dest": "store",
@@ -20524,7 +20623,7 @@
    "dest_from": "卡頭 scene"
   },
   {
-   "segment": "seg097",
+   "segment": "seg098",
    "section": "場景二・車站前那條街（第二天・下午）",
    "file": "調查篇-第二天",
    "dest": "street",
@@ -20536,7 +20635,7 @@
    "dest_from": "卡頭 scene"
   },
   {
-   "segment": "seg098",
+   "segment": "seg099",
    "section": "場景三・一樓（第二天・晚上七點多）",
    "file": "調查篇-第二天",
    "dest": "lobby",
@@ -20548,7 +20647,7 @@
    "dest_from": "卡頭 scene"
   },
   {
-   "segment": "seg099",
+   "segment": "seg100",
    "section": "第二天收尾",
    "file": "調查篇-第二天",
    "dest": "lobby",
@@ -20558,7 +20657,7 @@
    "dest_from": "卡頭 scene"
   },
   {
-   "segment": "seg100",
+   "segment": "seg101",
    "section": "台詞",
    "file": "調查篇-缺卡",
    "dest": "store",
@@ -20588,5 +20687,13 @@
    "text": "`store` 晚上 或 `laundry` 晚上，且 `met_斑比 == 0`"
   }
  ],
- "orphans": []
+ "orphans": [
+  {
+   "segment": "seg096",
+   "file": "調查篇-第一天-定稿",
+   "section": "三、第一天收尾",
+   "trigger": "",
+   "notes": []
+  }
+ ]
 }

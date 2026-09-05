@@ -83,6 +83,59 @@ def slots_from_headings(headings):
     return sorted({SLOT[s] for s in SLOT if s in text})
 
 
+# ── 總表：問答矩陣「一之一、二十八個問答段」那張表是段落→地點・時段的權威來源 ──
+TABLE_ROW = re.compile(r"^\|\s*(\S+)\s*\|\s*(\S+)\s*\|\s*\S+\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|")
+TABLE_LOC = re.compile(r"`(" + "|".join(LOCS) + r")`")
+
+
+def load_table():
+    """回 [(問誰, 節標籤, dest, slots)]。「同上」繼承上一列的地點與時段。"""
+    rows, last = [], (None, [])
+    text = (ROOT / "design/調查篇-問答矩陣.md").read_text(encoding="utf-8")
+    # 只讀「一、總表」那一段：整份檔還有各人的「觸發條件一覽」表，格式一樣但不是總表，
+    # 混進來會讓「該人預設」抓到一列 dest=None 的垃圾（2026-09-05 抓到）。
+    start = text.index("## 一、總表")
+    end = text.index("\n## ", start + 1)
+    for ln in text[start:end].split("\n"):
+        m = TABLE_ROW.match(ln)
+        if not m or m.group(1) in ("問誰", "缺什麼", "硬缺", "看骰子", "刻意空手", "不在表上"):
+            continue
+        who, label, cell = m.group(1), m.group(3), m.group(4)
+        if cell.startswith("同上"):
+            dest, slots = last
+        else:
+            locs = TABLE_LOC.findall(cell)
+            dest = locs[-1] if locs else None          # 「`street` 換 `booth`」取後者
+            slots = [0, 1, 2, 3] if "任一" in cell else sorted({SLOT[s] for s in SLOT if s in cell})
+            if "櫃檯的班" in cell:
+                slots = [0, 1]                          # 櫃檯只在上午／下午（時段表）
+            last = (dest, slots)
+        rows.append((who, label, dest, slots))
+    return rows
+
+
+def table_match(rows, headings):
+    """用 L2 的人名 + 節標籤裡的關鍵詞對回段落。對不到就回 None。"""
+    stack = " ".join(headings)
+    for who, label, dest, slots in rows:
+        if who not in stack:
+            continue
+        # 標籤形如「二・一Ａ 那台螢幕」「三・Ａ二 她叫什麼名字」「五・格一」「七・三」
+        parts = [x for x in re.split(r"[・\s]+", label) if x]
+        toks = [x for x in parts if not re.fullmatch(r"[一二三四五六七八九十]+", x)]
+        # 一、關鍵詞：「那台螢幕」「失物箱」「她叫什麼名字」
+        if any(tok in stack for tok in toks if len(tok) >= 2):
+            return dest, slots
+        # 二、子節開頭：「Ａ一」「格一」「甲」對到標題開頭
+        if any(h.startswith(tok) for tok in toks for h in headings):
+            return dest, slots
+        # 三、純序數：「七・二」＝該人底下第二個 L3，對到以「二、」開頭的標題
+        if len(parts) >= 2 and re.fullmatch(r"[一二三四五六七八九十]+", parts[1]):
+            if any(h.startswith(parts[1] + "、") or h.startswith(parts[1] + "・") for h in headings[1:]):
+                return dest, slots
+    return None
+
+
 # ── 觸發判讀 ─────────────────────────────────────────────
 EXPR = re.compile(r"`\s*([a-zA-Z_][\w]*(?:_[一-鿿0-9x<>誰]+)?)\s*(==|!=|>=|<=|>|<)\s*([^`]+?)\s*`")
 BARE_LOC = re.compile(r"`(" + "|".join(LOCS) + r")`|(?<![a-z_])(" + "|".join(LOCS) + r")(?![a-z_])")
@@ -181,6 +234,7 @@ def card_node(c):
 
 def build(cards):
     b = Board()
+    table = load_table()
     # 1. 調查板
     board_id = b.add({"type": "miniGame", "title": "調查板", "text": "選一個地方去。",
                       "miniGameHtml": "@@larch/cards/board.html",
@@ -230,6 +284,25 @@ def build(cards):
                 if loc:
                     rule["dest"] = loc
                     rule["dest_from"] = how
+        # 總表是權威：對得到就覆寫地點與時段（它明寫 0x 在 tower14、鐵塔 street 換 booth）
+        if s["cards"][0]["file"] == "調查篇-問答矩陣":
+            hit = table_match(table, heads)
+            if not hit:
+                # 對不到具體那一列（池一…池五這種沒關鍵詞的子節）就用該人的第一列當預設
+                who = next((w for w in PERSON_LOC if any(w in h for h in heads)), None)
+                row = next(((d_, sl) for w, _, d_, sl in table if w == who), None) if who else None
+                if row:
+                    hit = row
+                    rule["dest_from"] = "總表（該人預設）"
+            if hit:
+                dest, slots = hit
+                if dest:
+                    rule["dest"] = dest
+                    rule.setdefault("dest_from", "總表")
+                    if rule["dest_from"] not in ("總表（該人預設）",):
+                        rule["dest_from"] = "總表"
+                if slots:
+                    rule["slots"] = slots
         if rule["dest"]:
             notes = [x for x in notes if x != "判不出地點"]
         if not rule["slots"]:

@@ -57,7 +57,9 @@ LINE_ANY = re.compile(r"^>\s?(.*)$")
 # 觸發決定這一段什麼時候播（＝邊的條件），變數決定它寫什麼。
 # 只抓文字，判讀留給下一層，因為寫法還沒統一（「`day >= 4`」與「第四天以後」並存）。
 META = re.compile(r"^\*\*(觸發|變數|線索|問誰|地點・時段|給什麼|新資訊)\*\*[：:]?\s*(.*)$")
-SECTION = re.compile(r"^(#{2,5})\s+(.*?)\s*$")
+PERSONS = ["管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "便利商店店員", "材料行老闆"]
+# 含 L1：橋段的每一場都是 L1，而且標題就帶地點代號與時段（`# 五、深夜的鐵塔（`store`・深夜）`）。
+SECTION = re.compile(r"^(#{1,5})\s+(.*?)\s*$")
 # 這些節不是台詞，是給人看的註解，可是裡面常有 `>` 引用（範例、對照），
 # 不跳過的話會被當成卡片。標題含任一關鍵字就整節跳過（直到下一個同級或更高的標題）。
 SKIP = ["排卡註", "觸發條件一覽", "格式", "配音", "讀音", "待拍板", "總表", "評審",
@@ -90,6 +92,14 @@ def parse_file(path):
             lvl, text = len(h.group(1)), h.group(2)
             stack = [(l, t) for l, t in stack if l < lvl] + [(lvl, text)]
             meta_now = {}
+            # scene/slot 只在同一節內黏著。換到 L2/L3 就重設，不然 0x 那張卡
+            # 會繼承上一節鐵塔的 `booth`（2026-09-05 抓到的 bug）。
+            # 兩份文件的 L2 意思不同：問答矩陣的 L2 是「人」（換人＝換地點，要重設），
+            # 橋段的 L2 是「同一場裡的子卡」（要繼承第一張卡頭的 scene）。
+            # 所以只在 L2 標題是人名時重設。
+            # L1＝橋段換場（一定換地點）；問答矩陣的 L2 是人名（換人＝換地點）。
+            if lvl == 1 or (lvl == 2 and any(w in text for w in PERSONS)):
+                scene = slot = None
             if skip_lvl is not None and lvl <= skip_lvl:
                 skip_lvl = None
             if skip_lvl is None and any(k in text for k in SKIP):
