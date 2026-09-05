@@ -13,10 +13,10 @@
   iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
   所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
 
-  miniGameReadVars ：day slot met dest
+  miniGameReadVars ：day slot met dest night_visits
                      open_roof open_laundry open_figure open_parts
                      open_studio open_tower14
-  miniGameWriteVars：day slot dest here
+  miniGameWriteVars：day slot dest here night_visits
 
   **解鎖是一個地點一個布林，不是一串逗號清單。** 清單要「讀出來、加一個、寫回去」，
   而普通對話卡做不到那件事（它只能設一個值）。布林的話，管理員講完那句話的那張卡
@@ -158,6 +158,8 @@ function go(spotId){
   var here=whoIsThere(spotId,slot);
   setVar('here', here.join(','));
   setVar('dest', spotId);
+  // 收尾門檻之一：深夜至少出門三次（信心.md 五）。只算真的出門，不算「這一段不出門」。
+  if(slot===3) setVar('night_visits', num(values.night_visits,0)+1);
   finish(spotId,{day:day,slot:slot,here:here});
 }
 

@@ -83,6 +83,11 @@ def loc_from_headings(headings):
     return None, None
 
 
+# 收尾門檻（design/調查篇-信心.md 五）：四樣裡的前三樣。第四樣在收尾那一場自己花掉。
+# 不用 ending_ready 旗標，直接把三個條件擺進規則，選單卡自己判。
+ENDING_CONDS = ({"variable": "day", "op": "gte", "value": 4},
+                {"variable": "night_visits", "op": "gte", "value": 3},
+                {"variable": "strikes", "op": "gte", "value": 3})
 CN_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10, "十一": 11}
 # 整份檔都是同一天的
 FILE_DAY = {"調查篇-第一天-定稿": 1, "調查篇-第二天": 2}
@@ -99,8 +104,8 @@ def day_conds(file, headings):
     if m:
         return [{"variable": "day", "op": "gte", "value": CN_NUM[m.group(1)]},
                 {"variable": "day", "op": "lte", "value": CN_NUM[m.group(2)]}]
-    if "最後一天" in text or "最後那一頁" in text:
-        return [{"variable": "day", "op": "gte", "value": 11}]
+    if "最後一天" in text or "最後那一頁" in text or "最後一頁" in text:
+        return list(ENDING_CONDS)
     m = re.search(r"第([一二三四五六七八九十]+)天(以後|之後|起)", text)
     if m:
         return [{"variable": "day", "op": "gte", "value": CN_NUM[m.group(1)]}]
@@ -189,10 +194,13 @@ def parse_trigger(text):
     if "或" in text and "或深夜" not in text and "或下午" not in text and "或晚上" not in text:
         # 「A 或 B」在地點層級＝兩條規則，這裡先標記，不展開
         rule["or"] = True
+    if "ending_ready" in text:
+        rule["conds"].extend(ENDING_CONDS)
     for m in EXPR.finditer(text):
         var, op, val = m.group(1), OPS[m.group(2)], m.group(3).strip()
-        if var == "dest":
-            rule["dest"] = val
+        if var in ("dest", "ending_ready"):
+            if var == "dest":
+                rule["dest"] = val
             continue
         if var == "slot":
             continue
@@ -317,6 +325,9 @@ def card_node(c):
         if c["kind"] == "note":
             d["title"] = "筆記：" + text[:10]
             d["speaker"] = "玩家"
+            if "~~" in text:
+                # 他劃掉自己寫過的結論。收尾門檻之一（信心.md 五：至少三條刪除線）
+                d["variableOps"] = [{"id": "op-strikes", "variable": "strikes", "kind": "add", "value": 1}]
         return d
     if c["kind"] == "say":
         text = "\n".join(l["text"] for l in lines)
@@ -342,9 +353,9 @@ def build(cards):
     board_id = b.add({"type": "miniGame", "title": "調查板", "text": "選一個地方去。",
                       "miniGameHtml": "@@larch/cards/board.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
-                      "miniGameReadVars": ["day", "slot", "met", "dest"] + [f"open_{k}" for k in
+                      "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")],
-                      "miniGameWriteVars": ["day", "slot", "dest", "here"], "start": True})
+                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits"], "start": True})
     # 2. 每個地點：入口場景 → 選單
     menu_of = {}
     for loc in LOCS:
@@ -519,6 +530,9 @@ def build(cards):
             rule["dest"] = "store"       # 私人場景掛在原地點的選單底下（變數帳一）
         if rule and rule["dest"] in menu_of:
             b.edge(menu_of[rule["dest"]], first, {"variable": "pick", "op": "eq", "value": sid})
+            menu_label = s["cards"][0].get("trigger", {}).get("選單", "").strip()
+            if menu_label:
+                rule["label"] = menu_label
             rules.append({"segment": sid, "section": s["key"][1], "file": s["key"][0], **rule})
             if notes:
                 unresolved.append({"segment": sid, "section": s["key"][1], "notes": notes,
@@ -534,6 +548,7 @@ def variables():
          ("here", "string", ""), ("pick", "string", ""), ("met", "string", ""),
          ("notes", "string", "[]"), ("notes_free", "string", "[]"),
          ("hole_sightings", "number", 0), ("noah_stage", "number", 0),
+         ("night_visits", "number", 0), ("strikes", "number", 0),
          ("bambi_asked_at", "number", 0)]
     for k in ("roof", "laundry", "figure", "parts", "studio", "tower14"):
         v.append((f"open_{k}", "boolean", False))

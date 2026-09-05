@@ -20,6 +20,7 @@
      "slot",
      "met",
      "dest",
+     "night_visits",
      "open_roof",
      "open_laundry",
      "open_figure",
@@ -31,7 +32,8 @@
      "day",
      "slot",
      "dest",
-     "here"
+     "here",
+     "night_visits"
     ],
     "start": true
    }
@@ -3034,15 +3036,21 @@
     "title": "筆記：畫她的那個人。工作室",
     "text": "畫她的那個人。工作室。她不談客戶，她談她的稿。\n第四十版。她每一版都看，每一版都講得出畫面上有什麼，而且都對。\n四十次都是同一種回答。\n四十次，她一次都沒有講過哪一版比較好。\n要比就要記得上一版。\n那不是裝的。裝的人記得自己上次說過什麼。\n結論：~~她是裝的~~",
     "speaker": "玩家",
-    "segment": "seg021",
     "variableOps": [
+     {
+      "id": "op-strikes",
+      "variable": "strikes",
+      "kind": "add",
+      "value": 1
+     },
      {
       "id": "op-see_bambi",
       "variable": "see_bambi",
       "kind": "set",
       "value": true
      }
-    ]
+    ],
+    "segment": "seg021"
    }
   },
   {
@@ -7756,6 +7764,14 @@
     "title": "筆記：頂樓。他下去倒垃圾，",
     "text": "頂樓。他下去倒垃圾，沒有問我。\n櫃檯底下有一個鞋盒。側面寫著「樓下小姑娘」。\n我沒有打開。\n他上來沒有問。他沒有往那邊看一眼。\n他在替她保管，~~還是那是他收的。~~　←　第四段那句「她會再來」之後劃掉後半",
     "speaker": "玩家",
+    "variableOps": [
+     {
+      "id": "op-strikes",
+      "variable": "strikes",
+      "kind": "add",
+      "value": 1
+     }
+    ],
     "segment": "seg065"
    }
   },
@@ -7856,6 +7872,14 @@
     "title": "筆記：頂樓。他下去倒垃圾，",
     "text": "頂樓。他下去倒垃圾，沒有問我。\n櫃檯底下有一個鞋盒。側面寫著「樓下小姑娘」。\n裡面是舊東西。傘、手套、一支起子。還有錢。\n他上來沒有問。他沒有往那邊看一眼。\n他在替她保管，~~還是那是他收的。~~　←　第四段那句「她會再來」之後劃掉後半",
     "speaker": "玩家",
+    "variableOps": [
+     {
+      "id": "op-strikes",
+      "variable": "strikes",
+      "kind": "add",
+      "value": 1
+     }
+    ],
     "segment": "seg066"
    }
   },
@@ -12031,6 +12055,14 @@
     "title": "筆記：第二天。\n便利商店的",
     "text": "第二天。\n便利商店的店員不認識她。街上的人不在乎是真是假。\n~~結論：這棟樓沒有東西。明天換一個方向。~~",
     "speaker": "玩家",
+    "variableOps": [
+     {
+      "id": "op-strikes",
+      "variable": "strikes",
+      "kind": "add",
+      "value": 1
+     }
+    ],
     "segment": "seg086"
    }
   },
@@ -20707,6 +20739,20 @@
    "defaultValue": 0
   },
   {
+   "id": "night_visits",
+   "name": "night_visits",
+   "label": "night_visits",
+   "type": "number",
+   "defaultValue": 0
+  },
+  {
+   "id": "strikes",
+   "name": "strikes",
+   "label": "strikes",
+   "type": "number",
+   "defaultValue": 0
+  },
+  {
    "id": "bambi_asked_at",
    "name": "bambi_asked_at",
    "label": "bambi_asked_at",
@@ -20869,7 +20915,17 @@
     {
      "variable": "day",
      "op": "gte",
-     "value": 11
+     "value": 4
+    },
+    {
+     "variable": "night_visits",
+     "op": "gte",
+     "value": 3
+    },
+    {
+     "variable": "strikes",
+     "op": "gte",
+     "value": 3
     }
    ],
    "or": false,
@@ -22230,7 +22286,23 @@
    "slots": [
     0
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "day",
+     "op": "gte",
+     "value": 4
+    },
+    {
+     "variable": "night_visits",
+     "op": "gte",
+     "value": 3
+    },
+    {
+     "variable": "strikes",
+     "op": "gte",
+     "value": 3
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
    "slots_from": "標題"

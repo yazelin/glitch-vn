@@ -159,7 +159,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     rule_by_loc = {}
     cond_vars = set()
     for r in rules:
-        r2 = {"seg": r["segment"], "label": label_of(r["section"]), "slots": r["slots"],
+        r2 = {"seg": r["segment"], "label": r.get("label") or label_of(r["section"]), "slots": r["slots"],
               "conds": r["conds"], "who": who_of(by_seg.get(r["segment"], []))}
         rule_by_loc.setdefault(r["dest"], []).append(r2)
         for c in r["conds"]:

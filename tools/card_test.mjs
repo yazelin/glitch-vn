@@ -213,6 +213,7 @@ console.log('\n=== 調查板：回到板上才推進時間，深夜之後換日 
   sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
   ok('深夜便利商店貓草必定在', String(sets.here).includes('貓草'), `here="${sets.here}"`);
   ok('出門時 slot 不動', sets.slot === undefined, `slot=${sets.slot}`);
+  ok('深夜出門計一次（收尾門檻）', sets.night_visits === 1, `night_visits=${sets.night_visits}`);
   // 不出門：直接推進
   const fr3 = await open('board.html', { day: 3, slot: 3, met: '' });
   await fr3.locator('#skip').click();
