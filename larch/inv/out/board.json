@@ -2529,7 +2529,21 @@
     "title": "筆記：十一格裡有一格搬走了",
     "text": "十一格裡有一格搬走了。他沒說是哪一年。\n我在那一格旁邊畫了一個問號。其他十格我沒有動。\n他認得那格信箱，不認得住裡面的人。",
     "speaker": "玩家",
-    "segment": "seg017"
+    "segment": "seg017",
+    "variableOps": [
+     {
+      "id": "op-see_noah",
+      "variable": "see_noah",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_諾亞_黑洞",
+      "variable": "asked_諾亞_黑洞",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
