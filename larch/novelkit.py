@@ -468,7 +468,9 @@ class Chapter:
         self.cast = []
         shell = (
             '<!doctype html><html lang="zh-Hant"><meta charset="utf-8">'
-            '<style>html,body{margin:0;height:100%;background:#04080c}'
+            # 薄殼背景一定要透明：Larch 2026-09-04 起 miniGame 層可以透明，這一層是唯一
+            # 擋住放映廳場景的東西。credits.html?bg=none 那邊本來就是 transparent。
+            '<style>html,body{margin:0;height:100%;background:transparent}'
             'iframe{width:100%;height:100%;border:0;display:block}</style>'
             f'<iframe src="{url}" allow="fullscreen"></iframe><script>'
             "parent.postMessage({type:'larch:ready'},'*');"
