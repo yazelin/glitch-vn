@@ -29,6 +29,17 @@ CARDS = ROOT / "larch/cards"
 MAIN_ASSETS = json.loads((ROOT / "larch/assets.json").read_text(encoding="utf-8"))
 NEW_BG_DIR = ROOT / "art/bg-investigation"
 
+# 立繪：新五個在 art/inv-cast（2026-09-05 codex 生、09-07 去背），正文七個沿用 assets.json 的網址。
+# 鍵是調查板 here 裡的名字。黑洞先生刻意不上台：他在這款裡只能是旁白描述的「穿西裝的先生」。
+SPRITE_LOCAL = {"管理員": "art/inv-cast/sprite-admin.png", "店員": "art/inv-cast/sprite-clerk.png",
+                "保全": "art/inv-cast/sprite-guard.png", "老闆": "art/inv-cast/sprite-parts.png",
+                "櫃檯": "art/inv-cast/sprite-reception.png"}
+SPRITE_MAIN = {"諾亞": "sprite-noah", "斑比": "sprite-bambi", "鐵塔": "sprite-tower",
+               "貓草": "sprite-catgrass", "0x": "sprite-zerox"}
+SPRITE_SCALE = {"諾亞": .98, "斑比": .92, "鐵塔": 1.04, "貓草": .98, "0x": .94}
+ITEM_LOCAL = {"rulebook": "art/items/item-rulebook.png", "phone": "art/items/item-phone.png",
+              "tape": "art/items/item-tape.png"}
+
 API = "https://larch.ink/api/agent"
 KEY_PATH = pathlib.Path.home() / ".config/larch/key"
 
@@ -107,6 +118,26 @@ def bg_url(key_, state, pid=None, dry=False):
     return None
 
 
+def local_asset(rel, state, pid, dry, category):
+    key_ = pathlib.Path(rel).stem
+    assets = state.setdefault("assets", {})
+    if key_ in assets:
+        return assets[key_]
+    if dry:
+        return f"(上傳) {rel}"
+    assets[key_] = upload(pid, ROOT / rel, category)
+    save_state(state)
+    return assets[key_]
+
+
+def sprite_url(name, state, pid, dry):
+    if name in SPRITE_LOCAL:
+        return local_asset(SPRITE_LOCAL[name], state, pid, dry, "character")
+    if name in SPRITE_MAIN:
+        return MAIN_ASSETS[SPRITE_MAIN[name]]
+    return None
+
+
 def pick_bg(day_key, night_key, state, pid, dry):
     """白天版還沒畫（2026-09-06），有哪一張用哪一張。都沒有就留空讓推送報出來。"""
     for k in (day_key, night_key):
@@ -165,6 +196,33 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         for c in r["conds"]:
             cond_vars.add((c["variable"], c["value"]))
 
+    item_url = {k: local_asset(v, state, pid, dry, "prop") for k, v in ITEM_LOCAL.items()}
+    ghost = MAIN_ASSETS["sprite-none"]
+    # 每一段誰在台上：段落的 who（最多兩個），有立繪的才上
+    stage_of = {}
+    for seg, sn in by_seg.items():
+        cast = [w for w in who_of(sn) if sprite_url(w, state, pid, dry)][:2]
+        stage_of[seg] = cast
+    for n in nodes:
+        d = n["data"]
+        seg = d.get("segment")
+        if d.get("type") != "dialogue" or not seg:
+            continue
+        cast = [] if d.get("remote") else stage_of.get(seg, [])
+        slots = ["center"] if len(cast) == 1 else ["left", "right"]
+        actors, layers = [], []
+        for w, slot in zip(cast, slots):
+            u = sprite_url(w, state, pid, dry)
+            actors.append({"id": f"actor-{w}-{slot}", "url": u, "name": w, "slot": slot,
+                           "scale": SPRITE_SCALE.get(w, 1.0), "offsetX": 0, "offsetY": 0,
+                           "enter": "fade", "loop": "breathe", "loopSpeed": 1, "loopStrength": 1})
+            layers.append({"id": f"layer-{w}-{slot}", "url": u, "position": slot, "x": 0, "y": 0,
+                           "scale": SPRITE_SCALE.get(w, 1.0), "opacity": 1, "flipX": False})
+        # 台上沒人要放一個看不見的演員，不然上一張的人會留著（novelkit 實測）
+        d["stage"] = {"actors": actors or [{"id": "actor-none", "url": ghost, "name": "", "slot": "center",
+                                            "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}]}
+        d["characterLayers"] = layers or [{"id": "layer-none", "url": ghost, "position": "center", "x": 0, "y": 0,
+                                           "scale": 0.01, "opacity": 1, "flipX": False}]
     board_html = (CARDS / "board.html").read_text(encoding="utf-8")
     menu_html = (CARDS / "menu.html").read_text(encoding="utf-8")
     notes_html = (CARDS / "notes.html").read_text(encoding="utf-8")
@@ -191,7 +249,12 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 d["miniGameReadVars"] = ["day", "slot", "here"] + vs
                 d["miniGameWriteVars"] = ["pick"]
                 menus.append(n["id"])
+        elif d.get("type") == "plugin" and d.get("pluginCardId") == "grant-item":
+            if not d["pluginValues"].get("itemImage"):
+                d["pluginValues"]["itemImage"] = item_url["tape"]
         elif d.get("type") == "scene":
+            d["stage"] = {"actors": [{"id": "actor-none", "url": ghost, "name": "", "slot": "center",
+                                      "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}]}
             day_key = d["background"].replace("@@", "")
             night_key = d.pop("backgroundNight", "").replace("@@", "")
             url, used = pick_bg(day_key, night_key, state, pid, dry)
@@ -250,7 +313,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         for i, t in enumerate(tapes):
             nid = f"inv-tape-{t['id']}"
             add_node(nid, {"type": "dialogue", "title": f"播：{t['name']}", "text": t["quote"],
-                           "speaker": t["who"], "remote": True,
+                           "speaker": t["who"], "remote": True,   # 錄音機裡的聲音，不上立繪
                            "variableOps": [{"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}]},
                      400 + i * 320, 900)
             add_edge("inv-tape-int", nid, {"variable": "inventoryLastUsed", "op": "eq", "value": t["name"]})
@@ -268,8 +331,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         t, _ = infer_type(val)
         default = False if t == "boolean" else 0 if t == "number" else ""
         vs[name] = {"id": name, "name": name, "label": name, "type": t, "defaultValue": default}
+    inv_default = json.loads(INVENTORY_DEFAULT)
+    for it in inv_default:
+        it["i"] = item_url.get(it["id"], "")
     for name, t, default, label in [
-        ("inventory", "string", INVENTORY_DEFAULT, "背包（守則本、手機、錄音）"),
+        ("inventory", "string", json.dumps(inv_default, ensure_ascii=False), "背包（守則本、手機、錄音）"),
         ("inventoryCount", "number", 2, "背包件數"),
         ("inventoryLastUsed", "string", "", "最後用的道具（名稱）"),
         ("open_notes", "boolean", False, "翻開守則本"),

@@ -256,7 +256,8 @@ def expand_rec(b, prev, c, sid, tapes):
                      └─預設──────────────────────────────────────────────▶（接下一張）
     回傳「下一張卡要接在哪些節點後面」的匯流節點 id。
     Larch 一個出口只認第一條成立的邊，所以 prev 的兩條邊順序是條件在前、預設在後。"""
-    who = c["meta"].strip()
+    who, _, when = c["meta"].strip().partition("・")     # 「斑比・深夜」＝只有深夜給錄
+    slot_need = SLOT.get(when.strip()) if when else None
     reaction = [l for l in c["lines"] if l.get("speaker")]
     quote = " ".join(l["text"] for l in c["lines"] if not l.get("speaker") and not l.get("direction"))
     item_id = "rec_" + TAPE_ID.get(who, re.sub(r"[^a-z0-9]", "", who.lower()) or f"{sid}")
@@ -264,10 +265,18 @@ def expand_rec(b, prev, c, sid, tapes):
     tapes.append({"id": item_id, "name": name, "who": who, "quote": quote})
     choice = b.add({"type": "choice", "title": f"錄音：{who}", "text": "錄音機在包包裡。",
                     "choices": ["開錄音機", "不開"], "choiceMode": "branch", "segment": sid})
-    b.edge(prev, choice, {"variable": "rec_ok", "op": "eq", "value": True})
     # 匯流點：一張空的 setVariable 卡（沒有字會自動跳過），兩條路都接到它，下一張卡再接它
     merge = b.add({"type": "setVariable", "title": "（匯流）", "text": "", "variableOps": [], "segment": sid})
-    b.edge(prev, merge)
+    if slot_need is None:
+        b.edge(prev, choice, {"variable": "rec_ok", "op": "eq", "value": True})
+        b.edge(prev, merge)
+    else:
+        # 一條邊只掛一個條件：rec_ok 先過一張空卡，再判時段
+        gate = b.add({"type": "setVariable", "title": f"（{who}只有{when}給錄）", "text": "", "variableOps": [], "segment": sid})
+        b.edge(prev, gate, {"variable": "rec_ok", "op": "eq", "value": True})
+        b.edge(prev, merge)
+        b.edge(gate, choice, {"variable": "slot", "op": "eq", "value": slot_need})
+        b.edge(gate, merge)
     grant = b.add({"type": "plugin", "title": f"取得：{name}", "text": "",
                    "pluginId": "larch-inventory", "pluginCardId": "grant-item",
                    "pluginVersion": "1.9.0", "pluginName": "背包系統", "pluginCardName": "取得道具",
@@ -380,6 +389,7 @@ def build(cards):
             cur_key = key
         cur["cards"].append(c)
     rules, unresolved, orphans, tapes = [], [], [], []
+    labels, unlabeled = load_labels(), []
     for i, s in enumerate(segs):
         sid = f"seg{i:03d}"
         rule, notes = parse_trigger(s["trigger"])
@@ -530,9 +540,13 @@ def build(cards):
             rule["dest"] = "store"       # 私人場景掛在原地點的選單底下（變數帳一）
         if rule and rule["dest"] in menu_of:
             b.edge(menu_of[rule["dest"]], first, {"variable": "pick", "op": "eq", "value": sid})
-            menu_label = s["cards"][0].get("trigger", {}).get("選單", "").strip()
+            menu_label = (s["cards"][0].get("trigger", {}).get("選單", "").strip()
+                          or labels.get((s["key"][0], s["key"][1]))
+                          or (LABEL_DAY1.get((rule["dest"], s["key"][1])) if s["key"][0] == "調查篇-第一天-定稿" else None))
             if menu_label:
                 rule["label"] = menu_label
+            else:
+                unlabeled.append((s["key"][0], s["key"][1]))
             rules.append({"segment": sid, "section": s["key"][1], "file": s["key"][0], **rule})
             if notes:
                 unresolved.append({"segment": sid, "section": s["key"][1], "notes": notes,
@@ -540,7 +554,29 @@ def build(cards):
         else:
             orphans.append({"segment": sid, "file": s["key"][0], "section": s["key"][1],
                             "trigger": s["trigger"], "notes": notes})
+    b.unlabeled = unlabeled
     return b, rules, unresolved, orphans, len(segs), tapes
+
+
+LABELS_MD = ROOT / "design/調查篇-選單標籤.md"
+# 第一天定稿的「上午／下午／晚上」節標題在五個地點重複，靠地點分
+LABEL_DAY1 = {("lobby", "下午"): "再去一樓", ("lobby", "晚上"): "抄信箱的名牌",
+              ("street", "上午"): "問看板的事", ("street", "下午"): "隨便問一個人",
+              ("busstop", "上午"): "問藍十五", ("busstop", "下午"): "等一班車", ("busstop", "晚上"): "問車怎麼這麼久",
+              ("metro", "上午"): "跟發傳單的講話", ("metro", "下午"): "接一張傳單", ("metro", "晚上"): "站在二號出口",
+              ("store", "上午"): "問立牌可不可以買", ("store", "下午"): "再進去一次", ("store", "晚上"): "問店員一件事"}
+
+
+def load_labels():
+    """design/調查篇-選單標籤.md 的表：{(檔, 節): 選單}。"""
+    out = {}
+    if not LABELS_MD.exists():
+        return out
+    for ln in LABELS_MD.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^\|\s*(調查篇[^|]*?)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*$", ln)
+        if m and m.group(1) != "檔":
+            out[(m.group(1), m.group(2))] = m.group(3)
+    return out
 
 
 def variables():
@@ -583,6 +619,10 @@ def main():
     print(f"段落入口沒有任何 pick 邊進來的：{len(unreached)} 條")
     print(f"時段判讀：任一 {sum(1 for r in rules if len(r['slots'])==4)}、指定 {sum(1 for r in rules if 0<len(r['slots'])<4)}、沒寫 {sum(1 for r in rules if not r['slots'])}")
     print(f"含「或」要拆的規則：{sum(1 for r in rules if r['or'])} 條")
+    if b.unlabeled:
+        print(f"沒有選單標籤的段落（退回節標題）：{len(b.unlabeled)} 條")
+        for f_, sec in b.unlabeled[:12]:
+            print(f"  ・{f_}｜{sec[:40]}")
     if orphans:
         print("\n判不出地點的段落（前 12）：")
         for o in orphans[:12]:
