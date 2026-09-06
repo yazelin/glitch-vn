@@ -263,7 +263,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 d["background"] = ""
             else:
                 d["background"] = url
-                d["title"] = LOC_NAME.get(d["title"], d["title"])
+                base = d["title"].replace("@n", "")
+                d["title"] = LOC_NAME.get(base, base) + ("（夜）" if d["title"].endswith("@n") else "")
             # 入口場景沒有字，停在那裡等點一下很怪；轉場完直接進選單。
             d["autoAdvance"] = {"enabled": True, "mode": "delay", "delayMs": 500}
         elif d.get("type") == "boardJump":
@@ -357,7 +358,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         pos[m] = (800, i * 220)
     entries = [e["source"] for e in edges if e["target"] in menus and e["source"] != board_id]
     for i, en in enumerate(entries):
-        pos[en] = (400, i * 220)
+        pos[en] = (300 + (i % 2) * 220, (i // 2) * 220)
     row = 0
     for seg, sn in by_seg.items():
         for j, n in enumerate(sn):

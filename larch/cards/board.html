@@ -157,7 +157,9 @@ function go(spotId){
   var slot=num(values.slot,0), day=num(values.day,1);
   var here=whoIsThere(spotId,slot);
   setVar('here', here.join(','));
-  setVar('dest', spotId);
+  // 晚上與深夜走夜版入口（背景兩種色溫，design/調查篇-場景.md「白天與夜晚是兩種色溫」）。
+  // 板上其他地方只認前面的地點代號；@n 只給入口那條邊看。
+  setVar('dest', slot>=2 ? spotId+'@n' : spotId);
   // 收尾門檻之一：深夜至少出門三次（信心.md 五）。只算真的出門，不算「這一段不出門」。
   if(slot===3) setVar('night_visits', num(values.night_visits,0)+1);
   finish(spotId,{day:day,slot:slot,here:here});

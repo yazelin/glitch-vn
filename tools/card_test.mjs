@@ -91,7 +91,7 @@ console.log('\n=== 調查板 ===');
   const sets = Object.fromEntries(m.filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
   const done = m.find(x => x.type === 'larch:complete');
 
-  ok('寫回 dest', sets.dest === 'lobby', JSON.stringify(sets.dest));
+  ok('寫回 dest（晚上帶 @n，走夜版入口）', sets.dest === 'lobby@n', JSON.stringify(sets.dest));
   ok('出門時不動時段（那一趟的選單要讀到當下的時段）', sets.slot === undefined, `slot=${sets.slot}`);
   ok('沒有跨日', sets.day === undefined, `day=${sets.day}`);
   ok('完成事件帶目的地', done && done.result === 'lobby');
@@ -107,6 +107,11 @@ console.log('\n=== 調查板：一顆布林開一個地方 ===');
   const shut = await open('board.html', { day: 2, slot: 0, met: '管理員' });
   ok('open_roof 沒設，頂樓是灰的',
      (await shut.locator('button.spot', { hasText: '頂樓收音機店' }).getAttribute('class')).includes('locked'));
+  const dayGo = await open('board.html', { day: 2, slot: 0, met: '管理員' });
+  await dayGo.locator('button.spot', { hasText: '一樓' }).click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  const daySets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('上午出門 dest 不帶 @n（白天入口）', daySets.dest === 'lobby', JSON.stringify(daySets.dest));
   const opened = await open('board.html', { day: 2, slot: 0, open_roof: true, met: '管理員,諾亞' });
   const roofOpen = opened.locator('button.spot', { hasText: '頂樓收音機店' });
   ok('open_roof = true，頂樓就開了', !(await roofOpen.getAttribute('class')).includes('locked'));

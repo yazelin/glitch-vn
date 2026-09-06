@@ -369,15 +369,21 @@ def build(cards):
     menu_of = {}
     for loc in LOCS:
         day, night = BG[loc]
+        # 一個地點兩張入口：白天（上午／下午）與夜晚（晚上／深夜），調查板用 dest 尾巴的 @n 分
         entry = b.add({"type": "scene", "title": loc, "text": "",
                        "background": f"@@{day}", "backgroundNight": f"@@{night}",
                        "transition": "fade", "transitionMs": 340})
         b.edge(board_id, entry, {"variable": "dest", "op": "eq", "value": loc})
+        entry_n = b.add({"type": "scene", "title": f"{loc}@n", "text": "",
+                         "background": f"@@{night}", "backgroundNight": f"@@{night}",
+                         "transition": "fade", "transitionMs": 340})
+        b.edge(board_id, entry_n, {"variable": "dest", "op": "eq", "value": f"{loc}@n"})
         menu = b.add({"type": "miniGame", "title": f"選單：{loc}", "text": "問誰、關於誰。",
                       "miniGameHtml": "@@larch/cards/menu.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
                       "miniGameReadVars": ["day", "slot", "here"], "miniGameWriteVars": ["pick"]})
         b.edge(entry, menu)
+        b.edge(entry_n, menu)
         menu_of[loc] = menu
     # 3. 段落：同一 (檔, 章節) 的連續卡片＝一條線
     segs, cur_key, cur = [], None, None
@@ -541,8 +547,8 @@ def build(cards):
         if rule and rule["dest"] in menu_of:
             b.edge(menu_of[rule["dest"]], first, {"variable": "pick", "op": "eq", "value": sid})
             menu_label = (s["cards"][0].get("trigger", {}).get("選單", "").strip()
-                          or labels.get((s["key"][0], s["key"][1]))
-                          or (LABEL_DAY1.get((rule["dest"], s["key"][1])) if s["key"][0] == "調查篇-第一天-定稿" else None))
+                          or (LABEL_DAY1.get((rule["dest"], s["key"][1])) if s["key"][0] == "調查篇-第一天-定稿" else None)
+                          or labels.get((s["key"][0], s["key"][1])))
             if menu_label:
                 rule["label"] = menu_label
             else:
