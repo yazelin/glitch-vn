@@ -612,7 +612,7 @@ def credits_board(state, pid, dry=False):
     sprites["格莉奇"] = MAIN_ASSETS["sprite-glitch"]; sprites["黑洞先生"] = MAIN_ASSETS["sprite-blackhole"]
     html = (html.replace("/*@@SPRITES@@*/{}", json.dumps({k: v for k, v in sprites.items() if v}, ensure_ascii=False))
                 .replace("/*@@LOC_NAME@@*/{}", json.dumps(LOC_NAME, ensure_ascii=False))
-                .replace("/*@@HALL@@*/''", json.dumps(MAIN_ASSETS["bg-credits-cinema"])))
+                .replace("/*@@HALL@@*/''", MAIN_ASSETS["bg-credits-cinema"]))   # 在 style 屬性裡，不能帶雙引號
     met_vars = [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
     seq = [
         # 片尾不要有背包按鈕：背包插件的 HUD 看 inventoryHudVisible（show-hud／hide-hud 兩張卡寫的就是它）
