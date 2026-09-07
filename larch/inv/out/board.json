@@ -18776,6 +18776,48 @@
     "y": 0
    },
    "data": {
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-589",
+   "type": "story",
+   "position": {
+    "x": 176700,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-590",
+   "type": "story",
+   "position": {
+    "x": 177000,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-591",
+   "type": "story",
+   "position": {
+    "x": 177300,
+    "y": 0
+   },
+   "data": {
     "type": "interrupt",
     "title": "第十二天，收尾",
     "text": "",
@@ -18791,48 +18833,6 @@
    }
   },
   {
-   "id": "inv-589",
-   "type": "story",
-   "position": {
-    "x": 176700,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-590",
-   "type": "story",
-   "position": {
-    "x": 177000,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-591",
-   "type": "story",
-   "position": {
-    "x": 177300,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
    "id": "inv-592",
    "type": "story",
    "position": {
@@ -18841,7 +18841,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第3次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -18855,7 +18855,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -18869,7 +18869,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -18883,7 +18883,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -18897,7 +18897,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -18911,7 +18911,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -18925,7 +18925,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -18939,7 +18939,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -18953,7 +18953,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -18967,7 +18967,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -18981,7 +18981,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -18995,7 +18995,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19009,7 +19009,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19037,7 +19037,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19065,7 +19065,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19079,7 +19079,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19093,7 +19093,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19107,7 +19107,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19121,7 +19121,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19135,7 +19135,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（store 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19149,7 +19149,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19163,7 +19163,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（store 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19177,7 +19177,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（parts 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19187,6 +19187,48 @@
    "type": "story",
    "position": {
     "x": 185100,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-618",
+   "type": "story",
+   "position": {
+    "x": 185400,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-619",
+   "type": "story",
+   "position": {
+    "x": 185700,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-620",
+   "type": "story",
+   "position": {
+    "x": 186000,
     "y": 0
    },
    "data": {
@@ -22186,21 +22228,6 @@
    "animated": true
   },
   {
-   "id": "e324",
-   "source": "inv-022",
-   "target": "inv-348",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg096"
-    }
-   }
-  },
-  {
    "id": "e325",
    "source": "inv-350",
    "target": "inv-351",
@@ -22213,21 +22240,6 @@
    "target": "inv-352",
    "sourceHandle": "right",
    "animated": true
-  },
-  {
-   "id": "e327",
-   "source": "inv-022",
-   "target": "inv-350",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg097"
-    }
-   }
   },
   {
    "id": "e328",
@@ -24194,166 +24206,121 @@
   {
    "id": "e556",
    "source": "inv-327",
-   "target": "inv-329",
-   "sourceHandle": "choice-1",
-   "animated": true
-  },
-  {
-   "id": "e556",
-   "source": "inv-334",
-   "target": "inv-329",
+   "target": "inv-588",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
    "id": "e557",
-   "source": "inv-340",
-   "target": "inv-329",
-   "sourceHandle": "choice-0",
-   "animated": true
-  },
-  {
-   "id": "e558",
-   "source": "inv-340",
-   "target": "inv-344",
-   "sourceHandle": "choice-2",
-   "animated": true
-  },
-  {
-   "id": "e558",
-   "source": "inv-002",
-   "target": "inv-589",
+   "source": "inv-588",
+   "target": "inv-350",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e559",
-   "source": "inv-589",
-   "target": "inv-231",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e560",
-   "source": "inv-589",
-   "target": "inv-004",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e561",
-   "source": "inv-231",
-   "target": "inv-004",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e562",
-   "source": "inv-002",
-   "target": "inv-590",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
+     "variable": "cat_asked_glitch",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e563",
-   "source": "inv-590",
-   "target": "inv-230",
+   "id": "e558",
+   "source": "inv-588",
+   "target": "inv-348",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e557",
+   "source": "inv-327",
+   "target": "inv-329",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e557",
+   "source": "inv-334",
+   "target": "inv-329",
+   "sourceHandle": "choice-0",
+   "animated": true
+  },
+  {
+   "id": "e558",
+   "source": "inv-334",
+   "target": "inv-589",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e559",
+   "source": "inv-589",
+   "target": "inv-350",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
+     "variable": "cat_asked_glitch",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e560",
+   "source": "inv-589",
+   "target": "inv-348",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e561",
+   "source": "inv-340",
+   "target": "inv-329",
+   "sourceHandle": "choice-0",
+   "animated": true
+  },
+  {
+   "id": "e562",
+   "source": "inv-340",
+   "target": "inv-590",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e563",
+   "source": "inv-590",
+   "target": "inv-350",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "cat_asked_glitch",
+     "op": "gte",
+     "value": 3
     }
    }
   },
   {
    "id": "e564",
    "source": "inv-590",
-   "target": "inv-004",
+   "target": "inv-348",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e565",
-   "source": "inv-230",
-   "target": "inv-004",
-   "sourceHandle": "right",
+   "source": "inv-340",
+   "target": "inv-344",
+   "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e566",
+   "id": "e565",
    "source": "inv-002",
-   "target": "inv-004",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e567",
-   "source": "inv-003",
-   "target": "inv-591",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e568",
-   "source": "inv-591",
-   "target": "inv-231",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e569",
-   "source": "inv-591",
-   "target": "inv-004",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e570",
-   "source": "inv-003",
    "target": "inv-592",
    "sourceHandle": "right",
    "animated": true,
@@ -24362,13 +24329,57 @@
      "kind": "variable",
      "variable": "met_管理員",
      "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e566",
+   "source": "inv-592",
+   "target": "inv-231",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e567",
+   "source": "inv-592",
+   "target": "inv-004",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e568",
+   "source": "inv-231",
+   "target": "inv-004",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e569",
+   "source": "inv-002",
+   "target": "inv-593",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e571",
-   "source": "inv-592",
+   "id": "e570",
+   "source": "inv-593",
    "target": "inv-230",
    "sourceHandle": "right",
    "animated": true,
@@ -24382,29 +24393,36 @@
    }
   },
   {
+   "id": "e571",
+   "source": "inv-593",
+   "target": "inv-004",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e572",
-   "source": "inv-592",
+   "source": "inv-230",
    "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e573",
-   "source": "inv-003",
+   "source": "inv-002",
    "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e574",
-   "source": "inv-005",
-   "target": "inv-593",
+   "source": "inv-003",
+   "target": "inv-594",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_諾亞",
+     "variable": "met_管理員",
      "op": "gte",
      "value": 5
     }
@@ -24412,8 +24430,8 @@
   },
   {
    "id": "e575",
-   "source": "inv-593",
-   "target": "inv-233",
+   "source": "inv-594",
+   "target": "inv-231",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24421,94 +24439,36 @@
      "kind": "variable",
      "variable": "slot",
      "op": "lte",
-     "value": 2
+     "value": 1
     }
    }
   },
   {
    "id": "e576",
-   "source": "inv-593",
-   "target": "inv-007",
+   "source": "inv-594",
+   "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e577",
-   "source": "inv-233",
-   "target": "inv-007",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e578",
-   "source": "inv-005",
-   "target": "inv-594",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e579",
-   "source": "inv-594",
-   "target": "inv-232",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e580",
-   "source": "inv-594",
-   "target": "inv-007",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e581",
-   "source": "inv-232",
-   "target": "inv-007",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e582",
-   "source": "inv-005",
-   "target": "inv-007",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e583",
-   "source": "inv-006",
+   "source": "inv-003",
    "target": "inv-595",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_諾亞",
+     "variable": "met_管理員",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e584",
+   "id": "e578",
    "source": "inv-595",
-   "target": "inv-233",
+   "target": "inv-230",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24516,20 +24476,27 @@
      "kind": "variable",
      "variable": "slot",
      "op": "lte",
-     "value": 2
+     "value": 1
     }
    }
   },
   {
-   "id": "e585",
+   "id": "e579",
    "source": "inv-595",
-   "target": "inv-007",
+   "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e586",
-   "source": "inv-006",
+   "id": "e580",
+   "source": "inv-003",
+   "target": "inv-004",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e581",
+   "source": "inv-005",
    "target": "inv-596",
    "sourceHandle": "right",
    "animated": true,
@@ -24538,13 +24505,57 @@
      "kind": "variable",
      "variable": "met_諾亞",
      "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e582",
+   "source": "inv-596",
+   "target": "inv-233",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e583",
+   "source": "inv-596",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e584",
+   "source": "inv-233",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e585",
+   "source": "inv-005",
+   "target": "inv-597",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e587",
-   "source": "inv-596",
+   "id": "e586",
+   "source": "inv-597",
    "target": "inv-232",
    "sourceHandle": "right",
    "animated": true,
@@ -24558,168 +24569,124 @@
    }
   },
   {
+   "id": "e587",
+   "source": "inv-597",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e588",
-   "source": "inv-596",
+   "source": "inv-232",
    "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e589",
-   "source": "inv-006",
+   "source": "inv-005",
    "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e590",
-   "source": "inv-008",
-   "target": "inv-010",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e591",
-   "source": "inv-009",
-   "target": "inv-010",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e592",
-   "source": "inv-011",
-   "target": "inv-597",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e593",
-   "source": "inv-597",
-   "target": "inv-243",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e594",
-   "source": "inv-597",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e595",
-   "source": "inv-243",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e596",
-   "source": "inv-011",
+   "source": "inv-006",
    "target": "inv-598",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e597",
-   "source": "inv-598",
-   "target": "inv-242",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e598",
-   "source": "inv-598",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e599",
-   "source": "inv-242",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e600",
-   "source": "inv-011",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e601",
-   "source": "inv-012",
-   "target": "inv-599",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
+     "variable": "met_諾亞",
      "op": "gte",
      "value": 5
     }
    }
   },
   {
-   "id": "e602",
-   "source": "inv-599",
-   "target": "inv-243",
+   "id": "e591",
+   "source": "inv-598",
+   "target": "inv-233",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "gte",
-     "value": 1
+     "op": "lte",
+     "value": 2
     }
    }
   },
   {
-   "id": "e603",
-   "source": "inv-599",
-   "target": "inv-013",
+   "id": "e592",
+   "source": "inv-598",
+   "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e604",
-   "source": "inv-012",
+   "id": "e593",
+   "source": "inv-006",
+   "target": "inv-599",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e594",
+   "source": "inv-599",
+   "target": "inv-232",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e595",
+   "source": "inv-599",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e596",
+   "source": "inv-006",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e597",
+   "source": "inv-008",
+   "target": "inv-010",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e598",
+   "source": "inv-009",
+   "target": "inv-010",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e599",
+   "source": "inv-011",
    "target": "inv-600",
    "sourceHandle": "right",
    "animated": true,
@@ -24728,13 +24695,57 @@
      "kind": "variable",
      "variable": "met_斑比",
      "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e600",
+   "source": "inv-600",
+   "target": "inv-243",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e601",
+   "source": "inv-600",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e602",
+   "source": "inv-243",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e603",
+   "source": "inv-011",
+   "target": "inv-601",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e605",
-   "source": "inv-600",
+   "id": "e604",
+   "source": "inv-601",
    "target": "inv-242",
    "sourceHandle": "right",
    "animated": true,
@@ -24748,96 +24759,45 @@
    }
   },
   {
+   "id": "e605",
+   "source": "inv-601",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e606",
-   "source": "inv-600",
+   "source": "inv-242",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e607",
-   "source": "inv-012",
+   "source": "inv-011",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e608",
-   "source": "inv-014",
-   "target": "inv-016",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e609",
-   "source": "inv-015",
-   "target": "inv-016",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e610",
-   "source": "inv-017",
-   "target": "inv-601",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e611",
-   "source": "inv-601",
-   "target": "inv-239",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e612",
-   "source": "inv-601",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e613",
-   "source": "inv-239",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e614",
-   "source": "inv-017",
+   "source": "inv-012",
    "target": "inv-602",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
+     "variable": "met_斑比",
      "op": "gte",
      "value": 5
     }
    }
   },
   {
-   "id": "e615",
+   "id": "e609",
    "source": "inv-602",
-   "target": "inv-241",
+   "target": "inv-243",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24845,70 +24805,77 @@
      "kind": "variable",
      "variable": "slot",
      "op": "gte",
-     "value": 2
+     "value": 1
     }
    }
   },
   {
-   "id": "e616",
+   "id": "e610",
    "source": "inv-602",
-   "target": "inv-019",
+   "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e617",
-   "source": "inv-241",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e618",
-   "source": "inv-017",
+   "id": "e611",
+   "source": "inv-012",
    "target": "inv-603",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_櫃檯",
+     "variable": "met_斑比",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e619",
+   "id": "e612",
    "source": "inv-603",
-   "target": "inv-238",
+   "target": "inv-242",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "lte",
+     "op": "gte",
      "value": 1
     }
    }
   },
   {
-   "id": "e620",
+   "id": "e613",
    "source": "inv-603",
-   "target": "inv-019",
+   "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e621",
-   "source": "inv-238",
-   "target": "inv-019",
+   "id": "e614",
+   "source": "inv-012",
+   "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e622",
+   "id": "e615",
+   "source": "inv-014",
+   "target": "inv-016",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e616",
+   "source": "inv-015",
+   "target": "inv-016",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e617",
    "source": "inv-017",
    "target": "inv-604",
    "sourceHandle": "right",
@@ -24916,57 +24883,6 @@
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e623",
-   "source": "inv-604",
-   "target": "inv-240",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e624",
-   "source": "inv-604",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e625",
-   "source": "inv-240",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e626",
-   "source": "inv-017",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e627",
-   "source": "inv-018",
-   "target": "inv-605",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
      "variable": "met_櫃檯",
      "op": "gte",
      "value": 5
@@ -24974,8 +24890,8 @@
    }
   },
   {
-   "id": "e628",
-   "source": "inv-605",
+   "id": "e618",
+   "source": "inv-604",
    "target": "inv-239",
    "sourceHandle": "right",
    "animated": true,
@@ -24989,16 +24905,23 @@
    }
   },
   {
-   "id": "e629",
-   "source": "inv-605",
+   "id": "e619",
+   "source": "inv-604",
    "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e630",
-   "source": "inv-018",
-   "target": "inv-606",
+   "id": "e620",
+   "source": "inv-239",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e621",
+   "source": "inv-017",
+   "target": "inv-605",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25011,8 +24934,8 @@
    }
   },
   {
-   "id": "e631",
-   "source": "inv-606",
+   "id": "e622",
+   "source": "inv-605",
    "target": "inv-241",
    "sourceHandle": "right",
    "animated": true,
@@ -25026,16 +24949,23 @@
    }
   },
   {
-   "id": "e632",
-   "source": "inv-606",
+   "id": "e623",
+   "source": "inv-605",
    "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e633",
-   "source": "inv-018",
-   "target": "inv-607",
+   "id": "e624",
+   "source": "inv-241",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e625",
+   "source": "inv-017",
+   "target": "inv-606",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25048,8 +24978,8 @@
    }
   },
   {
-   "id": "e634",
-   "source": "inv-607",
+   "id": "e626",
+   "source": "inv-606",
    "target": "inv-238",
    "sourceHandle": "right",
    "animated": true,
@@ -25063,16 +24993,23 @@
    }
   },
   {
-   "id": "e635",
-   "source": "inv-607",
+   "id": "e627",
+   "source": "inv-606",
    "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e636",
-   "source": "inv-018",
-   "target": "inv-608",
+   "id": "e628",
+   "source": "inv-238",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e629",
+   "source": "inv-017",
+   "target": "inv-607",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25085,8 +25022,8 @@
    }
   },
   {
-   "id": "e637",
-   "source": "inv-608",
+   "id": "e630",
+   "source": "inv-607",
    "target": "inv-240",
    "sourceHandle": "right",
    "animated": true,
@@ -25100,58 +25037,147 @@
    }
   },
   {
-   "id": "e638",
-   "source": "inv-608",
+   "id": "e631",
+   "source": "inv-607",
    "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e639",
+   "id": "e632",
+   "source": "inv-240",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e633",
+   "source": "inv-017",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e634",
    "source": "inv-018",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e640",
-   "source": "inv-020",
-   "target": "inv-609",
+   "target": "inv-608",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_店員",
+     "variable": "met_櫃檯",
      "op": "gte",
      "value": 5
     }
    }
   },
   {
-   "id": "e641",
+   "id": "e635",
+   "source": "inv-608",
+   "target": "inv-239",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e636",
+   "source": "inv-608",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e637",
+   "source": "inv-018",
+   "target": "inv-609",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e638",
    "source": "inv-609",
-   "target": "inv-235",
+   "target": "inv-241",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e639",
+   "source": "inv-609",
+   "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e642",
-   "source": "inv-235",
-   "target": "inv-022",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e643",
-   "source": "inv-020",
+   "id": "e640",
+   "source": "inv-018",
    "target": "inv-610",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_店員",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e641",
+   "source": "inv-610",
+   "target": "inv-238",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e642",
+   "source": "inv-610",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e643",
+   "source": "inv-018",
+   "target": "inv-611",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
      "op": "gte",
      "value": 3
     }
@@ -25159,29 +25185,37 @@
   },
   {
    "id": "e644",
-   "source": "inv-610",
-   "target": "inv-234",
+   "source": "inv-611",
+   "target": "inv-240",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
   },
   {
    "id": "e645",
-   "source": "inv-234",
-   "target": "inv-022",
+   "source": "inv-611",
+   "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e646",
-   "source": "inv-020",
-   "target": "inv-022",
+   "source": "inv-018",
+   "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e647",
-   "source": "inv-021",
-   "target": "inv-611",
+   "source": "inv-020",
+   "target": "inv-612",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25195,15 +25229,22 @@
   },
   {
    "id": "e648",
-   "source": "inv-611",
+   "source": "inv-612",
    "target": "inv-235",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e649",
-   "source": "inv-021",
-   "target": "inv-612",
+   "source": "inv-235",
+   "target": "inv-022",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e650",
+   "source": "inv-020",
+   "target": "inv-613",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25216,73 +25257,58 @@
    }
   },
   {
-   "id": "e650",
-   "source": "inv-612",
+   "id": "e651",
+   "source": "inv-613",
    "target": "inv-234",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e651",
-   "source": "inv-021",
+   "id": "e652",
+   "source": "inv-234",
    "target": "inv-022",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e652",
-   "source": "inv-023",
-   "target": "inv-613",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_材料行老闆",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
    "id": "e653",
-   "source": "inv-613",
-   "target": "inv-237",
+   "source": "inv-020",
+   "target": "inv-022",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
+   "animated": true
   },
   {
    "id": "e654",
-   "source": "inv-613",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e655",
-   "source": "inv-237",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e656",
-   "source": "inv-023",
+   "source": "inv-021",
    "target": "inv-614",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
+     "variable": "met_店員",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e655",
+   "source": "inv-614",
+   "target": "inv-235",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e656",
+   "source": "inv-021",
+   "target": "inv-615",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_店員",
      "op": "gte",
      "value": 3
     }
@@ -25290,80 +25316,21 @@
   },
   {
    "id": "e657",
-   "source": "inv-614",
-   "target": "inv-236",
+   "source": "inv-615",
+   "target": "inv-234",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
+   "animated": true
   },
   {
    "id": "e658",
-   "source": "inv-614",
-   "target": "inv-025",
+   "source": "inv-021",
+   "target": "inv-022",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e659",
-   "source": "inv-236",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e660",
    "source": "inv-023",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e661",
-   "source": "inv-024",
-   "target": "inv-615",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_材料行老闆",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e662",
-   "source": "inv-615",
-   "target": "inv-237",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e663",
-   "source": "inv-615",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e664",
-   "source": "inv-024",
    "target": "inv-616",
    "sourceHandle": "right",
    "animated": true,
@@ -25372,13 +25339,57 @@
      "kind": "variable",
      "variable": "met_材料行老闆",
      "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e660",
+   "source": "inv-616",
+   "target": "inv-237",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e661",
+   "source": "inv-616",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e662",
+   "source": "inv-237",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e663",
+   "source": "inv-023",
+   "target": "inv-617",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e665",
-   "source": "inv-616",
+   "id": "e664",
+   "source": "inv-617",
    "target": "inv-236",
    "sourceHandle": "right",
    "animated": true,
@@ -25392,78 +25403,166 @@
    }
   },
   {
+   "id": "e665",
+   "source": "inv-617",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e666",
-   "source": "inv-616",
+   "source": "inv-236",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e667",
-   "source": "inv-024",
+   "source": "inv-023",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e668",
+   "source": "inv-024",
+   "target": "inv-618",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e669",
+   "source": "inv-618",
+   "target": "inv-237",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e670",
+   "source": "inv-618",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e671",
+   "source": "inv-024",
+   "target": "inv-619",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e672",
+   "source": "inv-619",
+   "target": "inv-236",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e673",
+   "source": "inv-619",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e674",
+   "source": "inv-024",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e675",
    "source": "inv-026",
    "target": "inv-028",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e669",
+   "id": "e676",
    "source": "inv-027",
    "target": "inv-028",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e670",
+   "id": "e677",
    "source": "inv-029",
    "target": "inv-031",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e671",
+   "id": "e678",
    "source": "inv-030",
    "target": "inv-031",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e672",
+   "id": "e679",
    "source": "inv-032",
    "target": "inv-034",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e673",
+   "id": "e680",
    "source": "inv-033",
    "target": "inv-034",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e674",
+   "id": "e681",
    "source": "inv-035",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e675",
+   "id": "e682",
    "source": "inv-036",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e676",
-   "source": "inv-617",
+   "id": "e683",
+   "source": "inv-620",
    "target": "inv-453",
    "sourceHandle": "right",
    "animated": true
@@ -27098,42 +27197,6 @@
    "label": "問他蘿蔔要煮多久"
   },
   {
-   "segment": "seg096",
-   "section": "乙・問她（`cat_asked_glitch` 是 1 或 2 的時候播，兩次逐字重播）",
-   "file": "調查篇-橋段2",
-   "dest": "store",
-   "slots": [
-    3
-   ],
-   "conds": [
-    {
-     "variable": "trust_貓草",
-     "op": "eq",
-     "value": 0
-    }
-   ],
-   "or": false,
-   "label": "只問一件事"
-  },
-  {
-   "segment": "seg097",
-   "section": "乙・轉身（`cat_asked_glitch` 到 3 的時候播）",
-   "file": "調查篇-橋段2",
-   "dest": "store",
-   "slots": [
-    3
-   ],
-   "conds": [
-    {
-     "variable": "trust_貓草",
-     "op": "eq",
-     "value": 0
-    }
-   ],
-   "or": false,
-   "label": "最後一個問題"
-  },
-  {
    "segment": "seg098",
    "section": "八、手辦店（`figure`・貓草第二階）",
    "file": "調查篇-橋段2",
@@ -27919,47 +27982,6 @@
    "quote": "監視器上常常有一個人站在對面。我沒下去問過。"
   }
  ],
- "unresolved": [
-  {
-   "segment": "",
-   "section": "選項 → 共用卡・乙",
-   "notes": [
-    "對不到那一節"
-   ],
-   "text": "七、深夜的便利商店（`store`・貓草・第零階到第一階）"
-  },
-  {
-   "segment": "",
-   "section": "選項 → 筆記",
-   "notes": [
-    "對不到那一節"
-   ],
-   "text": "七、深夜的便利商店（`store`・貓草・第零階到第一階）"
-  },
-  {
-   "segment": "",
-   "section": "選項 → 共用卡・乙",
-   "notes": [
-    "對不到那一節"
-   ],
-   "text": "七、深夜的便利商店（`store`・貓草・第零階到第一階）"
-  },
-  {
-   "segment": "",
-   "section": "選項 → 筆記",
-   "notes": [
-    "對不到那一節"
-   ],
-   "text": "七、深夜的便利商店（`store`・貓草・第零階到第一階）"
-  },
-  {
-   "segment": "",
-   "section": "選項 → 共用卡・乙",
-   "notes": [
-    "對不到那一節"
-   ],
-   "text": "七、深夜的便利商店（`store`・貓草・第零階到第一階）"
-  }
- ],
+ "unresolved": [],
  "orphans": []
 }

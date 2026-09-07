@@ -587,6 +587,7 @@ def build(cards):
         if not any(c["variable"] == "day" for c in rule["conds"]):
             rule["conds"] = rule["conds"] + day_conds(s["cards"][0]["file"], heads)
         first = prev = None
+        after_choice = None
         back_id = None          # 這一段的回板卡，背包巨集的「沒挑到」要接到它，所以先預留 id
         pending_bag = None      # 背包巨集：下一張卡要接在 pick 條件邊後面
         for c in s["cards"]:
@@ -634,8 +635,12 @@ def build(cards):
                     b.edge(prev, nid)
                 first = first or nid
                 prev = nid
+                after_choice = None
                 for k_, o in enumerate(c["options"]):
-                    choice_links.append((nid, k_, c["file"], " / ".join(c["headings"][:-1]), o["target"]))
+                    if o["target"] == "筆記":
+                        after_choice = (nid, k_)        # 「今天到這裡 → 筆記」＝接這一段裡選擇卡後面那一張
+                    else:
+                        choice_links.append((nid, k_, c["file"], " / ".join(c["headings"][:-1]), o["target"]))
                 continue
             d = card_node(c)
             if not d:
@@ -644,6 +649,12 @@ def build(cards):
             for v in c["vars"]:
                 d.setdefault("variableOps", []).append(var_op(v))
             nid = b.add(d)
+            if after_choice:
+                b.edge(after_choice[0], nid); b.edges[-1]["sourceHandle"] = f"choice-{after_choice[1]}"
+                after_choice = None
+                first = first or nid
+                prev = nid
+                continue
             if pending_bag:
                 bag, want = pending_bag
                 b.edge(bag, nid, {"variable": "inventoryLastUsed", "op": "eq", "value": want})
@@ -704,6 +715,21 @@ def build(cards):
                             "trigger": s["trigger"], "notes": notes})
     # 選擇卡的選項接到同一場裡的節（「→ 二」＝那一場底下以「二・」開頭的節），那些節不再列在選單上
     for nid, k_, file_, l1, target in choice_links:
+        if target.startswith("共用卡"):
+            kids = [(sec, f_, sid_) for (ff, ll, sec), (f_, sid_) in seg_first.items()
+                    if ff == file_ and target in ll and l1.split(" / ")[0] in ll]
+            ask = next((k for k in kids if "問她" in k[0]), None)
+            turn = next((k for k in kids if "轉身" in k[0]), None)
+            if ask and turn:
+                gate = b.add({"type": "setVariable", "title": "（問幾次了）", "text": "", "variableOps": []})
+                b.edge(nid, gate); b.edges[-1]["sourceHandle"] = f"choice-{k_}"
+                b.edge(gate, turn[1], {"variable": "cat_asked_glitch", "op": "gte", "value": 3})
+                b.edge(gate, ask[1])
+                for k in kids:
+                    b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == k[2]
+                                                        and e["data"]["condition"].get("variable") == "pick")]
+                    rules[:] = [r for r in rules if r["segment"] != k[2]]
+                continue
         hit = next(((f_, sid_) for (ff, ll, sec), (f_, sid_) in seg_first.items()
                     if ff == file_ and (ll == l1 or ll.startswith(l1) or l1.startswith(ll))
                     and (sec == target or sec.startswith(target + "・") or sec.startswith(target + "、")
@@ -865,7 +891,7 @@ def main():
         print(f"\n寫出 {out}")
     # 自我檢查：兩種路由變數以外不可以有任何條件邊
     bad = [e for e in b.edges if e.get("data") and
-           e["data"]["condition"]["variable"] not in ("dest", "pick", "rec_ok", "inventoryLastUsed", "slot")
+           e["data"]["condition"]["variable"] not in ("dest", "pick", "rec_ok", "inventoryLastUsed", "slot", "cat_asked_glitch")
            and not e["data"]["condition"]["variable"].startswith("met_")]
     assert not bad, f"有 {len(bad)} 條邊掛了 dest/pick 以外的條件，複合判斷不該變成邊"
     return 0
