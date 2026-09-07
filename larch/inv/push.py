@@ -51,7 +51,7 @@ DESC = ("AI 主播格莉奇說她只有 4KB 的記憶。全世界當成哏，只
 # 場景代號 → (白天, 夜晚) 背景，跟 build.py 的 BG 一致；只給段落中途換場景用
 BG_MAP = {"lobby": ("bg-lobby-day", "bg-apartment-hall"), "roof": ("bg-roof-day", "bg-noah-shop"),
           "street": ("bg-street-day2", "bg-street-night"), "studio": ("bg-studio-day", "bg-bambi-studio"),
-          "booth": ("bg-booth", "bg-booth"), "tower14": ("bg-tower14-day", "bg-office-14f"),
+          "booth": ("bg-booth", "bg-booth"), "tower14": ("bg-tower14-day", "bg-tower14-night"),
           "store": ("bg-store-day", "bg-store-night"), "parts": ("bg-parts-day", "bg-parts"),
           "busstop": ("bg-busstop-day", "bg-busstop"), "metro": ("bg-metro-day", "bg-metro"),
           "laundry": ("bg-laundry-day", "bg-laundry"), "figure": ("bg-figure-day", "bg-figure"),
@@ -230,6 +230,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 w = WHO_MAP.get(sp, sp)
                 if w and w not in NOT_WHO and (seg, w) not in first_speak:
                     first_speak[(seg, w)] = idx
+    exit_at = {}
+    for seg, sn in by_seg.items():
+        for idx, n in enumerate(sn):
+            for w in n["data"].get("exits", []):
+                exit_at.setdefault((seg, WHO_MAP.get(w, w)), idx)
     seg_index = {n["id"]: i for sn in by_seg.values() for i, n in enumerate(sn)}
     for n in nodes:
         d = n["data"]
@@ -237,7 +242,9 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         if d.get("type") != "dialogue" or not seg:
             continue
         idx = seg_index.get(n["id"], 0)
-        cast = [] if d.get("remote") else [w for w in stage_of.get(seg, []) if first_speak.get((seg, w), 10**9) <= idx]
+        cast = [] if d.get("remote") else [w for w in stage_of.get(seg, [])
+                                          if first_speak.get((seg, w), 10**9) <= idx and idx <= exit_at.get((seg, w), 10**9)]
+        d.pop("exits", None)
         hint = d.pop("castHint", None)
         if hint and sprite_url(WHO_MAP.get(hint, hint), state, pid, dry):
             cast = [WHO_MAP.get(hint, hint)]
@@ -344,6 +351,29 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                            "miniGameReadVars": ["notes", "notes_free", "met", "page1"] + note_codes,
                            "miniGameWriteVars": ["notes_free", "page1", "page1_text", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
+    phone_html = pathlib.Path.home().joinpath("larch-phone-chat/card/receive.html").read_text(encoding="utf-8")
+    def receive(nid, contact, messages, x, y):
+        add_node(nid, {"type": "plugin", "title": f"手機：{contact}", "text": "",
+                       "pluginId": "phone-chat", "pluginCardId": "receive", "pluginName": "格莉奇手機",
+                       "pluginCardName": "收到訊息", "pluginIcon": "bell", "pluginColor": "#5b8def",
+                       "pluginVersion": "0.3.4", "platforms": ["web"], "pluginAssets": [], "pluginHtml": phone_html,
+                       "pluginValues": {"contactName": contact, "avatar": "", "messages": messages, "sound": "",
+                                        "historyVar": "phone_log", "duration": 3, "dim": 0, "bgImage": "none", "bgColor": "none"},
+                       "pluginReadVars": ["phone_log"], "pluginWriteVars": ["phone_log"],
+                       "pluginSkippable": True, "pluginPresentation": "fullscreen"}, x, y)
+    # 她的手機只收不回（背包與謎題 五）：直播開始（第二、五、八天晚上）、斑比約你、公關窗口自動回覆
+    phones = [("phone-live-2", "格莉奇", "格莉奇 開始直播了", [("day", "eq", 2), ("slot", "eq", 2)]),
+              ("phone-live-5", "格莉奇", "格莉奇 開始直播了", [("day", "eq", 5), ("slot", "eq", 2)]),
+              ("phone-live-8", "格莉奇", "格莉奇 開始直播了", [("day", "eq", 8), ("slot", "eq", 2)]),
+              ("phone-bambi", "斑比", "有空來工作室。稿子帶著。", [("open_studio", "eq", True)]),
+              ("phone-pr", "公關窗口", "您的來信已收到，我們將於三至五個工作天內回覆。", [("met_櫃檯", "gte", 1)])]
+    for i, (nid, contact, msg, conds) in enumerate(phones):
+        cond = {"kind": "variable", "variable": conds[0][0], "op": conds[0][1], "value": conds[0][2], "match": "all",
+                "conditions": [{"variable": v, "op": o, "value": val} for v, o, val in conds]}
+        add_node(f"{nid}-int", {"type": "interrupt", "title": f"手機響：{contact}", "text": "",
+                                "interruptCondition": cond, "interruptOnce": True, "interruptExit": "return"}, 0, 1400 + i * 240)
+        receive(nid, contact, msg, 400, 1400 + i * 240)
+        add_edge(f"{nid}-int", nid)
     tapes = board.get("tapes", [])
     if tapes:
         add_node("inv-tape-int", {"type": "interrupt", "title": "播錄音", "text": "",
@@ -387,6 +417,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
         ("page1_text", "string", "她一個字都沒有寫。", "第一頁：收尾旁白唸的版本"),
         ("open_tape", "boolean", False, "播錄音（HUD 用了哪一卷）"),
+        ("phone_log", "string", "[]", "手機收到的訊息（格莉奇手機插件）"),
         ("in_bag", "boolean", False, "劇情正在開背包（擋掉 HUD 重聽的插播）"),
     ]:
         vs.setdefault(name, {"id": name, "name": name, "label": label, "type": t, "defaultValue": default})
@@ -535,6 +566,7 @@ def settings_patch(settings, bag_image=""):
         "surfaceColor": "#141a30", "surfaceOpacity": 0.94, "itemColor": "#1f2747",
         "textColor": "#ece9f4", "accentColor": "#7fd6e8",
         "motionStyle": "gentle", "shadowStyle": "soft"}}
+    plugins["phone-chat"] = {"enabled": True}
     settings["plugins"] = plugins
     settings.setdefault("stageFit", "auto")
     settings.setdefault("keepActorsInFrame", False)

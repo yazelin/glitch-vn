@@ -36,7 +36,7 @@ BG = {
     "street":  ("bg-street-day2", "bg-street-night"),
     "studio":  ("bg-studio-day",  "bg-bambi-studio"),
     "booth":   ("bg-booth",       "bg-booth"),
-    "tower14": ("bg-tower14-day", "bg-office-14f"),
+    "tower14": ("bg-tower14-day", "bg-tower14-night"),
     "store":   ("bg-store-day",   "bg-store-night"),
     "parts":   ("bg-parts-day",   "bg-parts"),
     "busstop": ("bg-busstop-day", "bg-busstop"),
@@ -260,8 +260,9 @@ def expand_rec(b, prev, c, sid, tapes):
                      └─預設──────────────────────────────────────────────▶（接下一張）
     回傳「下一張卡要接在哪些節點後面」的匯流節點 id。
     Larch 一個出口只認第一條成立的邊，所以 prev 的兩條邊順序是條件在前、預設在後。"""
-    who, _, when = c["meta"].strip().partition("・")     # 「斑比・深夜」＝只有深夜給錄
-    slot_need = SLOT.get(when.strip()) if when else None
+    who, _, when = c["meta"].strip().partition("・")     # 「斑比・深夜」＝只有深夜給錄；「貓草・拒」＝開了就掉信任、當場結束
+    refuse = when.strip() == "拒"
+    slot_need = SLOT.get(when.strip()) if (when and not refuse) else None
     reaction = [l for l in c["lines"] if l.get("speaker")]
     quote = " ".join(l["text"] for l in c["lines"] if not l.get("speaker") and not l.get("direction"))
     item_id = "rec_" + TAPE_ID.get(who, re.sub(r"[^a-z0-9]", "", who.lower()) or f"{sid}")
@@ -294,6 +295,20 @@ def expand_rec(b, prev, c, sid, tapes):
                    "pluginReadVars": ["inventory", "inventoryCount"],
                    "pluginWriteVars": ["inventory", "inventoryCount", "pluginResult"],
                    "segment": sid})
+    if refuse:
+        # 不給錄的人：反應那張卡之後掉一級，直接回調查板（這一場就此結束）
+        dl = [{"id": f"l{i}", "speaker": l["speaker"], "text": l["text"], "emotion": ""}
+              for i, l in enumerate(reaction)] or [{"id": "l0", "speaker": who, "text": "你錄音？", "emotion": ""}]
+        react = b.add({"type": "dialogue", "title": f"{who}：對錄音機", "text": dl[0]["text"],
+                       "speaker": dl[0]["speaker"], "dialogueLines": dl, "segment": sid,
+                       "variableOps": [{"id": "op-trust", "variable": f"trust_{who}", "kind": "add", "value": -1}]})
+        b.edge(choice, react); b.edges[-1]["sourceHandle"] = "choice-0"
+        out = b.add({"type": "boardJump", "title": "回調查板（被趕走）", "jumpBoardId": BID, "jumpNodeId": "@@board"})
+        b.edge(react, out)
+        b.edge(choice, merge); b.edges[-1]["sourceHandle"] = "choice-1"
+        tapes.pop()                       # 沒有這一卷
+        b.nodes.remove(next(n for n in b.nodes if n["id"] == grant))
+        return merge
     if reaction:
         dl = [{"id": f"l{i}", "speaker": l["speaker"], "text": l["text"], "emotion": ""}
               for i, l in enumerate(reaction)]
@@ -350,6 +365,8 @@ def card_node(c):
         d = {"type": "dialogue", "title": text[:14], "text": text, "speaker": NARRATOR}
         if c.get("scene"):
             d["sceneCode"] = c["scene"]      # 卡頭的 `scene: xxx`：段落中途換場景（貓草家、錄音間）
+        if c.get("exits"):
+            d["exits"] = c["exits"]
         if c["kind"] == "note":
             d["title"] = "筆記：" + text[:10]
             d["speaker"] = "玩家"
@@ -370,8 +387,13 @@ def card_node(c):
         return None
     dl = [{"id": f"l{i}", "speaker": l["speaker"], "text": l["text"], "emotion": ""}
           for i, l in enumerate(spoken)]
-    return {"type": "dialogue", "title": f"{spoken[0]['speaker']}：{spoken[0]['text'][:10]}",
-            "text": spoken[0]["text"], "speaker": spoken[0]["speaker"], "dialogueLines": dl}
+    d = {"type": "dialogue", "title": f"{spoken[0]['speaker']}：{spoken[0]['text'][:10]}",
+         "text": spoken[0]["text"], "speaker": spoken[0]["speaker"], "dialogueLines": dl}
+    if c.get("scene"):
+        d["sceneCode"] = c["scene"]
+    if c.get("exits"):
+        d["exits"] = c["exits"]
+    return d
 
 
 def build(cards):
@@ -534,7 +556,8 @@ def build(cards):
                 sub = s["key"][1].startswith(("甲", "乙", "他先開口"))
                 rule["conds"].append({"variable": "cat_visits", "op": "gte" if n_ == 3 else "eq", "value": n_ if sub else n_ - 1})
                 if n_ < 3 and s["key"][1].startswith(("第一次", "第二次")):
-                    s["cards"][-1]["vars"].append({"name": "cat_visits", "set": None, "add": "1", "from": None})
+                    last_card = next(c_ for c_ in reversed(s["cards"]) if c_["kind"] not in ("rec", "bag"))
+                    last_card["vars"].append({"name": "cat_visits", "set": None, "add": "1", "from": None})
         if s["key"][1].startswith("Ｂ・頂樓收音機店（隔天"):
             rule["slots"] = [0, 1, 2]
             rule["conds"].append({"variable": "names_seen", "op": "eq", "value": True})
@@ -740,6 +763,10 @@ def main():
     b, rules, unresolved, orphans, nseg, tapes = build(cards)
     vs = variables()
 
+    bid_ = next(n["id"] for n in b.nodes if n["data"].get("type") == "miniGame" and n["data"]["title"] == "調查板")
+    for n in b.nodes:
+        if n["data"].get("jumpNodeId") == "@@board":
+            n["data"]["jumpNodeId"] = bid_
     # 固定開場：第一天上午一樓（一之一）從它的第一張卡開始，不經過調查板
     board_node = next(n for n in b.nodes if n["data"].get("type") == "miniGame" and n["data"]["title"] == "調查板")
     opening = next((r for r in rules if r["file"] == "調查篇-第一天-定稿" and r["section"].startswith("一之一")), None)

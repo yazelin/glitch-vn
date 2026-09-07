@@ -76,7 +76,7 @@ SKIP = ["排卡註", "觸發條件一覽", "格式", "配音", "讀音", "待拍
         "表上那一列", "各補什麼", "我自己抓到", "判決怎麼處理", "卡數", "標點",
         "共用音檔", "為什麼一張", "不可以做的事", "自己驗過"]
 
-VAR = re.compile(r"\*\*→\s*(?:解鎖\s*)?`([^`]+)`\s*(?:←\s*(\S+)|[＋+]\s*(\d+)|(?:\d+\s*→\s*)?(\d+)\b)?")
+VAR = re.compile(r"\*\*→\s*(?:解鎖\s*|下台\s*)?`([^`]+)`\s*(?:←\s*(\S+)|[＋+]\s*(\d+)|(?:\d+\s*→\s*)?(\d+)\b)?")
 VAR_PIECE = re.compile(r"`([^`]+)`\s*(?:[←＝=]\s*(\S+)|[＋+]\s*(\d+)|[−\-]\s*(\d+)|(?:(\d+)\s*→\s*)?(\d+)\b)?")
 
 
@@ -158,6 +158,9 @@ def parse_file(path):
             tgt = cards[-1] if cards else None
             if tgt is None:
                 problems.append(f"{path.stem}:{i} 變數寫入前面沒有卡片")
+            elif "下台" in ln:
+                # 「**→ 下台 `諾亞`**」：這張卡之後他不在台上（推送層照它排立繪）
+                tgt.setdefault("exits", []).extend(re.findall(r"`([^`]+)`", ln))
             else:
                 # 一行可以寫好幾個：「**→ `a`、`b`、`trust_貓草` 2 → 3**」，用頓號分開逐個收
                 for piece in re.split(r"[、，]", ln):

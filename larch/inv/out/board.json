@@ -361,7 +361,7 @@
     "title": "tower14",
     "text": "",
     "background": "@@bg-tower14-day",
-    "backgroundNight": "@@bg-office-14f",
+    "backgroundNight": "@@bg-tower14-night",
     "transition": "fade",
     "transitionMs": 340
    }
@@ -377,8 +377,8 @@
     "type": "scene",
     "title": "tower14@n",
     "text": "",
-    "background": "@@bg-office-14f",
-    "backgroundNight": "@@bg-office-14f",
+    "background": "@@bg-tower14-night",
+    "backgroundNight": "@@bg-tower14-night",
     "transition": "fade",
     "transitionMs": 340
    }
@@ -821,6 +821,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg000"
    }
   },
@@ -944,6 +945,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg001"
    }
   },
@@ -3275,6 +3277,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg021",
     "variableOps": [
      {
@@ -3452,6 +3455,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg022",
     "variableOps": [
      {
@@ -3765,6 +3769,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg023",
     "variableOps": [
      {
@@ -3844,6 +3849,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg024"
    }
   },
@@ -3977,6 +3983,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg025",
     "variableOps": [
      {
@@ -4104,6 +4111,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg026",
     "variableOps": [
      {
@@ -4195,6 +4203,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg027"
    }
   },
@@ -4244,6 +4253,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg028"
    }
   },
@@ -4453,6 +4463,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "booth",
     "segment": "seg030"
    }
   },
@@ -4556,6 +4567,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "booth",
     "segment": "seg031",
     "variableOps": [
      {
@@ -4679,6 +4691,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "booth",
     "segment": "seg032"
    }
   },
@@ -5129,6 +5142,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "laundry",
     "segment": "seg035",
     "variableOps": [
      {
@@ -5296,6 +5310,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg036",
     "variableOps": [
      {
@@ -5489,6 +5504,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg037",
     "variableOps": [
      {
@@ -5712,6 +5728,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "figure",
     "segment": "seg038",
     "variableOps": [
      {
@@ -5869,6 +5886,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "figure",
     "segment": "seg039",
     "variableOps": [
      {
@@ -5960,6 +5978,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg040"
    }
   },
@@ -5989,6 +6008,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg040",
     "variableOps": [
      {
@@ -6052,6 +6072,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg041",
     "variableOps": [
      {
@@ -7063,6 +7084,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "parts",
     "segment": "seg052",
     "variableOps": [
      {
@@ -7259,6 +7281,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "parts",
     "segment": "seg053"
    }
   },
@@ -7360,6 +7383,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "parts",
     "segment": "seg054"
    }
   },
@@ -7545,6 +7569,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "parts",
     "segment": "seg055"
    }
   },
@@ -7634,6 +7659,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "parts",
     "segment": "seg056"
    }
   },
@@ -8033,6 +8059,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg071"
    }
   },
@@ -8146,6 +8173,10 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
+    "exits": [
+     "諾亞"
+    ],
     "segment": "seg072"
    }
   },
@@ -8215,6 +8246,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg073"
    }
   },
@@ -8314,6 +8346,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg075"
    }
   },
@@ -8431,6 +8464,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg077"
    }
   },
@@ -8564,6 +8598,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg079"
    }
   },
@@ -8675,6 +8710,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg080"
    }
   },
@@ -8812,6 +8848,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg081"
    }
   },
@@ -8899,6 +8936,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg081"
    }
   },
@@ -9026,6 +9064,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg081",
     "variableOps": [
      {
@@ -9245,6 +9284,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg082"
    }
   },
@@ -9382,6 +9422,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg083"
    }
   },
@@ -9561,6 +9602,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg083",
     "variableOps": [
      {
@@ -9690,6 +9732,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg083"
    }
   },
@@ -9801,6 +9844,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "tower14",
     "segment": "seg084"
    }
   },
@@ -10000,6 +10044,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "tower14",
     "segment": "seg084",
     "variableOps": [
      {
@@ -10065,6 +10110,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "tower14",
     "segment": "seg084"
    }
   },
@@ -10204,6 +10250,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg085",
     "variableOps": [
      {
@@ -10229,10 +10276,15 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "choice",
+    "title": "錄音：貓草",
+    "text": "錄音機在包包裡。",
+    "choices": [
+     "開錄音機",
+     "不開"
+    ],
+    "choiceMode": "branch",
+    "segment": "seg085"
    }
   },
   {
@@ -10240,6 +10292,80 @@
    "type": "story",
    "position": {
     "x": 91500,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（匯流）",
+    "text": "",
+    "variableOps": [],
+    "segment": "seg085"
+   }
+  },
+  {
+   "id": "inv-307",
+   "type": "story",
+   "position": {
+    "x": 92100,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "貓草：對錄音機",
+    "text": "你錄音？",
+    "speaker": "貓草",
+    "dialogueLines": [
+     {
+      "id": "l0",
+      "speaker": "貓草",
+      "text": "你錄音？",
+      "emotion": ""
+     }
+    ],
+    "segment": "seg085",
+    "variableOps": [
+     {
+      "id": "op-trust",
+      "variable": "trust_貓草",
+      "kind": "add",
+      "value": -1
+     }
+    ]
+   }
+  },
+  {
+   "id": "inv-308",
+   "type": "story",
+   "position": {
+    "x": 92400,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板（被趕走）",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-309",
+   "type": "story",
+   "position": {
+    "x": 92700,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-310",
+   "type": "story",
+   "position": {
+    "x": 93000,
     "y": 0
    },
    "data": {
@@ -10279,14 +10405,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg086"
    }
   },
   {
-   "id": "inv-306",
+   "id": "inv-311",
    "type": "story",
    "position": {
-    "x": 91800,
+    "x": 93300,
     "y": 0
    },
    "data": {
@@ -10313,10 +10440,10 @@
    }
   },
   {
-   "id": "inv-307",
+   "id": "inv-312",
    "type": "story",
    "position": {
-    "x": 92100,
+    "x": 93600,
     "y": 0
    },
    "data": {
@@ -10327,10 +10454,10 @@
    }
   },
   {
-   "id": "inv-308",
+   "id": "inv-313",
    "type": "story",
    "position": {
-    "x": 92400,
+    "x": 93900,
     "y": 0
    },
    "data": {
@@ -10343,10 +10470,10 @@
    }
   },
   {
-   "id": "inv-309",
+   "id": "inv-314",
    "type": "story",
    "position": {
-    "x": 92700,
+    "x": 94200,
     "y": 0
    },
    "data": {
@@ -10422,6 +10549,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg087",
     "variableOps": [
      {
@@ -10434,10 +10562,10 @@
    }
   },
   {
-   "id": "inv-310",
+   "id": "inv-315",
    "type": "story",
    "position": {
-    "x": 93000,
+    "x": 94500,
     "y": 0
    },
    "data": {
@@ -10448,10 +10576,10 @@
    }
   },
   {
-   "id": "inv-311",
+   "id": "inv-316",
    "type": "story",
    "position": {
-    "x": 93300,
+    "x": 94800,
     "y": 0
    },
    "data": {
@@ -10485,14 +10613,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg088"
    }
   },
   {
-   "id": "inv-312",
+   "id": "inv-317",
    "type": "story",
    "position": {
-    "x": 93600,
+    "x": 95100,
     "y": 0
    },
    "data": {
@@ -10519,10 +10648,10 @@
    }
   },
   {
-   "id": "inv-313",
+   "id": "inv-318",
    "type": "story",
    "position": {
-    "x": 93900,
+    "x": 95400,
     "y": 0
    },
    "data": {
@@ -10533,10 +10662,10 @@
    }
   },
   {
-   "id": "inv-314",
+   "id": "inv-319",
    "type": "story",
    "position": {
-    "x": 94200,
+    "x": 95700,
     "y": 0
    },
    "data": {
@@ -10549,10 +10678,10 @@
    }
   },
   {
-   "id": "inv-315",
+   "id": "inv-320",
    "type": "story",
    "position": {
-    "x": 94500,
+    "x": 96000,
     "y": 0
    },
    "data": {
@@ -10563,10 +10692,10 @@
    }
   },
   {
-   "id": "inv-316",
+   "id": "inv-321",
    "type": "story",
    "position": {
-    "x": 94800,
+    "x": 96300,
     "y": 0
    },
    "data": {
@@ -10600,14 +10729,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg090"
    }
   },
   {
-   "id": "inv-317",
+   "id": "inv-322",
    "type": "story",
    "position": {
-    "x": 95100,
+    "x": 96600,
     "y": 0
    },
    "data": {
@@ -10618,10 +10748,10 @@
    }
   },
   {
-   "id": "inv-318",
+   "id": "inv-323",
    "type": "story",
    "position": {
-    "x": 95400,
+    "x": 96900,
     "y": 0
    },
    "data": {
@@ -10667,6 +10797,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg091",
     "variableOps": [
      {
@@ -10679,10 +10810,10 @@
    }
   },
   {
-   "id": "inv-319",
+   "id": "inv-324",
    "type": "story",
    "position": {
-    "x": 95700,
+    "x": 97200,
     "y": 0
    },
    "data": {
@@ -10695,10 +10826,10 @@
    }
   },
   {
-   "id": "inv-320",
+   "id": "inv-325",
    "type": "story",
    "position": {
-    "x": 96000,
+    "x": 97500,
     "y": 0
    },
    "data": {
@@ -10725,10 +10856,10 @@
    }
   },
   {
-   "id": "inv-321",
+   "id": "inv-326",
    "type": "story",
    "position": {
-    "x": 96300,
+    "x": 97800,
     "y": 0
    },
    "data": {
@@ -10739,10 +10870,10 @@
    }
   },
   {
-   "id": "inv-322",
+   "id": "inv-327",
    "type": "story",
    "position": {
-    "x": 96600,
+    "x": 98100,
     "y": 0
    },
    "data": {
@@ -10788,6 +10919,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg092",
     "variableOps": [
      {
@@ -10800,10 +10932,10 @@
    }
   },
   {
-   "id": "inv-323",
+   "id": "inv-328",
    "type": "story",
    "position": {
-    "x": 96900,
+    "x": 98400,
     "y": 0
    },
    "data": {
@@ -10814,10 +10946,10 @@
    }
   },
   {
-   "id": "inv-324",
+   "id": "inv-329",
    "type": "story",
    "position": {
-    "x": 97200,
+    "x": 98700,
     "y": 0
    },
    "data": {
@@ -10839,14 +10971,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg093"
    }
   },
   {
-   "id": "inv-325",
+   "id": "inv-330",
    "type": "story",
    "position": {
-    "x": 97500,
+    "x": 99000,
     "y": 0
    },
    "data": {
@@ -10859,10 +10992,10 @@
    }
   },
   {
-   "id": "inv-326",
+   "id": "inv-331",
    "type": "story",
    "position": {
-    "x": 97800,
+    "x": 99300,
     "y": 0
    },
    "data": {
@@ -10873,10 +11006,10 @@
    }
   },
   {
-   "id": "inv-327",
+   "id": "inv-332",
    "type": "story",
    "position": {
-    "x": 98100,
+    "x": 99600,
     "y": 0
    },
    "data": {
@@ -10889,10 +11022,10 @@
    }
   },
   {
-   "id": "inv-328",
+   "id": "inv-333",
    "type": "story",
    "position": {
-    "x": 98400,
+    "x": 99900,
     "y": 0
    },
    "data": {
@@ -10905,10 +11038,10 @@
    }
   },
   {
-   "id": "inv-329",
+   "id": "inv-334",
    "type": "story",
    "position": {
-    "x": 98700,
+    "x": 100200,
     "y": 0
    },
    "data": {
@@ -10948,14 +11081,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "figure",
     "segment": "seg094"
    }
   },
   {
-   "id": "inv-330",
+   "id": "inv-335",
    "type": "story",
    "position": {
-    "x": 99000,
+    "x": 100500,
     "y": 0
    },
    "data": {
@@ -10966,10 +11100,10 @@
    }
   },
   {
-   "id": "inv-331",
+   "id": "inv-336",
    "type": "story",
    "position": {
-    "x": 99300,
+    "x": 100800,
     "y": 0
    },
    "data": {
@@ -11027,6 +11161,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "figure",
     "segment": "seg095",
     "variableOps": [
      {
@@ -11045,10 +11180,10 @@
    }
   },
   {
-   "id": "inv-332",
+   "id": "inv-337",
    "type": "story",
    "position": {
-    "x": 99600,
+    "x": 101100,
     "y": 0
    },
    "data": {
@@ -11061,10 +11196,10 @@
    }
   },
   {
-   "id": "inv-333",
+   "id": "inv-338",
    "type": "story",
    "position": {
-    "x": 99900,
+    "x": 101400,
     "y": 0
    },
    "data": {
@@ -11075,10 +11210,10 @@
    }
   },
   {
-   "id": "inv-334",
+   "id": "inv-339",
    "type": "story",
    "position": {
-    "x": 100200,
+    "x": 101700,
     "y": 0
    },
    "data": {
@@ -11238,6 +11373,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "figure",
     "segment": "seg096",
     "variableOps": [
      {
@@ -11250,10 +11386,10 @@
    }
   },
   {
-   "id": "inv-335",
+   "id": "inv-340",
    "type": "story",
    "position": {
-    "x": 100500,
+    "x": 102000,
     "y": 0
    },
    "data": {
@@ -11266,10 +11402,10 @@
    }
   },
   {
-   "id": "inv-336",
+   "id": "inv-341",
    "type": "story",
    "position": {
-    "x": 100800,
+    "x": 102300,
     "y": 0
    },
    "data": {
@@ -11321,6 +11457,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "figure",
     "segment": "seg096",
     "variableOps": [
      {
@@ -11333,10 +11470,10 @@
    }
   },
   {
-   "id": "inv-337",
+   "id": "inv-342",
    "type": "story",
    "position": {
-    "x": 101100,
+    "x": 102600,
     "y": 0
    },
    "data": {
@@ -11349,10 +11486,10 @@
    }
   },
   {
-   "id": "inv-338",
+   "id": "inv-343",
    "type": "story",
    "position": {
-    "x": 101400,
+    "x": 102900,
     "y": 0
    },
    "data": {
@@ -11363,10 +11500,10 @@
    }
   },
   {
-   "id": "inv-339",
+   "id": "inv-344",
    "type": "story",
    "position": {
-    "x": 101700,
+    "x": 103200,
     "y": 0
    },
    "data": {
@@ -11379,10 +11516,10 @@
    }
   },
   {
-   "id": "inv-340",
+   "id": "inv-345",
    "type": "story",
    "position": {
-    "x": 102000,
+    "x": 103500,
     "y": 0
    },
    "data": {
@@ -11464,6 +11601,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg097",
     "variableOps": [
      {
@@ -11476,10 +11614,10 @@
    }
   },
   {
-   "id": "inv-341",
+   "id": "inv-346",
    "type": "story",
    "position": {
-    "x": 102300,
+    "x": 103800,
     "y": 0
    },
    "data": {
@@ -11492,10 +11630,10 @@
    }
   },
   {
-   "id": "inv-342",
+   "id": "inv-347",
    "type": "story",
    "position": {
-    "x": 102600,
+    "x": 104100,
     "y": 0
    },
    "data": {
@@ -11553,6 +11691,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "catgrass_door",
     "segment": "seg097",
     "variableOps": [
      {
@@ -11571,10 +11710,10 @@
    }
   },
   {
-   "id": "inv-343",
+   "id": "inv-348",
    "type": "story",
    "position": {
-    "x": 102900,
+    "x": 104400,
     "y": 0
    },
    "data": {
@@ -11587,10 +11726,10 @@
    }
   },
   {
-   "id": "inv-344",
+   "id": "inv-349",
    "type": "story",
    "position": {
-    "x": 103200,
+    "x": 104700,
     "y": 0
    },
    "data": {
@@ -11720,14 +11859,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "catgrass_home",
     "segment": "seg097"
    }
   },
   {
-   "id": "inv-345",
+   "id": "inv-350",
    "type": "story",
    "position": {
-    "x": 103500,
+    "x": 105000,
     "y": 0
    },
    "data": {
@@ -11740,10 +11880,10 @@
    }
   },
   {
-   "id": "inv-346",
+   "id": "inv-351",
    "type": "story",
    "position": {
-    "x": 103800,
+    "x": 105300,
     "y": 0
    },
    "data": {
@@ -12005,14 +12145,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "catgrass_home",
     "segment": "seg097"
    }
   },
   {
-   "id": "inv-347",
+   "id": "inv-352",
    "type": "story",
    "position": {
-    "x": 104100,
+    "x": 105600,
     "y": 0
    },
    "data": {
@@ -12025,10 +12166,10 @@
    }
   },
   {
-   "id": "inv-348",
+   "id": "inv-353",
    "type": "story",
    "position": {
-    "x": 104400,
+    "x": 105900,
     "y": 0
    },
    "data": {
@@ -12049,10 +12190,10 @@
    }
   },
   {
-   "id": "inv-349",
+   "id": "inv-354",
    "type": "story",
    "position": {
-    "x": 104700,
+    "x": 106200,
     "y": 0
    },
    "data": {
@@ -12063,10 +12204,10 @@
    }
   },
   {
-   "id": "inv-350",
+   "id": "inv-355",
    "type": "story",
    "position": {
-    "x": 105000,
+    "x": 106500,
     "y": 0
    },
    "data": {
@@ -12079,10 +12220,10 @@
    }
   },
   {
-   "id": "inv-351",
+   "id": "inv-356",
    "type": "story",
    "position": {
-    "x": 105300,
+    "x": 106800,
     "y": 0
    },
    "data": {
@@ -12134,14 +12275,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg098"
    }
   },
   {
-   "id": "inv-352",
+   "id": "inv-357",
    "type": "story",
    "position": {
-    "x": 105600,
+    "x": 107100,
     "y": 0
    },
    "data": {
@@ -12154,10 +12296,10 @@
    }
   },
   {
-   "id": "inv-353",
+   "id": "inv-358",
    "type": "story",
    "position": {
-    "x": 105900,
+    "x": 107400,
     "y": 0
    },
    "data": {
@@ -12251,6 +12393,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg098",
     "variableOps": [
      {
@@ -12263,10 +12406,10 @@
    }
   },
   {
-   "id": "inv-354",
+   "id": "inv-359",
    "type": "story",
    "position": {
-    "x": 106200,
+    "x": 107700,
     "y": 0
    },
    "data": {
@@ -12279,10 +12422,10 @@
    }
   },
   {
-   "id": "inv-355",
+   "id": "inv-360",
    "type": "story",
    "position": {
-    "x": 106500,
+    "x": 108000,
     "y": 0
    },
    "data": {
@@ -12376,14 +12519,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg098"
    }
   },
   {
-   "id": "inv-356",
+   "id": "inv-361",
    "type": "story",
    "position": {
-    "x": 106800,
+    "x": 108300,
     "y": 0
    },
    "data": {
@@ -12410,10 +12554,10 @@
    }
   },
   {
-   "id": "inv-357",
+   "id": "inv-362",
    "type": "story",
    "position": {
-    "x": 107100,
+    "x": 108600,
     "y": 0
    },
    "data": {
@@ -12426,10 +12570,10 @@
    }
   },
   {
-   "id": "inv-358",
+   "id": "inv-363",
    "type": "story",
    "position": {
-    "x": 107400,
+    "x": 108900,
     "y": 0
    },
    "data": {
@@ -12440,10 +12584,10 @@
    }
   },
   {
-   "id": "inv-359",
+   "id": "inv-364",
    "type": "story",
    "position": {
-    "x": 107700,
+    "x": 109200,
     "y": 0
    },
    "data": {
@@ -12456,10 +12600,10 @@
    }
   },
   {
-   "id": "inv-360",
+   "id": "inv-365",
    "type": "story",
    "position": {
-    "x": 108000,
+    "x": 109500,
     "y": 0
    },
    "data": {
@@ -12655,6 +12799,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "tower14",
     "segment": "seg099",
     "variableOps": [
      {
@@ -12667,10 +12812,10 @@
    }
   },
   {
-   "id": "inv-361",
+   "id": "inv-366",
    "type": "story",
    "position": {
-    "x": 108300,
+    "x": 109800,
     "y": 0
    },
    "data": {
@@ -12686,10 +12831,10 @@
    }
   },
   {
-   "id": "inv-362",
+   "id": "inv-367",
    "type": "story",
    "position": {
-    "x": 108600,
+    "x": 110100,
     "y": 0
    },
    "data": {
@@ -12701,10 +12846,10 @@
    }
   },
   {
-   "id": "inv-363",
+   "id": "inv-368",
    "type": "story",
    "position": {
-    "x": 108900,
+    "x": 110400,
     "y": 0
    },
    "data": {
@@ -12749,10 +12894,10 @@
    }
   },
   {
-   "id": "inv-364",
+   "id": "inv-369",
    "type": "story",
    "position": {
-    "x": 109200,
+    "x": 110700,
     "y": 0
    },
    "data": {
@@ -12772,10 +12917,10 @@
    }
   },
   {
-   "id": "inv-365",
+   "id": "inv-370",
    "type": "story",
    "position": {
-    "x": 109500,
+    "x": 111000,
     "y": 0
    },
    "data": {
@@ -12788,10 +12933,10 @@
    }
   },
   {
-   "id": "inv-366",
+   "id": "inv-371",
    "type": "story",
    "position": {
-    "x": 109800,
+    "x": 111300,
     "y": 0
    },
    "data": {
@@ -12957,6 +13102,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "tower14",
     "segment": "seg099",
     "variableOps": [
      {
@@ -12969,10 +13115,10 @@
    }
   },
   {
-   "id": "inv-367",
+   "id": "inv-372",
    "type": "story",
    "position": {
-    "x": 110100,
+    "x": 111600,
     "y": 0
    },
    "data": {
@@ -13005,10 +13151,10 @@
    }
   },
   {
-   "id": "inv-368",
+   "id": "inv-373",
    "type": "story",
    "position": {
-    "x": 110400,
+    "x": 111900,
     "y": 0
    },
    "data": {
@@ -13021,10 +13167,10 @@
    }
   },
   {
-   "id": "inv-369",
+   "id": "inv-374",
    "type": "story",
    "position": {
-    "x": 110700,
+    "x": 112200,
     "y": 0
    },
    "data": {
@@ -13035,10 +13181,10 @@
    }
   },
   {
-   "id": "inv-370",
+   "id": "inv-375",
    "type": "story",
    "position": {
-    "x": 111000,
+    "x": 112500,
     "y": 0
    },
    "data": {
@@ -13051,10 +13197,10 @@
    }
   },
   {
-   "id": "inv-371",
+   "id": "inv-376",
    "type": "story",
    "position": {
-    "x": 111300,
+    "x": 112800,
     "y": 0
    },
    "data": {
@@ -13075,86 +13221,6 @@
    }
   },
   {
-   "id": "inv-372",
-   "type": "story",
-   "position": {
-    "x": 111600,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "那一行上面劃了三道。第一道是",
-    "text": "那一行上面劃了三道。第一道是直的，後面兩道從左下往右上，收筆的地方把紙戳破了一點。\n紙的背面凸起來。往後數三頁還摸得到。\n他的拇指從那一行上面壓過去，然後往後翻。\n前面那幾十頁，劃掉的比留下來的多。\n後半本是他自己畫的表，一格一個人。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
-    "segment": "seg100"
-   }
-  },
-  {
-   "id": "inv-373",
-   "type": "story",
-   "position": {
-    "x": 111900,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：管理員：很高。西裝。",
-    "text": "管理員：很高。西裝。帽子我沒印象。他都走樓梯。\n諾亞：金色的帽子。短靴擦得很亮。我們點過頭很多次了。\n便利商店店員：他買過東西嗎……我不確定他有沒有進來過。\n材料行老闆：有一個穿西裝的來問過真空管。是不是他我不知道。\n斑比：她有提過一個室友。我沒問。客戶的事我不問。\n貓草：她講過「我室友」。就這樣。從來沒露過臉。\n保全：監視器上常常有一個人站在對面。我沒下去問過。\n0x：不回答。",
-    "speaker": "玩家",
-    "sceneCode": "roof",
-    "segment": "seg100"
-   }
-  },
-  {
-   "id": "inv-374",
-   "type": "story",
-   "position": {
-    "x": 112200,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "再往後面翻。\n有一頁是空的。",
-    "text": "再往後面翻。\n有一頁是空的。整本只有這一頁沒有寫滿。\n上面只有一行，寫在最上面那一條線上。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
-    "segment": "seg100"
-   }
-  },
-  {
-   "id": "inv-375",
-   "type": "story",
-   "position": {
-    "x": 112500,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：我答應過他。",
-    "text": "我答應過他。",
-    "speaker": "玩家",
-    "sceneCode": "roof",
-    "segment": "seg100"
-   }
-  },
-  {
-   "id": "inv-376",
-   "type": "story",
-   "position": {
-    "x": 112800,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "倒數第三頁。他自己的字，寫得",
-    "text": "倒數第三頁。他自己的字，寫得比平常草。\n只有一行。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
-    "segment": "seg100"
-   }
-  },
-  {
    "id": "inv-377",
    "type": "story",
    "position": {
@@ -13163,8 +13229,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "早上下樓的時候看一下信箱那邊",
-    "text": "早上下樓的時候看一下信箱那邊",
+    "title": "那一行上面劃了三道。第一道是",
+    "text": "那一行上面劃了三道。第一道是直的，後面兩道從左下往右上，收筆的地方把紙戳破了一點。\n紙的背面凸起來。往後數三頁還摸得到。\n他的拇指從那一行上面壓過去，然後往後翻。\n前面那幾十頁，劃掉的比留下來的多。\n後半本是他自己畫的表，一格一個人。",
     "speaker": "旁白",
     "sceneCode": "roof",
     "segment": "seg100"
@@ -13179,8 +13245,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：這是我的字。\n我不記",
-    "text": "這是我的字。\n我不記得我什麼時候寫的。",
+    "title": "筆記：管理員：很高。西裝。",
+    "text": "管理員：很高。西裝。帽子我沒印象。他都走樓梯。\n諾亞：金色的帽子。短靴擦得很亮。我們點過頭很多次了。\n便利商店店員：他買過東西嗎……我不確定他有沒有進來過。\n材料行老闆：有一個穿西裝的來問過真空管。是不是他我不知道。\n斑比：她有提過一個室友。我沒問。客戶的事我不問。\n貓草：她講過「我室友」。就這樣。從來沒露過臉。\n保全：監視器上常常有一個人站在對面。我沒下去問過。\n0x：不回答。",
     "speaker": "玩家",
     "sceneCode": "roof",
     "segment": "seg100"
@@ -13195,8 +13261,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "他往回翻了兩頁，找那一天的日",
-    "text": "他往回翻了兩頁，找那一天的日期。第十一天他寫到四點。\n他翻到最後一頁。\n七條橫線是他自己畫的，用尺量過，間距一樣。\n前面六條上面有字。",
+    "title": "再往後面翻。\n有一頁是空的。",
+    "text": "再往後面翻。\n有一頁是空的。整本只有這一頁沒有寫滿。\n上面只有一行，寫在最上面那一條線上。",
     "speaker": "旁白",
     "sceneCode": "roof",
     "segment": "seg100"
@@ -13211,9 +13277,9 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "第一頁。六個 ID，旁邊是她",
-    "text": "第一頁。六個 ID，旁邊是她自己填的字。\n{{page1_text}}",
-    "speaker": "旁白",
+    "title": "筆記：我答應過他。",
+    "text": "我答應過他。",
+    "speaker": "玩家",
     "sceneCode": "roof",
     "segment": "seg100"
    }
@@ -13227,9 +13293,9 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：@CatGrass_",
-    "text": "@CatGrass_80。深夜那個。等級八十，他說那是看時數。\n@Tower_Manager。三包喉糖，他說兩天。他說那不是機密。\n@Null_0x99。兩分鐘。她記得我來過幾次，櫃檯不記得。\n@Bambi_Draft3。第四行是她自己。她早就知道，她沒有問過為什麼。\n@Radio_Noah。我問過他。他不知道。\n@考完就刪。帳號兩年前刪掉的，沒有回來過。看 ID，他那年剛考完，現在應該二十歲上下。\n猜的：他沒有走遠。刪帳號的人不會搬家。這一條我查不下去了。",
-    "speaker": "玩家",
+    "title": "倒數第三頁。他自己的字，寫得",
+    "text": "倒數第三頁。他自己的字，寫得比平常草。\n只有一行。",
+    "speaker": "旁白",
     "sceneCode": "roof",
     "segment": "seg100"
    }
@@ -13243,8 +13309,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "第七行。\n他把筆放上去。\n筆",
-    "text": "第七行。\n他把筆放上去。\n筆尖沒有碰到紙。\n樓下的鐵門響了一聲。\n他寫了一行。",
+    "title": "早上下樓的時候看一下信箱那邊",
+    "text": "早上下樓的時候看一下信箱那邊",
     "speaker": "旁白",
     "sceneCode": "roof",
     "segment": "seg100"
@@ -13259,8 +13325,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：還有一個。我沒有問到",
-    "text": "還有一個。我沒有問到名字。",
+    "title": "筆記：這是我的字。\n我不記",
+    "text": "這是我的字。\n我不記得我什麼時候寫的。",
     "speaker": "玩家",
     "sceneCode": "roof",
     "segment": "seg100"
@@ -13271,6 +13337,86 @@
    "type": "story",
    "position": {
     "x": 115200,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "他往回翻了兩頁，找那一天的日",
+    "text": "他往回翻了兩頁，找那一天的日期。第十一天他寫到四點。\n他翻到最後一頁。\n七條橫線是他自己畫的，用尺量過，間距一樣。\n前面六條上面有字。",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg100"
+   }
+  },
+  {
+   "id": "inv-385",
+   "type": "story",
+   "position": {
+    "x": 115500,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "第一頁。六個 ID，旁邊是她",
+    "text": "第一頁。六個 ID，旁邊是她自己填的字。\n{{page1_text}}",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg100"
+   }
+  },
+  {
+   "id": "inv-386",
+   "type": "story",
+   "position": {
+    "x": 115800,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：@CatGrass_",
+    "text": "@CatGrass_80。深夜那個。等級八十，他說那是看時數。\n@Tower_Manager。三包喉糖，他說兩天。他說那不是機密。\n@Null_0x99。兩分鐘。她記得我來過幾次，櫃檯不記得。\n@Bambi_Draft3。第四行是她自己。她早就知道，她沒有問過為什麼。\n@Radio_Noah。我問過他。他不知道。\n@考完就刪。帳號兩年前刪掉的，沒有回來過。看 ID，他那年剛考完，現在應該二十歲上下。\n猜的：他沒有走遠。刪帳號的人不會搬家。這一條我查不下去了。",
+    "speaker": "玩家",
+    "sceneCode": "roof",
+    "segment": "seg100"
+   }
+  },
+  {
+   "id": "inv-387",
+   "type": "story",
+   "position": {
+    "x": 116100,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "第七行。\n他把筆放上去。\n筆",
+    "text": "第七行。\n他把筆放上去。\n筆尖沒有碰到紙。\n樓下的鐵門響了一聲。\n他寫了一行。",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg100"
+   }
+  },
+  {
+   "id": "inv-388",
+   "type": "story",
+   "position": {
+    "x": 116400,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：還有一個。我沒有問到",
+    "text": "還有一個。我沒有問到名字。",
+    "speaker": "玩家",
+    "sceneCode": "roof",
+    "segment": "seg100"
+   }
+  },
+  {
+   "id": "inv-389",
+   "type": "story",
+   "position": {
+    "x": 116700,
     "y": 0
    },
    "data": {
@@ -13292,14 +13438,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg100"
    }
   },
   {
-   "id": "inv-385",
+   "id": "inv-390",
    "type": "story",
    "position": {
-    "x": 115500,
+    "x": 117000,
     "y": 0
    },
    "data": {
@@ -13320,10 +13467,10 @@
    }
   },
   {
-   "id": "inv-386",
+   "id": "inv-391",
    "type": "story",
    "position": {
-    "x": 115800,
+    "x": 117300,
     "y": 0
    },
    "data": {
@@ -13336,10 +13483,10 @@
    }
   },
   {
-   "id": "inv-387",
+   "id": "inv-392",
    "type": "story",
    "position": {
-    "x": 116100,
+    "x": 117600,
     "y": 0
    },
    "data": {
@@ -13352,10 +13499,10 @@
    }
   },
   {
-   "id": "inv-388",
+   "id": "inv-393",
    "type": "story",
    "position": {
-    "x": 116400,
+    "x": 117900,
     "y": 0
    },
    "data": {
@@ -13366,10 +13513,10 @@
    }
   },
   {
-   "id": "inv-389",
+   "id": "inv-394",
    "type": "story",
    "position": {
-    "x": 116700,
+    "x": 118200,
     "y": 0
    },
    "data": {
@@ -13396,10 +13543,10 @@
    }
   },
   {
-   "id": "inv-390",
+   "id": "inv-395",
    "type": "story",
    "position": {
-    "x": 117000,
+    "x": 118500,
     "y": 0
    },
    "data": {
@@ -13426,10 +13573,10 @@
    }
   },
   {
-   "id": "inv-391",
+   "id": "inv-396",
    "type": "story",
    "position": {
-    "x": 117300,
+    "x": 118800,
     "y": 0
    },
    "data": {
@@ -13440,10 +13587,10 @@
    }
   },
   {
-   "id": "inv-392",
+   "id": "inv-397",
    "type": "story",
    "position": {
-    "x": 117600,
+    "x": 119100,
     "y": 0
    },
    "data": {
@@ -13470,10 +13617,10 @@
    }
   },
   {
-   "id": "inv-393",
+   "id": "inv-398",
    "type": "story",
    "position": {
-    "x": 117900,
+    "x": 119400,
     "y": 0
    },
    "data": {
@@ -13484,10 +13631,10 @@
    }
   },
   {
-   "id": "inv-394",
+   "id": "inv-399",
    "type": "story",
    "position": {
-    "x": 118200,
+    "x": 119700,
     "y": 0
    },
    "data": {
@@ -13635,10 +13782,10 @@
    }
   },
   {
-   "id": "inv-395",
+   "id": "inv-400",
    "type": "story",
    "position": {
-    "x": 118500,
+    "x": 120000,
     "y": 0
    },
    "data": {
@@ -13658,10 +13805,10 @@
    }
   },
   {
-   "id": "inv-396",
+   "id": "inv-401",
    "type": "story",
    "position": {
-    "x": 118800,
+    "x": 120300,
     "y": 0
    },
    "data": {
@@ -13672,10 +13819,10 @@
    }
   },
   {
-   "id": "inv-397",
+   "id": "inv-402",
    "type": "story",
    "position": {
-    "x": 119100,
+    "x": 120600,
     "y": 0
    },
    "data": {
@@ -13701,10 +13848,10 @@
    }
   },
   {
-   "id": "inv-398",
+   "id": "inv-403",
    "type": "story",
    "position": {
-    "x": 119400,
+    "x": 120900,
     "y": 0
    },
    "data": {
@@ -13724,10 +13871,10 @@
    }
   },
   {
-   "id": "inv-399",
+   "id": "inv-404",
    "type": "story",
    "position": {
-    "x": 119700,
+    "x": 121200,
     "y": 0
    },
    "data": {
@@ -13738,10 +13885,10 @@
    }
   },
   {
-   "id": "inv-400",
+   "id": "inv-405",
    "type": "story",
    "position": {
-    "x": 120000,
+    "x": 121500,
     "y": 0
    },
    "data": {
@@ -13780,10 +13927,10 @@
    }
   },
   {
-   "id": "inv-401",
+   "id": "inv-406",
    "type": "story",
    "position": {
-    "x": 120300,
+    "x": 121800,
     "y": 0
    },
    "data": {
@@ -13796,10 +13943,10 @@
    }
   },
   {
-   "id": "inv-402",
+   "id": "inv-407",
    "type": "story",
    "position": {
-    "x": 120600,
+    "x": 122100,
     "y": 0
    },
    "data": {
@@ -13812,10 +13959,10 @@
    }
   },
   {
-   "id": "inv-403",
+   "id": "inv-408",
    "type": "story",
    "position": {
-    "x": 120900,
+    "x": 122400,
     "y": 0
    },
    "data": {
@@ -13903,14 +14050,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg105"
    }
   },
   {
-   "id": "inv-404",
+   "id": "inv-409",
    "type": "story",
    "position": {
-    "x": 121200,
+    "x": 122700,
     "y": 0
    },
    "data": {
@@ -13923,10 +14071,10 @@
    }
   },
   {
-   "id": "inv-405",
+   "id": "inv-410",
    "type": "story",
    "position": {
-    "x": 121500,
+    "x": 123000,
     "y": 0
    },
    "data": {
@@ -14014,6 +14162,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg105",
     "variableOps": [
      {
@@ -14026,10 +14175,10 @@
    }
   },
   {
-   "id": "inv-406",
+   "id": "inv-411",
    "type": "story",
    "position": {
-    "x": 121800,
+    "x": 123300,
     "y": 0
    },
    "data": {
@@ -14042,10 +14191,10 @@
    }
   },
   {
-   "id": "inv-407",
+   "id": "inv-412",
    "type": "story",
    "position": {
-    "x": 122100,
+    "x": 123600,
     "y": 0
    },
    "data": {
@@ -14109,6 +14258,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg105",
     "variableOps": [
      {
@@ -14121,10 +14271,10 @@
    }
   },
   {
-   "id": "inv-408",
+   "id": "inv-413",
    "type": "story",
    "position": {
-    "x": 122400,
+    "x": 123900,
     "y": 0
    },
    "data": {
@@ -14137,10 +14287,10 @@
    }
   },
   {
-   "id": "inv-409",
+   "id": "inv-414",
    "type": "story",
    "position": {
-    "x": 122700,
+    "x": 124200,
     "y": 0
    },
    "data": {
@@ -14151,10 +14301,10 @@
    }
   },
   {
-   "id": "inv-410",
+   "id": "inv-415",
    "type": "story",
    "position": {
-    "x": 123000,
+    "x": 124500,
     "y": 0
    },
    "data": {
@@ -14167,10 +14317,10 @@
    }
   },
   {
-   "id": "inv-411",
+   "id": "inv-416",
    "type": "story",
    "position": {
-    "x": 123300,
+    "x": 124800,
     "y": 0
    },
    "data": {
@@ -14258,6 +14408,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg106",
     "variableOps": [
      {
@@ -14270,10 +14421,10 @@
    }
   },
   {
-   "id": "inv-412",
+   "id": "inv-417",
    "type": "story",
    "position": {
-    "x": 123600,
+    "x": 125100,
     "y": 0
    },
    "data": {
@@ -14331,6 +14482,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg106",
     "variableOps": [
      {
@@ -14343,10 +14495,10 @@
    }
   },
   {
-   "id": "inv-413",
+   "id": "inv-418",
    "type": "story",
    "position": {
-    "x": 123900,
+    "x": 125400,
     "y": 0
    },
    "data": {
@@ -14359,10 +14511,10 @@
    }
   },
   {
-   "id": "inv-414",
+   "id": "inv-419",
    "type": "story",
    "position": {
-    "x": 124200,
+    "x": 125700,
     "y": 0
    },
    "data": {
@@ -14420,6 +14572,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg106",
     "variableOps": [
      {
@@ -14444,10 +14597,10 @@
    }
   },
   {
-   "id": "inv-415",
+   "id": "inv-420",
    "type": "story",
    "position": {
-    "x": 124500,
+    "x": 126000,
     "y": 0
    },
    "data": {
@@ -14460,10 +14613,10 @@
    }
   },
   {
-   "id": "inv-416",
+   "id": "inv-421",
    "type": "story",
    "position": {
-    "x": 124800,
+    "x": 126300,
     "y": 0
    },
    "data": {
@@ -14497,14 +14650,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "roof",
     "segment": "seg106"
    }
   },
   {
-   "id": "inv-417",
+   "id": "inv-422",
    "type": "story",
    "position": {
-    "x": 125100,
+    "x": 126600,
     "y": 0
    },
    "data": {
@@ -14517,10 +14671,10 @@
    }
   },
   {
-   "id": "inv-418",
+   "id": "inv-423",
    "type": "story",
    "position": {
-    "x": 125400,
+    "x": 126900,
     "y": 0
    },
    "data": {
@@ -14531,10 +14685,10 @@
    }
   },
   {
-   "id": "inv-419",
+   "id": "inv-424",
    "type": "story",
    "position": {
-    "x": 125700,
+    "x": 127200,
     "y": 0
    },
    "data": {
@@ -14547,10 +14701,10 @@
    }
   },
   {
-   "id": "inv-420",
+   "id": "inv-425",
    "type": "story",
    "position": {
-    "x": 126000,
+    "x": 127500,
     "y": 0
    },
    "data": {
@@ -14563,10 +14717,10 @@
    }
   },
   {
-   "id": "inv-421",
+   "id": "inv-426",
    "type": "story",
    "position": {
-    "x": 126300,
+    "x": 127800,
     "y": 0
    },
    "data": {
@@ -14579,10 +14733,10 @@
    }
   },
   {
-   "id": "inv-422",
+   "id": "inv-427",
    "type": "story",
    "position": {
-    "x": 126600,
+    "x": 128100,
     "y": 0
    },
    "data": {
@@ -14640,6 +14794,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "street",
     "segment": "seg107",
     "variableOps": [
      {
@@ -14652,10 +14807,10 @@
    }
   },
   {
-   "id": "inv-423",
+   "id": "inv-428",
    "type": "story",
    "position": {
-    "x": 126900,
+    "x": 128400,
     "y": 0
    },
    "data": {
@@ -14668,10 +14823,10 @@
    }
   },
   {
-   "id": "inv-424",
+   "id": "inv-429",
    "type": "story",
    "position": {
-    "x": 127200,
+    "x": 128700,
     "y": 0
    },
    "data": {
@@ -14684,10 +14839,10 @@
    }
   },
   {
-   "id": "inv-425",
+   "id": "inv-430",
    "type": "story",
    "position": {
-    "x": 127500,
+    "x": 129000,
     "y": 0
    },
    "data": {
@@ -14698,10 +14853,10 @@
    }
   },
   {
-   "id": "inv-426",
+   "id": "inv-431",
    "type": "story",
    "position": {
-    "x": 127800,
+    "x": 129300,
     "y": 0
    },
    "data": {
@@ -14714,10 +14869,10 @@
    }
   },
   {
-   "id": "inv-427",
+   "id": "inv-432",
    "type": "story",
    "position": {
-    "x": 128100,
+    "x": 129600,
     "y": 0
    },
    "data": {
@@ -14853,14 +15008,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg108"
    }
   },
   {
-   "id": "inv-428",
+   "id": "inv-433",
    "type": "story",
    "position": {
-    "x": 128400,
+    "x": 129900,
     "y": 0
    },
    "data": {
@@ -14873,10 +15029,10 @@
    }
   },
   {
-   "id": "inv-429",
+   "id": "inv-434",
    "type": "story",
    "position": {
-    "x": 128700,
+    "x": 130200,
     "y": 0
    },
    "data": {
@@ -14889,10 +15045,10 @@
    }
   },
   {
-   "id": "inv-430",
+   "id": "inv-435",
    "type": "story",
    "position": {
-    "x": 129000,
+    "x": 130500,
     "y": 0
    },
    "data": {
@@ -14903,10 +15059,10 @@
    }
   },
   {
-   "id": "inv-431",
+   "id": "inv-436",
    "type": "story",
    "position": {
-    "x": 129300,
+    "x": 130800,
     "y": 0
    },
    "data": {
@@ -14919,10 +15075,10 @@
    }
   },
   {
-   "id": "inv-432",
+   "id": "inv-437",
    "type": "story",
    "position": {
-    "x": 129600,
+    "x": 131100,
     "y": 0
    },
    "data": {
@@ -14935,10 +15091,10 @@
    }
   },
   {
-   "id": "inv-433",
+   "id": "inv-438",
    "type": "story",
    "position": {
-    "x": 129900,
+    "x": 131400,
     "y": 0
    },
    "data": {
@@ -14951,10 +15107,10 @@
    }
   },
   {
-   "id": "inv-434",
+   "id": "inv-439",
    "type": "story",
    "position": {
-    "x": 130200,
+    "x": 131700,
     "y": 0
    },
    "data": {
@@ -14967,10 +15123,10 @@
    }
   },
   {
-   "id": "inv-435",
+   "id": "inv-440",
    "type": "story",
    "position": {
-    "x": 130500,
+    "x": 132000,
     "y": 0
    },
    "data": {
@@ -14991,10 +15147,10 @@
    }
   },
   {
-   "id": "inv-436",
+   "id": "inv-441",
    "type": "story",
    "position": {
-    "x": 130800,
+    "x": 132300,
     "y": 0
    },
    "data": {
@@ -15005,10 +15161,10 @@
    }
   },
   {
-   "id": "inv-437",
+   "id": "inv-442",
    "type": "story",
    "position": {
-    "x": 131100,
+    "x": 132600,
     "y": 0
    },
    "data": {
@@ -15021,10 +15177,10 @@
    }
   },
   {
-   "id": "inv-438",
+   "id": "inv-443",
    "type": "story",
    "position": {
-    "x": 131400,
+    "x": 132900,
     "y": 0
    },
    "data": {
@@ -15094,14 +15250,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "street",
     "segment": "seg110"
    }
   },
   {
-   "id": "inv-439",
+   "id": "inv-444",
    "type": "story",
    "position": {
-    "x": 131700,
+    "x": 133200,
     "y": 0
    },
    "data": {
@@ -15114,10 +15271,10 @@
    }
   },
   {
-   "id": "inv-440",
+   "id": "inv-445",
    "type": "story",
    "position": {
-    "x": 132000,
+    "x": 133500,
     "y": 0
    },
    "data": {
@@ -15130,10 +15287,10 @@
    }
   },
   {
-   "id": "inv-441",
+   "id": "inv-446",
    "type": "story",
    "position": {
-    "x": 132300,
+    "x": 133800,
     "y": 0
    },
    "data": {
@@ -15144,10 +15301,10 @@
    }
   },
   {
-   "id": "inv-442",
+   "id": "inv-447",
    "type": "story",
    "position": {
-    "x": 132600,
+    "x": 134100,
     "y": 0
    },
    "data": {
@@ -15160,10 +15317,10 @@
    }
   },
   {
-   "id": "inv-443",
+   "id": "inv-448",
    "type": "story",
    "position": {
-    "x": 132900,
+    "x": 134400,
     "y": 0
    },
    "data": {
@@ -15176,10 +15333,10 @@
    }
   },
   {
-   "id": "inv-444",
+   "id": "inv-449",
    "type": "story",
    "position": {
-    "x": 133200,
+    "x": 134700,
     "y": 0
    },
    "data": {
@@ -15192,10 +15349,10 @@
    }
   },
   {
-   "id": "inv-445",
+   "id": "inv-450",
    "type": "story",
    "position": {
-    "x": 133500,
+    "x": 135000,
     "y": 0
    },
    "data": {
@@ -15241,6 +15398,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "street",
     "segment": "seg111",
     "variableOps": [
      {
@@ -15253,10 +15411,10 @@
    }
   },
   {
-   "id": "inv-446",
+   "id": "inv-451",
    "type": "story",
    "position": {
-    "x": 133800,
+    "x": 135300,
     "y": 0
    },
    "data": {
@@ -15269,10 +15427,10 @@
    }
   },
   {
-   "id": "inv-447",
+   "id": "inv-452",
    "type": "story",
    "position": {
-    "x": 134100,
+    "x": 135600,
     "y": 0
    },
    "data": {
@@ -15283,10 +15441,10 @@
    }
   },
   {
-   "id": "inv-448",
+   "id": "inv-453",
    "type": "story",
    "position": {
-    "x": 134400,
+    "x": 135900,
     "y": 0
    },
    "data": {
@@ -15299,10 +15457,10 @@
    }
   },
   {
-   "id": "inv-449",
+   "id": "inv-454",
    "type": "story",
    "position": {
-    "x": 134700,
+    "x": 136200,
     "y": 0
    },
    "data": {
@@ -15378,14 +15536,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "busstop",
     "segment": "seg112"
    }
   },
   {
-   "id": "inv-450",
+   "id": "inv-455",
    "type": "story",
    "position": {
-    "x": 135000,
+    "x": 136500,
     "y": 0
    },
    "data": {
@@ -15398,10 +15557,10 @@
    }
   },
   {
-   "id": "inv-451",
+   "id": "inv-456",
    "type": "story",
    "position": {
-    "x": 135300,
+    "x": 136800,
     "y": 0
    },
    "data": {
@@ -15414,10 +15573,10 @@
    }
   },
   {
-   "id": "inv-452",
+   "id": "inv-457",
    "type": "story",
    "position": {
-    "x": 135600,
+    "x": 137100,
     "y": 0
    },
    "data": {
@@ -15428,10 +15587,10 @@
    }
   },
   {
-   "id": "inv-453",
+   "id": "inv-458",
    "type": "story",
    "position": {
-    "x": 135900,
+    "x": 137400,
     "y": 0
    },
    "data": {
@@ -15444,10 +15603,10 @@
    }
   },
   {
-   "id": "inv-454",
+   "id": "inv-459",
    "type": "story",
    "position": {
-    "x": 136200,
+    "x": 137700,
     "y": 0
    },
    "data": {
@@ -15458,10 +15617,10 @@
    }
   },
   {
-   "id": "inv-455",
+   "id": "inv-460",
    "type": "story",
    "position": {
-    "x": 136500,
+    "x": 138000,
     "y": 0
    },
    "data": {
@@ -15474,10 +15633,10 @@
    }
   },
   {
-   "id": "inv-456",
+   "id": "inv-461",
    "type": "story",
    "position": {
-    "x": 136800,
+    "x": 138300,
     "y": 0
    },
    "data": {
@@ -15547,14 +15706,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "busstop",
     "segment": "seg114"
    }
   },
   {
-   "id": "inv-457",
+   "id": "inv-462",
    "type": "story",
    "position": {
-    "x": 137100,
+    "x": 138600,
     "y": 0
    },
    "data": {
@@ -15567,10 +15727,10 @@
    }
   },
   {
-   "id": "inv-458",
+   "id": "inv-463",
    "type": "story",
    "position": {
-    "x": 137400,
+    "x": 138900,
     "y": 0
    },
    "data": {
@@ -15583,10 +15743,10 @@
    }
   },
   {
-   "id": "inv-459",
+   "id": "inv-464",
    "type": "story",
    "position": {
-    "x": 137700,
+    "x": 139200,
     "y": 0
    },
    "data": {
@@ -15597,10 +15757,10 @@
    }
   },
   {
-   "id": "inv-460",
+   "id": "inv-465",
    "type": "story",
    "position": {
-    "x": 138000,
+    "x": 139500,
     "y": 0
    },
    "data": {
@@ -15613,10 +15773,10 @@
    }
   },
   {
-   "id": "inv-461",
+   "id": "inv-466",
    "type": "story",
    "position": {
-    "x": 138300,
+    "x": 139800,
     "y": 0
    },
    "data": {
@@ -15650,14 +15810,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "metro",
     "segment": "seg115"
    }
   },
   {
-   "id": "inv-462",
+   "id": "inv-467",
    "type": "story",
    "position": {
-    "x": 138600,
+    "x": 140100,
     "y": 0
    },
    "data": {
@@ -15703,14 +15864,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "metro",
     "segment": "seg115"
    }
   },
   {
-   "id": "inv-463",
+   "id": "inv-468",
    "type": "story",
    "position": {
-    "x": 138900,
+    "x": 140400,
     "y": 0
    },
    "data": {
@@ -15723,10 +15885,10 @@
    }
   },
   {
-   "id": "inv-464",
+   "id": "inv-469",
    "type": "story",
    "position": {
-    "x": 139200,
+    "x": 140700,
     "y": 0
    },
    "data": {
@@ -15737,10 +15899,10 @@
    }
   },
   {
-   "id": "inv-465",
+   "id": "inv-470",
    "type": "story",
    "position": {
-    "x": 139500,
+    "x": 141000,
     "y": 0
    },
    "data": {
@@ -15753,10 +15915,10 @@
    }
   },
   {
-   "id": "inv-466",
+   "id": "inv-471",
    "type": "story",
    "position": {
-    "x": 139800,
+    "x": 141300,
     "y": 0
    },
    "data": {
@@ -15868,14 +16030,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "metro",
     "segment": "seg116"
    }
   },
   {
-   "id": "inv-467",
+   "id": "inv-472",
    "type": "story",
    "position": {
-    "x": 140100,
+    "x": 141600,
     "y": 0
    },
    "data": {
@@ -15888,10 +16051,10 @@
    }
   },
   {
-   "id": "inv-468",
+   "id": "inv-473",
    "type": "story",
    "position": {
-    "x": 140400,
+    "x": 141900,
     "y": 0
    },
    "data": {
@@ -15904,10 +16067,10 @@
    }
   },
   {
-   "id": "inv-469",
+   "id": "inv-474",
    "type": "story",
    "position": {
-    "x": 140700,
+    "x": 142200,
     "y": 0
    },
    "data": {
@@ -15918,10 +16081,10 @@
    }
   },
   {
-   "id": "inv-470",
+   "id": "inv-475",
    "type": "story",
    "position": {
-    "x": 141000,
+    "x": 142500,
     "y": 0
    },
    "data": {
@@ -15934,10 +16097,10 @@
    }
   },
   {
-   "id": "inv-471",
+   "id": "inv-476",
    "type": "story",
    "position": {
-    "x": 141300,
+    "x": 142800,
     "y": 0
    },
    "data": {
@@ -15950,10 +16113,10 @@
    }
   },
   {
-   "id": "inv-472",
+   "id": "inv-477",
    "type": "story",
    "position": {
-    "x": 141600,
+    "x": 143100,
     "y": 0
    },
    "data": {
@@ -15999,14 +16162,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "metro",
     "segment": "seg117"
    }
   },
   {
-   "id": "inv-473",
+   "id": "inv-478",
    "type": "story",
    "position": {
-    "x": 141900,
+    "x": 143400,
     "y": 0
    },
    "data": {
@@ -16019,10 +16183,10 @@
    }
   },
   {
-   "id": "inv-474",
+   "id": "inv-479",
    "type": "story",
    "position": {
-    "x": 142200,
+    "x": 143700,
     "y": 0
    },
    "data": {
@@ -16035,10 +16199,10 @@
    }
   },
   {
-   "id": "inv-475",
+   "id": "inv-480",
    "type": "story",
    "position": {
-    "x": 142500,
+    "x": 144000,
     "y": 0
    },
    "data": {
@@ -16051,10 +16215,10 @@
    }
   },
   {
-   "id": "inv-476",
+   "id": "inv-481",
    "type": "story",
    "position": {
-    "x": 142800,
+    "x": 144300,
     "y": 0
    },
    "data": {
@@ -16065,10 +16229,10 @@
    }
   },
   {
-   "id": "inv-477",
+   "id": "inv-482",
    "type": "story",
    "position": {
-    "x": 143100,
+    "x": 144600,
     "y": 0
    },
    "data": {
@@ -16081,10 +16245,10 @@
    }
   },
   {
-   "id": "inv-478",
+   "id": "inv-483",
    "type": "story",
    "position": {
-    "x": 143400,
+    "x": 144900,
     "y": 0
    },
    "data": {
@@ -16097,10 +16261,10 @@
    }
   },
   {
-   "id": "inv-479",
+   "id": "inv-484",
    "type": "story",
    "position": {
-    "x": 143700,
+    "x": 145200,
     "y": 0
    },
    "data": {
@@ -16164,14 +16328,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg118"
    }
   },
   {
-   "id": "inv-480",
+   "id": "inv-485",
    "type": "story",
    "position": {
-    "x": 144000,
+    "x": 145500,
     "y": 0
    },
    "data": {
@@ -16184,10 +16349,10 @@
    }
   },
   {
-   "id": "inv-481",
+   "id": "inv-486",
    "type": "story",
    "position": {
-    "x": 144300,
+    "x": 145800,
     "y": 0
    },
    "data": {
@@ -16245,6 +16410,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg118",
     "variableOps": [
      {
@@ -16257,10 +16423,10 @@
    }
   },
   {
-   "id": "inv-482",
+   "id": "inv-487",
    "type": "story",
    "position": {
-    "x": 144600,
+    "x": 146100,
     "y": 0
    },
    "data": {
@@ -16273,10 +16439,10 @@
    }
   },
   {
-   "id": "inv-483",
+   "id": "inv-488",
    "type": "story",
    "position": {
-    "x": 144900,
+    "x": 146400,
     "y": 0
    },
    "data": {
@@ -16287,10 +16453,10 @@
    }
   },
   {
-   "id": "inv-484",
+   "id": "inv-489",
    "type": "story",
    "position": {
-    "x": 145200,
+    "x": 146700,
     "y": 0
    },
    "data": {
@@ -16303,10 +16469,10 @@
    }
   },
   {
-   "id": "inv-485",
+   "id": "inv-490",
    "type": "story",
    "position": {
-    "x": 145500,
+    "x": 147000,
     "y": 0
    },
    "data": {
@@ -16319,10 +16485,10 @@
    }
   },
   {
-   "id": "inv-486",
+   "id": "inv-491",
    "type": "story",
    "position": {
-    "x": 145800,
+    "x": 147300,
     "y": 0
    },
    "data": {
@@ -16374,14 +16540,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg119"
    }
   },
   {
-   "id": "inv-487",
+   "id": "inv-492",
    "type": "story",
    "position": {
-    "x": 146100,
+    "x": 147600,
     "y": 0
    },
    "data": {
@@ -16394,10 +16561,10 @@
    }
   },
   {
-   "id": "inv-488",
+   "id": "inv-493",
    "type": "story",
    "position": {
-    "x": 146400,
+    "x": 147900,
     "y": 0
    },
    "data": {
@@ -16410,10 +16577,10 @@
    }
   },
   {
-   "id": "inv-489",
+   "id": "inv-494",
    "type": "story",
    "position": {
-    "x": 146700,
+    "x": 148200,
     "y": 0
    },
    "data": {
@@ -16424,10 +16591,10 @@
    }
   },
   {
-   "id": "inv-490",
+   "id": "inv-495",
    "type": "story",
    "position": {
-    "x": 147000,
+    "x": 148500,
     "y": 0
    },
    "data": {
@@ -16440,10 +16607,10 @@
    }
   },
   {
-   "id": "inv-491",
+   "id": "inv-496",
    "type": "story",
    "position": {
-    "x": 147300,
+    "x": 148800,
     "y": 0
    },
    "data": {
@@ -16525,6 +16692,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg120",
     "variableOps": [
      {
@@ -16537,10 +16705,10 @@
    }
   },
   {
-   "id": "inv-492",
+   "id": "inv-497",
    "type": "story",
    "position": {
-    "x": 147600,
+    "x": 149100,
     "y": 0
    },
    "data": {
@@ -16553,10 +16721,10 @@
    }
   },
   {
-   "id": "inv-493",
+   "id": "inv-498",
    "type": "story",
    "position": {
-    "x": 147900,
+    "x": 149400,
     "y": 0
    },
    "data": {
@@ -16569,10 +16737,10 @@
    }
   },
   {
-   "id": "inv-494",
+   "id": "inv-499",
    "type": "story",
    "position": {
-    "x": 148200,
+    "x": 149700,
     "y": 0
    },
    "data": {
@@ -16583,10 +16751,10 @@
    }
   },
   {
-   "id": "inv-495",
+   "id": "inv-500",
    "type": "story",
    "position": {
-    "x": 148500,
+    "x": 150000,
     "y": 0
    },
    "data": {
@@ -16604,10 +16772,10 @@
    }
   },
   {
-   "id": "inv-496",
+   "id": "inv-501",
    "type": "story",
    "position": {
-    "x": 148800,
+    "x": 150300,
     "y": 0
    },
    "data": {
@@ -16619,10 +16787,10 @@
    }
   },
   {
-   "id": "inv-497",
+   "id": "inv-502",
    "type": "story",
    "position": {
-    "x": 149100,
+    "x": 150600,
     "y": 0
    },
    "data": {
@@ -16635,10 +16803,10 @@
    }
   },
   {
-   "id": "inv-498",
+   "id": "inv-503",
    "type": "story",
    "position": {
-    "x": 149400,
+    "x": 150900,
     "y": 0
    },
    "data": {
@@ -16651,10 +16819,10 @@
    }
   },
   {
-   "id": "inv-499",
+   "id": "inv-504",
    "type": "story",
    "position": {
-    "x": 149700,
+    "x": 151200,
     "y": 0
    },
    "data": {
@@ -16700,6 +16868,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg122",
     "variableOps": [
      {
@@ -16712,10 +16881,10 @@
    }
   },
   {
-   "id": "inv-500",
+   "id": "inv-505",
    "type": "story",
    "position": {
-    "x": 150000,
+    "x": 151500,
     "y": 0
    },
    "data": {
@@ -16728,10 +16897,10 @@
    }
   },
   {
-   "id": "inv-501",
+   "id": "inv-506",
    "type": "story",
    "position": {
-    "x": 150300,
+    "x": 151800,
     "y": 0
    },
    "data": {
@@ -16777,6 +16946,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg122",
     "variableOps": [
      {
@@ -16789,10 +16959,10 @@
    }
   },
   {
-   "id": "inv-502",
+   "id": "inv-507",
    "type": "story",
    "position": {
-    "x": 150600,
+    "x": 152100,
     "y": 0
    },
    "data": {
@@ -16805,10 +16975,10 @@
    }
   },
   {
-   "id": "inv-503",
+   "id": "inv-508",
    "type": "story",
    "position": {
-    "x": 150900,
+    "x": 152400,
     "y": 0
    },
    "data": {
@@ -16819,10 +16989,10 @@
    }
   },
   {
-   "id": "inv-504",
+   "id": "inv-509",
    "type": "story",
    "position": {
-    "x": 151200,
+    "x": 152700,
     "y": 0
    },
    "data": {
@@ -16835,10 +17005,10 @@
    }
   },
   {
-   "id": "inv-505",
+   "id": "inv-510",
    "type": "story",
    "position": {
-    "x": 151500,
+    "x": 153000,
     "y": 0
    },
    "data": {
@@ -16884,14 +17054,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "street",
     "segment": "seg123"
    }
   },
   {
-   "id": "inv-506",
+   "id": "inv-511",
    "type": "story",
    "position": {
-    "x": 151800,
+    "x": 153300,
     "y": 0
    },
    "data": {
@@ -16904,10 +17075,10 @@
    }
   },
   {
-   "id": "inv-507",
+   "id": "inv-512",
    "type": "story",
    "position": {
-    "x": 152100,
+    "x": 153600,
     "y": 0
    },
    "data": {
@@ -16918,10 +17089,10 @@
    }
   },
   {
-   "id": "inv-508",
+   "id": "inv-513",
    "type": "story",
    "position": {
-    "x": 152400,
+    "x": 153900,
     "y": 0
    },
    "data": {
@@ -16934,10 +17105,10 @@
    }
   },
   {
-   "id": "inv-509",
+   "id": "inv-514",
    "type": "story",
    "position": {
-    "x": 152700,
+    "x": 154200,
     "y": 0
    },
    "data": {
@@ -17019,14 +17190,15 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "lobby",
     "segment": "seg124"
    }
   },
   {
-   "id": "inv-510",
+   "id": "inv-515",
    "type": "story",
    "position": {
-    "x": 153000,
+    "x": 154500,
     "y": 0
    },
    "data": {
@@ -17047,10 +17219,10 @@
    }
   },
   {
-   "id": "inv-511",
+   "id": "inv-516",
    "type": "story",
    "position": {
-    "x": 153300,
+    "x": 154800,
     "y": 0
    },
    "data": {
@@ -17063,10 +17235,10 @@
    }
   },
   {
-   "id": "inv-512",
+   "id": "inv-517",
    "type": "story",
    "position": {
-    "x": 153600,
+    "x": 155100,
     "y": 0
    },
    "data": {
@@ -17077,10 +17249,10 @@
    }
   },
   {
-   "id": "inv-513",
+   "id": "inv-518",
    "type": "story",
    "position": {
-    "x": 153900,
+    "x": 155400,
     "y": 0
    },
    "data": {
@@ -17098,10 +17270,10 @@
    }
   },
   {
-   "id": "inv-514",
+   "id": "inv-519",
    "type": "story",
    "position": {
-    "x": 154200,
+    "x": 155700,
     "y": 0
    },
    "data": {
@@ -17114,10 +17286,10 @@
    }
   },
   {
-   "id": "inv-515",
+   "id": "inv-520",
    "type": "story",
    "position": {
-    "x": 154500,
+    "x": 156000,
     "y": 0
    },
    "data": {
@@ -17130,10 +17302,10 @@
    }
   },
   {
-   "id": "inv-516",
+   "id": "inv-521",
    "type": "story",
    "position": {
-    "x": 154800,
+    "x": 156300,
     "y": 0
    },
    "data": {
@@ -17209,6 +17381,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "store",
     "segment": "seg126",
     "variableOps": [
      {
@@ -17221,10 +17394,10 @@
    }
   },
   {
-   "id": "inv-517",
+   "id": "inv-522",
    "type": "story",
    "position": {
-    "x": 155100,
+    "x": 156600,
     "y": 0
    },
    "data": {
@@ -17245,10 +17418,10 @@
    }
   },
   {
-   "id": "inv-518",
+   "id": "inv-523",
    "type": "story",
    "position": {
-    "x": 155400,
+    "x": 156900,
     "y": 0
    },
    "data": {
@@ -17259,10 +17432,10 @@
    }
   },
   {
-   "id": "inv-519",
+   "id": "inv-524",
    "type": "story",
    "position": {
-    "x": 155700,
+    "x": 157200,
     "y": 0
    },
    "data": {
@@ -17275,10 +17448,10 @@
    }
   },
   {
-   "id": "inv-520",
+   "id": "inv-525",
    "type": "story",
    "position": {
-    "x": 156000,
+    "x": 157500,
     "y": 0
    },
    "data": {
@@ -17306,6 +17479,7 @@
       "emotion": ""
      }
     ],
+    "sceneCode": "studio",
     "segment": "seg127",
     "variableOps": [
      {
@@ -17318,76 +17492,6 @@
    }
   },
   {
-   "id": "inv-521",
-   "type": "story",
-   "position": {
-    "x": 156300,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
-   }
-  },
-  {
-   "id": "inv-522",
-   "type": "story",
-   "position": {
-    "x": 156600,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-523",
-   "type": "story",
-   "position": {
-    "x": 156900,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-524",
-   "type": "story",
-   "position": {
-    "x": 157200,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-525",
-   "type": "story",
-   "position": {
-    "x": 157500,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
    "id": "inv-526",
    "type": "story",
    "position": {
@@ -17395,10 +17499,10 @@
     "y": 0
    },
    "data": {
-    "type": "setVariable",
-    "title": "（roof 第5次起）",
-    "text": "",
-    "variableOps": []
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -17410,7 +17514,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17424,7 +17528,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17438,7 +17542,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17452,7 +17556,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17466,7 +17570,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17480,7 +17584,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17494,7 +17598,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17508,7 +17612,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17522,7 +17626,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17536,7 +17640,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17550,7 +17654,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17564,7 +17668,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17592,7 +17696,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17620,7 +17724,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17634,7 +17738,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17648,7 +17752,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17662,7 +17766,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17676,7 +17780,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17690,7 +17794,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17704,7 +17808,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（store 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -17718,7 +17822,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -17728,6 +17832,76 @@
    "type": "story",
    "position": {
     "x": 165000,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（store 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-551",
+   "type": "story",
+   "position": {
+    "x": 165300,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-552",
+   "type": "story",
+   "position": {
+    "x": 165600,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-553",
+   "type": "story",
+   "position": {
+    "x": 165900,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-554",
+   "type": "story",
+   "position": {
+    "x": 166200,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-555",
+   "type": "story",
+   "position": {
+    "x": 166500,
     "y": 0
    },
    "data": {
@@ -20571,10 +20745,53 @@
    "source": "inv-303",
    "target": "inv-304",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "rec_ok",
+     "op": "eq",
+     "value": true
+    }
+   }
   },
   {
    "id": "e288",
+   "source": "inv-303",
+   "target": "inv-305",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e289",
+   "source": "inv-304",
+   "target": "inv-307",
+   "sourceHandle": "choice-0",
+   "animated": true
+  },
+  {
+   "id": "e290",
+   "source": "inv-307",
+   "target": "inv-308",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e291",
+   "source": "inv-304",
+   "target": "inv-305",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e292",
+   "source": "inv-305",
+   "target": "inv-309",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e293",
    "source": "inv-022",
    "target": "inv-301",
    "sourceHandle": "right",
@@ -20589,23 +20806,23 @@
    }
   },
   {
-   "id": "e289",
-   "source": "inv-305",
-   "target": "inv-306",
+   "id": "e294",
+   "source": "inv-310",
+   "target": "inv-311",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e290",
-   "source": "inv-306",
-   "target": "inv-307",
+   "id": "e295",
+   "source": "inv-311",
+   "target": "inv-312",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e291",
+   "id": "e296",
    "source": "inv-022",
-   "target": "inv-305",
+   "target": "inv-310",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20618,23 +20835,23 @@
    }
   },
   {
-   "id": "e292",
-   "source": "inv-308",
-   "target": "inv-309",
+   "id": "e297",
+   "source": "inv-313",
+   "target": "inv-314",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e293",
-   "source": "inv-309",
-   "target": "inv-310",
+   "id": "e298",
+   "source": "inv-314",
+   "target": "inv-315",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e294",
+   "id": "e299",
    "source": "inv-022",
-   "target": "inv-308",
+   "target": "inv-313",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20647,23 +20864,23 @@
    }
   },
   {
-   "id": "e295",
-   "source": "inv-311",
-   "target": "inv-312",
+   "id": "e300",
+   "source": "inv-316",
+   "target": "inv-317",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e296",
-   "source": "inv-312",
-   "target": "inv-313",
+   "id": "e301",
+   "source": "inv-317",
+   "target": "inv-318",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e297",
+   "id": "e302",
    "source": "inv-022",
-   "target": "inv-311",
+   "target": "inv-316",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20676,16 +20893,16 @@
    }
   },
   {
-   "id": "e298",
-   "source": "inv-314",
-   "target": "inv-315",
+   "id": "e303",
+   "source": "inv-319",
+   "target": "inv-320",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e299",
+   "id": "e304",
    "source": "inv-022",
-   "target": "inv-314",
+   "target": "inv-319",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20698,16 +20915,16 @@
    }
   },
   {
-   "id": "e300",
-   "source": "inv-316",
-   "target": "inv-317",
+   "id": "e305",
+   "source": "inv-321",
+   "target": "inv-322",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e301",
+   "id": "e306",
    "source": "inv-022",
-   "target": "inv-316",
+   "target": "inv-321",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20720,62 +20937,11 @@
    }
   },
   {
-   "id": "e302",
-   "source": "inv-318",
-   "target": "inv-319",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e303",
-   "source": "inv-319",
-   "target": "inv-320",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e304",
-   "source": "inv-320",
-   "target": "inv-321",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e305",
-   "source": "inv-022",
-   "target": "inv-318",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg091"
-    }
-   }
-  },
-  {
-   "id": "e306",
-   "source": "inv-322",
-   "target": "inv-323",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e307",
-   "source": "inv-022",
-   "target": "inv-322",
+   "source": "inv-323",
+   "target": "inv-324",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg092"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e308",
@@ -20794,7 +20960,7 @@
   {
    "id": "e310",
    "source": "inv-022",
-   "target": "inv-324",
+   "target": "inv-323",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20802,7 +20968,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg093"
+     "value": "seg091"
     }
    }
   },
@@ -20815,10 +20981,18 @@
   },
   {
    "id": "e312",
-   "source": "inv-328",
-   "target": "inv-329",
+   "source": "inv-022",
+   "target": "inv-327",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg092"
+    }
+   }
   },
   {
    "id": "e313",
@@ -20829,8 +21003,15 @@
   },
   {
    "id": "e314",
-   "source": "inv-037",
-   "target": "inv-327",
+   "source": "inv-330",
+   "target": "inv-331",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e315",
+   "source": "inv-022",
+   "target": "inv-329",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20838,16 +21019,9 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg094"
+     "value": "seg093"
     }
    }
-  },
-  {
-   "id": "e315",
-   "source": "inv-331",
-   "target": "inv-332",
-   "sourceHandle": "right",
-   "animated": true
   },
   {
    "id": "e316",
@@ -20858,18 +21032,10 @@
   },
   {
    "id": "e317",
-   "source": "inv-037",
-   "target": "inv-331",
+   "source": "inv-333",
+   "target": "inv-334",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg095"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e318",
@@ -20880,10 +21046,18 @@
   },
   {
    "id": "e319",
-   "source": "inv-335",
-   "target": "inv-336",
+   "source": "inv-037",
+   "target": "inv-332",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg094"
+    }
+   }
   },
   {
    "id": "e320",
@@ -20902,7 +21076,7 @@
   {
    "id": "e322",
    "source": "inv-037",
-   "target": "inv-334",
+   "target": "inv-336",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -20910,7 +21084,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg096"
+     "value": "seg095"
     }
    }
   },
@@ -20944,10 +21118,18 @@
   },
   {
    "id": "e327",
-   "source": "inv-343",
-   "target": "inv-344",
+   "source": "inv-037",
+   "target": "inv-339",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg096"
+    }
+   }
   },
   {
    "id": "e328",
@@ -20986,18 +21168,10 @@
   },
   {
    "id": "e333",
-   "source": "inv-022",
-   "target": "inv-339",
+   "source": "inv-349",
+   "target": "inv-350",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg097"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e334",
@@ -21029,10 +21203,18 @@
   },
   {
    "id": "e338",
-   "source": "inv-354",
-   "target": "inv-355",
+   "source": "inv-022",
+   "target": "inv-344",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg097"
+    }
+   }
   },
   {
    "id": "e339",
@@ -21057,18 +21239,10 @@
   },
   {
    "id": "e342",
-   "source": "inv-004",
-   "target": "inv-350",
+   "source": "inv-358",
+   "target": "inv-359",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg098"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e343",
@@ -21082,6 +21256,49 @@
    "source": "inv-360",
    "target": "inv-361",
    "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e345",
+   "source": "inv-361",
+   "target": "inv-362",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e346",
+   "source": "inv-362",
+   "target": "inv-363",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e347",
+   "source": "inv-004",
+   "target": "inv-355",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg098"
+    }
+   }
+  },
+  {
+   "id": "e348",
+   "source": "inv-364",
+   "target": "inv-365",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e349",
+   "source": "inv-365",
+   "target": "inv-366",
+   "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
@@ -21093,89 +21310,46 @@
    }
   },
   {
-   "id": "e345",
-   "source": "inv-360",
-   "target": "inv-362",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e346",
-   "source": "inv-361",
-   "target": "inv-364",
-   "sourceHandle": "choice-0",
-   "animated": true
-  },
-  {
-   "id": "e347",
-   "source": "inv-364",
-   "target": "inv-363",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e348",
-   "source": "inv-361",
-   "target": "inv-362",
-   "sourceHandle": "choice-1",
-   "animated": true
-  },
-  {
-   "id": "e349",
-   "source": "inv-363",
-   "target": "inv-362",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e350",
-   "source": "inv-362",
-   "target": "inv-365",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e351",
    "source": "inv-365",
-   "target": "inv-366",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e352",
-   "source": "inv-366",
    "target": "inv-367",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e353",
-   "source": "inv-367",
+   "id": "e351",
+   "source": "inv-366",
+   "target": "inv-369",
+   "sourceHandle": "choice-0",
+   "animated": true
+  },
+  {
+   "id": "e352",
+   "source": "inv-369",
    "target": "inv-368",
    "sourceHandle": "right",
    "animated": true
   },
   {
+   "id": "e353",
+   "source": "inv-366",
+   "target": "inv-367",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
    "id": "e354",
    "source": "inv-368",
-   "target": "inv-369",
+   "target": "inv-367",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e355",
-   "source": "inv-019",
-   "target": "inv-359",
+   "source": "inv-367",
+   "target": "inv-370",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg099"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e356",
@@ -21207,10 +21381,18 @@
   },
   {
    "id": "e360",
-   "source": "inv-374",
-   "target": "inv-375",
+   "source": "inv-019",
+   "target": "inv-364",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg099"
+    }
+   }
   },
   {
    "id": "e361",
@@ -21305,18 +21487,10 @@
   },
   {
    "id": "e374",
-   "source": "inv-007",
-   "target": "inv-370",
+   "source": "inv-388",
+   "target": "inv-389",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg100"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e375",
@@ -21334,18 +21508,10 @@
   },
   {
    "id": "e377",
-   "source": "inv-034",
-   "target": "inv-389",
+   "source": "inv-391",
+   "target": "inv-392",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg101"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e378",
@@ -21356,8 +21522,8 @@
   },
   {
    "id": "e379",
-   "source": "inv-034",
-   "target": "inv-392",
+   "source": "inv-007",
+   "target": "inv-375",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -21365,7 +21531,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg102"
+     "value": "seg100"
     }
    }
   },
@@ -21394,7 +21560,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg103"
+     "value": "seg101"
     }
    }
   },
@@ -21407,13 +21573,6 @@
   },
   {
    "id": "e384",
-   "source": "inv-398",
-   "target": "inv-399",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e385",
    "source": "inv-034",
    "target": "inv-397",
    "sourceHandle": "right",
@@ -21423,9 +21582,16 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg104"
+     "value": "seg102"
     }
    }
+  },
+  {
+   "id": "e385",
+   "source": "inv-399",
+   "target": "inv-400",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e386",
@@ -21436,10 +21602,18 @@
   },
   {
    "id": "e387",
-   "source": "inv-401",
-   "target": "inv-402",
+   "source": "inv-034",
+   "target": "inv-399",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg103"
+    }
+   }
   },
   {
    "id": "e388",
@@ -21457,10 +21631,18 @@
   },
   {
    "id": "e390",
-   "source": "inv-404",
-   "target": "inv-405",
+   "source": "inv-034",
+   "target": "inv-402",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg104"
+    }
+   }
   },
   {
    "id": "e391",
@@ -21487,6 +21669,13 @@
    "id": "e394",
    "source": "inv-408",
    "target": "inv-409",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e395",
+   "source": "inv-409",
+   "target": "inv-410",
    "sourceHandle": "right",
    "animated": true
   },
@@ -21519,13 +21708,6 @@
    "animated": true
   },
   {
-   "id": "e400",
-   "source": "inv-414",
-   "target": "inv-415",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e401",
    "source": "inv-415",
    "target": "inv-416",
@@ -21548,18 +21730,10 @@
   },
   {
    "id": "e404",
-   "source": "inv-007",
-   "target": "inv-410",
+   "source": "inv-418",
+   "target": "inv-419",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg106"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e405",
@@ -21591,10 +21765,18 @@
   },
   {
    "id": "e409",
-   "source": "inv-423",
-   "target": "inv-424",
+   "source": "inv-007",
+   "target": "inv-415",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg106"
+    }
+   }
   },
   {
    "id": "e410",
@@ -21605,18 +21787,10 @@
   },
   {
    "id": "e411",
-   "source": "inv-010",
-   "target": "inv-419",
+   "source": "inv-425",
+   "target": "inv-426",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg107"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e412",
@@ -21648,8 +21822,8 @@
   },
   {
    "id": "e416",
-   "source": "inv-004",
-   "target": "inv-426",
+   "source": "inv-010",
+   "target": "inv-424",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -21657,7 +21831,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg108"
+     "value": "seg107"
     }
    }
   },
@@ -21691,13 +21865,6 @@
   },
   {
    "id": "e421",
-   "source": "inv-435",
-   "target": "inv-436",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e422",
    "source": "inv-004",
    "target": "inv-431",
    "sourceHandle": "right",
@@ -21707,9 +21874,16 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg109"
+     "value": "seg108"
     }
    }
+  },
+  {
+   "id": "e422",
+   "source": "inv-436",
+   "target": "inv-437",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e423",
@@ -21741,8 +21915,8 @@
   },
   {
    "id": "e427",
-   "source": "inv-010",
-   "target": "inv-437",
+   "source": "inv-004",
+   "target": "inv-436",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -21750,7 +21924,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg110"
+     "value": "seg109"
     }
    }
   },
@@ -21784,13 +21958,6 @@
   },
   {
    "id": "e432",
-   "source": "inv-446",
-   "target": "inv-447",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e433",
    "source": "inv-010",
    "target": "inv-442",
    "sourceHandle": "right",
@@ -21800,9 +21967,16 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg111"
+     "value": "seg110"
     }
    }
+  },
+  {
+   "id": "e433",
+   "source": "inv-447",
+   "target": "inv-448",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e434",
@@ -21834,8 +22008,8 @@
   },
   {
    "id": "e438",
-   "source": "inv-028",
-   "target": "inv-448",
+   "source": "inv-010",
+   "target": "inv-447",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -21843,7 +22017,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg112"
+     "value": "seg111"
     }
    }
   },
@@ -21856,18 +22030,10 @@
   },
   {
    "id": "e440",
-   "source": "inv-028",
-   "target": "inv-453",
+   "source": "inv-454",
+   "target": "inv-455",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg113"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e441",
@@ -21885,10 +22051,18 @@
   },
   {
    "id": "e443",
-   "source": "inv-457",
-   "target": "inv-458",
+   "source": "inv-028",
+   "target": "inv-453",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg112"
+    }
+   }
   },
   {
    "id": "e444",
@@ -21900,7 +22074,7 @@
   {
    "id": "e445",
    "source": "inv-028",
-   "target": "inv-455",
+   "target": "inv-458",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -21908,7 +22082,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg114"
+     "value": "seg113"
     }
    }
   },
@@ -21942,7 +22116,7 @@
   },
   {
    "id": "e450",
-   "source": "inv-031",
+   "source": "inv-028",
    "target": "inv-460",
    "sourceHandle": "right",
    "animated": true,
@@ -21951,7 +22125,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg115"
+     "value": "seg114"
     }
    }
   },
@@ -21994,7 +22168,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg116"
+     "value": "seg115"
     }
    }
   },
@@ -22028,10 +22202,18 @@
   },
   {
    "id": "e460",
-   "source": "inv-474",
-   "target": "inv-475",
+   "source": "inv-031",
+   "target": "inv-470",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg116"
+    }
+   }
   },
   {
    "id": "e461",
@@ -22042,18 +22224,10 @@
   },
   {
    "id": "e462",
-   "source": "inv-031",
-   "target": "inv-470",
+   "source": "inv-476",
+   "target": "inv-477",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg117"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e463",
@@ -22085,10 +22259,18 @@
   },
   {
    "id": "e467",
-   "source": "inv-481",
-   "target": "inv-482",
+   "source": "inv-031",
+   "target": "inv-475",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg117"
+    }
+   }
   },
   {
    "id": "e468",
@@ -22099,18 +22281,10 @@
   },
   {
    "id": "e469",
-   "source": "inv-022",
-   "target": "inv-477",
+   "source": "inv-483",
+   "target": "inv-484",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg118"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e470",
@@ -22142,15 +22316,8 @@
   },
   {
    "id": "e474",
-   "source": "inv-488",
-   "target": "inv-489",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e475",
    "source": "inv-022",
-   "target": "inv-484",
+   "target": "inv-482",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22158,9 +22325,16 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg119"
+     "value": "seg118"
     }
    }
+  },
+  {
+   "id": "e475",
+   "source": "inv-489",
+   "target": "inv-490",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e476",
@@ -22193,7 +22367,7 @@
   {
    "id": "e480",
    "source": "inv-022",
-   "target": "inv-490",
+   "target": "inv-489",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22201,7 +22375,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg120"
+     "value": "seg119"
     }
    }
   },
@@ -22214,36 +22388,44 @@
   },
   {
    "id": "e482",
+   "source": "inv-496",
+   "target": "inv-497",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e483",
    "source": "inv-497",
    "target": "inv-498",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e483",
+   "id": "e484",
    "source": "inv-498",
    "target": "inv-499",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e484",
-   "source": "inv-499",
-   "target": "inv-500",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e485",
-   "source": "inv-500",
-   "target": "inv-501",
+   "source": "inv-022",
+   "target": "inv-495",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg120"
+    }
+   }
   },
   {
    "id": "e486",
-   "source": "inv-501",
-   "target": "inv-502",
+   "source": "inv-500",
+   "target": "inv-501",
    "sourceHandle": "right",
    "animated": true
   },
@@ -22256,18 +22438,10 @@
   },
   {
    "id": "e488",
-   "source": "inv-022",
-   "target": "inv-497",
+   "source": "inv-503",
+   "target": "inv-504",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg122"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e489",
@@ -22292,8 +22466,15 @@
   },
   {
    "id": "e492",
-   "source": "inv-010",
-   "target": "inv-504",
+   "source": "inv-507",
+   "target": "inv-508",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e493",
+   "source": "inv-022",
+   "target": "inv-502",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22301,16 +22482,9 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg123"
+     "value": "seg122"
     }
    }
-  },
-  {
-   "id": "e493",
-   "source": "inv-508",
-   "target": "inv-509",
-   "sourceHandle": "right",
-   "animated": true
   },
   {
    "id": "e494",
@@ -22335,8 +22509,8 @@
   },
   {
    "id": "e497",
-   "source": "inv-004",
-   "target": "inv-508",
+   "source": "inv-010",
+   "target": "inv-509",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22344,7 +22518,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg124"
+     "value": "seg123"
     }
    }
   },
@@ -22357,29 +22531,29 @@
   },
   {
    "id": "e499",
+   "source": "inv-514",
+   "target": "inv-515",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e500",
    "source": "inv-515",
    "target": "inv-516",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e500",
+   "id": "e501",
    "source": "inv-516",
    "target": "inv-517",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e501",
-   "source": "inv-517",
-   "target": "inv-518",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e502",
-   "source": "inv-022",
-   "target": "inv-515",
+   "source": "inv-004",
+   "target": "inv-513",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22387,14 +22561,14 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg126"
+     "value": "seg124"
     }
    }
   },
   {
    "id": "e503",
-   "source": "inv-519",
-   "target": "inv-520",
+   "source": "inv-518",
+   "target": "inv-519",
    "sourceHandle": "right",
    "animated": true
   },
@@ -22407,8 +22581,51 @@
   },
   {
    "id": "e505",
+   "source": "inv-521",
+   "target": "inv-522",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e506",
+   "source": "inv-522",
+   "target": "inv-523",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e507",
+   "source": "inv-022",
+   "target": "inv-520",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg126"
+    }
+   }
+  },
+  {
+   "id": "e508",
+   "source": "inv-524",
+   "target": "inv-525",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e509",
+   "source": "inv-525",
+   "target": "inv-526",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e510",
    "source": "inv-013",
-   "target": "inv-519",
+   "target": "inv-524",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22421,9 +22638,9 @@
    }
   },
   {
-   "id": "e506",
+   "id": "e511",
    "source": "inv-002",
-   "target": "inv-522",
+   "target": "inv-527",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22436,8 +22653,8 @@
    }
   },
   {
-   "id": "e507",
-   "source": "inv-522",
+   "id": "e512",
+   "source": "inv-527",
    "target": "inv-217",
    "sourceHandle": "right",
    "animated": true,
@@ -22451,23 +22668,23 @@
    }
   },
   {
-   "id": "e508",
-   "source": "inv-522",
+   "id": "e513",
+   "source": "inv-527",
    "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e509",
+   "id": "e514",
    "source": "inv-217",
    "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e510",
+   "id": "e515",
    "source": "inv-002",
-   "target": "inv-523",
+   "target": "inv-528",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22480,60 +22697,9 @@
    }
   },
   {
-   "id": "e511",
-   "source": "inv-523",
-   "target": "inv-216",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e512",
-   "source": "inv-523",
-   "target": "inv-004",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e513",
-   "source": "inv-216",
-   "target": "inv-004",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e514",
-   "source": "inv-002",
-   "target": "inv-004",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e515",
-   "source": "inv-003",
-   "target": "inv-524",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
    "id": "e516",
-   "source": "inv-524",
-   "target": "inv-217",
+   "source": "inv-528",
+   "target": "inv-216",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22547,15 +22713,66 @@
   },
   {
    "id": "e517",
-   "source": "inv-524",
+   "source": "inv-528",
    "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e518",
+   "source": "inv-216",
+   "target": "inv-004",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e519",
+   "source": "inv-002",
+   "target": "inv-004",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e520",
    "source": "inv-003",
-   "target": "inv-525",
+   "target": "inv-529",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e521",
+   "source": "inv-529",
+   "target": "inv-217",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e522",
+   "source": "inv-529",
+   "target": "inv-004",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e523",
+   "source": "inv-003",
+   "target": "inv-530",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22568,8 +22785,8 @@
    }
   },
   {
-   "id": "e519",
-   "source": "inv-525",
+   "id": "e524",
+   "source": "inv-530",
    "target": "inv-216",
    "sourceHandle": "right",
    "animated": true,
@@ -22583,23 +22800,23 @@
    }
   },
   {
-   "id": "e520",
-   "source": "inv-525",
+   "id": "e525",
+   "source": "inv-530",
    "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e521",
+   "id": "e526",
    "source": "inv-003",
    "target": "inv-004",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e522",
+   "id": "e527",
    "source": "inv-005",
-   "target": "inv-526",
+   "target": "inv-531",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22612,8 +22829,8 @@
    }
   },
   {
-   "id": "e523",
-   "source": "inv-526",
+   "id": "e528",
+   "source": "inv-531",
    "target": "inv-219",
    "sourceHandle": "right",
    "animated": true,
@@ -22627,23 +22844,23 @@
    }
   },
   {
-   "id": "e524",
-   "source": "inv-526",
+   "id": "e529",
+   "source": "inv-531",
    "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e525",
+   "id": "e530",
    "source": "inv-219",
    "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e526",
+   "id": "e531",
    "source": "inv-005",
-   "target": "inv-527",
+   "target": "inv-532",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22656,60 +22873,9 @@
    }
   },
   {
-   "id": "e527",
-   "source": "inv-527",
-   "target": "inv-218",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e528",
-   "source": "inv-527",
-   "target": "inv-007",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e529",
-   "source": "inv-218",
-   "target": "inv-007",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e530",
-   "source": "inv-005",
-   "target": "inv-007",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e531",
-   "source": "inv-006",
-   "target": "inv-528",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
    "id": "e532",
-   "source": "inv-528",
-   "target": "inv-219",
+   "source": "inv-532",
+   "target": "inv-218",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22723,15 +22889,66 @@
   },
   {
    "id": "e533",
-   "source": "inv-528",
+   "source": "inv-532",
    "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e534",
+   "source": "inv-218",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e535",
+   "source": "inv-005",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e536",
    "source": "inv-006",
-   "target": "inv-529",
+   "target": "inv-533",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e537",
+   "source": "inv-533",
+   "target": "inv-219",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e538",
+   "source": "inv-533",
+   "target": "inv-007",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e539",
+   "source": "inv-006",
+   "target": "inv-534",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22744,8 +22961,8 @@
    }
   },
   {
-   "id": "e535",
-   "source": "inv-529",
+   "id": "e540",
+   "source": "inv-534",
    "target": "inv-218",
    "sourceHandle": "right",
    "animated": true,
@@ -22759,37 +22976,37 @@
    }
   },
   {
-   "id": "e536",
-   "source": "inv-529",
+   "id": "e541",
+   "source": "inv-534",
    "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e537",
+   "id": "e542",
    "source": "inv-006",
    "target": "inv-007",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e538",
+   "id": "e543",
    "source": "inv-008",
    "target": "inv-010",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e539",
+   "id": "e544",
    "source": "inv-009",
    "target": "inv-010",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e540",
+   "id": "e545",
    "source": "inv-011",
-   "target": "inv-530",
+   "target": "inv-535",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22802,8 +23019,8 @@
    }
   },
   {
-   "id": "e541",
-   "source": "inv-530",
+   "id": "e546",
+   "source": "inv-535",
    "target": "inv-229",
    "sourceHandle": "right",
    "animated": true,
@@ -22817,23 +23034,23 @@
    }
   },
   {
-   "id": "e542",
-   "source": "inv-530",
+   "id": "e547",
+   "source": "inv-535",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e543",
+   "id": "e548",
    "source": "inv-229",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e544",
+   "id": "e549",
    "source": "inv-011",
-   "target": "inv-531",
+   "target": "inv-536",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22846,60 +23063,9 @@
    }
   },
   {
-   "id": "e545",
-   "source": "inv-531",
-   "target": "inv-228",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e546",
-   "source": "inv-531",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e547",
-   "source": "inv-228",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e548",
-   "source": "inv-011",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e549",
-   "source": "inv-012",
-   "target": "inv-532",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
    "id": "e550",
-   "source": "inv-532",
-   "target": "inv-229",
+   "source": "inv-536",
+   "target": "inv-228",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22913,15 +23079,66 @@
   },
   {
    "id": "e551",
-   "source": "inv-532",
+   "source": "inv-536",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e552",
+   "source": "inv-228",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e553",
+   "source": "inv-011",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e554",
    "source": "inv-012",
-   "target": "inv-533",
+   "target": "inv-537",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e555",
+   "source": "inv-537",
+   "target": "inv-229",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e556",
+   "source": "inv-537",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e557",
+   "source": "inv-012",
+   "target": "inv-538",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -22934,8 +23151,8 @@
    }
   },
   {
-   "id": "e553",
-   "source": "inv-533",
+   "id": "e558",
+   "source": "inv-538",
    "target": "inv-228",
    "sourceHandle": "right",
    "animated": true,
@@ -22949,262 +23166,86 @@
    }
   },
   {
-   "id": "e554",
-   "source": "inv-533",
+   "id": "e559",
+   "source": "inv-538",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e555",
+   "id": "e560",
    "source": "inv-012",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e556",
+   "id": "e561",
    "source": "inv-014",
    "target": "inv-016",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e557",
+   "id": "e562",
    "source": "inv-015",
    "target": "inv-016",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e558",
-   "source": "inv-017",
-   "target": "inv-534",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e559",
-   "source": "inv-534",
-   "target": "inv-225",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e560",
-   "source": "inv-534",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e561",
-   "source": "inv-225",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e562",
-   "source": "inv-017",
-   "target": "inv-535",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
    "id": "e563",
-   "source": "inv-535",
-   "target": "inv-227",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e564",
-   "source": "inv-535",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e565",
-   "source": "inv-227",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e566",
    "source": "inv-017",
-   "target": "inv-536",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e567",
-   "source": "inv-536",
-   "target": "inv-224",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e568",
-   "source": "inv-536",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e569",
-   "source": "inv-224",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e570",
-   "source": "inv-017",
-   "target": "inv-537",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e571",
-   "source": "inv-537",
-   "target": "inv-226",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e572",
-   "source": "inv-537",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e573",
-   "source": "inv-226",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e574",
-   "source": "inv-017",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e575",
-   "source": "inv-018",
-   "target": "inv-538",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e576",
-   "source": "inv-538",
-   "target": "inv-225",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e577",
-   "source": "inv-538",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e578",
-   "source": "inv-018",
    "target": "inv-539",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e564",
+   "source": "inv-539",
+   "target": "inv-225",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e565",
+   "source": "inv-539",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e566",
+   "source": "inv-225",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e567",
+   "source": "inv-017",
+   "target": "inv-540",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
      "variable": "met_保全",
      "op": "gte",
      "value": 5
@@ -23212,8 +23253,8 @@
    }
   },
   {
-   "id": "e579",
-   "source": "inv-539",
+   "id": "e568",
+   "source": "inv-540",
    "target": "inv-227",
    "sourceHandle": "right",
    "animated": true,
@@ -23227,16 +23268,23 @@
    }
   },
   {
-   "id": "e580",
-   "source": "inv-539",
+   "id": "e569",
+   "source": "inv-540",
    "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e581",
-   "source": "inv-018",
-   "target": "inv-540",
+   "id": "e570",
+   "source": "inv-227",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e571",
+   "source": "inv-017",
+   "target": "inv-541",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -23249,8 +23297,8 @@
    }
   },
   {
-   "id": "e582",
-   "source": "inv-540",
+   "id": "e572",
+   "source": "inv-541",
    "target": "inv-224",
    "sourceHandle": "right",
    "animated": true,
@@ -23264,16 +23312,23 @@
    }
   },
   {
-   "id": "e583",
-   "source": "inv-540",
+   "id": "e573",
+   "source": "inv-541",
    "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e584",
-   "source": "inv-018",
-   "target": "inv-541",
+   "id": "e574",
+   "source": "inv-224",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e575",
+   "source": "inv-017",
+   "target": "inv-542",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -23286,8 +23341,8 @@
    }
   },
   {
-   "id": "e585",
-   "source": "inv-541",
+   "id": "e576",
+   "source": "inv-542",
    "target": "inv-226",
    "sourceHandle": "right",
    "animated": true,
@@ -23301,88 +23356,185 @@
    }
   },
   {
-   "id": "e586",
-   "source": "inv-541",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e587",
-   "source": "inv-018",
-   "target": "inv-019",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e588",
-   "source": "inv-020",
-   "target": "inv-542",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e589",
+   "id": "e577",
    "source": "inv-542",
-   "target": "inv-221",
+   "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e590",
-   "source": "inv-221",
-   "target": "inv-022",
+   "id": "e578",
+   "source": "inv-226",
+   "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e591",
-   "source": "inv-020",
+   "id": "e579",
+   "source": "inv-017",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e580",
+   "source": "inv-018",
    "target": "inv-543",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_店員",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e581",
+   "source": "inv-543",
+   "target": "inv-225",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e582",
+   "source": "inv-543",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e583",
+   "source": "inv-018",
+   "target": "inv-544",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e584",
+   "source": "inv-544",
+   "target": "inv-227",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e585",
+   "source": "inv-544",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e586",
+   "source": "inv-018",
+   "target": "inv-545",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
+   "id": "e587",
+   "source": "inv-545",
+   "target": "inv-224",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e588",
+   "source": "inv-545",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e589",
+   "source": "inv-018",
+   "target": "inv-546",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e590",
+   "source": "inv-546",
+   "target": "inv-226",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e591",
+   "source": "inv-546",
+   "target": "inv-019",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e592",
-   "source": "inv-543",
-   "target": "inv-220",
+   "source": "inv-018",
+   "target": "inv-019",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e593",
-   "source": "inv-220",
-   "target": "inv-022",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e594",
    "source": "inv-020",
-   "target": "inv-022",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e595",
-   "source": "inv-021",
-   "target": "inv-544",
+   "target": "inv-547",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -23395,16 +23547,23 @@
    }
   },
   {
-   "id": "e596",
-   "source": "inv-544",
+   "id": "e594",
+   "source": "inv-547",
    "target": "inv-221",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e597",
-   "source": "inv-021",
-   "target": "inv-545",
+   "id": "e595",
+   "source": "inv-221",
+   "target": "inv-022",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e596",
+   "source": "inv-020",
+   "target": "inv-548",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -23417,29 +23576,36 @@
    }
   },
   {
-   "id": "e598",
-   "source": "inv-545",
+   "id": "e597",
+   "source": "inv-548",
    "target": "inv-220",
    "sourceHandle": "right",
    "animated": true
   },
   {
+   "id": "e598",
+   "source": "inv-220",
+   "target": "inv-022",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e599",
-   "source": "inv-021",
+   "source": "inv-020",
    "target": "inv-022",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e600",
-   "source": "inv-023",
-   "target": "inv-546",
+   "source": "inv-021",
+   "target": "inv-549",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
+     "variable": "met_店員",
      "op": "gte",
      "value": 5
     }
@@ -23447,88 +23613,44 @@
   },
   {
    "id": "e601",
-   "source": "inv-546",
-   "target": "inv-223",
+   "source": "inv-549",
+   "target": "inv-221",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
+   "animated": true
   },
   {
    "id": "e602",
-   "source": "inv-546",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e603",
-   "source": "inv-223",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e604",
-   "source": "inv-023",
-   "target": "inv-547",
+   "source": "inv-021",
+   "target": "inv-550",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
+     "variable": "met_店員",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
+   "id": "e603",
+   "source": "inv-550",
+   "target": "inv-220",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e604",
+   "source": "inv-021",
+   "target": "inv-022",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e605",
-   "source": "inv-547",
-   "target": "inv-222",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e606",
-   "source": "inv-547",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e607",
-   "source": "inv-222",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e608",
    "source": "inv-023",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e609",
-   "source": "inv-024",
-   "target": "inv-548",
+   "target": "inv-551",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -23541,9 +23663,53 @@
    }
   },
   {
-   "id": "e610",
-   "source": "inv-548",
+   "id": "e606",
+   "source": "inv-551",
    "target": "inv-223",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e607",
+   "source": "inv-551",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e608",
+   "source": "inv-223",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e609",
+   "source": "inv-023",
+   "target": "inv-552",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e610",
+   "source": "inv-552",
+   "target": "inv-222",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -23557,15 +23723,66 @@
   },
   {
    "id": "e611",
-   "source": "inv-548",
+   "source": "inv-552",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e612",
+   "source": "inv-222",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e613",
+   "source": "inv-023",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e614",
    "source": "inv-024",
-   "target": "inv-549",
+   "target": "inv-553",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e615",
+   "source": "inv-553",
+   "target": "inv-223",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e616",
+   "source": "inv-553",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e617",
+   "source": "inv-024",
+   "target": "inv-554",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -23578,8 +23795,8 @@
    }
   },
   {
-   "id": "e613",
-   "source": "inv-549",
+   "id": "e618",
+   "source": "inv-554",
    "target": "inv-222",
    "sourceHandle": "right",
    "animated": true,
@@ -23593,79 +23810,79 @@
    }
   },
   {
-   "id": "e614",
-   "source": "inv-549",
+   "id": "e619",
+   "source": "inv-554",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e615",
+   "id": "e620",
    "source": "inv-024",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e616",
+   "id": "e621",
    "source": "inv-026",
    "target": "inv-028",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e617",
+   "id": "e622",
    "source": "inv-027",
    "target": "inv-028",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e618",
+   "id": "e623",
    "source": "inv-029",
    "target": "inv-031",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e619",
+   "id": "e624",
    "source": "inv-030",
    "target": "inv-031",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e620",
+   "id": "e625",
    "source": "inv-032",
    "target": "inv-034",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e621",
+   "id": "e626",
    "source": "inv-033",
    "target": "inv-034",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e622",
+   "id": "e627",
    "source": "inv-035",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e623",
+   "id": "e628",
    "source": "inv-036",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e624",
-   "source": "inv-550",
-   "target": "inv-400",
+   "id": "e629",
+   "source": "inv-555",
+   "target": "inv-405",
    "sourceHandle": "right",
    "animated": true
   }
