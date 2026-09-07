@@ -428,7 +428,8 @@ def build(cards):
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
                       "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits", "seen_booth", "visited",
                                            "names_seen", "see_stairs", "hole_sightings", "see_admin", "laundry_night1",
-                                           "trust_斑比", "strikes", "clue_list", "rec_ok"] + [f"open_{k}" for k in
+                                           "trust_斑比", "strikes", "clue_list", "rec_ok",
+                                           "note_mailbox", "trust_店員", "trust_貓草", "cat_visits"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
                       "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單

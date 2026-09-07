@@ -32,6 +32,10 @@
      "strikes",
      "clue_list",
      "rec_ok",
+     "note_mailbox",
+     "trust_店員",
+     "trust_貓草",
+     "cat_visits",
      "open_roof",
      "open_laundry",
      "open_figure",
@@ -28441,8 +28445,13 @@
    "conds": [
     {
      "variable": "trust_貓草",
-     "op": "eq",
+     "op": "gte",
      "value": 2
+    },
+    {
+     "variable": "asked_貓草_格莉奇",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -28457,7 +28466,18 @@
    "slots": [
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "gte",
+     "value": 2
+    },
+    {
+     "variable": "asked_貓草_格莉奇",
+     "op": "eq",
+     "value": true
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問她家裡的事"
@@ -28473,7 +28493,12 @@
    "conds": [
     {
      "variable": "trust_貓草",
-     "op": "eq",
+     "op": "gte",
+     "value": 1
+    },
+    {
+     "variable": "met_鐵塔",
+     "op": "gte",
      "value": 1
     }
    ],
@@ -28490,7 +28515,18 @@
     1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "gte",
+     "value": 2
+    },
+    {
+     "variable": "open_figure",
+     "op": "eq",
+     "value": true
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問這個賣得好不好"
@@ -28504,7 +28540,18 @@
     1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "gte",
+     "value": 2
+    },
+    {
+     "variable": "open_figure",
+     "op": "eq",
+     "value": true
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問畫她的人是誰"
@@ -28541,7 +28588,18 @@
    "slots": [
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "gte",
+     "value": 2
+    },
+    {
+     "variable": "asked_貓草_格莉奇",
+     "op": "eq",
+     "value": true
+    }
+   ],
    "or": false,
    "dest_from": "總表（該人預設）",
    "label": "問她是不是真的會忘"
@@ -29031,7 +29089,13 @@
    "slots": [
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "met_鐵塔",
+     "op": "gte",
+     "value": 1
+    }
+   ],
    "or": false,
    "label": "跟靠窗那個人講話"
   },

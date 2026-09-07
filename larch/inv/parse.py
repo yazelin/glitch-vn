@@ -65,7 +65,8 @@ LINE_ANY = re.compile(r"^>\s?(.*)$")
 # 觸發決定這一段什麼時候播（＝邊的條件），變數決定它寫什麼。
 # 只抓文字，判讀留給下一層，因為寫法還沒統一（「`day >= 4`」與「第四天以後」並存）。
 META = re.compile(r"^(?:-\s*)?\*\*(觸發|變數|線索|問誰|地點・時段|給什麼|新資訊|選單)\*\*[：:]?\s*(.*)$")
-META_CONT = re.compile(r"^\s+×\s*(.*)$")     # 「- **觸發**」寫成兩行時的續行（材料行那五格）
+META_CONT = re.compile(r"^\s+×\s*(.*)$")
+TABLE_META = re.compile(r"^\|\s*(觸發|選單)\s*\|\s*([^|]*?)\s*\|\s*$")   # 貓草那一節用兩欄表格寫觸發：| 觸發 | `trust_貓草 >= 2` … |     # 「- **觸發**」寫成兩行時的續行（材料行那五格）
 PERSONS = ["管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "便利商店店員", "材料行老闆"]
 # 含 L1：橋段的每一場都是 L1，而且標題就帶地點代號與時段（`# 五、深夜的鐵塔（`store`・深夜）`）。
 SECTION = re.compile(r"^(#{1,5})\s+(.*?)\s*$")
@@ -126,6 +127,8 @@ def parse_file(path):
             meta_now[last_meta] = (meta_now.get(last_meta, "") + " × " + mc.group(1).strip()).strip()
             continue
         last_meta = None
+        if tm := TABLE_META.match(ln):
+            ln = f"**{tm.group(1)}**：{tm.group(2)}"
         if mm := META.match(ln):
             key, val = mm.group(1), mm.group(2).strip()
             here_lvl = stack[-1][0] if stack else 99

@@ -282,7 +282,7 @@ function start(){
   // 她自己寫在便條上的判斷，照狀態換（拉力不足的地方在這裡補）
   function noteFor(s){
     var d=num(values.day,1), h=num(values.hole_sightings,0);
-    if(s.id==='lobby' && slot===2 && h>=1) return '七點多。他會在。';
+    if(s.id==='lobby' && slot===2 && ((h===1&&d>=5&&d<=7)||(h===2&&d>=8&&d<=11))) return '七點多。他會在。';   // 只在他真的會來的那幾天
     if(s.id==='street' && d>=3 && slot<=1 && !(values.seen_booth===true||values.seen_booth==='true')) return '經紀公司在車站那一邊。走過去看看。';
     if(s.id==='store' && slot===3 && num(values.night_visits,0)===0) return '深夜還開著。';
     return null;
