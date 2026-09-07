@@ -47,6 +47,14 @@ NAME = "格莉奇與黑洞先生・調查篇"
 DESC = ("AI 主播格莉奇說她只有 4KB 的記憶。全世界當成哏，只有你當真。\n"
         "十一天，八個地點，一本買來的守則本。去問每一個認識她的人：她真的會忘嗎，為什麼沒有人把她修好。")
 
+# 場景代號 → (白天, 夜晚) 背景，跟 build.py 的 BG 一致；只給段落中途換場景用
+BG_MAP = {"lobby": ("bg-lobby-day", "bg-apartment-hall"), "roof": ("bg-roof-day", "bg-noah-shop"),
+          "street": ("bg-street-day2", "bg-street-night"), "studio": ("bg-studio-day", "bg-bambi-studio"),
+          "booth": ("bg-booth", "bg-booth"), "tower14": ("bg-tower14-day", "bg-office-14f"),
+          "store": ("bg-store-day", "bg-store-night"), "parts": ("bg-parts-day", "bg-parts"),
+          "busstop": ("bg-busstop-day", "bg-busstop"), "metro": ("bg-metro-day", "bg-metro"),
+          "laundry": ("bg-laundry-day", "bg-laundry"), "figure": ("bg-figure-day", "bg-figure"),
+          "catgrass_door": ("bg-catgrass-door", "bg-catgrass-door"), "catgrass_home": ("bg-catgrass-home", "bg-catgrass-home")}
 LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街", "studio": "斑比工作室",
             "booth": "錄音間門口", "tower14": "十四樓大廳", "store": "便利商店", "parts": "材料行",
             "busstop": "公車站", "metro": "捷運出口", "laundry": "自助洗衣店", "figure": "手辦店"}
@@ -230,6 +238,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                                             "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}]}
         d["characterLayers"] = layers or [{"id": "layer-none", "url": ghost, "position": "center", "x": 0, "y": 0,
                                            "scale": 0.01, "opacity": 1, "flipX": False}]
+    seg_dest_of = {r["segment"]: r["dest"] for r in rules}
     board_html = (CARDS / "board.html").read_text(encoding="utf-8")
     menu_html = (CARDS / "menu.html").read_text(encoding="utf-8")
     notes_html = (CARDS / "notes.html").read_text(encoding="utf-8")
@@ -256,6 +265,15 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 d["miniGameReadVars"] = ["day", "slot", "here"] + vs
                 d["miniGameWriteVars"] = ["pick"]
                 menus.append(n["id"])
+        elif d.get("type") == "dialogue" and d.get("sceneCode"):
+            # 段落中途換場景的卡：帶背景（play 時進這張卡就換）。日夜先都用夜版，白天版由入口決定。
+            code = d.pop("sceneCode")
+            seg_dest = seg_dest_of.get(d.get("segment"))
+            if code != seg_dest and code in BG_MAP:
+                day_key, night_key = BG_MAP[code]
+                url, _ = pick_bg(day_key, night_key, state, pid, dry)
+                if url:
+                    d["background"] = url
         elif d.get("type") == "plugin" and d.get("pluginCardId") == "grant-item":
             if not d["pluginValues"].get("itemImage"):
                 d["pluginValues"]["itemImage"] = item_url["tape"]

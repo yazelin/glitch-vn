@@ -344,6 +344,8 @@ def card_node(c):
     if c["kind"] in ("narrate", "note", "plate"):
         text = "\n".join(l["text"] for l in lines)
         d = {"type": "dialogue", "title": text[:14], "text": text, "speaker": NARRATOR}
+        if c.get("scene"):
+            d["sceneCode"] = c["scene"]      # 卡頭的 `scene: xxx`：段落中途換場景（貓草家、錄音間）
         if c["kind"] == "note":
             d["title"] = "筆記：" + text[:10]
             d["speaker"] = "玩家"
@@ -690,7 +692,14 @@ def main():
         first_id = next(n["id"] for n in b.nodes if n["data"].get("segment") == opening["segment"])
         board_node["data"].pop("start", None)
         first_node = next(n for n in b.nodes if n["id"] == first_id)
-        first_node["data"]["start"] = True
+        # 起點是一張有背景的入口場景卡，不然開場那一段沒有背景（2026-09-07 抓到）
+        day_bg, night_bg = BG["lobby"]
+        open_scene = b.add({"type": "scene", "title": "開場・一樓", "text": "",
+                            "background": f"@@{day_bg}", "backgroundNight": f"@@{night_bg}",
+                            "transition": "fadeBlack", "transitionMs": 600, "start": True,
+                            "autoAdvance": {"enabled": True, "mode": "delay", "delayMs": 500}})
+        b.edge(open_scene, first_id)
+        first_node["data"].pop("start", None)
         # 開場那一趟 here 是管理員；板之後的第一次開板不該再推進時間（dest 是空的，本來就不會）
         # 開場那一段從選單拿掉：它只演一次，而且是遊戲自己開的
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == opening["segment"])]

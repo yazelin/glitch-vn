@@ -225,6 +225,17 @@ console.log('\n=== 調查板：回到板上才推進時間，深夜之後換日 
   await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
   sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
   ok('不出門直接換日', sets.day === 4 && sets.slot === 0, `day=${sets.day} slot=${sets.slot}`);
+  // 深夜第四天才亮：第 2 天晚上不出門，直接到第 3 天上午；第 4 天晚上不出門，才到深夜
+  const fr4 = await open('board.html', { day: 2, slot: 2, met: '' });
+  await fr4.locator('#skip').click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('前三天沒有深夜：晚上過完直接換日', sets.day === 3 && sets.slot === 0, `day=${sets.day} slot=${sets.slot}`);
+  const fr5 = await open('board.html', { day: 4, slot: 2, met: '' });
+  await fr5.locator('#skip').click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('第四天起晚上之後是深夜', sets.slot === 3 && sets.day === undefined, `day=${sets.day} slot=${sets.slot}`);
 }
 
 console.log('\n=== 調查筆記 ===');

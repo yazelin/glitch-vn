@@ -23,51 +23,110 @@
   直接把 open_roof 設成 true 就好。誰在哪裡開哪一個，見 design/調查篇-變數.md。
 
   一次開板等於一個時段。玩家只選地點，時間自己往前走（深夜之後換日）。
+
+  畫面（2026-09-07 重做）：這一頁是她出門前攤開的街區。一條車站前的大街橫過下面，
+  舊公寓在左邊的巷子裡，經紀公司與 0x 那棟在右邊。每個地點是街上的一棟房子，
+  有人在的窗戶亮著。時間只從天色看得出來：白天暖白、晚上藍底帶路燈、深夜紫黑。
+  沒開的地方畫成她的字跡註記，灰的、虛線，寫的是她自己還缺什麼。
 -->
 <style>
 :root{
-  --paper:#12101d; --panel:#1a1729; --line:#2e2a44;
-  --ink:#e8e6f2; --dim:#9a94b8; --cyan:#7fd6e8; --lilac:#b39ddb;
+  --ink:#0e1322; --block:#1a2140; --block2:#212a4d; --street:#2c3660; --line:#3a4470;
+  --text:#ece9f4; --dim:#8d93b2; --cyan:#7fd6e8; --lamp:#f2c56d; --lamp2:#ffe2a8;
+  --sky-a:#0e1322; --sky-b:#0e1322;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);
-  font:16px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  -webkit-text-size-adjust:100%}
-.wrap{height:100%;display:flex;flex-direction:column;padding:3vh 4vw;gap:2vh;overflow:hidden}
-header{flex:none;display:flex;align-items:baseline;gap:.8em;flex-wrap:wrap}
-h1{margin:0;font-size:clamp(15px,2.4vw,20px);font-weight:600;letter-spacing:.06em}
-.when{color:var(--cyan);font-size:clamp(13px,2vw,17px);font-variant-numeric:tabular-nums}
-.hint{color:var(--dim);font-size:clamp(11px,1.5vw,13px);margin-left:auto}
-.grid{flex:1;display:grid;gap:1.4vh 1.4vw;overflow-y:auto;
-  grid-template-columns:repeat(auto-fill,minmax(min(200px,44vw),1fr));align-content:start}
-button.spot{appearance:none;text-align:left;cursor:pointer;color:inherit;font:inherit;
-  background:var(--panel);border:1px solid var(--line);border-radius:10px;
-  padding:.85em .95em;display:flex;flex-direction:column;gap:.25em;
-  transition:border-color .15s,transform .1s}
-button.spot:hover,button.spot:focus-visible{border-color:var(--cyan);outline:none}
-button.spot:active{transform:scale(.985)}
-button.spot[disabled]{opacity:.32;cursor:default}
-button.spot.locked[disabled]{opacity:.55}
-button.spot[disabled]:hover{border-color:var(--line)}
-.name{font-weight:600;font-size:clamp(14px,1.9vw,16px)}
-.who{color:var(--lilac);font-size:clamp(12px,1.6vw,13px)}
+html,body{margin:0;height:100%;background:var(--ink);color:var(--text);
+  font:15px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  -webkit-text-size-adjust:100%;overflow:hidden}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,var(--sky-a) 0%,var(--sky-b) 34%,var(--ink) 62%);
+  transition:background 1.2s}
+.wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.6vh 3.2vw 2.2vh}
+header{flex:none;display:flex;align-items:baseline;gap:.9em;flex-wrap:wrap}
+h1{margin:0;font:600 clamp(20px,3.4vw,30px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;
+  letter-spacing:.04em}
+.when{font:500 clamp(14px,2vw,17px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;
+  color:var(--cyan);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.hint{color:var(--dim);font-size:clamp(11px,1.4vw,13px);margin-left:auto}
+.map{position:relative;flex:1;margin-top:1.2vh;min-height:0}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.map .st{stroke:var(--street);stroke-linecap:round;fill:none}
+.map .bk{fill:var(--block)}
+.map .bk2{fill:var(--block2)}
+.map .rail{stroke:var(--line);stroke-dasharray:2 6;fill:none}
+.map .wins{fill:url(#win)}
+.map .win{fill:#2a3358;transition:fill 1s}
+.map.night .win{fill:#5a5a4a}
+.map.late .win{fill:#3c3a5c}
+.map .lamp{fill:var(--lamp);opacity:0;transition:opacity 1s}
+.map.night .lamp{opacity:.85}
+.map.late .lamp{opacity:.55}
+button.spot{position:absolute;transform:translate(-50%,-50%);appearance:none;cursor:pointer;
+  color:inherit;font:inherit;text-align:left;background:rgba(14,19,34,.72);
+  border:1px solid var(--line);border-radius:6px;padding:.45em .7em .5em .95em;
+  min-width:7.2em;max-width:12em;display:flex;flex-direction:column;gap:.1em;
+  backdrop-filter:blur(2px);transition:border-color .15s,transform .1s,box-shadow .2s}
+button.spot::before{content:"";position:absolute;left:.42em;top:.78em;width:.42em;height:.42em;
+  border-radius:50%;background:var(--line);box-shadow:none;transition:background .3s,box-shadow .3s}
+button.spot.lit::before{background:var(--lamp2);box-shadow:0 0 .55em .2em rgba(242,197,109,.55)}
+button.spot:hover,button.spot:focus-visible{border-color:var(--cyan);outline:none;
+  transform:translate(-50%,-50%) translateY(-1px)}
+button.spot:active{transform:translate(-50%,-50%) scale(.985)}
+button.spot[disabled]{cursor:default;opacity:.4}
+button.spot[disabled]:hover{border-color:var(--line);transform:translate(-50%,-50%)}
+.name{font-weight:600;font-size:clamp(13px,1.7vw,15px);letter-spacing:.02em}
+.who{color:var(--lamp2);font-size:clamp(11px,1.45vw,12.5px)}
 .who.unknown{color:var(--dim)}
-.who.hint{color:var(--dim);font-size:clamp(11px,1.5vw,12.5px);line-height:1.45}
-button.spot.locked{background:transparent;border-style:dashed;opacity:.5}
+.who.hint{color:var(--dim);font:italic clamp(11px,1.35vw,12px)/1.4 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif}
+button.spot.locked{background:transparent;border-style:dashed;opacity:.62;max-width:13em}
+button.spot.locked::before{display:none}
 button.spot.locked .name{color:var(--dim);font-weight:500}
-footer{flex:none;display:flex;gap:.8em;align-items:center}
+footer{flex:none;display:flex;justify-content:flex-end;align-items:center;margin-top:.6vh}
 button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;
-  font-size:clamp(12px,1.6vw,14px);background:none;border:1px solid var(--line);
-  border-radius:8px;padding:.5em 1.1em}
-button.skip:hover,button.skip:focus-visible{color:var(--ink);border-color:var(--lilac);outline:none}
+  font-size:clamp(12px,1.5vw,14px);background:none;border:0;border-bottom:1px solid var(--line);
+  padding:.25em .1em}
+button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(--cyan);outline:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:600px){button.spot{min-width:5.6em;padding:.35em .5em .4em .85em}.name{font-size:12px}.who{font-size:10.5px}}
 </style></head>
-<body><div class="wrap">
+<body><div class="sky" id="sky"></div><div class="wrap">
   <header>
     <h1>今天要去哪</h1><span class="when" id="when"></span>
     <span class="hint" id="hint"></span>
   </header>
-  <div class="grid" id="grid"></div>
+  <div class="map" id="grid">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <pattern id="win" width="3" height="3.4" patternUnits="userSpaceOnUse">
+          <rect class="win" x=".9" y="1" width="1.1" height="1.3" rx=".15"/>
+        </pattern>
+      </defs>
+      <!-- 街區：先鋪房子，再畫街，路燈最後 -->
+      <rect class="bk" x="10" y="14" width="18" height="52" rx="1"/>
+      <rect class="bk2" x="36" y="16" width="20" height="24" rx="1"/>
+      <rect class="bk" x="40" y="48" width="14" height="16" rx="1"/>
+      <rect class="bk2" x="52" y="46" width="30" height="18" rx="1"/>
+      <rect class="bk" x="70" y="8" width="14" height="30" rx="1"/>
+      <rect class="bk2" x="86" y="4" width="10" height="42" rx="1"/>
+      <rect class="bk" x="80" y="62" width="16" height="14" rx="1"/>
+      <rect class="bk2" x="60" y="84" width="26" height="12" rx="1"/>
+      <rect class="wins" x="11" y="15" width="16" height="50"/>
+      <rect class="wins" x="37" y="17" width="18" height="22"/>
+      <rect class="wins" x="53" y="47" width="28" height="16"/>
+      <rect class="wins" x="71" y="9" width="12" height="28"/>
+      <rect class="wins" x="87" y="5" width="8" height="40"/>
+      <rect class="wins" x="81" y="63" width="14" height="12"/>
+      <path class="st" d="M0 74 H100" stroke-width="5"/>
+      <path class="st" d="M32 74 V10" stroke-width="2.4"/>
+      <path class="st" d="M66 74 V40" stroke-width="2"/>
+      <path class="st" d="M84 74 V46" stroke-width="1.6"/>
+      <path class="st" d="M0 92 H58" stroke-width="2"/>
+      <path class="rail" d="M60 90 H100" stroke-width="1"/>
+      <rect class="lamp" x="13.4" y="70.4" width="1.2" height="1.6"/><rect class="lamp" x="44.4" y="70.4" width="1.2" height="1.6"/>
+      <rect class="lamp" x="75.4" y="70.4" width="1.2" height="1.6"/><rect class="lamp" x="94.4" y="70.4" width="1.2" height="1.6"/>
+      <rect class="lamp" x="28.4" y="39.4" width="1.2" height="1.6"/><rect class="lamp" x="62.4" y="51.4" width="1.2" height="1.6"/>
+    </svg>
+  </div>
   <footer><button class="skip" id="skip">這一段不出門</button></footer>
 </div>
 <script>
@@ -75,39 +134,41 @@ var values={}, vars={}, done=false;
 function setVar(n,v){ if(n) parent.postMessage({type:'larch:set',name:n,value:v},'*'); }
 function finish(result,payload){ if(done)return; done=true;
   parent.postMessage({type:'larch:complete',result:result,payload:payload},'*'); }
-function num(v,d){ var n=Number(v); return isNaN(n)?d:n; }
+function num(v,d){ var n=Number(v); return isNaN(v)||v===''||v==null?d:n; }
 function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
 
 var SLOTS=['上午','下午','晚上','深夜'];
+// 天色：時間只從這裡感覺得到（design/調查篇-場景.md「白天與夜晚是兩種色溫」）
+var SKY=[['#c9b48a','#4a4a5a'],['#b88a55','#3a3550'],['#243056','#121a34'],['#1a1030','#0e1322']];
 
-// 地點：代號、名字、每個時段的狀態
+// 地點：代號、名字、每個時段的狀態、在街區上的位置（百分比）
 //   '名字' = 那個人常駐　　''  = 開著可是沒有常駐　　null = 這個時間進不去
 // **「沒有常駐」跟「沒開」是兩件事。** 一樓的晚上沒有常駐（管理員下班了），
 // 可是那正是黑洞先生唯一會出現的時段，寫成 null 等於把全作最重要的一場關掉。
 // 空手而回本來就是這款的一部分（見設計文件三之一），所以預設是開著。
 var SPOTS=[
- {id:'lobby',   name:'一樓',        live:['管理員','管理員','','']},
- {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null], gate:'open_roof',
+ {id:'lobby',   name:'一樓',        live:['管理員','管理員','',''], x:19, y:52},
+ {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null], gate:'open_roof', x:19, y:22,
   hint:'有人說樓上那間什麼都留著。我需要一個壞掉的東西。'},
- {id:'street',  name:'車站前那條街', live:['路人','路人','路人','']},
- {id:'busstop', name:'公車站',      live:['路人','路人','路人','']},
- {id:'metro',   name:'捷運出口',    live:['路人','路人','路人','']},
- {id:'store',   name:'便利商店',    live:['店員','店員','店員','店員']},
- {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null], gate:'open_parts',
+ {id:'street',  name:'車站前那條街', live:['路人','路人','路人',''], x:48, y:80},
+ {id:'busstop', name:'公車站',      live:['路人','路人','路人',''], x:22, y:87},
+ {id:'metro',   name:'捷運出口',    live:['路人','路人','路人',''], x:73, y:92},
+ {id:'store',   name:'便利商店',    live:['店員','店員','店員','店員'], x:60, y:56},
+ {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null], gate:'open_parts', x:88, y:69,
   hint:'他等那顆管子等兩個禮拜了。他走不開。'},
- {id:'laundry', name:'自助洗衣店',  live:['','','',''], gate:'open_laundry',
+ {id:'laundry', name:'自助洗衣店',  live:['','','',''], gate:'open_laundry', x:77, y:56,
   hint:'隔壁那家深夜也開。'},
- {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null], gate:'open_figure',
+ {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null], gate:'open_figure', x:46, y:57,
   hint:'他說他都在那裡買。'},
- {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'], gate:'open_studio',
+ {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'], gate:'open_studio', x:46, y:26,
   hint:'畫她的人。名字我還沒問到。'},
  // **booth 永遠是灰的，而且提示永遠是那一句。** 玩家會一直看到它，一直進不去。
  // 那是刻意的挫折，而且它會讓「深夜在便利商店撞到鐵塔」變成整款最好的一個瞬間。
- {id:'booth',   name:'錄音間門口',  live:['鐵塔','鐵塔',null,null],
+ {id:'booth',   name:'錄音間門口',  live:['鐵塔','鐵塔',null,null], x:76, y:20,
   hint:'經紀公司在哪裡我知道了。可是我進不去。', sealed:true},
  // tower14 在設計的解鎖表裡漏掉了（它列在「走不進去的」那一組，可是沒說什麼時候出現）。
  // 照既有規則補：提示講他缺什麼，不講該去問誰，而且只講他知道的。
- {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全'], gate:'open_tower14',
+ {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全'], gate:'open_tower14', x:90, y:30,
   hint:'那個 AI 是哪一家公司的，我還沒查到。'},
 ];
 
@@ -117,7 +178,6 @@ var SPOTS=[
 // 做成板上的一格會讓玩家不請自來敲貓草家的門，而那正是這個角色不可能接受的事
 // ——正典裡他要先講「你不要寫出去喔」才讓人進去。
 // 它們是 scene 代號（catgrass_door、catgrass_home），不是 dest。
-
 
 // 訪客：某個人剛好也在。[地點, 時段, 機率]
 // 黑洞先生那一條是正典（第五章、調查篇第二天）：他只在一樓的晚上，七點多。
@@ -148,11 +208,13 @@ function whoIsThere(spotId, slot){
 // 一次開板等於一個時段。深夜之後換日。
 // **時間在回到板上的時候才推進**，出門時不動：不然那一趟的選單與規則讀到的是下一個時段
 // （上午去一樓，選單寫下午；2026-09-07 抓到）。板一開、發現 dest 還留著上一趟的目的地，就推進並清掉。
+// 深夜要到第四天才亮（信心.md 三）：前三天晚上過完直接換日，他還在睡覺。遊戲一句都不解釋。
 function advance(){
   var slot=num(values.slot,0), day=num(values.day,1);
-  if(slot>=3){ values.slot=0; values.day=day+1; setVar('slot',0); setVar('day',day+1); }
+  if(slot>=3 || (slot===2 && day<4)){ values.slot=0; values.day=day+1; setVar('slot',0); setVar('day',day+1); }
   else { values.slot=slot+1; setVar('slot',slot+1); }
 }
+function metKey(p){ return 'met_'+(p==='老闆'?'材料行老闆':p); }
 function go(spotId){
   var slot=num(values.slot,0), day=num(values.day,1);
   var here=whoIsThere(spotId,slot);
@@ -162,7 +224,7 @@ function go(spotId){
   var met=list(values.met);
   here.forEach(function(p){
     if(p==='路人'||p==='黑洞先生') return;
-    var v='met_'+(p==='老闆'?'材料行老闆':p);
+    var v=metKey(p);
     setVar(v, num(values[v],0)+1);
     if(met.indexOf(p)<0) met.push(p);
   });
@@ -181,12 +243,16 @@ function start(){
   var met=list(values.met);
   // gate 沒填的就是一開始就有的（一樓、車站前那條街、公車站、捷運出口、便利商店）。
   function isOpen(s){ return s.sealed ? false : (!s.gate || values[s.gate]===true || values[s.gate]==='true'); }
+  function known(p){ return met.indexOf(p)>=0 || num(values[metKey(p)],0)>0; }
 
   document.getElementById('when').textContent='第 '+day+' 天 ・ '+SLOTS[slot];
   document.getElementById('hint').textContent='去一個地方就過一個時段';
+  var sky=document.getElementById('sky');
+  sky.style.setProperty('--sky-a', SKY[slot][0]); sky.style.setProperty('--sky-b', SKY[slot][1]);
+  var map=document.getElementById('grid');
+  map.className='map'+(slot===2?' night':slot===3?' late':'');
+  Array.prototype.slice.call(map.querySelectorAll('button.spot')).forEach(function(b){ b.remove(); });
 
-  var grid=document.getElementById('grid');
-  grid.textContent='';
   SPOTS.forEach(function(s){
     var open = isOpen(s);
     // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
@@ -194,20 +260,21 @@ function start(){
     var live=s.live[slot];
     var b=document.createElement('button');
     b.className='spot'; b.type='button';
+    b.style.left=s.x+'%'; b.style.top=s.y+'%';
     var n=document.createElement('span'); n.className='name'; n.textContent=s.name;
     var w=document.createElement('span'); w.className='who';
     if(!open){
-      // 看得到，可是灰的。提示是他自己的判斷，不是系統指令。
+      // 看得到，可是灰的。提示是她自己的判斷，不是系統指令。
       b.className='spot locked'; b.disabled=true;
       w.className='who hint'; w.textContent=s.hint;
     }
     else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
-    else if(met.indexOf(live)>=0 || num(values['met_'+(live==='老闆'?'材料行老闆':live)],0)>0){ w.textContent=live; }
-    else { w.textContent='沒去過'; w.className='who unknown'; }
+    else if(known(live)){ w.textContent=live; b.className+=' lit'; }
+    else { w.textContent='沒去過'; w.className='who unknown'; b.className+=' lit'; }
     b.appendChild(n); b.appendChild(w);
     if(!b.disabled) b.addEventListener('click',function(){ go(s.id); });
-    grid.appendChild(b);
+    map.appendChild(b);
   });
 
   document.getElementById('skip').addEventListener('click',function(){
