@@ -467,7 +467,7 @@ def build(cards):
         cur["cards"].append(c)
     rules, unresolved, orphans, tapes = [], [], [], []
     labels, unlabeled = load_labels(), []
-    choice_links, seg_first, seg_end = [], {}, {}
+    choice_links, seg_first, seg_end, leftover_notes = [], {}, {}, []
     for i, s in enumerate(segs):
         sid = f"seg{i:03d}"
         if (s["key"][0], s["key"][1]) in SKIP_SECTIONS:
@@ -704,6 +704,10 @@ def build(cards):
                 b.edge(prev, nid)
             first = first or nid
             prev = nid
+        if after_choice:
+            # 「今天到這裡 → 筆記」可是這一節在選擇卡就結束了：筆記在下一節（貓草那三晚），先記著，最後接
+            leftover_notes.append((after_choice, sid))
+            after_choice = None
         if not first:
             continue
         if pending_bag:                          # 背包卡是最後一張：只剩預設邊
@@ -757,7 +761,10 @@ def build(cards):
             ask = next((k for k in kids if "問她" in k[0]), None)
             turn = next((k for k in kids if "轉身" in k[0]), None)
             if ask and turn:
-                gate = b.add({"type": "setVariable", "title": "（問幾次了）", "text": "", "variableOps": []})
+                # 走乙這條路也算來過一晚（甲那條的筆記卡上有同樣的加法）
+                gate = b.add({"type": "setVariable", "title": "（問幾次了）", "text": "",
+                              "variableOps": [{"id": "op-met", "variable": "met_貓草", "kind": "add", "value": 1},
+                                              {"id": "op-visits", "variable": "cat_visits", "kind": "add", "value": 1}]})
                 b.edge(nid, gate); b.edges[-1]["sourceHandle"] = f"choice-{k_}"
                 b.edge(gate, turn[1], {"variable": "cat_asked_glitch", "op": "gte", "value": 3})
                 b.edge(gate, ask[1])
@@ -766,10 +773,14 @@ def build(cards):
                                                         and e["data"]["condition"].get("variable") == "pick")]
                     rules[:] = [r for r in rules if r["segment"] != k[2]]
                 continue
-        hit = next(((f_, sid_) for (ff, ll, sec), (f_, sid_) in seg_first.items()
-                    if ff == file_ and (ll == l1 or ll.startswith(l1) or l1.startswith(ll))
-                    and (sec == target or sec.startswith(target + "・") or sec.startswith(target + "、")
-                         or (len(target) >= 2 and sec.startswith(target)))), None)
+        cands = [(f_, sid_) for (ff, ll, sec), (f_, sid_) in seg_first.items()
+                 if ff == file_ and (ll == l1 or ll.startswith(l1) or l1.startswith(ll))
+                 and (sec == target or sec.startswith(target + "・") or sec.startswith(target + "、")
+                      or (len(target) >= 2 and sec.startswith(target)))]
+        # 同一個字開頭的節不只一個（貓草三晚各有一節「甲」）：取選擇卡後面最近的那一節
+        here_sid = next((n["data"].get("segment") or "" for n in b.nodes if n["id"] == nid), "")
+        after = sorted([c for c in cands if c[1] > here_sid], key=lambda c: c[1])
+        hit = after[0] if after else (cands[0] if cands else None)
         if not hit:
             unresolved.append({"segment": "", "section": f"選項 → {target}", "notes": ["對不到那一節"], "text": l1})
             continue
@@ -777,6 +788,11 @@ def build(cards):
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == hit[1]
                                             and e["data"]["condition"].get("variable") == "pick")]
         rules[:] = [r for r in rules if r["segment"] != hit[1]]
+    for (nid_, k_), sid_ in leftover_notes:
+        nxt = next((n["id"] for n in b.nodes if (n["data"].get("segment") or "") > sid_
+                    and n["data"].get("title", "").startswith("筆記：")), None)
+        assert nxt, f"選項 → 筆記 接不到（{sid_}）"
+        b.edge(nid_, nxt); b.edges[-1]["sourceHandle"] = f"choice-{k_}"
     # 她開台的晚上（調查篇-直播）：「第Ｎ天直播」＝板上的插播，橫幅那張卡由這裡放，推送層換成手機插件卡
     for (ff, _l, sec), (first, sid_) in list(seg_first.items()):
         m_live = re.search(r"第([一二三四五六七八九十]+)天直播", sec) if ff == "調查篇-直播" else None

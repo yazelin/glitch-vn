@@ -19342,7 +19342,20 @@
     "type": "setVariable",
     "title": "（問幾次了）",
     "text": "",
-    "variableOps": []
+    "variableOps": [
+     {
+      "id": "op-met",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -19356,7 +19369,20 @@
     "type": "setVariable",
     "title": "（問幾次了）",
     "text": "",
-    "variableOps": []
+    "variableOps": [
+     {
+      "id": "op-met",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -19370,7 +19396,20 @@
     "type": "setVariable",
     "title": "（問幾次了）",
     "text": "",
-    "variableOps": []
+    "variableOps": [
+     {
+      "id": "op-met",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -23255,21 +23294,6 @@
    "animated": true
   },
   {
-   "id": "e326",
-   "source": "inv-029",
-   "target": "inv-348",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg092"
-    }
-   }
-  },
-  {
    "id": "e327",
    "source": "inv-351",
    "target": "inv-352",
@@ -23297,21 +23321,6 @@
    "target": "inv-355",
    "sourceHandle": "right",
    "animated": true
-  },
-  {
-   "id": "e330",
-   "source": "inv-029",
-   "target": "inv-354",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg094"
-    }
-   }
   },
   {
    "id": "e331",
@@ -25460,19 +25469,19 @@
   {
    "id": "e585",
    "source": "inv-346",
-   "target": "inv-341",
+   "target": "inv-348",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e586",
+   "id": "e585",
    "source": "inv-346",
    "target": "inv-622",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e587",
+   "id": "e586",
    "source": "inv-622",
    "target": "inv-362",
    "sourceHandle": "right",
@@ -25487,28 +25496,28 @@
    }
   },
   {
-   "id": "e588",
+   "id": "e587",
    "source": "inv-622",
    "target": "inv-360",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e588",
    "source": "inv-352",
-   "target": "inv-341",
+   "target": "inv-354",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e590",
+   "id": "e588",
    "source": "inv-352",
    "target": "inv-623",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e591",
+   "id": "e589",
    "source": "inv-623",
    "target": "inv-362",
    "sourceHandle": "right",
@@ -25523,31 +25532,45 @@
    }
   },
   {
-   "id": "e592",
+   "id": "e590",
    "source": "inv-623",
    "target": "inv-360",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e593",
+   "id": "e591",
    "source": "inv-352",
    "target": "inv-356",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e593",
+   "id": "e591",
    "source": "inv-480",
    "target": "inv-481",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e594",
+   "id": "e592",
    "source": "inv-480",
    "target": "inv-483",
    "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e593",
+   "source": "inv-339",
+   "target": "inv-342",
+   "sourceHandle": "choice-2",
+   "animated": true
+  },
+  {
+   "id": "e594",
+   "source": "inv-346",
+   "target": "inv-349",
+   "sourceHandle": "choice-2",
    "animated": true
   },
   {
@@ -29165,29 +29188,6 @@
    "label": "再跟他講話"
   },
   {
-   "segment": "seg092",
-   "section": "甲・那一句（第二次）",
-   "file": "調查篇-橋段2",
-   "dest": "store",
-   "slots": [
-    3
-   ],
-   "conds": [
-    {
-     "variable": "trust_貓草",
-     "op": "eq",
-     "value": 0
-    },
-    {
-     "variable": "cat_visits",
-     "op": "eq",
-     "value": 2
-    }
-   ],
-   "or": false,
-   "label": "問他剛剛那句"
-  },
-  {
    "segment": "seg093",
    "section": "第三次",
    "file": "調查篇-橋段2",
@@ -29209,29 +29209,6 @@
    ],
    "or": false,
    "label": "第三次跟他講話"
-  },
-  {
-   "segment": "seg094",
-   "section": "甲・那一份（第三次）",
-   "file": "調查篇-橋段2",
-   "dest": "store",
-   "slots": [
-    3
-   ],
-   "conds": [
-    {
-     "variable": "trust_貓草",
-     "op": "eq",
-     "value": 0
-    },
-    {
-     "variable": "cat_visits",
-     "op": "gte",
-     "value": 3
-    }
-   ],
-   "or": false,
-   "label": "問他蘿蔔要煮多久"
   },
   {
    "segment": "seg098",
