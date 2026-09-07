@@ -103,6 +103,7 @@ function passes(r, slot, here){
   var i;
   for(i=0;i<(r.conds||[]).length;i++){
     var c=r.conds[i];
+    if(c.any){ var j, okAny=false; for(j=0;j<c.any.length;j++) if(cmp(values[c.any[j].variable], c.any[j].op, c.any[j].value)) okAny=true; if(!okAny) return false; continue; }
     if(!cmp(values[c.variable], c.op, c.value)) return false;
   }
   if(r.who && r.who.length){

@@ -189,17 +189,29 @@ BARE_LOC = re.compile(r"`(" + "|".join(LOCS) + r")`|(?<![a-z_])(" + "|".join(LOC
 OPS = {"==": "eq", "!=": "neq", ">=": "gte", "<=": "lte", ">": "gt", "<": "lt"}
 
 
+def _val(val):
+    if val in ("true", "false"):
+        return val == "true"
+    return int(val) if re.fullmatch(r"-?\d+", val) else val
+
+
 def parse_trigger(text):
     """回 (rule, notes)。rule = {dest, slots, conds, any_slot}；判不完整的放 notes。"""
     rule = {"dest": None, "slots": [], "conds": [], "or": False}
     notes = []
     if not text:
         return None, ["沒有觸發"]
-    if "或" in text and "或深夜" not in text and "或下午" not in text and "或晚上" not in text:
+    if "或" in re.sub(r"（[^（）]*）", "", text) and "或深夜" not in text and "或下午" not in text and "或晚上" not in text:
         # 「A 或 B」在地點層級＝兩條規則，這裡先標記，不展開
         rule["or"] = True
     if "ending_ready" in text:
         rule["conds"].extend(ENDING_CONDS)
+    # 括號裡用「或」接的幾個條件＝任一成立（材料行甲：see_admin 或 see_noah）
+    for g in re.findall(r"（([^（）]*`[^（）]*或[^（）]*)）", text):
+        alts = [{"variable": m.group(1), "op": OPS[m.group(2)], "value": _val(m.group(3).strip())} for m in EXPR.finditer(g)]
+        if len(alts) >= 2:
+            rule["conds"].append({"variable": "任一", "op": "any", "value": "", "any": alts})   # 其他讀 c["variable"] 的地方不用改
+            text = text.replace(g, "")
     for m in EXPR.finditer(text):
         var, op, val = m.group(1), OPS[m.group(2)], m.group(3).strip()
         if var in ("dest", "ending_ready"):

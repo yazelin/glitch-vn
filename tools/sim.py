@@ -44,6 +44,12 @@ def norm(v):
         return v
 
 
+def ok(V, c):
+    if "any" in c:
+        return any(ok(V, a) for a in c["any"])
+    return cmp(V.get(c["variable"]), c["op"], c["value"])
+
+
 def cmp(a, op, bv):
     if op == "hasItem":
         return any(i.get("id") == bv for i in json.loads(a or "[]"))
@@ -157,7 +163,7 @@ def main():
                 for r in rules:
                     if r["dest"] != loc or slot not in r["slots"]:
                         continue
-                    if any(not cmp(V.get(c["variable"]), c["op"], c["value"]) for c in r["conds"]):
+                    if any(not ok(V, c) for c in r["conds"]):
                         continue
                     w = who_c[r["segment"]] & POSSIBLE[loc]
                     if w and not (w & here):
@@ -177,10 +183,10 @@ def main():
     ending = [r for r in rules if "最後一頁" in r["section"] or "最後那一頁" in r["section"]]
     for r in ending:
         print("結局：", r["section"][:20], "開了" if r["segment"] in played else "沒開",
-              [(c["variable"], c["op"], c["value"], V.get(c["variable"])) for c in r["conds"]])
+              [(c["variable"], c["op"], c["value"], V.get(c["variable"])) for c in r["conds"] if "any" not in c])
     print("關鍵變數：", {k: V.get(k) for k in ("day", "night_visits", "strikes", "clue_list", "trust_管理員", "trust_貓草", "trust_斑比", "met_諾亞", "met_管理員", "hole_sightings", "rec_ok")})
     for r in never[:40]:
-        bad = [(c["variable"], c["op"], c["value"], V.get(c["variable"])) for c in r["conds"] if not cmp(V.get(c["variable"]), c["op"], c["value"])]
+        bad = [(c["variable"], c["op"], c["value"], V.get(c["variable"])) for c in r["conds"] if not ok(V, c)]
         w = who_c[r["segment"]]
         print(f"  ・{r['dest']:8s} {r['section'][:24]:26s} 卡在 {bad if bad else ('誰在：' + '、'.join(w) if w else '時段/地點')}")
     return 0

@@ -2891,7 +2891,27 @@
       "emotion": ""
      }
     ],
-    "segment": "seg017"
+    "segment": "seg017",
+    "variableOps": [
+     {
+      "id": "op-admin_third",
+      "variable": "admin_third",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-trust_管理員",
+      "variable": "trust_管理員",
+      "kind": "add",
+      "value": -1
+     },
+     {
+      "id": "op-asked_諾亞_格莉奇",
+      "variable": "asked_諾亞_格莉奇",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -3643,7 +3663,15 @@
     "title": "筆記：我又問了他同一件事。",
     "text": "我又問了他同一件事。\n他從頭回答了一遍。中間那些我已經知道的，他一句都沒有跳過。\n問他同一件事不會有新東西。",
     "speaker": "玩家",
-    "segment": "seg023"
+    "segment": "seg023",
+    "variableOps": [
+     {
+      "id": "op-noah_reask",
+      "variable": "noah_reask",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -7808,7 +7836,15 @@
     "text": "又一個看過他的人。\n她說有一個穿西裝的來問過真空管。她沒有看他的臉。她記得的是他問了什麼。\n她記得那件西裝，因為穿西裝的不會來這種店。\n沒有身高，沒有帽子，沒有臉。這一份最短。\n她是第一個記得他開口講了什麼的人。",
     "speaker": "玩家",
     "sceneCode": "parts",
-    "segment": "seg056"
+    "segment": "seg056",
+    "variableOps": [
+     {
+      "id": "op-asked_材料行老闆_黑洞",
+      "variable": "asked_材料行老闆_黑洞",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -7892,7 +7928,15 @@
     "text": "第二次問，她多講了三句。三句都是那個管子的。",
     "speaker": "玩家",
     "sceneCode": "parts",
-    "segment": "seg057"
+    "segment": "seg057",
+    "variableOps": [
+     {
+      "id": "op-asked_材料行老闆_黑洞2",
+      "variable": "asked_材料行老闆_黑洞2",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -8180,7 +8224,15 @@
     "text": "二手電子材料行。南港路，車站後面，鐵門拉到一半，裡面比外面深很多。\n老闆五十幾歲。管理員問我找誰。她問我找什麼。\n頂樓那個在這裡買了二十年，從來不自己來，都是託人。她沒有見過他。\n她認得他，因為他要的東西沒有別人要。\n他二十年沒有走出過那間店。\n這種管子一年問不到一次。她留著。",
     "speaker": "玩家",
     "sceneCode": "parts",
-    "segment": "seg059"
+    "segment": "seg059",
+    "variableOps": [
+     {
+      "id": "op-asked_材料行老闆_諾亞",
+      "variable": "asked_材料行老闆_諾亞",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -8254,7 +8306,15 @@
      }
     ],
     "sceneCode": "parts",
-    "segment": "seg060"
+    "segment": "seg060",
+    "variableOps": [
+     {
+      "id": "op-asked_材料行老闆_諾亞2",
+      "variable": "asked_材料行老闆_諾亞2",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -28152,7 +28212,18 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_管理員",
+     "op": "gte",
+     "value": 2
+    },
+    {
+     "variable": "admin_third",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "同一件事再問一次"
@@ -28282,7 +28353,18 @@
     1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_諾亞_格莉奇",
+     "op": "eq",
+     "value": true
+    },
+    {
+     "variable": "noah_reask",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "dest_from": "總表（該人預設）",
    "label": "同一件事再問他一次"
@@ -28892,7 +28974,30 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "任一",
+     "op": "any",
+     "value": "",
+     "any": [
+      {
+       "variable": "see_admin",
+       "op": "eq",
+       "value": true
+      },
+      {
+       "variable": "see_noah",
+       "op": "eq",
+       "value": true
+      }
+     ]
+    },
+    {
+     "variable": "asked_材料行老闆_黑洞",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問老闆那個穿西裝的"
@@ -28906,7 +29011,23 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_材料行老闆_黑洞",
+     "op": "eq",
+     "value": true
+    },
+    {
+     "variable": "asked_材料行老闆_黑洞2",
+     "op": "eq",
+     "value": false
+    },
+    {
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "再問一次那個穿西裝的"
@@ -28920,7 +29041,23 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_材料行老闆_黑洞2",
+     "op": "eq",
+     "value": true
+    },
+    {
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 3
+    },
+    {
+     "variable": "hole_sightings",
+     "op": "gte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "第三次問那個穿西裝的"
@@ -28934,7 +29071,13 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_材料行老闆_諾亞",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問老闆樓上修收音機的那個"
@@ -28948,7 +29091,23 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "asked_材料行老闆_諾亞",
+     "op": "eq",
+     "value": true
+    },
+    {
+     "variable": "asked_材料行老闆_諾亞2",
+     "op": "eq",
+     "value": false
+    },
+    {
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問老闆他都買什麼"

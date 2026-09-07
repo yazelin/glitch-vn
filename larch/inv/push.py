@@ -210,7 +210,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
               "conds": r["conds"], "who": who}
         rule_by_loc.setdefault(r["dest"], []).append(r2)
         for c in r["conds"]:
-            cond_vars.add((c["variable"], c["value"]))
+            for cc in (c.get("any") or [c]):
+                cond_vars.add((cc["variable"], cc["value"]))
 
     item_url = {k: local_asset(v, state, pid, dry, "prop") for k, v in ITEM_LOCAL.items()}
     ghost = MAIN_ASSETS["sprite-none"]
@@ -295,7 +296,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 html = (menu_html.replace("@@LOC_NAME@@", LOC_NAME.get(loc, loc)).replace("@@LOC@@", loc)
                         .replace("/*@@RULES@@*/[]", json.dumps(rs, ensure_ascii=False)))
                 d["miniGameHtml"] = html
-                vs = sorted({c["variable"] for r in rs for c in r["conds"]})
+                vs = sorted({cc["variable"] for r in rs for c in r["conds"] for cc in (c.get("any") or [c])})
                 d["miniGameReadVars"] = ["day", "slot", "here"] + vs
                 d["miniGameWriteVars"] = ["pick"]
                 menus.append(n["id"])

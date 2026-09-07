@@ -64,7 +64,8 @@ LINE_ANY = re.compile(r"^>\s?(.*)$")
 # 段落層的 metadata。這些不是卡片，是**建置真正需要的東西**：
 # 觸發決定這一段什麼時候播（＝邊的條件），變數決定它寫什麼。
 # 只抓文字，判讀留給下一層，因為寫法還沒統一（「`day >= 4`」與「第四天以後」並存）。
-META = re.compile(r"^\*\*(觸發|變數|線索|問誰|地點・時段|給什麼|新資訊|選單)\*\*[：:]?\s*(.*)$")
+META = re.compile(r"^(?:-\s*)?\*\*(觸發|變數|線索|問誰|地點・時段|給什麼|新資訊|選單)\*\*[：:]?\s*(.*)$")
+META_CONT = re.compile(r"^\s+×\s*(.*)$")     # 「- **觸發**」寫成兩行時的續行（材料行那五格）
 PERSONS = ["管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "便利商店店員", "材料行老闆"]
 # 含 L1：橋段的每一場都是 L1，而且標題就帶地點代號與時段（`# 五、深夜的鐵塔（`store`・深夜）`）。
 SECTION = re.compile(r"^(#{1,5})\s+(.*?)\s*$")
@@ -95,6 +96,7 @@ def parse_file(path):
         cur = None
 
     stack, meta_now, skip_lvl = [], {}, None   # stack = [(level, text)]
+    last_meta = None
     meta_lvl = {}                              # 每個 meta 鍵在哪一級標題底下收的
     for i, ln in enumerate(lines, 1):
         if h := SECTION.match(ln):
@@ -120,6 +122,10 @@ def parse_file(path):
             continue
         if skip_lvl is not None:
             continue
+        if last_meta and (mc := META_CONT.match(ln)):
+            meta_now[last_meta] = (meta_now.get(last_meta, "") + " × " + mc.group(1).strip()).strip()
+            continue
+        last_meta = None
         if mm := META.match(ln):
             key, val = mm.group(1), mm.group(2).strip()
             here_lvl = stack[-1][0] if stack else 99
@@ -128,6 +134,7 @@ def parse_file(path):
             else:
                 meta_now[key] = (meta_now.get(key, "") + " " + val).strip()
             meta_lvl[key] = here_lvl
+            last_meta = key
             continue
         if (cm := CHOICE.match(ln)):
             flush()

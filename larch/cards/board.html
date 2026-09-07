@@ -94,7 +94,15 @@ button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;font-si
   background:none;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:.25em .1em}
 button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(--cyan);outline:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media (max-width:600px){button.spot{width:6.4em;padding:.35em .35em .45em}.name{font-size:12px}.who{font-size:10px}}
+/* 直向手機：地圖式排版擠不下，改成兩欄便條牆，往下捲。街道線與紅線不畫，待辦便條排最上面 */
+@media (orientation:portrait){
+  .wrap{padding:2vh 3.5vw 1.5vh}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:1.1em .8em;align-content:start;overflow-y:auto;padding:.9em .3em 1.2em}
+  .map svg{display:none}
+  .todo{position:static;transform:rotate(-.6deg);grid-column:1/-1;width:auto;margin:0 0 .2em}
+  button.spot,button.spot.note{position:static;transform:rotate(var(--rot,0deg)) scale(.96);width:auto;min-height:5.2em}
+  .name{font-size:14px}.who{font-size:11.5px}.who.hint{font-size:11.5px}
+}
 </style></head>
 <body><div class="sky" id="sky"></div><div class="wrap">
   <header>
