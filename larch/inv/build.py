@@ -172,8 +172,9 @@ def table_match(rows, headings):
         # 一、關鍵詞：「那台螢幕」「失物箱」「她叫什麼名字」
         if any(tok in stack for tok in toks if len(tok) >= 2):
             return dest, slots
-        # 二、子節開頭：「Ａ一」「格一」「甲」對到標題開頭
-        if any(h.startswith(tok) for tok in toks for h in headings):
+        # 二、子節開頭：「Ａ一」「格一」「甲」對到標題開頭；「乙（含乙之二）」先把括號拿掉
+        toks2 = [re.sub(r"（.*?）", "", tok) for tok in toks]
+        if any(t and h.startswith(t) for t in toks2 for h in headings):
             return dest, slots
         # 三、純序數：「七・二」＝該人底下第二個 L3，對到以「二、」開頭的標題
         if len(parts) >= 2 and re.fullmatch(r"[一二三四五六七八九十]+", parts[1]):

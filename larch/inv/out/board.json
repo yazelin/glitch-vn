@@ -19908,7 +19908,7 @@
   },
   {
    "id": "e211",
-   "source": "inv-007",
+   "source": "inv-025",
    "target": "inv-211",
    "sourceHandle": "right",
    "animated": true,
@@ -19930,7 +19930,7 @@
   },
   {
    "id": "e213",
-   "source": "inv-007",
+   "source": "inv-025",
    "target": "inv-214",
    "sourceHandle": "right",
    "animated": true,
@@ -24938,7 +24938,7 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表（該人預設）",
+   "dest_from": "總表",
    "label": "問老闆那個穿西裝的"
   },
   {
@@ -24952,7 +24952,7 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表（該人預設）",
+   "dest_from": "總表",
    "label": "再問一次那個穿西裝的"
   },
   {
@@ -24966,37 +24966,35 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表（該人預設）",
+   "dest_from": "總表",
    "label": "第三次問那個穿西裝的"
   },
   {
    "segment": "seg055",
    "section": "乙、問她・關於諾亞",
    "file": "調查篇-問答矩陣",
-   "dest": "roof",
+   "dest": "parts",
    "slots": [
     0,
-    1,
-    2
+    1
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表（該人預設）",
+   "dest_from": "總表",
    "label": "問老闆樓上修收音機的那個"
   },
   {
    "segment": "seg056",
    "section": "乙之二、再問一次",
    "file": "調查篇-問答矩陣",
-   "dest": "roof",
+   "dest": "parts",
    "slots": [
     0,
-    1,
-    2
+    1
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表（該人預設）",
+   "dest_from": "總表",
    "label": "問老闆他都買什麼"
   },
   {
