@@ -8730,7 +8730,15 @@
     "text": "他等了一下。\n沒有人再問。\n他把信封收進外套內側，點了一下頭，走上樓梯。\n樓梯間沒有燈。第三階的邊角被踩得發亮。",
     "speaker": "旁白",
     "sceneCode": "lobby",
-    "segment": "seg075"
+    "segment": "seg075",
+    "variableOps": [
+     {
+      "id": "op-hole_sightings",
+      "variable": "hole_sightings",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -18777,166 +18785,6 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "信箱牆前面站著一個人。\n很高",
-    "text": "信箱牆前面站著一個人。\n很高。深色西裝。手上拿著一個信封，正在看上面的字。",
-    "speaker": "旁白",
-    "sceneCode": "lobby",
-    "segment": "seg142"
-   }
-  },
-  {
-   "id": "inv-599",
-   "type": "story",
-   "position": {
-    "x": 179700,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "玩家：不好意思。",
-    "text": "不好意思。",
-    "speaker": "玩家",
-    "dialogueLines": [
-     {
-      "id": "l0",
-      "speaker": "玩家",
-      "text": "不好意思。",
-      "emotion": ""
-     },
-     {
-      "id": "l1",
-      "speaker": "黑洞先生",
-      "text": "（抬頭）嗯。",
-      "emotion": ""
-     },
-     {
-      "id": "l2",
-      "speaker": "玩家",
-      "text": "你住這裡嗎。",
-      "emotion": ""
-     },
-     {
-      "id": "l3",
-      "speaker": "黑洞先生",
-      "text": "住。",
-      "emotion": ""
-     },
-     {
-      "id": "l4",
-      "speaker": "玩家",
-      "text": "那你有沒有看過一本本子。深色的，很厚，邊角磨掉了。",
-      "emotion": ""
-     },
-     {
-      "id": "l5",
-      "speaker": "黑洞先生",
-      "text": "（很短的停頓）我知道你說的是誰。",
-      "emotion": ""
-     },
-     {
-      "id": "l6",
-      "speaker": "玩家",
-      "text": "我沒有說是誰。",
-      "emotion": ""
-     },
-     {
-      "id": "l7",
-      "speaker": "黑洞先生",
-      "text": "對。",
-      "emotion": ""
-     },
-     {
-      "id": "l8",
-      "speaker": "玩家",
-      "text": "……她住幾樓。",
-      "emotion": ""
-     },
-     {
-      "id": "l9",
-      "speaker": "黑洞先生",
-      "text": "這個我不能講。",
-      "emotion": ""
-     },
-     {
-      "id": "l10",
-      "speaker": "玩家",
-      "text": "為什麼。",
-      "emotion": ""
-     },
-     {
-      "id": "l11",
-      "speaker": "黑洞先生",
-      "text": "因為你問了。",
-      "emotion": ""
-     }
-    ],
-    "sceneCode": "lobby",
-    "segment": "seg142"
-   }
-  },
-  {
-   "id": "inv-600",
-   "type": "story",
-   "position": {
-    "x": 180000,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "他把信封收進外套內側，點了一",
-    "text": "他把信封收進外套內側，點了一下頭，走上樓梯。\n短靴踩在磁磚上有很輕的聲音。",
-    "speaker": "旁白",
-    "sceneCode": "lobby",
-    "segment": "seg142",
-    "variableOps": [
-     {
-      "id": "op-hole_sightings",
-      "variable": "hole_sightings",
-      "kind": "add",
-      "value": 1
-     }
-    ]
-   }
-  },
-  {
-   "id": "inv-601",
-   "type": "story",
-   "position": {
-    "x": 180300,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：晚上七點多，一樓遇到",
-    "text": "晚上七點多，一樓遇到一個住戶。\n高個子，穿西裝。沒問到名字。\n我問的是本子。他回答的是人。\n他說「因為你問了」。我不知道那是什麼意思。",
-    "speaker": "玩家",
-    "sceneCode": "lobby",
-    "segment": "seg142"
-   }
-  },
-  {
-   "id": "inv-602",
-   "type": "story",
-   "position": {
-    "x": 180600,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
-   }
-  },
-  {
-   "id": "inv-603",
-   "type": "story",
-   "position": {
-    "x": 180900,
-    "y": 0
-   },
-   "data": {
     "type": "interrupt",
     "title": "第二天收尾",
     "text": "",
@@ -18951,10 +18799,10 @@
    }
   },
   {
-   "id": "inv-604",
+   "id": "inv-599",
    "type": "story",
    "position": {
-    "x": 181200,
+    "x": 179700,
     "y": 0
    },
    "data": {
@@ -18969,10 +18817,10 @@
    }
   },
   {
-   "id": "inv-605",
+   "id": "inv-600",
    "type": "story",
    "position": {
-    "x": 181500,
+    "x": 180000,
     "y": 0
    },
    "data": {
@@ -18984,10 +18832,10 @@
    }
   },
   {
-   "id": "inv-606",
+   "id": "inv-601",
    "type": "story",
    "position": {
-    "x": 181800,
+    "x": 180300,
     "y": 0
    },
    "data": {
@@ -19000,10 +18848,10 @@
    }
   },
   {
-   "id": "inv-607",
+   "id": "inv-602",
    "type": "story",
    "position": {
-    "x": 182100,
+    "x": 180600,
     "y": 0
    },
    "data": {
@@ -19092,10 +18940,10 @@
    }
   },
   {
-   "id": "inv-608",
+   "id": "inv-603",
    "type": "story",
    "position": {
-    "x": 182400,
+    "x": 180900,
     "y": 0
    },
    "data": {
@@ -19116,10 +18964,10 @@
    }
   },
   {
-   "id": "inv-609",
+   "id": "inv-604",
    "type": "story",
    "position": {
-    "x": 182700,
+    "x": 181200,
     "y": 0
    },
    "data": {
@@ -19130,10 +18978,10 @@
    }
   },
   {
-   "id": "inv-610",
+   "id": "inv-605",
    "type": "story",
    "position": {
-    "x": 183000,
+    "x": 181500,
     "y": 0
    },
    "data": {
@@ -19146,10 +18994,10 @@
    }
   },
   {
-   "id": "inv-611",
+   "id": "inv-606",
    "type": "story",
    "position": {
-    "x": 183300,
+    "x": 181800,
     "y": 0
    },
    "data": {
@@ -19190,10 +19038,10 @@
    }
   },
   {
-   "id": "inv-612",
+   "id": "inv-607",
    "type": "story",
    "position": {
-    "x": 183600,
+    "x": 182100,
     "y": 0
    },
    "data": {
@@ -19204,10 +19052,10 @@
    }
   },
   {
-   "id": "inv-613",
+   "id": "inv-608",
    "type": "story",
    "position": {
-    "x": 183900,
+    "x": 182400,
     "y": 0
    },
    "data": {
@@ -19257,10 +19105,10 @@
    }
   },
   {
-   "id": "inv-614",
+   "id": "inv-609",
    "type": "story",
    "position": {
-    "x": 184200,
+    "x": 182700,
     "y": 0
    },
    "data": {
@@ -19272,10 +19120,10 @@
    }
   },
   {
-   "id": "inv-615",
+   "id": "inv-610",
    "type": "story",
    "position": {
-    "x": 184500,
+    "x": 183000,
     "y": 0
    },
    "data": {
@@ -19286,10 +19134,10 @@
    }
   },
   {
-   "id": "inv-616",
+   "id": "inv-611",
    "type": "story",
    "position": {
-    "x": 184800,
+    "x": 183300,
     "y": 0
    },
    "data": {
@@ -19301,10 +19149,10 @@
    }
   },
   {
-   "id": "inv-617",
+   "id": "inv-612",
    "type": "story",
    "position": {
-    "x": 185100,
+    "x": 183600,
     "y": 0
    },
    "data": {
@@ -19315,10 +19163,10 @@
    }
   },
   {
-   "id": "inv-618",
+   "id": "inv-613",
    "type": "story",
    "position": {
-    "x": 185400,
+    "x": 183900,
     "y": 0
    },
    "data": {
@@ -19362,10 +19210,10 @@
    }
   },
   {
-   "id": "inv-619",
+   "id": "inv-614",
    "type": "story",
    "position": {
-    "x": 185700,
+    "x": 184200,
     "y": 0
    },
    "data": {
@@ -19374,6 +19222,79 @@
     "text": "二號出口發傳單的。他記得我昨天沒有拿。\n他一天遞出去幾百張，記得的是沒拿的那個。",
     "speaker": "玩家",
     "segment": "seg148"
+   }
+  },
+  {
+   "id": "inv-615",
+   "type": "story",
+   "position": {
+    "x": 184500,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-616",
+   "type": "story",
+   "position": {
+    "x": 184800,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "手扶梯一直在吐人。上來的人不",
+    "text": "手扶梯一直在吐人。上來的人不看路，看手機，然後往三個方向散開。\n沒有一個人停下來。她站了一個時段，被撞了兩次，兩次都是對方說對不起。",
+    "speaker": "旁白",
+    "segment": "seg149"
+   }
+  },
+  {
+   "id": "inv-617",
+   "type": "story",
+   "position": {
+    "x": 185100,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-618",
+   "type": "story",
+   "position": {
+    "x": 185400,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "看板每十五秒換一格。銀行、房",
+    "text": "看板每十五秒換一格。銀行、房仲、一支手機，然後又是她。\n她那一格沒有聲音。畫面裡她在講話，字幕寫「我會記得你們的」。\n底下經過的人沒有一個抬頭。",
+    "speaker": "旁白",
+    "segment": "seg150"
+   }
+  },
+  {
+   "id": "inv-619",
+   "type": "story",
+   "position": {
+    "x": 185700,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：南港車站前。她的廣告",
+    "text": "南港車站前。她的廣告在看板上，沒有聲音，字幕寫我會記得你們的。\n我站了一個時段。沒有人抬頭。我是唯一一個看完的。",
+    "speaker": "玩家",
+    "segment": "seg150"
    }
   },
   {
@@ -19398,11 +19319,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "手扶梯一直在吐人。上來的人不",
-    "text": "手扶梯一直在吐人。上來的人不看路，看手機，然後往三個方向散開。\n沒有一個人停下來。她站了一個時段，被撞了兩次，兩次都是對方說對不起。",
-    "speaker": "旁白",
-    "segment": "seg149"
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": []
    }
   },
   {
@@ -19413,10 +19333,10 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": []
    }
   },
   {
@@ -19427,11 +19347,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "看板每十五秒換一格。銀行、房",
-    "text": "看板每十五秒換一格。銀行、房仲、一支手機，然後又是她。\n她那一格沒有聲音。畫面裡她在講話，字幕寫「我會記得你們的」。\n底下經過的人沒有一個抬頭。",
-    "speaker": "旁白",
-    "segment": "seg150"
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": []
    }
   },
   {
@@ -19439,77 +19358,6 @@
    "type": "story",
    "position": {
     "x": 187200,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：南港車站前。她的廣告",
-    "text": "南港車站前。她的廣告在看板上，沒有聲音，字幕寫我會記得你們的。\n我站了一個時段。沒有人抬頭。我是唯一一個看完的。",
-    "speaker": "玩家",
-    "segment": "seg150"
-   }
-  },
-  {
-   "id": "inv-625",
-   "type": "story",
-   "position": {
-    "x": 187500,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
-   }
-  },
-  {
-   "id": "inv-626",
-   "type": "story",
-   "position": {
-    "x": 187800,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（問幾次了）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-627",
-   "type": "story",
-   "position": {
-    "x": 188100,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（問幾次了）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-628",
-   "type": "story",
-   "position": {
-    "x": 188400,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（問幾次了）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-629",
-   "type": "story",
-   "position": {
-    "x": 188700,
     "y": 0
    },
    "data": {
@@ -19540,10 +19388,10 @@
    }
   },
   {
-   "id": "inv-630",
+   "id": "inv-625",
    "type": "story",
    "position": {
-    "x": 189000,
+    "x": 187500,
     "y": 0
    },
    "data": {
@@ -19556,10 +19404,10 @@
    }
   },
   {
-   "id": "inv-631",
+   "id": "inv-626",
    "type": "story",
    "position": {
-    "x": 189300,
+    "x": 187800,
     "y": 0
    },
    "data": {
@@ -19574,10 +19422,10 @@
    }
   },
   {
-   "id": "inv-632",
+   "id": "inv-627",
    "type": "story",
    "position": {
-    "x": 189600,
+    "x": 188100,
     "y": 0
    },
    "data": {
@@ -19608,10 +19456,10 @@
    }
   },
   {
-   "id": "inv-633",
+   "id": "inv-628",
    "type": "story",
    "position": {
-    "x": 189900,
+    "x": 188400,
     "y": 0
    },
    "data": {
@@ -19624,10 +19472,10 @@
    }
   },
   {
-   "id": "inv-634",
+   "id": "inv-629",
    "type": "story",
    "position": {
-    "x": 190200,
+    "x": 188700,
     "y": 0
    },
    "data": {
@@ -19642,10 +19490,10 @@
    }
   },
   {
-   "id": "inv-635",
+   "id": "inv-630",
    "type": "story",
    "position": {
-    "x": 190500,
+    "x": 189000,
     "y": 0
    },
    "data": {
@@ -19676,10 +19524,10 @@
    }
   },
   {
-   "id": "inv-636",
+   "id": "inv-631",
    "type": "story",
    "position": {
-    "x": 190800,
+    "x": 189300,
     "y": 0
    },
    "data": {
@@ -19692,10 +19540,10 @@
    }
   },
   {
-   "id": "inv-637",
+   "id": "inv-632",
    "type": "story",
    "position": {
-    "x": 191100,
+    "x": 189600,
     "y": 0
    },
    "data": {
@@ -19710,10 +19558,10 @@
    }
   },
   {
-   "id": "inv-638",
+   "id": "inv-633",
    "type": "story",
    "position": {
-    "x": 191400,
+    "x": 189900,
     "y": 0
    },
    "data": {
@@ -19732,6 +19580,76 @@
    }
   },
   {
+   "id": "inv-634",
+   "type": "story",
+   "position": {
+    "x": 190200,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（lobby 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-635",
+   "type": "story",
+   "position": {
+    "x": 190500,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（lobby 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-636",
+   "type": "story",
+   "position": {
+    "x": 190800,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（lobby 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-637",
+   "type": "story",
+   "position": {
+    "x": 191100,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（lobby 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-638",
+   "type": "story",
+   "position": {
+    "x": 191400,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（lobby 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
    "id": "inv-639",
    "type": "story",
    "position": {
@@ -19740,7 +19658,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19754,7 +19672,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19768,7 +19686,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19782,7 +19700,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19796,7 +19714,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19810,7 +19728,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19824,7 +19742,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19838,7 +19756,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19852,7 +19770,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19866,7 +19784,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19880,7 +19798,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19894,7 +19812,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19908,7 +19826,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19922,7 +19840,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19936,7 +19854,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19950,7 +19868,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19964,7 +19882,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19978,7 +19896,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20006,7 +19924,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20034,7 +19952,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20062,7 +19980,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20090,7 +20008,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20104,7 +20022,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（store 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20118,7 +20036,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20132,7 +20050,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（store 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20146,7 +20064,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20160,7 +20078,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（store 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20174,7 +20092,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（parts 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20188,7 +20106,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（parts 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20202,7 +20120,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（parts 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20216,7 +20134,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（parts 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20230,7 +20148,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（parts 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20244,7 +20162,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（parts 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20254,76 +20172,6 @@
    "type": "story",
    "position": {
     "x": 202800,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（parts 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-677",
-   "type": "story",
-   "position": {
-    "x": 203100,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（parts 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-678",
-   "type": "story",
-   "position": {
-    "x": 203400,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（parts 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-679",
-   "type": "story",
-   "position": {
-    "x": 203700,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（parts 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-680",
-   "type": "story",
-   "position": {
-    "x": 204000,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（parts 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-681",
-   "type": "story",
-   "position": {
-    "x": 204300,
     "y": 0
    },
    "data": {
@@ -25268,72 +25116,29 @@
   },
   {
    "id": "e562",
-   "source": "inv-600",
-   "target": "inv-601",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e563",
    "source": "inv-601",
    "target": "inv-602",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e564",
-   "source": "inv-005",
-   "target": "inv-598",
+   "id": "e563",
+   "source": "inv-602",
+   "target": "inv-603",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg142"
-    }
-   }
+   "animated": true
   },
   {
-   "id": "e565",
+   "id": "e564",
    "source": "inv-603",
    "target": "inv-604",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e566",
-   "source": "inv-604",
-   "target": "inv-605",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e567",
-   "source": "inv-606",
-   "target": "inv-607",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e568",
-   "source": "inv-607",
-   "target": "inv-608",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e569",
-   "source": "inv-608",
-   "target": "inv-609",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e570",
+   "id": "e565",
    "source": "inv-029",
-   "target": "inv-606",
+   "target": "inv-601",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25346,11 +25151,62 @@
    }
   },
   {
-   "id": "e571",
-   "source": "inv-610",
-   "target": "inv-611",
+   "id": "e566",
+   "source": "inv-605",
+   "target": "inv-606",
    "sourceHandle": "right",
    "animated": true
+  },
+  {
+   "id": "e567",
+   "source": "inv-606",
+   "target": "inv-607",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e568",
+   "source": "inv-017",
+   "target": "inv-605",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg145"
+    }
+   }
+  },
+  {
+   "id": "e569",
+   "source": "inv-608",
+   "target": "inv-609",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e570",
+   "source": "inv-609",
+   "target": "inv-610",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e571",
+   "source": "inv-037",
+   "target": "inv-608",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg146"
+    }
+   }
   },
   {
    "id": "e572",
@@ -25361,8 +25217,8 @@
   },
   {
    "id": "e573",
-   "source": "inv-017",
-   "target": "inv-610",
+   "source": "inv-037",
+   "target": "inv-611",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25370,7 +25226,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg145"
+     "value": "seg147"
     }
    }
   },
@@ -25390,7 +25246,7 @@
   },
   {
    "id": "e576",
-   "source": "inv-037",
+   "source": "inv-041",
    "target": "inv-613",
    "sourceHandle": "right",
    "animated": true,
@@ -25399,7 +25255,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg146"
+     "value": "seg148"
     }
    }
   },
@@ -25412,7 +25268,7 @@
   },
   {
    "id": "e578",
-   "source": "inv-037",
+   "source": "inv-041",
    "target": "inv-616",
    "sourceHandle": "right",
    "animated": true,
@@ -25421,7 +25277,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg147"
+     "value": "seg149"
     }
    }
   },
@@ -25441,59 +25297,8 @@
   },
   {
    "id": "e581",
-   "source": "inv-041",
-   "target": "inv-618",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg148"
-    }
-   }
-  },
-  {
-   "id": "e582",
-   "source": "inv-621",
-   "target": "inv-622",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e583",
-   "source": "inv-041",
-   "target": "inv-621",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg149"
-    }
-   }
-  },
-  {
-   "id": "e584",
-   "source": "inv-623",
-   "target": "inv-624",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e585",
-   "source": "inv-624",
-   "target": "inv-625",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e586",
    "source": "inv-013",
-   "target": "inv-623",
+   "target": "inv-618",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25506,106 +25311,106 @@
    }
   },
   {
-   "id": "e587",
+   "id": "e582",
    "source": "inv-161",
    "target": "inv-163",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e587",
+   "id": "e582",
    "source": "inv-161",
    "target": "inv-166",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e587",
+   "id": "e582",
    "source": "inv-161",
    "target": "inv-168",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e587",
+   "id": "e582",
    "source": "inv-164",
    "target": "inv-166",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e588",
+   "id": "e583",
    "source": "inv-164",
    "target": "inv-168",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-265",
    "target": "inv-267",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-265",
    "target": "inv-271",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-272",
    "target": "inv-274",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-272",
    "target": "inv-278",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-279",
    "target": "inv-281",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-279",
    "target": "inv-285",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-287",
    "target": "inv-289",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-287",
    "target": "inv-293",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e589",
+   "id": "e584",
    "source": "inv-339",
-   "target": "inv-626",
+   "target": "inv-621",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e590",
-   "source": "inv-626",
+   "id": "e585",
+   "source": "inv-621",
    "target": "inv-362",
    "sourceHandle": "right",
    "animated": true,
@@ -25619,116 +25424,151 @@
    }
   },
   {
-   "id": "e591",
-   "source": "inv-626",
+   "id": "e586",
+   "source": "inv-621",
    "target": "inv-360",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e590",
+   "id": "e585",
    "source": "inv-339",
    "target": "inv-341",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e590",
+   "id": "e585",
    "source": "inv-346",
    "target": "inv-341",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e591",
+   "id": "e586",
    "source": "inv-346",
-   "target": "inv-627",
+   "target": "inv-622",
    "sourceHandle": "choice-1",
    "animated": true
+  },
+  {
+   "id": "e587",
+   "source": "inv-622",
+   "target": "inv-362",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "cat_asked_glitch",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e588",
+   "source": "inv-622",
+   "target": "inv-360",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e589",
+   "source": "inv-352",
+   "target": "inv-341",
+   "sourceHandle": "choice-0",
+   "animated": true
+  },
+  {
+   "id": "e590",
+   "source": "inv-352",
+   "target": "inv-623",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e591",
+   "source": "inv-623",
+   "target": "inv-362",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "cat_asked_glitch",
+     "op": "gte",
+     "value": 3
+    }
+   }
   },
   {
    "id": "e592",
-   "source": "inv-627",
-   "target": "inv-362",
+   "source": "inv-623",
+   "target": "inv-360",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "cat_asked_glitch",
-     "op": "gte",
-     "value": 3
-    }
-   }
+   "animated": true
   },
   {
    "id": "e593",
-   "source": "inv-627",
-   "target": "inv-360",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e594",
-   "source": "inv-352",
-   "target": "inv-341",
-   "sourceHandle": "choice-0",
-   "animated": true
-  },
-  {
-   "id": "e595",
-   "source": "inv-352",
-   "target": "inv-628",
-   "sourceHandle": "choice-1",
-   "animated": true
-  },
-  {
-   "id": "e596",
-   "source": "inv-628",
-   "target": "inv-362",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "cat_asked_glitch",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e597",
-   "source": "inv-628",
-   "target": "inv-360",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e598",
    "source": "inv-352",
    "target": "inv-356",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e598",
+   "id": "e593",
    "source": "inv-480",
    "target": "inv-481",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e599",
+   "id": "e594",
    "source": "inv-480",
    "target": "inv-483",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
+   "id": "e595",
+   "source": "inv-624",
+   "target": "inv-625",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e596",
+   "source": "inv-625",
+   "target": "inv-626",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e597",
+   "source": "inv-626",
+   "target": "inv-474",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e598",
+   "source": "inv-627",
+   "target": "inv-628",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e599",
+   "source": "inv-628",
+   "target": "inv-629",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e600",
    "source": "inv-629",
-   "target": "inv-630",
+   "target": "inv-478",
    "sourceHandle": "right",
    "animated": true
   },
@@ -25742,70 +25582,35 @@
   {
    "id": "e602",
    "source": "inv-631",
-   "target": "inv-474",
+   "target": "inv-632",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e603",
    "source": "inv-632",
-   "target": "inv-633",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e604",
-   "source": "inv-633",
-   "target": "inv-634",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e605",
-   "source": "inv-634",
-   "target": "inv-478",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e606",
-   "source": "inv-635",
-   "target": "inv-636",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e607",
-   "source": "inv-636",
-   "target": "inv-637",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e608",
-   "source": "inv-637",
    "target": "inv-485",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e608",
+   "id": "e603",
    "source": "inv-158",
    "target": "inv-160",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e607",
+   "id": "e602",
    "source": "inv-166",
    "target": "inv-168",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e608",
+   "id": "e603",
    "source": "inv-002",
-   "target": "inv-639",
+   "target": "inv-634",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25818,8 +25623,8 @@
    }
   },
   {
-   "id": "e609",
-   "source": "inv-639",
+   "id": "e604",
+   "source": "inv-634",
    "target": "inv-243",
    "sourceHandle": "right",
    "animated": true,
@@ -25833,23 +25638,23 @@
    }
   },
   {
-   "id": "e610",
-   "source": "inv-639",
+   "id": "e605",
+   "source": "inv-634",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e611",
+   "id": "e606",
    "source": "inv-243",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e612",
+   "id": "e607",
    "source": "inv-002",
-   "target": "inv-640",
+   "target": "inv-635",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25862,9 +25667,60 @@
    }
   },
   {
-   "id": "e613",
-   "source": "inv-640",
+   "id": "e608",
+   "source": "inv-635",
    "target": "inv-242",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e609",
+   "source": "inv-635",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e610",
+   "source": "inv-242",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e611",
+   "source": "inv-002",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e612",
+   "source": "inv-003",
+   "target": "inv-636",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e613",
+   "source": "inv-636",
+   "target": "inv-243",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25878,29 +25734,15 @@
   },
   {
    "id": "e614",
-   "source": "inv-640",
+   "source": "inv-636",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e615",
-   "source": "inv-242",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e616",
-   "source": "inv-002",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e617",
    "source": "inv-003",
-   "target": "inv-641",
+   "target": "inv-637",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25908,14 +25750,14 @@
      "kind": "variable",
      "variable": "met_管理員",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e618",
-   "source": "inv-641",
-   "target": "inv-243",
+   "id": "e616",
+   "source": "inv-637",
+   "target": "inv-242",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25928,16 +25770,23 @@
    }
   },
   {
-   "id": "e619",
-   "source": "inv-641",
+   "id": "e617",
+   "source": "inv-637",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e620",
+   "id": "e618",
    "source": "inv-003",
-   "target": "inv-642",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e619",
+   "source": "inv-004",
+   "target": "inv-638",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25945,80 +25794,36 @@
      "kind": "variable",
      "variable": "met_管理員",
      "op": "gte",
-     "value": 3
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e620",
+   "source": "inv-638",
+   "target": "inv-243",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
     }
    }
   },
   {
    "id": "e621",
-   "source": "inv-642",
-   "target": "inv-242",
+   "source": "inv-638",
+   "target": "inv-005",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
+   "animated": true
   },
   {
    "id": "e622",
-   "source": "inv-642",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e623",
-   "source": "inv-003",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e624",
    "source": "inv-004",
-   "target": "inv-643",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e625",
-   "source": "inv-643",
-   "target": "inv-243",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e626",
-   "source": "inv-643",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e627",
-   "source": "inv-004",
-   "target": "inv-644",
+   "target": "inv-639",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26031,8 +25836,8 @@
    }
   },
   {
-   "id": "e628",
-   "source": "inv-644",
+   "id": "e623",
+   "source": "inv-639",
    "target": "inv-242",
    "sourceHandle": "right",
    "animated": true,
@@ -26046,23 +25851,23 @@
    }
   },
   {
-   "id": "e629",
-   "source": "inv-644",
+   "id": "e624",
+   "source": "inv-639",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e630",
+   "id": "e625",
    "source": "inv-004",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e631",
+   "id": "e626",
    "source": "inv-006",
-   "target": "inv-645",
+   "target": "inv-640",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26075,8 +25880,8 @@
    }
   },
   {
-   "id": "e632",
-   "source": "inv-645",
+   "id": "e627",
+   "source": "inv-640",
    "target": "inv-245",
    "sourceHandle": "right",
    "animated": true,
@@ -26090,23 +25895,23 @@
    }
   },
   {
-   "id": "e633",
-   "source": "inv-645",
+   "id": "e628",
+   "source": "inv-640",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e634",
+   "id": "e629",
    "source": "inv-245",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e635",
+   "id": "e630",
    "source": "inv-006",
-   "target": "inv-646",
+   "target": "inv-641",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26119,9 +25924,60 @@
    }
   },
   {
-   "id": "e636",
-   "source": "inv-646",
+   "id": "e631",
+   "source": "inv-641",
    "target": "inv-244",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e632",
+   "source": "inv-641",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e633",
+   "source": "inv-244",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e634",
+   "source": "inv-006",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e635",
+   "source": "inv-007",
+   "target": "inv-642",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e636",
+   "source": "inv-642",
+   "target": "inv-245",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26135,29 +25991,15 @@
   },
   {
    "id": "e637",
-   "source": "inv-646",
+   "source": "inv-642",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e638",
-   "source": "inv-244",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e639",
-   "source": "inv-006",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e640",
    "source": "inv-007",
-   "target": "inv-647",
+   "target": "inv-643",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26165,14 +26007,14 @@
      "kind": "variable",
      "variable": "met_諾亞",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e641",
-   "source": "inv-647",
-   "target": "inv-245",
+   "id": "e639",
+   "source": "inv-643",
+   "target": "inv-244",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26185,16 +26027,23 @@
    }
   },
   {
-   "id": "e642",
-   "source": "inv-647",
+   "id": "e640",
+   "source": "inv-643",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e643",
+   "id": "e641",
    "source": "inv-007",
-   "target": "inv-648",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e642",
+   "source": "inv-008",
+   "target": "inv-644",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26202,80 +26051,36 @@
      "kind": "variable",
      "variable": "met_諾亞",
      "op": "gte",
-     "value": 3
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e643",
+   "source": "inv-644",
+   "target": "inv-245",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
     }
    }
   },
   {
    "id": "e644",
-   "source": "inv-648",
-   "target": "inv-244",
+   "source": "inv-644",
+   "target": "inv-009",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
+   "animated": true
   },
   {
    "id": "e645",
-   "source": "inv-648",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e646",
-   "source": "inv-007",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e647",
    "source": "inv-008",
-   "target": "inv-649",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e648",
-   "source": "inv-649",
-   "target": "inv-245",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e649",
-   "source": "inv-649",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e650",
-   "source": "inv-008",
-   "target": "inv-650",
+   "target": "inv-645",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26288,8 +26093,8 @@
    }
   },
   {
-   "id": "e651",
-   "source": "inv-650",
+   "id": "e646",
+   "source": "inv-645",
    "target": "inv-244",
    "sourceHandle": "right",
    "animated": true,
@@ -26303,44 +26108,44 @@
    }
   },
   {
-   "id": "e652",
-   "source": "inv-650",
+   "id": "e647",
+   "source": "inv-645",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e653",
+   "id": "e648",
    "source": "inv-008",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e654",
+   "id": "e649",
    "source": "inv-010",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e655",
+   "id": "e650",
    "source": "inv-011",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e656",
+   "id": "e651",
    "source": "inv-012",
    "target": "inv-013",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e657",
+   "id": "e652",
    "source": "inv-014",
-   "target": "inv-651",
+   "target": "inv-646",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26353,8 +26158,8 @@
    }
   },
   {
-   "id": "e658",
-   "source": "inv-651",
+   "id": "e653",
+   "source": "inv-646",
    "target": "inv-255",
    "sourceHandle": "right",
    "animated": true,
@@ -26368,23 +26173,23 @@
    }
   },
   {
-   "id": "e659",
-   "source": "inv-651",
+   "id": "e654",
+   "source": "inv-646",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e660",
+   "id": "e655",
    "source": "inv-255",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e661",
+   "id": "e656",
    "source": "inv-014",
-   "target": "inv-652",
+   "target": "inv-647",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26397,9 +26202,60 @@
    }
   },
   {
-   "id": "e662",
-   "source": "inv-652",
+   "id": "e657",
+   "source": "inv-647",
    "target": "inv-254",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e658",
+   "source": "inv-647",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e659",
+   "source": "inv-254",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e660",
+   "source": "inv-014",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e661",
+   "source": "inv-015",
+   "target": "inv-648",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e662",
+   "source": "inv-648",
+   "target": "inv-255",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26413,29 +26269,15 @@
   },
   {
    "id": "e663",
-   "source": "inv-652",
+   "source": "inv-648",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e664",
-   "source": "inv-254",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e665",
-   "source": "inv-014",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e666",
    "source": "inv-015",
-   "target": "inv-653",
+   "target": "inv-649",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26443,14 +26285,14 @@
      "kind": "variable",
      "variable": "met_斑比",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e667",
-   "source": "inv-653",
-   "target": "inv-255",
+   "id": "e665",
+   "source": "inv-649",
+   "target": "inv-254",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26463,16 +26305,23 @@
    }
   },
   {
-   "id": "e668",
-   "source": "inv-653",
+   "id": "e666",
+   "source": "inv-649",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e669",
+   "id": "e667",
    "source": "inv-015",
-   "target": "inv-654",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e668",
+   "source": "inv-016",
+   "target": "inv-650",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26480,80 +26329,36 @@
      "kind": "variable",
      "variable": "met_斑比",
      "op": "gte",
-     "value": 3
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e669",
+   "source": "inv-650",
+   "target": "inv-255",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
     }
    }
   },
   {
    "id": "e670",
-   "source": "inv-654",
-   "target": "inv-254",
+   "source": "inv-650",
+   "target": "inv-017",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
+   "animated": true
   },
   {
    "id": "e671",
-   "source": "inv-654",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e672",
-   "source": "inv-015",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e673",
    "source": "inv-016",
-   "target": "inv-655",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e674",
-   "source": "inv-655",
-   "target": "inv-255",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e675",
-   "source": "inv-655",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e676",
-   "source": "inv-016",
-   "target": "inv-656",
+   "target": "inv-651",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26566,8 +26371,8 @@
    }
   },
   {
-   "id": "e677",
-   "source": "inv-656",
+   "id": "e672",
+   "source": "inv-651",
    "target": "inv-254",
    "sourceHandle": "right",
    "animated": true,
@@ -26581,44 +26386,44 @@
    }
   },
   {
-   "id": "e678",
-   "source": "inv-656",
+   "id": "e673",
+   "source": "inv-651",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e679",
+   "id": "e674",
    "source": "inv-016",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e680",
+   "id": "e675",
    "source": "inv-018",
    "target": "inv-021",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e681",
+   "id": "e676",
    "source": "inv-019",
    "target": "inv-021",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e682",
+   "id": "e677",
    "source": "inv-020",
    "target": "inv-021",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e683",
+   "id": "e678",
    "source": "inv-022",
-   "target": "inv-657",
+   "target": "inv-652",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26631,8 +26436,8 @@
    }
   },
   {
-   "id": "e684",
-   "source": "inv-657",
+   "id": "e679",
+   "source": "inv-652",
    "target": "inv-251",
    "sourceHandle": "right",
    "animated": true,
@@ -26646,23 +26451,23 @@
    }
   },
   {
-   "id": "e685",
-   "source": "inv-657",
+   "id": "e680",
+   "source": "inv-652",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e686",
+   "id": "e681",
    "source": "inv-251",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e687",
+   "id": "e682",
    "source": "inv-022",
-   "target": "inv-658",
+   "target": "inv-653",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26675,8 +26480,8 @@
    }
   },
   {
-   "id": "e688",
-   "source": "inv-658",
+   "id": "e683",
+   "source": "inv-653",
    "target": "inv-253",
    "sourceHandle": "right",
    "animated": true,
@@ -26690,23 +26495,23 @@
    }
   },
   {
-   "id": "e689",
-   "source": "inv-658",
+   "id": "e684",
+   "source": "inv-653",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e690",
+   "id": "e685",
    "source": "inv-253",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e691",
+   "id": "e686",
    "source": "inv-022",
-   "target": "inv-659",
+   "target": "inv-654",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26719,8 +26524,8 @@
    }
   },
   {
-   "id": "e692",
-   "source": "inv-659",
+   "id": "e687",
+   "source": "inv-654",
    "target": "inv-250",
    "sourceHandle": "right",
    "animated": true,
@@ -26734,23 +26539,23 @@
    }
   },
   {
-   "id": "e693",
-   "source": "inv-659",
+   "id": "e688",
+   "source": "inv-654",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e694",
+   "id": "e689",
    "source": "inv-250",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e695",
+   "id": "e690",
    "source": "inv-022",
-   "target": "inv-660",
+   "target": "inv-655",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26763,8 +26568,8 @@
    }
   },
   {
-   "id": "e696",
-   "source": "inv-660",
+   "id": "e691",
+   "source": "inv-655",
    "target": "inv-252",
    "sourceHandle": "right",
    "animated": true,
@@ -26778,345 +26583,345 @@
    }
   },
   {
-   "id": "e697",
-   "source": "inv-660",
+   "id": "e692",
+   "source": "inv-655",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e698",
+   "id": "e693",
    "source": "inv-252",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e699",
+   "id": "e694",
    "source": "inv-022",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e700",
+   "id": "e695",
    "source": "inv-023",
+   "target": "inv-656",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e696",
+   "source": "inv-656",
+   "target": "inv-251",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e697",
+   "source": "inv-656",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e698",
+   "source": "inv-023",
+   "target": "inv-657",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e699",
+   "source": "inv-657",
+   "target": "inv-253",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e700",
+   "source": "inv-657",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e701",
+   "source": "inv-023",
+   "target": "inv-658",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e702",
+   "source": "inv-658",
+   "target": "inv-250",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e703",
+   "source": "inv-658",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e704",
+   "source": "inv-023",
+   "target": "inv-659",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e705",
+   "source": "inv-659",
+   "target": "inv-252",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e706",
+   "source": "inv-659",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e707",
+   "source": "inv-023",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e708",
+   "source": "inv-024",
+   "target": "inv-660",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e709",
+   "source": "inv-660",
+   "target": "inv-251",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e710",
+   "source": "inv-660",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e711",
+   "source": "inv-024",
    "target": "inv-661",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_櫃檯",
+     "variable": "met_保全",
      "op": "gte",
      "value": 5
     }
    }
   },
   {
-   "id": "e701",
+   "id": "e712",
    "source": "inv-661",
-   "target": "inv-251",
+   "target": "inv-253",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "lte",
-     "value": 1
+     "op": "gte",
+     "value": 2
     }
    }
   },
   {
-   "id": "e702",
+   "id": "e713",
    "source": "inv-661",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e703",
-   "source": "inv-023",
+   "id": "e714",
+   "source": "inv-024",
    "target": "inv-662",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
+     "variable": "met_櫃檯",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e704",
+   "id": "e715",
    "source": "inv-662",
-   "target": "inv-253",
+   "target": "inv-250",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "gte",
-     "value": 2
+     "op": "lte",
+     "value": 1
     }
    }
   },
   {
-   "id": "e705",
+   "id": "e716",
    "source": "inv-662",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e706",
-   "source": "inv-023",
+   "id": "e717",
+   "source": "inv-024",
    "target": "inv-663",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_櫃檯",
+     "variable": "met_保全",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e707",
+   "id": "e718",
    "source": "inv-663",
-   "target": "inv-250",
+   "target": "inv-252",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "lte",
-     "value": 1
+     "op": "gte",
+     "value": 2
     }
    }
   },
   {
-   "id": "e708",
+   "id": "e719",
    "source": "inv-663",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e709",
-   "source": "inv-023",
+   "id": "e720",
+   "source": "inv-024",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e721",
+   "source": "inv-026",
    "target": "inv-664",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e710",
-   "source": "inv-664",
-   "target": "inv-252",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e711",
-   "source": "inv-664",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e712",
-   "source": "inv-023",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e713",
-   "source": "inv-024",
-   "target": "inv-665",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e714",
-   "source": "inv-665",
-   "target": "inv-251",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e715",
-   "source": "inv-665",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e716",
-   "source": "inv-024",
-   "target": "inv-666",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e717",
-   "source": "inv-666",
-   "target": "inv-253",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e718",
-   "source": "inv-666",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e719",
-   "source": "inv-024",
-   "target": "inv-667",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e720",
-   "source": "inv-667",
-   "target": "inv-250",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e721",
-   "source": "inv-667",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e722",
-   "source": "inv-024",
-   "target": "inv-668",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e723",
-   "source": "inv-668",
-   "target": "inv-252",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e724",
-   "source": "inv-668",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e725",
-   "source": "inv-024",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e726",
-   "source": "inv-026",
-   "target": "inv-669",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
      "variable": "met_店員",
      "op": "gte",
      "value": 5
@@ -27124,23 +26929,23 @@
    }
   },
   {
-   "id": "e727",
-   "source": "inv-669",
+   "id": "e722",
+   "source": "inv-664",
    "target": "inv-247",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e728",
+   "id": "e723",
    "source": "inv-247",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e729",
+   "id": "e724",
    "source": "inv-026",
-   "target": "inv-670",
+   "target": "inv-665",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27153,30 +26958,81 @@
    }
   },
   {
-   "id": "e730",
-   "source": "inv-670",
+   "id": "e725",
+   "source": "inv-665",
    "target": "inv-246",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e731",
+   "id": "e726",
    "source": "inv-246",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e732",
+   "id": "e727",
    "source": "inv-026",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e733",
+   "id": "e728",
    "source": "inv-027",
-   "target": "inv-671",
+   "target": "inv-666",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_店員",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e729",
+   "source": "inv-666",
+   "target": "inv-247",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e730",
+   "source": "inv-027",
+   "target": "inv-667",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_店員",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e731",
+   "source": "inv-667",
+   "target": "inv-246",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e732",
+   "source": "inv-027",
+   "target": "inv-029",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e733",
+   "source": "inv-028",
+   "target": "inv-668",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27190,15 +27046,15 @@
   },
   {
    "id": "e734",
-   "source": "inv-671",
+   "source": "inv-668",
    "target": "inv-247",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e735",
-   "source": "inv-027",
-   "target": "inv-672",
+   "source": "inv-028",
+   "target": "inv-669",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27212,73 +27068,22 @@
   },
   {
    "id": "e736",
-   "source": "inv-672",
+   "source": "inv-669",
    "target": "inv-246",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e737",
-   "source": "inv-027",
+   "source": "inv-028",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e738",
-   "source": "inv-028",
-   "target": "inv-673",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e739",
-   "source": "inv-673",
-   "target": "inv-247",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e740",
-   "source": "inv-028",
-   "target": "inv-674",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e741",
-   "source": "inv-674",
-   "target": "inv-246",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e742",
-   "source": "inv-028",
-   "target": "inv-029",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e743",
    "source": "inv-030",
-   "target": "inv-675",
+   "target": "inv-670",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27291,8 +27096,8 @@
    }
   },
   {
-   "id": "e744",
-   "source": "inv-675",
+   "id": "e739",
+   "source": "inv-670",
    "target": "inv-249",
    "sourceHandle": "right",
    "animated": true,
@@ -27306,23 +27111,23 @@
    }
   },
   {
-   "id": "e745",
-   "source": "inv-675",
+   "id": "e740",
+   "source": "inv-670",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e746",
+   "id": "e741",
    "source": "inv-249",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e747",
+   "id": "e742",
    "source": "inv-030",
-   "target": "inv-676",
+   "target": "inv-671",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27335,9 +27140,60 @@
    }
   },
   {
-   "id": "e748",
-   "source": "inv-676",
+   "id": "e743",
+   "source": "inv-671",
    "target": "inv-248",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e744",
+   "source": "inv-671",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e745",
+   "source": "inv-248",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e746",
+   "source": "inv-030",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e747",
+   "source": "inv-031",
+   "target": "inv-672",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e748",
+   "source": "inv-672",
+   "target": "inv-249",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27351,29 +27207,15 @@
   },
   {
    "id": "e749",
-   "source": "inv-676",
+   "source": "inv-672",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e750",
-   "source": "inv-248",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e751",
-   "source": "inv-030",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e752",
    "source": "inv-031",
-   "target": "inv-677",
+   "target": "inv-673",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27381,14 +27223,14 @@
      "kind": "variable",
      "variable": "met_材料行老闆",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e753",
-   "source": "inv-677",
-   "target": "inv-249",
+   "id": "e751",
+   "source": "inv-673",
+   "target": "inv-248",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27401,16 +27243,23 @@
    }
   },
   {
-   "id": "e754",
-   "source": "inv-677",
+   "id": "e752",
+   "source": "inv-673",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e755",
+   "id": "e753",
    "source": "inv-031",
-   "target": "inv-678",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e754",
+   "source": "inv-032",
+   "target": "inv-674",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27418,80 +27267,36 @@
      "kind": "variable",
      "variable": "met_材料行老闆",
      "op": "gte",
-     "value": 3
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e755",
+   "source": "inv-674",
+   "target": "inv-249",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
     }
    }
   },
   {
    "id": "e756",
-   "source": "inv-678",
-   "target": "inv-248",
+   "source": "inv-674",
+   "target": "inv-033",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
+   "animated": true
   },
   {
    "id": "e757",
-   "source": "inv-678",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e758",
-   "source": "inv-031",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e759",
    "source": "inv-032",
-   "target": "inv-679",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_材料行老闆",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e760",
-   "source": "inv-679",
-   "target": "inv-249",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e761",
-   "source": "inv-679",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e762",
-   "source": "inv-032",
-   "target": "inv-680",
+   "target": "inv-675",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27504,8 +27309,8 @@
    }
   },
   {
-   "id": "e763",
-   "source": "inv-680",
+   "id": "e758",
+   "source": "inv-675",
    "target": "inv-248",
    "sourceHandle": "right",
    "animated": true,
@@ -27519,106 +27324,106 @@
    }
   },
   {
-   "id": "e764",
-   "source": "inv-680",
+   "id": "e759",
+   "source": "inv-675",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e765",
+   "id": "e760",
    "source": "inv-032",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e766",
+   "id": "e761",
    "source": "inv-034",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e767",
+   "id": "e762",
    "source": "inv-035",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e768",
+   "id": "e763",
    "source": "inv-036",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e769",
+   "id": "e764",
    "source": "inv-038",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e770",
+   "id": "e765",
    "source": "inv-039",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e771",
+   "id": "e766",
    "source": "inv-040",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e772",
+   "id": "e767",
    "source": "inv-042",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e773",
+   "id": "e768",
    "source": "inv-043",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e774",
+   "id": "e769",
    "source": "inv-044",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e775",
+   "id": "e770",
    "source": "inv-046",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e776",
+   "id": "e771",
    "source": "inv-047",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e777",
+   "id": "e772",
    "source": "inv-048",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e778",
-   "source": "inv-681",
+   "id": "e773",
+   "source": "inv-676",
    "target": "inv-489",
    "sourceHandle": "right",
    "animated": true
@@ -29915,26 +29720,6 @@
    "dest_from": "卡頭 scene",
    "slots_from": "標題",
    "label": "問路人聽過格莉奇嗎"
-  },
-  {
-   "segment": "seg142",
-   "section": "場景三・一樓（第二天・晚上七點多）",
-   "file": "調查篇-第二天",
-   "dest": "lobby",
-   "slots": [
-    2
-   ],
-   "conds": [
-    {
-     "variable": "day",
-     "op": "eq",
-     "value": 2
-    }
-   ],
-   "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題",
-   "label": "去信箱那邊"
   },
   {
    "segment": "seg144",

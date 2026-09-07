@@ -469,6 +469,8 @@ def build(cards):
     choice_links, seg_first, seg_end = [], {}, {}
     for i, s in enumerate(segs):
         sid = f"seg{i:03d}"
+        if (s["key"][0], s["key"][1]) in SKIP_SECTIONS:
+            continue
         rule, notes = parse_trigger(s["trigger"])
         heads = s["cards"][0].get("headings", [])
         if rule is None:
@@ -839,6 +841,8 @@ def build(cards):
     return b, rules, unresolved, orphans, len(segs), tapes
 
 
+# 被後來的定稿取代、可是同一份檔裡其他節還在用的段落（整份檔不能作廢）
+SKIP_SECTIONS = {("調查篇-第二天", "場景三・一樓（第二天・晚上七點多）")}   # 正本是橋段「一、第一次擦身而過」
 # 問答矩陣鐵塔那一場：場面 → 格一（進門就是這一格，不用選）；格三演完 → 收尾（三格共用）
 CHAINS = [("調查篇-問答矩陣", "一、場面（三格共用）", "格一・問鐵塔關於格莉奇"),
           ("調查篇-問答矩陣", "格三・問鐵塔關於斑比", "收尾（三格共用）")]
