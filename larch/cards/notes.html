@@ -139,7 +139,14 @@ var CLUES=[
  ['clue_same_pause','諾亞','兩段。同一句。停頓在同一個位置。他沒有在背，他每次都是這樣講。']
 ];
 
+/*@@TODO@@*/
+if(typeof todoLines!=='function'){ window.todoLines=function(){ return []; }; }
 var TABS=['名單','目擊','問答','空白頁'];
+function drawTodo(m){
+  var box=el('div','qa'); box.appendChild(el('h3',null,'明天'));
+  todoLines(values).forEach(function(t){ box.appendChild(el('p',null,t)); });
+  m.appendChild(box);
+}
 // 第一頁只在六個 ID 都抄到之後才有。people 是她見過的人（met），加一個「查不到」。
 var UNKNOWN='查不到';
 function hasAllNames(){ return NAMES.every(function(n){ return has(n[0]); }); }
@@ -254,6 +261,7 @@ function drawFree(m){
 function render(){
   var tabs=TABS.slice(), draws=[drawNames,drawSight,drawQA,drawFree];
   if(hasAllNames()){ tabs.unshift('第一頁'); draws.unshift(drawPage1); }
+  tabs.push('明天'); draws.push(drawTodo);
   if(tab>=tabs.length) tab=0;
   var nav=document.getElementById('tabs'); nav.textContent='';
   tabs.forEach(function(name,i){

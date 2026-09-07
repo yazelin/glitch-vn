@@ -117,8 +117,22 @@ def main():
         cur = nxt[0]["target"] if nxt else None
     apply(opening, V)
     POSSIBLE = {loc: set(x for x in live if x) | {w for l, s2, w in VISITS if l == loc} for loc, live in LIVE.items()}
+    CN = {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九", 10: "十", 11: "十一"}
+    def wrapup(n_day):
+        """換日插播的「第 N 天收尾」：從那張 interrupt 卡沿邊走完，套變數（刪除線在這裡）"""
+        intr = next((n for n in b["nodes"] if n["data"].get("type") == "interrupt" and n["data"]["title"] == f"第{CN.get(n_day, '')}天收尾"), None)
+        if not intr:
+            return
+        cur, ns, seen = intr["id"], [], set()
+        while cur and cur not in seen:
+            seen.add(cur); ns.append(nodes[cur])
+            nxt = [e for e in edges if e["source"] == cur and not e.get("data")]
+            cur = nxt[0]["target"] if nxt else None
+        apply(ns, V)
     for day in range(1, a.days + 1):
         V["day"] = day
+        if day >= 2:
+            wrapup(day - 1)
         for slot in range(4):
             V["slot"] = slot
             if slot == 3 and day < 4:
@@ -149,6 +163,9 @@ def main():
                     if w and not (w & here):
                         continue
                     ns = cache[r["segment"]]
+                    # 掉信任的段落（問第三次那種）是玩家自己選的，貪婪走法不走它
+                    if any(o["kind"] == "add" and o["value"] < 0 for n in ns for o in n["data"].get("variableOps", [])):
+                        continue
                     apply(ns, V)
                     if any("~~" in (n["data"].get("text") or "") for n in ns):
                         pass  # strikes 已經在 variableOps 裡

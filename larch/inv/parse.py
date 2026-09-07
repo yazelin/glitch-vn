@@ -48,6 +48,9 @@ FIXED = ["旁白", "talk", "玩家", "特寫卡", "錄音", "背包"]
 CAST = ["格莉奇", "黑洞先生", "貓草", "鐵塔", "0x", "斑比", "諾亞",
         "管理員", "店員", "保全", "材料行老闆", "櫃檯", "住戶",
         "路人", "路人乙", "高中生", "阿姨", "送貨的", "發傳單的", "上班族"]
+# 選擇卡：「**choice・層一**」，引言是題目，底下「- 標籤　→ 二」一行一個選項，目標是同一場裡的節
+CHOICE = re.compile(r"^\*\*choice・(.+?)\*\*\s*$")
+OPTION = re.compile(r"^-\s*(.+?)\s*→\s*(\S+)\s*$")
 HEAD = re.compile(r"^\*\*(" + "|".join(FIXED + CAST) + r")\*\*(?:（(.*?)）)?\s*$")
 SCENE = re.compile(r"`scene:\s*([a-z_0-9]+)`")
 SLOT = re.compile(r"(上午|下午|晚上|深夜)")
@@ -87,7 +90,7 @@ def parse_file(path):
 
     def flush():
         nonlocal cur
-        if cur and (cur["lines"] or cur["kind"] == "bag"):
+        if cur and (cur["lines"] or cur["kind"] == "bag" or cur.get("options")):
             cards.append(cur)
         cur = None
 
@@ -125,6 +128,17 @@ def parse_file(path):
             else:
                 meta_now[key] = (meta_now.get(key, "") + " " + val).strip()
             meta_lvl[key] = here_lvl
+            continue
+        if (cm := CHOICE.match(ln)):
+            flush()
+            cur = {"kind": "choice", "speaker": None, "remote": False, "scene": scene, "slot": slot,
+                   "meta": cm.group(1), "options": [],
+                   "section": next((t for _, t in reversed(stack) if t.strip() not in GENERIC_HEADS), None),
+                   "headings": [t for _, t in stack], "trigger": dict(meta_now),
+                   "lines": [], "vars": [], "file": path.stem, "line": i}
+            continue
+        if cur is not None and cur["kind"] == "choice" and (om := OPTION.match(ln)):
+            cur["options"].append({"label": om.group(1), "target": om.group(2)})
             continue
         m = HEAD.match(ln)
         if m:

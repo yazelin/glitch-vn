@@ -263,9 +263,10 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         d["characterLayers"] = layers or [{"id": "layer-none", "url": ghost, "position": "center", "x": 0, "y": 0,
                                            "scale": 0.01, "opacity": 1, "flipX": False}]
     seg_dest_of = {r["segment"]: r["dest"] for r in rules}
-    board_html = (CARDS / "board.html").read_text(encoding="utf-8")
+    todo_js = (CARDS / "todo.js").read_text(encoding="utf-8")
+    board_html = (CARDS / "board.html").read_text(encoding="utf-8").replace("/*@@TODO@@*/", todo_js)
     menu_html = (CARDS / "menu.html").read_text(encoding="utf-8")
-    notes_html = (CARDS / "notes.html").read_text(encoding="utf-8")
+    notes_html = (CARDS / "notes.html").read_text(encoding="utf-8").replace("/*@@TODO@@*/", todo_js)
     missing_bg = []
     board_id = None
     menus = []
@@ -356,7 +357,9 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     add_node("inv-notes", {"type": "miniGame", "title": "調查筆記", "text": "",
                            "miniGameHtml": notes_html, "miniGamePresentation": "fullscreen",
                            "miniGameSkippable": True, "miniGameFrame": {"showButton": False, "showTitle": False},
-                           "miniGameReadVars": ["notes", "notes_free", "met", "page1"] + note_codes,
+                           "miniGameReadVars": ["notes", "notes_free", "met", "page1", "day", "night_visits", "hole_sightings",
+                                                "laundry_night1", "trust_斑比", "strikes", "open_roof", "open_parts", "open_laundry",
+                                                "open_studio", "met_諾亞", "met_材料行老闆"] + note_codes,
                            "miniGameWriteVars": ["notes_free", "page1", "page1_text", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
     phone_html = pathlib.Path.home().joinpath("larch-phone-chat/card/receive.html").read_text(encoding="utf-8")
@@ -393,11 +396,16 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                                   "interruptOnce": False, "interruptExit": "return"}, 0, 0)
         for i, t in enumerate(tapes):
             nid = f"inv-tape-{t['id']}"
+            # 先一張旁白讓玩家知道那是錄音機，再播那一句（講者與文字跟原場一模一樣，配音才會是同一份）
+            add_node(f"{nid}-pre", {"type": "dialogue", "title": f"錄音機：{t['name']}", "text": "錄音機轉了一下。",
+                                    "speaker": "旁白",
+                                    "variableOps": [{"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}]},
+                     400 + i * 320, 850)
             add_node(nid, {"type": "dialogue", "title": f"播：{t['name']}", "text": t["quote"],
-                           "speaker": t["who"], "remote": True,   # 錄音機裡的聲音，不上立繪
-                           "variableOps": [{"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}]},
-                     400 + i * 320, 900)
-            add_edge("inv-tape-int", nid, {"variable": "inventoryLastUsed", "op": "eq", "value": t["name"]})
+                           "speaker": t["who"], "remote": True},   # 錄音機裡的聲音，不上立繪
+                     400 + i * 320, 1000)
+            add_edge("inv-tape-int", f"{nid}-pre", {"variable": "inventoryLastUsed", "op": "eq", "value": t["name"]})
+            add_edge(f"{nid}-pre", nid)
         # 沒對到任何一卷（不該發生）：關掉旗標就回去
         add_node("inv-tape-none", {"type": "setVariable", "title": "（沒有這一卷）", "text": "",
                                    "variableOps": [{"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}]},

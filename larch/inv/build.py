@@ -404,7 +404,8 @@ def build(cards):
                       "miniGameHtml": "@@larch/cards/board.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
                       "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits", "seen_booth", "visited",
-                                           "names_seen", "see_stairs"] + [f"open_{k}" for k in
+                                           "names_seen", "see_stairs", "hole_sightings", "see_admin", "laundry_night1",
+                                           "trust_斑比", "strikes", "clue_list", "rec_ok"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
                       "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
@@ -437,6 +438,7 @@ def build(cards):
         cur["cards"].append(c)
     rules, unresolved, orphans, tapes = [], [], [], []
     labels, unlabeled = load_labels(), []
+    choice_links, seg_first = [], {}
     for i, s in enumerate(segs):
         sid = f"seg{i:03d}"
         rule, notes = parse_trigger(s["trigger"])
@@ -570,15 +572,17 @@ def build(cards):
         # 管理員那五格閒話每問一次加一級信任，滿了就不再列（不然無限加上去，失物箱那格 lte/gte 都對不上）
         if s["key"][1].startswith("池") and s["cards"][0]["file"] == "調查篇-問答矩陣":
             rule["conds"].append({"variable": "trust_管理員", "op": "lte", "value": 2})
-        # 含範本 <誰> 的條件（五之三）解析出來是殘缺的變數名，丟掉，留待展開
-        rule["conds"] = [c for c in rule["conds"] if not c["variable"].endswith("_") and "<" not in str(c["value"])]
+        # 含範本 <誰> 的條件（五之三）：用〈關於格莉奇〉那一格的兩個旗標（問答矩陣寫明「看的是 bambi_revised」）
+        if any(c["variable"].endswith("_") or "<" in str(c["value"]) for c in rule["conds"]):
+            rule["conds"] = [c for c in rule["conds"] if not c["variable"].endswith("_") and "<" not in str(c["value"])]
+            rule["conds"] += [{"variable": "asked_斑比_格莉奇", "op": "eq", "value": True},
+                              {"variable": "bambi_revised", "op": "eq", "value": True},
+                              {"variable": "bambi_third", "op": "eq", "value": False}]
+            notes = [x for x in notes if "範本" not in x]
         for c in rule["conds"]:
             # trust 用 add 一路加上去會超過 3，「== 3」要當「>= 3」
             if c["variable"].startswith("trust_") and c["op"] == "eq" and c["value"] == 3:
                 c["op"] = "gte"
-            # ponytail: 保全的三階（次數、問他自己的事、聽完女兒學開車）那幾場還沒寫，先用碰過幾次頂著
-            if c["variable"] == "trust_保全":
-                c["variable"] = "met_保全"
         # 日期閘：觸發裡沒寫 day 的，從檔名與標題補
         if not any(c["variable"] == "day" for c in rule["conds"]):
             rule["conds"] = rule["conds"] + day_conds(s["cards"][0]["file"], heads)
@@ -622,6 +626,17 @@ def build(cards):
                 pending_bag = (bag, c["meta"].strip())   # 條件邊接下一張時才掛，預設邊排在它後面
                 prev = bag
                 continue
+            if c["kind"] == "choice":
+                prompt = "\n".join(l["text"] for l in c["lines"] if not l.get("direction"))
+                nid = b.add({"type": "choice", "title": f"選擇：{prompt[:12]}", "text": prompt,
+                             "choices": [o["label"] for o in c["options"]], "choiceMode": "branch", "segment": sid})
+                if prev:
+                    b.edge(prev, nid)
+                first = first or nid
+                prev = nid
+                for k_, o in enumerate(c["options"]):
+                    choice_links.append((nid, k_, c["file"], " / ".join(c["headings"][:-1]), o["target"]))
+                continue
             d = card_node(c)
             if not d:
                 continue
@@ -656,7 +671,9 @@ def build(cards):
             b.edge(leave, back_id)
         back = b.add({"type": "boardJump", "title": "回調查板", "jumpBoardId": BID,
                       "jumpNodeId": board_id}, nid=back_id)
-        b.edge(prev, back)
+        if not (prev and next(n for n in b.nodes if n["id"] == prev)["data"].get("type") == "choice"):
+            b.edge(prev, back)
+        seg_first[(s["key"][0], " / ".join(s["cards"][0]["headings"][:-1]), s["key"][1])] = (first, sid)
         if rule and rule["dest"] in ("catgrass_door", "catgrass_home"):
             rule["scene_only"] = rule["dest"]
             rule["dest"] = "store"       # 私人場景掛在原地點的選單底下（變數帳一）
@@ -685,6 +702,26 @@ def build(cards):
         else:
             orphans.append({"segment": sid, "file": s["key"][0], "section": s["key"][1],
                             "trigger": s["trigger"], "notes": notes})
+    # 選擇卡的選項接到同一場裡的節（「→ 二」＝那一場底下以「二・」開頭的節），那些節不再列在選單上
+    for nid, k_, file_, l1, target in choice_links:
+        hit = next(((f_, sid_) for (ff, ll, sec), (f_, sid_) in seg_first.items()
+                    if ff == file_ and (ll == l1 or ll.startswith(l1) or l1.startswith(ll))
+                    and (sec == target or sec.startswith(target + "・") or sec.startswith(target + "、")
+                         or (len(target) >= 2 and sec.startswith(target)))), None)
+        if not hit:
+            unresolved.append({"segment": "", "section": f"選項 → {target}", "notes": ["對不到那一節"], "text": l1})
+            continue
+        b.edge(nid, hit[0]); b.edges[-1]["sourceHandle"] = f"choice-{k_}"
+        b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == hit[1]
+                                            and e["data"]["condition"].get("variable") == "pick")]
+        rules[:] = [r for r in rules if r["segment"] != hit[1]]
+    # 第十二天：一開板就進收尾那一場，不管條件（沒查完就是沒查完的版本）
+    ending = next((r for r in rules if r["section"].startswith("十二、最後一頁")), None)
+    if ending:
+        first_end = next(n["id"] for n in b.nodes if n["data"].get("segment") == ending["segment"])
+        b.add({"type": "interrupt", "title": "第十二天，收尾", "text": "",
+               "interruptCondition": {"kind": "variable", "variable": "day", "op": "gte", "value": 12},
+               "interruptOnce": True, "interruptExit": "jump", "interruptTargetNodeId": first_end})
     # 進門那一下：入口 ─met>=N─▶ 閘（判時段）─▶ 招呼卡 ─▶ 選單；閘的預設與入口的預設都直接進選單。
     # 門檻高的先判（第五次起排在第三次起前面），入口→選單的無條件邊最後接。
     def slot_cond(slots):

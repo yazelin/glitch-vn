@@ -23,7 +23,9 @@ hb=ld('05_hair_back')
 a=hb[...,3]>0; rgb=hb[...,:3].astype(int); sat=rgb.max(2)-rgb.min(2); lum=rgb.sum(2)
 hairlike=a&(sat>40)&(lum>300)
 lab,n=ndimage.label(hairlike); ids=np.unique(lab[:640][lab[:640]>0]); keep=np.isin(lab,ids)&hairlike
-low=a.copy(); low[:684]=False; move=low&~keep
+low=a.copy(); low[:684]=False
+near=ndimage.binary_dilation(keep, iterations=3)          # 髮絲的輪廓線與高光不合髮色門檻，但貼著髮絲，要一起留下
+move=low&~keep&~near
 def over_into(dst_name, sel):
     top=ld(dst_name).astype(np.float32); bf=hb.astype(np.float32)
     ta=top[...,3:4]/255.0; ba=bf[...,3:4]/255.0; oa=ta+ba*(1-ta)

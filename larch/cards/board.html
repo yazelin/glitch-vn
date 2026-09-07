@@ -54,7 +54,14 @@ h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMi
 .hint{color:var(--dim);font-size:clamp(11px,1.4vw,13px);margin-left:auto}
 .map{position:relative;flex:1;margin-top:1vh;min-height:0}
 .map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.map .st{stroke:rgba(255,255,255,.07);stroke-linecap:round;fill:none}
+.map .st{stroke:rgba(255,255,255,.13);stroke-linecap:round;fill:none}
+/* 她的便條：板子左上角一張大的，寫明天要做的事 */
+.todo{position:absolute;left:1.5%;top:2%;transform:rotate(-1.5deg);width:13.5em;background:linear-gradient(180deg,#f2efe6,#e6e1d3);
+  color:var(--ink);padding:.7em .8em .8em;border-radius:2px;box-shadow:0 6px 14px rgba(0,0,0,.45);z-index:1;pointer-events:none}
+.todo::before{content:"";position:absolute;left:50%;top:-.5em;width:.95em;height:.95em;margin-left:-.48em;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1f18);box-shadow:0 2px 3px rgba(0,0,0,.5)}
+.todo b{display:block;font:600 clamp(12px,1.5vw,13.5px)/1.3 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:var(--ink2);margin-bottom:.3em}
+.todo p{margin:0;font:italic clamp(12px,1.55vw,14px)/1.5 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif}
 .map .thread{stroke:var(--pin);stroke-width:.35;fill:none;opacity:.85}
 /* 釘上去的東西：拍立得或便條 */
 button.spot{position:absolute;transform:translate(-50%,-50%) rotate(var(--rot,0deg));appearance:none;cursor:pointer;
@@ -114,6 +121,8 @@ function finish(result,payload){ if(done)return; done=true;
 function num(v,d){ var n=Number(v); return isNaN(v)||v===''||v==null?d:n; }
 function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
 
+/*@@TODO@@*/
+if(typeof todoLines!=='function'){ window.todoLines=function(){ return []; }; }
 var SLOTS=['上午','下午','晚上','深夜'];
 // 各地點的照片（日版、夜版），推送層注入；本檔獨立打開時是空的，拍立得會是灰的
 var PHOTOS = /*@@PHOTOS@@*/{};
@@ -174,15 +183,19 @@ var SPOTS=[
 // 訪客：某個人剛好也在。[地點, 時段, 機率]
 // 黑洞先生那一條是正典（第五章、調查篇第二天）：他只在一樓的晚上，七點多。
 // 0.6 不是 1.0，因為每一次都遇到會把那一場的份量磨掉。
+// 必要的相遇不擲骰：第一次（第二天起）、第二次（第五到七天）、第三次（第八到十一天）那幾個時間窗裡他一定在，
+// 窗外才是三成五。斑比在洗衣店晚上一定在（她是通往工作室的唯一一條路）。
+function holeProb(){ var d=num(values.day,1), h=num(values.hole_sightings,0);
+  if((h===0&&d>=2)||(h===1&&d>=5&&d<=7)||(h===2&&d>=8&&d<=11)) return 1; return 0.35; }
 var VISITS=[
- ['lobby',  2,'黑洞先生',0.60],
+ ['lobby',  2,'黑洞先生',holeProb],
  ['store',  3,'貓草',    1.00],
  ['store',  3,'鐵塔',    0.25],
  ['store',  2,'斑比',    0.20],
  ['figure', 1,'貓草',    0.40],
  ['figure', 2,'貓草',    0.40],
  ['laundry',3,'貓草',    0.20],
- ['laundry',2,'斑比',    0.30],
+ ['laundry',2,'斑比',    1.00],
  ['parts',  1,'諾亞',    0.15]
 ];
 
@@ -192,7 +205,8 @@ function whoIsThere(spotId, slot){
   if(s && s.live[slot]) out.push(s.live[slot]);
   for(i=0;i<VISITS.length;i++){
     var v=VISITS[i];
-    if(v[0]===spotId && v[1]===slot && Math.random()<v[3] && out.indexOf(v[2])<0) out.push(v[2]);
+    var pr=(typeof v[3]==='function')?v[3]():v[3];
+    if(v[0]===spotId && v[1]===slot && Math.random()<pr && out.indexOf(v[2])<0) out.push(v[2]);
   }
   return out;
 }
@@ -244,7 +258,7 @@ function start(){
   sky.style.setProperty('--sky-a', SKY[slot][0]); sky.style.setProperty('--sky-b', SKY[slot][1]);
   var map=document.getElementById('grid');
   map.className='map';
-  Array.prototype.slice.call(map.querySelectorAll('button.spot')).forEach(function(b){ b.remove(); });
+  Array.prototype.slice.call(map.querySelectorAll('button.spot, .todo')).forEach(function(b){ b.remove(); });
 
   var visited=list(values.visited);
   var lines=document.getElementById('threads'); lines.textContent='';
@@ -257,6 +271,18 @@ function start(){
     p.setAttribute('d','M'+a.x+' '+a.y+' Q'+mx+' '+my+' '+b.x+' '+b.y); lines.appendChild(p);
   });
 
+  // 她自己寫在便條上的判斷，照狀態換（拉力不足的地方在這裡補）
+  function noteFor(s){
+    var d=num(values.day,1), h=num(values.hole_sightings,0);
+    if(s.id==='lobby' && slot===2 && h>=1) return '七點多。他會在。';
+    if(s.id==='street' && d>=3 && slot<=1 && !(values.seen_booth===true||values.seen_booth==='true')) return '經紀公司在車站那一邊。走過去看看。';
+    if(s.id==='store' && slot===3 && num(values.night_visits,0)===0) return '深夜還開著。';
+    return null;
+  }
+  var todo=document.createElement('div'); todo.className='todo';
+  var tb=document.createElement('b'); tb.textContent='明天'; todo.appendChild(tb);
+  todoLines(values).forEach(function(t){ var p=document.createElement('p'); p.textContent=t; todo.appendChild(p); });
+  map.appendChild(todo);
   SPOTS.forEach(function(s,i){
     var open = isOpen(s);
     // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
@@ -285,6 +311,8 @@ function start(){
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
     else if(known(live)){ w.textContent=live; }
     else { w.textContent='沒去過'; w.className='who unknown'; }
+    var note=(!b.disabled)?noteFor(s):null;
+    if(note){ w.className='who hint'; w.textContent=note; }
     b.appendChild(n); b.appendChild(w);
     if(!b.disabled) b.addEventListener('click',function(){ go(s.id); });
     map.appendChild(b);
