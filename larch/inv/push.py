@@ -362,7 +362,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                            "miniGameReadVars": ["notes", "notes_free", "met", "page1", "day", "night_visits", "hole_sightings",
                                                 "laundry_night1", "trust_斑比", "strikes", "open_roof", "open_parts", "open_laundry",
                                                 "open_studio", "met_諾亞", "met_材料行老闆"] + note_codes,
-                           "miniGameWriteVars": ["notes_free", "page1", "page1_text", "open_notes"]}, 0, 0)
+                           "miniGameWriteVars": ["notes_free", "page1", "page1_text", "page1_lead", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
     phone_html = pathlib.Path.home().joinpath("larch-phone-chat/card/receive.html").read_text(encoding="utf-8")
     def phone_data(contact, messages):
@@ -437,7 +437,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("phone_ringing", "boolean", False, "永遠不會響"),
         ("rec_ok", "boolean", False, "錄音機清過毛了"),
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
-        ("page1_text", "string", "她一個字都沒有寫。", "第一頁：收尾旁白唸的版本"),
+        ("page1_text", "string", "第一頁。她一個字都沒有寫。", "第一頁：收尾旁白唸的版本（沒看到牆的人唸預設）"),
+        ("page1_lead", "string", "是空的。", "收尾翻到最後一頁那一句（有第一頁的人換成七條線）"),
         ("open_tape", "boolean", False, "播錄音（HUD 用了哪一卷）"),
         ("phone_log", "string", "[]", "手機收到的訊息（格莉奇手機插件）"),
         ("in_bag", "boolean", False, "劇情正在開背包（擋掉 HUD 重聽的插播）"),

@@ -14138,7 +14138,7 @@
    "data": {
     "type": "dialogue",
     "title": "他往回翻了兩頁，找那一天的日",
-    "text": "他往回翻了兩頁，找那一天的日期。第十一天他寫到四點。\n他翻到最後一頁。\n七條橫線是他自己畫的，用尺量過，間距一樣。\n前面六條上面有字。",
+    "text": "他往回翻了兩頁，找那一天的日期。第十一天他寫到四點。\n他翻到最後一頁。\n{{page1_lead}}",
     "speaker": "旁白",
     "sceneCode": "roof",
     "segment": "seg104"
@@ -14153,8 +14153,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "第一頁。六個 ID，旁邊是她",
-    "text": "第一頁。六個 ID，旁邊是她自己填的字。\n{{page1_text}}",
+    "title": "{{page1_text}}",
+    "text": "{{page1_text}}",
     "speaker": "旁白",
     "sceneCode": "roof",
     "segment": "seg104"
