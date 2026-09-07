@@ -153,8 +153,11 @@ def parse_file(path):
             if tgt is None:
                 problems.append(f"{path.stem}:{i} 變數寫入前面沒有卡片")
             else:
-                tgt["vars"].append({"name": v.group(1),
-                                    "set": v.group(2), "add": v.group(3)})
+                name = v.group(1)
+                # 「**→ 解鎖 `roof`**」＝把 open_roof 設 true（變數帳一：一個地點一個布林）
+                if "解鎖" in ln and not name.startswith("open_"):
+                    name = "open_" + name
+                tgt["vars"].append({"name": name, "set": v.group(2), "add": v.group(3)})
             continue
         if cur is None:
             continue

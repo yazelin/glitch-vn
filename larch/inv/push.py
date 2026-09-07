@@ -300,7 +300,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                            "miniGameHtml": notes_html, "miniGamePresentation": "fullscreen",
                            "miniGameSkippable": True, "miniGameFrame": {"showButton": False, "showTitle": False},
                            "miniGameReadVars": ["notes", "notes_free", "met", "page1"] + note_codes,
-                           "miniGameWriteVars": ["notes_free", "page1", "open_notes"]}, 0, 0)
+                           "miniGameWriteVars": ["notes_free", "page1", "page1_text", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
     tapes = board.get("tapes", [])
     if tapes:
@@ -343,6 +343,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("phone_ringing", "boolean", False, "永遠不會響"),
         ("rec_ok", "boolean", False, "錄音機清過毛了"),
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
+        ("page1_text", "string", "她一個字都沒有寫。", "第一頁：收尾旁白唸的版本"),
         ("open_tape", "boolean", False, "播錄音（HUD 用了哪一卷）"),
         ("in_bag", "boolean", False, "劇情正在開背包（擋掉 HUD 重聽的插播）"),
     ]:

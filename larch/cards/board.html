@@ -13,10 +13,10 @@
   iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
   所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
 
-  miniGameReadVars ：day slot met dest night_visits
+  miniGameReadVars ：day slot met dest night_visits met_<每個人>
                      open_roof open_laundry open_figure open_parts
                      open_studio open_tower14
-  miniGameWriteVars：day slot dest here night_visits
+  miniGameWriteVars：day slot dest here night_visits met met_<每個人>
 
   **解鎖是一個地點一個布林，不是一串逗號清單。** 清單要「讀出來、加一個、寫回去」，
   而普通對話卡做不到那件事（它只能設一個值）。布林的話，管理員講完那句話的那張卡
@@ -157,6 +157,16 @@ function go(spotId){
   var slot=num(values.slot,0), day=num(values.day,1);
   var here=whoIsThere(spotId,slot);
   setVar('here', here.join(','));
+  // 碰過幾次：設計說「met_<誰> 由那一趟自己加」，加的地方就是這裡（2026-09-07）。
+  // 老闆在規則裡叫材料行老闆；路人與黑洞先生不算（他的次數是 hole_sightings，故事卡寫）。
+  var met=list(values.met);
+  here.forEach(function(p){
+    if(p==='路人'||p==='黑洞先生') return;
+    var v='met_'+(p==='老闆'?'材料行老闆':p);
+    setVar(v, num(values[v],0)+1);
+    if(met.indexOf(p)<0) met.push(p);
+  });
+  setVar('met', met.join(','));
   // 晚上與深夜走夜版入口（背景兩種色溫，design/調查篇-場景.md「白天與夜晚是兩種色溫」）。
   // 板上其他地方只認前面的地點代號；@n 只給入口那條邊看。
   setVar('dest', slot>=2 ? spotId+'@n' : spotId);
@@ -193,7 +203,7 @@ function start(){
     }
     else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
-    else if(met.indexOf(live)>=0){ w.textContent=live; }
+    else if(met.indexOf(live)>=0 || num(values['met_'+(live==='老闆'?'材料行老闆':live)],0)>0){ w.textContent=live; }
     else { w.textContent='沒去過'; w.className='who unknown'; }
     b.appendChild(n); b.appendChild(w);
     if(!b.disabled) b.addEventListener('click',function(){ go(s.id); });

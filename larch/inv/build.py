@@ -363,8 +363,8 @@ def build(cards):
                       "miniGameHtml": "@@larch/cards/board.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
                       "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits"] + [f"open_{k}" for k in
-                                          ("roof", "laundry", "figure", "parts", "studio", "tower14")],
-                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits"], "start": True})
+                                          ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
+                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
     menu_of = {}
     for loc in LOCS:
@@ -402,6 +402,27 @@ def build(cards):
         heads = s["cards"][0].get("headings", [])
         if rule is None:
             rule, notes = {"dest": None, "slots": [], "conds": [], "or": False}, []
+        m_end = re.search(r"第([一二三四五六七八九十]+)天收尾", s["key"][1])
+        if m_end:
+            n_day = CN_NUM[m_end.group(1)]
+            first = prev = None
+            intr = b.add({"type": "interrupt", "title": f"第{m_end.group(1)}天收尾", "text": "",
+                          "interruptCondition": {"kind": "variable", "variable": "day", "op": "eq", "value": n_day + 1},
+                          "interruptOnce": True, "interruptExit": "return"})
+            prev = intr
+            for c in s["cards"]:
+                d = card_node(c)
+                if not d:
+                    continue
+                d["segment"] = sid
+                for v in c["vars"]:
+                    d.setdefault("variableOps", []).append(
+                        {"id": f"op-{v['name']}", "variable": v["name"], "kind": "add" if v["add"] else "set",
+                         "value": int(v["add"]) if v["add"] else var_value(v["set"])})
+                nid = b.add(d)
+                b.edge(prev, nid)
+                prev = nid
+            continue
         if not rule["dest"]:
             # 卡頭自己寫的 `scene: xxx` 是最直接的來源，橋段那類場次沒有觸發也沒有
             # 標題代號，地點只在這裡。
@@ -461,6 +482,15 @@ def build(cards):
             for m in re.finditer(r"`(trust_[^`]+|met_[^`]+|noah_stage)`\s+([0-9])\b", " ".join(heads)):
                 if not any(c["variable"] == m.group(1) for c in rule["conds"]):
                     rule["conds"].append({"variable": m.group(1), "op": "eq", "value": int(m.group(2))})
+        # 含範本 <誰> 的條件（五之三）解析出來是殘缺的變數名，丟掉，留待展開
+        rule["conds"] = [c for c in rule["conds"] if not c["variable"].endswith("_") and "<" not in str(c["value"])]
+        for c in rule["conds"]:
+            # trust 用 add 一路加上去會超過 3，「== 3」要當「>= 3」
+            if c["variable"].startswith("trust_") and c["op"] == "eq" and c["value"] == 3:
+                c["op"] = "gte"
+            # ponytail: 保全的三階（次數、問他自己的事、聽完女兒學開車）那幾場還沒寫，先用碰過幾次頂著
+            if c["variable"] == "trust_保全":
+                c["variable"] = "met_保全"
         # 日期閘：觸發裡沒寫 day 的，從檔名與標題補
         if not any(c["variable"] == "day" for c in rule["conds"]):
             rule["conds"] = rule["conds"] + day_conds(s["cards"][0]["file"], heads)
@@ -544,6 +574,15 @@ def build(cards):
         if rule and rule["dest"] in ("catgrass_door", "catgrass_home"):
             rule["scene_only"] = rule["dest"]
             rule["dest"] = "store"       # 私人場景掛在原地點的選單底下（變數帳一）
+        if rule and rule.get("or") and "多個地點" in " ".join(notes):
+            # 「store 或 laundry」：同一段掛在兩個選單底下
+            locs = re.findall(r"`(" + "|".join(LOCS) + r")`", s["trigger"])
+            if locs and rule["dest"] not in locs:
+                rule["dest"] = locs[0]          # 總表給的預設地點不算數，觸發寫的才是
+            for extra in sorted(set(locs) - {rule["dest"]}):
+                b.edge(menu_of[extra], first, {"variable": "pick", "op": "eq", "value": sid})
+                rules.append({**rule, "segment": sid, "section": s["key"][1], "file": s["key"][0], "dest": extra})
+            notes = [x for x in notes if "多個地點" not in x]
         if rule and rule["dest"] in menu_of:
             b.edge(menu_of[rule["dest"]], first, {"variable": "pick", "op": "eq", "value": sid})
             menu_label = (s["cards"][0].get("trigger", {}).get("選單", "").strip()
@@ -564,6 +603,7 @@ def build(cards):
     return b, rules, unresolved, orphans, len(segs), tapes
 
 
+MET_VARS = [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
 LABELS_MD = ROOT / "design/調查篇-選單標籤.md"
 # 第一天定稿的「上午／下午／晚上」節標題在五個地點重複，靠地點分
 LABEL_DAY1 = {("lobby", "下午"): "再去一樓", ("lobby", "晚上"): "抄信箱的名牌",
@@ -610,6 +650,23 @@ def main():
     b, rules, unresolved, orphans, nseg, tapes = build(cards)
     vs = variables()
 
+    # 固定開場：第一天上午一樓（一之一）從它的第一張卡開始，不經過調查板
+    board_node = next(n for n in b.nodes if n["data"].get("type") == "miniGame" and n["data"]["title"] == "調查板")
+    opening = next((r for r in rules if r["file"] == "調查篇-第一天-定稿" and r["section"].startswith("一之一")), None)
+    if opening:
+        first_id = next(n["id"] for n in b.nodes if n["data"].get("segment") == opening["segment"])
+        board_node["data"].pop("start", None)
+        first_node = next(n for n in b.nodes if n["id"] == first_id)
+        first_node["data"]["start"] = True
+        # 開場那一趟 here 是管理員；板之後的第一次開板不該再推進時間（dest 是空的，本來就不會）
+        # 開場那一段從選單拿掉：它只演一次，而且是遊戲自己開的
+        b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == opening["segment"])]
+        rules.remove(opening)
+        first_node["data"].setdefault("variableOps", []).extend([
+            {"id": "op-dest", "variable": "dest", "kind": "set", "value": "lobby"},   # 回到板上算一個時段
+            {"id": "op-here", "variable": "here", "kind": "set", "value": "管理員"},
+            {"id": "op-met", "variable": "met", "kind": "set", "value": "管理員"},
+            {"id": "op-met-admin", "variable": "met_管理員", "kind": "add", "value": 1}])
     # 可達性：每個段落入口都要有一條 pick 邊
     seg_entries = {n["data"]["segment"]: n["id"] for n in b.nodes if n["data"].get("segment")}
     firsts = {}
