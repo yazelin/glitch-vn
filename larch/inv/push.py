@@ -58,7 +58,7 @@ BG_MAP = {"lobby": ("bg-lobby-day", "bg-apartment-hall"), "roof": ("bg-roof-day"
           "catgrass_door": ("bg-catgrass-door", "bg-catgrass-door"), "catgrass_home": ("bg-catgrass-home", "bg-catgrass-home")}
 LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街", "studio": "斑比工作室",
             "booth": "錄音間門口", "tower14": "十四樓大廳", "store": "便利商店", "parts": "材料行",
-            "busstop": "公車站", "metro": "捷運出口", "laundry": "自助洗衣店", "figure": "手辦店"}
+            "busstop": "車站前站牌", "metro": "南港站二號出口", "laundry": "自助洗衣店", "figure": "手辦店"}
 # 卡片講者 → 調查板 here 裡用的名字。玩家、旁白、格莉奇（只在螢幕上）不算「誰在」。
 WHO_MAP = {"材料行老闆": "老闆", "住戶": "路人", "路人乙": "路人", "高中生": "路人", "阿姨": "路人",
            "送貨的": "路人", "發傳單的": "路人", "上班族": "路人"}
