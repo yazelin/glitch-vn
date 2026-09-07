@@ -13,10 +13,10 @@
   iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
   所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
 
-  miniGameReadVars ：day slot met dest night_visits seen_booth met_<每個人>
+  miniGameReadVars ：day slot met dest night_visits seen_booth visited met_<每個人> 以及 THREADS 用到的 open_*／names_seen／see_stairs
                      open_roof open_laundry open_figure open_parts
                      open_studio open_tower14
-  miniGameWriteVars：day slot dest here night_visits met met_<每個人>
+  miniGameWriteVars：day slot dest here night_visits met visited met_<每個人>
 
   **解鎖是一個地點一個布林，不是一串逗號清單。** 清單要「讀出來、加一個、寫回去」，
   而普通對話卡做不到那件事（它只能設一個值）。布林的話，管理員講完那句話的那張卡
@@ -31,63 +31,63 @@
 -->
 <style>
 :root{
-  --ink:#0e1322; --block:#1a2140; --block2:#212a4d; --street:#2c3660; --line:#3a4470;
-  --text:#ece9f4; --dim:#8d93b2; --cyan:#7fd6e8; --lamp:#f2c56d; --lamp2:#ffe2a8;
-  --sky-a:#0e1322; --sky-b:#0e1322;
+  --board:#2a2320; --board2:#382e28; --edge:#1a1512;
+  --text:#ece9f4; --dim:#a39a8f; --cyan:#7fd6e8; --pin:#c9463d; --pin2:#e0c35a;
+  --paper:#f2efe6; --paper2:#e6e1d3; --ink:#2a2a33; --ink2:#5d5a66; --sticky:#f0d98a; --sticky2:#e2c96e;
+  --sky-a:#2a2320; --sky-b:#2a2320;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--ink);color:var(--text);
+html,body{margin:0;height:100%;background:var(--board);color:var(--text);
   font:15px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   -webkit-text-size-adjust:100%;overflow:hidden}
-.sky{position:absolute;inset:0;background:linear-gradient(180deg,var(--sky-a) 0%,var(--sky-b) 34%,var(--ink) 62%);
-  transition:background 1.2s}
-.wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.6vh 3.2vw 2.2vh}
+/* 軟木板：兩層顆粒加一條斜光 */
+.sky{position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,.035) 0 1px,transparent 2px) 0 0/7px 9px,
+    radial-gradient(circle at 70% 60%,rgba(0,0,0,.18) 0 1px,transparent 2px) 3px 4px/11px 13px,
+    linear-gradient(115deg,var(--board2) 0%,var(--board) 45%,var(--edge) 100%)}
+.sky::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 120px rgba(0,0,0,.55)}
+.wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.4vh 3vw 2vh}
 header{flex:none;display:flex;align-items:baseline;gap:.9em;flex-wrap:wrap}
-h1{margin:0;font:600 clamp(20px,3.4vw,30px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;
-  letter-spacing:.04em}
-.when{font:500 clamp(14px,2vw,17px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;
-  color:var(--cyan);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;letter-spacing:.04em}
+.when{font:500 clamp(14px,2vw,17px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:var(--cyan);letter-spacing:.06em;font-variant-numeric:tabular-nums}
 .hint{color:var(--dim);font-size:clamp(11px,1.4vw,13px);margin-left:auto}
-.map{position:relative;flex:1;margin-top:1.2vh;min-height:0}
-.map svg{position:absolute;inset:0;width:100%;height:100%}
-.map .st{stroke:var(--street);stroke-linecap:round;fill:none}
-.map .bk{fill:var(--block)}
-.map .bk2{fill:var(--block2)}
-.map .rail{stroke:var(--line);stroke-dasharray:2 6;fill:none}
-.map .wins{fill:url(#win)}
-.map .win{fill:#2a3358;transition:fill 1s}
-.map.night .win{fill:#5a5a4a}
-.map.late .win{fill:#3c3a5c}
-.map .lamp{fill:var(--lamp);opacity:0;transition:opacity 1s}
-.map.night .lamp{opacity:.85}
-.map.late .lamp{opacity:.55}
-button.spot{position:absolute;transform:translate(-50%,-50%);appearance:none;cursor:pointer;
-  color:inherit;font:inherit;text-align:left;background:rgba(14,19,34,.72);
-  border:1px solid var(--line);border-radius:6px;padding:.45em .7em .5em .95em;
-  min-width:7.2em;max-width:12em;display:flex;flex-direction:column;gap:.1em;
-  backdrop-filter:blur(2px);transition:border-color .15s,transform .1s,box-shadow .2s}
-button.spot::before{content:"";position:absolute;left:.42em;top:.78em;width:.42em;height:.42em;
-  border-radius:50%;background:var(--line);box-shadow:none;transition:background .3s,box-shadow .3s}
-button.spot.lit::before{background:var(--lamp2);box-shadow:0 0 .55em .2em rgba(242,197,109,.55)}
-button.spot:hover,button.spot:focus-visible{border-color:var(--cyan);outline:none;
-  transform:translate(-50%,-50%) translateY(-1px)}
-button.spot:active{transform:translate(-50%,-50%) scale(.985)}
-button.spot[disabled]{cursor:default;opacity:.4}
-button.spot[disabled]:hover{border-color:var(--line);transform:translate(-50%,-50%)}
-.name{font-weight:600;font-size:clamp(13px,1.7vw,15px);letter-spacing:.02em}
-.who{color:var(--lamp2);font-size:clamp(11px,1.45vw,12.5px)}
-.who.unknown{color:var(--dim)}
-.who.hint{color:var(--dim);font:italic clamp(11px,1.35vw,12px)/1.4 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif}
-button.spot.locked{background:transparent;border-style:dashed;opacity:.62;max-width:13em}
-button.spot.locked::before{display:none}
-button.spot.locked .name{color:var(--dim);font-weight:500}
+.map{position:relative;flex:1;margin-top:1vh;min-height:0}
+.map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.map .st{stroke:rgba(255,255,255,.07);stroke-linecap:round;fill:none}
+.map .thread{stroke:var(--pin);stroke-width:.35;fill:none;opacity:.85}
+/* 釘上去的東西：拍立得或便條 */
+button.spot{position:absolute;transform:translate(-50%,-50%) rotate(var(--rot,0deg));appearance:none;cursor:pointer;
+  color:var(--ink);font:inherit;text-align:left;background:var(--paper);border:0;border-radius:2px;
+  padding:.45em .5em .55em;width:8.6em;display:flex;flex-direction:column;gap:.3em;
+  box-shadow:0 6px 14px rgba(0,0,0,.45),0 1px 0 rgba(255,255,255,.35) inset;
+  transition:transform .12s,box-shadow .2s}
+button.spot::before{content:"";position:absolute;left:50%;top:-.5em;width:.95em;height:.95em;margin-left:-.48em;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1f18);box-shadow:0 2px 3px rgba(0,0,0,.5)}
+button.spot .photo{width:100%;aspect-ratio:4/3;background:#111 center/cover no-repeat;border-radius:1px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+button.spot .photo.empty{background:linear-gradient(135deg,#d9d4c7,#c7c1b2);}
+button.spot:hover,button.spot:focus-visible{outline:none;transform:translate(-50%,-52%) rotate(var(--rot,0deg)) scale(1.03);
+  box-shadow:0 12px 22px rgba(0,0,0,.55)}
+button.spot:active{transform:translate(-50%,-50%) rotate(var(--rot,0deg)) scale(.99)}
+button.spot[disabled]{cursor:default}
+button.spot[disabled]:hover{transform:translate(-50%,-50%) rotate(var(--rot,0deg));box-shadow:0 6px 14px rgba(0,0,0,.45)}
+.name{font:600 clamp(13px,1.7vw,15px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;letter-spacing:.02em}
+.who{color:var(--ink2);font-size:clamp(11px,1.4vw,12.5px);line-height:1.35}
+.who.unknown{color:var(--ink2)}
+.who.hint{font:italic clamp(11px,1.35vw,12px)/1.4 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:var(--ink)}
+/* 沒去過、沒開：便條紙，沒有照片 */
+button.spot.note{background:linear-gradient(180deg,var(--sticky),var(--sticky2));width:8.2em;padding:.6em .6em .65em}
+button.spot.note::before{background:radial-gradient(circle at 35% 35%,#fff3b0,var(--pin2) 55%,#8a7420)}
+button.spot.locked{opacity:.92}
+button.spot.locked .name{color:var(--ink2);font-weight:500}
+button.spot.closed{opacity:.55}
 footer{flex:none;display:flex;justify-content:flex-end;align-items:center;margin-top:.6vh}
-button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;
-  font-size:clamp(12px,1.5vw,14px);background:none;border:0;border-bottom:1px solid var(--line);
-  padding:.25em .1em}
+button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;font-size:clamp(12px,1.5vw,14px);
+  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:.25em .1em}
 button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(--cyan);outline:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media (max-width:600px){button.spot{min-width:5.6em;padding:.35em .5em .4em .85em}.name{font-size:12px}.who{font-size:10.5px}}
+@media (max-width:600px){button.spot{width:6.4em;padding:.35em .35em .45em}.name{font-size:12px}.who{font-size:10px}}
 </style></head>
 <body><div class="sky" id="sky"></div><div class="wrap">
   <header>
@@ -96,35 +96,12 @@ button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(-
   </header>
   <div class="map" id="grid">
     <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <pattern id="win" width="3" height="3.4" patternUnits="userSpaceOnUse">
-          <rect class="win" x=".9" y="1" width="1.1" height="1.3" rx=".15"/>
-        </pattern>
-      </defs>
-      <!-- 街區：先鋪房子，再畫街，路燈最後 -->
-      <rect class="bk" x="10" y="14" width="18" height="52" rx="1"/>
-      <rect class="bk2" x="36" y="16" width="20" height="24" rx="1"/>
-      <rect class="bk" x="40" y="48" width="14" height="16" rx="1"/>
-      <rect class="bk2" x="52" y="46" width="30" height="18" rx="1"/>
-      <rect class="bk" x="70" y="8" width="14" height="30" rx="1"/>
-      <rect class="bk2" x="86" y="4" width="10" height="42" rx="1"/>
-      <rect class="bk" x="80" y="62" width="16" height="14" rx="1"/>
-      <rect class="bk2" x="60" y="84" width="26" height="12" rx="1"/>
-      <rect class="wins" x="11" y="15" width="16" height="50"/>
-      <rect class="wins" x="37" y="17" width="18" height="22"/>
-      <rect class="wins" x="53" y="47" width="28" height="16"/>
-      <rect class="wins" x="71" y="9" width="12" height="28"/>
-      <rect class="wins" x="87" y="5" width="8" height="40"/>
-      <rect class="wins" x="81" y="63" width="14" height="12"/>
-      <path class="st" d="M0 74 H100" stroke-width="5"/>
-      <path class="st" d="M32 74 V10" stroke-width="2.4"/>
-      <path class="st" d="M66 74 V40" stroke-width="2"/>
-      <path class="st" d="M84 74 V46" stroke-width="1.6"/>
-      <path class="st" d="M0 92 H58" stroke-width="2"/>
-      <path class="rail" d="M60 90 H100" stroke-width="1"/>
-      <rect class="lamp" x="13.4" y="70.4" width="1.2" height="1.6"/><rect class="lamp" x="44.4" y="70.4" width="1.2" height="1.6"/>
-      <rect class="lamp" x="75.4" y="70.4" width="1.2" height="1.6"/><rect class="lamp" x="94.4" y="70.4" width="1.2" height="1.6"/>
-      <rect class="lamp" x="28.4" y="39.4" width="1.2" height="1.6"/><rect class="lamp" x="62.4" y="51.4" width="1.2" height="1.6"/>
+      <path class="st" d="M0 74 H100" stroke-width="3"/>
+      <path class="st" d="M32 74 V10" stroke-width="1.6"/>
+      <path class="st" d="M66 74 V40" stroke-width="1.4"/>
+      <path class="st" d="M84 74 V46" stroke-width="1.2"/>
+      <path class="st" d="M0 92 H58" stroke-width="1.4"/>
+      <g id="threads"></g>
     </svg>
   </div>
   <footer><button class="skip" id="skip">這一段不出門</button></footer>
@@ -138,8 +115,22 @@ function num(v,d){ var n=Number(v); return isNaN(v)||v===''||v==null?d:n; }
 function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
 
 var SLOTS=['上午','下午','晚上','深夜'];
+// 各地點的照片（日版、夜版），推送層注入；本檔獨立打開時是空的，拍立得會是灰的
+var PHOTOS = /*@@PHOTOS@@*/{};
+// 她把兩件事接起來的時候才拉線：[變數, 從, 到]
+var THREADS=[
+ ['open_roof','lobby','roof'],
+ ['open_parts','roof','parts'],
+ ['open_laundry','store','laundry'],
+ ['open_figure','store','figure'],
+ ['open_studio','laundry','studio'],
+ ['open_tower14','street','tower14'],
+ ['seen_booth','street','booth'],
+ ['see_stairs','tower14','lobby'],
+ ['names_seen','studio','roof'],['names_seen','studio','store'],['names_seen','studio','booth'],['names_seen','studio','tower14']
+];
 // 天色：時間只從這裡感覺得到（design/調查篇-場景.md「白天與夜晚是兩種色溫」）
-var SKY=[['#c9b48a','#4a4a5a'],['#b88a55','#3a3550'],['#243056','#121a34'],['#1a1030','#0e1322']];
+var SKY=[['#3a2f27','#2a2320'],['#3d2d22','#2a2320'],['#221f2c','#2a2320'],['#1c1724','#2a2320']];
 
 // 地點：代號、名字、每個時段的狀態、在街區上的位置（百分比）
 //   '名字' = 那個人常駐　　''  = 開著可是沒有常駐　　null = 這個時間進不去
@@ -230,6 +221,7 @@ function go(spotId){
     if(met.indexOf(p)<0) met.push(p);
   });
   setVar('met', met.join(','));
+  var visited=list(values.visited); if(visited.indexOf(spotId)<0) visited.push(spotId); setVar('visited', visited.join(','));
   // 晚上與深夜走夜版入口（背景兩種色溫，design/調查篇-場景.md「白天與夜晚是兩種色溫」）。
   // 板上其他地方只認前面的地點代號；@n 只給入口那條邊看。
   setVar('dest', slot>=2 ? spotId+'@n' : spotId);
@@ -251,29 +243,48 @@ function start(){
   var sky=document.getElementById('sky');
   sky.style.setProperty('--sky-a', SKY[slot][0]); sky.style.setProperty('--sky-b', SKY[slot][1]);
   var map=document.getElementById('grid');
-  map.className='map'+(slot===2?' night':slot===3?' late':'');
+  map.className='map';
   Array.prototype.slice.call(map.querySelectorAll('button.spot')).forEach(function(b){ b.remove(); });
 
-  SPOTS.forEach(function(s){
+  var visited=list(values.visited);
+  var lines=document.getElementById('threads'); lines.textContent='';
+  function spotAt(id){ for(var i=0;i<SPOTS.length;i++) if(SPOTS[i].id===id) return SPOTS[i]; return null; }
+  THREADS.forEach(function(t){
+    if(!(values[t[0]]===true||values[t[0]]==='true')) return;
+    var a=spotAt(t[1]), b=spotAt(t[2]); if(!a||!b) return;
+    var p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('class','thread');
+    var mx=(a.x+b.x)/2, my=(a.y+b.y)/2-3;
+    p.setAttribute('d','M'+a.x+' '+a.y+' Q'+mx+' '+my+' '+b.x+' '+b.y); lines.appendChild(p);
+  });
+
+  SPOTS.forEach(function(s,i){
     var open = isOpen(s);
     // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
     if(!open && !s.hint) return;
     if(s.showIf && !(values[s.showIf]===true || values[s.showIf]==='true')) return;
     var live=s.live[slot];
+    var been = visited.indexOf(s.id)>=0;
     var b=document.createElement('button');
     b.className='spot'; b.type='button';
     b.style.left=s.x+'%'; b.style.top=s.y+'%';
+    b.style.setProperty('--rot', ((i*7)%9-4)*0.8+'deg');
     var n=document.createElement('span'); n.className='name'; n.textContent=s.name;
     var w=document.createElement('span'); w.className='who';
+    if(been && PHOTOS[s.id]){
+      var ph=document.createElement('span'); ph.className='photo';
+      var url=PHOTOS[s.id][slot>=2?'night':'day']||PHOTOS[s.id].day||PHOTOS[s.id].night;
+      if(url) ph.style.backgroundImage='url("'+url+'")'; else ph.className='photo empty';
+      b.appendChild(ph);
+    } else { b.className+=' note'; }
     if(!open){
       // 看得到，可是灰的。提示是她自己的判斷，不是系統指令。
-      b.className='spot locked'; b.disabled=true;
+      b.className+=' locked'; b.disabled=true;
       w.className='who hint'; w.textContent=s.hint;
     }
-    else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; }
+    else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; b.className+=' closed'; }
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
-    else if(known(live)){ w.textContent=live; b.className+=' lit'; }
-    else { w.textContent='沒去過'; w.className='who unknown'; b.className+=' lit'; }
+    else if(known(live)){ w.textContent=live; }
+    else { w.textContent='沒去過'; w.className='who unknown'; }
     b.appendChild(n); b.appendChild(w);
     if(!b.disabled) b.addEventListener('click',function(){ go(s.id); });
     map.appendChild(b);

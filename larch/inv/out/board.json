@@ -22,6 +22,9 @@
      "dest",
      "night_visits",
      "seen_booth",
+     "visited",
+     "names_seen",
+     "see_stairs",
      "open_roof",
      "open_laundry",
      "open_figure",
@@ -46,6 +49,7 @@
      "here",
      "night_visits",
      "met",
+     "visited",
      "met_管理員",
      "met_諾亞",
      "met_斑比",
@@ -23971,6 +23975,13 @@
    "label": "strikes",
    "type": "number",
    "defaultValue": 0
+  },
+  {
+   "id": "visited",
+   "name": "visited",
+   "label": "visited",
+   "type": "string",
+   "defaultValue": ""
   },
   {
    "id": "bambi_asked_at",

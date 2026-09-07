@@ -403,9 +403,10 @@ def build(cards):
     board_id = b.add({"type": "miniGame", "title": "調查板", "text": "選一個地方去。",
                       "miniGameHtml": "@@larch/cards/board.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
-                      "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits", "seen_booth"] + [f"open_{k}" for k in
+                      "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits", "seen_booth", "visited",
+                                           "names_seen", "see_stairs"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
-                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met"] + MET_VARS})
+                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
     menu_of, entries_of, greetings = {}, {}, []
     for loc in LOCS:
@@ -743,7 +744,7 @@ def variables():
          ("here", "string", ""), ("pick", "string", ""), ("met", "string", ""),
          ("notes", "string", "[]"), ("notes_free", "string", "[]"),
          ("hole_sightings", "number", 0), ("noah_stage", "number", 0),
-         ("night_visits", "number", 0), ("strikes", "number", 0),
+         ("night_visits", "number", 0), ("strikes", "number", 0), ("visited", "string", ""),
          ("bambi_asked_at", "number", 0)]
     for k in ("roof", "laundry", "figure", "parts", "studio", "tower14"):
         v.append((f"open_{k}", "boolean", False))

@@ -277,7 +277,15 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             # 不然玩家每過一個時段都要多按一次「套用結果並繼續」。
             d["miniGameFrame"] = {"showButton": False, "showTitle": False}
             if d["miniGameHtml"].endswith("board.html"):
-                d["miniGameHtml"] = board_html
+                # 拍立得的照片：各地點日版／夜版背景
+                photos = {}
+                for loc, (dk, nk) in BG_MAP.items():
+                    if loc.startswith("catgrass"):
+                        continue
+                    du, _ = pick_bg(dk, dk, state, pid, dry)
+                    nu, _ = pick_bg(nk, nk, state, pid, dry)
+                    photos[loc] = {"day": du or nu or "", "night": nu or du or ""}
+                d["miniGameHtml"] = board_html.replace("/*@@PHOTOS@@*/{}", json.dumps(photos, ensure_ascii=False))
                 board_id = n["id"]
             elif d["miniGameHtml"].endswith("menu.html"):
                 loc = d["title"].split("：", 1)[1]
