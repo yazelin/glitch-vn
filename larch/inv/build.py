@@ -233,6 +233,14 @@ def parse_trigger(text):
     return rule, notes
 
 
+def desk_scene(b, after, sid):
+    """插播（每天收尾、她開台的晚上）都是她在自己桌前，背景換成那一張，不然會停在上一趟去的地方。"""
+    sc = b.add({"type": "scene", "title": "桌前", "text": "", "background": "@@bg-desk-night",
+                "backgroundNight": "@@bg-desk-night", "transition": "fade", "transitionMs": 340, "segment": sid})
+    b.edge(after, sc)
+    return sc
+
+
 # ── 節點 ─────────────────────────────────────────────────
 class Board:
     def __init__(self):
@@ -481,7 +489,7 @@ def build(cards):
             intr = b.add({"type": "interrupt", "title": f"第{m_end.group(1)}天收尾", "text": "",
                           "interruptCondition": {"kind": "variable", "variable": "day", "op": "eq", "value": n_day + 1},
                           "interruptOnce": True, "interruptExit": "return"})
-            prev = intr
+            prev = desk_scene(b, intr, sid)
             for c in s["cards"]:
                 d = card_node(c)
                 if not d:
@@ -764,7 +772,7 @@ def build(cards):
         banner = b.add({"type": "phone", "title": "手機：格莉奇", "text": "", "contact": "格莉奇",
                         "msg": "格莉奇 開始直播了", "segment": sid_})
         b.edge(intr, banner)
-        b.edge(banner, first)
+        b.edge(desk_scene(b, banner, sid_), first)
     # 直接接下去的段落（設計寫「進門就是這一格，不用選」那種）：上一段演完不回板，進這一段；這一段不上選單
     for file_, from_sec, to_sec in CHAINS:
         frm = next((sid_ for (ff, _l, sec), (_f, sid_) in seg_first.items() if ff == file_ and sec.startswith(from_sec)), None)

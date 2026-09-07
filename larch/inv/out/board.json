@@ -14629,10 +14629,13 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "第三天。",
-    "text": "第三天。",
-    "speaker": "旁白",
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
     "segment": "seg109"
    }
   },
@@ -14645,9 +14648,9 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：三個地方。問到的都是",
-    "text": "三個地方。問到的都是別人的事。\n她的事沒有人講。可是每個人都講了另一個人。",
-    "speaker": "玩家",
+    "title": "第三天。",
+    "text": "第三天。",
+    "speaker": "旁白",
     "segment": "seg109"
    }
   },
@@ -14656,6 +14659,21 @@
    "type": "story",
    "position": {
     "x": 132300,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：三個地方。問到的都是",
+    "text": "三個地方。問到的都是別人的事。\n她的事沒有人講。可是每個人都講了另一個人。",
+    "speaker": "玩家",
+    "segment": "seg109"
+   }
+  },
+  {
+   "id": "inv-442",
+   "type": "story",
+   "position": {
+    "x": 132600,
     "y": 0
    },
    "data": {
@@ -14673,10 +14691,28 @@
    }
   },
   {
-   "id": "inv-442",
+   "id": "inv-443",
    "type": "story",
    "position": {
-    "x": 132600,
+    "x": 132900,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-444",
+   "type": "story",
+   "position": {
+    "x": 133200,
     "y": 0
    },
    "data": {
@@ -14688,10 +14724,10 @@
    }
   },
   {
-   "id": "inv-443",
+   "id": "inv-445",
    "type": "story",
    "position": {
-    "x": 132900,
+    "x": 133500,
     "y": 0
    },
    "data": {
@@ -14703,10 +14739,10 @@
    }
   },
   {
-   "id": "inv-444",
+   "id": "inv-446",
    "type": "story",
    "position": {
-    "x": 133200,
+    "x": 133800,
     "y": 0
    },
    "data": {
@@ -14724,10 +14760,28 @@
    }
   },
   {
-   "id": "inv-445",
+   "id": "inv-447",
    "type": "story",
    "position": {
-    "x": 133500,
+    "x": 134100,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg111"
+   }
+  },
+  {
+   "id": "inv-448",
+   "type": "story",
+   "position": {
+    "x": 134400,
     "y": 0
    },
    "data": {
@@ -14739,10 +14793,10 @@
    }
   },
   {
-   "id": "inv-446",
+   "id": "inv-449",
    "type": "story",
    "position": {
-    "x": 133800,
+    "x": 134700,
     "y": 0
    },
    "data": {
@@ -14762,10 +14816,10 @@
    }
   },
   {
-   "id": "inv-447",
+   "id": "inv-450",
    "type": "story",
    "position": {
-    "x": 134100,
+    "x": 135000,
     "y": 0
    },
    "data": {
@@ -14783,10 +14837,28 @@
    }
   },
   {
-   "id": "inv-448",
+   "id": "inv-451",
    "type": "story",
    "position": {
-    "x": 134400,
+    "x": 135300,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg112"
+   }
+  },
+  {
+   "id": "inv-452",
+   "type": "story",
+   "position": {
+    "x": 135600,
     "y": 0
    },
    "data": {
@@ -14798,10 +14870,10 @@
    }
   },
   {
-   "id": "inv-449",
+   "id": "inv-453",
    "type": "story",
    "position": {
-    "x": 134700,
+    "x": 135900,
     "y": 0
    },
    "data": {
@@ -14813,10 +14885,10 @@
    }
   },
   {
-   "id": "inv-450",
+   "id": "inv-454",
    "type": "story",
    "position": {
-    "x": 135000,
+    "x": 136200,
     "y": 0
    },
    "data": {
@@ -14834,10 +14906,28 @@
    }
   },
   {
-   "id": "inv-451",
+   "id": "inv-455",
    "type": "story",
    "position": {
-    "x": 135300,
+    "x": 136500,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg113"
+   }
+  },
+  {
+   "id": "inv-456",
+   "type": "story",
+   "position": {
+    "x": 136800,
     "y": 0
    },
    "data": {
@@ -14849,10 +14939,10 @@
    }
   },
   {
-   "id": "inv-452",
+   "id": "inv-457",
    "type": "story",
    "position": {
-    "x": 135600,
+    "x": 137100,
     "y": 0
    },
    "data": {
@@ -14872,10 +14962,10 @@
    }
   },
   {
-   "id": "inv-453",
+   "id": "inv-458",
    "type": "story",
    "position": {
-    "x": 135900,
+    "x": 137400,
     "y": 0
    },
    "data": {
@@ -14893,10 +14983,28 @@
    }
   },
   {
-   "id": "inv-454",
+   "id": "inv-459",
    "type": "story",
    "position": {
-    "x": 136200,
+    "x": 137700,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg114"
+   }
+  },
+  {
+   "id": "inv-460",
+   "type": "story",
+   "position": {
+    "x": 138000,
     "y": 0
    },
    "data": {
@@ -14908,10 +15016,10 @@
    }
   },
   {
-   "id": "inv-455",
+   "id": "inv-461",
    "type": "story",
    "position": {
-    "x": 136500,
+    "x": 138300,
     "y": 0
    },
    "data": {
@@ -14923,10 +15031,10 @@
    }
   },
   {
-   "id": "inv-456",
+   "id": "inv-462",
    "type": "story",
    "position": {
-    "x": 136800,
+    "x": 138600,
     "y": 0
    },
    "data": {
@@ -14944,10 +15052,28 @@
    }
   },
   {
-   "id": "inv-457",
+   "id": "inv-463",
    "type": "story",
    "position": {
-    "x": 137100,
+    "x": 138900,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg115"
+   }
+  },
+  {
+   "id": "inv-464",
+   "type": "story",
+   "position": {
+    "x": 139200,
     "y": 0
    },
    "data": {
@@ -14959,10 +15085,10 @@
    }
   },
   {
-   "id": "inv-458",
+   "id": "inv-465",
    "type": "story",
    "position": {
-    "x": 137400,
+    "x": 139500,
     "y": 0
    },
    "data": {
@@ -14982,10 +15108,10 @@
    }
   },
   {
-   "id": "inv-459",
+   "id": "inv-466",
    "type": "story",
    "position": {
-    "x": 137700,
+    "x": 139800,
     "y": 0
    },
    "data": {
@@ -15003,10 +15129,28 @@
    }
   },
   {
-   "id": "inv-460",
+   "id": "inv-467",
    "type": "story",
    "position": {
-    "x": 138000,
+    "x": 140100,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg116"
+   }
+  },
+  {
+   "id": "inv-468",
+   "type": "story",
+   "position": {
+    "x": 140400,
     "y": 0
    },
    "data": {
@@ -15018,10 +15162,10 @@
    }
   },
   {
-   "id": "inv-461",
+   "id": "inv-469",
    "type": "story",
    "position": {
-    "x": 138300,
+    "x": 140700,
     "y": 0
    },
    "data": {
@@ -15041,10 +15185,10 @@
    }
   },
   {
-   "id": "inv-462",
+   "id": "inv-470",
    "type": "story",
    "position": {
-    "x": 138600,
+    "x": 141000,
     "y": 0
    },
    "data": {
@@ -15062,10 +15206,28 @@
    }
   },
   {
-   "id": "inv-463",
+   "id": "inv-471",
    "type": "story",
    "position": {
-    "x": 138900,
+    "x": 141300,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg117"
+   }
+  },
+  {
+   "id": "inv-472",
+   "type": "story",
+   "position": {
+    "x": 141600,
     "y": 0
    },
    "data": {
@@ -15077,10 +15239,10 @@
    }
   },
   {
-   "id": "inv-464",
+   "id": "inv-473",
    "type": "story",
    "position": {
-    "x": 139200,
+    "x": 141900,
     "y": 0
    },
    "data": {
@@ -15092,10 +15254,10 @@
    }
   },
   {
-   "id": "inv-465",
+   "id": "inv-474",
    "type": "story",
    "position": {
-    "x": 139500,
+    "x": 142200,
     "y": 0
    },
    "data": {
@@ -15107,10 +15269,10 @@
    }
   },
   {
-   "id": "inv-466",
+   "id": "inv-475",
    "type": "story",
    "position": {
-    "x": 139800,
+    "x": 142500,
     "y": 0
    },
    "data": {
@@ -15123,10 +15285,10 @@
    }
   },
   {
-   "id": "inv-467",
+   "id": "inv-476",
    "type": "story",
    "position": {
-    "x": 140100,
+    "x": 142800,
     "y": 0
    },
    "data": {
@@ -15138,10 +15300,10 @@
    }
   },
   {
-   "id": "inv-468",
+   "id": "inv-477",
    "type": "story",
    "position": {
-    "x": 140400,
+    "x": 143100,
     "y": 0
    },
    "data": {
@@ -15153,10 +15315,10 @@
    }
   },
   {
-   "id": "inv-469",
+   "id": "inv-478",
    "type": "story",
    "position": {
-    "x": 140700,
+    "x": 143400,
     "y": 0
    },
    "data": {
@@ -15168,10 +15330,10 @@
    }
   },
   {
-   "id": "inv-470",
+   "id": "inv-479",
    "type": "story",
    "position": {
-    "x": 141000,
+    "x": 143700,
     "y": 0
    },
    "data": {
@@ -15184,10 +15346,10 @@
    }
   },
   {
-   "id": "inv-471",
+   "id": "inv-480",
    "type": "story",
    "position": {
-    "x": 141300,
+    "x": 144000,
     "y": 0
    },
    "data": {
@@ -15203,10 +15365,10 @@
    }
   },
   {
-   "id": "inv-472",
+   "id": "inv-481",
    "type": "story",
    "position": {
-    "x": 141600,
+    "x": 144300,
     "y": 0
    },
    "data": {
@@ -15218,10 +15380,10 @@
    }
   },
   {
-   "id": "inv-473",
+   "id": "inv-482",
    "type": "story",
    "position": {
-    "x": 141900,
+    "x": 144600,
     "y": 0
    },
    "data": {
@@ -15233,10 +15395,10 @@
    }
   },
   {
-   "id": "inv-474",
+   "id": "inv-483",
    "type": "story",
    "position": {
-    "x": 142200,
+    "x": 144900,
     "y": 0
    },
    "data": {
@@ -15248,10 +15410,10 @@
    }
   },
   {
-   "id": "inv-475",
+   "id": "inv-484",
    "type": "story",
    "position": {
-    "x": 142500,
+    "x": 145200,
     "y": 0
    },
    "data": {
@@ -15263,10 +15425,10 @@
    }
   },
   {
-   "id": "inv-476",
+   "id": "inv-485",
    "type": "story",
    "position": {
-    "x": 142800,
+    "x": 145500,
     "y": 0
    },
    "data": {
@@ -15278,10 +15440,10 @@
    }
   },
   {
-   "id": "inv-477",
+   "id": "inv-486",
    "type": "story",
    "position": {
-    "x": 143100,
+    "x": 145800,
     "y": 0
    },
    "data": {
@@ -15294,10 +15456,10 @@
    }
   },
   {
-   "id": "inv-478",
+   "id": "inv-487",
    "type": "story",
    "position": {
-    "x": 143400,
+    "x": 146100,
     "y": 0
    },
    "data": {
@@ -15309,10 +15471,10 @@
    }
   },
   {
-   "id": "inv-479",
+   "id": "inv-488",
    "type": "story",
    "position": {
-    "x": 143700,
+    "x": 146400,
     "y": 0
    },
    "data": {
@@ -15324,10 +15486,10 @@
    }
   },
   {
-   "id": "inv-480",
+   "id": "inv-489",
    "type": "story",
    "position": {
-    "x": 144000,
+    "x": 146700,
     "y": 0
    },
    "data": {
@@ -15366,10 +15528,10 @@
    }
   },
   {
-   "id": "inv-481",
+   "id": "inv-490",
    "type": "story",
    "position": {
-    "x": 144300,
+    "x": 147000,
     "y": 0
    },
    "data": {
@@ -15382,10 +15544,10 @@
    }
   },
   {
-   "id": "inv-482",
+   "id": "inv-491",
    "type": "story",
    "position": {
-    "x": 144600,
+    "x": 147300,
     "y": 0
    },
    "data": {
@@ -15398,10 +15560,10 @@
    }
   },
   {
-   "id": "inv-483",
+   "id": "inv-492",
    "type": "story",
    "position": {
-    "x": 144900,
+    "x": 147600,
     "y": 0
    },
    "data": {
@@ -15494,10 +15656,10 @@
    }
   },
   {
-   "id": "inv-484",
+   "id": "inv-493",
    "type": "story",
    "position": {
-    "x": 145200,
+    "x": 147900,
     "y": 0
    },
    "data": {
@@ -15510,10 +15672,10 @@
    }
   },
   {
-   "id": "inv-485",
+   "id": "inv-494",
    "type": "story",
    "position": {
-    "x": 145500,
+    "x": 148200,
     "y": 0
    },
    "data": {
@@ -15614,10 +15776,10 @@
    }
   },
   {
-   "id": "inv-486",
+   "id": "inv-495",
    "type": "story",
    "position": {
-    "x": 145800,
+    "x": 148500,
     "y": 0
    },
    "data": {
@@ -15630,10 +15792,10 @@
    }
   },
   {
-   "id": "inv-487",
+   "id": "inv-496",
    "type": "story",
    "position": {
-    "x": 146100,
+    "x": 148800,
     "y": 0
    },
    "data": {
@@ -15710,10 +15872,10 @@
    }
   },
   {
-   "id": "inv-488",
+   "id": "inv-497",
    "type": "story",
    "position": {
-    "x": 146400,
+    "x": 149100,
     "y": 0
    },
    "data": {
@@ -15726,10 +15888,10 @@
    }
   },
   {
-   "id": "inv-489",
+   "id": "inv-498",
    "type": "story",
    "position": {
-    "x": 146700,
+    "x": 149400,
     "y": 0
    },
    "data": {
@@ -15740,10 +15902,10 @@
    }
   },
   {
-   "id": "inv-490",
+   "id": "inv-499",
    "type": "story",
    "position": {
-    "x": 147000,
+    "x": 149700,
     "y": 0
    },
    "data": {
@@ -15756,10 +15918,10 @@
    }
   },
   {
-   "id": "inv-491",
+   "id": "inv-500",
    "type": "story",
    "position": {
-    "x": 147300,
+    "x": 150000,
     "y": 0
    },
    "data": {
@@ -15860,10 +16022,10 @@
    }
   },
   {
-   "id": "inv-492",
+   "id": "inv-501",
    "type": "story",
    "position": {
-    "x": 147600,
+    "x": 150300,
     "y": 0
    },
    "data": {
@@ -15934,10 +16096,10 @@
    }
   },
   {
-   "id": "inv-493",
+   "id": "inv-502",
    "type": "story",
    "position": {
-    "x": 147900,
+    "x": 150600,
     "y": 0
    },
    "data": {
@@ -15950,10 +16112,10 @@
    }
   },
   {
-   "id": "inv-494",
+   "id": "inv-503",
    "type": "story",
    "position": {
-    "x": 148200,
+    "x": 150900,
     "y": 0
    },
    "data": {
@@ -16036,10 +16198,10 @@
    }
   },
   {
-   "id": "inv-495",
+   "id": "inv-504",
    "type": "story",
    "position": {
-    "x": 148500,
+    "x": 151200,
     "y": 0
    },
    "data": {
@@ -16052,10 +16214,10 @@
    }
   },
   {
-   "id": "inv-496",
+   "id": "inv-505",
    "type": "story",
    "position": {
-    "x": 148800,
+    "x": 151500,
     "y": 0
    },
    "data": {
@@ -16094,10 +16256,10 @@
    }
   },
   {
-   "id": "inv-497",
+   "id": "inv-506",
    "type": "story",
    "position": {
-    "x": 149100,
+    "x": 151800,
     "y": 0
    },
    "data": {
@@ -16110,10 +16272,10 @@
    }
   },
   {
-   "id": "inv-498",
+   "id": "inv-507",
    "type": "story",
    "position": {
-    "x": 149400,
+    "x": 152100,
     "y": 0
    },
    "data": {
@@ -16124,10 +16286,10 @@
    }
   },
   {
-   "id": "inv-499",
+   "id": "inv-508",
    "type": "story",
    "position": {
-    "x": 149700,
+    "x": 152400,
     "y": 0
    },
    "data": {
@@ -16140,10 +16302,10 @@
    }
   },
   {
-   "id": "inv-500",
+   "id": "inv-509",
    "type": "story",
    "position": {
-    "x": 150000,
+    "x": 152700,
     "y": 0
    },
    "data": {
@@ -16156,10 +16318,10 @@
    }
   },
   {
-   "id": "inv-501",
+   "id": "inv-510",
    "type": "story",
    "position": {
-    "x": 150300,
+    "x": 153000,
     "y": 0
    },
    "data": {
@@ -16172,10 +16334,10 @@
    }
   },
   {
-   "id": "inv-502",
+   "id": "inv-511",
    "type": "story",
    "position": {
-    "x": 150600,
+    "x": 153300,
     "y": 0
    },
    "data": {
@@ -16246,10 +16408,10 @@
    }
   },
   {
-   "id": "inv-503",
+   "id": "inv-512",
    "type": "story",
    "position": {
-    "x": 150900,
+    "x": 153600,
     "y": 0
    },
    "data": {
@@ -16262,10 +16424,10 @@
    }
   },
   {
-   "id": "inv-504",
+   "id": "inv-513",
    "type": "story",
    "position": {
-    "x": 151200,
+    "x": 153900,
     "y": 0
    },
    "data": {
@@ -16278,10 +16440,10 @@
    }
   },
   {
-   "id": "inv-505",
+   "id": "inv-514",
    "type": "story",
    "position": {
-    "x": 151500,
+    "x": 154200,
     "y": 0
    },
    "data": {
@@ -16292,10 +16454,10 @@
    }
   },
   {
-   "id": "inv-506",
+   "id": "inv-515",
    "type": "story",
    "position": {
-    "x": 151800,
+    "x": 154500,
     "y": 0
    },
    "data": {
@@ -16308,10 +16470,10 @@
    }
   },
   {
-   "id": "inv-507",
+   "id": "inv-516",
    "type": "story",
    "position": {
-    "x": 152100,
+    "x": 154800,
     "y": 0
    },
    "data": {
@@ -16452,10 +16614,10 @@
    }
   },
   {
-   "id": "inv-508",
+   "id": "inv-517",
    "type": "story",
    "position": {
-    "x": 152400,
+    "x": 155100,
     "y": 0
    },
    "data": {
@@ -16468,10 +16630,10 @@
    }
   },
   {
-   "id": "inv-509",
+   "id": "inv-518",
    "type": "story",
    "position": {
-    "x": 152700,
+    "x": 155400,
     "y": 0
    },
    "data": {
@@ -16484,10 +16646,10 @@
    }
   },
   {
-   "id": "inv-510",
+   "id": "inv-519",
    "type": "story",
    "position": {
-    "x": 153000,
+    "x": 155700,
     "y": 0
    },
    "data": {
@@ -16498,10 +16660,10 @@
    }
   },
   {
-   "id": "inv-511",
+   "id": "inv-520",
    "type": "story",
    "position": {
-    "x": 153300,
+    "x": 156000,
     "y": 0
    },
    "data": {
@@ -16514,10 +16676,10 @@
    }
   },
   {
-   "id": "inv-512",
+   "id": "inv-521",
    "type": "story",
    "position": {
-    "x": 153600,
+    "x": 156300,
     "y": 0
    },
    "data": {
@@ -16530,10 +16692,10 @@
    }
   },
   {
-   "id": "inv-513",
+   "id": "inv-522",
    "type": "story",
    "position": {
-    "x": 153900,
+    "x": 156600,
     "y": 0
    },
    "data": {
@@ -16546,10 +16708,10 @@
    }
   },
   {
-   "id": "inv-514",
+   "id": "inv-523",
    "type": "story",
    "position": {
-    "x": 154200,
+    "x": 156900,
     "y": 0
    },
    "data": {
@@ -16562,10 +16724,10 @@
    }
   },
   {
-   "id": "inv-515",
+   "id": "inv-524",
    "type": "story",
    "position": {
-    "x": 154500,
+    "x": 157200,
     "y": 0
    },
    "data": {
@@ -16586,10 +16748,10 @@
    }
   },
   {
-   "id": "inv-516",
+   "id": "inv-525",
    "type": "story",
    "position": {
-    "x": 154800,
+    "x": 157500,
     "y": 0
    },
    "data": {
@@ -16600,10 +16762,10 @@
    }
   },
   {
-   "id": "inv-517",
+   "id": "inv-526",
    "type": "story",
    "position": {
-    "x": 155100,
+    "x": 157800,
     "y": 0
    },
    "data": {
@@ -16616,10 +16778,10 @@
    }
   },
   {
-   "id": "inv-518",
+   "id": "inv-527",
    "type": "story",
    "position": {
-    "x": 155400,
+    "x": 158100,
     "y": 0
    },
    "data": {
@@ -16694,10 +16856,10 @@
    }
   },
   {
-   "id": "inv-519",
+   "id": "inv-528",
    "type": "story",
    "position": {
-    "x": 155700,
+    "x": 158400,
     "y": 0
    },
    "data": {
@@ -16710,10 +16872,10 @@
    }
   },
   {
-   "id": "inv-520",
+   "id": "inv-529",
    "type": "story",
    "position": {
-    "x": 156000,
+    "x": 158700,
     "y": 0
    },
    "data": {
@@ -16726,10 +16888,10 @@
    }
   },
   {
-   "id": "inv-521",
+   "id": "inv-530",
    "type": "story",
    "position": {
-    "x": 156300,
+    "x": 159000,
     "y": 0
    },
    "data": {
@@ -16740,10 +16902,10 @@
    }
   },
   {
-   "id": "inv-522",
+   "id": "inv-531",
    "type": "story",
    "position": {
-    "x": 156600,
+    "x": 159300,
     "y": 0
    },
    "data": {
@@ -16756,10 +16918,10 @@
    }
   },
   {
-   "id": "inv-523",
+   "id": "inv-532",
    "type": "story",
    "position": {
-    "x": 156900,
+    "x": 159600,
     "y": 0
    },
    "data": {
@@ -16772,10 +16934,10 @@
    }
   },
   {
-   "id": "inv-524",
+   "id": "inv-533",
    "type": "story",
    "position": {
-    "x": 157200,
+    "x": 159900,
     "y": 0
    },
    "data": {
@@ -16788,10 +16950,10 @@
    }
   },
   {
-   "id": "inv-525",
+   "id": "inv-534",
    "type": "story",
    "position": {
-    "x": 157500,
+    "x": 160200,
     "y": 0
    },
    "data": {
@@ -16850,10 +17012,10 @@
    }
   },
   {
-   "id": "inv-526",
+   "id": "inv-535",
    "type": "story",
    "position": {
-    "x": 157800,
+    "x": 160500,
     "y": 0
    },
    "data": {
@@ -16866,10 +17028,10 @@
    }
   },
   {
-   "id": "inv-527",
+   "id": "inv-536",
    "type": "story",
    "position": {
-    "x": 158100,
+    "x": 160800,
     "y": 0
    },
    "data": {
@@ -16880,10 +17042,10 @@
    }
   },
   {
-   "id": "inv-528",
+   "id": "inv-537",
    "type": "story",
    "position": {
-    "x": 158400,
+    "x": 161100,
     "y": 0
    },
    "data": {
@@ -16896,10 +17058,10 @@
    }
   },
   {
-   "id": "inv-529",
+   "id": "inv-538",
    "type": "story",
    "position": {
-    "x": 158700,
+    "x": 161400,
     "y": 0
    },
    "data": {
@@ -16980,10 +17142,10 @@
    }
   },
   {
-   "id": "inv-530",
+   "id": "inv-539",
    "type": "story",
    "position": {
-    "x": 159000,
+    "x": 161700,
     "y": 0
    },
    "data": {
@@ -16996,10 +17158,10 @@
    }
   },
   {
-   "id": "inv-531",
+   "id": "inv-540",
    "type": "story",
    "position": {
-    "x": 159300,
+    "x": 162000,
     "y": 0
    },
    "data": {
@@ -17012,10 +17174,10 @@
    }
   },
   {
-   "id": "inv-532",
+   "id": "inv-541",
    "type": "story",
    "position": {
-    "x": 159600,
+    "x": 162300,
     "y": 0
    },
    "data": {
@@ -17026,10 +17188,10 @@
    }
   },
   {
-   "id": "inv-533",
+   "id": "inv-542",
    "type": "story",
    "position": {
-    "x": 159900,
+    "x": 162600,
     "y": 0
    },
    "data": {
@@ -17042,10 +17204,10 @@
    }
   },
   {
-   "id": "inv-534",
+   "id": "inv-543",
    "type": "story",
    "position": {
-    "x": 160200,
+    "x": 162900,
     "y": 0
    },
    "data": {
@@ -17056,10 +17218,10 @@
    }
   },
   {
-   "id": "inv-535",
+   "id": "inv-544",
    "type": "story",
    "position": {
-    "x": 160500,
+    "x": 163200,
     "y": 0
    },
    "data": {
@@ -17072,10 +17234,10 @@
    }
   },
   {
-   "id": "inv-536",
+   "id": "inv-545",
    "type": "story",
    "position": {
-    "x": 160800,
+    "x": 163500,
     "y": 0
    },
    "data": {
@@ -17150,10 +17312,10 @@
    }
   },
   {
-   "id": "inv-537",
+   "id": "inv-546",
    "type": "story",
    "position": {
-    "x": 161100,
+    "x": 163800,
     "y": 0
    },
    "data": {
@@ -17166,10 +17328,10 @@
    }
   },
   {
-   "id": "inv-538",
+   "id": "inv-547",
    "type": "story",
    "position": {
-    "x": 161400,
+    "x": 164100,
     "y": 0
    },
    "data": {
@@ -17182,10 +17344,10 @@
    }
   },
   {
-   "id": "inv-539",
+   "id": "inv-548",
    "type": "story",
    "position": {
-    "x": 161700,
+    "x": 164400,
     "y": 0
    },
    "data": {
@@ -17196,10 +17358,10 @@
    }
   },
   {
-   "id": "inv-540",
+   "id": "inv-549",
    "type": "story",
    "position": {
-    "x": 162000,
+    "x": 164700,
     "y": 0
    },
    "data": {
@@ -17212,10 +17374,10 @@
    }
   },
   {
-   "id": "inv-541",
+   "id": "inv-550",
    "type": "story",
    "position": {
-    "x": 162300,
+    "x": 165000,
     "y": 0
    },
    "data": {
@@ -17254,10 +17416,10 @@
    }
   },
   {
-   "id": "inv-542",
+   "id": "inv-551",
    "type": "story",
    "position": {
-    "x": 162600,
+    "x": 165300,
     "y": 0
    },
    "data": {
@@ -17308,10 +17470,10 @@
    }
   },
   {
-   "id": "inv-543",
+   "id": "inv-552",
    "type": "story",
    "position": {
-    "x": 162900,
+    "x": 165600,
     "y": 0
    },
    "data": {
@@ -17324,10 +17486,10 @@
    }
   },
   {
-   "id": "inv-544",
+   "id": "inv-553",
    "type": "story",
    "position": {
-    "x": 163200,
+    "x": 165900,
     "y": 0
    },
    "data": {
@@ -17338,10 +17500,10 @@
    }
   },
   {
-   "id": "inv-545",
+   "id": "inv-554",
    "type": "story",
    "position": {
-    "x": 163500,
+    "x": 166200,
     "y": 0
    },
    "data": {
@@ -17354,10 +17516,10 @@
    }
   },
   {
-   "id": "inv-546",
+   "id": "inv-555",
    "type": "story",
    "position": {
-    "x": 163800,
+    "x": 166500,
     "y": 0
    },
    "data": {
@@ -17474,10 +17636,10 @@
    }
   },
   {
-   "id": "inv-547",
+   "id": "inv-556",
    "type": "story",
    "position": {
-    "x": 164100,
+    "x": 166800,
     "y": 0
    },
    "data": {
@@ -17490,10 +17652,10 @@
    }
   },
   {
-   "id": "inv-548",
+   "id": "inv-557",
    "type": "story",
    "position": {
-    "x": 164400,
+    "x": 167100,
     "y": 0
    },
    "data": {
@@ -17506,10 +17668,10 @@
    }
   },
   {
-   "id": "inv-549",
+   "id": "inv-558",
    "type": "story",
    "position": {
-    "x": 164700,
+    "x": 167400,
     "y": 0
    },
    "data": {
@@ -17520,10 +17682,10 @@
    }
   },
   {
-   "id": "inv-550",
+   "id": "inv-559",
    "type": "story",
    "position": {
-    "x": 165000,
+    "x": 167700,
     "y": 0
    },
    "data": {
@@ -17536,10 +17698,10 @@
    }
   },
   {
-   "id": "inv-551",
+   "id": "inv-560",
    "type": "story",
    "position": {
-    "x": 165300,
+    "x": 168000,
     "y": 0
    },
    "data": {
@@ -17552,10 +17714,10 @@
    }
   },
   {
-   "id": "inv-552",
+   "id": "inv-561",
    "type": "story",
    "position": {
-    "x": 165600,
+    "x": 168300,
     "y": 0
    },
    "data": {
@@ -17606,10 +17768,10 @@
    }
   },
   {
-   "id": "inv-553",
+   "id": "inv-562",
    "type": "story",
    "position": {
-    "x": 165900,
+    "x": 168600,
     "y": 0
    },
    "data": {
@@ -17622,10 +17784,10 @@
    }
   },
   {
-   "id": "inv-554",
+   "id": "inv-563",
    "type": "story",
    "position": {
-    "x": 166200,
+    "x": 168900,
     "y": 0
    },
    "data": {
@@ -17638,10 +17800,10 @@
    }
   },
   {
-   "id": "inv-555",
+   "id": "inv-564",
    "type": "story",
    "position": {
-    "x": 166500,
+    "x": 169200,
     "y": 0
    },
    "data": {
@@ -17654,10 +17816,10 @@
    }
   },
   {
-   "id": "inv-556",
+   "id": "inv-565",
    "type": "story",
    "position": {
-    "x": 166800,
+    "x": 169500,
     "y": 0
    },
    "data": {
@@ -17668,10 +17830,10 @@
    }
   },
   {
-   "id": "inv-557",
+   "id": "inv-566",
    "type": "story",
    "position": {
-    "x": 167100,
+    "x": 169800,
     "y": 0
    },
    "data": {
@@ -17684,10 +17846,10 @@
    }
   },
   {
-   "id": "inv-558",
+   "id": "inv-567",
    "type": "story",
    "position": {
-    "x": 167400,
+    "x": 170100,
     "y": 0
    },
    "data": {
@@ -17700,10 +17862,10 @@
    }
   },
   {
-   "id": "inv-559",
+   "id": "inv-568",
    "type": "story",
    "position": {
-    "x": 167700,
+    "x": 170400,
     "y": 0
    },
    "data": {
@@ -17772,10 +17934,10 @@
    }
   },
   {
-   "id": "inv-560",
+   "id": "inv-569",
    "type": "story",
    "position": {
-    "x": 168000,
+    "x": 170700,
     "y": 0
    },
    "data": {
@@ -17788,10 +17950,10 @@
    }
   },
   {
-   "id": "inv-561",
+   "id": "inv-570",
    "type": "story",
    "position": {
-    "x": 168300,
+    "x": 171000,
     "y": 0
    },
    "data": {
@@ -17862,10 +18024,10 @@
    }
   },
   {
-   "id": "inv-562",
+   "id": "inv-571",
    "type": "story",
    "position": {
-    "x": 168600,
+    "x": 171300,
     "y": 0
    },
    "data": {
@@ -17878,10 +18040,10 @@
    }
   },
   {
-   "id": "inv-563",
+   "id": "inv-572",
    "type": "story",
    "position": {
-    "x": 168900,
+    "x": 171600,
     "y": 0
    },
    "data": {
@@ -17892,10 +18054,10 @@
    }
   },
   {
-   "id": "inv-564",
+   "id": "inv-573",
    "type": "story",
    "position": {
-    "x": 169200,
+    "x": 171900,
     "y": 0
    },
    "data": {
@@ -17908,10 +18070,10 @@
    }
   },
   {
-   "id": "inv-565",
+   "id": "inv-574",
    "type": "story",
    "position": {
-    "x": 169500,
+    "x": 172200,
     "y": 0
    },
    "data": {
@@ -17924,10 +18086,10 @@
    }
   },
   {
-   "id": "inv-566",
+   "id": "inv-575",
    "type": "story",
    "position": {
-    "x": 169800,
+    "x": 172500,
     "y": 0
    },
    "data": {
@@ -17984,10 +18146,10 @@
    }
   },
   {
-   "id": "inv-567",
+   "id": "inv-576",
    "type": "story",
    "position": {
-    "x": 170100,
+    "x": 172800,
     "y": 0
    },
    "data": {
@@ -18000,10 +18162,10 @@
    }
   },
   {
-   "id": "inv-568",
+   "id": "inv-577",
    "type": "story",
    "position": {
-    "x": 170400,
+    "x": 173100,
     "y": 0
    },
    "data": {
@@ -18016,10 +18178,10 @@
    }
   },
   {
-   "id": "inv-569",
+   "id": "inv-578",
    "type": "story",
    "position": {
-    "x": 170700,
+    "x": 173400,
     "y": 0
    },
    "data": {
@@ -18030,10 +18192,10 @@
    }
   },
   {
-   "id": "inv-570",
+   "id": "inv-579",
    "type": "story",
    "position": {
-    "x": 171000,
+    "x": 173700,
     "y": 0
    },
    "data": {
@@ -18046,10 +18208,10 @@
    }
   },
   {
-   "id": "inv-571",
+   "id": "inv-580",
    "type": "story",
    "position": {
-    "x": 171300,
+    "x": 174000,
     "y": 0
    },
    "data": {
@@ -18144,10 +18306,10 @@
    }
   },
   {
-   "id": "inv-572",
+   "id": "inv-581",
    "type": "story",
    "position": {
-    "x": 171600,
+    "x": 174300,
     "y": 0
    },
    "data": {
@@ -18160,10 +18322,10 @@
    }
   },
   {
-   "id": "inv-573",
+   "id": "inv-582",
    "type": "story",
    "position": {
-    "x": 171900,
+    "x": 174600,
     "y": 0
    },
    "data": {
@@ -18176,10 +18338,10 @@
    }
   },
   {
-   "id": "inv-574",
+   "id": "inv-583",
    "type": "story",
    "position": {
-    "x": 172200,
+    "x": 174900,
     "y": 0
    },
    "data": {
@@ -18190,10 +18352,10 @@
    }
   },
   {
-   "id": "inv-575",
+   "id": "inv-584",
    "type": "story",
    "position": {
-    "x": 172500,
+    "x": 175200,
     "y": 0
    },
    "data": {
@@ -18211,10 +18373,28 @@
    }
   },
   {
-   "id": "inv-576",
+   "id": "inv-585",
    "type": "story",
    "position": {
-    "x": 172800,
+    "x": 175500,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg139"
+   }
+  },
+  {
+   "id": "inv-586",
+   "type": "story",
+   "position": {
+    "x": 175800,
     "y": 0
    },
    "data": {
@@ -18226,10 +18406,10 @@
    }
   },
   {
-   "id": "inv-577",
+   "id": "inv-587",
    "type": "story",
    "position": {
-    "x": 173100,
+    "x": 176100,
     "y": 0
    },
    "data": {
@@ -18242,10 +18422,10 @@
    }
   },
   {
-   "id": "inv-578",
+   "id": "inv-588",
    "type": "story",
    "position": {
-    "x": 173400,
+    "x": 176400,
     "y": 0
    },
    "data": {
@@ -18258,10 +18438,10 @@
    }
   },
   {
-   "id": "inv-579",
+   "id": "inv-589",
    "type": "story",
    "position": {
-    "x": 173700,
+    "x": 176700,
     "y": 0
    },
    "data": {
@@ -18320,10 +18500,10 @@
    }
   },
   {
-   "id": "inv-580",
+   "id": "inv-590",
    "type": "story",
    "position": {
-    "x": 174000,
+    "x": 177000,
     "y": 0
    },
    "data": {
@@ -18336,10 +18516,10 @@
    }
   },
   {
-   "id": "inv-581",
+   "id": "inv-591",
    "type": "story",
    "position": {
-    "x": 174300,
+    "x": 177300,
     "y": 0
    },
    "data": {
@@ -18398,10 +18578,10 @@
    }
   },
   {
-   "id": "inv-582",
+   "id": "inv-592",
    "type": "story",
    "position": {
-    "x": 174600,
+    "x": 177600,
     "y": 0
    },
    "data": {
@@ -18414,10 +18594,10 @@
    }
   },
   {
-   "id": "inv-583",
+   "id": "inv-593",
    "type": "story",
    "position": {
-    "x": 174900,
+    "x": 177900,
     "y": 0
    },
    "data": {
@@ -18428,10 +18608,10 @@
    }
   },
   {
-   "id": "inv-584",
+   "id": "inv-594",
    "type": "story",
    "position": {
-    "x": 175200,
+    "x": 178200,
     "y": 0
    },
    "data": {
@@ -18444,10 +18624,10 @@
    }
   },
   {
-   "id": "inv-585",
+   "id": "inv-595",
    "type": "story",
    "position": {
-    "x": 175500,
+    "x": 178500,
     "y": 0
    },
    "data": {
@@ -18498,10 +18678,10 @@
    }
   },
   {
-   "id": "inv-586",
+   "id": "inv-596",
    "type": "story",
    "position": {
-    "x": 175800,
+    "x": 178800,
     "y": 0
    },
    "data": {
@@ -18514,10 +18694,10 @@
    }
   },
   {
-   "id": "inv-587",
+   "id": "inv-597",
    "type": "story",
    "position": {
-    "x": 176100,
+    "x": 179100,
     "y": 0
    },
    "data": {
@@ -18528,10 +18708,10 @@
    }
   },
   {
-   "id": "inv-588",
+   "id": "inv-598",
    "type": "story",
    "position": {
-    "x": 176400,
+    "x": 179400,
     "y": 0
    },
    "data": {
@@ -18544,10 +18724,10 @@
    }
   },
   {
-   "id": "inv-589",
+   "id": "inv-599",
    "type": "story",
    "position": {
-    "x": 176700,
+    "x": 179700,
     "y": 0
    },
    "data": {
@@ -18634,10 +18814,10 @@
    }
   },
   {
-   "id": "inv-590",
+   "id": "inv-600",
    "type": "story",
    "position": {
-    "x": 177000,
+    "x": 180000,
     "y": 0
    },
    "data": {
@@ -18658,10 +18838,10 @@
    }
   },
   {
-   "id": "inv-591",
+   "id": "inv-601",
    "type": "story",
    "position": {
-    "x": 177300,
+    "x": 180300,
     "y": 0
    },
    "data": {
@@ -18674,10 +18854,10 @@
    }
   },
   {
-   "id": "inv-592",
+   "id": "inv-602",
    "type": "story",
    "position": {
-    "x": 177600,
+    "x": 180600,
     "y": 0
    },
    "data": {
@@ -18688,10 +18868,10 @@
    }
   },
   {
-   "id": "inv-593",
+   "id": "inv-603",
    "type": "story",
    "position": {
-    "x": 177900,
+    "x": 180900,
     "y": 0
    },
    "data": {
@@ -18709,10 +18889,28 @@
    }
   },
   {
-   "id": "inv-594",
+   "id": "inv-604",
    "type": "story",
    "position": {
-    "x": 178200,
+    "x": 181200,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg143"
+   }
+  },
+  {
+   "id": "inv-605",
+   "type": "story",
+   "position": {
+    "x": 181500,
     "y": 0
    },
    "data": {
@@ -18725,10 +18923,10 @@
    }
   },
   {
-   "id": "inv-595",
+   "id": "inv-606",
    "type": "story",
    "position": {
-    "x": 178500,
+    "x": 181800,
     "y": 0
    },
    "data": {
@@ -18741,10 +18939,10 @@
    }
   },
   {
-   "id": "inv-596",
+   "id": "inv-607",
    "type": "story",
    "position": {
-    "x": 178800,
+    "x": 182100,
     "y": 0
    },
    "data": {
@@ -18833,10 +19031,10 @@
    }
   },
   {
-   "id": "inv-597",
+   "id": "inv-608",
    "type": "story",
    "position": {
-    "x": 179100,
+    "x": 182400,
     "y": 0
    },
    "data": {
@@ -18857,10 +19055,10 @@
    }
   },
   {
-   "id": "inv-598",
+   "id": "inv-609",
    "type": "story",
    "position": {
-    "x": 179400,
+    "x": 182700,
     "y": 0
    },
    "data": {
@@ -18871,10 +19069,10 @@
    }
   },
   {
-   "id": "inv-599",
+   "id": "inv-610",
    "type": "story",
    "position": {
-    "x": 179700,
+    "x": 183000,
     "y": 0
    },
    "data": {
@@ -18887,10 +19085,10 @@
    }
   },
   {
-   "id": "inv-600",
+   "id": "inv-611",
    "type": "story",
    "position": {
-    "x": 180000,
+    "x": 183300,
     "y": 0
    },
    "data": {
@@ -18931,10 +19129,10 @@
    }
   },
   {
-   "id": "inv-601",
+   "id": "inv-612",
    "type": "story",
    "position": {
-    "x": 180300,
+    "x": 183600,
     "y": 0
    },
    "data": {
@@ -18945,10 +19143,10 @@
    }
   },
   {
-   "id": "inv-602",
+   "id": "inv-613",
    "type": "story",
    "position": {
-    "x": 180600,
+    "x": 183900,
     "y": 0
    },
    "data": {
@@ -18998,10 +19196,10 @@
    }
   },
   {
-   "id": "inv-603",
+   "id": "inv-614",
    "type": "story",
    "position": {
-    "x": 180900,
+    "x": 184200,
     "y": 0
    },
    "data": {
@@ -19013,10 +19211,10 @@
    }
   },
   {
-   "id": "inv-604",
+   "id": "inv-615",
    "type": "story",
    "position": {
-    "x": 181200,
+    "x": 184500,
     "y": 0
    },
    "data": {
@@ -19027,10 +19225,10 @@
    }
   },
   {
-   "id": "inv-605",
+   "id": "inv-616",
    "type": "story",
    "position": {
-    "x": 181500,
+    "x": 184800,
     "y": 0
    },
    "data": {
@@ -19042,10 +19240,10 @@
    }
   },
   {
-   "id": "inv-606",
+   "id": "inv-617",
    "type": "story",
    "position": {
-    "x": 181800,
+    "x": 185100,
     "y": 0
    },
    "data": {
@@ -19056,10 +19254,10 @@
    }
   },
   {
-   "id": "inv-607",
+   "id": "inv-618",
    "type": "story",
    "position": {
-    "x": 182100,
+    "x": 185400,
     "y": 0
    },
    "data": {
@@ -19103,10 +19301,10 @@
    }
   },
   {
-   "id": "inv-608",
+   "id": "inv-619",
    "type": "story",
    "position": {
-    "x": 182400,
+    "x": 185700,
     "y": 0
    },
    "data": {
@@ -19118,10 +19316,10 @@
    }
   },
   {
-   "id": "inv-609",
+   "id": "inv-620",
    "type": "story",
    "position": {
-    "x": 182700,
+    "x": 186000,
     "y": 0
    },
    "data": {
@@ -19132,10 +19330,10 @@
    }
   },
   {
-   "id": "inv-610",
+   "id": "inv-621",
    "type": "story",
    "position": {
-    "x": 183000,
+    "x": 186300,
     "y": 0
    },
    "data": {
@@ -19147,10 +19345,10 @@
    }
   },
   {
-   "id": "inv-611",
+   "id": "inv-622",
    "type": "story",
    "position": {
-    "x": 183300,
+    "x": 186600,
     "y": 0
    },
    "data": {
@@ -19161,10 +19359,10 @@
    }
   },
   {
-   "id": "inv-612",
+   "id": "inv-623",
    "type": "story",
    "position": {
-    "x": 183600,
+    "x": 186900,
     "y": 0
    },
    "data": {
@@ -19176,10 +19374,10 @@
    }
   },
   {
-   "id": "inv-613",
+   "id": "inv-624",
    "type": "story",
    "position": {
-    "x": 183900,
+    "x": 187200,
     "y": 0
    },
    "data": {
@@ -19191,10 +19389,10 @@
    }
   },
   {
-   "id": "inv-614",
+   "id": "inv-625",
    "type": "story",
    "position": {
-    "x": 184200,
+    "x": 187500,
     "y": 0
    },
    "data": {
@@ -19205,10 +19403,10 @@
    }
   },
   {
-   "id": "inv-615",
+   "id": "inv-626",
    "type": "story",
    "position": {
-    "x": 184500,
+    "x": 187800,
     "y": 0
    },
    "data": {
@@ -19219,10 +19417,10 @@
    }
   },
   {
-   "id": "inv-616",
+   "id": "inv-627",
    "type": "story",
    "position": {
-    "x": 184800,
+    "x": 188100,
     "y": 0
    },
    "data": {
@@ -19233,10 +19431,10 @@
    }
   },
   {
-   "id": "inv-617",
+   "id": "inv-628",
    "type": "story",
    "position": {
-    "x": 185100,
+    "x": 188400,
     "y": 0
    },
    "data": {
@@ -19247,10 +19445,10 @@
    }
   },
   {
-   "id": "inv-618",
+   "id": "inv-629",
    "type": "story",
    "position": {
-    "x": 185400,
+    "x": 188700,
     "y": 0
    },
    "data": {
@@ -19281,10 +19479,10 @@
    }
   },
   {
-   "id": "inv-619",
+   "id": "inv-630",
    "type": "story",
    "position": {
-    "x": 185700,
+    "x": 189000,
     "y": 0
    },
    "data": {
@@ -19297,10 +19495,28 @@
    }
   },
   {
-   "id": "inv-620",
+   "id": "inv-631",
    "type": "story",
    "position": {
-    "x": 186000,
+    "x": 189300,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg118"
+   }
+  },
+  {
+   "id": "inv-632",
+   "type": "story",
+   "position": {
+    "x": 189600,
     "y": 0
    },
    "data": {
@@ -19331,10 +19547,10 @@
    }
   },
   {
-   "id": "inv-621",
+   "id": "inv-633",
    "type": "story",
    "position": {
-    "x": 186300,
+    "x": 189900,
     "y": 0
    },
    "data": {
@@ -19347,10 +19563,28 @@
    }
   },
   {
-   "id": "inv-622",
+   "id": "inv-634",
    "type": "story",
    "position": {
-    "x": 186600,
+    "x": 190200,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg119"
+   }
+  },
+  {
+   "id": "inv-635",
+   "type": "story",
+   "position": {
+    "x": 190500,
     "y": 0
    },
    "data": {
@@ -19381,10 +19615,10 @@
    }
   },
   {
-   "id": "inv-623",
+   "id": "inv-636",
    "type": "story",
    "position": {
-    "x": 186900,
+    "x": 190800,
     "y": 0
    },
    "data": {
@@ -19397,10 +19631,28 @@
    }
   },
   {
-   "id": "inv-624",
+   "id": "inv-637",
    "type": "story",
    "position": {
-    "x": 187200,
+    "x": 191100,
+    "y": 0
+   },
+   "data": {
+    "type": "scene",
+    "title": "桌前",
+    "text": "",
+    "background": "@@bg-desk-night",
+    "backgroundNight": "@@bg-desk-night",
+    "transition": "fade",
+    "transitionMs": 340,
+    "segment": "seg122"
+   }
+  },
+  {
+   "id": "inv-638",
+   "type": "story",
+   "position": {
+    "x": 191400,
     "y": 0
    },
    "data": {
@@ -19419,202 +19671,6 @@
    }
   },
   {
-   "id": "inv-625",
-   "type": "story",
-   "position": {
-    "x": 187500,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-626",
-   "type": "story",
-   "position": {
-    "x": 187800,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-627",
-   "type": "story",
-   "position": {
-    "x": 188100,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-628",
-   "type": "story",
-   "position": {
-    "x": 188400,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-629",
-   "type": "story",
-   "position": {
-    "x": 188700,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-630",
-   "type": "story",
-   "position": {
-    "x": 189000,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-631",
-   "type": "story",
-   "position": {
-    "x": 189300,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（roof 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-632",
-   "type": "story",
-   "position": {
-    "x": 189600,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（roof 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-633",
-   "type": "story",
-   "position": {
-    "x": 189900,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（roof 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-634",
-   "type": "story",
-   "position": {
-    "x": 190200,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（roof 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-635",
-   "type": "story",
-   "position": {
-    "x": 190500,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（roof 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-636",
-   "type": "story",
-   "position": {
-    "x": 190800,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（roof 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-637",
-   "type": "story",
-   "position": {
-    "x": 191100,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（studio 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-638",
-   "type": "story",
-   "position": {
-    "x": 191400,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（studio 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
    "id": "inv-639",
    "type": "story",
    "position": {
@@ -19623,7 +19679,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19637,7 +19693,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19651,7 +19707,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19665,7 +19721,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19679,7 +19735,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19693,7 +19749,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19707,7 +19763,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19721,7 +19777,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19735,7 +19791,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19749,7 +19805,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19763,7 +19819,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19777,7 +19833,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19791,7 +19847,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19805,7 +19861,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19819,7 +19875,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19833,7 +19889,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19847,7 +19903,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19861,7 +19917,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19875,7 +19931,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19889,7 +19945,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19903,7 +19959,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19917,7 +19973,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19931,7 +19987,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19945,7 +20001,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19959,7 +20015,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19973,7 +20029,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19987,7 +20043,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20001,7 +20057,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20011,6 +20067,202 @@
    "type": "story",
    "position": {
     "x": 200100,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（tower14 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-668",
+   "type": "story",
+   "position": {
+    "x": 200400,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（tower14 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-669",
+   "type": "story",
+   "position": {
+    "x": 200700,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（store 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-670",
+   "type": "story",
+   "position": {
+    "x": 201000,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（store 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-671",
+   "type": "story",
+   "position": {
+    "x": 201300,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（store 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-672",
+   "type": "story",
+   "position": {
+    "x": 201600,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（store 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-673",
+   "type": "story",
+   "position": {
+    "x": 201900,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（store 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-674",
+   "type": "story",
+   "position": {
+    "x": 202200,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（store 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-675",
+   "type": "story",
+   "position": {
+    "x": 202500,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-676",
+   "type": "story",
+   "position": {
+    "x": 202800,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-677",
+   "type": "story",
+   "position": {
+    "x": 203100,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-678",
+   "type": "story",
+   "position": {
+    "x": 203400,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-679",
+   "type": "story",
+   "position": {
+    "x": 203700,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-680",
+   "type": "story",
+   "position": {
+    "x": 204000,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-681",
+   "type": "story",
+   "position": {
+    "x": 204300,
     "y": 0
    },
    "data": {
@@ -23811,8 +24063,8 @@
   },
   {
    "id": "e417",
-   "source": "inv-441",
-   "target": "inv-442",
+   "source": "inv-440",
+   "target": "inv-441",
    "sourceHandle": "right",
    "animated": true
   },
@@ -23825,232 +24077,239 @@
   },
   {
    "id": "e419",
+   "source": "inv-443",
+   "target": "inv-444",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e420",
    "source": "inv-444",
    "target": "inv-445",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e420",
-   "source": "inv-445",
-   "target": "inv-446",
+   "id": "e421",
+   "source": "inv-446",
+   "target": "inv-447",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e421",
+   "id": "e422",
    "source": "inv-447",
    "target": "inv-448",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e422",
+   "id": "e423",
    "source": "inv-448",
    "target": "inv-449",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e423",
+   "id": "e424",
    "source": "inv-450",
    "target": "inv-451",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e424",
+   "id": "e425",
    "source": "inv-451",
    "target": "inv-452",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e425",
-   "source": "inv-453",
-   "target": "inv-454",
+   "id": "e426",
+   "source": "inv-452",
+   "target": "inv-453",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e426",
+   "id": "e427",
    "source": "inv-454",
    "target": "inv-455",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e427",
+   "id": "e428",
+   "source": "inv-455",
+   "target": "inv-456",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e429",
    "source": "inv-456",
    "target": "inv-457",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e428",
-   "source": "inv-457",
-   "target": "inv-458",
+   "id": "e430",
+   "source": "inv-458",
+   "target": "inv-459",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e429",
+   "id": "e431",
    "source": "inv-459",
    "target": "inv-460",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e430",
+   "id": "e432",
    "source": "inv-460",
    "target": "inv-461",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e431",
+   "id": "e433",
    "source": "inv-462",
    "target": "inv-463",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e432",
+   "id": "e434",
    "source": "inv-463",
    "target": "inv-464",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e433",
-   "source": "inv-465",
-   "target": "inv-466",
+   "id": "e435",
+   "source": "inv-464",
+   "target": "inv-465",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e434",
+   "id": "e436",
    "source": "inv-466",
    "target": "inv-467",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e435",
+   "id": "e437",
    "source": "inv-467",
    "target": "inv-468",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e436",
-   "source": "inv-469",
-   "target": "inv-470",
+   "id": "e438",
+   "source": "inv-468",
+   "target": "inv-469",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e437",
+   "id": "e439",
    "source": "inv-470",
    "target": "inv-471",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e438",
+   "id": "e440",
+   "source": "inv-471",
+   "target": "inv-472",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e441",
    "source": "inv-472",
    "target": "inv-473",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e439",
+   "id": "e442",
    "source": "inv-474",
    "target": "inv-475",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e440",
+   "id": "e443",
+   "source": "inv-475",
+   "target": "inv-476",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e444",
    "source": "inv-476",
    "target": "inv-477",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e441",
-   "source": "inv-477",
-   "target": "inv-478",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e442",
+   "id": "e445",
    "source": "inv-478",
    "target": "inv-479",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e443",
-   "source": "inv-480",
-   "target": "inv-481",
+   "id": "e446",
+   "source": "inv-479",
+   "target": "inv-480",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e444",
+   "id": "e447",
    "source": "inv-481",
    "target": "inv-482",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e445",
-   "source": "inv-482",
-   "target": "inv-483",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e446",
+   "id": "e448",
    "source": "inv-483",
    "target": "inv-484",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e447",
-   "source": "inv-484",
-   "target": "inv-485",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e448",
+   "id": "e449",
    "source": "inv-485",
    "target": "inv-486",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e449",
+   "id": "e450",
    "source": "inv-486",
    "target": "inv-487",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e450",
+   "id": "e451",
    "source": "inv-487",
    "target": "inv-488",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e451",
-   "source": "inv-488",
-   "target": "inv-489",
+   "id": "e452",
+   "source": "inv-489",
+   "target": "inv-490",
    "sourceHandle": "right",
    "animated": true
   },
@@ -24111,21 +24370,6 @@
    "animated": true
   },
   {
-   "id": "e461",
-   "source": "inv-009",
-   "target": "inv-490",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg124"
-    }
-   }
-  },
-  {
    "id": "e462",
    "source": "inv-499",
    "target": "inv-500",
@@ -24169,18 +24413,10 @@
   },
   {
    "id": "e468",
-   "source": "inv-013",
-   "target": "inv-499",
+   "source": "inv-505",
+   "target": "inv-506",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg125"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e469",
@@ -24191,10 +24427,18 @@
   },
   {
    "id": "e470",
-   "source": "inv-507",
-   "target": "inv-508",
+   "source": "inv-009",
+   "target": "inv-499",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg124"
+    }
+   }
   },
   {
    "id": "e471",
@@ -24212,18 +24456,10 @@
   },
   {
    "id": "e473",
-   "source": "inv-005",
-   "target": "inv-506",
+   "source": "inv-510",
+   "target": "inv-511",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg126"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e474",
@@ -24248,10 +24484,18 @@
   },
   {
    "id": "e477",
-   "source": "inv-514",
-   "target": "inv-515",
+   "source": "inv-013",
+   "target": "inv-508",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg125"
+    }
+   }
   },
   {
    "id": "e478",
@@ -24262,18 +24506,10 @@
   },
   {
    "id": "e479",
-   "source": "inv-005",
-   "target": "inv-511",
+   "source": "inv-516",
+   "target": "inv-517",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg127"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e480",
@@ -24291,10 +24527,18 @@
   },
   {
    "id": "e482",
-   "source": "inv-519",
-   "target": "inv-520",
+   "source": "inv-005",
+   "target": "inv-515",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg126"
+    }
+   }
   },
   {
    "id": "e483",
@@ -24305,18 +24549,10 @@
   },
   {
    "id": "e484",
-   "source": "inv-013",
-   "target": "inv-517",
+   "source": "inv-521",
+   "target": "inv-522",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg128"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e485",
@@ -24341,10 +24577,18 @@
   },
   {
    "id": "e488",
-   "source": "inv-525",
-   "target": "inv-526",
+   "source": "inv-005",
+   "target": "inv-520",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg127"
+    }
+   }
   },
   {
    "id": "e489",
@@ -24355,18 +24599,10 @@
   },
   {
    "id": "e490",
-   "source": "inv-013",
-   "target": "inv-522",
+   "source": "inv-527",
+   "target": "inv-528",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg129"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e491",
@@ -24384,10 +24620,18 @@
   },
   {
    "id": "e493",
-   "source": "inv-530",
-   "target": "inv-531",
+   "source": "inv-013",
+   "target": "inv-526",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg128"
+    }
+   }
   },
   {
    "id": "e494",
@@ -24398,18 +24642,10 @@
   },
   {
    "id": "e495",
-   "source": "inv-037",
-   "target": "inv-528",
+   "source": "inv-532",
+   "target": "inv-533",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg130"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e496",
@@ -24420,18 +24656,10 @@
   },
   {
    "id": "e497",
-   "source": "inv-037",
-   "target": "inv-533",
+   "source": "inv-534",
+   "target": "inv-535",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg131"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e498",
@@ -24442,10 +24670,18 @@
   },
   {
    "id": "e499",
-   "source": "inv-536",
-   "target": "inv-537",
+   "source": "inv-013",
+   "target": "inv-531",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg129"
+    }
+   }
   },
   {
    "id": "e500",
@@ -24463,18 +24699,10 @@
   },
   {
    "id": "e502",
-   "source": "inv-037",
-   "target": "inv-535",
+   "source": "inv-539",
+   "target": "inv-540",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg132"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e503",
@@ -24485,10 +24713,18 @@
   },
   {
    "id": "e504",
-   "source": "inv-541",
-   "target": "inv-542",
+   "source": "inv-037",
+   "target": "inv-537",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg130"
+    }
+   }
   },
   {
    "id": "e505",
@@ -24499,15 +24735,8 @@
   },
   {
    "id": "e506",
-   "source": "inv-543",
-   "target": "inv-544",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e507",
-   "source": "inv-041",
-   "target": "inv-540",
+   "source": "inv-037",
+   "target": "inv-542",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24515,9 +24744,16 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg133"
+     "value": "seg131"
     }
    }
+  },
+  {
+   "id": "e507",
+   "source": "inv-544",
+   "target": "inv-545",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e508",
@@ -24542,15 +24778,8 @@
   },
   {
    "id": "e511",
-   "source": "inv-548",
-   "target": "inv-549",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e512",
-   "source": "inv-041",
-   "target": "inv-545",
+   "source": "inv-037",
+   "target": "inv-544",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24558,9 +24787,16 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg134"
+     "value": "seg132"
     }
    }
+  },
+  {
+   "id": "e512",
+   "source": "inv-549",
+   "target": "inv-550",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e513",
@@ -24585,10 +24821,18 @@
   },
   {
    "id": "e516",
-   "source": "inv-553",
-   "target": "inv-554",
+   "source": "inv-041",
+   "target": "inv-549",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg133"
+    }
+   }
   },
   {
    "id": "e517",
@@ -24606,18 +24850,10 @@
   },
   {
    "id": "e519",
-   "source": "inv-041",
-   "target": "inv-550",
+   "source": "inv-556",
+   "target": "inv-557",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg135"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e520",
@@ -24628,10 +24864,18 @@
   },
   {
    "id": "e521",
-   "source": "inv-558",
-   "target": "inv-559",
+   "source": "inv-041",
+   "target": "inv-554",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg134"
+    }
+   }
   },
   {
    "id": "e522",
@@ -24663,18 +24907,10 @@
   },
   {
    "id": "e526",
-   "source": "inv-029",
-   "target": "inv-557",
+   "source": "inv-563",
+   "target": "inv-564",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg136"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e527",
@@ -24685,10 +24921,18 @@
   },
   {
    "id": "e528",
-   "source": "inv-565",
-   "target": "inv-566",
+   "source": "inv-041",
+   "target": "inv-559",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg135"
+    }
+   }
   },
   {
    "id": "e529",
@@ -24713,18 +24957,10 @@
   },
   {
    "id": "e532",
-   "source": "inv-029",
-   "target": "inv-564",
+   "source": "inv-569",
+   "target": "inv-570",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg137"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e533",
@@ -24742,10 +24978,18 @@
   },
   {
    "id": "e535",
-   "source": "inv-572",
-   "target": "inv-573",
+   "source": "inv-029",
+   "target": "inv-566",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg136"
+    }
+   }
   },
   {
    "id": "e536",
@@ -24756,8 +25000,79 @@
   },
   {
    "id": "e537",
+   "source": "inv-574",
+   "target": "inv-575",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e538",
+   "source": "inv-575",
+   "target": "inv-576",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e539",
+   "source": "inv-576",
+   "target": "inv-577",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e540",
+   "source": "inv-577",
+   "target": "inv-578",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e541",
    "source": "inv-029",
-   "target": "inv-570",
+   "target": "inv-573",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg137"
+    }
+   }
+  },
+  {
+   "id": "e542",
+   "source": "inv-579",
+   "target": "inv-580",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e543",
+   "source": "inv-580",
+   "target": "inv-581",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e544",
+   "source": "inv-581",
+   "target": "inv-582",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e545",
+   "source": "inv-582",
+   "target": "inv-583",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e546",
+   "source": "inv-029",
+   "target": "inv-579",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24770,104 +25085,25 @@
    }
   },
   {
-   "id": "e538",
-   "source": "inv-575",
-   "target": "inv-576",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e539",
-   "source": "inv-577",
-   "target": "inv-578",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e540",
-   "source": "inv-578",
-   "target": "inv-579",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e541",
-   "source": "inv-579",
-   "target": "inv-580",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e542",
-   "source": "inv-580",
-   "target": "inv-581",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e543",
-   "source": "inv-581",
-   "target": "inv-582",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e544",
-   "source": "inv-582",
-   "target": "inv-583",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e545",
-   "source": "inv-029",
-   "target": "inv-577",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg140"
-    }
-   }
-  },
-  {
-   "id": "e546",
+   "id": "e547",
    "source": "inv-584",
    "target": "inv-585",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e547",
+   "id": "e548",
    "source": "inv-585",
    "target": "inv-586",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e548",
-   "source": "inv-586",
-   "target": "inv-587",
+   "id": "e549",
+   "source": "inv-587",
+   "target": "inv-588",
    "sourceHandle": "right",
    "animated": true
-  },
-  {
-   "id": "e549",
-   "source": "inv-013",
-   "target": "inv-584",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg141"
-    }
-   }
   },
   {
    "id": "e550",
@@ -24899,8 +25135,94 @@
   },
   {
    "id": "e554",
+   "source": "inv-592",
+   "target": "inv-593",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e555",
+   "source": "inv-029",
+   "target": "inv-587",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg140"
+    }
+   }
+  },
+  {
+   "id": "e556",
+   "source": "inv-594",
+   "target": "inv-595",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e557",
+   "source": "inv-595",
+   "target": "inv-596",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e558",
+   "source": "inv-596",
+   "target": "inv-597",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e559",
+   "source": "inv-013",
+   "target": "inv-594",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg141"
+    }
+   }
+  },
+  {
+   "id": "e560",
+   "source": "inv-598",
+   "target": "inv-599",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e561",
+   "source": "inv-599",
+   "target": "inv-600",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e562",
+   "source": "inv-600",
+   "target": "inv-601",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e563",
+   "source": "inv-601",
+   "target": "inv-602",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e564",
    "source": "inv-005",
-   "target": "inv-588",
+   "target": "inv-598",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24913,127 +25235,25 @@
    }
   },
   {
-   "id": "e555",
-   "source": "inv-593",
-   "target": "inv-594",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e556",
-   "source": "inv-595",
-   "target": "inv-596",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e557",
-   "source": "inv-596",
-   "target": "inv-597",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e558",
-   "source": "inv-597",
-   "target": "inv-598",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e559",
-   "source": "inv-029",
-   "target": "inv-595",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg144"
-    }
-   }
-  },
-  {
-   "id": "e560",
-   "source": "inv-599",
-   "target": "inv-600",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e561",
-   "source": "inv-600",
-   "target": "inv-601",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e562",
-   "source": "inv-017",
-   "target": "inv-599",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg145"
-    }
-   }
-  },
-  {
-   "id": "e563",
-   "source": "inv-602",
-   "target": "inv-603",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e564",
+   "id": "e565",
    "source": "inv-603",
    "target": "inv-604",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e565",
-   "source": "inv-037",
-   "target": "inv-602",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg146"
-    }
-   }
-  },
-  {
    "id": "e566",
-   "source": "inv-605",
-   "target": "inv-606",
+   "source": "inv-604",
+   "target": "inv-605",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e567",
-   "source": "inv-037",
-   "target": "inv-605",
+   "source": "inv-606",
+   "target": "inv-607",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg147"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e568",
@@ -25051,8 +25271,8 @@
   },
   {
    "id": "e570",
-   "source": "inv-041",
-   "target": "inv-607",
+   "source": "inv-029",
+   "target": "inv-606",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25060,7 +25280,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg148"
+     "value": "seg144"
     }
    }
   },
@@ -25073,8 +25293,117 @@
   },
   {
    "id": "e572",
-   "source": "inv-041",
+   "source": "inv-611",
+   "target": "inv-612",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e573",
+   "source": "inv-017",
    "target": "inv-610",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg145"
+    }
+   }
+  },
+  {
+   "id": "e574",
+   "source": "inv-613",
+   "target": "inv-614",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e575",
+   "source": "inv-614",
+   "target": "inv-615",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e576",
+   "source": "inv-037",
+   "target": "inv-613",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg146"
+    }
+   }
+  },
+  {
+   "id": "e577",
+   "source": "inv-616",
+   "target": "inv-617",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e578",
+   "source": "inv-037",
+   "target": "inv-616",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg147"
+    }
+   }
+  },
+  {
+   "id": "e579",
+   "source": "inv-618",
+   "target": "inv-619",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e580",
+   "source": "inv-619",
+   "target": "inv-620",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e581",
+   "source": "inv-041",
+   "target": "inv-618",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg148"
+    }
+   }
+  },
+  {
+   "id": "e582",
+   "source": "inv-621",
+   "target": "inv-622",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e583",
+   "source": "inv-041",
+   "target": "inv-621",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25087,23 +25416,23 @@
    }
   },
   {
-   "id": "e573",
-   "source": "inv-612",
-   "target": "inv-613",
+   "id": "e584",
+   "source": "inv-623",
+   "target": "inv-624",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e574",
-   "source": "inv-613",
-   "target": "inv-614",
+   "id": "e585",
+   "source": "inv-624",
+   "target": "inv-625",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e575",
+   "id": "e586",
    "source": "inv-013",
-   "target": "inv-612",
+   "target": "inv-623",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25116,106 +25445,106 @@
    }
   },
   {
-   "id": "e576",
+   "id": "e587",
    "source": "inv-161",
    "target": "inv-163",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e576",
+   "id": "e587",
    "source": "inv-161",
    "target": "inv-166",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e576",
+   "id": "e587",
    "source": "inv-161",
    "target": "inv-168",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e576",
+   "id": "e587",
    "source": "inv-164",
    "target": "inv-166",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e577",
+   "id": "e588",
    "source": "inv-164",
    "target": "inv-168",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-265",
    "target": "inv-267",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-265",
    "target": "inv-271",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-272",
    "target": "inv-274",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-272",
    "target": "inv-278",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-279",
    "target": "inv-281",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-279",
    "target": "inv-285",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-287",
    "target": "inv-289",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-287",
    "target": "inv-293",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e578",
+   "id": "e589",
    "source": "inv-339",
-   "target": "inv-615",
+   "target": "inv-626",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e579",
-   "source": "inv-615",
+   "id": "e590",
+   "source": "inv-626",
    "target": "inv-362",
    "sourceHandle": "right",
    "animated": true,
@@ -25229,36 +25558,36 @@
    }
   },
   {
-   "id": "e580",
-   "source": "inv-615",
+   "id": "e591",
+   "source": "inv-626",
    "target": "inv-360",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e579",
+   "id": "e590",
    "source": "inv-339",
    "target": "inv-341",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e579",
+   "id": "e590",
    "source": "inv-346",
    "target": "inv-341",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e580",
+   "id": "e591",
    "source": "inv-346",
-   "target": "inv-616",
+   "target": "inv-627",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e581",
-   "source": "inv-616",
+   "id": "e592",
+   "source": "inv-627",
    "target": "inv-362",
    "sourceHandle": "right",
    "animated": true,
@@ -25272,29 +25601,29 @@
    }
   },
   {
-   "id": "e582",
-   "source": "inv-616",
+   "id": "e593",
+   "source": "inv-627",
    "target": "inv-360",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e583",
+   "id": "e594",
    "source": "inv-352",
    "target": "inv-341",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e584",
+   "id": "e595",
    "source": "inv-352",
-   "target": "inv-617",
+   "target": "inv-628",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e585",
-   "source": "inv-617",
+   "id": "e596",
+   "source": "inv-628",
    "target": "inv-362",
    "sourceHandle": "right",
    "animated": true,
@@ -25308,93 +25637,114 @@
    }
   },
   {
-   "id": "e586",
-   "source": "inv-617",
+   "id": "e597",
+   "source": "inv-628",
    "target": "inv-360",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e587",
+   "id": "e598",
    "source": "inv-352",
    "target": "inv-356",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e587",
-   "source": "inv-471",
-   "target": "inv-472",
+   "id": "e598",
+   "source": "inv-480",
+   "target": "inv-481",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e588",
-   "source": "inv-471",
-   "target": "inv-474",
+   "id": "e599",
+   "source": "inv-480",
+   "target": "inv-483",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e589",
-   "source": "inv-618",
-   "target": "inv-619",
+   "id": "e600",
+   "source": "inv-629",
+   "target": "inv-630",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e590",
-   "source": "inv-619",
-   "target": "inv-465",
+   "id": "e601",
+   "source": "inv-630",
+   "target": "inv-631",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e591",
-   "source": "inv-620",
-   "target": "inv-621",
+   "id": "e602",
+   "source": "inv-631",
+   "target": "inv-474",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e592",
-   "source": "inv-621",
-   "target": "inv-469",
+   "id": "e603",
+   "source": "inv-632",
+   "target": "inv-633",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e593",
-   "source": "inv-622",
-   "target": "inv-623",
+   "id": "e604",
+   "source": "inv-633",
+   "target": "inv-634",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e594",
-   "source": "inv-623",
-   "target": "inv-476",
+   "id": "e605",
+   "source": "inv-634",
+   "target": "inv-478",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e594",
+   "id": "e606",
+   "source": "inv-635",
+   "target": "inv-636",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e607",
+   "source": "inv-636",
+   "target": "inv-637",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e608",
+   "source": "inv-637",
+   "target": "inv-485",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e608",
    "source": "inv-158",
    "target": "inv-160",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e593",
+   "id": "e607",
    "source": "inv-166",
    "target": "inv-168",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e594",
+   "id": "e608",
    "source": "inv-002",
-   "target": "inv-625",
+   "target": "inv-639",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25407,8 +25757,8 @@
    }
   },
   {
-   "id": "e595",
-   "source": "inv-625",
+   "id": "e609",
+   "source": "inv-639",
    "target": "inv-243",
    "sourceHandle": "right",
    "animated": true,
@@ -25422,23 +25772,23 @@
    }
   },
   {
-   "id": "e596",
-   "source": "inv-625",
+   "id": "e610",
+   "source": "inv-639",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e597",
+   "id": "e611",
    "source": "inv-243",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e598",
+   "id": "e612",
    "source": "inv-002",
-   "target": "inv-626",
+   "target": "inv-640",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25451,8 +25801,8 @@
    }
   },
   {
-   "id": "e599",
-   "source": "inv-626",
+   "id": "e613",
+   "source": "inv-640",
    "target": "inv-242",
    "sourceHandle": "right",
    "animated": true,
@@ -25466,198 +25816,36 @@
    }
   },
   {
-   "id": "e600",
-   "source": "inv-626",
+   "id": "e614",
+   "source": "inv-640",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e601",
+   "id": "e615",
    "source": "inv-242",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e602",
+   "id": "e616",
    "source": "inv-002",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e603",
-   "source": "inv-003",
-   "target": "inv-627",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e604",
-   "source": "inv-627",
-   "target": "inv-243",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e605",
-   "source": "inv-627",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e606",
-   "source": "inv-003",
-   "target": "inv-628",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e607",
-   "source": "inv-628",
-   "target": "inv-242",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e608",
-   "source": "inv-628",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e609",
-   "source": "inv-003",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e610",
-   "source": "inv-004",
-   "target": "inv-629",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e611",
-   "source": "inv-629",
-   "target": "inv-243",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e612",
-   "source": "inv-629",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e613",
-   "source": "inv-004",
-   "target": "inv-630",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e614",
-   "source": "inv-630",
-   "target": "inv-242",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e615",
-   "source": "inv-630",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e616",
-   "source": "inv-004",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e617",
-   "source": "inv-006",
-   "target": "inv-631",
+   "source": "inv-003",
+   "target": "inv-641",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_諾亞",
+     "variable": "met_管理員",
      "op": "gte",
      "value": 5
     }
@@ -25665,8 +25853,8 @@
   },
   {
    "id": "e618",
-   "source": "inv-631",
-   "target": "inv-245",
+   "source": "inv-641",
+   "target": "inv-243",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25674,480 +25862,473 @@
      "kind": "variable",
      "variable": "slot",
      "op": "lte",
-     "value": 2
+     "value": 1
     }
    }
   },
   {
    "id": "e619",
-   "source": "inv-631",
-   "target": "inv-009",
+   "source": "inv-641",
+   "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e620",
-   "source": "inv-245",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e621",
-   "source": "inv-006",
-   "target": "inv-632",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e622",
-   "source": "inv-632",
-   "target": "inv-244",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e623",
-   "source": "inv-632",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e624",
-   "source": "inv-244",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e625",
-   "source": "inv-006",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e626",
-   "source": "inv-007",
-   "target": "inv-633",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e627",
-   "source": "inv-633",
-   "target": "inv-245",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e628",
-   "source": "inv-633",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e629",
-   "source": "inv-007",
-   "target": "inv-634",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e630",
-   "source": "inv-634",
-   "target": "inv-244",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e631",
-   "source": "inv-634",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e632",
-   "source": "inv-007",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e633",
-   "source": "inv-008",
-   "target": "inv-635",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e634",
-   "source": "inv-635",
-   "target": "inv-245",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e635",
-   "source": "inv-635",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e636",
-   "source": "inv-008",
-   "target": "inv-636",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e637",
-   "source": "inv-636",
-   "target": "inv-244",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e638",
-   "source": "inv-636",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e639",
-   "source": "inv-008",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e640",
-   "source": "inv-010",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e641",
-   "source": "inv-011",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e642",
-   "source": "inv-012",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e643",
-   "source": "inv-014",
-   "target": "inv-637",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e644",
-   "source": "inv-637",
-   "target": "inv-255",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e645",
-   "source": "inv-637",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e646",
-   "source": "inv-255",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e647",
-   "source": "inv-014",
-   "target": "inv-638",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e648",
-   "source": "inv-638",
-   "target": "inv-254",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e649",
-   "source": "inv-638",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e650",
-   "source": "inv-254",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e651",
-   "source": "inv-014",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e652",
-   "source": "inv-015",
-   "target": "inv-639",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e653",
-   "source": "inv-639",
-   "target": "inv-255",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e654",
-   "source": "inv-639",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e655",
-   "source": "inv-015",
-   "target": "inv-640",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e656",
-   "source": "inv-640",
-   "target": "inv-254",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e657",
-   "source": "inv-640",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e658",
-   "source": "inv-015",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e659",
-   "source": "inv-016",
-   "target": "inv-641",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e660",
-   "source": "inv-641",
-   "target": "inv-255",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e661",
-   "source": "inv-641",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e662",
-   "source": "inv-016",
+   "source": "inv-003",
    "target": "inv-642",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e621",
+   "source": "inv-642",
+   "target": "inv-242",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e622",
+   "source": "inv-642",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e623",
+   "source": "inv-003",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e624",
+   "source": "inv-004",
+   "target": "inv-643",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e625",
+   "source": "inv-643",
+   "target": "inv-243",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e626",
+   "source": "inv-643",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e627",
+   "source": "inv-004",
+   "target": "inv-644",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e628",
+   "source": "inv-644",
+   "target": "inv-242",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e629",
+   "source": "inv-644",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e630",
+   "source": "inv-004",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e631",
+   "source": "inv-006",
+   "target": "inv-645",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e632",
+   "source": "inv-645",
+   "target": "inv-245",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e633",
+   "source": "inv-645",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e634",
+   "source": "inv-245",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e635",
+   "source": "inv-006",
+   "target": "inv-646",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e636",
+   "source": "inv-646",
+   "target": "inv-244",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e637",
+   "source": "inv-646",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e638",
+   "source": "inv-244",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e639",
+   "source": "inv-006",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e640",
+   "source": "inv-007",
+   "target": "inv-647",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e641",
+   "source": "inv-647",
+   "target": "inv-245",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e642",
+   "source": "inv-647",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e643",
+   "source": "inv-007",
+   "target": "inv-648",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e644",
+   "source": "inv-648",
+   "target": "inv-244",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e645",
+   "source": "inv-648",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e646",
+   "source": "inv-007",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e647",
+   "source": "inv-008",
+   "target": "inv-649",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e648",
+   "source": "inv-649",
+   "target": "inv-245",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e649",
+   "source": "inv-649",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e650",
+   "source": "inv-008",
+   "target": "inv-650",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e651",
+   "source": "inv-650",
+   "target": "inv-244",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e652",
+   "source": "inv-650",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e653",
+   "source": "inv-008",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e654",
+   "source": "inv-010",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e655",
+   "source": "inv-011",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e656",
+   "source": "inv-012",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e657",
+   "source": "inv-014",
+   "target": "inv-651",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e658",
+   "source": "inv-651",
+   "target": "inv-255",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e659",
+   "source": "inv-651",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e660",
+   "source": "inv-255",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e661",
+   "source": "inv-014",
+   "target": "inv-652",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
      "variable": "met_斑比",
      "op": "gte",
      "value": 3
@@ -26155,8 +26336,8 @@
    }
   },
   {
-   "id": "e663",
-   "source": "inv-642",
+   "id": "e662",
+   "source": "inv-652",
    "target": "inv-254",
    "sourceHandle": "right",
    "animated": true,
@@ -26170,94 +26351,117 @@
    }
   },
   {
+   "id": "e663",
+   "source": "inv-652",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e664",
-   "source": "inv-642",
+   "source": "inv-254",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e665",
-   "source": "inv-016",
+   "source": "inv-014",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e666",
-   "source": "inv-018",
-   "target": "inv-021",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e667",
-   "source": "inv-019",
-   "target": "inv-021",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e668",
-   "source": "inv-020",
-   "target": "inv-021",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e669",
-   "source": "inv-022",
-   "target": "inv-643",
+   "source": "inv-015",
+   "target": "inv-653",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_櫃檯",
+     "variable": "met_斑比",
      "op": "gte",
      "value": 5
     }
    }
   },
   {
-   "id": "e670",
-   "source": "inv-643",
-   "target": "inv-251",
+   "id": "e667",
+   "source": "inv-653",
+   "target": "inv-255",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "lte",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e668",
+   "source": "inv-653",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e669",
+   "source": "inv-015",
+   "target": "inv-654",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e670",
+   "source": "inv-654",
+   "target": "inv-254",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
      "value": 1
     }
    }
   },
   {
    "id": "e671",
-   "source": "inv-643",
-   "target": "inv-025",
+   "source": "inv-654",
+   "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e672",
-   "source": "inv-251",
-   "target": "inv-025",
+   "source": "inv-015",
+   "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e673",
-   "source": "inv-022",
-   "target": "inv-644",
+   "source": "inv-016",
+   "target": "inv-655",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
+     "variable": "met_斑比",
      "op": "gte",
      "value": 5
     }
@@ -26265,8 +26469,8 @@
   },
   {
    "id": "e674",
-   "source": "inv-644",
-   "target": "inv-253",
+   "source": "inv-655",
+   "target": "inv-255",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26274,87 +26478,36 @@
      "kind": "variable",
      "variable": "slot",
      "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e675",
-   "source": "inv-644",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e676",
-   "source": "inv-253",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e677",
-   "source": "inv-022",
-   "target": "inv-645",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e678",
-   "source": "inv-645",
-   "target": "inv-250",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
      "value": 1
     }
    }
   },
   {
-   "id": "e679",
-   "source": "inv-645",
-   "target": "inv-025",
+   "id": "e675",
+   "source": "inv-655",
+   "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e680",
-   "source": "inv-250",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e681",
-   "source": "inv-022",
-   "target": "inv-646",
+   "id": "e676",
+   "source": "inv-016",
+   "target": "inv-656",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
+     "variable": "met_斑比",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e682",
-   "source": "inv-646",
-   "target": "inv-252",
+   "id": "e677",
+   "source": "inv-656",
+   "target": "inv-254",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26362,35 +26515,49 @@
      "kind": "variable",
      "variable": "slot",
      "op": "gte",
-     "value": 2
+     "value": 1
     }
    }
   },
   {
+   "id": "e678",
+   "source": "inv-656",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e679",
+   "source": "inv-016",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e680",
+   "source": "inv-018",
+   "target": "inv-021",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e681",
+   "source": "inv-019",
+   "target": "inv-021",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e682",
+   "source": "inv-020",
+   "target": "inv-021",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e683",
-   "source": "inv-646",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e684",
-   "source": "inv-252",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e685",
    "source": "inv-022",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e686",
-   "source": "inv-023",
-   "target": "inv-647",
+   "target": "inv-657",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26403,8 +26570,8 @@
    }
   },
   {
-   "id": "e687",
-   "source": "inv-647",
+   "id": "e684",
+   "source": "inv-657",
    "target": "inv-251",
    "sourceHandle": "right",
    "animated": true,
@@ -26418,16 +26585,23 @@
    }
   },
   {
-   "id": "e688",
-   "source": "inv-647",
+   "id": "e685",
+   "source": "inv-657",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e689",
-   "source": "inv-023",
-   "target": "inv-648",
+   "id": "e686",
+   "source": "inv-251",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e687",
+   "source": "inv-022",
+   "target": "inv-658",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26440,8 +26614,8 @@
    }
   },
   {
-   "id": "e690",
-   "source": "inv-648",
+   "id": "e688",
+   "source": "inv-658",
    "target": "inv-253",
    "sourceHandle": "right",
    "animated": true,
@@ -26455,16 +26629,23 @@
    }
   },
   {
-   "id": "e691",
-   "source": "inv-648",
+   "id": "e689",
+   "source": "inv-658",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e692",
-   "source": "inv-023",
-   "target": "inv-649",
+   "id": "e690",
+   "source": "inv-253",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e691",
+   "source": "inv-022",
+   "target": "inv-659",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26477,8 +26658,8 @@
    }
   },
   {
-   "id": "e693",
-   "source": "inv-649",
+   "id": "e692",
+   "source": "inv-659",
    "target": "inv-250",
    "sourceHandle": "right",
    "animated": true,
@@ -26492,16 +26673,23 @@
    }
   },
   {
+   "id": "e693",
+   "source": "inv-659",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e694",
-   "source": "inv-649",
+   "source": "inv-250",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e695",
-   "source": "inv-023",
-   "target": "inv-650",
+   "source": "inv-022",
+   "target": "inv-660",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26515,7 +26703,7 @@
   },
   {
    "id": "e696",
-   "source": "inv-650",
+   "source": "inv-660",
    "target": "inv-252",
    "sourceHandle": "right",
    "animated": true,
@@ -26530,22 +26718,29 @@
   },
   {
    "id": "e697",
-   "source": "inv-650",
+   "source": "inv-660",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e698",
-   "source": "inv-023",
+   "source": "inv-252",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e699",
-   "source": "inv-024",
-   "target": "inv-651",
+   "source": "inv-022",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e700",
+   "source": "inv-023",
+   "target": "inv-661",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26558,8 +26753,8 @@
    }
   },
   {
-   "id": "e700",
-   "source": "inv-651",
+   "id": "e701",
+   "source": "inv-661",
    "target": "inv-251",
    "sourceHandle": "right",
    "animated": true,
@@ -26573,16 +26768,16 @@
    }
   },
   {
-   "id": "e701",
-   "source": "inv-651",
+   "id": "e702",
+   "source": "inv-661",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e702",
-   "source": "inv-024",
-   "target": "inv-652",
+   "id": "e703",
+   "source": "inv-023",
+   "target": "inv-662",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26595,8 +26790,8 @@
    }
   },
   {
-   "id": "e703",
-   "source": "inv-652",
+   "id": "e704",
+   "source": "inv-662",
    "target": "inv-253",
    "sourceHandle": "right",
    "animated": true,
@@ -26610,16 +26805,16 @@
    }
   },
   {
-   "id": "e704",
-   "source": "inv-652",
+   "id": "e705",
+   "source": "inv-662",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e705",
-   "source": "inv-024",
-   "target": "inv-653",
+   "id": "e706",
+   "source": "inv-023",
+   "target": "inv-663",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26632,8 +26827,8 @@
    }
   },
   {
-   "id": "e706",
-   "source": "inv-653",
+   "id": "e707",
+   "source": "inv-663",
    "target": "inv-250",
    "sourceHandle": "right",
    "animated": true,
@@ -26647,16 +26842,16 @@
    }
   },
   {
-   "id": "e707",
-   "source": "inv-653",
+   "id": "e708",
+   "source": "inv-663",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e708",
-   "source": "inv-024",
-   "target": "inv-654",
+   "id": "e709",
+   "source": "inv-023",
+   "target": "inv-664",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26669,8 +26864,8 @@
    }
   },
   {
-   "id": "e709",
-   "source": "inv-654",
+   "id": "e710",
+   "source": "inv-664",
    "target": "inv-252",
    "sourceHandle": "right",
    "animated": true,
@@ -26684,23 +26879,178 @@
    }
   },
   {
-   "id": "e710",
-   "source": "inv-654",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e711",
-   "source": "inv-024",
+   "source": "inv-664",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e712",
+   "source": "inv-023",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e713",
+   "source": "inv-024",
+   "target": "inv-665",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e714",
+   "source": "inv-665",
+   "target": "inv-251",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e715",
+   "source": "inv-665",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e716",
+   "source": "inv-024",
+   "target": "inv-666",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e717",
+   "source": "inv-666",
+   "target": "inv-253",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e718",
+   "source": "inv-666",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e719",
+   "source": "inv-024",
+   "target": "inv-667",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e720",
+   "source": "inv-667",
+   "target": "inv-250",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e721",
+   "source": "inv-667",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e722",
+   "source": "inv-024",
+   "target": "inv-668",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e723",
+   "source": "inv-668",
+   "target": "inv-252",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e724",
+   "source": "inv-668",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e725",
+   "source": "inv-024",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e726",
    "source": "inv-026",
-   "target": "inv-655",
+   "target": "inv-669",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26713,23 +27063,23 @@
    }
   },
   {
-   "id": "e713",
-   "source": "inv-655",
+   "id": "e727",
+   "source": "inv-669",
    "target": "inv-247",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e714",
+   "id": "e728",
    "source": "inv-247",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e715",
+   "id": "e729",
    "source": "inv-026",
-   "target": "inv-656",
+   "target": "inv-670",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26742,233 +27092,87 @@
    }
   },
   {
-   "id": "e716",
-   "source": "inv-656",
+   "id": "e730",
+   "source": "inv-670",
    "target": "inv-246",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e717",
+   "id": "e731",
    "source": "inv-246",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e718",
+   "id": "e732",
    "source": "inv-026",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e719",
-   "source": "inv-027",
-   "target": "inv-657",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e720",
-   "source": "inv-657",
-   "target": "inv-247",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e721",
-   "source": "inv-027",
-   "target": "inv-658",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e722",
-   "source": "inv-658",
-   "target": "inv-246",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e723",
-   "source": "inv-027",
-   "target": "inv-029",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e724",
-   "source": "inv-028",
-   "target": "inv-659",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e725",
-   "source": "inv-659",
-   "target": "inv-247",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e726",
-   "source": "inv-028",
-   "target": "inv-660",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e727",
-   "source": "inv-660",
-   "target": "inv-246",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e728",
-   "source": "inv-028",
-   "target": "inv-029",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e729",
-   "source": "inv-030",
-   "target": "inv-661",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_材料行老闆",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e730",
-   "source": "inv-661",
-   "target": "inv-249",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e731",
-   "source": "inv-661",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e732",
-   "source": "inv-249",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e733",
-   "source": "inv-030",
-   "target": "inv-662",
+   "source": "inv-027",
+   "target": "inv-671",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
+     "variable": "met_店員",
      "op": "gte",
-     "value": 3
+     "value": 5
     }
    }
   },
   {
    "id": "e734",
-   "source": "inv-662",
-   "target": "inv-248",
+   "source": "inv-671",
+   "target": "inv-247",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e735",
+   "source": "inv-027",
+   "target": "inv-672",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
+     "variable": "met_店員",
+     "op": "gte",
+     "value": 3
     }
    }
   },
   {
-   "id": "e735",
-   "source": "inv-662",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e736",
-   "source": "inv-248",
-   "target": "inv-033",
+   "source": "inv-672",
+   "target": "inv-246",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e737",
-   "source": "inv-030",
-   "target": "inv-033",
+   "source": "inv-027",
+   "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e738",
-   "source": "inv-031",
-   "target": "inv-663",
+   "source": "inv-028",
+   "target": "inv-673",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
+     "variable": "met_店員",
      "op": "gte",
      "value": 5
     }
@@ -26976,74 +27180,44 @@
   },
   {
    "id": "e739",
-   "source": "inv-663",
-   "target": "inv-249",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e740",
-   "source": "inv-663",
-   "target": "inv-033",
+   "source": "inv-673",
+   "target": "inv-247",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e741",
-   "source": "inv-031",
-   "target": "inv-664",
+   "id": "e740",
+   "source": "inv-028",
+   "target": "inv-674",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
+     "variable": "met_店員",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e742",
-   "source": "inv-664",
-   "target": "inv-248",
+   "id": "e741",
+   "source": "inv-674",
+   "target": "inv-246",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
+   "animated": true
+  },
+  {
+   "id": "e742",
+   "source": "inv-028",
+   "target": "inv-029",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e743",
-   "source": "inv-664",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e744",
-   "source": "inv-031",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e745",
-   "source": "inv-032",
-   "target": "inv-665",
+   "source": "inv-030",
+   "target": "inv-675",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27056,8 +27230,8 @@
    }
   },
   {
-   "id": "e746",
-   "source": "inv-665",
+   "id": "e744",
+   "source": "inv-675",
    "target": "inv-249",
    "sourceHandle": "right",
    "animated": true,
@@ -27071,16 +27245,23 @@
    }
   },
   {
-   "id": "e747",
-   "source": "inv-665",
+   "id": "e745",
+   "source": "inv-675",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e748",
-   "source": "inv-032",
-   "target": "inv-666",
+   "id": "e746",
+   "source": "inv-249",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e747",
+   "source": "inv-030",
+   "target": "inv-676",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27093,8 +27274,8 @@
    }
   },
   {
-   "id": "e749",
-   "source": "inv-666",
+   "id": "e748",
+   "source": "inv-676",
    "target": "inv-248",
    "sourceHandle": "right",
    "animated": true,
@@ -27108,107 +27289,276 @@
    }
   },
   {
+   "id": "e749",
+   "source": "inv-676",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e750",
-   "source": "inv-666",
+   "source": "inv-248",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e751",
-   "source": "inv-032",
+   "source": "inv-030",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e752",
+   "source": "inv-031",
+   "target": "inv-677",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e753",
+   "source": "inv-677",
+   "target": "inv-249",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e754",
+   "source": "inv-677",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e755",
+   "source": "inv-031",
+   "target": "inv-678",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e756",
+   "source": "inv-678",
+   "target": "inv-248",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e757",
+   "source": "inv-678",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e758",
+   "source": "inv-031",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e759",
+   "source": "inv-032",
+   "target": "inv-679",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e760",
+   "source": "inv-679",
+   "target": "inv-249",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e761",
+   "source": "inv-679",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e762",
+   "source": "inv-032",
+   "target": "inv-680",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e763",
+   "source": "inv-680",
+   "target": "inv-248",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e764",
+   "source": "inv-680",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e765",
+   "source": "inv-032",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e766",
    "source": "inv-034",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e753",
+   "id": "e767",
    "source": "inv-035",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e754",
+   "id": "e768",
    "source": "inv-036",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e755",
+   "id": "e769",
    "source": "inv-038",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e756",
+   "id": "e770",
    "source": "inv-039",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e757",
+   "id": "e771",
    "source": "inv-040",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e758",
+   "id": "e772",
    "source": "inv-042",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e759",
+   "id": "e773",
    "source": "inv-043",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e760",
+   "id": "e774",
    "source": "inv-044",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e761",
+   "id": "e775",
    "source": "inv-046",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e762",
+   "id": "e776",
    "source": "inv-047",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e763",
+   "id": "e777",
    "source": "inv-048",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e764",
-   "source": "inv-667",
-   "target": "inv-480",
+   "id": "e778",
+   "source": "inv-681",
+   "target": "inv-489",
    "sourceHandle": "right",
    "animated": true
   }
