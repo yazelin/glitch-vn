@@ -421,11 +421,16 @@ def build(cards):
                          "background": f"@@{night}", "backgroundNight": f"@@{night}",
                          "transition": "fade", "transitionMs": 340})
         b.edge(board_id, entry_n, {"variable": "dest", "op": "eq", "value": f"{loc}@n"})
+        # 第三張：晚上（slot 2）。晚上版沒畫的地點（貓草、經紀公司）推送層會退回夜版。
+        entry_e = b.add({"type": "scene", "title": f"{loc}@e", "text": "",
+                         "background": f"@@bg-{loc}-evening", "backgroundNight": f"@@{night}",
+                         "transition": "fade", "transitionMs": 340})
+        b.edge(board_id, entry_e, {"variable": "dest", "op": "eq", "value": f"{loc}@e"})
         menu = b.add({"type": "miniGame", "title": f"選單：{loc}", "text": "問誰、關於誰。",
                       "miniGameHtml": "@@larch/cards/menu.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
                       "miniGameReadVars": ["day", "slot", "here"], "miniGameWriteVars": ["pick"]})
-        entries_of[loc] = (entry, entry_n)
+        entries_of[loc] = (entry, entry_n, entry_e)
         menu_of[loc] = menu
     # 3. 段落：同一 (檔, 章節) 的連續卡片＝一條線
     segs, cur_key, cur = [], None, None
@@ -760,10 +765,10 @@ def build(cards):
             if s_[-1] == 3:
                 return {"variable": "slot", "op": "gte", "value": s_[0]}
         return {"variable": "slot", "op": "eq", "value": s_[0]}
-    for loc, (entry, entry_n) in entries_of.items():
+    for loc, ens in entries_of.items():
         menu = menu_of[loc]
         gs = sorted([g for g in greetings if g["loc"] == loc], key=lambda g: -g["n"])
-        for k, en in enumerate((entry, entry_n)):
+        for k, en in enumerate(ens):
             for g in gs:
                 sc = slot_cond(g["slots"])
                 gate = b.add({"type": "setVariable", "title": f"（{loc} 第{g['n']}次起）", "text": "", "variableOps": []})

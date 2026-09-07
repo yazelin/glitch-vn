@@ -236,9 +236,9 @@ function go(spotId){
   });
   setVar('met', met.join(','));
   var visited=list(values.visited); if(visited.indexOf(spotId)<0) visited.push(spotId); setVar('visited', visited.join(','));
-  // 晚上與深夜走夜版入口（背景兩種色溫，design/調查篇-場景.md「白天與夜晚是兩種色溫」）。
+  // 上午／下午走日版入口，晚上走 @e，深夜走 @n（三種色溫，design/調查篇-場景.md）。
   // 板上其他地方只認前面的地點代號；@n 只給入口那條邊看。
-  setVar('dest', slot>=2 ? spotId+'@n' : spotId);
+  setVar('dest', slot===3 ? spotId+'@n' : slot===2 ? spotId+'@e' : spotId);
   // 收尾門檻之一：深夜至少出門三次（信心.md 五）。只算真的出門，不算「這一段不出門」。
   if(slot===3) setVar('night_visits', num(values.night_visits,0)+1);
   finish(spotId,{day:day,slot:slot,here:here});
@@ -289,7 +289,7 @@ function start(){
     if(!open && !s.hint) return;
     if(s.showIf && !(values[s.showIf]===true || values[s.showIf]==='true')) return;
     var live=s.live[slot];
-    var been = visited.indexOf(s.id)>=0;
+    var been = visited.indexOf(s.id)>=0 || s.id==='lobby';   // 開場那一趟就在一樓，不經過板
     var b=document.createElement('button');
     b.className='spot'; b.type='button';
     b.style.left=s.x+'%'; b.style.top=s.y+'%';
@@ -298,7 +298,7 @@ function start(){
     var w=document.createElement('span'); w.className='who';
     if(been && PHOTOS[s.id]){
       var ph=document.createElement('span'); ph.className='photo';
-      var url=PHOTOS[s.id][slot>=2?'night':'day']||PHOTOS[s.id].day||PHOTOS[s.id].night;
+      var url=PHOTOS[s.id][slot===3?'night':slot===2?'evening':'day']||PHOTOS[s.id].day||PHOTOS[s.id].night;
       if(url) ph.style.backgroundImage='url("'+url+'")'; else ph.className='photo empty';
       b.appendChild(ph);
     } else { b.className+=' note'; }

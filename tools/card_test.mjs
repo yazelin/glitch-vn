@@ -91,7 +91,7 @@ console.log('\n=== 調查板 ===');
   const sets = Object.fromEntries(m.filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
   const done = m.find(x => x.type === 'larch:complete');
 
-  ok('寫回 dest（晚上帶 @n，走夜版入口）', sets.dest === 'lobby@n', JSON.stringify(sets.dest));
+  ok('寫回 dest（晚上帶 @e，走晚上版入口）', sets.dest === 'lobby@e', JSON.stringify(sets.dest));
   ok('出門時不動時段（那一趟的選單要讀到當下的時段）', sets.slot === undefined, `slot=${sets.slot}`);
   ok('沒有跨日', sets.day === undefined, `day=${sets.day}`);
   ok('完成事件帶目的地', done && done.result === 'lobby');

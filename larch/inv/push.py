@@ -285,7 +285,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                         continue
                     du, _ = pick_bg(dk, dk, state, pid, dry)
                     nu, _ = pick_bg(nk, nk, state, pid, dry)
-                    photos[loc] = {"day": du or nu or "", "night": nu or du or ""}
+                    eu, _ = pick_bg(f"bg-{loc}-evening", nk, state, pid, dry)
+                    photos[loc] = {"day": du or nu or "", "evening": eu or nu or "", "night": nu or du or ""}
                 d["miniGameHtml"] = board_html.replace("/*@@PHOTOS@@*/{}", json.dumps(photos, ensure_ascii=False))
                 board_id = n["id"]
             elif d["miniGameHtml"].endswith("menu.html"):
@@ -321,8 +322,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 d["background"] = ""
             else:
                 d["background"] = url
-                base = d["title"].replace("@n", "")
-                d["title"] = LOC_NAME.get(base, base) + ("（夜）" if d["title"].endswith("@n") else "")
+                base = d["title"].replace("@n", "").replace("@e", "")
+                d["title"] = LOC_NAME.get(base, base) + {"@n": "（夜）", "@e": "（晚）"}.get(d["title"][-2:], "")
             # 入口場景沒有字，停在那裡等點一下很怪；轉場完直接進選單。
             d["autoAdvance"] = {"enabled": True, "mode": "delay", "delayMs": 500}
         elif d.get("type") == "boardJump":
