@@ -495,6 +495,7 @@ def build(cards):
                 if not d:
                     continue
                 d["segment"] = sid
+                d.pop("sceneCode", None)     # 收尾在桌前，不吃檔案裡上一場留下來的 scene
                 for v in c["vars"]:
                     d.setdefault("variableOps", []).append(var_op(v))
                 nid = b.add(d)
