@@ -364,20 +364,24 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                            "miniGameWriteVars": ["notes_free", "page1", "page1_text", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
     phone_html = pathlib.Path.home().joinpath("larch-phone-chat/card/receive.html").read_text(encoding="utf-8")
-    def receive(nid, contact, messages, x, y):
-        add_node(nid, {"type": "plugin", "title": f"手機：{contact}", "text": "",
+    def phone_data(contact, messages):
+        return {"type": "plugin", "title": f"手機：{contact}", "text": "",
                        "pluginId": "phone-chat", "pluginCardId": "receive", "pluginName": "格莉奇手機",
                        "pluginCardName": "收到訊息", "pluginIcon": "bell", "pluginColor": "#5b8def",
                        "pluginVersion": "0.3.4", "platforms": ["web"], "pluginAssets": [], "pluginHtml": phone_html,
                        "pluginValues": {"contactName": contact, "avatar": "", "messages": messages, "sound": "",
                                         "historyVar": "phone_log", "duration": 3, "dim": 0, "bgImage": "none", "bgColor": "none"},
                        "pluginReadVars": ["phone_log"], "pluginWriteVars": ["phone_log"],
-                       "pluginSkippable": True, "pluginPresentation": "fullscreen"}, x, y)
-    # 她的手機只收不回（背包與謎題 五）：直播開始（第二、五、八天晚上）、斑比約你、公關窗口自動回覆
-    phones = [("phone-live-2", "格莉奇", "格莉奇 開始直播了", [("day", "eq", 2), ("slot", "eq", 2)]),
-              ("phone-live-5", "格莉奇", "格莉奇 開始直播了", [("day", "eq", 5), ("slot", "eq", 2)]),
-              ("phone-live-8", "格莉奇", "格莉奇 開始直播了", [("day", "eq", 8), ("slot", "eq", 2)]),
-              ("phone-bambi", "斑比", "有空來工作室。稿子帶著。", [("open_studio", "eq", True)]),
+                       "pluginSkippable": True, "pluginPresentation": "fullscreen"}
+    def receive(nid, contact, messages, x, y):
+        add_node(nid, phone_data(contact, messages), x, y)
+    # 建置層放的手機卡（直播那三晚的橫幅，design/調查篇-直播.md）換成插件卡
+    for n in nodes:
+        if n["data"].get("type") == "phone":
+            d = n["data"]
+            n["data"] = {**phone_data(d["contact"], d["msg"]), "segment": d.get("segment")}
+    # 她的手機只收不回（背包與謎題 五）：直播開始那三晚由建置層接段落；斑比約你、公關窗口自動回覆
+    phones = [("phone-bambi", "斑比", "有空來工作室。稿子帶著。", [("open_studio", "eq", True)]),
               ("phone-pr", "公關窗口", "您的來信已收到，我們將於三至五個工作天內回覆。", [("met_櫃檯", "gte", 1)])]
     for i, (nid, contact, msg, conds) in enumerate(phones):
         cond = {"kind": "variable", "variable": conds[0][0], "op": conds[0][1], "value": conds[0][2], "match": "all",

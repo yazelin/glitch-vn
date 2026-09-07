@@ -685,10 +685,13 @@ def build(cards):
                            "segment": sid})
             b.edge(pending_bag[0], leave)
             b.edge(leave, back_id)
-        back = b.add({"type": "boardJump", "title": "回調查板", "jumpBoardId": BID,
-                      "jumpNodeId": board_id}, nid=back_id)
-        if not (prev and next(n for n in b.nodes if n["id"] == prev)["data"].get("type") == "choice"):
-            b.edge(prev, back)
+        if s["key"][0] == "調查篇-直播":
+            back = None          # 插播裡的段落：演完沒有下一張就回到板（interruptExit return），不跳板
+        else:
+            back = b.add({"type": "boardJump", "title": "回調查板", "jumpBoardId": BID,
+                          "jumpNodeId": board_id}, nid=back_id)
+            if not (prev and next(n for n in b.nodes if n["id"] == prev)["data"].get("type") == "choice"):
+                b.edge(prev, back)
         seg_first[(s["key"][0], " / ".join(s["cards"][0]["headings"][:-1]), s["key"][1])] = (first, sid)
         seg_end[sid] = (prev, back)
         if rule and rule["dest"] in ("catgrass_door", "catgrass_home"):
@@ -716,7 +719,7 @@ def build(cards):
             if notes:
                 unresolved.append({"segment": sid, "section": s["key"][1], "notes": notes,
                                    "text": s["trigger"]})
-        else:
+        elif s["key"][0] != "調查篇-直播":
             orphans.append({"segment": sid, "file": s["key"][0], "section": s["key"][1],
                             "trigger": s["trigger"], "notes": notes})
     # 選擇卡的選項接到同一場裡的節（「→ 二」＝那一場底下以「二・」開頭的節），那些節不再列在選單上
@@ -747,6 +750,21 @@ def build(cards):
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == hit[1]
                                             and e["data"]["condition"].get("variable") == "pick")]
         rules[:] = [r for r in rules if r["segment"] != hit[1]]
+    # 她開台的晚上（調查篇-直播）：「第Ｎ天直播」＝板上的插播，橫幅那張卡由這裡放，推送層換成手機插件卡
+    for (ff, _l, sec), (first, sid_) in list(seg_first.items()):
+        m_live = re.search(r"第([一二三四五六七八九十]+)天直播", sec) if ff == "調查篇-直播" else None
+        if not m_live:
+            continue
+        n_day = CN_NUM[m_live.group(1)]
+        intr = b.add({"type": "interrupt", "title": f"第{m_live.group(1)}天直播", "text": "",
+                      "interruptCondition": {"kind": "variable", "variable": "day", "op": "eq", "value": n_day, "match": "all",
+                                             "conditions": [{"variable": "day", "op": "eq", "value": n_day},
+                                                            {"variable": "slot", "op": "eq", "value": 2}]},
+                      "interruptOnce": True, "interruptExit": "return"})
+        banner = b.add({"type": "phone", "title": "手機：格莉奇", "text": "", "contact": "格莉奇",
+                        "msg": "格莉奇 開始直播了", "segment": sid_})
+        b.edge(intr, banner)
+        b.edge(banner, first)
     # 直接接下去的段落（設計寫「進門就是這一格，不用選」那種）：上一段演完不回板，進這一段；這一段不上選單
     for file_, from_sec, to_sec in CHAINS:
         frm = next((sid_ for (ff, _l, sec), (_f, sid_) in seg_first.items() if ff == file_ and sec.startswith(from_sec)), None)
