@@ -13,9 +13,11 @@
 <style>
 :root{--ink:#0b1a22;--hair:rgba(255,255,255,.07);--cy:#25c2e8;--mint:#7cf3c0;--purple:#b78bff;--text:#dfe8ec;--muted:#93a3ac;--faint:#6d7d84}
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:transparent;color:var(--text);overflow:hidden;
+html,body{height:100%;margin:0;background:#04080c;color:var(--text);overflow:hidden;
   font-family:"Noto Serif TC","Songti TC","PMingLiU",Georgia,serif}
 #stage{position:fixed;inset:0;overflow:hidden;cursor:grab}
+/* 不靠平台把插件層畫成透明（有的裝置畫出來是白的）：自己鋪放映廳，壓暗，跟底下的場景圖是同一張，疊在一起也對得齊 */
+#hall{position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--hall) center/cover no-repeat;opacity:.5}
 #stage::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(180deg,rgba(4,8,12,.92) 0%,rgba(4,8,12,.3) 16%,rgba(4,8,12,.3) 84%,rgba(4,8,12,.92) 100%)}
 #track{position:absolute;left:50%;top:100%;z-index:2;width:min(92vw,720px);transform:translate(-50%,0);
@@ -40,7 +42,7 @@ html,body{height:100%;margin:0;background:transparent;color:var(--text);overflow
 @media (max-width:520px){.film{font-size:28px}.name{font-size:19px}.h{letter-spacing:.36em}}
 @media (prefers-reduced-motion:reduce){#track{transition:none}}
 </style>
-<div id="stage"><div id="track">
+<div id="stage"><div id="hall" style="--hall:url(/*@@HALL@@*/'')"></div><div id="track">
   <div class="film">格莉奇與黑洞先生</div>
   <div class="sub">調 查 篇　・　十 二 天</div>
 
