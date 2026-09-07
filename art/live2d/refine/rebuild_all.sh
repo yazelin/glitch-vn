@@ -9,6 +9,7 @@ python3 refine/patch.py mouth  refine/out_mouth.webp  | tail -1
 cp layers_out/22_lid_R.png layers_out/23_lid_L.png layers_out/42_mouth_A.png layers/
 python3 refine/shift_mouth.py
 python3 refine/split_sleeve.py
+python3 refine/head_mask.py
 python3 refine/fix_head_hands.py
 python3 mkpsd.py | tail -1
 cp glitch.psd "$HOME/glitch-l2d/source/glitch.psd"; cp glitch.psd "$HOME/.wine-cubism/drive_c/glitch/glitch-refined.psd"

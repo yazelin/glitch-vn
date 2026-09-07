@@ -17,26 +17,7 @@ before=comp()
 ld=lambda n: np.asarray(Image.open(f'{L}/{n}.png')).copy()
 sv=lambda n,a: Image.fromarray(a,'RGBA').save(f'{L}/{n}.png')
 
-# ---- 1. 後髮的帽T 像素 → 58_hood（有帽子 alpha 處）或 62_hoodie（其餘）----
-# 後髮正上方最近有覆蓋的層是 58_hood；用「上層 over 後髮」寫進上層，再上面的脖子/頸環/帽T 照原順序疊，休息姿態不變。
-hb=ld('05_hair_back')
-a=hb[...,3]>0; rgb=hb[...,:3].astype(int); sat=rgb.max(2)-rgb.min(2); lum=rgb.sum(2)
-hairlike=a&(sat>40)&(lum>300)
-lab,n=ndimage.label(hairlike); ids=np.unique(lab[:640][lab[:640]>0]); keep=np.isin(lab,ids)&hairlike
-low=a.copy(); low[:684]=False
-near=ndimage.binary_dilation(keep, iterations=3)          # 髮絲的輪廓線與高光不合髮色門檻，但貼著髮絲，要一起留下
-move=low&~keep&~near
-def over_into(dst_name, sel):
-    top=ld(dst_name).astype(np.float32); bf=hb.astype(np.float32)
-    ta=top[...,3:4]/255.0; ba=bf[...,3:4]/255.0; oa=ta+ba*(1-ta)
-    orgb=np.where(oa>0,(top[...,:3]*ta+bf[...,:3]*ba*(1-ta))/np.maximum(oa,1e-6),top[...,:3])
-    out=np.where(sel[...,None],np.dstack([orgb,oa*255]),top).round().clip(0,255).astype(np.uint8)
-    sv(dst_name,out); return int(sel.sum())
-hood_a=ld('58_hood')[...,3]>0
-n1=over_into('58_hood', move&hood_a)
-n2=over_into('62_hoodie', move&~hood_a)
-hb[move]=0; sv('05_hair_back',hb)
-print(f'後髮搬出 {int(move.sum())} px：→58_hood {n1}、→62_hoodie {n2}')
+# ---- 1. 後髮的帽T 像素：改由 refine/head_mask.py 用幾何處理（顏色分不開同色系的髮與帽T）----
 
 # ---- 2. 指尖：粒子層裡的膚色碎片 → 手 ----
 pt=ld('01_particles'); pa=pt[...,3]>0; prgb=pt[...,:3].astype(int)
