@@ -186,6 +186,7 @@ def parse_file(path):
                 continue
             flush()
             continue
+        ln = re.sub(r"\s*<!--.*?-->", "", ln)      # speak-tw-ok 這種註解是給檢查器看的，不進卡片（2026-09-07 抓到漏進台詞）
         if (s := LINE_SPK.match(ln)):
             cur["lines"].append({"speaker": s.group(1), "text": s.group(2)})
         elif (d := LINE_DIR.match(ln)):

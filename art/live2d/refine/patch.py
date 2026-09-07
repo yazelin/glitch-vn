@@ -8,7 +8,8 @@ from PIL import Image, ImageDraw
 LAYERS = '/home/ct/glitch-vn/art/live2d/layers'
 OUT = 'layers_out'; os.makedirs(OUT, exist_ok=True)
 S = 2                                          # 圖層畫布是原圖的 2x
-BOX = tuple(map(int, open('in_geo.box').read().split()))   # 1x 座標的臉部裁框
+HERE = os.path.dirname(os.path.abspath(__file__))
+BOX = tuple(map(int, open(os.path.join(HERE, 'in_geo.box')).read().split()))   # 1x 座標的臉部裁框
 GEO_SCALE = 840 / (BOX[2]-BOX[0])              # in_geo 是裁框放大到 840
 W, H = 1196, 3072
 
@@ -51,7 +52,7 @@ def write_layer(name, rgb_canvas, alpha_mask, feather=1.0):
     print(f'  寫入 {OUT}/{name}.png  不透明 {int((al>128).sum())} px')
 
 mode, gen_path = sys.argv[1], sys.argv[2]
-ref = load_rgb('in_geo.webp'); gen = load_rgb(gen_path, (840, 840))
+ref = load_rgb(os.path.join(HERE, 'in_geo.webp')); gen = load_rgb(gen_path, (840, 840))
 aligned, cc = align(gen, ref)
 print(f'ECC = {cc:.4f}  ({"通過" if cc >= 0.98 else "未達 0.98，對不準，先別用"})')
 if mode != 'closed' and (aligned is None or cc < 0.98): sys.exit(2)
