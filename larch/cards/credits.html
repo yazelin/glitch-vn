@@ -119,7 +119,7 @@ function tick(t){ if(!last)last=t; var dt=(t-last)/1000; last=t;
   if(pos>=maxPos() && !done){ done=true; clamp(); apply(); setTimeout(finish,600); return; }
   clamp(); apply(); requestAnimationFrame(tick); }
 window.addEventListener('message',function(e){ var d=e.data; if(!d||d.type!=='larch:init')return;
-  values=d.values||{}; render(); apply(); requestAnimationFrame(tick); });
+  values=Object.assign({}, d.variables||{}, d.values||{}); /* miniGame 的 init 給的是 variables；本機殼給 values，兩個都認 */ render(); apply(); requestAnimationFrame(tick); });
 parent.postMessage({type:'larch:ready'},'*');
 </script>
 </html>

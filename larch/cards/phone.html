@@ -159,7 +159,7 @@ function renderBanner(){
   setTimeout(function(){ s.className=''; setTimeout(finish, 380); }, 2200);
   document.addEventListener('click', function(){ finish(); });
 }
-window.addEventListener('message',function(e){ var d=e.data; if(!d||d.type!=='larch:init')return; values=d.values||{};
+window.addEventListener('message',function(e){ var d=e.data; if(!d||d.type!=='larch:init')return; values=Object.assign({}, d.variables||{}, d.values||{});   // miniGame 的 init 給的是 variables；本機殼給 values，兩個都認
   if(MODE==='banner'&&BANNER) renderBanner(); else renderFull(); });
 parent.postMessage({type:'larch:ready'},'*');
 </script>
