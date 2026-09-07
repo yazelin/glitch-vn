@@ -484,11 +484,20 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     return nodes, edges, list(vs.values()), stats
 
 
-def settings_patch(settings):
+def settings_patch(settings, bag_image=""):
     settings = dict(settings or {})
     plugins = dict(settings.get("plugins") or {})
-    plugins["larch-inventory"] = {"enabled": True, "settings": {**(plugins.get("larch-inventory", {}).get("settings") or {}),
-                                                              "hudEnabled": True, "bagVar": "inventory"}}
+    # HUD 的位置與欄位照官方範例「背包功能使用教學」，顏色換成調查板那一套（夜色街區）
+    plugins["larch-inventory"] = {"enabled": True, "settings": {
+        **(plugins.get("larch-inventory", {}).get("settings") or {}),
+        "hudEnabled": True, "bagVar": "inventory",
+        "hudPosition": "right", "buttonPositionMode": "custom", "buttonX": 89.3, "buttonY": 10.4,
+        "buttonPivot": "top-left", "buttonStyle": "image", "buttonSize": 76, "buttonShowCount": True,
+        "buttonImage": bag_image, "buttonLabel": "",
+        "slotCount": 12, "radius": 8,
+        "surfaceColor": "#141a30", "surfaceOpacity": 0.94, "itemColor": "#1f2747",
+        "textColor": "#ece9f4", "accentColor": "#7fd6e8",
+        "motionStyle": "gentle", "shadowStyle": "soft"}}
     settings["plugins"] = plugins
     settings.setdefault("stageFit", "auto")
     settings.setdefault("keepActorsInFrame", False)
@@ -550,7 +559,8 @@ def main():
     proj = api("GET", f"/projects/{pid}")
     proj = proj.get("project") or proj
     proj["name"], proj["description"] = NAME, DESC
-    proj["settings"] = settings_patch(proj.get("settings"))
+    bag_image = local_asset("art/items/bag.png", state, pid, False, "prop") if (ROOT / "art/items/bag.png").exists() else ""
+    proj["settings"] = settings_patch(proj.get("settings"), bag_image)
     proj["variables"] = vs
     api("PUT", f"/projects/{pid}", {"project": proj})
     print("PUT 專案設定與變數：ok")
