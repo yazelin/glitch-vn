@@ -21,6 +21,7 @@
      "met",
      "dest",
      "night_visits",
+     "seen_booth",
      "open_roof",
      "open_laundry",
      "open_figure",
@@ -14264,12 +14265,6 @@
       "variable": "open_parts",
       "kind": "set",
       "value": true
-     },
-     {
-      "id": "op-open_調查篇-場景.md",
-      "variable": "open_調查篇-場景.md",
-      "kind": "set",
-      "value": true
      }
     ]
    }
@@ -24752,6 +24747,9 @@
    "file": "調查篇-問答矩陣",
    "dest": "store",
    "slots": [
+    0,
+    1,
+    2,
     3
    ],
    "conds": [

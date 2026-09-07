@@ -167,6 +167,8 @@ def parse_file(path):
                     name = v.group(1)
                     # 「**→ 解鎖 `roof`**」＝把 open_roof 設 true（變數帳一：一個地點一個布林）
                     if "解鎖" in ln and not name.startswith("open_"):
+                        if not re.fullmatch(r"[a-z0-9_]+", name):
+                            continue          # 「解鎖 `roof`」才算；「見 `調查篇-場景.md`」這種引用不是變數
                         name = "open_" + name
                     # 「`trust_店員` 1」「`trust_貓草` 0 → 1」＝設成最後那個數；「+1」半形也算加
                     add = v.group(3) or (("-" + v.group(4)) if v.group(4) else None)

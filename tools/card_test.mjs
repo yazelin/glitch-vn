@@ -65,7 +65,7 @@ console.log('\n=== 調查板 ===');
   ok('解鎖的畫成可點的', (await openSpots.count()) === 5, `${await openSpots.count()} 個`);
   // 沒開又有提示的要看得到（灰的），沒開又沒提示的（trust 3 私人地方）根本不畫。
   const locked = fr.locator('button.spot.locked');
-  ok('沒開但有提示的畫成灰的', (await locked.count()) === 7, `${await locked.count()} 個`);
+  ok('沒開但有提示的畫成灰的', (await locked.count()) === 6, `${await locked.count()} 個`);
   // trust 3 那五個私人地方是「場景不是地點」，板上永遠不該有它們。
   ok('貓草家不在板上（那是場景不是地點）',
      (await fr.locator('button.spot', { hasText: '貓草家' }).count()) === 0);
@@ -124,8 +124,10 @@ console.log('\n=== 調查板：一顆布林開一個地方 ===');
 
 console.log('\n=== 調查板：錄音間門口永遠進不去 ===');
 {
+  const before = await open('board.html', { day: 5, slot: 0, met: '管理員,店員,貓草' });
+  ok('還沒在街上被擋過，板上沒有錄音間門口', (await before.locator('button.spot', { hasText: '錄音間門口' }).count()) === 0);
   const fr = await open('board.html',
-    { day: 5, slot: 0, met: '管理員,店員,貓草' });
+    { day: 5, slot: 0, met: '管理員,店員,貓草', seen_booth: true });
   const booth = fr.locator('button.spot', { hasText: '錄音間門口' });
   ok('booth 不管怎樣都是灰的', (await booth.getAttribute('class')).includes('locked'));
   ok('booth 點不下去', await booth.isDisabled());

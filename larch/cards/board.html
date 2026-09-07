@@ -13,7 +13,7 @@
   iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
   所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
 
-  miniGameReadVars ：day slot met dest night_visits met_<每個人>
+  miniGameReadVars ：day slot met dest night_visits seen_booth met_<每個人>
                      open_roof open_laundry open_figure open_parts
                      open_studio open_tower14
   miniGameWriteVars：day slot dest here night_visits met met_<每個人>
@@ -164,8 +164,9 @@ var SPOTS=[
   hint:'畫她的人。名字我還沒問到。'},
  // **booth 永遠是灰的，而且提示永遠是那一句。** 玩家會一直看到它，一直進不去。
  // 那是刻意的挫折，而且它會讓「深夜在便利商店撞到鐵塔」變成整款最好的一個瞬間。
+ // 在街上被鐵塔擋過（seen_booth）之後才畫在板上，而且永遠是灰的。
  {id:'booth',   name:'錄音間門口',  live:['鐵塔','鐵塔',null,null], x:76, y:20,
-  hint:'經紀公司在哪裡我知道了。可是我進不去。', sealed:true},
+  hint:'經紀公司在哪裡我知道了。可是我進不去。', sealed:true, showIf:'seen_booth'},
  // tower14 在設計的解鎖表裡漏掉了（它列在「走不進去的」那一組，可是沒說什麼時候出現）。
  // 照既有規則補：提示講他缺什麼，不講該去問誰，而且只講他知道的。
  {id:'tower14', name:'十四樓大廳',  live:['櫃檯','櫃檯','保全','保全'], gate:'open_tower14', x:90, y:30,
@@ -257,6 +258,7 @@ function start(){
     var open = isOpen(s);
     // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
     if(!open && !s.hint) return;
+    if(s.showIf && !(values[s.showIf]===true || values[s.showIf]==='true')) return;
     var live=s.live[slot];
     var b=document.createElement('button');
     b.className='spot'; b.type='button';

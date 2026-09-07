@@ -160,6 +160,9 @@ def load_table():
 def table_match(rows, headings):
     """用 L2 的人名 + 節標籤裡的關鍵詞對回段落。對不到就回 None。"""
     stack = " ".join(headings)
+    # 問答矩陣的 L2 是「人」：先對那個人的列，再對別人的。不然「乙、問她・關於諾亞」會對到諾亞的列（頂樓）
+    person = next((w for h in headings[:2] for w in PERSON_LOC if h.startswith(w) or f"、{w}" in h), None)
+    rows = sorted(rows, key=lambda r: 0 if r[0] == person else 1)
     for who, label, dest, slots in rows:
         if who not in stack:
             continue
@@ -377,7 +380,7 @@ def build(cards):
     board_id = b.add({"type": "miniGame", "title": "調查板", "text": "選一個地方去。",
                       "miniGameHtml": "@@larch/cards/board.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
-                      "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits"] + [f"open_{k}" for k in
+                      "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits", "seen_booth"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
                       "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
