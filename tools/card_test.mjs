@@ -287,6 +287,41 @@ console.log('\n=== 調查筆記 ===');
   ok('單則卡在 200 字', len.length === 200, `${len.length} 字`);
 }
 
+
+console.log('\n=== 她的手機（design/調查篇-手機.md）===');
+if (fs.existsSync(path.join(DIR, '.phone-test.html'))) {
+  let fr = await open('.phone-test.html', { day: 3, slot: 1, phone_log: '[]', phone_day_seen: 0 });
+  ok('沒有訊息時一開就是格莉奇的頁面', (await fr.locator('nav button.on').textContent()).startsWith('格莉奇'));
+  ok('第三天看得到三天內的貼文（第 1、1、2、3 天，四則）', (await fr.locator('.post').count()) === 4, `${await fr.locator('.post').count()} 則`);
+  ok('第四天以後的貼文還沒出現', !(await fr.locator('.post .txt').allTextContents()).some(t => t.includes('手辦店的貨到了')));
+  ok('兩年前那一串在最底下，帳號標已刪除', (await fr.locator('.old .id.del').count()) === 2 && (await fr.locator('.old .c').last().textContent()).includes('我會記得的'));
+  ok('留言有 ID 與口氣（0x 寫到秒）', (await fr.locator('.cm .c').allTextContents()).some(t => t.includes('@Null_0x99') && t.includes('21:00:00')));
+  await fr.locator('nav button', { hasText: '訊息' }).click();
+  ok('訊息頁空的時候寫「沒有訊息。」', (await fr.locator('.empty').textContent()) === '沒有訊息。');
+  ok('回覆列是灰的：她不回', (await fr.locator('#reply span').textContent()) === '她不回。');
+  await fr.locator('nav button', { hasText: '直播' }).click();
+  ok('第三天下午：上次開台是第 2 天', (await fr.locator('.live p').first().textContent()).includes('第 2 天'));
+  await fr.locator('nav button', { hasText: '電話' }).click();
+  ok('電話：沒有人會打來', (await fr.locator('.call').textContent()).includes('沒有人會打來'));
+  await fr.locator('#close').click();
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 5000 });
+  const sets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('收起來寫回 open_phone=false、phone_day_seen=3', sets.open_phone === false && sets.phone_day_seen === 3, JSON.stringify(sets));
+  fr = await open('.phone-test.html', { day: 5, slot: 2, phone_log: JSON.stringify([{who:'斑比',text:'有空來工作室。稿子帶著。',day:4,slot:1}]), phone_day_seen: 3 });
+  ok('有訊息時一開是訊息頁，列出收過的', (await fr.locator('nav button.on').textContent()).startsWith('訊息') && (await fr.locator('.msg .bub').first().textContent()).includes('稿子帶著'));
+  ok('第 4 天以後有新貼文：格莉奇那一頁有紅點', !(await fr.locator('#dot-feed').isHidden()));
+  await fr.locator('nav button', { hasText: '直播' }).click();
+  ok('第五天晚上：今晚開台了', (await fr.locator('.live p').first().textContent()).includes('今晚開台'));
+  // 橫幅模式
+  fr = await open('.phone-banner-test.html', { day: 4, slot: 1, phone_log: '[]' });
+  ok('橫幅寫著誰與什麼', (await fr.locator('#s-who').textContent()) === '斑比' && (await fr.locator('#s-txt').textContent()).includes('稿子帶著'));
+  await page.waitForFunction(() => window.__msgs.some(m => m.type === 'larch:complete'), { timeout: 6000 });
+  const bsets = (await msgs()).filter(x => x.type === 'larch:set' && x.name === 'phone_log');
+  ok('橫幅兩秒後自己走，並把那一則寫進 phone_log', bsets.length === 1 && JSON.parse(bsets[0].value)[0].who === '斑比', JSON.stringify(bsets).slice(0, 120));
+} else {
+  console.log('  （沒有 .phone-test.html：先跑一次 push.py --dry）');
+}
+
 console.log('\n=== sandbox：卡片不可以碰 localStorage ===');
 {
   const errs = [];

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>她的手機</title>
+<!--
+  她的手機（design/調查篇-手機.md）。兩種模式，推送層注入 MODE：
+    full    從背包打開：訊息／格莉奇的頁面／直播／電話，四頁。關掉寫 open_phone=false、phone_day_seen=day。
+    banner  收到訊息的橫幅：頂端一條，兩秒後把那一則寫進 phone_log，自己 larch:complete。
+  miniGameReadVars：day slot phone_log open_studio met_櫃檯   miniGameWriteVars：phone_log open_phone phone_day_seen
+  貼文與留言（POSTS、OLD）由推送層從設計文件的表注入；本檔獨立打開時是空的。
+-->
+<style>
+:root{--bg:#0b0d12;--body:#15171d;--edge:#2a2d36;--screen:#f4f5f7;--ink:#1a1c22;--ink2:#6b7079;--line:#e3e5ea;
+  --cy:#1f9fc4;--mine:#dfe9f5;--tab:#8a8f99;--red:#d7333f;--del:#a5a9b2}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:rgba(6,8,12,.9);color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;overflow:hidden}
+/* 完整模式：畫面中央一支手機 */
+#phone{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(390px,92vw);height:min(760px,94vh);
+  background:var(--body);border-radius:38px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 2px var(--edge)}
+#screen{position:relative;width:100%;height:100%;background:var(--screen);border-radius:28px;overflow:hidden;display:flex;flex-direction:column}
+#bar{flex:none;display:flex;justify-content:space-between;align-items:center;padding:12px 18px 6px;font-size:12px;color:var(--ink2);letter-spacing:.04em}
+#bar b{color:var(--ink);font-weight:600}
+#page{flex:1;overflow-y:auto;padding:0 0 12px;-webkit-overflow-scrolling:touch}
+nav{flex:none;display:flex;border-top:1px solid var(--line);background:#fff}
+nav button{flex:1;appearance:none;border:0;background:none;padding:10px 0 12px;font:inherit;font-size:12px;color:var(--tab);cursor:pointer;position:relative}
+nav button.on{color:var(--cy);font-weight:600}
+nav button .dot{position:absolute;top:8px;right:22%;width:7px;height:7px;border-radius:50%;background:var(--red)}
+h2{margin:14px 18px 8px;font-size:17px;font-weight:600}
+.empty{margin:40px 18px;color:var(--ink2);font-size:14px;line-height:1.9;text-align:center}
+/* 訊息 */
+.msg{display:flex;gap:10px;padding:10px 16px}
+.msg .av{flex:none;width:36px;height:36px;border-radius:50%;background:#cfd4dc center/cover no-repeat;font-size:12px;display:flex;align-items:center;justify-content:center;color:#fff}
+.msg .bd{max-width:78%}
+.msg .who{font-size:11px;color:var(--ink2);margin:0 0 3px 2px}
+.msg .bub{background:#fff;border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:8px 12px;font-size:14px;line-height:1.6}
+.msg .when{font-size:10px;color:var(--ink2);margin:3px 0 0 2px}
+#reply{flex:none;display:flex;gap:8px;padding:8px 12px;border-top:1px solid var(--line);background:#fafafa}
+#reply span{flex:1;border:1px solid var(--line);border-radius:18px;padding:7px 12px;font-size:13px;color:#b8bcc4;background:#f1f2f4}
+#reply i{width:34px;border-radius:50%;background:#dfe1e6}
+/* 格莉奇的頁面 */
+.prof{display:flex;gap:12px;align-items:center;padding:14px 18px 6px}
+.prof .av{width:52px;height:52px;border-radius:50%;background:#cfd4dc center/cover no-repeat}
+.prof b{display:block;font-size:15px}.prof small{color:var(--ink2);font-size:12px}
+.post{border-top:8px solid #eceef2;padding:12px 18px 6px}
+.post .day{font-size:11px;color:var(--ink2);margin-bottom:6px}
+.post .txt{font-size:14px;line-height:1.7;white-space:pre-line}
+.post .to{display:none}
+.cm{margin:8px 0 0;padding:8px 0 4px;border-top:1px solid var(--line)}
+.cm .c{display:flex;gap:8px;font-size:12.5px;line-height:1.6;padding:3px 0}
+.cm .id{flex:none;color:var(--cy);font-weight:600}
+.cm .id.del{color:var(--del);font-weight:400;text-decoration:line-through}
+.cm .t{color:var(--ink)} .cm .tm{margin-left:auto;color:var(--ink2);font-size:11px;flex:none}
+.cm .self .id{color:#8b5cc4}
+.old{border-top:8px solid #eceef2;padding:12px 18px 18px}
+.old .day{font-size:11px;color:var(--ink2);margin-bottom:6px}
+/* 直播 */
+.live{padding:18px}
+.live .box{aspect-ratio:9/12;border-radius:12px;background:#111 center/cover no-repeat;position:relative;overflow:hidden}
+.live .box.off{background:#1a1c22}
+.live .tag{position:absolute;left:10px;top:10px;background:var(--red);color:#fff;font-size:11px;padding:2px 8px;border-radius:10px}
+.live p{font-size:14px;line-height:1.8;color:var(--ink);margin:12px 4px 0}
+.live p.dim{color:var(--ink2)}
+/* 電話 */
+.call{padding:60px 18px;text-align:center;color:var(--ink2);font-size:14px;line-height:2}
+#close{position:absolute;right:18px;bottom:18px;appearance:none;border:0;background:rgba(255,255,255,.08);color:#dfe3ea;border-radius:20px;padding:8px 16px;font:inherit;font-size:13px;cursor:pointer}
+/* 橫幅模式：只有頂端一條，底下透出來（透不出來就是暗的） */
+body.banner{background:rgba(6,8,12,.35)}
+body.banner #phone,body.banner #close{display:none}
+#strip{display:none;position:absolute;left:50%;top:18px;transform:translate(-50%,-140%);width:min(560px,92vw);
+  background:rgba(20,22,28,.94);color:#eef0f4;border-radius:16px;padding:12px 16px;box-shadow:0 12px 40px rgba(0,0,0,.5);
+  align-items:center;gap:12px;transition:transform .35s ease}
+body.banner #strip{display:flex}
+#strip.in{transform:translate(-50%,0)}
+#strip .av{flex:none;width:38px;height:38px;border-radius:9px;background:#cfd4dc center/cover no-repeat}
+#strip .who{font-size:12px;color:#aab0bb}#strip .txt{font-size:14px;line-height:1.5}
+@media (prefers-reduced-motion:reduce){#strip{transition:none}}
+</style>
+<div id="strip"><div class="av" id="s-av"></div><div><div class="who" id="s-who"></div><div class="txt" id="s-txt"></div></div></div>
+<div id="phone"><div id="screen">
+  <div id="bar"><b id="when"></b><span id="batt">▮▮▮</span></div>
+  <div id="page"></div>
+  <div id="reply" hidden><span>她不回。</span><i></i></div>
+  <nav>
+    <button data-p="msg">訊息<span class="dot" id="dot-msg" hidden></span></button>
+    <button data-p="feed">格莉奇<span class="dot" id="dot-feed" hidden></span></button>
+    <button data-p="live">直播</button>
+    <button data-p="call">電話</button>
+  </nav>
+</div></div>
+<button id="close" type="button">收起來</button>
+<script>
+var MODE=/*@@MODE@@*/'full';
+var BANNER=/*@@BANNER@@*/null;          // {who, text}
+var POSTS=/*@@POSTS@@*/[];              // [{day, text, to, comments:[{id, text, tm, deleted}]}]
+var OLD=/*@@OLD@@*/[];                  // 兩年前那一串 [{id, text, deleted, self}]
+var AVATAR=/*@@AVATAR@@*/'';
+var LIVE_DAYS=/*@@LIVE_DAYS@@*/[2,5,8];
+var SLOTS=['上午','下午','晚上','深夜'];
+var values={}, done=false;
+function setVar(n,v){ parent.postMessage({type:'larch:set',name:n,value:v},'*'); }
+function finish(){ if(done)return; done=true; parent.postMessage({type:'larch:complete',result:'complete',payload:{}},'*'); }
+function num(v,d){ var n=Number(v); return isNaN(n)||v===''||v==null?d:n; }
+function el(t,c,txt){ var e=document.createElement(t); if(c)e.className=c; if(txt!=null)e.textContent=txt; return e; }
+function log(){ try{ var a=JSON.parse(values.phone_log||'[]'); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function day(){ return num(values.day,1); }
+function slot(){ return num(values.slot,0); }
+
+function drawMsg(box){
+  var a=log().slice().reverse(); document.getElementById('reply').hidden=false;
+  if(!a.length){ box.appendChild(el('p','empty','沒有訊息。')); return; }
+  a.forEach(function(m){ var r=el('div','msg'); var av=el('div','av'); if(m.who==='格莉奇'&&AVATAR) av.style.backgroundImage='url("'+AVATAR+'")'; else av.textContent=(m.who||'?').slice(0,1);
+    var bd=el('div','bd'); bd.appendChild(el('div','who',m.who||'')); bd.appendChild(el('div','bub',m.text||'')); bd.appendChild(el('div','when', m.day?('第 '+m.day+' 天'+(m.slot!=null?'・'+SLOTS[m.slot]:'')):''));
+    r.appendChild(av); r.appendChild(bd); box.appendChild(r); });
+}
+function comment(c){ var r=el('div','c'+(c.self?' self':'')); var id=el('span','id'+(c.deleted?' del':''), c.id); r.appendChild(id);
+  r.appendChild(el('span','t',c.text)); if(c.tm) r.appendChild(el('span','tm',c.tm)); return r; }
+function drawFeed(box){
+  var p=el('div','prof'); var av=el('div','av'); if(AVATAR) av.style.backgroundImage='url("'+AVATAR+'")'; p.appendChild(av);
+  var t=el('div'); t.appendChild(el('b',null,'格莉奇')); t.appendChild(el('small',null,'官方帳號・每天開台')); p.appendChild(t); box.appendChild(p);
+  var d=day(); var shown=POSTS.filter(function(x){ return num(x.day,99)<=d; }).sort(function(a,b){ return num(b.day,0)-num(a.day,0); });
+  if(!shown.length) box.appendChild(el('p','empty','還沒有貼文。'));
+  shown.forEach(function(x){ var po=el('div','post'); po.appendChild(el('div','day','第 '+x.day+' 天')); po.appendChild(el('div','txt',x.text));
+    if(x.comments&&x.comments.length){ var cm=el('div','cm'); x.comments.forEach(function(c){ cm.appendChild(comment(c)); }); po.appendChild(cm); }
+    box.appendChild(po); });
+  if(OLD.length){ var o=el('div','old'); o.appendChild(el('div','day','兩年前')); var cm=el('div','cm'); OLD.forEach(function(c){ cm.appendChild(comment(c)); }); o.appendChild(cm); box.appendChild(o); }
+}
+function drawLive(box){
+  var d=day(), s=slot(), w=el('div','live'); var on = LIVE_DAYS.indexOf(d)>=0 && s>=2;
+  var b=el('div','box'+(on?'':' off')); if(on){ if(AVATAR) b.style.backgroundImage='url("'+AVATAR+'")'; b.appendChild(el('span','tag','LIVE')); }
+  w.appendChild(b);
+  if(on){ w.appendChild(el('p',null,'今晚開台了。')); w.appendChild(el('p','dim','剛剛那一段她看過了。')); }
+  else { var last=LIVE_DAYS.filter(function(x){ return x<d; }).pop();
+    w.appendChild(el('p',null, last?('上次開台：第 '+last+' 天。'):'還沒開過台。'));
+    w.appendChild(el('p','dim', last===8?'聊天室最後一則：這集有我。':last===5?'聊天室最後一則：今天講到哪了。':last===2?'聊天室最後一則：早安。':'今晚沒開台。')); }
+  box.appendChild(w);
+}
+function drawCall(box){ var c=el('div','call'); c.appendChild(el('div',null,'通話紀錄是空的。')); c.appendChild(el('div',null,'沒有人會打來。')); box.appendChild(c); }
+var PAGES={msg:drawMsg,feed:drawFeed,live:drawLive,call:drawCall}, cur='msg';
+function show(p){ cur=p; var box=document.getElementById('page'); box.textContent=''; document.getElementById('reply').hidden=true;
+  PAGES[p](box); box.scrollTop=0;
+  Array.prototype.forEach.call(document.querySelectorAll('nav button'),function(b){ b.className=b.dataset.p===p?'on':''; });
+  if(p==='feed') document.getElementById('dot-feed').hidden=true; if(p==='msg') document.getElementById('dot-msg').hidden=true; }
+function renderFull(){
+  document.getElementById('when').textContent='第 '+day()+' 天・'+SLOTS[slot()];
+  var seen=num(values.phone_day_seen,0); var fresh=POSTS.some(function(x){ return num(x.day,99)<=day() && num(x.day,99)>seen; });
+  document.getElementById('dot-feed').hidden=!fresh;
+  show(log().length?'msg':'feed');
+  Array.prototype.forEach.call(document.querySelectorAll('nav button'),function(b){ b.addEventListener('click',function(){ show(b.dataset.p); }); });
+  document.getElementById('close').addEventListener('click',function(){ setVar('phone_day_seen', day()); setVar('open_phone', false); finish(); });
+}
+function renderBanner(){
+  document.body.className='banner'; var s=document.getElementById('strip');
+  document.getElementById('s-who').textContent=BANNER.who||''; document.getElementById('s-txt').textContent=BANNER.text||'';
+  var av=document.getElementById('s-av'); if(BANNER.who==='格莉奇'&&AVATAR) av.style.backgroundImage='url("'+AVATAR+'")'; else av.textContent=(BANNER.who||'?').slice(0,1);
+  var a=log(); a.push({who:BANNER.who,text:BANNER.text,day:day(),slot:slot()}); setVar('phone_log', JSON.stringify(a));
+  requestAnimationFrame(function(){ s.className='in'; });
+  setTimeout(function(){ s.className=''; setTimeout(finish, 380); }, 2200);
+  document.addEventListener('click', function(){ finish(); });
+}
+window.addEventListener('message',function(e){ var d=e.data; if(!d||d.type!=='larch:init')return; values=d.values||{};
+  if(MODE==='banner'&&BANNER) renderBanner(); else renderFull(); });
+parent.postMessage({type:'larch:ready'},'*');
+</script>
+</html>

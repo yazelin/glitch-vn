@@ -18,7 +18,7 @@ const frames = () => page.frames().filter(f => f !== page.mainFrame());
 const frameWith = async (s) => { for (const f of frames()) { try { if ((await f.locator('body').innerText()).includes(s)) return f; } catch(e){} } return null; };
 const boardFrame = () => frameWith('今天要去哪');
 const menuFrame = async () => { for (const f of frames()) { try { if (await f.locator('button.seg').count() || await f.locator('button#skip', { hasText: '先走' }).count()) return f; } catch(e){} } return null; };
-const done = new Set(); const visits = {}; let outings=0; let lastCard=''; let stuck=0;
+const done = new Set(); const visits = {}; const phoneDays = new Set(); let outings=0; let lastCard=''; let stuck=0;
 const SPOT_HINT = [['樓下','一樓'],['信箱','一樓'],['管理員','一樓'],['一樓','一樓'],['樓上那間','頂樓收音機店'],['頂樓','頂樓收音機店'],['材料行','材料行'],['便利商店','便利商店'],['洗衣店','自助洗衣店'],['工作室','斑比工作室'],['經紀公司','車站前那條街'],['車站','車站前那條街'],['十四樓','十四樓大廳'],['手辦','手辦店'],['關東煮','便利商店'],['那家店','便利商店'],['店員','便利商店']];
 const pickSpot = async (bf) => {
   const when = await bf.locator('#when').textContent();
@@ -53,7 +53,18 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   const t = await text();
   if (t.includes('開始遊戲') && t.includes('繼續遊戲')) { out('\n=== 回到標題（遊戲結束）'); break; }
   const bf = await boardFrame();
-  if (bf) { await page.waitForTimeout(600); const bf2=await boardFrame(); if(!bf2) continue; when = await bf2.locator('#when').textContent(); spot = await pickSpot(bf2); if (!spot) { out('沒地方可去，這一段不出門'); await bf2.locator('#skip').click(); } await page.waitForTimeout(2500); continue; }
+  if (bf) { await page.waitForTimeout(600); const bf2=await boardFrame(); if(!bf2) continue; when = await bf2.locator('#when').textContent();
+    // 每天上午開一次手機翻一遍（design/調查篇-手機.md 驗收）：HUD 背包 → 手機 → 使用道具 → 記下看到的貼文 → 收起來
+    if (when.includes('上午') && !phoneDays.has(when.split(' ・')[0])) { phoneDays.add(when.split(' ・')[0]);
+      try { await page.mouse.click(1180,112); await page.waitForTimeout(1200); const it=page.locator('text=手機').first(); if (await it.count()) { await it.click(); await page.waitForTimeout(500); }
+        const use=page.locator('button', { hasText: '使用道具' }).first(); if (await use.count()) { await use.click(); await page.waitForTimeout(2500); }
+        let pf=null; for (const f of frames()) { try { if ((await f.locator('#close').count())) pf=f; } catch(e){} }
+        if (pf) { const msgs=(await pf.locator('.msg .bub').allTextContents()).map(t=>t.slice(0,16)); await pf.locator('nav button', { hasText: '格莉奇' }).click(); await page.waitForTimeout(300);
+          const posts=await pf.locator('.post .txt').allTextContents(); out(`  [手機] 訊息 ${msgs.length} 則 ${JSON.stringify(msgs)}；貼文 ${posts.length} 則：${posts.map(t=>t.slice(0,10)).join('｜')}`);
+          await pf.locator('#close').click(); await page.waitForTimeout(2000); }
+        else { out('  [手機] 打不開'); await page.keyboard.press('Escape'); }
+      } catch(e) { out('  [手機] 出錯 '+String(e).slice(0,80)); }
+      continue; } spot = await pickSpot(bf2); if (!spot) { out('沒地方可去，這一段不出門'); await bf2.locator('#skip').click(); } await page.waitForTimeout(2500); continue; }
   const mf = await menuFrame();
   if (mf) { await pickMenu(mf, spot, when); await page.waitForTimeout(1800); continue; }
   const opts = await page.locator('button', { hasText: /^0[1-9]\s/ }).all();

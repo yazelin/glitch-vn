@@ -77,9 +77,8 @@ POSSIBLE = {"lobby": {"管理員", "黑洞先生"}, "roof": {"諾亞"}, "street"
 INVENTORY_DEFAULT = json.dumps([
     {"id": "rulebook", "n": "守則本", "d": "一千二。第一頁還是空的。", "c": False,
      "e": "set", "v": "open_notes", "x": True},
-    {"id": "phone", "n": "手機", "d": "沒有人會打來。", "c": False,
-     "useConditionVariable": "phone_ringing", "useConditionValue": True,
-     "useConditionMessage": "沒有人會打來。"},
+    {"id": "phone", "n": "手機", "d": "訊息、她的頁面、直播。沒有人會打來。", "c": False,
+     "e": "set", "v": "open_phone", "x": True},
 ], ensure_ascii=False)
 
 
@@ -378,8 +377,27 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                                                 "open_studio", "met_諾亞", "met_材料行老闆"] + note_codes,
                            "miniGameWriteVars": ["notes_free", "page1", "page1_text", "page1_lead", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
-    phone_html = pathlib.Path.home().joinpath("larch-phone-chat/card/receive.html").read_text(encoding="utf-8")
+    phone_src = (HERE.parent / "cards/phone.html").read_text(encoding="utf-8")
+    posts, old_thread = phone_feed()
+    def phone_card(mode, banner=None):
+        """她的手機（design/調查篇-手機.md）。full＝從背包打開；banner＝收到訊息的橫幅，兩秒自己走。"""
+        html = (phone_src.replace("/*@@MODE@@*/'full'", json.dumps(mode))
+                .replace("/*@@BANNER@@*/null", json.dumps(banner, ensure_ascii=False))
+                .replace("/*@@POSTS@@*/[]", json.dumps(posts, ensure_ascii=False))
+                .replace("/*@@OLD@@*/[]", json.dumps(old_thread, ensure_ascii=False))
+                .replace("/*@@AVATAR@@*/''", json.dumps(MAIN_ASSETS.get("avatar-glitch", ""))))
+        d = {"type": "miniGame", "title": ("手機：" + banner["who"]) if banner else "她的手機", "text": "",
+             "miniGameHtml": html, "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
+             "miniGameFrame": {"showButton": False, "showTitle": False},
+             "miniGameReadVars": ["day", "slot", "phone_log", "phone_day_seen", "open_studio", "met_櫃檯"],
+             "miniGameWriteVars": ["phone_log", "open_phone", "phone_day_seen"]}
+        return d
     def phone_data(contact, messages):
+        return phone_card("banner", {"who": contact, "text": messages})
+    # 給卡片測試用的注入版（不進 repo）：tools/card_test.mjs 開這兩個檔
+    (HERE.parent / "cards/.phone-test.html").write_text(phone_card("full")["miniGameHtml"], encoding="utf-8")
+    (HERE.parent / "cards/.phone-banner-test.html").write_text(phone_data("斑比", "有空來工作室。稿子帶著。")["miniGameHtml"], encoding="utf-8")
+    def _unused_plugin_receive(contact, messages):
         return {"type": "plugin", "title": f"手機：{contact}", "text": "",
                        "pluginId": "phone-chat", "pluginCardId": "receive", "pluginName": "格莉奇手機",
                        "pluginCardName": "收到訊息", "pluginIcon": "bell", "pluginColor": "#5b8def",
@@ -390,7 +408,13 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                        "pluginSkippable": True, "pluginPresentation": "fullscreen"}
     def receive(nid, contact, messages, x, y):
         add_node(nid, phone_data(contact, messages), x, y)
-    # 建置層放的手機卡（直播那三晚的橫幅，design/調查篇-直播.md）換成插件卡
+    # 從背包打開手機：open_phone=true → 插播 → 手機卡 → 收起來回原處（跟守則本同一條路）
+    add_node("inv-phone-int", {"type": "interrupt", "title": "打開手機", "text": "",
+                               "interruptCondition": {"kind": "variable", "variable": "open_phone", "op": "eq", "value": True},
+                               "interruptOnce": False, "interruptExit": "return"}, 0, 0)
+    add_node("inv-phone", phone_card("full"), 0, 0)
+    add_edge("inv-phone-int", "inv-phone")
+    # 建置層放的手機卡（直播那三晚的橫幅，design/調查篇-直播.md）換成橫幅模式的手機卡
     for n in nodes:
         if n["data"].get("type") == "phone":
             d = n["data"]
@@ -448,7 +472,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("inventoryCount", "number", 2, "背包件數"),
         ("inventoryLastUsed", "string", "", "最後用的道具（名稱）"),
         ("open_notes", "boolean", False, "翻開守則本"),
-        ("phone_ringing", "boolean", False, "永遠不會響"),
+        ("open_phone", "boolean", False, "從背包打開手機"),
+        ("phone_day_seen", "number", 0, "她翻到第幾天的貼文（紅點用）"),
         ("rec_ok", "boolean", False, "錄音機清過毛了"),
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
         ("page1_text", "string", "第一頁。她一個字都沒有寫。", "第一頁：收尾旁白唸的版本（沒看到牆的人唸預設）"),
@@ -590,6 +615,29 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     return nodes, edges, list(vs.values()), stats
 
 
+def phone_feed():
+    """design/調查篇-手機.md：貼文表（| 天 | 貼文 | 指向 | 留言 |）與「兩年前那一串」那段引言。"""
+    text = (ROOT / "design/調查篇-手機.md").read_text(encoding="utf-8")
+    posts = []
+    for row in re.findall(r"^\| (\d+) \| (.+?) \| (.+?) \| (.+?) \|$", text, re.M):
+        day, body, to, cms = row
+        comments = []
+        for c in cms.split("／"):
+            c = c.strip()
+            m = re.match(r"(@\S+?)(?:（(\d{2}:\d{2})）)?：(.*)", c)
+            if m:
+                comments.append({"id": m.group(1), "text": m.group(3).strip(), "tm": m.group(2) or ""})
+            elif c.startswith("路人 ID"):
+                who = c.split("：", 1)[1].strip() if "：" in c else ""
+                comments.append({"id": "@路人", "text": who or "早安", "tm": ""})
+        posts.append({"day": int(day), "text": body.strip(), "to": to.strip(), "comments": comments})
+    old = []
+    for m in re.finditer(r"^> \*\*(@?\S+?)\*\*(（帳號已刪除）)?：(.*)$", text, re.M):
+        old.append({"id": m.group(1), "text": m.group(3).strip(), "deleted": bool(m.group(2)), "self": m.group(1) == "格莉奇"})
+    assert posts and old, "手機設計文件的貼文表或兩年前那一串讀不到"
+    return posts, old
+
+
 CREDITS_BID = "board-credits"
 
 
@@ -650,7 +698,7 @@ def settings_patch(settings, bag_image=""):
         "surfaceColor": "#141a30", "surfaceOpacity": 0.94, "itemColor": "#1f2747",
         "textColor": "#ece9f4", "accentColor": "#7fd6e8",
         "motionStyle": "gentle", "shadowStyle": "soft"}}
-    plugins["phone-chat"] = {"enabled": True}
+    plugins.pop("phone-chat", None)      # 通知改由自己的手機卡做（design/調查篇-手機.md）
     settings["plugins"] = plugins
     settings.setdefault("stageFit", "auto")
     settings.setdefault("keepActorsInFrame", False)

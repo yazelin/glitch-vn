@@ -35,3 +35,5 @@ art/live2d/glitch.psd
 # 調查篇推送層的私人預覽連結與 dry-run 產物
 larch/inv/preview.json
 larch/inv/out/payload.json
+larch/cards/.phone-test.html
+larch/cards/.phone-banner-test.html
