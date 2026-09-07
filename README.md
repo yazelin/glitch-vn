@@ -28,6 +28,8 @@
     tools/cut_faces.py       表情差分去背（綠幕→清內部殘留→負控制驗收）
     tools/make_icons.py      PWA 圖示（從立繪按實際 ink 邊界裁，不是目測置中）
     tools/update_sw.py       用內容 hash 產 sw.js 的快取版號，別手動 bump
+    tools/autoplay.mjs       調查篇的自動玩家：照板上便條從第一天玩到結局，對白與每一步決定存 transcript（OUT=目錄）。
+                             改了門檻或接線就跑一輪，看它卡在哪、缺什麼提示；它很笨，便條沒提到的地方輪流去
     art/live2d/              格莉奇的 Live2D 模型。build.py 把 sprite-glitch.png 切成 34 層、
                              mkpsd.py 組成 Cubism 讀得懂的 PSD、run-cubism.sh 在 Wine 底下開
                              Cubism Editor（Ubuntu 也做得完，見該資料夾 README）。
