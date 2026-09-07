@@ -359,35 +359,105 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     for code in note_codes:
         vs.setdefault(code, {"id": code, "name": code, "label": code, "type": "boolean", "defaultValue": False})
 
-    # 版面：板與地點在左邊兩欄；每一段一列
-    pos = {board_id: (0, 0)}
-    y = 0
-    for i, m in enumerate(menus):
-        pos[m] = (800, i * 220)
-    entries = [e["source"] for e in edges if e["target"] in menus and e["source"] != board_id]
-    for i, en in enumerate(entries):
-        pos[en] = (300 + (i % 2) * 220, (i // 2) * 220)
-    row = 0
-    for seg, sn in by_seg.items():
-        for j, n in enumerate(sn):
-            pos[n["id"]] = (1400 + j * 320, 3200 + row * 200)
-        row += 1
+    # ── 版面：人看得懂的白板 ────────────────────────────────────
+    # 左邊一欄是系統卡（調查板、休息、筆記、錄音播放、收尾插播）。
+    # 每個地點一個群組框：第一列日版入口、夜版入口、選單、回板；底下一段一列，卡片照走的順序從左到右，
+    # 一列最多 WRAP 張，超過折到下一列。群組是 Larch 的「故事區段」卡（type group），子卡用 parentId。
+    CW, CH = 360, 240            # 一格的間距（卡片本身約 280×140，帶立繪的到 200 高）
+    WRAP = 8
+    PAD = 40
+    by_id = {n["id"]: n for n in nodes}
+    out_edges = {}
+    for e in edges:
+        out_edges.setdefault(e["source"], []).append(e)
+
+    def chain(start_id, stop=lambda nid: False):
+        """從一張卡沿出邊走完整段（含分支），照發現順序回傳 id 清單"""
+        seen, order, stack = set(), [], [start_id]
+        while stack:
+            nid = stack.pop(0)
+            if nid in seen or nid not in by_id or stop(nid):
+                continue
+            seen.add(nid); order.append(nid)
+            for e in out_edges.get(nid, []):
+                stack.append(e["target"])
+        return order
+
+    placed = {}
+
+    def put(nid, x, y, parent=None):
+        n = by_id[nid]
+        n["position"] = {"x": x, "y": y}
+        if parent:
+            n["parentId"] = parent
+            n["extent"] = "parent"
+        placed[nid] = True
+
+    # 左欄
+    col = 0
+    put(board_id, 0, 0)
+    put("inv-rest", 0, CH)
+    put("inv-notes-int", 0, 2 * CH); put("inv-notes", CW, 2 * CH)
+    y = 3 * CH
+    if "inv-tape-int" in by_id:
+        put("inv-tape-int", 0, y)
+        tapes_ids = [n["id"] for n in nodes if n["id"].startswith("inv-tape-rec_")]
+        for i, t in enumerate(tapes_ids):
+            put(t, CW * (1 + i % 3), y + CH * (i // 3))
+        put("inv-tape-none", 0, y + CH * ((len(tapes_ids) + 2) // 3))
+        y += CH * ((len(tapes_ids) + 2) // 3 + 1)
     for n in nodes:
-        if n["id"] in pos:
-            n["position"] = {"x": pos[n["id"]][0], "y": pos[n["id"]][1]}
-        elif n["id"].endswith("-back"):
-            src = n["id"][:-5]
-            n["position"] = {"x": 1100, "y": pos.get(src, (0, 0))[1]}
-        elif n["data"].get("type") == "boardJump":
-            # 每一段的回板卡接在該段最後一張後面
-            prev = next((e["source"] for e in edges if e["target"] == n["id"]), None)
-            px, py = pos.get(prev, (1400, 3200))
-            n["position"] = {"x": px + 320, "y": py}
+        if n["data"].get("type") == "interrupt" and n["id"] not in ("inv-notes-int", "inv-tape-int"):
+            ids = chain(n["id"])
+            for i, nid in enumerate(ids):
+                put(nid, CW * (i % WRAP), y + CH * (i // WRAP))
+            y += CH * ((len(ids) + WRAP - 1) // WRAP)
+
+    # 群組：地點
+    group_nodes = []
+    gx, gy = CW * 4, 0
+    menu_loc = {}
+    for m in menus:
+        menu_loc[m] = by_id[m]["data"]["title"].split("：", 1)[1]
+    for m in menus:
+        loc = menu_loc[m]
+        gid = f"grp-{loc}"
+        rows = []            # 每列一串 id
+        entries = [e["source"] for e in edges if e["target"] == m and e["source"] != board_id]
+        rows.append(entries + [m, f"{m}-back"])
+        seg_entries = [e["target"] for e in out_edges.get(m, []) if e.get("data")]
+        for se in seg_entries:
+            ids = chain(se, stop=lambda nid: nid in placed or nid == m)
+            for k in range(0, len(ids), WRAP):
+                rows.append(ids[k:k + WRAP])
+            for nid in ids:
+                placed[nid] = True
+        width = PAD * 2 + CW * max(len(r) for r in rows)
+        height = PAD * 2 + CH * len(rows) + 40
+        group_nodes.append({"id": gid, "type": "story", "position": {"x": gx, "y": gy},
+                            "width": width, "height": height, "style": {"width": width, "height": height},
+                            "data": {"type": "group", "title": LOC_NAME.get(loc, loc), "text": "",
+                                     "groupColor": "#667257"}})
+        for r_i, row in enumerate(rows):
+            for c_i, nid in enumerate(row):
+                if nid in by_id:
+                    put(nid, PAD + CW * c_i, PAD + 40 + CH * r_i, parent=gid)
+        gy += height + CH
+
+    # 沒排到的（開場那段、孤兒）：放在群組下面
+    x_i = 0
     for n in nodes:
-        n.setdefault("position", {"x": 0, "y": 0})
-    nodes[[n["id"] for n in nodes].index("inv-rest")]["position"] = {"x": 0, "y": 300}
-    nodes[[n["id"] for n in nodes].index("inv-notes-int")]["position"] = {"x": 0, "y": 600}
-    nodes[[n["id"] for n in nodes].index("inv-notes")]["position"] = {"x": 400, "y": 600}
+        if n["id"] not in placed and n["id"] not in [g["id"] for g in group_nodes]:
+            n.setdefault("position", {"x": gx + CW * (x_i % WRAP), "y": gy + CH * (x_i // WRAP)})
+            x_i += 1
+    # 開場那一段自成一列（它從 start 卡開始，沒有 pick 邊）
+    start_ids = [n["id"] for n in nodes if n["data"].get("start")]
+    if start_ids:
+        ids = chain(start_ids[0], stop=lambda nid: nid == board_id)
+        for i, nid in enumerate(ids):
+            by_id[nid]["position"] = {"x": gx + CW * (i % WRAP), "y": gy + CH * (i // WRAP)}
+            by_id[nid].pop("parentId", None); by_id[nid].pop("extent", None)
+    nodes[:0] = group_nodes          # 群組要排在子卡前面
 
     stats = {"nodes": len(nodes), "edges": len(edges),
              "cond_edges": sum(1 for e in edges if e.get("data")),
