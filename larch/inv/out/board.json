@@ -28756,6 +28756,11 @@
      "variable": "trust_店員",
      "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "asked_店員_格莉奇",
+     "op": "eq",
+     "value": true
     }
    ],
    "or": false,
@@ -28778,6 +28783,11 @@
      "variable": "trust_店員",
      "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "see_clerk",
+     "op": "eq",
+     "value": true
     }
    ],
    "or": false,
@@ -28847,6 +28857,11 @@
      "variable": "trust_店員",
      "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "open_laundry",
+     "op": "eq",
+     "value": true
     }
    ],
    "or": false,
