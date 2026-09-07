@@ -819,15 +819,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg000",
-    "variableOps": [
-     {
-      "id": "op-hole_sightings",
-      "variable": "hole_sightings",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg000"
    }
   },
   {
@@ -842,7 +834,15 @@
     "title": "他上樓。",
     "text": "他上樓。",
     "speaker": "旁白",
-    "segment": "seg000"
+    "segment": "seg000",
+    "variableOps": [
+     {
+      "id": "op-hole_sightings",
+      "variable": "hole_sightings",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -939,15 +939,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg001",
-    "variableOps": [
-     {
-      "id": "op-hole_sightings",
-      "variable": "hole_sightings",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg001"
    }
   },
   {
@@ -962,7 +954,15 @@
     "title": "他點了一下頭，上樓。",
     "text": "他點了一下頭，上樓。",
     "speaker": "旁白",
-    "segment": "seg001"
+    "segment": "seg001",
+    "variableOps": [
+     {
+      "id": "op-hole_sightings",
+      "variable": "hole_sightings",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -1363,15 +1363,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。 <!-- speak-tw-ok 正典口頭禪 -->\n《守則本》限時預購中，數量有限喔。\n裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
-    "segment": "seg004",
-    "variableOps": [
-     {
-      "id": "op-see_admin",
-      "variable": "see_admin",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg004"
    }
   },
   {
@@ -1540,7 +1532,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg005"
+    "segment": "seg005",
+    "variableOps": [
+     {
+      "id": "op-see_admin",
+      "variable": "see_admin",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -1706,15 +1706,7 @@
     "text": "監視器上常常有一個人站在對面。我沒下去問過。",
     "speaker": "保全",
     "remote": true,
-    "segment": "seg006",
-    "variableOps": [
-     {
-      "id": "op-see_stairs",
-      "variable": "see_stairs",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg006"
    }
   },
   {
@@ -1755,7 +1747,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg006"
+    "segment": "seg006",
+    "variableOps": [
+     {
+      "id": "op-see_stairs",
+      "variable": "see_stairs",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -2213,39 +2213,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg011",
-    "variableOps": [
-     {
-      "id": "op-trust_管理員",
-      "variable": "trust_管理員",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-trust_管理員",
-      "variable": "trust_管理員",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-trust_管理員",
-      "variable": "trust_管理員",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-trust_管理員",
-      "variable": "trust_管理員",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-trust_管理員",
-      "variable": "trust_管理員",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg011"
    }
   },
   {
@@ -2306,7 +2274,39 @@
       "emotion": ""
      }
     ],
-    "segment": "seg012"
+    "segment": "seg012",
+    "variableOps": [
+     {
+      "id": "op-trust_管理員",
+      "variable": "trust_管理員",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-trust_管理員",
+      "variable": "trust_管理員",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-trust_管理員",
+      "variable": "trust_管理員",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-trust_管理員",
+      "variable": "trust_管理員",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-trust_管理員",
+      "variable": "trust_管理員",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -2697,15 +2697,7 @@
     "title": "筆記：我問他覺不覺得她不正",
     "text": "我問他覺不覺得她不正常。\n他說她要買線，他有線。我說我不是在講線，他說他知道。\n然後他就繼續弄他的了。\n這個人給不了我要的答案。他沒有那個答案，因為他從來沒有問過那個問題。",
     "speaker": "玩家",
-    "segment": "seg016",
-    "variableOps": [
-     {
-      "id": "op-asked_諾亞_信箱",
-      "variable": "asked_諾亞_信箱",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg016"
    }
   },
   {
@@ -2772,7 +2764,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg017"
+    "segment": "seg017",
+    "variableOps": [
+     {
+      "id": "op-asked_諾亞_信箱",
+      "variable": "asked_諾亞_信箱",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -2787,21 +2787,7 @@
     "title": "筆記：十一格裡有一格搬走了",
     "text": "十一格裡有一格搬走了。他沒說是哪一年。\n我在那一格旁邊畫了一個問號。其他十格我沒有動。\n他認得那格信箱，不認得住裡面的人。",
     "speaker": "玩家",
-    "segment": "seg017",
-    "variableOps": [
-     {
-      "id": "op-see_noah",
-      "variable": "see_noah",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-asked_諾亞_黑洞",
-      "variable": "asked_諾亞_黑洞",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg017"
    }
   },
   {
@@ -2946,7 +2932,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg018"
+    "segment": "seg018",
+    "variableOps": [
+     {
+      "id": "op-see_noah",
+      "variable": "see_noah",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_諾亞_黑洞",
+      "variable": "asked_諾亞_黑洞",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -3124,27 +3124,7 @@
     "title": "桌子、兩台螢幕、一台繪圖板。",
     "text": "桌子、兩台螢幕、一台繪圖板。\n七個馬克杯。他每一次來的時候空的那幾個位置都不一樣。\n她沒有回頭。",
     "speaker": "旁白",
-    "segment": "seg020",
-    "variableOps": [
-     {
-      "id": "op-clue_real",
-      "variable": "clue_real",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-strike_fake",
-      "variable": "strike_fake",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-asked_斑比_格莉奇",
-      "variable": "asked_斑比_格莉奇",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg020"
    }
   },
   {
@@ -3283,7 +3263,27 @@
       "emotion": ""
      }
     ],
-    "segment": "seg021"
+    "segment": "seg021",
+    "variableOps": [
+     {
+      "id": "op-clue_real",
+      "variable": "clue_real",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-strike_fake",
+      "variable": "strike_fake",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_斑比_格莉奇",
+      "variable": "asked_斑比_格莉奇",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -3304,18 +3304,6 @@
       "variable": "strikes",
       "kind": "add",
       "value": 1
-     },
-     {
-      "id": "op-see_bambi",
-      "variable": "see_bambi",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-asked_斑比_黑洞",
-      "variable": "asked_斑比_黑洞",
-      "kind": "set",
-      "value": true
      }
     ],
     "segment": "seg021"
@@ -3451,7 +3439,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg022"
+    "segment": "seg022",
+    "variableOps": [
+     {
+      "id": "op-see_bambi",
+      "variable": "see_bambi",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_斑比_黑洞",
+      "variable": "asked_斑比_黑洞",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -3586,15 +3588,7 @@
     "title": "筆記：我問她那個人是不是一",
     "text": "我問她那個人是不是一個人住。\n她說她家裡的事她不會講。我再問，她說她不知道。兩句她都講了。\n客戶提過一個室友。很多次。沒有名字，也沒有講長什麼樣子。\n她說客戶的事她不問。\n她說沒有看過的她畫不出來。\n目擊那一頁上多一列。她那一列是空的。\n到現在為止沒有兩份是一樣的。有人記錯了。",
     "speaker": "玩家",
-    "segment": "seg022",
-    "variableOps": [
-     {
-      "id": "op-asked_斑比_鐵塔",
-      "variable": "asked_斑比_鐵塔",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg022"
    }
   },
   {
@@ -3757,7 +3751,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg023"
+    "segment": "seg023",
+    "variableOps": [
+     {
+      "id": "op-asked_斑比_鐵塔",
+      "variable": "asked_斑比_鐵塔",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-trust_斑比",
+      "variable": "trust_斑比",
+      "kind": "set",
+      "value": 3
+     }
+    ]
    }
   },
   {
@@ -3821,15 +3829,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg024",
-    "variableOps": [
-     {
-      "id": "op-open_tower14",
-      "variable": "open_tower14",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg024"
    }
   },
   {
@@ -3962,7 +3962,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg025"
+    "segment": "seg025",
+    "variableOps": [
+     {
+      "id": "op-open_tower14",
+      "variable": "open_tower14",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -3977,15 +3985,7 @@
     "title": "筆記：深夜。工作室。她把另",
     "text": "深夜。工作室。她把另一台螢幕轉過來給我看。\n0x 那邊不外包。\n她說 0x 出道到現在換過三次立繪，三次都是同一張重上色，底稿沒有動過。\n她說她看得出來，因為線在同一個位置。\n我問那是不是省事。她說那是第一次就畫對了。\n我問她那不好嗎。她說好啊，然後就不講了。\n一邊兩年一張。一邊第四十版。這兩件事我還接不起來。\n車站出來那棟最高的，十四樓。地方有了。",
     "speaker": "玩家",
-    "segment": "seg025",
-    "variableOps": [
-     {
-      "id": "op-bambi_revised",
-      "variable": "bambi_revised",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg025"
    }
   },
   {
@@ -4088,7 +4088,27 @@
       "emotion": ""
      }
     ],
-    "segment": "seg026"
+    "segment": "seg026",
+    "variableOps": [
+     {
+      "id": "op-bambi_revised",
+      "variable": "bambi_revised",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-bambi_invited",
+      "variable": "bambi_invited",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-trust_斑比 ← 3",
+      "variable": "trust_斑比 ← 3",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -4236,21 +4256,7 @@
     "title": "騎樓那一排店中間有一個門口。",
     "text": "騎樓那一排店中間有一個門口。牆上一塊樓層表，一層一層列下來，十一樓是那家公司的名字。\n電梯只有一台。",
     "speaker": "旁白",
-    "segment": "seg029",
-    "variableOps": [
-     {
-      "id": "op-seen_booth",
-      "variable": "seen_booth",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-met_鐵塔",
-      "variable": "met_鐵塔",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg029"
    }
   },
   {
@@ -4265,7 +4271,21 @@
     "title": "十一樓。玻璃門開著。\n門邊一",
     "text": "十一樓。玻璃門開著。\n門邊一張桌子，桌上一本簽名簿，最後一行是三天前。他在下面寫了第二行。\n沒有人出來。\n走廊底端兩扇門。左邊那扇開著，裡面是錄音間。牆是深灰色的，貼滿吸音棉，一格一格排得很整齊。\n燈是暗的，椅子上放著一副耳機。\n右邊那扇沒有關緊。裡面有人在放同一句話。",
     "speaker": "旁白",
-    "segment": "seg029"
+    "segment": "seg029",
+    "variableOps": [
+     {
+      "id": "op-seen_booth",
+      "variable": "seen_booth",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-met_鐵塔",
+      "variable": "met_鐵塔",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -4414,15 +4434,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg030",
-    "variableOps": [
-     {
-      "id": "op-open_tower14",
-      "variable": "open_tower14",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg030"
    }
   },
   {
@@ -4525,7 +4537,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg031"
+    "segment": "seg031",
+    "variableOps": [
+     {
+      "id": "op-open_tower14",
+      "variable": "open_tower14",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -4684,21 +4704,7 @@
     "title": "筆記：經紀公司。十一樓，玻",
     "text": "經紀公司。十一樓，玻璃門開著，沒有人出來。\n桌上那本簽名簿最後一行是三天前。我寫了第二行。\n錄音間的門開著，燈是暗的，裡面沒有人。聲音是從隔壁那一間出來的。\n同一句廣告，我在走廊上聽到四次。他說總共五次。所以我是從第二次開始聽的。\n他說第二次可以，第五次趕。兩次我都聽到了。我聽不出來差別。\n他問我找誰。他沒有問我是誰。\n［問過 0x］同業。我問了兩次，兩次都是同一個字。\n聯動是兩邊一起排的，他說猜歌不用兩個人講話。\n0x 的公司在車站對面那棟，十四樓。他說他們不會讓我上去。\n［問過周邊］畫她的人。名字我還沒問到。外包的，不在這裡上班，名字在合約上。\n《守則本》的內頁重排過，他說字體太像真的。我問像誰的，他說像手寫的。\n他聽了五次同一句話。他大概不喜歡這個工作。\n正門走不通。他從頭到尾沒有停下來。",
     "speaker": "玩家",
-    "segment": "seg033",
-    "variableOps": [
-     {
-      "id": "op-clue_cantfix",
-      "variable": "clue_cantfix",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-asked_0x_黑洞",
-      "variable": "asked_0x_黑洞",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg033"
    }
   },
   {
@@ -4879,7 +4885,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg034"
+    "segment": "seg034",
+    "variableOps": [
+     {
+      "id": "op-clue_cantfix",
+      "variable": "clue_cantfix",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_0x_黑洞",
+      "variable": "asked_0x_黑洞",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -4908,15 +4928,7 @@
     "title": "深夜兩點。洗衣店只有兩台在轉",
     "text": "深夜兩點。洗衣店只有兩台在轉。\n靠門那張椅子上坐著一個人。連帽衫，耳機掛在脖子上。\n手機立在腿上，螢幕朝著他自己。\n滾筒裡那一件跟他身上那一件是同一個顏色。",
     "speaker": "旁白",
-    "segment": "seg035",
-    "variableOps": [
-     {
-      "id": "op-asked_貓草_格莉奇",
-      "variable": "asked_貓草_格莉奇",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg035"
    }
   },
   {
@@ -5095,7 +5107,27 @@
       "emotion": ""
      }
     ],
-    "segment": "seg035"
+    "segment": "seg035",
+    "variableOps": [
+     {
+      "id": "op-asked_貓草_格莉奇",
+      "variable": "asked_貓草_格莉奇",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_cat_glitch",
+      "variable": "note_cat_glitch",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-trust_貓草",
+      "variable": "trust_貓草",
+      "kind": "set",
+      "value": 3
+     }
+    ]
    }
   },
   {
@@ -5139,15 +5171,7 @@
     "title": "深夜三點。店裡沒有別的客人。",
     "text": "深夜三點。店裡沒有別的客人。\n紙板人形還在收銀台旁邊，笑得跟上次一樣用力。\n貓草坐在靠窗那一桌。關東煮，兩顆蘿蔔，一杯無糖。",
     "speaker": "旁白",
-    "segment": "seg036",
-    "variableOps": [
-     {
-      "id": "op-see_cat",
-      "variable": "see_cat",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg036"
    }
   },
   {
@@ -5248,7 +5272,27 @@
       "emotion": ""
      }
     ],
-    "segment": "seg036"
+    "segment": "seg036",
+    "variableOps": [
+     {
+      "id": "op-see_cat",
+      "variable": "see_cat",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_貓草_黑洞",
+      "variable": "asked_貓草_黑洞",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_cat_hole",
+      "variable": "note_cat_hole",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -5263,15 +5307,7 @@
     "title": "筆記：她在直播上提過跟她住",
     "text": "她在直播上提過跟她住在一起的人。四次。\n沒有入鏡，沒有照片。他說是室友。\n他先說他沒有數，然後說四次。\n我問他怎麼知道是男的。他戴上耳機。\n目擊那一頁又多一份。這一份的人沒有看過本人。",
     "speaker": "玩家",
-    "segment": "seg036",
-    "variableOps": [
-     {
-      "id": "op-asked_貓草_鐵塔",
-      "variable": "asked_貓草_鐵塔",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg036"
    }
   },
   {
@@ -5428,7 +5464,39 @@
       "emotion": ""
      }
     ],
-    "segment": "seg037"
+    "segment": "seg037",
+    "variableOps": [
+     {
+      "id": "op-asked_貓草_鐵塔",
+      "variable": "asked_貓草_鐵塔",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_cat_tetsu",
+      "variable": "note_cat_tetsu",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-strike_cat_buy",
+      "variable": "strike_cat_buy",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-open_figure",
+      "variable": "open_figure",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-trust_貓草",
+      "variable": "trust_貓草",
+      "kind": "set",
+      "value": 2
+     }
+    ]
    }
   },
   {
@@ -5443,15 +5511,7 @@
     "title": "筆記：靠窗那個認得經紀人。",
     "text": "靠窗那個認得經紀人。理由是那個人排周邊。\n他嫌那個猜歌的企劃爛。他在留言區問過是誰想的，沒有人回他。\n他還在買。全部都買。抱枕兩個，一個拆一個不拆。\n結論：他是為了罵才買的。\n他講完就把手機拿回去了，可是他給了我一家店。",
     "speaker": "玩家",
-    "segment": "seg037",
-    "variableOps": [
-     {
-      "id": "op-asked_貓草_0x",
-      "variable": "asked_貓草_0x",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg037"
    }
   },
   {
@@ -5626,7 +5686,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg038"
+    "segment": "seg038",
+    "variableOps": [
+     {
+      "id": "op-asked_貓草_0x",
+      "variable": "asked_貓草_0x",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_cat_zero",
+      "variable": "note_cat_zero",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -5641,15 +5715,7 @@
     "title": "筆記：手辦店。他每個禮拜來",
     "text": "手辦店。他每個禮拜來。他說他不看零失誤那個的台，可是他知道對方補貨補得比較勤。\n聯動那場：對方答題零點四秒，每一題。他說那是拿到題目了。\n我說這你都記得。他說他那天也在。\n那天兩萬個人。\n第十一題她按了鈴，說「我知道，我只是叫不出來，這兩件事不一樣」。\n這一句我要一個字一個字抄下來。\n兩萬個人在場，回這句話的有零個。他數過。\n他是為了罵那場聯動才講這件事的。",
     "speaker": "玩家",
-    "segment": "seg038",
-    "variableOps": [
-     {
-      "id": "op-asked_貓草_斑比",
-      "variable": "asked_貓草_斑比",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg038"
    }
   },
   {
@@ -5776,7 +5842,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg039"
+    "segment": "seg039",
+    "variableOps": [
+     {
+      "id": "op-asked_貓草_斑比",
+      "variable": "asked_貓草_斑比",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_cat_bambi",
+      "variable": "note_cat_bambi",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -5852,15 +5932,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg040",
-    "variableOps": [
-     {
-      "id": "op-trust_貓草",
-      "variable": "trust_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg040"
    }
   },
   {
@@ -5892,10 +5964,10 @@
     "segment": "seg040",
     "variableOps": [
      {
-      "id": "op-deadend_cat",
-      "variable": "deadend_cat",
-      "kind": "set",
-      "value": true
+      "id": "op-trust_貓草",
+      "variable": "trust_貓草",
+      "kind": "add",
+      "value": -1
      }
     ]
    }
@@ -5955,8 +6027,14 @@
     "segment": "seg041",
     "variableOps": [
      {
-      "id": "op-asked_店員_格莉奇",
-      "variable": "asked_店員_格莉奇",
+      "id": "op-deadend_cat",
+      "variable": "deadend_cat",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-trust",
+      "variable": "trust",
       "kind": "set",
       "value": true
      }
@@ -6081,7 +6159,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg042"
+    "segment": "seg042",
+    "variableOps": [
+     {
+      "id": "op-asked_店員_格莉奇",
+      "variable": "asked_店員_格莉奇",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -6096,15 +6182,7 @@
     "title": "筆記：立牌拆掉要拍照，拍到",
     "text": "立牌拆掉要拍照，拍到壓平為止，不然算沒拆。上個月那個也壓平了，\n他想不起來那是誰。\n廣告的音量鎖著。一個班七百次。\n他說她講完「送完為止」會吸一口氣，錄的時候沒剪掉。\n同一個檔，所以那口氣每次都在同一個地方。\n我問的是她會不會忘記。我寫下來的是這些。",
     "speaker": "玩家",
-    "segment": "seg042",
-    "variableOps": [
-     {
-      "id": "op-see_clerk",
-      "variable": "see_clerk",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg042"
    }
   },
   {
@@ -6183,7 +6261,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg043"
+    "segment": "seg043",
+    "variableOps": [
+     {
+      "id": "op-see_clerk",
+      "variable": "see_clerk",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -6303,21 +6389,7 @@
     "title": "筆記：問便利商店的店員。他",
     "text": "問便利商店的店員。他說穿西裝的每天都有。\n我補了住樓上、晚上七點多在一樓看過。他反過來問我那個人買過什麼。\n我答不出來，所以他也答不出來。\n他認人是靠買了什麼。那個人在他這裡沒有買過東西。\n這一份不能用。",
     "speaker": "玩家",
-    "segment": "seg043",
-    "variableOps": [
-     {
-      "id": "op-trust_店員",
-      "variable": "trust_店員",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-asked_店員_貓草",
-      "variable": "asked_店員_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg043"
    }
   },
   {
@@ -6426,7 +6498,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg044"
+    "segment": "seg044",
+    "variableOps": [
+     {
+      "id": "op-trust_店員",
+      "variable": "trust_店員",
+      "kind": "set",
+      "value": 2
+     },
+     {
+      "id": "op-asked_店員_貓草",
+      "variable": "asked_店員_貓草",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -6441,15 +6527,7 @@
     "title": "筆記：深夜有一個常客。關東",
     "text": "深夜有一個常客。關東煮，兩顆蘿蔔，一杯無糖。從來沒有換過。\n店員說不出他長什麼樣子，可是蘿蔔的數量他記得，因為蘿蔔是他夾的。\n白天他一個都記不住。晚上只有那幾個，所以記得住。\n記一下：要找一個人，先問他買什麼。\n深夜要自己去一趟。",
     "speaker": "玩家",
-    "segment": "seg044",
-    "variableOps": [
-     {
-      "id": "op-open_laundry",
-      "variable": "open_laundry",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg044"
    }
   },
   {
@@ -6516,7 +6594,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg045"
+    "segment": "seg045",
+    "variableOps": [
+     {
+      "id": "op-open_laundry",
+      "variable": "open_laundry",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -6827,15 +6913,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。 <!-- speak-tw-ok 正典口頭禪 -->\n這個月的周邊有新東西喔，詳細請看下面的連結。欸，等一下，螢幕上沒有連結。",
     "speaker": "格莉奇",
     "remote": true,
-    "segment": "seg051",
-    "variableOps": [
-     {
-      "id": "op-see_parts",
-      "variable": "see_parts",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg051"
    }
   },
   {
@@ -6956,7 +7034,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg052"
+    "segment": "seg052",
+    "variableOps": [
+     {
+      "id": "op-see_parts",
+      "variable": "see_parts",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -8532,69 +8618,7 @@
     "title": "@CatGrass_80\n@",
     "text": "@CatGrass_80\n@Tower_Manager\n@Null_0x99\n@Bambi_Draft3\n@Radio_Noah\n@考完就刪",
     "speaker": "旁白",
-    "segment": "seg067",
-    "variableOps": [
-     {
-      "id": "op-name_cat",
-      "variable": "name_cat",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-name_tower",
-      "variable": "name_tower",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-name_zero",
-      "variable": "name_zero",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-name_bambi",
-      "variable": "name_bambi",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-name_noah",
-      "variable": "name_noah",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-name_del",
-      "variable": "name_del",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-names_seen",
-      "variable": "names_seen",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-clue_list",
-      "variable": "clue_list",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-clue_seventh",
-      "variable": "clue_seventh",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-note_wall",
-      "variable": "note_wall",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg067"
    }
   },
   {
@@ -8689,7 +8713,69 @@
       "emotion": ""
      }
     ],
-    "segment": "seg067"
+    "segment": "seg067",
+    "variableOps": [
+     {
+      "id": "op-name_cat",
+      "variable": "name_cat",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-name_tower",
+      "variable": "name_tower",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-name_zero",
+      "variable": "name_zero",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-name_bambi",
+      "variable": "name_bambi",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-name_noah",
+      "variable": "name_noah",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-name_del",
+      "variable": "name_del",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-names_seen",
+      "variable": "names_seen",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-clue_list",
+      "variable": "clue_list",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-clue_seventh",
+      "variable": "clue_seventh",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_wall",
+      "variable": "note_wall",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -8977,15 +9063,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg069",
-    "variableOps": [
-     {
-      "id": "op-clue_notfix",
-      "variable": "clue_notfix",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg069"
    }
   },
   {
@@ -9164,7 +9242,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg069"
+    "segment": "seg069",
+    "variableOps": [
+     {
+      "id": "op-clue_notfix",
+      "variable": "clue_notfix",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-blocked_agency",
+      "variable": "blocked_agency",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -9417,21 +9509,7 @@
     "title": "電梯到了。\n出來三個人。前面",
     "text": "電梯到了。\n出來三個人。前面兩個各拿著一件外套跟一台平板，中間那個沒有拿東西。\n銀白色的長直髮，髮尾偏藍。走的時候十指之間的距離沒有變。\n右耳上方浮著一個半透明的標籤，上面是 99.98%。\n櫃檯後面那個人站起來。\n三個人往大門走。走到一半，中間那個停下來。",
     "speaker": "旁白",
-    "segment": "seg070",
-    "variableOps": [
-     {
-      "id": "op-clue_cantfix",
-      "variable": "clue_cantfix",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-asked_0x_黑洞",
-      "variable": "asked_0x_黑洞",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg070"
    }
   },
   {
@@ -9598,7 +9676,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg070"
+    "segment": "seg070",
+    "variableOps": [
+     {
+      "id": "op-clue_cantfix",
+      "variable": "clue_cantfix",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_0x_黑洞",
+      "variable": "asked_0x_黑洞",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -9708,15 +9800,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。 <!-- speak-tw-ok 正典口頭禪 -->\n《守則本》限時預購中，數量有限喔。\n裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
-    "segment": "seg071",
-    "variableOps": [
-     {
-      "id": "op-cat_asked_glitch",
-      "variable": "cat_asked_glitch",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg071"
    }
   },
   {
@@ -9793,7 +9877,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg071"
+    "segment": "seg071",
+    "variableOps": [
+     {
+      "id": "op-cat_asked_glitch",
+      "variable": "cat_asked_glitch",
+      "kind": "set",
+      "value": 1
+     },
+     {
+      "id": "op-cat_visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -9854,15 +9952,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg072",
-    "variableOps": [
-     {
-      "id": "op-met_貓草",
-      "variable": "met_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg072"
    }
   },
   {
@@ -9877,7 +9967,21 @@
     "title": "筆記：深夜的便利商店。靠窗",
     "text": "深夜的便利商店。靠窗那一桌。關東煮，兩顆蘿蔔，一杯無糖，跟店員說的一模一樣。\n我問他認不認識她，他說沒聽過。\n後來我問的是他每次都買一樣的東西。他回我一句「我不看那個」。\n那一句沒有人問他。\n他不喜歡被問，可是他沒有走。他一次都沒有站起來。\n再來一次。",
     "speaker": "玩家",
-    "segment": "seg072"
+    "segment": "seg072",
+    "variableOps": [
+     {
+      "id": "op-met_貓草",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-cat_visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -9989,7 +10093,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg073"
+    "segment": "seg073",
+    "variableOps": [
+     {
+      "id": "op-cat_visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -10044,15 +10156,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg074",
-    "variableOps": [
-     {
-      "id": "op-met_貓草",
-      "variable": "met_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg074"
    }
   },
   {
@@ -10067,7 +10171,21 @@
     "title": "筆記：第二次。他記得我。我",
     "text": "第二次。他記得我。我一走過去他就把手機拿起來。\n我問了那個 ID。他說沒有。\n他說那個人不會跟我講。\n一個沒聽過那個 ID 的人，知道那個人不會跟我講。\n我可能問錯方向。這一家的常客跟聊天室大概沒有關係。\n再來一次。這次不要提她。",
     "speaker": "玩家",
-    "segment": "seg074"
+    "segment": "seg074",
+    "variableOps": [
+     {
+      "id": "op-met_貓草",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-cat_visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -10151,15 +10269,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg076",
-    "variableOps": [
-     {
-      "id": "op-trust_貓草",
-      "variable": "trust_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg076"
    }
   },
   {
@@ -10226,7 +10336,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg077"
+    "segment": "seg077",
+    "variableOps": [
+     {
+      "id": "op-trust_貓草",
+      "variable": "trust_貓草",
+      "kind": "set",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -10242,15 +10360,7 @@
     "text": "裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
-    "segment": "seg077",
-    "variableOps": [
-     {
-      "id": "op-met_貓草",
-      "variable": "met_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg077"
    }
   },
   {
@@ -10268,10 +10378,16 @@
     "segment": "seg077",
     "variableOps": [
      {
-      "id": "op-cat_asked_glitch",
-      "variable": "cat_asked_glitch",
-      "kind": "set",
-      "value": true
+      "id": "op-met_貓草",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-cat_visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
      }
     ]
    }
@@ -10340,7 +10456,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg078"
+    "segment": "seg078",
+    "variableOps": [
+     {
+      "id": "op-cat_asked_glitch",
+      "variable": "cat_asked_glitch",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -10490,15 +10614,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg080",
-    "variableOps": [
-     {
-      "id": "op-deadend_cat_glitch",
-      "variable": "deadend_cat_glitch",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg080"
    }
   },
   {
@@ -10577,7 +10693,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg081"
+    "segment": "seg081",
+    "variableOps": [
+     {
+      "id": "op-deadend_cat_glitch",
+      "variable": "deadend_cat_glitch",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-asked_貓草_格莉奇",
+      "variable": "asked_貓草_格莉奇",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -10592,15 +10722,7 @@
     "title": "筆記：手辦店，二樓。她的東",
     "text": "手辦店，二樓。她的東西在最上面兩層，立牌跟貼紙。地板那一籃打五折。\n我問了三句她的事。第三句他就把耳機戴起來了。\n他在這裡買她的東西，他說那不叫認識。\n下次不要一進門就問她。",
     "speaker": "玩家",
-    "segment": "seg081",
-    "variableOps": [
-     {
-      "id": "op-trust_貓草",
-      "variable": "trust_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg081"
    }
   },
   {
@@ -10781,7 +10903,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg082"
+    "segment": "seg082",
+    "variableOps": [
+     {
+      "id": "op-trust_貓草",
+      "variable": "trust_貓草",
+      "kind": "set",
+      "value": 2
+     }
+    ]
    }
   },
   {
@@ -10796,15 +10926,7 @@
     "title": "貓草蹲下去看最下面那一格。那",
     "text": "貓草蹲下去看最下面那一格。那一格全是別人寄賣的，\n玻璃上一格一格用膠帶貼著編號。\n螢幕上那支片子跑完了，從頭開始。",
     "speaker": "旁白",
-    "segment": "seg082",
-    "variableOps": [
-     {
-      "id": "op-cat_room_mentioned",
-      "variable": "cat_room_mentioned",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg082"
    }
   },
   {
@@ -10863,7 +10985,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg082"
+    "segment": "seg082",
+    "variableOps": [
+     {
+      "id": "op-cat_room_mentioned",
+      "variable": "cat_room_mentioned",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -10907,15 +11037,7 @@
     "title": "三點。冰櫃的壓縮機還在響。\n",
     "text": "三點。冰櫃的壓縮機還在響。\n紙板人形還在收銀台旁邊，笑得跟上次一樣用力。\n靠窗那一桌。關東煮，兩顆蘿蔔，一杯無糖。\n桌上還有第二份，沒有動過。",
     "speaker": "旁白",
-    "segment": "seg083",
-    "variableOps": [
-     {
-      "id": "op-met_貓草",
-      "variable": "met_貓草",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg083"
    }
   },
   {
@@ -11004,7 +11126,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg083"
+    "segment": "seg083",
+    "variableOps": [
+     {
+      "id": "op-met_貓草",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -11019,15 +11149,7 @@
     "title": "後面那條巷子。舊公寓，四樓，",
     "text": "後面那條巷子。舊公寓，四樓，沒有電梯。\n樓梯間的感應燈慢半拍。他走在前面，沒有等燈亮。\n四樓的門上貼著一張曬白的紙，是十年前的瓦斯行電話。\n他把鑰匙插進去，沒有轉。",
     "speaker": "旁白",
-    "segment": "seg083",
-    "variableOps": [
-     {
-      "id": "op-open_catgrass_home",
-      "variable": "open_catgrass_home",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg083"
    }
   },
   {
@@ -11092,7 +11214,21 @@
       "emotion": ""
      }
     ],
-    "segment": "seg083"
+    "segment": "seg083",
+    "variableOps": [
+     {
+      "id": "op-open_catgrass_home",
+      "variable": "open_catgrass_home",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-seen_catgrass_home",
+      "variable": "seen_catgrass_home",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -11544,15 +11680,7 @@
     "title": "後面那條巷子。四樓那扇門關上",
     "text": "後面那條巷子。四樓那扇門關上了。\n樓梯間的感應燈慢半拍。",
     "speaker": "旁白",
-    "segment": "seg083",
-    "variableOps": [
-     {
-      "id": "op-note_blank",
-      "variable": "note_blank",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg083"
    }
   },
   {
@@ -11567,7 +11695,15 @@
     "title": "筆記：我答應過他。",
     "text": "我答應過他。",
     "speaker": "玩家",
-    "segment": "seg083"
+    "segment": "seg083",
+    "variableOps": [
+     {
+      "id": "op-note_blank",
+      "variable": "note_blank",
+      "kind": "set",
+      "value": "true。這一場不寫任何"
+     }
+    ]
    }
   },
   {
@@ -11670,15 +11806,7 @@
     "title": "深綠色的塑膠籃。\n三把傘。兩",
     "text": "深綠色的塑膠籃。\n三把傘。兩把是便利商店那種透明的，一把折疊的。\n一隻手套。左手。\n一條線，捲得很整齊，用橡皮筋束著。\n最上面躺著一本本子。皮面，深色，厚到已經不太像筆記本。",
     "speaker": "旁白",
-    "segment": "seg084",
-    "variableOps": [
-     {
-      "id": "op-clue_lostbox",
-      "variable": "clue_lostbox",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg084"
    }
   },
   {
@@ -11779,7 +11907,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg084"
+    "segment": "seg084",
+    "variableOps": [
+     {
+      "id": "op-clue_lostbox",
+      "variable": "clue_lostbox",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -11896,6 +12032,21 @@
       "emotion": ""
      }
     ],
+    "segment": "seg084"
+   }
+  },
+  {
+   "id": "inv-342",
+   "type": "story",
+   "position": {
+    "x": 102600,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "電風扇轉到底，又轉回來。\n窗",
+    "text": "電風扇轉到底，又轉回來。\n窗口拉下來一半。\n螢幕還在播。",
+    "speaker": "旁白",
     "segment": "seg084",
     "variableOps": [
      {
@@ -11911,21 +12062,6 @@
       "value": true
      }
     ]
-   }
-  },
-  {
-   "id": "inv-342",
-   "type": "story",
-   "position": {
-    "x": 102600,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "電風扇轉到底，又轉回來。\n窗",
-    "text": "電風扇轉到底，又轉回來。\n窗口拉下來一半。\n螢幕還在播。",
-    "speaker": "旁白",
-    "segment": "seg084"
    }
   },
   {
@@ -11969,15 +12105,7 @@
     "title": "兩點十分。大廳只留了一半的燈",
     "text": "兩點十分。大廳只留了一半的燈。那盆真的植物在暗的那一半。\n電梯門旁邊那台螢幕還開著。銀白色的長髮，字幕跟著嘴形跑。沒有開聲音。\n櫃台後面沒有人。桌沿那支筆跟桌邊平行。\n側門旁邊有一張矮一點的桌子，桌上一排小螢幕，全部背對著大廳。\n桌子後面坐著一個人。他沒有站起來。",
     "speaker": "旁白",
-    "segment": "seg085",
-    "variableOps": [
-     {
-      "id": "op-see_guard",
-      "variable": "see_guard",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg085"
    }
   },
   {
@@ -12180,7 +12308,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg085"
+    "segment": "seg085",
+    "variableOps": [
+     {
+      "id": "op-see_guard",
+      "variable": "see_guard",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -12300,15 +12436,7 @@
     "title": "他轉頭看了一眼桌上那排螢幕。",
     "text": "他轉頭看了一眼桌上那排螢幕。從他開始講話到現在，這是第四次。\n螢幕背對著大廳。從這一邊看過去只看得到機殼。",
     "speaker": "旁白",
-    "segment": "seg085",
-    "variableOps": [
-     {
-      "id": "op-deadend_cctv",
-      "variable": "deadend_cctv",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg085"
    }
   },
   {
@@ -12484,20 +12612,8 @@
     "segment": "seg085",
     "variableOps": [
      {
-      "id": "op-guard_told",
-      "variable": "guard_told",
-      "kind": "set",
-      "value": true
-     },
-     {
       "id": "op-deadend_cctv",
       "variable": "deadend_cctv",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-note_two_men",
-      "variable": "note_two_men",
       "kind": "set",
       "value": true
      }
@@ -12516,7 +12632,27 @@
     "title": "側門關上。\n大廳空了。\n桌上",
     "text": "側門關上。\n大廳空了。\n桌上那排螢幕，右邊數過來第三格是對面的人行道。\n燈柱底下站著一個人。\n電梯門旁邊那台螢幕，影片播完，接回開頭。",
     "speaker": "旁白",
-    "segment": "seg085"
+    "segment": "seg085",
+    "variableOps": [
+     {
+      "id": "op-guard_told",
+      "variable": "guard_told",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-deadend_cctv",
+      "variable": "deadend_cctv",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_two_men",
+      "variable": "note_two_men",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -12792,15 +12928,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg086",
-    "variableOps": [
-     {
-      "id": "op-hole_sightings",
-      "variable": "hole_sightings",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg086"
    }
   },
   {
@@ -12815,7 +12943,15 @@
     "title": "樓梯間沒有燈。第三階的邊角被",
     "text": "樓梯間沒有燈。第三階的邊角被踩得發亮。\n他一層一層走下來。四樓有電視的聲音，二樓有人在洗碗。\n大廳。管理室的窗口開著，裡面沒有人。\n公告螢幕開著，聲音轉得很小。她在講這個月的周邊。\n信箱牆前面站著一個人。金色軟呢帽，深色西裝，短靴擦得很亮。\n那個人手上沒有東西，也沒有在看信箱。\n他走下最後一階的時候，那個人轉過來，等他走過去。\n兩個人點了一下頭。\n他沒有停。",
     "speaker": "旁白",
-    "segment": "seg086"
+    "segment": "seg086",
+    "variableOps": [
+     {
+      "id": "op-hole_sightings",
+      "variable": "hole_sightings",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -12845,15 +12981,7 @@
     "title": "大門在後面關上。\n外面的空氣",
     "text": "大門在後面關上。\n外面的空氣比裡面涼。騎樓下面管理員在掃地，他沒有抬頭。\n他把外套的拉鍊拉到最上面。\n轉角那家便利商店的燈亮著。他往那邊走。",
     "speaker": "旁白",
-    "segment": "seg086",
-    "variableOps": [
-     {
-      "id": "op-met_斑比",
-      "variable": "met_斑比",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg086"
    }
   },
   {
@@ -12885,8 +13013,14 @@
     "segment": "seg087",
     "variableOps": [
      {
-      "id": "op-laundry_coin",
-      "variable": "laundry_coin",
+      "id": "op-met_斑比",
+      "variable": "met_斑比",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-laundry_night1",
+      "variable": "laundry_night1",
       "kind": "set",
       "value": true
      }
@@ -12908,8 +13042,14 @@
     "segment": "seg087",
     "variableOps": [
      {
-      "id": "op-met_斑比",
-      "variable": "met_斑比",
+      "id": "op-laundry_coin",
+      "variable": "laundry_coin",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-note_laundry_wait",
+      "variable": "note_laundry_wait",
       "kind": "set",
       "value": true
      }
@@ -12945,22 +13085,16 @@
     "segment": "seg088",
     "variableOps": [
      {
-      "id": "op-trust_斑比",
-      "variable": "trust_斑比",
-      "kind": "set",
-      "value": true
+      "id": "op-met_斑比",
+      "variable": "met_斑比",
+      "kind": "add",
+      "value": 1
      },
      {
       "id": "op-trust_斑比",
       "variable": "trust_斑比",
       "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-open_studio",
-      "variable": "open_studio",
-      "kind": "set",
-      "value": true
+      "value": 1
      }
     ]
    }
@@ -13116,8 +13250,14 @@
     "segment": "seg089",
     "variableOps": [
      {
-      "id": "op-note_laundry_look",
-      "variable": "note_laundry_look",
+      "id": "op-trust_斑比",
+      "variable": "trust_斑比",
+      "kind": "set",
+      "value": 2
+     },
+     {
+      "id": "op-open_studio",
+      "variable": "open_studio",
       "kind": "set",
       "value": true
      }
@@ -13136,7 +13276,15 @@
     "title": "筆記：洗衣店，第二次。她先",
     "text": "洗衣店，第二次。她先開口，跟我講哪一台會停。\n她在看她自己的稿。她說印出來才看得到歪掉的地方。\n她說她看過太多次了，所以看不出來。她要一個沒有看過的人看。所以是我。\n她把一張放在桌上叫我看。我看不出來要看什麼。她自己說算了，這裡的燈不對。\n她那邊的燈是調過的。\n她給我一張紙，背面寫了地址。她說她下午以後都在。\n她說不然我會忘記我要看什麼。\n名字我還是沒有問到。",
     "speaker": "玩家",
-    "segment": "seg089"
+    "segment": "seg089",
+    "variableOps": [
+     {
+      "id": "op-note_laundry_look",
+      "variable": "note_laundry_look",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -13179,15 +13327,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg090",
-    "variableOps": [
-     {
-      "id": "op-note_laundry_shut",
-      "variable": "note_laundry_shut",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg090"
    }
   },
   {
@@ -13202,7 +13342,15 @@
     "title": "筆記：我問她幫誰畫的。她沒",
     "text": "我問她幫誰畫的。她沒有回答。\n她把桌上那幾張收起來，走到窗邊坐著。那些紙她本來要看完的。\n我猜她簽了什麼不能講的東西。\n她沒有生氣。她坐過去之前跟我說不好意思。",
     "speaker": "玩家",
-    "segment": "seg090"
+    "segment": "seg090",
+    "variableOps": [
+     {
+      "id": "op-note_laundry_shut",
+      "variable": "note_laundry_shut",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -13399,15 +13547,7 @@
     "title": "筆記：管理員。六十幾歲。他",
     "text": "管理員。六十幾歲。他知道記者跟粉絲各自會說什麼謊，\n表示這兩種人他都送走過。他不打算告訴我任何事。",
     "speaker": "玩家",
-    "segment": "seg091",
-    "variableOps": [
-     {
-      "id": "op-clue_notebook",
-      "variable": "clue_notebook",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg091"
    }
   },
   {
@@ -13502,7 +13642,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg091"
+    "segment": "seg091",
+    "variableOps": [
+     {
+      "id": "op-clue_notebook",
+      "variable": "clue_notebook",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -13517,15 +13665,7 @@
     "title": "筆記：他沒有告訴我她住幾樓",
     "text": "他沒有告訴我她住幾樓。他只是在抱怨他的失物箱。\n一個會把整袋菜留在信箱前面的人，一個月來問三次同一本本子在不在。",
     "speaker": "玩家",
-    "segment": "seg091",
-    "variableOps": [
-     {
-      "id": "op-open_roof",
-      "variable": "open_roof",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg091"
    }
   },
   {
@@ -13596,7 +13736,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg091"
+    "segment": "seg091",
+    "variableOps": [
+     {
+      "id": "op-open_roof",
+      "variable": "open_roof",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -13721,13 +13869,31 @@
       "speaker": "諾亞",
       "text": "買線。一樣的線。",
       "emotion": ""
+     },
+     {
+      "id": "l11",
+      "speaker": "玩家",
+      "text": "線在哪裡買。",
+      "emotion": ""
+     },
+     {
+      "id": "l12",
+      "speaker": "諾亞",
+      "text": "車站後面那家材料行。三十年了。",
+      "emotion": ""
      }
     ],
     "segment": "seg092",
     "variableOps": [
      {
-      "id": "op-clue_real",
-      "variable": "clue_real",
+      "id": "op-open_parts",
+      "variable": "open_parts",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-open_調查篇-場景.md",
+      "variable": "open_調查篇-場景.md",
       "kind": "set",
       "value": true
      }
@@ -13796,7 +13962,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg092"
+    "segment": "seg092",
+    "variableOps": [
+     {
+      "id": "op-clue_real",
+      "variable": "clue_real",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -13811,21 +13985,7 @@
     "title": "筆記：他不覺得那奇怪。\n我",
     "text": "他不覺得那奇怪。\n我今天問了兩個人。兩個人都當那是正常的。",
     "speaker": "玩家",
-    "segment": "seg092",
-    "variableOps": [
-     {
-      "id": "op-clue_older",
-      "variable": "clue_older",
-      "kind": "set",
-      "value": true
-     },
-     {
-      "id": "op-rec_ok",
-      "variable": "rec_ok",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg092"
    }
   },
   {
@@ -13890,7 +14050,27 @@
       "emotion": ""
      }
     ],
-    "segment": "seg092"
+    "segment": "seg092",
+    "variableOps": [
+     {
+      "id": "op-clue_older",
+      "variable": "clue_older",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-rec_ok",
+      "variable": "rec_ok",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-調查篇-背包與謎題.md",
+      "variable": "調查篇-背包與謎題.md",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -14021,15 +14201,7 @@
     "title": "筆記：她講「我保證」的時候",
     "text": "她講「我保證」的時候會停半拍。\n那是剪接，還是她本來就會停。",
     "speaker": "玩家",
-    "segment": "seg093",
-    "variableOps": [
-     {
-      "id": "op-deadend_fan",
-      "variable": "deadend_fan",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg093"
    }
   },
   {
@@ -14094,7 +14266,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg093"
+    "segment": "seg093",
+    "variableOps": [
+     {
+      "id": "op-deadend_fan",
+      "variable": "deadend_fan",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -14401,15 +14581,7 @@
     "title": "筆記：晚上七點四十。一樓沒",
     "text": "晚上七點四十。一樓沒有人。\n信箱十九格。有名牌的十一格，其中三張看不出字。\n沒有一個名字對得上。名牌比住在裡面的人舊。\n管理員從早上到現在，一次都沒有說過她不住這裡。",
     "speaker": "玩家",
-    "segment": "seg095",
-    "variableOps": [
-     {
-      "id": "op-note_mailbox",
-      "variable": "note_mailbox",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg095"
    }
   },
   {
@@ -14424,7 +14596,15 @@
     "title": "後門開了一次。諾亞走回樓梯口",
     "text": "後門開了一次。諾亞走回樓梯口，手上沒有東西了。\n螢幕還在播。",
     "speaker": "旁白",
-    "segment": "seg095"
+    "segment": "seg095",
+    "variableOps": [
+     {
+      "id": "op-note_mailbox",
+      "variable": "note_mailbox",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -14620,15 +14800,7 @@
     "title": "畫面換成房仲的廣告。\n十五秒",
     "text": "畫面換成房仲的廣告。\n十五秒到了。\n騎樓下的人沒有抬頭。",
     "speaker": "旁白",
-    "segment": "seg097",
-    "variableOps": [
-     {
-      "id": "op-deadend_fan",
-      "variable": "deadend_fan",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg097"
    }
   },
   {
@@ -14681,7 +14853,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg097"
+    "segment": "seg097",
+    "variableOps": [
+     {
+      "id": "op-deadend_fan",
+      "variable": "deadend_fan",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -15595,15 +15775,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。 <!-- speak-tw-ok 正典口頭禪 -->\n買兩件就送一張。送完為止喔。",
     "speaker": "格莉奇",
     "remote": true,
-    "segment": "seg104",
-    "variableOps": [
-     {
-      "id": "op-deadend_clerk",
-      "variable": "deadend_clerk",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg104"
    }
   },
   {
@@ -15668,7 +15840,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg104"
+    "segment": "seg104",
+    "variableOps": [
+     {
+      "id": "op-deadend_clerk",
+      "variable": "deadend_clerk",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -15847,15 +16027,7 @@
     "title": "晚上八點。外面暗了，店裡的燈",
     "text": "晚上八點。外面暗了，店裡的燈沒有變。\n冰櫃的壓縮機還在響。店員蹲在飲料櫃前面補貨。",
     "speaker": "旁白",
-    "segment": "seg106",
-    "variableOps": [
-     {
-      "id": "op-trust_店員",
-      "variable": "trust_店員",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg106"
    }
   },
   {
@@ -15944,7 +16116,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg106"
+    "segment": "seg106",
+    "variableOps": [
+     {
+      "id": "op-trust_店員",
+      "variable": "trust_店員",
+      "kind": "set",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -16055,15 +16235,7 @@
     "text": "……買兩件就送一張。送完為止喔。\n逼——嗶！ <!-- speak-tw-ok 正典口頭禪 -->",
     "speaker": "格莉奇",
     "remote": true,
-    "segment": "seg108",
-    "variableOps": [
-     {
-      "id": "op-deadend_clerk",
-      "variable": "deadend_clerk",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg108"
    }
   },
   {
@@ -16116,7 +16288,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg108"
+    "segment": "seg108",
+    "variableOps": [
+     {
+      "id": "op-deadend_clerk",
+      "variable": "deadend_clerk",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -16131,15 +16311,7 @@
     "title": "筆記：她在每一台螢幕上。沒",
     "text": "她在每一台螢幕上。沒有一個人認識她。",
     "speaker": "玩家",
-    "segment": "seg108",
-    "variableOps": [
-     {
-      "id": "op-open_store",
-      "variable": "open_store",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg108"
    }
   },
   {
@@ -16192,7 +16364,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg108"
+    "segment": "seg108",
+    "variableOps": [
+     {
+      "id": "op-open_store",
+      "variable": "open_store",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -16422,15 +16602,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg110",
-    "variableOps": [
-     {
-      "id": "op-hole_sightings",
-      "variable": "hole_sightings",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg110"
    }
   },
   {
@@ -16445,7 +16617,15 @@
     "title": "他把信封收進外套內側，點了一",
     "text": "他把信封收進外套內側，點了一下頭，走上樓梯。\n短靴踩在磁磚上有很輕的聲音。",
     "speaker": "旁白",
-    "segment": "seg110"
+    "segment": "seg110",
+    "variableOps": [
+     {
+      "id": "op-hole_sightings",
+      "variable": "hole_sightings",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -16525,15 +16705,7 @@
     "title": "兩點十分。\n冰櫃的壓縮機還在",
     "text": "兩點十分。\n冰櫃的壓縮機還在響。\n紙板人形還在收銀台旁邊，笑得跟上次一樣用力。\n貓草坐在靠窗那一桌。關東煮，兩顆蘿蔔，一杯無糖。\n桌上多了一個紙袋，摺口壓得很平。",
     "speaker": "旁白",
-    "segment": "seg112",
-    "variableOps": [
-     {
-      "id": "op-open_figure",
-      "variable": "open_figure",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg112"
    }
   },
   {
@@ -16619,8 +16791,8 @@
     "segment": "seg112",
     "variableOps": [
      {
-      "id": "op-met_貓草",
-      "variable": "met_貓草",
+      "id": "op-open_figure",
+      "variable": "open_figure",
       "kind": "set",
       "value": true
      }
@@ -16639,7 +16811,15 @@
     "title": "筆記：深夜的便利商店。靠窗",
     "text": "深夜的便利商店。靠窗那一桌。他今天先開口。\n他講的是抱枕在出清，一個四百八變成買一送一。他說他不會退。\n他把店的位置講給我聽，我沒有問。\n他今天一次都沒有提到她。",
     "speaker": "玩家",
-    "segment": "seg112"
+    "segment": "seg112",
+    "variableOps": [
+     {
+      "id": "op-met_貓草",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -16668,15 +16848,7 @@
     "title": "鐵門拉到一半。裡面亮著，外面",
     "text": "鐵門拉到一半。裡面亮著，外面沒有招牌。\n桌上七個馬克杯，六個是空的。\n靠牆那一面用布蓋著，布的下緣壓著一排圖釘。\n她背對著門，手上那支筆沒有停。",
     "speaker": "旁白",
-    "segment": "seg113",
-    "variableOps": [
-     {
-      "id": "op-met_斑比",
-      "variable": "met_斑比",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "segment": "seg113"
    }
   },
   {
@@ -16711,7 +16883,15 @@
       "emotion": ""
      }
     ],
-    "segment": "seg113"
+    "segment": "seg113",
+    "variableOps": [
+     {
+      "id": "op-met_斑比",
+      "variable": "met_斑比",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -18260,7 +18440,7 @@
   },
   {
    "id": "e153",
-   "source": "inv-016",
+   "source": "inv-010",
    "target": "inv-132",
    "sourceHandle": "right",
    "animated": true,
@@ -18282,7 +18462,7 @@
   },
   {
    "id": "e155",
-   "source": "inv-016",
+   "source": "inv-010",
    "target": "inv-136",
    "sourceHandle": "right",
    "animated": true,
@@ -18304,7 +18484,7 @@
   },
   {
    "id": "e157",
-   "source": "inv-016",
+   "source": "inv-010",
    "target": "inv-138",
    "sourceHandle": "right",
    "animated": true,
@@ -18326,7 +18506,7 @@
   },
   {
    "id": "e159",
-   "source": "inv-016",
+   "source": "inv-010",
    "target": "inv-140",
    "sourceHandle": "right",
    "animated": true,
@@ -18355,7 +18535,7 @@
   },
   {
    "id": "e162",
-   "source": "inv-016",
+   "source": "inv-010",
    "target": "inv-142",
    "sourceHandle": "right",
    "animated": true,
@@ -21875,16 +22055,6 @@
    ],
    "conds": [
     {
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 2
-    },
-    {
-     "variable": "trust_管理員",
-     "op": "lte",
-     "value": 2
-    },
-    {
      "variable": "trust_管理員",
      "op": "gte",
      "value": 3
@@ -21978,7 +22148,13 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_管理員",
+     "op": "lte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "信箱第三排那兩格"
@@ -21992,7 +22168,13 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_管理員",
+     "op": "lte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "那台打字機"
@@ -22006,7 +22188,13 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_管理員",
+     "op": "lte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "頂樓的排水口"
@@ -22020,7 +22208,13 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_管理員",
+     "op": "lte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "電梯保養"
@@ -22034,7 +22228,13 @@
     0,
     1
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_管理員",
+     "op": "lte",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "三樓那台腳踏車"
@@ -22336,7 +22536,7 @@
    ],
    "conds": [
     {
-     "variable": "met_斑比",
+     "variable": "trust_斑比",
      "op": "eq",
      "value": 0
     }
@@ -22344,12 +22544,12 @@
    "or": true,
    "dest_from": "總表",
    "segment": "seg028",
-   "section": "六、路上問不到（`store` 或 `laundry`・晚上）",
+   "section": "六、路上問不到（`store` 或 `laundry`・晚上・`trust_斑比 == 0`）",
    "file": "調查篇-問答矩陣"
   },
   {
    "segment": "seg028",
-   "section": "六、路上問不到（`store` 或 `laundry`・晚上）",
+   "section": "六、路上問不到（`store` 或 `laundry`・晚上・`trust_斑比 == 0`）",
    "file": "調查篇-問答矩陣",
    "dest": "store",
    "slots": [
@@ -22359,7 +22559,7 @@
    ],
    "conds": [
     {
-     "variable": "met_斑比",
+     "variable": "trust_斑比",
      "op": "eq",
      "value": 0
     }
@@ -22372,7 +22572,7 @@
    "segment": "seg029",
    "section": "一、場面（三格共用）",
    "file": "調查篇-問答矩陣",
-   "dest": "booth",
+   "dest": "street",
    "slots": [
     0,
     1
@@ -22397,7 +22597,7 @@
    "segment": "seg030",
    "section": "格一・問鐵塔關於格莉奇",
    "file": "調查篇-問答矩陣",
-   "dest": "booth",
+   "dest": "street",
    "slots": [
     0,
     1
@@ -22411,7 +22611,7 @@
    "segment": "seg031",
    "section": "格二・問鐵塔關於 0x",
    "file": "調查篇-問答矩陣",
-   "dest": "booth",
+   "dest": "street",
    "slots": [
     0,
     1
@@ -22425,7 +22625,7 @@
    "segment": "seg032",
    "section": "格三・問鐵塔關於斑比",
    "file": "調查篇-問答矩陣",
-   "dest": "booth",
+   "dest": "street",
    "slots": [
     0,
     1
@@ -22439,7 +22639,7 @@
    "segment": "seg033",
    "section": "收尾（三格共用）",
    "file": "調查篇-問答矩陣",
-   "dest": "booth",
+   "dest": "street",
    "slots": [
     0,
     1
@@ -22471,7 +22671,13 @@
    "slots": [
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 2
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問她格莉奇的事"
@@ -22497,7 +22703,13 @@
    "slots": [
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "trust_貓草",
+     "op": "eq",
+     "value": 1
+    }
+   ],
    "or": false,
    "dest_from": "總表",
    "label": "問她的經紀人"
@@ -22680,7 +22892,7 @@
    "conds": [
     {
      "variable": "trust_店員",
-     "op": "eq",
+     "op": "gte",
      "value": 1
     }
    ],
@@ -22702,7 +22914,7 @@
    "conds": [
     {
      "variable": "trust_店員",
-     "op": "eq",
+     "op": "gte",
      "value": 1
     }
    ],
@@ -22729,7 +22941,7 @@
     },
     {
      "variable": "trust_店員",
-     "op": "eq",
+     "op": "gte",
      "value": 1
     }
    ],
@@ -22749,7 +22961,7 @@
    "conds": [
     {
      "variable": "trust_店員",
-     "op": "eq",
+     "op": "gte",
      "value": 1
     }
    ],
@@ -22771,7 +22983,7 @@
    "conds": [
     {
      "variable": "trust_店員",
-     "op": "eq",
+     "op": "gte",
      "value": 1
     }
    ],
@@ -23040,9 +23252,17 @@
    "file": "調查篇-橋段",
    "dest": "roof",
    "slots": [
-    3
+    0,
+    1,
+    2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "names_seen",
+     "op": "eq",
+     "value": true
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
    "slots_from": "標題",
@@ -23092,6 +23312,11 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "cat_visits",
+     "op": "eq",
+     "value": 0
     }
    ],
    "or": false,
@@ -23110,6 +23335,11 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "cat_visits",
+     "op": "eq",
+     "value": 1
     }
    ],
    "or": false,
@@ -23128,6 +23358,11 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "cat_visits",
+     "op": "eq",
+     "value": 1
     }
    ],
    "or": false,
@@ -23146,6 +23381,11 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "cat_visits",
+     "op": "eq",
+     "value": 2
     }
    ],
    "or": false,
@@ -23164,6 +23404,11 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "cat_visits",
+     "op": "gte",
+     "value": 2
     }
    ],
    "or": false,
@@ -23182,6 +23427,11 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "cat_visits",
+     "op": "gte",
+     "value": 3
     }
    ],
    "or": false,
@@ -23200,6 +23450,11 @@
      "variable": "trust_貓草",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "cat_visits",
+     "op": "gte",
+     "value": 3
     }
    ],
    "or": false,
@@ -23414,7 +23669,7 @@
   },
   {
    "segment": "seg088",
-   "section": "第二晚",
+   "section": "第二晚（`laundry_night1 == true`・`trust_斑比` 0）",
    "file": "調查篇-橋段2",
    "dest": "laundry",
    "slots": [
@@ -23423,7 +23678,18 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "laundry_night1",
+     "op": "eq",
+     "value": true
+    },
+    {
+     "variable": "trust_斑比",
+     "op": "eq",
+     "value": 0
+    }
+   ],
    "or": false,
    "dest_from": "卡頭 scene",
    "slots_from": "地點預設",

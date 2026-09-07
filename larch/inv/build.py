@@ -148,7 +148,7 @@ def load_table():
             dest, slots = last
         else:
             locs = TABLE_LOC.findall(cell)
-            dest = locs[-1] if locs else None          # 「`street` 換 `booth`」取後者
+            dest = locs[0] if locs else None           # 「`street` 換 `booth`」取前者：玩家是在街上被擋的，觸發寫 dest == street
             slots = [0, 1, 2, 3] if "任一" in cell else sorted({SLOT[s] for s in SLOT if s in cell})
             if "櫃檯的班" in cell:
                 slots = [0, 1]                          # 櫃檯只在上午／下午（時段表）
@@ -308,12 +308,25 @@ TAPE_ID = {"諾亞": "noah", "店員": "clerk", "便利商店店員": "clerk", "
            "保全": "guard", "斑比": "bambi", "管理員": "admin"}
 
 
+COUNTERS = ("met_", "trust_", "hole_sightings", "noah_stage", "night_visits", "strikes")
+
+
+def var_op(v):
+    """一個標記 → 一個 variableOp。「**→ `hole_sightings`**」這種計數型沒寫值＝加一，旗標沒寫值＝true。"""
+    if v["add"]:
+        return {"id": f"op-{v['name']}", "variable": v["name"], "kind": "add", "value": int(v["add"])}
+    if v["set"] is None and v["name"].startswith(COUNTERS):
+        return {"id": f"op-{v['name']}", "variable": v["name"], "kind": "add", "value": 1}
+    return {"id": f"op-{v['name']}", "variable": v["name"], "kind": "set", "value": var_value(v["set"])}
+
+
 def var_value(raw):
     """「**→ `see_x`**」沒寫值＝設 true；「← true**」那個 ** 是 markdown 的粗體收尾，要剝掉；
     true/false/整數轉型，其餘留字串。之前直接把 None 與 'true**' 寫進去，旗標從來沒真的變 true（2026-09-07 抓到）。"""
     if raw is None:
         return True
-    v = str(raw).strip().rstrip("*").strip()
+    v = re.match(r"[^\s*（(]+", str(raw).strip())
+    v = (v.group(0) if v else "").strip()
     if v in ("true", "是"):
         return True
     if v in ("false", "否"):
@@ -416,9 +429,7 @@ def build(cards):
                     continue
                 d["segment"] = sid
                 for v in c["vars"]:
-                    d.setdefault("variableOps", []).append(
-                        {"id": f"op-{v['name']}", "variable": v["name"], "kind": "add" if v["add"] else "set",
-                         "value": int(v["add"]) if v["add"] else var_value(v["set"])})
+                    d.setdefault("variableOps", []).append(var_op(v))
                 nid = b.add(d)
                 b.edge(prev, nid)
                 prev = nid
@@ -478,10 +489,34 @@ def build(cards):
                     continue
                 val = (val == "true") if val in ("true", "false") else int(val) if re.fullmatch(r"-?\d+", val) else val
                 rule["conds"].append({"variable": var, "op": op, "value": val})
-            # 「`trust_管理員` 3」這種沒寫運算子的，當作等於
-            for m in re.finditer(r"`(trust_[^`]+|met_[^`]+|noah_stage)`\s+([0-9])\b", " ".join(heads)):
+            # 「`trust_管理員` 3」沒寫運算子的當等於；「`trust_店員` 1 以上」當大於等於
+            for m in re.finditer(r"`(trust_[^`]+|met_[^`]+|noah_stage)`\s+([0-9])\b(\s*以上)?", " ".join(heads)):
                 if not any(c["variable"] == m.group(1) for c in rule["conds"]):
-                    rule["conds"].append({"variable": m.group(1), "op": "eq", "value": int(m.group(2))})
+                    rule["conds"].append({"variable": m.group(1), "op": "gte" if m.group(3) else "eq", "value": int(m.group(2))})
+        # 貓草深夜便利商店那三次（橋段2 七）：第一次 trust 0、第二次 1、第三次 2，子節跟著父節的「次」
+        if s["cards"][0]["file"] == "調查篇-橋段2" and any(h.startswith("七、深夜的便利商店") for h in heads):
+            m_n = re.search(r"第([一二三])次", " ".join(heads[1:]))
+            if m_n:
+                # 三次都在 trust 0（父節的觸發），差別是來過幾次：調查板每趟加的 met_貓草
+                n_ = CN_NUM[m_n.group(1)]
+                # 到店幾次：cat_visits，由「第一次」「第二次」那兩段自己加（在那一段的最後一張卡）
+                rule["conds"] = [c for c in rule["conds"] if c["variable"] not in ("met_貓草", "cat_visits")]
+                # 「第一次」本身在 0 播完加成 1；它底下的「甲」分支在 1 播（同一趟或下一趟）
+                sub = s["key"][1].startswith(("甲", "乙", "他先開口"))
+                rule["conds"].append({"variable": "cat_visits", "op": "gte" if n_ == 3 else "eq", "value": n_ if sub else n_ - 1})
+                if n_ < 3 and s["key"][1].startswith(("第一次", "第二次")):
+                    s["cards"][-1]["vars"].append({"name": "cat_visits", "set": None, "add": "1", "from": None})
+        if s["key"][1].startswith("Ｂ・頂樓收音機店（隔天"):
+            rule["slots"] = [0, 1, 2]
+            rule["conds"].append({"variable": "names_seen", "op": "eq", "value": True})
+        # 標記寫「`trust_貓草` 2 → 3」＝這一段要在 2 的時候才播（沒有別的條件管同一個變數時）
+        for c_ in s["cards"]:
+            for v_ in c_["vars"]:
+                if v_.get("from") is not None and not any(c["variable"] == v_["name"] for c in rule["conds"]):
+                    rule["conds"].append({"variable": v_["name"], "op": "eq", "value": int(v_["from"])})
+        # 管理員那五格閒話每問一次加一級信任，滿了就不再列（不然無限加上去，失物箱那格 lte/gte 都對不上）
+        if s["key"][1].startswith("池") and s["cards"][0]["file"] == "調查篇-問答矩陣":
+            rule["conds"].append({"variable": "trust_管理員", "op": "lte", "value": 2})
         # 含範本 <誰> 的條件（五之三）解析出來是殘缺的變數名，丟掉，留待展開
         rule["conds"] = [c for c in rule["conds"] if not c["variable"].endswith("_") and "<" not in str(c["value"])]
         for c in rule["conds"]:
@@ -539,9 +574,7 @@ def build(cards):
                 continue
             d["segment"] = sid
             for v in c["vars"]:
-                d.setdefault("variableOps", []).append(
-                    {"id": f"op-{v['name']}", "variable": v["name"], "kind": "add" if v["add"] else "set",
-                     "value": int(v["add"]) if v["add"] else var_value(v["set"])})
+                d.setdefault("variableOps", []).append(var_op(v))
             nid = b.add(d)
             if pending_bag:
                 bag, want = pending_bag

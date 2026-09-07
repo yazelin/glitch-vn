@@ -54,6 +54,12 @@ LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站�
 WHO_MAP = {"材料行老闆": "老闆", "住戶": "路人", "路人乙": "路人", "高中生": "路人", "阿姨": "路人",
            "送貨的": "路人", "發傳單的": "路人", "上班族": "路人"}
 NOT_WHO = {"玩家", "旁白", "格莉奇"}
+# 每個地點可能在場的人（board.html 的常駐加訪客）。段落裡講話的人不在這張表上，
+# 就不用「誰在」擋它（鐵塔在街上、0x 在十四樓那種：設計上就是別的方式碰到）。
+POSSIBLE = {"lobby": {"管理員", "黑洞先生"}, "roof": {"諾亞"}, "street": {"路人"}, "busstop": {"路人"},
+            "metro": {"路人"}, "store": {"店員", "貓草", "鐵塔", "斑比"}, "parts": {"老闆", "諾亞"},
+            "laundry": {"貓草", "斑比"}, "figure": {"店員", "貓草"}, "studio": {"斑比"},
+            "booth": {"鐵塔"}, "tower14": {"櫃檯", "保全"}}
 
 INVENTORY_DEFAULT = json.dumps([
     {"id": "rulebook", "n": "守則本", "d": "一千二。第一頁還是空的。", "c": False,
@@ -190,8 +196,9 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     rule_by_loc = {}
     cond_vars = set()
     for r in rules:
+        who = [w for w in who_of(by_seg.get(r["segment"], [])) if w in POSSIBLE.get(r["dest"], set())]
         r2 = {"seg": r["segment"], "label": r.get("label") or label_of(r["section"]), "slots": r["slots"],
-              "conds": r["conds"], "who": who_of(by_seg.get(r["segment"], []))}
+              "conds": r["conds"], "who": who}
         rule_by_loc.setdefault(r["dest"], []).append(r2)
         for c in r["conds"]:
             cond_vars.add((c["variable"], c["value"]))

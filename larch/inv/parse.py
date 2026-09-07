@@ -76,7 +76,8 @@ SKIP = ["排卡註", "觸發條件一覽", "格式", "配音", "讀音", "待拍
         "表上那一列", "各補什麼", "我自己抓到", "判決怎麼處理", "卡數", "標點",
         "共用音檔", "為什麼一張", "不可以做的事", "自己驗過"]
 
-VAR = re.compile(r"\*\*→\s*(?:解鎖\s*)?`([^`]+)`\s*(?:←\\s*(\\S+)|＋\\s*(\\d+))?")
+VAR = re.compile(r"\*\*→\s*(?:解鎖\s*)?`([^`]+)`\s*(?:←\s*(\S+)|[＋+]\s*(\d+)|(?:\d+\s*→\s*)?(\d+)\b)?")
+VAR_PIECE = re.compile(r"`([^`]+)`\s*(?:[←＝=]\s*(\S+)|[＋+]\s*(\d+)|[−\-]\s*(\d+)|(?:(\d+)\s*→\s*)?(\d+)\b)?")
 
 
 def parse_file(path):
@@ -91,7 +92,7 @@ def parse_file(path):
         cur = None
 
     stack, meta_now, skip_lvl = [], {}, None   # stack = [(level, text)]
-    meta_lvl = 99                              # 目前 meta 是在哪一級標題底下收的
+    meta_lvl = {}                              # 每個 meta 鍵在哪一級標題底下收的
     for i, ln in enumerate(lines, 1):
         if h := SECTION.match(ln):
             flush()
@@ -99,9 +100,8 @@ def parse_file(path):
             stack = [(l, t) for l, t in stack if l < lvl] + [(lvl, text)]
             # meta（觸發／變數／選單）屬於寫它的那一節。更深一層的標題（「#### 台詞」）不清掉它，
             # 同級或更高的標題才清。之前每個標題都清，段落層的觸發列全部丟掉（2026-09-07 抓到）。
-            if lvl <= meta_lvl:
-                meta_now = {}
-                meta_lvl = 99
+            for k in [k for k, l in meta_lvl.items() if lvl <= l]:
+                meta_now.pop(k, None); meta_lvl.pop(k, None)
             # scene/slot 只在同一節內黏著。換到 L2/L3 就重設，不然 0x 那張卡
             # 會繼承上一節鐵塔的 `booth`（2026-09-05 抓到的 bug）。
             # 兩份文件的 L2 意思不同：問答矩陣的 L2 是「人」（換人＝換地點，要重設），
@@ -119,8 +119,12 @@ def parse_file(path):
             continue
         if mm := META.match(ln):
             key, val = mm.group(1), mm.group(2).strip()
-            meta_now[key] = (meta_now.get(key, "") + " " + val).strip()
-            meta_lvl = min(meta_lvl, stack[-1][0] if stack else 99)
+            here_lvl = stack[-1][0] if stack else 99
+            if key in meta_now and meta_lvl.get(key, 99) < here_lvl:
+                meta_now[key] = val          # 子節自己寫了，蓋掉父節那份
+            else:
+                meta_now[key] = (meta_now.get(key, "") + " " + val).strip()
+            meta_lvl[key] = here_lvl
             continue
         m = HEAD.match(ln)
         if m:
@@ -148,16 +152,26 @@ def parse_file(path):
         if BREAK.match(ln):
             flush()
             continue
-        if v := VAR.search(ln):
+        if VAR.search(ln):
+            if cur and cur["lines"]:
+                flush()          # 標記寫在卡片引言之後、── 之前：屬於這一張，不是上一張
             tgt = cards[-1] if cards else None
             if tgt is None:
                 problems.append(f"{path.stem}:{i} 變數寫入前面沒有卡片")
             else:
-                name = v.group(1)
-                # 「**→ 解鎖 `roof`**」＝把 open_roof 設 true（變數帳一：一個地點一個布林）
-                if "解鎖" in ln and not name.startswith("open_"):
-                    name = "open_" + name
-                tgt["vars"].append({"name": name, "set": v.group(2), "add": v.group(3)})
+                # 一行可以寫好幾個：「**→ `a`、`b`、`trust_貓草` 2 → 3**」，用頓號分開逐個收
+                for piece in re.split(r"[、，]", ln):
+                    v = VAR_PIECE.search(piece)
+                    if not v:
+                        continue
+                    name = v.group(1)
+                    # 「**→ 解鎖 `roof`**」＝把 open_roof 設 true（變數帳一：一個地點一個布林）
+                    if "解鎖" in ln and not name.startswith("open_"):
+                        name = "open_" + name
+                    # 「`trust_店員` 1」「`trust_貓草` 0 → 1」＝設成最後那個數；「+1」半形也算加
+                    add = v.group(3) or (("-" + v.group(4)) if v.group(4) else None)
+                    tgt["vars"].append({"name": name, "set": v.group(2) or v.group(6), "add": add,
+                                        "from": v.group(5)})   # 「2 → 3」的 2：這一段的前提
             continue
         if cur is None:
             continue
