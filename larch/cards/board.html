@@ -310,7 +310,7 @@ function start(){
     else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; b.className+=' closed'; }
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
     else if(known(live)){ w.textContent=live; }
-    else { w.textContent='沒去過'; w.className='who unknown'; }
+    else { w.textContent=been?'有人在':'沒去過'; w.className='who unknown'; }   // 去過可是那個人還沒認識
     var note=(!b.disabled)?noteFor(s):null;
     if(note){ w.className='who hint'; w.textContent=note; }
     b.appendChild(n); b.appendChild(w);

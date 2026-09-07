@@ -443,7 +443,7 @@ def build(cards):
         cur["cards"].append(c)
     rules, unresolved, orphans, tapes = [], [], [], []
     labels, unlabeled = load_labels(), []
-    choice_links, seg_first = [], {}
+    choice_links, seg_first, seg_end = [], {}, {}
     for i, s in enumerate(segs):
         sid = f"seg{i:03d}"
         rule, notes = parse_trigger(s["trigger"])
@@ -690,6 +690,7 @@ def build(cards):
         if not (prev and next(n for n in b.nodes if n["id"] == prev)["data"].get("type") == "choice"):
             b.edge(prev, back)
         seg_first[(s["key"][0], " / ".join(s["cards"][0]["headings"][:-1]), s["key"][1])] = (first, sid)
+        seg_end[sid] = (prev, back)
         if rule and rule["dest"] in ("catgrass_door", "catgrass_home"):
             rule["scene_only"] = rule["dest"]
             rule["dest"] = "store"       # 私人場景掛在原地點的選單底下（變數帳一）
@@ -746,6 +747,17 @@ def build(cards):
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == hit[1]
                                             and e["data"]["condition"].get("variable") == "pick")]
         rules[:] = [r for r in rules if r["segment"] != hit[1]]
+    # 直接接下去的段落（設計寫「進門就是這一格，不用選」那種）：上一段演完不回板，進這一段；這一段不上選單
+    for file_, from_sec, to_sec in CHAINS:
+        frm = next((sid_ for (ff, _l, sec), (_f, sid_) in seg_first.items() if ff == file_ and sec.startswith(from_sec)), None)
+        to = next(((f_, sid_) for (ff, _l, sec), (f_, sid_) in seg_first.items() if ff == file_ and sec.startswith(to_sec)), None)
+        assert frm and to, f"接不上：{file_} {from_sec} → {to_sec}"
+        last, back = seg_end[frm]
+        b.edges = [e for e in b.edges if not (e["source"] == last and e["target"] == back)]
+        b.edge(last, to[0])
+        b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == to[1]
+                                            and e["data"]["condition"].get("variable") == "pick")]
+        rules[:] = [r for r in rules if r["segment"] != to[1]]
     # 第十二天：一開板就進收尾那一場，不管條件（沒查完就是沒查完的版本）
     ending = next((r for r in rules if r["section"].startswith("十二、最後一頁")), None)
     if ending:
@@ -785,6 +797,9 @@ def build(cards):
     return b, rules, unresolved, orphans, len(segs), tapes
 
 
+# 問答矩陣鐵塔那一場：場面 → 格一（進門就是這一格，不用選）；格三演完 → 收尾（三格共用）
+CHAINS = [("調查篇-問答矩陣", "一、場面（三格共用）", "格一・問鐵塔關於格莉奇"),
+          ("調查篇-問答矩陣", "格三・問鐵塔關於斑比", "收尾（三格共用）")]
 MET_VARS = [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
 LABELS_MD = ROOT / "design/調查篇-選單標籤.md"
 # 第一天定稿的「上午／下午／晚上」節標題在五個地點重複，靠地點分
