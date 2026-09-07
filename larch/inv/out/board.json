@@ -14207,9 +14207,9 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "大門在後面關上。\n外面的空氣",
-    "text": "大門在後面關上。\n外面的空氣比裡面涼。騎樓下面管理員在掃地，他沒有抬頭。\n他把外套的拉鍊拉到最上面。\n轉角那家便利商店的燈亮著。他往那邊走。",
-    "speaker": "旁白",
+    "title": "畫面：四次。",
+    "text": "四次。",
+    "speaker": "",
     "sceneCode": "lobby",
     "segment": "seg104"
    }
@@ -14222,10 +14222,12 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "大門在後面關上。\n外面的空氣",
+    "text": "大門在後面關上。\n外面的空氣比裡面涼。騎樓下面管理員在掃地，他沒有抬頭。\n他把外套的拉鍊拉到最上面。\n轉角那家便利商店的燈亮著。他往那邊走。",
+    "speaker": "旁白",
+    "sceneCode": "lobby",
+    "segment": "seg104"
    }
   },
   {

@@ -368,9 +368,12 @@ def card_node(c):
     lines = [l for l in c["lines"] if not l.get("direction")]
     if not lines:
         return None
-    if c["kind"] in ("narrate", "note", "plate"):
+    if c["kind"] in ("narrate", "note", "plate", "screen"):
         text = "\n".join(l["text"] for l in lines)
         d = {"type": "dialogue", "title": text[:14], "text": text, "speaker": NARRATOR}
+        if c["kind"] == "screen":
+            d["speaker"] = ""            # 畫面：只有字，沒有講者名，不配音（橋段2 十二 排卡註一）
+            d["title"] = "畫面：" + text[:10]
         if c.get("scene"):
             d["sceneCode"] = c["scene"]      # 卡頭的 `scene: xxx`：段落中途換場景（貓草家、錄音間）
         if c.get("exits"):
@@ -694,8 +697,8 @@ def build(cards):
                            "segment": sid})
             b.edge(pending_bag[0], leave)
             b.edge(leave, back_id)
-        if s["key"][0] == "調查篇-直播":
-            back = None          # 插播裡的段落：演完沒有下一張就回到板（interruptExit return），不跳板
+        if s["key"][0] == "調查篇-直播" or s["key"][1].startswith("十二、最後一頁"):
+            back = None          # 插播裡的段落演完就回板（interruptExit return）；結局那一場演完沒有下一張＝遊戲結束回標題
         else:
             back = b.add({"type": "boardJump", "title": "回調查板", "jumpBoardId": BID,
                           "jumpNodeId": board_id}, nid=back_id)
