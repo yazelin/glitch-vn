@@ -8800,7 +8800,15 @@
     "text": "門開著。桌上那台一九六四年的收音機拆到一半，外殼掀在旁邊。\n諾亞站在門邊，把一個垃圾袋的袋口繞了兩圈，打結。",
     "speaker": "旁白",
     "sceneCode": "roof",
-    "segment": "seg076"
+    "segment": "seg076",
+    "variableOps": [
+     {
+      "id": "op-noah_alone",
+      "variable": "noah_alone",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -15984,7 +15992,15 @@
     "text": "木牌上的字被曬到只剩下筆畫的影子。門開著。\n裡面堆滿收音機。木頭外殼的、塑膠外殼的、有些沒有外殼，\n露出裡面一排一排的零件。",
     "speaker": "旁白",
     "sceneCode": "roof",
-    "segment": "seg124"
+    "segment": "seg124",
+    "variableOps": [
+     {
+      "id": "op-noah_intro",
+      "variable": "noah_intro",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -28950,9 +28966,20 @@
     1,
     2
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "noah_intro",
+     "op": "eq",
+     "value": true
+    },
+    {
+     "variable": "noah_alone",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
-   "label": "上頂樓"
+   "label": "上去看看"
   },
   {
    "segment": "seg085",
@@ -29387,19 +29414,29 @@
    "file": "調查篇-第一天-定稿",
    "dest": "roof",
    "slots": [
-    1
+    0,
+    1,
+    2
    ],
    "conds": [
     {
      "variable": "day",
-     "op": "eq",
+     "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "met_諾亞",
+     "op": "lte",
+     "value": 1
+    },
+    {
+     "variable": "noah_intro",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題",
-   "label": "拿錄音機上頂樓"
+   "label": "上頂樓"
   },
   {
    "segment": "seg125",
@@ -29452,13 +29489,16 @@
    "conds": [
     {
      "variable": "day",
-     "op": "eq",
+     "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "note_mailbox",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題",
    "label": "抄信箱的名牌"
   },
   {
@@ -29672,13 +29712,16 @@
    "conds": [
     {
      "variable": "day",
-     "op": "eq",
+     "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "trust_店員",
+     "op": "eq",
+     "value": 0
     }
    ],
    "or": false,
-   "dest_from": "卡頭 scene",
-   "slots_from": "標題",
    "label": "問店員一件事"
   },
   {
