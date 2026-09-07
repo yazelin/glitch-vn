@@ -218,12 +218,25 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     for seg, sn in by_seg.items():
         cast = [w for w in who_of(sn) if sprite_url(w, state, pid, dry)][:2]
         stage_of[seg] = cast
+    # 誰從哪一張卡開始站上台：那個人第一次講話的那張。之前的卡（旁白鋪陳）他還沒出現。
+    first_speak = {}
+    for seg, sn in by_seg.items():
+        for idx, n in enumerate(sn):
+            d = n["data"]
+            if d.get("type") != "dialogue" or d.get("remote"):
+                continue
+            for sp in [d.get("speaker")] + [l.get("speaker") for l in d.get("dialogueLines", [])]:
+                w = WHO_MAP.get(sp, sp)
+                if w and w not in NOT_WHO and (seg, w) not in first_speak:
+                    first_speak[(seg, w)] = idx
+    seg_index = {n["id"]: i for sn in by_seg.values() for i, n in enumerate(sn)}
     for n in nodes:
         d = n["data"]
         seg = d.get("segment")
         if d.get("type") != "dialogue" or not seg:
             continue
-        cast = [] if d.get("remote") else stage_of.get(seg, [])
+        idx = seg_index.get(n["id"], 0)
+        cast = [] if d.get("remote") else [w for w in stage_of.get(seg, []) if first_speak.get((seg, w), 10**9) <= idx]
         slots = ["center"] if len(cast) == 1 else ["left", "right"]
         actors, layers = [], []
         for w, slot in zip(cast, slots):
