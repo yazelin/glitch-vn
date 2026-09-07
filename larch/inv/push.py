@@ -328,7 +328,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             # 入口場景沒有字，停在那裡等點一下很怪；轉場完直接進選單。
             d["autoAdvance"] = {"enabled": True, "mode": "delay", "delayMs": 500}
         elif d.get("type") == "boardJump":
-            d["jumpBoardId"] = real_bid
+            if d.get("jumpBoardId") != CREDITS_BID:      # 結局跳謝幕那一塊版子的，id 已經是真的
+                d["jumpBoardId"] = real_bid
     assert board_id, "board.json 裡沒有調查板"
 
     # 預設邊：板上什麼都沒選（休息）、選單什麼都沒挑，都回調查板。**要排在條件邊後面。**
@@ -439,6 +440,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
         ("page1_text", "string", "第一頁。她一個字都沒有寫。", "第一頁：收尾旁白唸的版本（沒看到牆的人唸預設）"),
         ("page1_lead", "string", "是空的。", "收尾翻到最後一頁那一句（有第一頁的人換成七條線）"),
+        ("inventoryHudVisible", "boolean", True, "背包按鈕顯示與否；謝幕那一塊版子一開始關掉"),
         ("open_tape", "boolean", False, "播錄音（HUD 用了哪一卷）"),
         ("phone_log", "string", "[]", "手機收到的訊息（格莉奇手機插件）"),
         ("in_bag", "boolean", False, "劇情正在開背包（擋掉 HUD 重聽的插播）"),
@@ -575,6 +577,50 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     return nodes, edges, list(vs.values()), stats
 
 
+CREDITS_BID = "board-credits"
+
+
+def credits_board(state, pid, dry=False):
+    """謝幕那一塊版子（design/調查篇-謝幕.md）：放映廳 → 旁白「完」 → 片尾字卷 → 謝幕 → 格莉奇那句。"""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("inv_parse", HERE / "parse.py")
+    P = importlib.util.module_from_spec(spec); spec.loader.exec_module(P)
+    res = P.parse_file(ROOT / "design/調查篇-謝幕.md")
+    cards = res[0] if isinstance(res, tuple) else res
+    cards = [c for c in cards if c["lines"]]
+    assert len(cards) == 2, f"謝幕檔要剛好兩張卡（旁白、格莉奇），現在 {len(cards)}"
+    ghost = MAIN_ASSETS["sprite-none"]
+    stage0 = {"actors": [{"id": "actor-none", "url": ghost, "name": "", "slot": "center",
+                          "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}]}
+    def txt(c):
+        return "\n".join(l["text"] for l in c["lines"] if not l.get("direction"))
+    html = (HERE.parent / "cards/credits.html").read_text(encoding="utf-8")
+    sprites = {w: sprite_url(w, state, pid, dry) for w in list(SPRITE_LOCAL) + list(SPRITE_MAIN)}
+    sprites["格莉奇"] = MAIN_ASSETS["sprite-glitch"]; sprites["黑洞先生"] = MAIN_ASSETS["sprite-blackhole"]
+    html = (html.replace("/*@@SPRITES@@*/{}", json.dumps({k: v for k, v in sprites.items() if v}, ensure_ascii=False))
+                .replace("/*@@LOC_NAME@@*/{}", json.dumps(LOC_NAME, ensure_ascii=False)))
+    met_vars = [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
+    seq = [
+        # 片尾不要有背包按鈕：背包插件的 HUD 看 inventoryHudVisible（show-hud／hide-hud 兩張卡寫的就是它）
+        ("credits-hud", {"type": "setVariable", "title": "（收起背包按鈕）", "text": "", "start": True,
+                         "variableOps": [{"id": "op-hud", "variable": "inventoryHudVisible", "kind": "set", "value": False}]}),
+        ("credits-hall", {"type": "scene", "title": "放映廳", "text": "燈暗下來。", "background": MAIN_ASSETS["bg-credits-cinema"],
+                          "transition": "fade", "transitionMs": 900, "stage": stage0}),
+        ("credits-end", {"type": "dialogue", "title": "完", "text": txt(cards[0]), "speaker": "旁白", "stage": stage0}),
+        ("credits-roll", {"type": "miniGame", "title": "片尾字卷", "text": "", "miniGameHtml": html,
+                          "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
+                          "miniGameFrame": {"showButton": False, "showTitle": False},
+                          "miniGameReadVars": ["page1_text", "met", "visited", "day", "night_visits", "hole_sightings", "names_seen"] + met_vars,
+                          "miniGameWriteVars": []}),
+        ("credits-bow", {"type": "scene", "title": "謝幕", "text": "燈亮了。", "background": MAIN_ASSETS["bg-curtain-call"],
+                         "transition": "fade", "transitionMs": 700, "stage": stage0}),
+        ("credits-line", {"type": "dialogue", "title": "格莉奇：謝謝你看到這裡", "text": txt(cards[1]), "speaker": "格莉奇", "stage": stage0}),
+    ]
+    nodes = [{"id": nid, "type": "story", "position": {"x": 80 + i * 420, "y": 120}, "data": d} for i, (nid, d) in enumerate(seq)]
+    edges = [{"id": f"credits-e{i}", "source": seq[i][0], "target": seq[i + 1][0]} for i in range(len(seq) - 1)]
+    return nodes, edges
+
+
 def settings_patch(settings, bag_image=""):
     settings = dict(settings or {})
     plugins = dict(settings.get("plugins") or {})
@@ -667,6 +713,14 @@ def main():
     print(f"回讀：卡片 {got_nodes}/{len(nodes)}　邊 {got_edges}/{len(edges)}　帶條件的邊 {got_cond}/{st['cond_edges']}")
     ok = got_nodes == len(nodes) and got_edges == len(edges) and got_cond == st["cond_edges"]
     print("比對", "一致" if ok else "★ 不一致，去查")
+
+    # 5b. 謝幕那一塊版子（結局跳過來；沒有它 boardJump 會跳到不存在的版子）
+    cn, ce = credits_board(state, pid)
+    api("PUT", f"/projects/{pid}/boards/{CREDITS_BID}",
+        {"name": "謝幕", "kind": "story", "mode": "story", "nodes": cn, "edges": ce, "summary": "design/調查篇-謝幕.md"})
+    cb = api("GET", f"/projects/{pid}/boards/{CREDITS_BID}")
+    cb = cb.get("board") or cb
+    print(f"謝幕版子：卡片 {len(cb.get('nodes', []))}/{len(cn)}　邊 {len(cb.get('edges', []))}/{len(ce)}")
 
     # 6. 預覽
     pv = api("GET", f"/projects/{pid}/preview?boardId={bid}&hours=168")

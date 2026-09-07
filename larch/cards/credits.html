@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>片尾字卷・調查篇</title>
+<!--
+  片尾字卷（design/調查篇-謝幕.md）。疊在放映廳那張場景圖上，自己不畫背景。
+  照正文 docs/credits.html 的字卷做，差別在中段照這一輪的變數排：
+  她記住的那一頁（page1_text）、她見過的人（met、met_*）、她去過的地方（visited）、幾個深夜（night_visits）。
+  miniGameReadVars：page1_text met visited day night_visits hole_sightings names_seen met_<每個人>
+  走完（或按平台的略過）就 larch:complete。
+-->
+<style>
+:root{--ink:#0b1a22;--hair:rgba(255,255,255,.07);--cy:#25c2e8;--mint:#7cf3c0;--purple:#b78bff;--text:#dfe8ec;--muted:#93a3ac;--faint:#6d7d84}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:transparent;color:var(--text);overflow:hidden;
+  font-family:"Noto Serif TC","Songti TC","PMingLiU",Georgia,serif}
+#stage{position:fixed;inset:0;overflow:hidden;cursor:grab}
+#stage::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,8,12,.92) 0%,rgba(4,8,12,.3) 16%,rgba(4,8,12,.3) 84%,rgba(4,8,12,.92) 100%)}
+#track{position:absolute;left:50%;top:100%;z-index:2;width:min(92vw,720px);transform:translate(-50%,0);
+  text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6);will-change:transform}
+.film{margin:14vh 0 0;font-size:38px;letter-spacing:.14em}
+.sub{margin:12px 0 0;font-size:13px;letter-spacing:.42em;color:var(--muted)}
+.h{margin:80px 0 22px;font-size:15px;letter-spacing:.5em;color:var(--cy);text-indent:.5em}
+.role{margin:44px 0 6px;font-size:12px;letter-spacing:.32em;color:var(--faint)}
+.name{font-size:22px;letter-spacing:.06em;line-height:1.6}
+.name small{display:block;font-size:12px;letter-spacing:.08em;color:var(--faint);margin-top:4px}
+.quip{margin:16px 0;font-size:16px;line-height:2;color:var(--muted)}
+.page{margin:0 auto;max-width:22em;text-align:left;font-size:17px;line-height:2.2;color:var(--text)}
+.page .id{color:var(--purple)} .page .who{margin-left:1em} .page .blank{color:var(--faint)}
+.cast{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:14px;max-width:640px;margin:0 auto}
+.c-card{background:rgba(11,26,34,.85);border:1px solid var(--hair);border-radius:3px;overflow:hidden}
+.c-pic{aspect-ratio:3/4;background:#060d12}
+.c-pic img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.c-nm{padding:8px 4px 10px;font-size:15px;letter-spacing:.08em}
+.c-nm span{display:block;font-size:12px;color:var(--faint);letter-spacing:.04em}
+.epi{margin:88px auto 0;max-width:22em;font-size:21px;line-height:2.1;color:var(--mint)}
+.tail{height:40vh}
+@media (max-width:520px){.film{font-size:28px}.name{font-size:19px}.h{letter-spacing:.36em}}
+@media (prefers-reduced-motion:reduce){#track{transition:none}}
+</style>
+<div id="stage"><div id="track">
+  <div class="film">格莉奇與黑洞先生</div>
+  <div class="sub">調 查 篇　・　十 二 天</div>
+
+  <div class="h">她 記 住 的</div>
+  <div class="page" id="page"></div>
+
+  <div class="h">她 見 過 的 人</div>
+  <div class="cast" id="cast"></div>
+  <div class="quip" id="castNote"></div>
+
+  <div class="h">她 去 過 的 地 方</div>
+  <div class="name" id="places"></div>
+  <div class="quip" id="nights"></div>
+
+  <div class="role">原作・劇本</div>
+  <div class="name">林亞澤<small>調查篇，一百一十三段，她問了十二天</small></div>
+  <div class="role">視覺・立繪・場景</div>
+  <div class="name">AI 生成＋人工修版<small>去背、三檔色溫、站位校正</small></div>
+  <div class="role">平台</div>
+  <div class="name">Larch<small>larch.ink　視覺小說創作平台</small></div>
+
+  <div class="role">致</div>
+  <div class="name">每一個<br>一直去同一家店的人</div>
+  <div class="epi" id="epi">她被記住了，一點點。</div>
+  <div class="tail"></div>
+</div></div>
+<script>
+var values={};
+function finish(){ parent.postMessage({type:'larch:complete',result:'complete',payload:{}},'*'); }
+function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
+function num(v){ var n=Number(v); return isNaN(n)||v===''||v==null?0:n; }
+function el(t,c,txt){ var e=document.createElement(t); if(c)e.className=c; if(txt!=null)e.textContent=txt; return e; }
+var SPRITES=/*@@SPRITES@@*/{};
+var LOC_NAME=/*@@LOC_NAME@@*/{};
+var TAG={'管理員':'每天坐在那裡','諾亞':'話不多','斑比':'從來不打折','鐵塔':'從來不說再見','0x':'記錄精準','貓草':'只打字',
+  '店員':'第五次不說歡迎光臨','老闆':'等一顆管子','櫃檯':'請走公關窗口','保全':'這裡不能站','黑洞先生':'永遠在'};
+function render(){
+  // 一、她記住的那一頁：照 page1_text，第一行是旁白的開場，後面一行一個 ID
+  var pg=document.getElementById('page'); pg.textContent='';
+  var lines=String(values.page1_text||'').split('\n');
+  if(lines.length>1){
+    lines.slice(1).forEach(function(l){ var i=l.indexOf('　'); var row=el('div');
+      row.appendChild(el('span','id', i>0?l.slice(0,i):l));
+      var who=i>0?l.slice(i+1):''; row.appendChild(el('span', who==='（　）'?'who blank':'who', who||'（　）')); pg.appendChild(row); });
+  } else { pg.appendChild(el('div','blank', lines[0]||'她一個字都沒有寫。')); }
+  // 二、她見過的人：met 的順序就是她遇到的順序
+  var cast=document.getElementById('cast'); cast.textContent='';
+  var met=list(values.met).filter(function(p){ return p && p!=='路人'; }); var n=0;
+  met.forEach(function(p){ var c=el('div','c-card'); var pic=el('div','c-pic');
+    if(SPRITES[p]){ var im=document.createElement('img'); im.src=SPRITES[p]; im.alt=p; im.loading='lazy'; pic.appendChild(im); }
+    c.appendChild(pic); var nm=el('div','c-nm',p); var k=num(values['met_'+(p==='老闆'?'材料行老闆':p)]);
+    nm.appendChild(el('span',null, k>0?('見了 '+k+' 次'+(TAG[p]?'・'+TAG[p]:'')):(TAG[p]||''))); c.appendChild(nm); cast.appendChild(c); n++; });
+  document.getElementById('castNote').textContent = n? ('十二天，'+n+' 個人。'):'她誰都沒有見到。';
+  // 三、她去過的地方
+  var vis=list(values.visited).map(function(v){ return LOC_NAME[v]||v; });
+  document.getElementById('places').textContent = vis.length? vis.join('　'):'她哪裡都沒有去。';
+  var nv=num(values.night_visits), h=num(values.hole_sightings);
+  document.getElementById('nights').textContent = (nv?('深夜出門 '+nv+' 次。'):'')+(h?('在一樓遇到那個穿西裝的 '+h+' 次。'):'');
+  if(!(values.names_seen===true||values.names_seen==='true')) document.getElementById('epi').textContent='她做完了。';
+}
+// 字卷：從畫面一半開始往上走；滾輪、拖曳可以前後翻；走到底就完成
+var stage=document.getElementById('stage'), track=document.getElementById('track');
+var pos=innerHeight*0.5, last=0, dragY=null, done=false;
+var SPEED=44, reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function maxPos(){ return track.scrollHeight+innerHeight*0.35; }
+function apply(){ track.style.transform='translate(-50%,'+(-pos)+'px)'; }
+function clamp(){ pos=Math.max(0,Math.min(maxPos(),pos)); }
+stage.addEventListener('wheel',function(e){ pos+=e.deltaY*0.7; clamp(); apply(); },{passive:true});
+stage.addEventListener('pointerdown',function(e){ dragY=e.clientY; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener('pointermove',function(e){ if(dragY===null)return; pos+=(dragY-e.clientY)*1.1; dragY=e.clientY; clamp(); apply(); });
+stage.addEventListener('pointerup',function(){ dragY=null; }); stage.addEventListener('pointercancel',function(){ dragY=null; });
+function tick(t){ if(!last)last=t; var dt=(t-last)/1000; last=t;
+  if(dragY===null){ pos+=(reduced?SPEED*3:SPEED)*dt; }
+  if(pos>=maxPos() && !done){ done=true; clamp(); apply(); setTimeout(finish,600); return; }
+  clamp(); apply(); requestAnimationFrame(tick); }
+window.addEventListener('message',function(e){ var d=e.data; if(!d||d.type!=='larch:init')return;
+  values=d.values||{}; render(); apply(); requestAnimationFrame(tick); });
+parent.postMessage({type:'larch:ready'},'*');
+</script>
+</html>

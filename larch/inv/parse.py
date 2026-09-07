@@ -32,7 +32,7 @@ import argparse, json, pathlib, re, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 # 作廢與非台詞的檔案不解析。第一天的初稿已被定稿取代（定稿檔開頭寫明），
 # 兩份都讀會把同一場算兩次。
-OBSOLETE = {"調查篇-第一天"}
+OBSOLETE = {"調查篇-第一天", "調查篇-謝幕"}   # 謝幕是另一塊版子，推送層自己讀
 DOCS = [d for d in sorted(ROOT.glob("design/調查篇*.md"))
         if d.stem not in OBSOLETE]
 

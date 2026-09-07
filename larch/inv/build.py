@@ -716,8 +716,13 @@ def build(cards):
                            "segment": sid})
             b.edge(pending_bag[0], leave)
             b.edge(leave, back_id)
-        if s["key"][0] == "調查篇-直播" or s["key"][1].startswith("十二、最後一頁"):
-            back = None          # 插播裡的段落演完就回板（interruptExit return）；結局那一場演完沒有下一張＝遊戲結束回標題
+        if s["key"][0] == "調查篇-直播":
+            back = None          # 插播裡的段落演完就回板（interruptExit return）
+        elif s["key"][1].startswith("十二、最後一頁"):
+            # 結局演完跳到謝幕那一塊版子（design/調查篇-謝幕.md；推送層把 board-credits 換成真的 id）
+            back = b.add({"type": "boardJump", "title": "（謝幕）", "text": "", "jumpBoardId": "board-credits",
+                          "jumpNodeId": "credits-hud", "segment": sid})
+            b.edge(prev, back)
         else:
             back = b.add({"type": "boardJump", "title": "回調查板", "jumpBoardId": BID,
                           "jumpNodeId": board_id}, nid=back_id)
