@@ -37,6 +37,10 @@ SPRITE_LOCAL = {"管理員": "art/inv-cast/sprite-admin.png", "店員": "art/inv
 SPRITE_MAIN = {"諾亞": "sprite-noah", "斑比": "sprite-bambi", "鐵塔": "sprite-tower",
                "貓草": "sprite-catgrass", "0x": "sprite-zerox"}
 SPRITE_SCALE = {"諾亞": .98, "斑比": .92, "鐵塔": 1.04, "貓草": .98, "0x": .94}
+# 格莉奇講話的卡掛哪一種螢幕（art/screens，tools/make_screens.py 合成）：地點 → (道具, 縮放, 抬高)
+SCREEN_FOR = {"lobby": ("notice", .72, 0), "store": ("standee", .78, 0), "figure": ("standee", .78, 0),
+              "street": ("billboard", .62, 0), "busstop": ("billboard", .62, 0), "metro": ("billboard", .62, 0),
+              "parts": ("tv", .7, 0), "phone": ("phone", .76, 0)}   # 抬高靠圖底下補的透明邊（tools/make_screens.py），不靠 offsetY
 ITEM_LOCAL = {"rulebook": "art/items/item-rulebook.png", "phone": "art/items/item-phone.png",
               "tape": "art/items/item-tape.png"}
 
@@ -237,6 +241,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             for w in n["data"].get("exits", []):
                 exit_at.setdefault((seg, WHO_MAP.get(w, w)), idx)
     seg_index = {n["id"]: i for sn in by_seg.values() for i, n in enumerate(sn)}
+    seg_dest_of = {r["segment"]: r["dest"] for r in rules}
     for n in nodes:
         d = n["data"]
         seg = d.get("segment")
@@ -258,12 +263,20 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                            "enter": "fade", "loop": "breathe", "loopSpeed": 1, "loopStrength": 1})
             layers.append({"id": f"layer-{w}-{slot}", "url": u, "position": slot, "x": 0, "y": 0,
                            "scale": SPRITE_SCALE.get(w, 1.0), "opacity": 1, "flipX": False})
+        scr = d.pop("screen", "")
+        if d.get("remote") and d.get("speaker") == "格莉奇":
+            loc = scr or seg_dest_of.get(seg, "")
+            if loc in SCREEN_FOR:
+                prop, sc, oy = SCREEN_FOR[loc]
+                u = local_asset(f"art/screens/screen-{prop}.png", state, pid, dry, "prop")
+                actors = [{"id": f"actor-screen-{prop}", "url": u, "name": "", "slot": "right", "scale": sc,
+                           "offsetX": 0, "offsetY": oy, "enter": "fade", "loop": "none"}]
+                layers = [{"id": f"layer-screen-{prop}", "url": u, "position": "right", "x": 0, "y": oy, "scale": sc, "opacity": 1, "flipX": False}]
         # 台上沒人要放一個看不見的演員，不然上一張的人會留著（novelkit 實測）
         d["stage"] = {"actors": actors or [{"id": "actor-none", "url": ghost, "name": "", "slot": "center",
                                             "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}]}
         d["characterLayers"] = layers or [{"id": "layer-none", "url": ghost, "position": "center", "x": 0, "y": 0,
                                            "scale": 0.01, "opacity": 1, "flipX": False}]
-    seg_dest_of = {r["segment"]: r["dest"] for r in rules}
     todo_js = (CARDS / "todo.js").read_text(encoding="utf-8")
     board_html = (CARDS / "board.html").read_text(encoding="utf-8").replace("/*@@TODO@@*/", todo_js)
     menu_html = (CARDS / "menu.html").read_text(encoding="utf-8")
@@ -612,7 +625,8 @@ def credits_board(state, pid, dry=False):
                           "miniGameFrame": {"showButton": False, "showTitle": False},
                           "miniGameReadVars": ["page1_text", "met", "visited", "day", "night_visits", "hole_sightings", "names_seen"] + met_vars,
                           "miniGameWriteVars": []}),
-        ("credits-bow", {"type": "scene", "title": "謝幕", "text": "燈亮了。", "background": MAIN_ASSETS["bg-curtain-call"],
+        ("credits-bow", {"type": "scene", "title": "謝幕", "text": "燈亮了。",
+                         "background": bg_url("bg-curtain-call-inv", state, pid, dry) or MAIN_ASSETS["bg-curtain-call"],   # 十二人合照（正文七個加調查篇五個）
                          "transition": "fade", "transitionMs": 700, "stage": stage0}),
         ("credits-line", {"type": "dialogue", "title": "格莉奇：謝謝你看到這裡", "text": txt(cards[1]), "speaker": "格莉奇", "stage": stage0}),
     ]

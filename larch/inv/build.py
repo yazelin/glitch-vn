@@ -402,7 +402,9 @@ def card_node(c):
         d = {"type": "dialogue", "title": f"{c['speaker']}：{text[:10]}",
              "text": text, "speaker": c["speaker"]}
         if c.get("remote"):
-            d["remote"] = True          # 推送層據此掛大頭貼、不掛立繪
+            d["remote"] = True          # 推送層據此不掛立繪
+            # 格莉奇只在螢幕上：哪一種螢幕看地點（直播那三晚是手機），推送層換成合成好的螢幕道具（tools/make_screens.py）
+            d["screen"] = "phone" if c["file"] == "調查篇-直播" else (c.get("scene") or "")
         return d
     # talk：多講者
     spoken = [l for l in lines if l.get("speaker")]

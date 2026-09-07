@@ -267,6 +267,9 @@ build.py 有自我檢查：任何一條邊掛了 dest／pick 以外的條件就 
 
     larch/cards/credits.html 謝幕的片尾字卷，疊在放映廳那張圖上；中段照 page1_text、met、visited 排，每個人不一樣
 
+    art/screens/             格莉奇只在螢幕上：五種螢幕道具（公告螢幕、立牌、看板、電視、手機），tools/make_screens.py 從她的立繪合成；
+                             她講話的卡按地點掛上舞台（push.py SCREEN_FOR）
+    art/bg-investigation/bg-curtain-call-inv.jpg  謝幕十二人合照（正文七個加調查篇五個，codex 拿正文那張與五張立繪當參考生的）
     art/inv-cast/            五個新角色的立繪（管理員、店員、保全、材料行老闆、櫃檯），
                              2026-09-05 用 codex 生、09-07 用 cutout 去背。原始綠幕圖在 art/out/
     art/items/               背包道具圖三張（守則本、手機、卡帶），Larch 生圖後洋紅幕去背，512 方格

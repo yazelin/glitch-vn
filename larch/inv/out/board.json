@@ -1915,6 +1915,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n《守則本》限時預購中，數量有限喔。\n裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "",
     "segment": "seg008"
    }
   },
@@ -2258,6 +2259,7 @@
     "text": "監視器上常常有一個人站在對面。我沒下去問過。",
     "speaker": "保全",
     "remote": true,
+    "screen": "",
     "segment": "seg010"
    }
   },
@@ -4911,6 +4913,7 @@
     "text": "限時預購。\n限時預購。\n限時預購。\n限時預購。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "booth",
     "segment": "seg033"
    }
   },
@@ -7589,6 +7592,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n這個月的周邊有新東西喔，詳細請看下面的連結。欸，等一下，螢幕上沒有連結。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "parts",
     "segment": "seg055"
    }
   },
@@ -8758,6 +8762,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n這個月的周邊有新東西喔，詳細請看下面的連結。欸，等一下，螢幕上沒有連結。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "lobby",
     "segment": "seg075"
    }
   },
@@ -10097,6 +10102,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n《守則本》限時預購中，數量有限喔。\n裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg087"
    }
   },
@@ -10383,6 +10389,7 @@
     "text": "裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg087"
    }
   },
@@ -10923,6 +10930,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n《守則本》限時預購中，數量有限喔。\n裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg089"
    }
   },
@@ -11618,6 +11626,7 @@
     "text": "裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg095"
    }
   },
@@ -11830,6 +11839,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n《守則本》限時預購中，數量有限喔。\n裡面是空白的。你們可以自己寫。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "figure",
     "segment": "seg098"
    }
   },
@@ -12672,6 +12682,7 @@
     "text": "貓草！\n你怎麼每次都在啦。\n貓草！\n你怎麼每次都在啦。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "catgrass_home",
     "segment": "seg101"
    }
   },
@@ -13214,6 +13225,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n《守則本》限時預購中，數量有限喔。\n皮面的，很厚，內頁是空白的，你可以自己寫。\n附一張書籤，上面有我的簽名。……印上去的啦，不是我一張一張簽的。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "lobby",
     "segment": "seg102"
    }
   },
@@ -15379,6 +15391,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n今天的事情有點多，我們一件一件來。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "phone",
     "segment": "seg118"
    }
   },
@@ -15440,6 +15453,7 @@
     "text": "今天也在，謝謝你。\n早安人，謝謝你。現在是晚上喔。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "phone",
     "segment": "seg119"
    }
   },
@@ -15550,6 +15564,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "phone",
     "segment": "seg122"
    }
   },
@@ -15638,6 +15653,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n這個月的周邊有新東西喔，詳細請看下面的連結。欸，等一下，螢幕上沒有連結。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "lobby",
     "segment": "seg123"
    }
   },
@@ -16420,6 +16436,7 @@
     "text": "……所以我今天也會記得你們的。我保證。\n逼——嗶！",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "street",
     "segment": "seg125"
    }
   },
@@ -16794,6 +16811,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n這個月的周邊有新東西喔，詳細請看下面的連結。欸，等一下，螢幕上沒有連結。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "lobby",
     "segment": "seg127"
    }
   },
@@ -17036,6 +17054,7 @@
     "text": "逼——嗶！我是格莉奇。\n這款抱枕買一個送一個喔。倉庫還有很多，真的很多，多到我想跟大家講一件事，就是",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "street",
     "segment": "seg129"
    }
   },
@@ -17816,6 +17835,7 @@
     "text": "我會記得你們的。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "metro",
     "segment": "seg135"
    }
   },
@@ -17902,6 +17922,7 @@
     "text": "我會記得你們的。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "metro",
     "segment": "seg135"
    }
   },
@@ -17964,6 +17985,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n買兩件就送一張。送完為止喔。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg136"
    }
   },
@@ -18052,6 +18074,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。\n買兩件就送一張。送完為止喔。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg136"
    }
   },
@@ -18188,6 +18211,7 @@
     "text": "……買兩件就送一張。送完為止喔。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg137"
    }
   },
@@ -18264,6 +18288,7 @@
     "text": "逼——嗶！大家好，我是格莉奇。",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg137"
    }
   },
@@ -18540,6 +18565,7 @@
     "text": "……買兩件就送一張。送完為止喔。\n逼——嗶！",
     "speaker": "格莉奇",
     "remote": true,
+    "screen": "store",
     "segment": "seg140"
    }
   },
