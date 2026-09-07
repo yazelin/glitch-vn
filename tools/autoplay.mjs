@@ -69,6 +69,7 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   if (mf) { await pickMenu(mf, spot, when); await page.waitForTimeout(1800); continue; }
   const opts = await page.locator('button', { hasText: /^0[1-9]\s/ }).all();
   if (opts.length) { const labels=[]; for (const o of opts) labels.push((await o.textContent()).trim()); out(`  [選項] ${labels.join(' | ')} → 選 ${labels[0]}`); await opts[0].click(); await page.waitForTimeout(900); continue; }
+  if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++; if (stuck>40) { out('★ 卡住 40 下沒變：'+t.slice(0,120)); await page.screenshot({ path: `${SD}/stuck.png` }); break; } }
   await page.mouse.click(640,640); await page.waitForTimeout(420);
   if (step % 50 === 0) flush();
