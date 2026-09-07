@@ -381,7 +381,7 @@ def build(cards):
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
                       "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
-    menu_of = {}
+    menu_of, entries_of, greetings = {}, {}, []
     for loc in LOCS:
         day, night = BG[loc]
         # 一個地點兩張入口：白天（上午／下午）與夜晚（晚上／深夜），調查板用 dest 尾巴的 @n 分
@@ -397,8 +397,7 @@ def build(cards):
                       "miniGameHtml": "@@larch/cards/menu.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
                       "miniGameReadVars": ["day", "slot", "here"], "miniGameWriteVars": ["pick"]})
-        b.edge(entry, menu)
-        b.edge(entry_n, menu)
+        entries_of[loc] = (entry, entry_n)
         menu_of[loc] = menu
     # 3. 段落：同一 (檔, 章節) 的連續卡片＝一條線
     segs, cur_key, cur = [], None, None
@@ -417,6 +416,30 @@ def build(cards):
         heads = s["cards"][0].get("headings", [])
         if rule is None:
             rule, notes = {"dest": None, "slots": [], "conds": [], "or": False}, []
+        if s["cards"][0]["file"] == "調查篇-招呼":
+            heads = s["cards"][0].get("headings", [])
+            loc_, _ = loc_from_headings(heads)
+            m_met = re.search(r"`(met_[^`]+) >= (\d+)`", " ".join(heads))
+            if not loc_ or not m_met:
+                continue
+            who_ = heads[-2].split("（")[0] if len(heads) >= 2 else ""
+            gid = f"greet-{loc_}-{m_met.group(1)}-{m_met.group(2)}"
+            first = prev = None
+            for c in s["cards"]:
+                d = card_node(c)
+                if not d:
+                    continue
+                d["segment"] = gid
+                d["castHint"] = who_          # 旁白只寫動作，可是那個人要在台上
+                nid = b.add(d)
+                if prev:
+                    b.edge(prev, nid)
+                first = first or nid
+                prev = nid
+            if first:
+                greetings.append({"loc": loc_, "var": m_met.group(1), "n": int(m_met.group(2)),
+                                  "slots": slots_from_headings(heads), "first": first, "last": prev})
+            continue
         m_end = re.search(r"第([一二三四五六七八九十]+)天收尾", s["key"][1])
         if m_end:
             n_day = CN_NUM[m_end.group(1)]
@@ -634,6 +657,34 @@ def build(cards):
         else:
             orphans.append({"segment": sid, "file": s["key"][0], "section": s["key"][1],
                             "trigger": s["trigger"], "notes": notes})
+    # 進門那一下：入口 ─met>=N─▶ 閘（判時段）─▶ 招呼卡 ─▶ 選單；閘的預設與入口的預設都直接進選單。
+    # 門檻高的先判（第五次起排在第三次起前面），入口→選單的無條件邊最後接。
+    def slot_cond(slots):
+        s_ = sorted(slots)
+        if not s_ or len(s_) == 4:
+            return None
+        if s_ == list(range(s_[0], s_[-1] + 1)):
+            if s_[0] == 0:
+                return {"variable": "slot", "op": "lte", "value": s_[-1]}
+            if s_[-1] == 3:
+                return {"variable": "slot", "op": "gte", "value": s_[0]}
+        return {"variable": "slot", "op": "eq", "value": s_[0]}
+    for loc, (entry, entry_n) in entries_of.items():
+        menu = menu_of[loc]
+        gs = sorted([g for g in greetings if g["loc"] == loc], key=lambda g: -g["n"])
+        for k, en in enumerate((entry, entry_n)):
+            for g in gs:
+                sc = slot_cond(g["slots"])
+                gate = b.add({"type": "setVariable", "title": f"（{loc} 第{g['n']}次起）", "text": "", "variableOps": []})
+                b.edge(en, gate, {"variable": g["var"], "op": "gte", "value": g["n"]})
+                if sc:
+                    b.edge(gate, g["first"], sc)
+                    b.edge(gate, menu)
+                else:
+                    b.edge(gate, g["first"])
+                if k == 0:
+                    b.edge(g["last"], menu)
+            b.edge(en, menu)
     b.unlabeled = unlabeled
     return b, rules, unresolved, orphans, len(segs), tapes
 
@@ -745,7 +796,8 @@ def main():
         print(f"\n寫出 {out}")
     # 自我檢查：兩種路由變數以外不可以有任何條件邊
     bad = [e for e in b.edges if e.get("data") and
-           e["data"]["condition"]["variable"] not in ("dest", "pick", "rec_ok", "inventoryLastUsed")]
+           e["data"]["condition"]["variable"] not in ("dest", "pick", "rec_ok", "inventoryLastUsed", "slot")
+           and not e["data"]["condition"]["variable"].startswith("met_")]
     assert not bad, f"有 {len(bad)} 條邊掛了 dest/pick 以外的條件，複合判斷不該變成邊"
     return 0
 

@@ -238,6 +238,9 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             continue
         idx = seg_index.get(n["id"], 0)
         cast = [] if d.get("remote") else [w for w in stage_of.get(seg, []) if first_speak.get((seg, w), 10**9) <= idx]
+        hint = d.pop("castHint", None)
+        if hint and sprite_url(WHO_MAP.get(hint, hint), state, pid, dry):
+            cast = [WHO_MAP.get(hint, hint)]
         slots = ["center"] if len(cast) == 1 else ["left", "right"]
         actors, layers = [], []
         for w, slot in zip(cast, slots):
@@ -390,6 +393,20 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
 
     for code in note_codes:
         vs.setdefault(code, {"id": code, "name": code, "label": code, "type": "boolean", "defaultValue": False})
+    # 卡片會寫的、邊會判的（招呼那些 met_*／slot）也都要宣告，沒宣告的變數測試覆寫填不進去、編輯器也看不到
+    written = {}
+    for n in nodes:
+        for o in n["data"].get("variableOps", []):
+            written.setdefault(o["variable"], "number" if o["kind"] == "add" or isinstance(o["value"], int) and not isinstance(o["value"], bool) else "boolean" if isinstance(o["value"], bool) else "string")
+    for e in edges:
+        c = (e.get("data") or {}).get("condition")
+        if c and c.get("variable") and c["variable"] not in written:
+            written[c["variable"]] = "number" if isinstance(c["value"], int) and not isinstance(c["value"], bool) else "boolean" if isinstance(c["value"], bool) else "string"
+    for name, t in written.items():
+        if name in vs or name in ("inventory", "inventoryLastUsed", "pluginResult"):
+            continue
+        vs[name] = {"id": name, "name": name, "label": name, "type": t,
+                    "defaultValue": 0 if t == "number" else False if t == "boolean" else ""}
 
     # ── 版面：人看得懂的白板 ────────────────────────────────────
     # 左邊一欄是系統卡（調查板、休息、筆記、錄音播放、收尾插播）。
@@ -457,6 +474,12 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         rows = []            # 每列一串 id
         entries = [e["source"] for e in edges if e["target"] == m and e["source"] != board_id]
         rows.append(entries + [m, f"{m}-back"])
+        for en in entries:
+            ids = [x for x in chain(en, stop=lambda nid: nid == m or nid in placed) if x != en]
+            for k in range(0, len(ids), WRAP):
+                rows.append(ids[k:k + WRAP])
+            for nid in ids:
+                placed[nid] = True
         seg_entries = [e["target"] for e in out_edges.get(m, []) if e.get("data")]
         for se in seg_entries:
             ids = chain(se, stop=lambda nid: nid in placed or nid == m)
