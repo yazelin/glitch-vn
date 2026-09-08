@@ -333,7 +333,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             seg_dest = seg_dest_of.get(seg_of_card)
             if not seg_dest and seg_of_card and seg_of_card.startswith("greet-"):
                 seg_dest = seg_of_card.split("-")[1]      # 招呼卡與材料行前奏：greet-<地點>-…，本來就在那個地點，不換背景
-            if code != seg_dest and code in BG_MAP:
+            if (code != seg_dest or seg_of_card in board.get("force_bg", [])) and code in BG_MAP:
                 # 這一段幾點演，換的場景就用幾點的那張：全在晚上／深夜的段落用晚版／夜版，其他用日版
                 day_key, night_key = BG_MAP[code]
                 slots = seg_slots_of.get(seg_of_card) or []

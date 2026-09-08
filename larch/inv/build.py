@@ -886,6 +886,8 @@ def build(cards):
     # 第十二天：一開板就進收尾那一場，不管條件（沒查完就是沒查完的版本）
     ending = next((r for r in rules if r["section"].startswith("十二、最後一頁")), None)
     if ending:
+        # 這一段是插播跳進來的，不經過頂樓那張入口場景：卡頭寫了場景的卡都要自己帶背景（推送層看 force_bg）
+        b.force_bg = [ending["segment"]]
         first_end = next(n["id"] for n in b.nodes if n["data"].get("segment") == ending["segment"])
         b.add({"type": "interrupt", "title": "第十二天，收尾", "text": "",
                "interruptCondition": {"kind": "variable", "variable": "day", "op": "gte", "value": 12},
@@ -1042,7 +1044,7 @@ def main():
             print(f"  ・{u['section'][:22]}｜{'；'.join(u['notes'])}")
     if a.out:
         out = pathlib.Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps({"boardId": BID, "nodes": b.nodes, "edges": b.edges, "seg_slots": getattr(b, "seg_slots", {}),
+        out.write_text(json.dumps({"boardId": BID, "nodes": b.nodes, "edges": b.edges, "seg_slots": getattr(b, "seg_slots", {}), "force_bg": getattr(b, "force_bg", []),
                                    "variables": vs, "rules": rules, "tapes": tapes,
                                    "unresolved": unresolved, "orphans": orphans},
                                   ensure_ascii=False, indent=1), encoding="utf-8")
