@@ -29703,7 +29703,7 @@
   },
   {
    "segment": "seg040",
-   "section": "二之三、櫃檯迴圈（`tower14`・上午／下午・`met_櫃檯 <= 4`）",
+   "section": "二之三、櫃檯迴圈（`tower14`・上午／下午・`met_櫃檯 <= 5`）",
    "file": "調查篇-問答矩陣",
    "dest": "tower14",
    "slots": [
@@ -29714,7 +29714,7 @@
     {
      "variable": "met_櫃檯",
      "op": "lte",
-     "value": 4
+     "value": 5
     }
    ],
    "or": false,
@@ -30433,7 +30433,7 @@
     {
      "variable": "met_櫃檯",
      "op": "eq",
-     "value": 5
+     "value": 6
     }
    ],
    "or": false,
