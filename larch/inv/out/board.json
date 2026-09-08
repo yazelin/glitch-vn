@@ -5170,14 +5170,14 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "玩家：0x 是你們的嗎。",
-    "text": "0x 是你們的嗎。",
+    "title": "玩家：0x，跟她聯動過的那",
+    "text": "0x，跟她聯動過的那個，是你們的嗎。",
     "speaker": "玩家",
     "dialogueLines": [
      {
       "id": "l0",
       "speaker": "玩家",
-      "text": "0x 是你們的嗎。",
+      "text": "0x，跟她聯動過的那個，是你們的嗎。",
       "emotion": ""
      },
      {
