@@ -16121,7 +16121,7 @@
      {
       "id": "l11",
       "speaker": "玩家",
-      "text": "線在哪裡買。",
+      "text": "你的線是跟誰進的。",
       "emotion": ""
      },
      {
@@ -16291,7 +16291,7 @@
      {
       "id": "l7",
       "speaker": "諾亞",
-      "text": "比她開始那個什麼播還早。",
+      "text": "比她開始一個禮拜來三次還早。她說三次是為了那個什麼播。",
       "emotion": ""
      }
     ],
@@ -16328,8 +16328,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：本子比頻道老。\n如果",
-    "text": "本子比頻道老。\n如果那是道具，沒有必要做舊。",
+    "title": "筆記：一個禮拜三次是為了開",
+    "text": "一個禮拜三次是為了開台買的線。本子上的日期比那還早。本子比頻道老。\n如果那是道具，沒有必要做舊。",
     "speaker": "玩家",
     "sceneCode": "roof",
     "segment": "seg124"
@@ -17591,7 +17591,15 @@
      }
     ],
     "sceneCode": "metro",
-    "segment": "seg133"
+    "segment": "seg133",
+    "variableOps": [
+     {
+      "id": "op-met_flyer",
+      "variable": "met_flyer",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -17773,7 +17781,15 @@
     "text": "柱子旁邊空了。\n她把傳單摺起來，放進外套口袋。",
     "speaker": "旁白",
     "sceneCode": "metro",
-    "segment": "seg134"
+    "segment": "seg134",
+    "variableOps": [
+     {
+      "id": "op-met_flyer",
+      "variable": "met_flyer",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -19246,13 +19262,13 @@
      {
       "id": "l1",
       "speaker": "玩家",
-      "text": "你昨天也在。",
+      "text": "你每天都在。",
       "emotion": ""
      },
      {
       "id": "l2",
       "speaker": "發傳單的",
-      "text": "我每天都在。",
+      "text": "每天。",
       "emotion": ""
      },
      {
@@ -19264,7 +19280,7 @@
      {
       "id": "l4",
       "speaker": "發傳單的",
-      "text": "你昨天沒有拿。",
+      "text": "你站在這裡寫字。拿傳單的不會站著寫字。",
       "emotion": ""
      }
     ],
@@ -19281,7 +19297,7 @@
    "data": {
     "type": "dialogue",
     "title": "筆記：二號出口發傳單的。他",
-    "text": "二號出口發傳單的。他記得我昨天沒有拿。\n他一天遞出去幾百張，記得的是沒拿的那個。",
+    "text": "二號出口發傳單的。他記得我，因為我站在出口寫字。\n他一天遞出去幾百張，記得的不是臉。",
     "speaker": "玩家",
     "segment": "seg148"
    }
@@ -29972,11 +29988,14 @@
      "variable": "day",
      "op": "gte",
      "value": 2
+    },
+    {
+     "variable": "met_flyer",
+     "op": "eq",
+     "value": true
     }
    ],
    "or": false,
-   "dest_from": "標題代號",
-   "slots_from": "標題",
    "label": "跟發傳單的講話"
   },
   {
