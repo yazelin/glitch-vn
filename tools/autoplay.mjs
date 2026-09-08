@@ -7,6 +7,12 @@ const require_ = createRequire(import.meta.url);
 const { chromium } = require_('/home/ct/line-sticker-studio/node_modules/playwright');
 import fs from 'node:fs';
 const SD=process.env.OUT || '/tmp';
+// 走法：notes＝照便條（預設）、explore＝不看便條，挑去得最少的地方、random＝擲骰。
+// random 用固定種子，同一個 SEED 跑出來一樣，方便重現。
+const POLICY=process.env.POLICY || 'notes';
+let seed=(Number(process.env.SEED)||1)>>>0;
+const rnd=()=>{ seed=(seed+0x6D2B79F5)>>>0; let t=seed; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; };
+const rpick=(a)=>a[Math.floor(rnd()*a.length)];
 const pv = JSON.parse(fs.readFileSync('/home/ct/glitch-vn/larch/inv/preview.json','utf8'));
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
@@ -27,7 +33,8 @@ const pickSpot = async (bf) => {
   out(`\n=== 板 ${when} | 便條：${todo.join(' / ')} | 可去：${spots.map(s=>s.name+'('+s.who+')').join('、')}`);
   let target=null;
   const slotName = (when.match(/上午|下午|晚上|深夜/)||[''])[0];
-  for (const line of todo) { const t=(line.match(/上午|下午|晚上|深夜/)||[''])[0]; if (t && t!==slotName) continue; for (const [k,n] of SPOT_HINT) if (line.includes(k)) { const s=spots.find(x=>x.name===n); if (s) { target=s; break; } } if (target) break; }
+  if (POLICY==='random') { target=rpick(spots); }
+  else if (POLICY!=='explore') for (const line of todo) { const t=(line.match(/上午|下午|晚上|深夜/)||[''])[0]; if (t && t!==slotName) continue; for (const [k,n] of SPOT_HINT) if (line.includes(k)) { const s=spots.find(x=>x.name===n); if (s) { target=s; break; } } if (target) break; }
   if (!target) { spots.sort((a,b)=>(visits[a.name]||0)-(visits[b.name]||0)); target=spots[0]; }
   if (!target) return null;
   visits[target.name]=(visits[target.name]||0)+1; outings++;
@@ -42,7 +49,9 @@ const pickMenu = async (mf, spot, when) => {
   // 便條提到的字出現在哪一格的標籤裡，那一格優先（人會這樣讀）
   const overlap = (a,b) => { let best=0; for (let i=0;i<a.length;i++) for (let j=i+3;j<=a.length;j++) if (b.includes(a.slice(i,j))) best=Math.max(best,j-i); return best; };
   const hinted = fresh.map(i => ({ i, s: Math.max(0, ...lastTodo.map(t => overlap(i.label, t))) })).filter(x => x.s >= 3).sort((a,b) => b.s - a.s).map(x => x.i);
-  const pick = hinted[0] || fresh[0] || items[items.length-1];
+  const pick = POLICY==='random' ? (rpick(fresh.length?fresh:items))
+             : POLICY==='explore' ? (fresh[0] || items[items.length-1])
+             : (hinted[0] || fresh[0] || items[items.length-1]);
   if (!pick) { out('  選單空的（'+(await mf.locator('.empty').allTextContents()).join('')+'），先走'); await mf.locator('button', { hasText: '先走' }).first().click().catch(()=>{}); return; }
   done.add(spot+'|'+pick.label); out(`  → 選「${pick.label}」`); await pick.el.click();
 };
@@ -74,6 +83,7 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   await page.mouse.click(640,640); await page.waitForTimeout(420);
   if (step % 50 === 0) flush();
 }
+out(`\n=== 走法 ${POLICY} 種子 ${process.env.SEED||1}`);
 out(`\n=== 統計：出門 ${outings} 次，到過 ${JSON.stringify(visits)}，選過 ${done.size} 格，${Math.round((Date.now()-t0)/1000)} 秒`);
 flush(); await page.screenshot({ path: `${SD}/autoplay-end.png` }); await browser.close();
 console.log(T.slice(-3).join('\n'));

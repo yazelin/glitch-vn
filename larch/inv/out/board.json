@@ -4652,6 +4652,12 @@
       "variable": "open_tower14",
       "kind": "set",
       "value": true
+     },
+     {
+      "id": "op-asked_斑比_0x",
+      "variable": "asked_斑比_0x",
+      "kind": "set",
+      "value": true
      }
     ],
     "display": {
