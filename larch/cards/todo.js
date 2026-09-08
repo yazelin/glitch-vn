@@ -30,7 +30,7 @@ function todoLines(v){
   if(n('trust_店員')>=1 && !b('open_laundry') && n('day')>=4) P.push('問店員這條街深夜還有什麼開著。');
   // 十四樓那條線自己排一層：它不是結局的必要條件，可是沒有人提醒就不會有人去第六次。
   if(!b('open_tower14') && n('met_斑比')>=1) Q.push('問畫她的人，0x 那張圖是誰畫的。');
-  if(b('open_tower14') && !b('zero_answered')) Q.push(n('met_櫃檯')>=5 ? '十四樓大廳。今天再去一次。' : '十四樓大廳。再去約一次訪問。');
+  if(b('open_tower14') && !b('zero_answered')) Q.push(n('met_櫃檯')>=5 ? '十四樓大廳。再約一個訪問。' : '十四樓大廳。再跟櫃檯約一次訪問。');
   L=P.concat(Q,L);
   if(!L.length) L.push('再去一次同一個地方。');
   return L.slice(0,3);

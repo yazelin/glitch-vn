@@ -95,13 +95,30 @@ def key():
     return KEY_PATH.read_text().strip()
 
 
+# 2026-09-09：Larch 開始要 If-Match。PUT 之前先讀一次同一個路徑，把 ETag 帶上去；
+# 沒有 ETag 的路徑（例如還不存在的第二塊版子）就照舊直接送。
+ETAGS = {}
+
+
 def api(method, path, body=None, tries=4):
+    if method == "PUT" and path not in ETAGS:
+        try:
+            api("GET", path)
+        except SystemExit:
+            pass
     data = json.dumps(body, ensure_ascii=False).encode() if body is not None else None
-    req = urllib.request.Request(API + path, data, {"Authorization": "Bearer " + key(),
-                                                     "Content-Type": "application/json"}, method=method)
+    head = {"Authorization": "Bearer " + key(), "Content-Type": "application/json"}
+    if method == "PUT" and ETAGS.get(path):
+        head["If-Match"] = ETAGS[path]
+    req = urllib.request.Request(API + path, data, head, method=method)
     for i in range(tries):
         try:
             with urllib.request.urlopen(req, timeout=300) as r:
+                tag = r.headers.get("ETag")
+                if tag:
+                    ETAGS[path] = tag
+                elif method == "PUT":
+                    ETAGS.pop(path, None)
                 return json.loads(r.read() or b"{}")
         except urllib.error.HTTPError as e:
             msg = e.read()[:300].decode("utf-8", "replace")
