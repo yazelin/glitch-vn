@@ -432,7 +432,7 @@ def build(cards):
                                            "names_seen", "see_stairs", "hole_sightings", "see_admin", "laundry_night1",
                                            "trust_斑比", "strikes", "clue_list", "rec_ok",
                                            "note_mailbox", "trust_店員", "trust_貓草", "cat_visits",
-                                           "asked_鐵塔_斑比", "asked_貓草_斑比"] + [f"open_{k}" for k in
+                                           "asked_鐵塔_斑比", "asked_貓草_斑比", "tube_bought", "tube_given"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
                       "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
@@ -479,6 +479,23 @@ def build(cards):
         heads = s["cards"][0].get("headings", [])
         if rule is None:
             rule, notes = {"dest": None, "slots": [], "conds": [], "or": False}, []
+        if s["cards"][0]["file"] == "調查篇-問答矩陣" and s["key"][1].startswith("進場"):
+            # 材料行第一趟的前奏：入口 ─met_材料行老闆==1─▶ 這兩張 ─▶ 選單。跟招呼卡同一種接法，只演第一次
+            first = prev = None
+            for c in s["cards"]:
+                d = card_node(c)
+                if not d:
+                    continue
+                d["segment"] = "greet-parts-first"
+                nid = b.add(d)
+                if prev:
+                    b.edge(prev, nid)
+                first = first or nid
+                prev = nid
+            if first:
+                greetings.append({"loc": "parts", "var": "met_材料行老闆", "n": 1, "op": "eq",
+                                  "slots": [0, 1], "first": first, "last": prev})
+            continue
         if s["cards"][0]["file"] == "調查篇-招呼":
             heads = s["cards"][0].get("headings", [])
             loc_, _ = loc_from_headings(heads)
@@ -762,6 +779,8 @@ def build(cards):
             orphans.append({"segment": sid, "file": s["key"][0], "section": s["key"][1],
                             "trigger": s["trigger"], "notes": notes})
     # 選擇卡的選項接到同一場裡的節（「→ 二」＝那一場底下以「二・」開頭的節），那些節不再列在選單上
+    # 選項接走的段落等一下會從 rules 拿掉，可是推送層換場景要知道它幾點演：先把每一段的時段留一份
+    b.seg_slots = {r["segment"]: r.get("slots") or [] for r in rules}
     for nid, k_, file_, l1, target in choice_links:
         if target.startswith("共用卡"):
             kids = [(sec, f_, sid_) for (ff, ll, sec), (f_, sid_) in seg_first.items()
@@ -853,7 +872,7 @@ def build(cards):
             for g in gs:
                 sc = slot_cond(g["slots"])
                 gate = b.add({"type": "setVariable", "title": f"（{loc} 第{g['n']}次起）", "text": "", "variableOps": []})
-                b.edge(en, gate, {"variable": g["var"], "op": "gte", "value": g["n"]})
+                b.edge(en, gate, {"variable": g["var"], "op": g.get("op", "gte"), "value": g["n"]})
                 if sc:
                     b.edge(gate, g["first"], sc)
                     b.edge(gate, menu)
@@ -975,7 +994,7 @@ def main():
             print(f"  ・{u['section'][:22]}｜{'；'.join(u['notes'])}")
     if a.out:
         out = pathlib.Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps({"boardId": BID, "nodes": b.nodes, "edges": b.edges,
+        out.write_text(json.dumps({"boardId": BID, "nodes": b.nodes, "edges": b.edges, "seg_slots": getattr(b, "seg_slots", {}),
                                    "variables": vs, "rules": rules, "tapes": tapes,
                                    "unresolved": unresolved, "orphans": orphans},
                                   ensure_ascii=False, indent=1), encoding="utf-8")

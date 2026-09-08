@@ -241,6 +241,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 exit_at.setdefault((seg, WHO_MAP.get(w, w)), idx)
     seg_index = {n["id"]: i for sn in by_seg.values() for i, n in enumerate(sn)}
     seg_dest_of = {r["segment"]: r["dest"] for r in rules}
+    seg_slots_of = {**board.get("seg_slots", {}), **{r["segment"]: r.get("slots") or [] for r in rules}}
     for n in nodes:
         d = n["data"]
         seg = d.get("segment")
@@ -285,7 +286,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     menus = []
     for n in nodes:
         d = n["data"]
-        d.pop("segment", None)
+        seg_of_card = d.pop("segment", None)     # 下面換場景那一段還要用，先留著
         if d.get("type") == "miniGame":
             # showButton:false 時播放器在 larch:complete 之後 240ms 自己接下一張（Preview bundle 讀出來的），
             # 不然玩家每過一個時段都要多按一次「套用結果並繼續」。
@@ -315,10 +316,16 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         elif d.get("type") == "dialogue" and d.get("sceneCode"):
             # 段落中途換場景的卡：帶背景（play 時進這張卡就換）。日夜先都用夜版，白天版由入口決定。
             code = d.pop("sceneCode")
-            seg_dest = seg_dest_of.get(d.get("segment"))
+            seg_dest = seg_dest_of.get(seg_of_card)
             if code != seg_dest and code in BG_MAP:
+                # 這一段幾點演，換的場景就用幾點的那張：全在晚上／深夜的段落用晚版／夜版，其他用日版
                 day_key, night_key = BG_MAP[code]
-                url, _ = pick_bg(day_key, night_key, state, pid, dry)
+                slots = seg_slots_of.get(seg_of_card) or []
+                if slots and all(x >= 2 for x in slots):
+                    keys = [f"bg-{code}-evening", night_key] if 2 in slots else [night_key, f"bg-{code}-evening"]
+                else:
+                    keys = [day_key, night_key]
+                url, _ = pick_bg(keys[0], keys[1], state, pid, dry)
                 if url:
                     d["background"] = url
         elif d.get("type") == "plugin" and d.get("pluginCardId") == "grant-item":

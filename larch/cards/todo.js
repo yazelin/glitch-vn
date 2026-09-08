@@ -8,6 +8,7 @@ function todoLines(v){
   if(!b('open_roof')) L.push('先從樓下問起。');
   else if(n('met_諾亞')<1) L.push('樓上那間，門開著就是有開。');
   if(b('open_parts') && n('met_材料行老闆')<1) L.push('車站後面那家材料行。那顆管子。');
+  if(b('tube_bought') && !b('tube_given')) L.push('管子買到了。拿上去。');
   if(n('day')>=2 && n('hole_sightings')===0) L.push('晚上七點多，一樓。信箱前面。');
   if(n('hole_sightings')>=1 && !b('see_admin')) L.push('問管理員那個穿西裝的。');
   if(n('hole_sightings')===1 && n('day')>=5) L.push('一樓晚上。他還會來。');
