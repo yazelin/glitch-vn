@@ -41,7 +41,7 @@ SPRITE_SCALE = {"諾亞": .98, "斑比": .92, "鐵塔": 1.04, "貓草": .98, "0x
 SCREEN_FOR = {"lobby": ("notice", .72, 0), "store": ("standee", .78, 0), "figure": ("standee", .78, 0),
               "street": ("billboard", .62, 0), "busstop": ("billboard", .62, 0), "metro": ("billboard", .62, 0),
               "parts": ("tv", .7, 0), "phone": ("phone", .76, 0)}   # 抬高靠圖底下補的透明邊（tools/make_screens.py），不靠 offsetY
-ITEM_LOCAL = {"rulebook": "art/items/item-rulebook.png", "phone": "art/items/item-phone.png",
+ITEM_LOCAL = {"rulebook": "art/items/item-rulebook.png", "phone": "art/items/item-phone.png", "recorder": "art/items/item-recorder.png",
               "tape": "art/items/item-tape.png"}
 
 API = "https://larch.ink/api/agent"
@@ -83,6 +83,10 @@ INVENTORY_DEFAULT = json.dumps([
      "e": "set", "v": "open_notes", "x": True},
     {"id": "phone", "n": "手機", "d": "訊息、她的頁面、直播。沒有人會打來。", "c": False,
      "e": "set", "v": "open_phone", "x": True},
+    # 錄音機本身不是動作道具：對話裡有人講話的時候才按得下去（那時候會跳「開錄音機」）。放在包包裡是讓玩家知道它在
+    {"id": "recorder", "n": "錄音機", "d": "轉盤會卡，頂樓那個人修好之前錄不了。有人講話的時候按得下去。", "c": False,
+     "useConditionVariable": "recorder_now", "useConditionValue": True,
+     "useConditionMessage": "現在沒有人在講話。有人講話的時候，畫面上會跳出開錄音機。"},
 ], ensure_ascii=False)
 
 
@@ -496,6 +500,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("inventoryLastUsed", "string", "", "最後用的道具（名稱）"),
         ("open_notes", "boolean", False, "翻開守則本"),
         ("open_phone", "boolean", False, "從背包打開手機"),
+        ("recorder_now", "boolean", False, "永遠是假：錄音機在對話裡按，不在包包裡按"),
         ("phone_day_seen", "number", 0, "她翻到第幾天的貼文（紅點用）"),
         ("rec_ok", "boolean", False, "錄音機清過毛了"),
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
