@@ -66,7 +66,7 @@ h2{margin:14px 18px 8px;font-size:17px;font-weight:600}
 .call{padding:60px 18px;text-align:center;color:var(--ink2);font-size:14px;line-height:2}
 #close{position:absolute;right:18px;bottom:18px;appearance:none;border:0;background:rgba(255,255,255,.08);color:#dfe3ea;border-radius:20px;padding:8px 16px;font:inherit;font-size:13px;cursor:pointer}
 /* 橫幅模式：只有頂端一條，底下透出來（透不出來就是暗的） */
-body.banner{background:rgba(6,8,12,.35)}
+body.banner{background:transparent}   /* 通知不要壓暗畫面。miniGame 層透不透明看裝置：透不出來會是白的，那就退回 rgba(6,8,12,.35)（2026-09-08 他要求試透明） */
 body.banner #phone,body.banner #close{display:none}
 #strip{display:none;position:absolute;left:50%;top:18px;transform:translate(-50%,-140%);width:min(560px,92vw);
   background:rgba(20,22,28,.94);color:#eef0f4;border-radius:16px;padding:12px 16px;box-shadow:0 12px 40px rgba(0,0,0,.5);
