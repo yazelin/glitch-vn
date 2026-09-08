@@ -642,6 +642,7 @@ def build(cards):
         first = prev = None
         after_choice = None
         named_yet = False       # 斑比那一格：她講出名字之後的卡才能寫「斑比」
+        pending_skip = None     # 「掛 `var`」的條件卡：閘的預設邊要接到再下一張
         back_id = None          # 這一段的回板卡，背包巨集的「沒挑到」要接到它，所以先預留 id
         pending_bag = None      # 背包巨集：下一張卡要接在 pick 條件邊後面
         for c in s["cards"]:
@@ -717,7 +718,20 @@ def build(cards):
                     d["display"] = {"斑比": pre}
                 if "叫斑比" in d.get("text", ""):
                     named_yet = True
+            hang = re.search(r"掛 `([A-Za-z_][\w]*)`", c.get("meta") or "")
             nid = b.add(d)
+            if pending_skip:                      # 上一張是條件卡：它的閘還要一條預設邊直接到這一張
+                b.edge(pending_skip, nid)
+                pending_skip = None
+            if hang and not after_choice:
+                gate = b.add({"type": "setVariable", "title": f"（{hang.group(1)}？）", "text": "", "variableOps": [], "segment": sid})
+                if prev:
+                    b.edge(prev, gate)
+                b.edge(gate, nid, {"variable": hang.group(1), "op": "eq", "value": True})
+                first = first or gate
+                prev = nid
+                pending_skip = gate
+                continue
             if after_choice:
                 b.edge(after_choice[0], nid); b.edges[-1]["sourceHandle"] = f"choice-{after_choice[1]}"
                 after_choice = None
@@ -1034,10 +1048,11 @@ def main():
                                   ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"\n寫出 {out}")
     # 自我檢查：兩種路由變數以外不可以有任何條件邊
+    hung = {n["data"]["title"][1:-2] for n in b.nodes if n["data"].get("title", "").endswith("？）")}   # 「掛 `var`」的閘
     bad = [e for e in b.edges if e.get("data") and
            e["data"]["condition"]["variable"] not in ("dest", "pick", "rec_ok", "inventoryLastUsed", "slot", "cat_asked_glitch")
-           and not e["data"]["condition"]["variable"].startswith("met_")]
-    assert not bad, f"有 {len(bad)} 條邊掛了 dest/pick 以外的條件，複合判斷不該變成邊"
+           and not e["data"]["condition"]["variable"].startswith("met_") and e["data"]["condition"]["variable"] not in hung]
+    assert not bad, f"有 {len(bad)} 條邊掛了 dest/pick 以外的條件，複合判斷不該變成邊：{sorted({e['data']['condition']['variable'] for e in bad})}"
     return 0
 
 
