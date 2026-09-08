@@ -8501,7 +8501,7 @@
     "title": "他看了一眼，點了一下頭。沒有",
     "text": "他看了一眼，點了一下頭。沒有說歡迎光臨。",
     "speaker": "旁白",
-    "segment": "greet-store-met_店員-3",
+    "segment": "greet-store-met_店員-4",
     "castHint": "店員"
    }
   },
@@ -20229,7 +20229,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（store 第4次起）",
     "text": "",
     "variableOps": []
    }
@@ -20257,7 +20257,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（store 第4次起）",
     "text": "",
     "variableOps": []
    }
@@ -20285,7 +20285,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第3次起）",
+    "title": "（store 第4次起）",
     "text": "",
     "variableOps": []
    }
@@ -27200,7 +27200,7 @@
      "kind": "variable",
      "variable": "met_店員",
      "op": "gte",
-     "value": 3
+     "value": 4
     }
    }
   },
@@ -27258,7 +27258,7 @@
      "kind": "variable",
      "variable": "met_店員",
      "op": "gte",
-     "value": 3
+     "value": 4
     }
    }
   },
@@ -27309,7 +27309,7 @@
      "kind": "variable",
      "variable": "met_店員",
      "op": "gte",
-     "value": 3
+     "value": 4
     }
    }
   },
@@ -30611,6 +30611,11 @@
      "variable": "day",
      "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "met_店員",
+     "op": "gte",
+     "value": 3
     },
     {
      "variable": "trust_店員",
