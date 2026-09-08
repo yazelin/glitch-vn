@@ -92,11 +92,16 @@ function render(){
   } else { pg.appendChild(el('div','blank', lines[0]||'她一個字都沒有寫。')); }
   // 二、她見過的人：met 的順序就是她遇到的順序
   var cast=document.getElementById('cast'); cast.textContent='';
-  var met=list(values.met).filter(function(p){ return p && p!=='路人'; }); var n=0;
-  met.forEach(function(p){ var c=el('div','c-card'); var pic=el('div','c-pic');
-    if(SPRITES[p]){ var im=document.createElement('img'); im.src=SPRITES[p]; im.alt=p; im.loading='lazy'; pic.appendChild(im); }
-    c.appendChild(pic); var nm=el('div','c-nm',DISPLAY[p]||p); var k=num(values['met_'+(p==='老闆'?'材料行老闆':p)]);
-    nm.appendChild(el('span',null, k>0?('見了 '+k+' 次'+(TAG[p]?'・'+TAG[p]:'')):(TAG[p]||''))); c.appendChild(nm); cast.appendChild(c); n++; });
+  // 板上記的 met 只有在地點碰到的人；經紀人、0x、黑洞先生是在段落裡遇到的，看 met_* 與 hole_sightings
+  var ORDER=['管理員','諾亞','店員','材料行老闆','斑比','鐵塔','0x','貓草','櫃檯','保全','黑洞先生'];
+  var people=[]; list(values.met).forEach(function(p){ var q=(p==='老闆'?'材料行老闆':p); if(q && q!=='路人' && people.indexOf(q)<0) people.push(q); });
+  ORDER.forEach(function(q){ var k=(q==='黑洞先生')?num(values.hole_sightings):num(values['met_'+q]); if(k>0 && people.indexOf(q)<0) people.push(q); });
+  var n=0;
+  people.forEach(function(q){ var c=el('div','c-card'); var pic=el('div','c-pic'); var sp=SPRITES[q]||SPRITES[q==='材料行老闆'?'老闆':q];
+    if(sp){ var im=document.createElement('img'); im.src=sp; im.alt=q; im.loading='lazy'; pic.appendChild(im); }
+    c.appendChild(pic); var nm=el('div','c-nm',DISPLAY[q]||q); var k=(q==='黑洞先生')?num(values.hole_sightings):num(values['met_'+q]);
+    var tag=TAG[q]||TAG[q==='材料行老闆'?'老闆':q]||'';
+    nm.appendChild(el('span',null, k>0?((q==='黑洞先生'?'擦身而過 ':'見了 ')+k+' 次'+(tag?'・'+tag:'')):tag)); c.appendChild(nm); cast.appendChild(c); n++; });
   document.getElementById('castNote').textContent = n? ('十二天，'+n+' 個人。'):'她誰都沒有見到。';
   // 三、她去過的地方
   var vis=list(values.visited).map(function(v){ return LOC_NAME[v]||v; });
