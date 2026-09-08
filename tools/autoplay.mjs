@@ -7,7 +7,8 @@ const require_ = createRequire(import.meta.url);
 const { chromium } = require_('/home/ct/line-sticker-studio/node_modules/playwright');
 import fs from 'node:fs';
 const SD=process.env.OUT || '/tmp';
-// 走法：notes＝照便條（預設）、explore＝不看便條，挑去得最少的地方、random＝擲骰。
+// 走法：notes＝照便條（預設）、firstline＝只看便條第一行、casual＝一半的深夜不出門、
+// explore＝不看便條，挑去得最少的地方、random＝擲骰。
 // random 用固定種子，同一個 SEED 跑出來一樣，方便重現。
 const POLICY=process.env.POLICY || 'notes';
 let seed=(Number(process.env.SEED)||1)>>>0;
@@ -28,11 +29,14 @@ const done = new Set(); const visits = {}; const phoneDays = new Set(); let outi
 const SPOT_HINT = [['樓下','一樓'],['信箱','一樓'],['管理員','一樓'],['一樓','一樓'],['樓上那間','頂樓收音機店'],['頂樓','頂樓收音機店'],['材料行','材料行'],['便利商店','便利商店'],['洗衣店','自助洗衣店'],['工作室','斑比工作室'],['經紀公司','車站前那條街'],['車站','車站前那條街'],['十四樓','十四樓大廳'],['手辦','手辦店'],['關東煮','便利商店'],['那家店','便利商店'],['店員','便利商店']];
 const pickSpot = async (bf) => {
   const when = await bf.locator('#when').textContent();
-  const todo = await bf.locator('.todo p').allTextContents(); lastTodo = todo;
+  let todo = await bf.locator('.todo p').allTextContents();
+  if (POLICY==='firstline') todo = todo.slice(0,1);   // 只讀第一行的人
+  lastTodo = todo;
   const spots = []; for (const b of await bf.locator('button.spot:not([disabled])').all()) spots.push({ name: (await b.locator('.name').textContent()).trim(), who: (await b.locator('.who').textContent()).trim(), el: b });
   out(`\n=== 板 ${when} | 便條：${todo.join(' / ')} | 可去：${spots.map(s=>s.name+'('+s.who+')').join('、')}`);
   let target=null;
   const slotName = (when.match(/上午|下午|晚上|深夜/)||[''])[0];
+  if (POLICY==='casual' && slotName==='深夜' && rnd()<0.5) { out('→ 這個深夜不出門'); return 'skip'; }
   if (POLICY==='random') { target=rpick(spots); }
   else if (POLICY!=='explore') for (const line of todo) { const t=(line.match(/上午|下午|晚上|深夜/)||[''])[0]; if (t && t!==slotName) continue; for (const [k,n] of SPOT_HINT) if (line.includes(k)) { const s=spots.find(x=>x.name===n); if (s) { target=s; break; } } if (target) break; }
   if (!target) { spots.sort((a,b)=>(visits[a.name]||0)-(visits[b.name]||0)); target=spots[0]; }
@@ -73,7 +77,8 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
           await pf.locator('#close').click(); await page.waitForTimeout(2000); }
         else { out('  [手機] 打不開'); await page.keyboard.press('Escape'); }
       } catch(e) { out('  [手機] 出錯 '+String(e).slice(0,80)); }
-      continue; } spot = await pickSpot(bf2); if (!spot) { out('沒地方可去，這一段不出門'); await bf2.locator('#skip').click(); } await page.waitForTimeout(2500); continue; }
+      continue; } spot = await pickSpot(bf2); if (spot==='skip') { await bf2.locator('#skip').click(); await page.waitForTimeout(2000); continue; }
+    if (!spot) { out('沒地方可去，這一段不出門'); await bf2.locator('#skip').click(); } await page.waitForTimeout(2500); continue; }
   const mf = await menuFrame();
   if (mf) { await pickMenu(mf, spot, when); await page.waitForTimeout(1800); continue; }
   const opts = await page.locator('button', { hasText: /^0[1-9]\s/ }).all();

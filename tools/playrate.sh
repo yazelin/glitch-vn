@@ -13,7 +13,7 @@ run(){ local pol=$1; local seed=$2; local d="$BASE/$pol-$seed"; mkdir -p "$d"
   local outs=$(grep -o '出門 [0-9]* 次' "$t" 2>/dev/null | tail -1 | grep -o '[0-9]*')
   echo "$pol	$seed	$r	第${days:-?}天	出門${outs:-?}次" >> "$BASE/tally.tsv"
 }
-for pol in notes explore random; do for s in $(seq 1 "$N"); do
+for pol in ${POLICIES:-notes firstline casual explore random}; do for s in $(seq 1 "$N"); do
   while [ "$(jobs -rp | wc -l)" -ge "$PAR" ]; do wait -n; done
   run "$pol" "$s" & done; done
 wait
