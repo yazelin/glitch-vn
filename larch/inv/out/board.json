@@ -389,8 +389,8 @@
     "type": "scene",
     "title": "booth",
     "text": "",
-    "background": "@@bg-booth",
-    "backgroundNight": "@@bg-booth",
+    "background": "@@bg-booth-hall",
+    "backgroundNight": "@@bg-booth-hall",
     "transition": "fade",
     "transitionMs": 340
    }
@@ -406,8 +406,8 @@
     "type": "scene",
     "title": "booth@n",
     "text": "",
-    "background": "@@bg-booth",
-    "backgroundNight": "@@bg-booth",
+    "background": "@@bg-booth-hall",
+    "backgroundNight": "@@bg-booth-hall",
     "transition": "fade",
     "transitionMs": 340
    }
@@ -424,7 +424,7 @@
     "title": "booth@e",
     "text": "",
     "background": "@@bg-booth-evening",
-    "backgroundNight": "@@bg-booth",
+    "backgroundNight": "@@bg-booth-hall",
     "transition": "fade",
     "transitionMs": 340
    }

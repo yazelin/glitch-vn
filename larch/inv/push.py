@@ -55,11 +55,13 @@ DESC = ("AI 主播格莉奇說她只有 4KB 的記憶。全世界當成哏，只
 # 場景代號 → (白天, 夜晚) 背景，跟 build.py 的 BG 一致；只給段落中途換場景用
 BG_MAP = {"lobby": ("bg-lobby-day", "bg-apartment-hall"), "roof": ("bg-roof-day", "bg-noah-shop"),
           "street": ("bg-street-day2", "bg-street-night"), "studio": ("bg-studio-day", "bg-bambi-studio"),
-          "booth": ("bg-booth", "bg-booth"), "tower14": ("bg-tower14-day", "bg-tower14-night"),
+          "booth": ("bg-booth-hall", "bg-booth-hall"), "tower14": ("bg-tower14-day", "bg-tower14-night"),
           "store": ("bg-store-day", "bg-store-night"), "parts": ("bg-parts-day", "bg-parts"),
           "busstop": ("bg-busstop-day", "bg-busstop"), "metro": ("bg-metro-day", "bg-metro"),
           "laundry": ("bg-laundry-day", "bg-laundry"), "figure": ("bg-figure-day", "bg-figure"),
           "catgrass_door": ("bg-catgrass-door", "bg-catgrass-door"), "catgrass_home": ("bg-catgrass-home", "bg-catgrass-home")}
+# 玩家看得到的人名：她不知道鐵塔叫鐵塔，只知道他是經紀人。變數與規則裡仍用「鐵塔」，只有顯示換掉
+DISPLAY = {"鐵塔": "經紀人"}
 LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街", "studio": "斑比工作室",
             "booth": "錄音間門口", "tower14": "十四樓大廳", "store": "便利商店", "parts": "材料行",
             "busstop": "車站前站牌", "metro": "南港站二號出口", "laundry": "自助洗衣店", "figure": "手辦店"}
@@ -272,6 +274,13 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 actors = [{"id": f"actor-screen-{prop}", "url": u, "name": "", "slot": "right", "scale": sc,
                            "offsetX": 0, "offsetY": oy, "enter": "fade", "loop": "none"}]
                 layers = [{"id": f"layer-screen-{prop}", "url": u, "position": "right", "x": 0, "y": oy, "scale": sc, "opacity": 1, "flipX": False}]
+        if d.get("speaker") in DISPLAY:
+            d["speaker"] = DISPLAY[d["speaker"]]
+        for l in d.get("dialogueLines", []):
+            if l.get("speaker") in DISPLAY:
+                l["speaker"] = DISPLAY[l["speaker"]]
+        for a_ in actors:
+            a_["name"] = DISPLAY.get(a_["name"], a_["name"])
         # 台上沒人要放一個看不見的演員，不然上一張的人會留著（novelkit 實測）
         d["stage"] = {"actors": actors or [{"id": "actor-none", "url": ghost, "name": "", "slot": "center",
                                             "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}]}
@@ -301,13 +310,15 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                     nu, _ = pick_bg(nk, nk, state, pid, dry)
                     eu, _ = pick_bg(f"bg-{loc}-evening", nk, state, pid, dry)
                     photos[loc] = {"day": du or nu or "", "evening": eu or nu or "", "night": nu or du or ""}
-                d["miniGameHtml"] = board_html.replace("/*@@PHOTOS@@*/{}", json.dumps(photos, ensure_ascii=False))
+                d["miniGameHtml"] = (board_html.replace("/*@@PHOTOS@@*/{}", json.dumps(photos, ensure_ascii=False))
+                                     .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY, ensure_ascii=False)))
                 board_id = n["id"]
             elif d["miniGameHtml"].endswith("menu.html"):
                 loc = d["title"].split("：", 1)[1]
                 rs = rule_by_loc.get(loc, [])
                 html = (menu_html.replace("@@LOC_NAME@@", LOC_NAME.get(loc, loc)).replace("@@LOC@@", loc)
-                        .replace("/*@@RULES@@*/[]", json.dumps(rs, ensure_ascii=False)))
+                        .replace("/*@@RULES@@*/[]", json.dumps(rs, ensure_ascii=False))
+                        .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY, ensure_ascii=False)))
                 d["miniGameHtml"] = html
                 vs = sorted({cc["variable"] for r in rs for c in r["conds"] for cc in (c.get("any") or [c])})
                 d["miniGameReadVars"] = ["day", "slot", "here"] + vs
@@ -669,6 +680,7 @@ def credits_board(state, pid, dry=False):
     sprites["格莉奇"] = MAIN_ASSETS["sprite-glitch"]; sprites["黑洞先生"] = MAIN_ASSETS["sprite-blackhole"]
     html = (html.replace("/*@@SPRITES@@*/{}", json.dumps({k: v for k, v in sprites.items() if v}, ensure_ascii=False))
                 .replace("/*@@LOC_NAME@@*/{}", json.dumps(LOC_NAME, ensure_ascii=False))
+                .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY, ensure_ascii=False))
                 .replace("/*@@HALL@@*/''", MAIN_ASSETS["bg-credits-cinema"]))   # 在 style 屬性裡，不能帶雙引號
     met_vars = [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
     seq = [

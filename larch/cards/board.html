@@ -134,6 +134,8 @@ if(typeof todoLines!=='function'){ window.todoLines=function(){ return []; }; }
 var SLOTS=['上午','下午','晚上','深夜'];
 // 各地點的照片（日版、夜版），推送層注入；本檔獨立打開時是空的，拍立得會是灰的
 var PHOTOS = /*@@PHOTOS@@*/{};
+var DISPLAY = /*@@DISPLAY@@*/{};   // 玩家看得到的人名（鐵塔→經紀人），變數裡仍是原名
+function show(n){ return DISPLAY[n]||n; }
 // 她把兩件事接起來的時候才拉線：[變數, 從, 到]
 var THREADS=[
  ['open_roof','lobby','roof'],
@@ -324,7 +326,7 @@ function start(){
     }
     else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; b.className+=' closed'; }
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
-    else if(known(live)){ w.textContent=live; }
+    else if(known(live)){ w.textContent=show(live); }
     else { w.textContent=been?'有人在':'沒去過'; w.className='who unknown'; }   // 去過可是那個人還沒認識
     var note=(!b.disabled)?noteFor(s):null;
     if(note){ w.className='who hint'; w.textContent=note; }

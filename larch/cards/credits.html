@@ -78,6 +78,7 @@ function num(v){ var n=Number(v); return isNaN(n)||v===''||v==null?0:n; }
 function el(t,c,txt){ var e=document.createElement(t); if(c)e.className=c; if(txt!=null)e.textContent=txt; return e; }
 var SPRITES=/*@@SPRITES@@*/{};
 var LOC_NAME=/*@@LOC_NAME@@*/{};
+var DISPLAY=/*@@DISPLAY@@*/{};
 var TAG={'管理員':'每天坐在那裡','諾亞':'話不多','斑比':'從來不打折','鐵塔':'從來不說再見','0x':'記錄精準','貓草':'只打字',
   '店員':'第五次不說歡迎光臨','老闆':'等一顆管子','櫃檯':'請走公關窗口','保全':'這裡不能站','黑洞先生':'永遠在'};
 function render(){
@@ -94,7 +95,7 @@ function render(){
   var met=list(values.met).filter(function(p){ return p && p!=='路人'; }); var n=0;
   met.forEach(function(p){ var c=el('div','c-card'); var pic=el('div','c-pic');
     if(SPRITES[p]){ var im=document.createElement('img'); im.src=SPRITES[p]; im.alt=p; im.loading='lazy'; pic.appendChild(im); }
-    c.appendChild(pic); var nm=el('div','c-nm',p); var k=num(values['met_'+(p==='老闆'?'材料行老闆':p)]);
+    c.appendChild(pic); var nm=el('div','c-nm',DISPLAY[p]||p); var k=num(values['met_'+(p==='老闆'?'材料行老闆':p)]);
     nm.appendChild(el('span',null, k>0?('見了 '+k+' 次'+(TAG[p]?'・'+TAG[p]:'')):(TAG[p]||''))); c.appendChild(nm); cast.appendChild(c); n++; });
   document.getElementById('castNote').textContent = n? ('十二天，'+n+' 個人。'):'她誰都沒有見到。';
   // 三、她去過的地方
