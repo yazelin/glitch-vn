@@ -27988,12 +27988,9 @@
   ],
   "seg029": [
    1,
-   2,
-   3
+   2
   ],
   "seg030": [
-   1,
-   2,
    3
   ],
   "seg031": [
@@ -29243,8 +29240,7 @@
    "dest": "studio",
    "slots": [
     1,
-    2,
-    3
+    2
    ],
    "conds": [],
    "or": false,
@@ -29256,11 +29252,14 @@
    "file": "調查篇-問答矩陣",
    "dest": "studio",
    "slots": [
-    1,
-    2,
     3
    ],
    "conds": [
+    {
+     "variable": "asked_斑比_0x",
+     "op": "eq",
+     "value": false
+    },
     {
      "variable": "open_tower14",
      "op": "eq",
