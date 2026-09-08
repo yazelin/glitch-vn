@@ -6,7 +6,7 @@ function todoLines(v){
   function b(k){ return v[k]===true||v[k]==='true'; }
   // 兩層：P 是通往那面牆的那條線（店員 → 洗衣店 → 工作室），永遠排在前面；
   // L 是其他值得去的地方。只有三行位置，主線被擠掉的話玩家會走不到結局（2026-09-08）。
-  var P=[], L=[];
+  var P=[], Q=[], L=[];
   if(!b('open_roof')) L.push('先從樓下問起。');
   else if(n('met_諾亞')<1) L.push('樓上那間，門開著就是有開。');
   if(b('open_parts') && n('met_材料行老闆')<1) L.push('車站後面那家材料行。那顆管子。');
@@ -28,7 +28,10 @@ function todoLines(v){
   if(n('night_visits')>=1 && n('trust_貓草')<1) L.push('深夜的便利商店。關東煮前面那個人，再去講一次。');
   // 2026-09-08 自動玩家第十天才問到這一句：原本掛了 trust_貓草，把通往斑比的唯一一條路壓在貓草那條線後面
   if(n('trust_店員')>=1 && !b('open_laundry') && n('day')>=4) P.push('問店員這條街深夜還有什麼開著。');
-  L=P.concat(L);
+  // 十四樓那條線自己排一層：它不是結局的必要條件，可是沒有人提醒就不會有人去第六次。
+  if(!b('open_tower14') && n('met_斑比')>=1) Q.push('問畫她的人，0x 那張圖是誰畫的。');
+  if(b('open_tower14') && !b('zero_answered')) Q.push(n('met_櫃檯')>=5 ? '十四樓大廳。今天再去一次。' : '十四樓大廳。再去約一次訪問。');
+  L=P.concat(Q,L);
   if(!L.length) L.push('再去一次同一個地方。');
   return L.slice(0,3);
 }

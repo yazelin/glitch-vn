@@ -193,27 +193,42 @@ var SPOTS=[
 // 窗外才是三成五。斑比在洗衣店晚上一定在（她是通往工作室的唯一一條路）。
 function holeProb(){ var d=num(values.day,1), h=num(values.hole_sightings,0);
   if((h===0&&d>=2)||(h===1&&d>=5&&d<=7)||(h===2&&d>=8&&d<=11)) return 1; return 0.35; }
+// 第四欄是機率，第五欄是保底：同一個地點同一個時段去到第 N 次，那一次他一定在。
+// 沒有保底的話，兩成的機率配上八個深夜，玩家會在同一個門口空手來回四五次然後放棄
+// （2026-09-09 試玩回報：難度太高，人類會玩不下去）。骰輸的次數會累積，骰贏就歸零。
 var VISITS=[
- ['lobby',  2,'黑洞先生',holeProb],
- ['store',  3,'貓草',    1.00],
- ['store',  3,'鐵塔',    0.25],
- ['store',  2,'斑比',    0.20],
- ['figure', 1,'貓草',    0.40],
- ['figure', 2,'貓草',    0.40],
- ['laundry',3,'貓草',    0.20],
- ['laundry',2,'斑比',    1.00],
- ['parts',  1,'諾亞',    0.15]
+ ['lobby',  2,'黑洞先生',holeProb, 0],
+ ['store',  3,'貓草',    1.00,     0],
+ ['store',  3,'鐵塔',    0.25,     2],
+ ['store',  2,'斑比',    0.20,     3],
+ ['figure', 1,'貓草',    0.40,     2],
+ ['figure', 2,'貓草',    0.40,     2],
+ ['laundry',3,'貓草',    0.20,     3],
+ ['laundry',2,'斑比',    1.00,     0],
+ ['parts',  1,'諾亞',    0.15,     3]
 ];
 
+// 骰輸幾次了：存成 "key=次數" 的字串，key 是地點＋時段＋誰。只有 go() 會動它。
+function triesMap(){
+  var m={}, a=String(values.tries||'').split(',');
+  for(var i=0;i<a.length;i++){ var kv=a[i].split('='); if(kv[0]) m[kv[0]]=num(kv[1],0); }
+  return m;
+}
 function whoIsThere(spotId, slot){
-  var out=[], s=null, i;
+  var out=[], s=null, i, m=triesMap(), dirty=false;
   for(i=0;i<SPOTS.length;i++) if(SPOTS[i].id===spotId) s=SPOTS[i];
   if(s && s.live[slot]) out.push(s.live[slot]);
   for(i=0;i<VISITS.length;i++){
     var v=VISITS[i];
+    if(v[0]!==spotId || v[1]!==slot || out.indexOf(v[2])>=0) continue;
     var pr=(typeof v[3]==='function')?v[3]():v[3];
-    if(v[0]===spotId && v[1]===slot && Math.random()<pr && out.indexOf(v[2])<0) out.push(v[2]);
+    var key=spotId+slot+v[2], c=num(m[key],0)+1;
+    if(Math.random()<pr || (v[4]>0 && c>=v[4])){ out.push(v[2]); m[key]=0; }
+    else m[key]=c;
+    dirty=true;
   }
+  if(dirty){ var a=[]; for(var k in m) if(m.hasOwnProperty(k)) a.push(k+'='+m[k]);
+    values.tries=a.join(','); setVar('tries', values.tries); }
   return out;
 }
 

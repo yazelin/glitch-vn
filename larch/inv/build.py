@@ -428,13 +428,13 @@ def build(cards):
     board_id = b.add({"type": "miniGame", "title": "調查板", "text": "選一個地方去。",
                       "miniGameHtml": "@@larch/cards/board.html",
                       "miniGamePresentation": "fullscreen", "miniGameSkippable": False,
-                      "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits", "seen_booth", "visited",
+                      "miniGameReadVars": ["day", "slot", "met", "dest", "night_visits", "seen_booth", "visited", "tries",
                                            "names_seen", "see_stairs", "hole_sightings", "see_admin", "laundry_night1",
                                            "trust_斑比", "strikes", "clue_list", "rec_ok",
-                                           "note_mailbox", "trust_店員", "trust_貓草", "cat_visits",
+                                           "note_mailbox", "trust_店員", "trust_貓草", "cat_visits", "zero_answered",
                                            "asked_鐵塔_斑比", "asked_貓草_斑比", "tube_bought", "tube_given", "asked_斑比_鐵塔"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
-                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited"] + MET_VARS})
+                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
     menu_of, entries_of, greetings = {}, {}, []
     for loc in LOCS:
@@ -968,6 +968,7 @@ def variables():
          ("notes", "string", "[]"), ("notes_free", "string", "[]"),
          ("hole_sightings", "number", 0), ("noah_stage", "number", 0),
          ("night_visits", "number", 0), ("strikes", "number", 0), ("visited", "string", ""),
+         ("tries", "string", ""),
          ("bambi_asked_at", "number", 0)]
     for k in ("roof", "laundry", "figure", "parts", "studio", "tower14"):
         v.append((f"open_{k}", "boolean", False))
