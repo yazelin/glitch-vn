@@ -320,7 +320,7 @@ function start(){
     if(!open){
       // 看得到，可是灰的。提示是她自己的判斷，不是系統指令。
       b.className+=' locked'; b.disabled=true;
-      w.className='who hint'; w.textContent=s.hint;
+      w.className='who hint'; w.textContent=(s.id==='studio' && num(values['met_斑比'],0)>=1) ? '洗衣店那個人的工作室。她還沒說可以去。' : s.hint;   // 見過斑比之後名字知道了，提示跟著換
     }
     else if(live===null||live===undefined){ w.textContent='這個時間沒開'; w.className='who unknown'; b.disabled=true; b.className+=' closed'; }
     else if(live===''){ w.textContent='開著，可能沒人'; w.className='who unknown'; }
