@@ -121,7 +121,8 @@ function start(){
   document.getElementById('loc').textContent=LOC_NAME||LOC;
   document.getElementById('when').textContent='第 '+day+' 天 ・ '+SLOTS[slot];
   var DISPLAY=/*@@DISPLAY@@*/{};
-  document.getElementById('who').textContent=here.length?here.map(function(n){ return DISPLAY[n]||n; }).join('、')+' 在':'這裡沒有人';
+  function show(n){ var d=DISPLAY[n]; if(!d) return n; if(typeof d==='string') return d; return (values[d.until]===true||values[d.until]==='true') ? n : d.name; }
+  document.getElementById('who').textContent=here.length?here.map(show).join('、')+' 在':'這裡沒有人';
   var box=document.getElementById('list'); box.textContent='';
   var ok=RULES.filter(function(r){ return passes(r, slot, here); });
   if(!ok.length){

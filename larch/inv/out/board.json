@@ -40,6 +40,7 @@
      "asked_貓草_斑比",
      "tube_bought",
      "tube_given",
+     "asked_斑比_鐵塔",
      "open_roof",
      "open_laundry",
      "open_figure",
@@ -3943,7 +3944,10 @@
       "kind": "set",
       "value": true
      }
-    ]
+    ],
+    "display": {
+     "斑比": "畫她的人"
+    }
    }
   },
   {
@@ -4115,7 +4119,10 @@
       "kind": "set",
       "value": true
      }
-    ]
+    ],
+    "display": {
+     "斑比": "畫她的人"
+    }
    }
   },
   {
@@ -4429,7 +4436,10 @@
       "kind": "set",
       "value": 3
      }
-    ]
+    ],
+    "display": {
+     "斑比": "畫她的人"
+    }
    }
   },
   {
@@ -4495,7 +4505,10 @@
      }
     ],
     "sceneCode": "studio",
-    "segment": "seg029"
+    "segment": "seg029",
+    "display": {
+     "斑比": "畫她的人"
+    }
    }
   },
   {
@@ -4637,7 +4650,10 @@
       "kind": "set",
       "value": true
      }
-    ]
+    ],
+    "display": {
+     "斑比": "畫她的人"
+    }
    }
   },
   {
@@ -4913,7 +4929,10 @@
      }
     ],
     "sceneCode": "studio",
-    "segment": "seg033"
+    "segment": "seg033",
+    "display": {
+     "斑比": "洗衣店那個人"
+    }
    }
   },
   {
@@ -14682,7 +14701,10 @@
       "kind": "set",
       "value": true
      }
-    ]
+    ],
+    "display": {
+     "斑比": "洗衣店那個人"
+    }
    }
   },
   {
@@ -14748,7 +14770,10 @@
       "emotion": ""
      }
     ],
-    "segment": "seg109"
+    "segment": "seg109",
+    "display": {
+     "斑比": "洗衣店那個人"
+    }
    }
   },
   {

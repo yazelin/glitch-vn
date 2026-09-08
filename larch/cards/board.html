@@ -135,7 +135,7 @@ var SLOTS=['上午','下午','晚上','深夜'];
 // 各地點的照片（日版、夜版），推送層注入；本檔獨立打開時是空的，拍立得會是灰的
 var PHOTOS = /*@@PHOTOS@@*/{};
 var DISPLAY = /*@@DISPLAY@@*/{};   // 玩家看得到的人名（鐵塔→經紀人），變數裡仍是原名
-function show(n){ return DISPLAY[n]||n; }
+function show(n){ var d=DISPLAY[n]; if(!d) return n; if(typeof d==='string') return d; return (values[d.until]===true||values[d.until]==='true') ? n : d.name; }
 // 她把兩件事接起來的時候才拉線：[變數, 從, 到]
 var THREADS=[
  ['open_roof','lobby','roof'],

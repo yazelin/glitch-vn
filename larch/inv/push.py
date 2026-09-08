@@ -62,6 +62,8 @@ BG_MAP = {"lobby": ("bg-lobby-day", "bg-apartment-hall"), "roof": ("bg-roof-day"
           "catgrass_door": ("bg-catgrass-door", "bg-catgrass-door"), "catgrass_home": ("bg-catgrass-home", "bg-catgrass-home")}
 # 玩家看得到的人名：她不知道鐵塔叫鐵塔，只知道他是經紀人。變數與規則裡仍用「鐵塔」，只有顯示換掉
 DISPLAY = {"鐵塔": "經紀人"}
+# 板與選單用的：問到名字（asked_斑比_鐵塔）之前叫「畫她的人」
+DISPLAY_UI = {"鐵塔": "經紀人", "斑比": {"until": "asked_斑比_鐵塔", "name": "畫她的人"}}
 LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街", "studio": "斑比工作室",
             "booth": "錄音間門口", "tower14": "十四樓大廳", "store": "便利商店", "parts": "材料行",
             "busstop": "車站前站牌", "metro": "南港站二號出口", "laundry": "自助洗衣店", "figure": "手辦店"}
@@ -274,13 +276,14 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 actors = [{"id": f"actor-screen-{prop}", "url": u, "name": "", "slot": "right", "scale": sc,
                            "offsetX": 0, "offsetY": oy, "enter": "fade", "loop": "none"}]
                 layers = [{"id": f"layer-screen-{prop}", "url": u, "position": "right", "x": 0, "y": oy, "scale": sc, "opacity": 1, "flipX": False}]
-        if d.get("speaker") in DISPLAY:
-            d["speaker"] = DISPLAY[d["speaker"]]
+        disp = {**DISPLAY, **(d.pop("display", None) or {})}
+        if d.get("speaker") in disp:
+            d["speaker"] = disp[d["speaker"]]
         for l in d.get("dialogueLines", []):
-            if l.get("speaker") in DISPLAY:
-                l["speaker"] = DISPLAY[l["speaker"]]
+            if l.get("speaker") in disp:
+                l["speaker"] = disp[l["speaker"]]
         for a_ in actors:
-            a_["name"] = DISPLAY.get(a_["name"], a_["name"])
+            a_["name"] = disp.get(a_["name"], a_["name"])
         # 台上沒人要放一個看不見的演員，不然上一張的人會留著（novelkit 實測）
         d["stage"] = {"actors": actors or [{"id": "actor-none", "url": ghost, "name": "", "slot": "center",
                                             "scale": 0.01, "offsetX": 0, "offsetY": 0, "enter": "fade", "loop": "none"}]}
@@ -311,17 +314,17 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                     eu, _ = pick_bg(f"bg-{loc}-evening", nk, state, pid, dry)
                     photos[loc] = {"day": du or nu or "", "evening": eu or nu or "", "night": nu or du or ""}
                 d["miniGameHtml"] = (board_html.replace("/*@@PHOTOS@@*/{}", json.dumps(photos, ensure_ascii=False))
-                                     .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY, ensure_ascii=False)))
+                                     .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY_UI, ensure_ascii=False)))
                 board_id = n["id"]
             elif d["miniGameHtml"].endswith("menu.html"):
                 loc = d["title"].split("：", 1)[1]
                 rs = rule_by_loc.get(loc, [])
                 html = (menu_html.replace("@@LOC_NAME@@", LOC_NAME.get(loc, loc)).replace("@@LOC@@", loc)
                         .replace("/*@@RULES@@*/[]", json.dumps(rs, ensure_ascii=False))
-                        .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY, ensure_ascii=False)))
+                        .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY_UI, ensure_ascii=False)))
                 d["miniGameHtml"] = html
                 vs = sorted({cc["variable"] for r in rs for c in r["conds"] for cc in (c.get("any") or [c])})
-                d["miniGameReadVars"] = ["day", "slot", "here"] + vs
+                d["miniGameReadVars"] = ["day", "slot", "here", "asked_斑比_鐵塔"] + vs
                 d["miniGameWriteVars"] = ["pick"]
                 menus.append(n["id"])
         elif d.get("type") == "dialogue" and d.get("sceneCode"):
@@ -440,7 +443,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             d = n["data"]
             n["data"] = {**phone_data(d["contact"], d["msg"]), "segment": d.get("segment")}
     # 她的手機只收不回（背包與謎題 五）：直播開始那三晚由建置層接段落；斑比約你、公關窗口自動回覆
-    phones = [("phone-bambi", "斑比", "有空來工作室。稿子帶著。", [("open_studio", "eq", True)]),
+    phones = [("phone-bambi", "未儲存的號碼", "有空來工作室。稿子帶著。", [("open_studio", "eq", True)]),   # 她這時候還不知道名字
               ("phone-pr", "公關窗口", "您的來信已收到，我們將於三至五個工作天內回覆。", [("met_櫃檯", "gte", 1)])]
     for i, (nid, contact, msg, conds) in enumerate(phones):
         cond = {"kind": "variable", "variable": conds[0][0], "op": conds[0][1], "value": conds[0][2], "match": "all",

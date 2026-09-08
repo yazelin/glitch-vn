@@ -432,7 +432,7 @@ def build(cards):
                                            "names_seen", "see_stairs", "hole_sightings", "see_admin", "laundry_night1",
                                            "trust_斑比", "strikes", "clue_list", "rec_ok",
                                            "note_mailbox", "trust_店員", "trust_貓草", "cat_visits",
-                                           "asked_鐵塔_斑比", "asked_貓草_斑比", "tube_bought", "tube_given"] + [f"open_{k}" for k in
+                                           "asked_鐵塔_斑比", "asked_貓草_斑比", "tube_bought", "tube_given", "asked_斑比_鐵塔"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
                       "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
@@ -640,6 +640,7 @@ def build(cards):
             rule["conds"] = rule["conds"] + day_conds(s["cards"][0]["file"], heads)
         first = prev = None
         after_choice = None
+        named_yet = False       # 斑比那一格：她講出名字之後的卡才能寫「斑比」
         back_id = None          # 這一段的回板卡，背包巨集的「沒挑到」要接到它，所以先預留 id
         pending_bag = None      # 背包巨集：下一張卡要接在 pick 條件邊後面
         for c in s["cards"]:
@@ -700,6 +701,21 @@ def build(cards):
             d["segment"] = sid
             for v in c["vars"]:
                 d.setdefault("variableOps", []).append(var_op(v))
+            # 斑比：她在「三、問斑比・關於鐵塔」那一格才說自己叫斑比（問答矩陣 2027 行）。之前卡上不能寫這個名字。
+            spk = [d.get("speaker")] + [l.get("speaker") for l in d.get("dialogueLines", [])]
+            if "斑比" in spk:
+                sec, f_ = s["key"][1], s["key"][0]
+                pre = None
+                if sec.startswith("六、路上問不到") or (rule and rule.get("dest") == "laundry"):
+                    pre = "洗衣店那個人"
+                elif f_ == "調查篇-問答矩陣" and sec.startswith(("零、到訪", "一、問斑比", "二、問斑比", "短版", "深夜版")):
+                    pre = "畫她的人"
+                elif f_ == "調查篇-問答矩陣" and sec.startswith("三、問斑比") and not named_yet:
+                    pre = "畫她的人"
+                if pre:
+                    d["display"] = {"斑比": pre}
+                if "叫斑比" in d.get("text", ""):
+                    named_yet = True
             nid = b.add(d)
             if after_choice:
                 b.edge(after_choice[0], nid); b.edges[-1]["sourceHandle"] = f"choice-{after_choice[1]}"
