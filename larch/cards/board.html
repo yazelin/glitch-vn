@@ -279,6 +279,12 @@ function start(){
     p.setAttribute('d','M'+a.x+' '+a.y+' Q'+mx+' '+my+' '+b.x+' '+b.y); lines.appendChild(p);
   });
 
+  // 便條上的地名只寫她知道的：沒問到名字之前，斑比的工作室是「畫她的人那裡」；那家公司查到之前只是「那家公司的樓」
+  function nameFor(s,open){
+    if(s.id==='studio' && num(values['met_斑比'],0)<1) return '畫她的人那裡';
+    if(s.id==='tower14' && !open) return '那家公司的樓';
+    return s.name;
+  }
   // 她自己寫在便條上的判斷，照狀態換（拉力不足的地方在這裡補）
   function noteFor(s){
     var d=num(values.day,1), h=num(values.hole_sightings,0);
@@ -302,7 +308,7 @@ function start(){
     b.className='spot'; b.type='button';
     b.style.left=s.x+'%'; b.style.top=s.y+'%';
     b.style.setProperty('--rot', ((i*7)%9-4)*0.8+'deg');
-    var n=document.createElement('span'); n.className='name'; n.textContent=s.name;
+    var n=document.createElement('span'); n.className='name'; n.textContent=nameFor(s,open);
     var w=document.createElement('span'); w.className='who';
     if(been && PHOTOS[s.id]){
       var ph=document.createElement('span'); ph.className='photo';
