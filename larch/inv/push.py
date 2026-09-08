@@ -317,6 +317,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             # 段落中途換場景的卡：帶背景（play 時進這張卡就換）。日夜先都用夜版，白天版由入口決定。
             code = d.pop("sceneCode")
             seg_dest = seg_dest_of.get(seg_of_card)
+            if not seg_dest and seg_of_card and seg_of_card.startswith("greet-"):
+                seg_dest = seg_of_card.split("-")[1]      # 招呼卡與材料行前奏：greet-<地點>-…，本來就在那個地點，不換背景
             if code != seg_dest and code in BG_MAP:
                 # 這一段幾點演，換的場景就用幾點的那張：全在晚上／深夜的段落用晚版／夜版，其他用日版
                 day_key, night_key = BG_MAP[code]
