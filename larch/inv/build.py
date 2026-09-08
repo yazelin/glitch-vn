@@ -477,6 +477,7 @@ def build(cards):
             continue
         rule, notes = parse_trigger(s["trigger"])
         heads = s["cards"][0].get("headings", [])
+        trig_dest = rule["dest"] if rule else None     # 觸發列自己寫了地點的，總表不可以蓋掉（六之二在便利商店，總表寫的是工作室）
         if rule is None:
             rule, notes = {"dest": None, "slots": [], "conds": [], "or": False}, []
         if s["cards"][0]["file"] == "調查篇-問答矩陣" and s["key"][1].startswith("進場"):
@@ -564,7 +565,7 @@ def build(cards):
                     rule["dest_from"] = "總表（該人預設）"
             if hit:
                 dest, slots = hit
-                if dest:
+                if dest and not trig_dest:
                     rule["dest"] = dest
                     rule.setdefault("dest_from", "總表")
                     if rule["dest_from"] not in ("總表（該人預設）",):

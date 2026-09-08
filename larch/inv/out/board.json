@@ -22152,7 +22152,7 @@
   },
   {
    "id": "e151",
-   "source": "inv-017",
+   "source": "inv-045",
    "target": "inv-157",
    "sourceHandle": "right",
    "animated": true,
@@ -22174,7 +22174,7 @@
   },
   {
    "id": "e153",
-   "source": "inv-017",
+   "source": "inv-029",
    "target": "inv-159",
    "sourceHandle": "right",
    "animated": true,
@@ -28989,7 +28989,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "同一件事再問一次"
   },
   {
@@ -29130,7 +29129,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問諾亞那個穿西裝的"
   },
   {
@@ -29171,7 +29169,6 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表",
    "label": "敲門"
   },
   {
@@ -29192,7 +29189,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問斑比她是不是真的會忘"
   },
   {
@@ -29213,7 +29209,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問斑比她一個人住嗎"
   },
   {
@@ -29234,7 +29229,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問斑比守則本是不是她畫的"
   },
   {
@@ -29249,7 +29243,6 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表",
    "label": "問斑比 0x 的圖是誰畫的"
   },
   {
@@ -29264,7 +29257,6 @@
    ],
    "conds": [],
    "or": false,
-   "dest_from": "總表",
    "label": "問斑比 0x 的圖是誰畫的"
   },
   {
@@ -29285,7 +29277,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "再問一次她會不會忘"
   },
   {
@@ -29323,7 +29314,7 @@
    "segment": "seg033",
    "section": "六、路上問不到（`laundry`・晚上・`trust_斑比 == 0`）",
    "file": "調查篇-問答矩陣",
-   "dest": "studio",
+   "dest": "laundry",
    "slots": [
     1,
     2,
@@ -29337,14 +29328,13 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "在路上攔她"
   },
   {
    "segment": "seg034",
    "section": "六之二、路上問不到（`store`・晚上・`trust_斑比 == 0`）",
    "file": "調查篇-問答矩陣",
-   "dest": "studio",
+   "dest": "store",
    "slots": [
     1,
     2,
@@ -29358,7 +29348,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "在路上攔她"
   },
   {
@@ -29594,7 +29583,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問店員那個立牌"
   },
   {
@@ -29621,7 +29609,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問店員那個穿西裝的"
   },
   {
@@ -29648,7 +29635,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問店員每次都買一樣的那個客人"
   },
   {
@@ -29845,7 +29831,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問老闆那個穿西裝的"
   },
   {
@@ -29875,7 +29860,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "再問一次那個穿西裝的"
   },
   {
@@ -29905,7 +29889,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "第三次問那個穿西裝的"
   },
   {
@@ -29925,7 +29908,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "買諾亞等的那顆管子"
   },
   {
@@ -29955,7 +29937,6 @@
     }
    ],
    "or": false,
-   "dest_from": "總表",
    "label": "問老闆他都買什麼"
   },
   {
