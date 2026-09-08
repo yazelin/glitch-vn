@@ -418,7 +418,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                            "miniGameSkippable": True, "miniGameFrame": {"showButton": False, "showTitle": False},
                            "miniGameReadVars": ["notes", "notes_free", "met", "page1", "day", "night_visits", "hole_sightings",
                                                 "laundry_night1", "trust_斑比", "strikes", "open_roof", "open_parts", "open_laundry",
-                                                "open_studio", "met_諾亞", "met_材料行老闆"] + note_codes,
+                                                "open_studio", "met_諾亞", "met_材料行老闆",
+                                                # 便條與這一頁共用 todo.js，少讀一個變數就會寫出跟板上不一樣的三行（2026-09-09）
+                                                "tube_bought", "tube_given", "see_admin", "note_mailbox",
+                                                "trust_店員", "trust_貓草", "met_斑比", "names_seen", "clue_list",
+                                                "open_tower14", "open_figure", "met_櫃檯", "zero_answered"] + note_codes,
                            "miniGameWriteVars": ["notes_free", "page1", "page1_text", "page1_lead", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
     phone_src = (HERE.parent / "cards/phone.html").read_text(encoding="utf-8")
