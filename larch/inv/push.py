@@ -586,7 +586,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
 
     # 群組：地點
     group_nodes = []
-    gx, gy = CW * 4, 0
+    entry_slots = []   # (該地點的入口場景 ids, 群組的 x)
+    # 群組橫排、樞紐（調查板、插播）排在上面一列：從板到各地點入口的邊往下扇出，不穿過別的群組
+    # （2026-09-08 試玩抓到：直排的時候那三十幾條邊斜穿整面白板，看起來像沒接到卡的斷線）
+    gx, gy = 0, 0
+    group_h = 0
     menu_loc = {}
     for m in menus:
         menu_loc[m] = by_id[m]["data"]["title"].split("：", 1)[1]
@@ -595,7 +599,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         gid = f"grp-{loc}"
         rows = []            # 每列一串 id
         entries = [e["source"] for e in edges if e["target"] == m and e["source"] != board_id]
-        rows.append(entries + [m, f"{m}-back"])
+        rows.append([m, f"{m}-back"])          # 入口場景不進群組：排在群組正上方那一列，板到入口的邊就不會穿過別的群組
+        entry_slots.append((entries, gx))
         for en in entries:
             ids = [x for x in chain(en, stop=lambda nid: nid == m or nid in placed) if x != en]
             for k in range(0, len(ids), WRAP):
@@ -619,20 +624,34 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             for c_i, nid in enumerate(row):
                 if nid in by_id:
                     put(nid, PAD + CW * c_i, PAD + 40 + CH * r_i, parent=gid)
-        gy += height + CH
+        gx += width + CW
+        group_h = max(group_h, height)
 
-    # 沒排到的（開場那段、孤兒）：放在群組下面
-    x_i = 0
-    for n in nodes:
-        if n["id"] not in placed and n["id"] not in [g["id"] for g in group_nodes]:
-            n.setdefault("position", {"x": gx + CW * (x_i % WRAP), "y": gy + CH * (x_i // WRAP)})
-            x_i += 1
-    # 開場那一段自成一列（它從 start 卡開始，沒有 pick 邊）
+    # 入口場景：各自群組正上方一列（日／晚／夜三張）
+    for entries, x0 in entry_slots:
+        for i, en in enumerate(entries):
+            if en in by_id:
+                by_id[en]["position"] = {"x": x0 + PAD + CW * i, "y": -CH * 2}
+                by_id[en].pop("parentId", None); by_id[en].pop("extent", None)
+                placed[en] = True
+    # 樞紐與沒排到的（調查板、插播、共用閘、收尾、直播）：再上面一整列，橫著排；調查板放最左
+    total_w = gx
     start_ids = [n["id"] for n in nodes if n["data"].get("start")]
+    opening = set(chain(start_ids[0], stop=lambda nid: nid == board_id)) if start_ids else set()
+    gids = {g["id"] for g in group_nodes}
+    entry_ids = {en for entries, _ in entry_slots for en in entries}
+    hub_ids = [n["id"] for n in nodes if not n.get("parentId") and n["id"] not in gids
+               and n["id"] not in opening and n["id"] not in entry_ids]
+    hub_ids.sort(key=lambda i: 0 if i == board_id else 1)
+    cols = 24            # 樞紐列一排二十四張，往上疊
+    for x_i, nid in enumerate(hub_ids):
+        by_id[nid]["position"] = {"x": CW * (x_i % cols), "y": -CH * 5 - CH * (x_i // cols)}
+        by_id[nid].pop("parentId", None); by_id[nid].pop("extent", None)
+    # 開場那一段自成一列，放在群組下面（它從 start 卡開始，沒有 pick 邊）
     if start_ids:
         ids = chain(start_ids[0], stop=lambda nid: nid == board_id)
         for i, nid in enumerate(ids):
-            by_id[nid]["position"] = {"x": gx + CW * (i % WRAP), "y": gy + CH * (i // WRAP)}
+            by_id[nid]["position"] = {"x": CW * (i % cols), "y": group_h + CH * 2 + CH * (i // cols)}
             by_id[nid].pop("parentId", None); by_id[nid].pop("extent", None)
     nodes[:0] = group_nodes          # 群組要排在子卡前面
 
