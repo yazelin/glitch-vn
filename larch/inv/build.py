@@ -570,7 +570,7 @@ def build(cards):
                     rule.setdefault("dest_from", "總表")
                     if rule["dest_from"] not in ("總表（該人預設）",):
                         rule["dest_from"] = "總表"
-                if slots:
+                if slots and not rule["slots"]:      # 觸發列自己寫了時段的也照它
                     rule["slots"] = slots
         if rule["dest"]:
             notes = [x for x in notes if x != "判不出地點"]
