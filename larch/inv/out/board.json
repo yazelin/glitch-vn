@@ -28677,6 +28677,11 @@
      "variable": "met_管理員",
      "op": "gte",
      "value": 2
+    },
+    {
+     "variable": "see_admin",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -28940,6 +28945,11 @@
      "variable": "note_mailbox",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "asked_諾亞_信箱",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -28992,6 +29002,11 @@
      "variable": "see_admin",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "asked_諾亞_黑洞",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29121,7 +29136,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "open_tower14",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "label": "問斑比 0x 的圖是誰畫的"
   },
@@ -29141,6 +29162,11 @@
      "variable": "asked_斑比_格莉奇",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "bambi_revised",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29300,6 +29326,11 @@
      "variable": "asked_貓草_格莉奇",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "asked_貓草_黑洞",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29324,6 +29355,11 @@
      "variable": "met_鐵塔",
      "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "asked_貓草_鐵塔",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29349,6 +29385,11 @@
      "variable": "open_figure",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "asked_貓草_0x",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29374,6 +29415,11 @@
      "variable": "open_figure",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "asked_貓草_斑比",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29423,6 +29469,11 @@
      "variable": "asked_貓草_格莉奇",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "deadend_cat",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29476,6 +29527,11 @@
      "variable": "hole_sightings",
      "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "see_clerk",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29870,6 +29926,11 @@
      "variable": "trust_斑比",
      "op": "gte",
      "value": 3
+    },
+    {
+     "variable": "names_seen",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -29912,6 +29973,11 @@
      "variable": "met_鐵塔",
      "op": "gte",
      "value": 1
+    },
+    {
+     "variable": "clue_notfix",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -30031,7 +30097,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "deadend_cat_glitch",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "label": "問她的東西在哪一區"
   },
@@ -30046,7 +30118,13 @@
     2,
     3
    ],
-   "conds": [],
+   "conds": [
+    {
+     "variable": "cat_room_mentioned",
+     "op": "eq",
+     "value": false
+    }
+   ],
    "or": false,
    "label": "問他手上那個"
   },
@@ -30068,6 +30146,11 @@
      "variable": "clue_list",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "seen_catgrass_home",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -30169,6 +30252,11 @@
      "variable": "trust_斑比",
      "op": "eq",
      "value": 0
+    },
+    {
+     "variable": "laundry_night1",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -30220,6 +30308,11 @@
      "variable": "trust_斑比",
      "op": "eq",
      "value": 1
+    },
+    {
+     "variable": "open_studio",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,

@@ -837,6 +837,12 @@ def build(cards):
                     and n["data"].get("title", "").startswith("筆記：")), None)
         assert nxt, f"選項 → 筆記 接不到（{sid_}）"
         b.edge(nid_, nxt); b.edges[-1]["sourceHandle"] = f"choice-{k_}"
+    # 推劇情的段落只演一次：它自己設的旗標當門檻（2026-09-08 試玩抓到深夜的鐵塔可以一直重播）。
+    # 設計寫了「可以重來」的不在這張表上（乙・幫誰畫的、櫃檯迴圈、路人）。
+    for r in rules:
+        for sec_prefix, flag in ONCE_BY_FLAG.items():
+            if r["section"].startswith(sec_prefix) and not any(c.get("variable") == flag for c in r["conds"]):
+                r["conds"] = r["conds"] + [{"variable": flag, "op": "eq", "value": False}]
     # 她開台的晚上（調查篇-直播）：「第Ｎ天直播」＝板上的插播，橫幅那張卡由這裡放，推送層換成手機插件卡
     for (ff, _l, sec), (first, sid_) in list(seg_first.items()):
         m_live = re.search(r"第([一二三四五六七八九十]+)天直播", sec) if ff == "調查篇-直播" else None
@@ -905,6 +911,16 @@ def build(cards):
 # 被後來的定稿取代、可是同一份檔裡其他節還在用的段落（整份檔不能作廢）
 SKIP_SECTIONS = {("調查篇-第二天", "場景三・一樓（第二天・晚上七點多）"),      # 正本是橋段「一、第一次擦身而過」
                  ("調查篇-問答矩陣", "三、那一張卡（三格都在裡面）")}          # 0x 那張卡的抄本，正本在橋段六（2026-09-08 試玩抓到：沒預約就在櫃檯撞到 0x）
+# 只演一次的段落：節標題開頭 → 它自己設的旗標（演完為真，選單就收掉）
+ONCE_BY_FLAG = {
+    "二、問管理員・關於黑洞先生": "see_admin", "Ｃ、給諾亞看信箱那一頁": "asked_諾亞_信箱", "Ｂ、問諾亞・關於黑洞先生": "asked_諾亞_黑洞",
+    "深夜版": "open_tower14", "五之一、第二次問": "bambi_revised",
+    "二、關於黑洞先生（`store`": "asked_貓草_黑洞", "三、關於鐵塔（`store`": "asked_貓草_鐵塔",
+    "四、關於 0x（`figure`": "asked_貓草_0x", "五、關於斑比（`figure`": "asked_貓草_斑比", "七、她是不是真的會忘": "deadend_cat",
+    "二、問店員・關於黑洞先生": "see_clerk", "Ａ・斑比的工作室": "names_seen", "五、深夜的鐵塔": "clue_notfix",
+    "Ａ・問她的事": "deadend_cat_glitch", "Ｂ・問他手上那個": "cat_room_mentioned", "九、你不要寫出去喔": "seen_catgrass_home",
+    "第一晚": "laundry_night1", "甲・桌上那幾張": "open_studio",
+}
 # 問答矩陣鐵塔那一場：場面 → 格一（進門就是這一格，不用選）；格三演完 → 收尾（三格共用）
 CHAINS = [("調查篇-問答矩陣", "一、場面（三格共用）", "格一・問鐵塔關於格莉奇"),
           ("調查篇-問答矩陣", "格三・問鐵塔關於斑比", "收尾（三格共用）")]
