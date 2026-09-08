@@ -4,9 +4,9 @@
 set -u
 BASE=${1:?} N=${2:-3} PAR=${3:-3}
 mkdir -p "$BASE"
-run(){ local pol=$1 seed=$2 d="$BASE/$pol-$seed"; mkdir -p "$d"
+run(){ local pol=$1; local seed=$2; local d="$BASE/$pol-$seed"; mkdir -p "$d"
   OUT=$d POLICY=$pol SEED=$seed timeout 2400 node tools/autoplay.mjs >"$d/stdout.txt" 2>&1
-  local t="$d/transcript.txt" r=中斷
+  local t="$d/transcript.txt"; local r=中斷
   grep -q '選「把筆記寫完」' "$t" 2>/dev/null && r=好結局
   [ "$r" = 中斷 ] && grep -q '選「翻到倒數第三頁」' "$t" 2>/dev/null && r=短結局
   local days=$(grep -o '=== 板 第 [0-9]* 天' "$t" 2>/dev/null | tail -1 | grep -o '[0-9]*')
