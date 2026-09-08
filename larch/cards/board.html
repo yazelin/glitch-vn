@@ -162,13 +162,13 @@ var SPOTS=[
  {id:'busstop', name:'車站前站牌',  live:['路人','路人','路人',''], x:22, y:87},
  {id:'metro',   name:'南港站二號出口', live:['路人','路人','路人',''], x:73, y:92},
  {id:'store',   name:'便利商店',    live:['店員','店員','店員','店員'], x:60, y:56},
- {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null], gate:'open_parts', x:88, y:69,
+ {id:'parts',   name:'材料行',      live:['老闆','老闆',null,null], gate:'open_parts', x:88, y:69, showIf:'open_parts',
   hint:'他等那顆管子等兩個禮拜了。他走不開。'},
- {id:'laundry', name:'自助洗衣店',  live:['','','',''], gate:'open_laundry', x:77, y:56,
+ {id:'laundry', name:'自助洗衣店',  live:['','','',''], gate:'open_laundry', x:77, y:56, showIf:'open_laundry',
   hint:'隔壁那家深夜也開。'},
- {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null], gate:'open_figure', x:46, y:57,
+ {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null], gate:'open_figure', x:46, y:57, showIf:'open_figure',
   hint:'他說他都在那裡買。'},
- {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'], gate:'open_studio', x:46, y:26,
+ {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'], gate:'open_studio', x:46, y:26, showIf:['asked_鐵塔_斑比','asked_貓草_斑比','open_studio'],
   hint:'畫她的人。名字我還沒問到。'},
  // **booth 永遠是灰的，而且提示永遠是那一句。** 玩家會一直看到它，一直進不去。
  // 那是刻意的挫折，而且它會讓「深夜在便利商店撞到鐵塔」變成整款最好的一個瞬間。
@@ -301,7 +301,8 @@ function start(){
     var open = isOpen(s);
     // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
     if(!open && !s.hint) return;
-    if(s.showIf && !(values[s.showIf]===true || values[s.showIf]==='true')) return;
+    // 便條上引的話都是別人講過的：講過之前這一張不畫（2026-09-08 試玩抓到：第三天就看到「他說他都在那裡買」）
+    if(s.showIf){ var ks=[].concat(s.showIf), any=false; for(var q=0;q<ks.length;q++) if(values[ks[q]]===true||values[ks[q]]==='true') any=true; if(!any) return; }
     var live=s.live[slot];
     var been = visited.indexOf(s.id)>=0 || s.id==='lobby';   // 開場那一趟就在一樓，不經過板
     var b=document.createElement('button');

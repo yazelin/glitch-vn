@@ -65,7 +65,7 @@ console.log('\n=== 調查板 ===');
   ok('解鎖的畫成可點的', (await openSpots.count()) === 5, `${await openSpots.count()} 個`);
   // 沒開又有提示的要看得到（灰的），沒開又沒提示的（trust 3 私人地方）根本不畫。
   const locked = fr.locator('button.spot.locked');
-  ok('沒開但有提示的畫成灰的', (await locked.count()) === 6, `${await locked.count()} 個`);
+  ok('沒開但有提示的畫成灰的（只有她自己有疑問的兩處：頂樓、那家公司；別人講過才畫的那幾張還沒出現）', (await locked.count()) === 2, `${await locked.count()} 個`);
   // trust 3 那五個私人地方是「場景不是地點」，板上永遠不該有它們。
   ok('貓草家不在板上（那是場景不是地點）',
      (await fr.locator('button.spot', { hasText: '貓草家' }).count()) === 0);

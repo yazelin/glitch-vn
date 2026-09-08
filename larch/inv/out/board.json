@@ -36,6 +36,8 @@
      "trust_店員",
      "trust_貓草",
      "cat_visits",
+     "asked_鐵塔_斑比",
+     "asked_貓草_斑比",
      "open_roof",
      "open_laundry",
      "open_figure",
@@ -5315,7 +5317,15 @@
      }
     ],
     "sceneCode": "booth",
-    "segment": "seg036"
+    "segment": "seg036",
+    "variableOps": [
+     {
+      "id": "op-asked_鐵塔_斑比",
+      "variable": "asked_鐵塔_斑比",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
