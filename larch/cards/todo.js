@@ -23,7 +23,7 @@ function todoLines(v){
   // 2026-09-07 自動玩家跑完一輪抓到的斷點：店員的信任、貓草那條線、抄信箱，沒有人提醒就永遠走不到
   if(n('day')>=2 && !b('note_mailbox')) L.push('晚上去一樓，把信箱的名牌抄下來。');
   if(n('day')>=2 && n('trust_店員')<1) L.push(n('met_店員')>=3 ? '便利商店晚上再去一次。問店員一件事。' : '便利商店。多去幾次，讓他認得。');
-  if(n('night_visits')>=1 && n('trust_貓草')<1) L.push('深夜那家店，關東煮前面那個人。再去講一次。');
+  if(n('night_visits')>=1 && n('trust_貓草')<1) L.push('深夜的便利商店。關東煮前面那個人，再去講一次。');
   if(n('trust_貓草')>=1 && n('trust_店員')>=1 && !b('open_laundry') && n('day')>=4) L.push('問店員這條街深夜還有什麼開著。');
   if(!L.length) L.push('再去一次同一個地方。');
   return L.slice(0,3);
