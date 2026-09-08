@@ -242,6 +242,19 @@ function advance(){
   else { values.slot=slot+1; setVar('slot',slot+1); }
 }
 function metKey(p){ return 'met_'+(p==='老闆'?'材料行老闆':p); }
+// 名單那一頁。沒走過那一場的只留 ID，不補註解，也不補一句解釋。
+function listText(){
+  function on(k){ return values[k]===true||values[k]==='true'; }
+  var home=on('seen_catgrass_home'), L=[];
+  L.push('@CatGrass_80'+(home?'。深夜那個。等級八十，他說那是看時數。':''));
+  L.push('@Tower_Manager'+(on('clue_notfix')?'。三包喉糖，他說兩天。他說那不是機密。':''));
+  L.push('@Null_0x99'+(on('asked_0x_黑洞')?'。兩分鐘。她記得我來過幾次，櫃檯不記得。':''));
+  L.push('@Bambi_Draft3。第四行是她自己。她早就知道，她沒有問過為什麼。');
+  L.push('@Radio_Noah'+(on('asked_諾亞_帳號')?'。我問過他。他不知道。':''));
+  L.push('@考完就刪'+(home?'。帳號兩年前刪掉的，沒有回來過。看 ID，他那年剛考完，現在應該二十歲上下。':''));
+  if(home) L.push('猜的：他沒有走遠。刪帳號的人不會搬家。這一條我查不下去了。');
+  return L.join('\n');
+}
 function go(spotId){
   var slot=num(values.slot,0), day=num(values.day,1);
   var here=whoIsThere(spotId,slot);
@@ -256,6 +269,9 @@ function go(spotId){
     if(met.indexOf(p)<0) met.push(p);
   });
   setVar('met', met.join(','));
+  // 結局名單那一頁：一張卡，六行 ID，走過的那一場才有註解（design/調查篇-橋段2.md 十四）。
+  // 在這裡組是因為板每一個時段都會跑，收尾前一定是新的；筆記卡要玩家自己翻開才會寫。
+  setVar('list_text', listText());
   var visited=list(values.visited); if(visited.indexOf(spotId)<0) visited.push(spotId); setVar('visited', visited.join(','));
   // 上午／下午走日版入口，晚上走 @e，深夜走 @n（三種色溫，design/調查篇-場景.md）。
   // 板上其他地方只認前面的地點代號；@n 只給入口那條邊看。

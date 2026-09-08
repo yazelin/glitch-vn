@@ -432,9 +432,11 @@ def build(cards):
                                            "names_seen", "see_stairs", "hole_sightings", "see_admin", "laundry_night1",
                                            "trust_斑比", "strikes", "clue_list", "rec_ok",
                                            "note_mailbox", "trust_店員", "trust_貓草", "cat_visits", "zero_answered",
+                                           # 結局名單那一頁的註解：板每個時段組一次 list_text
+                                           "seen_catgrass_home", "clue_notfix", "asked_0x_黑洞", "asked_諾亞_帳號",
                                            "asked_鐵塔_斑比", "asked_貓草_斑比", "tube_bought", "tube_given", "asked_斑比_鐵塔"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
-                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries"] + MET_VARS})
+                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries", "list_text"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
     menu_of, entries_of, greetings = {}, {}, []
     for loc in LOCS:
@@ -968,7 +970,7 @@ def variables():
          ("notes", "string", "[]"), ("notes_free", "string", "[]"),
          ("hole_sightings", "number", 0), ("noah_stage", "number", 0),
          ("night_visits", "number", 0), ("strikes", "number", 0), ("visited", "string", ""),
-         ("tries", "string", ""),
+         ("tries", "string", ""), ("list_text", "string", ""),
          ("bambi_asked_at", "number", 0)]
     for k in ("roof", "laundry", "figure", "parts", "studio", "tower14"):
         v.append((f"open_{k}", "boolean", False))
