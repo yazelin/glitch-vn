@@ -23,7 +23,7 @@ function todoLines(v){
   if(b('names_seen') && n('strikes')<3) P.push('回頭看前幾天寫的結論。');
   // 牆看到之後主線就結束了，第一層空出來，十四樓那一行升上去（2026-09-09）：
   // 只讀第一行的玩家九輪零次碰到 0x，就是因為那一行永遠排在第二層。
-  var t14up=false;
+  var t14up=false, sumLine=-1;
   if(b('open_tower14') && !b('zero_answered')){
     var t14 = n('met_櫃檯')>=5 ? '白天的十四樓大廳。再約一個訪問。' : '白天的十四樓大廳。再跟櫃檯約一次訪問。';
     if(b('names_seen')){ P.push(t14); t14up=true; } else Q.push(t14);
@@ -35,7 +35,7 @@ function todoLines(v){
     if(n('trust_貓草')<3) left.push('深夜那個人');
     if(n('trust_保全')<3 && b('open_tower14')) left.push('大廳那個保全');
     if(left.length) P.push('本子還有空的地方。'+left[0]+'我還沒問完。');
-    else P.push('本子差不多了。剩下的時間再走一遍。');
+    else { P.push('本子差不多了。剩下的時間再走一遍。'); sumLine=P.length-1; }
   }
   // 2026-09-07 自動玩家跑完一輪抓到的斷點：店員的信任、貓草那條線、抄信箱，沒有人提醒就永遠走不到
   if(n('day')>=2 && !b('note_mailbox')) L.push('晚上去一樓，把信箱的名牌抄下來。');
@@ -51,6 +51,10 @@ function todoLines(v){
   // 他的後兩階：不提醒的話玩家升到一就停在那裡（十四天那一批第十二天才升到一，第十三天沒有人告訴他要幹嘛）
   if(n('trust_貓草')===1 && n('met_鐵塔')>=1 && !b('asked_貓草_鐵塔')) Q.push('深夜的便利商店。問他她的經紀人。');
   if(n('trust_貓草')>=2 && !b('asked_貓草_格莉奇')) Q.push('深夜的洗衣店。他有時候也在那裡。');
+  // 三階之後他才會讓人跟他回家，而且要先有那六行名單（橋段2 九）
+  if(n('trust_貓草')>=3 && b('clue_list') && !b('seen_catgrass_home')) Q.push('深夜的便利商店。他說可以去他家。');
+  // 「本子差不多了」是收尾用的一句，底下還有事情可以做的時候不佔位置
+  if(sumLine>=0 && Q.length) P.splice(sumLine,1);
   L=P.concat(Q,L);
   if(!L.length) L.push('再去一次同一個地方。');
   return L.slice(0,3);

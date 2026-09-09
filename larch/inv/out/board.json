@@ -48,6 +48,7 @@
      "asked_貓草_斑比",
      "asked_貓草_鐵塔",
      "asked_貓草_格莉奇",
+     "seen_catgrass_home",
      "tube_bought",
      "tube_given",
      "asked_斑比_鐵塔",
@@ -10955,6 +10956,18 @@
       "variable": "asked_0x_黑洞",
       "kind": "set",
       "value": true
+     },
+     {
+      "id": "op-zero_answered",
+      "variable": "zero_answered",
+      "kind": "set",
+      "value": true
+     },
+     {
+      "id": "op-met_0x",
+      "variable": "met_0x",
+      "kind": "set",
+      "value": 1
      }
     ]
    }
