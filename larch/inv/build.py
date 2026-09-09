@@ -307,8 +307,11 @@ def expand_rec(b, prev, c, sid, tapes):
                    "pluginId": "larch-inventory", "pluginCardId": "grant-item",
                    "pluginVersion": "1.9.0", "pluginName": "背包系統", "pluginCardName": "取得道具",
                    "pluginIcon": "box", "pluginColor": "#78a67d",
-                   "pluginPresentation": "fullscreen", "pluginSkippable": False,
-                   "pluginValues": {"autoCollect": False, "itemId": item_id, "itemName": name,
+                   # 自動收下（2026-09-10 改）：原本要玩家在外掛的畫面上按一下收，
+                   # 而那張畫面在自動試玩裡完全找不到可以按的東西，整輪停在那裡。
+                   # 她按下錄音鍵就等於錄到了，中間那一下確認沒有敘事上的作用。
+                   "pluginPresentation": "fullscreen", "pluginSkippable": True,
+                   "pluginValues": {"autoCollect": True, "itemId": item_id, "itemName": name,
                                     "itemImage": "", "itemNote": quote, "itemCount": 1,
                                     "hideAfterCollect": True, "bagVar": "inventory", "countVar": "inventoryCount",
                                     "consumable": False, "effectKind": "set", "effectVar": "open_tape",
