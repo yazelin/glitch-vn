@@ -24,6 +24,12 @@ function todoLines(v){
   // 牆看到之後主線就結束了，第一層空出來，十四樓那一行升上去（2026-09-09）：
   // 只讀第一行的玩家九輪零次碰到 0x，就是因為那一行永遠排在第二層。
   var t14up=false, sumLine=-1;
+  // 保全那四階：他在十四樓的晚上與深夜。沒有人提醒的話玩家不會為了一個保全一直去大廳。
+  if(b('open_tower14') && n('trust_保全')<3){
+    var g = n('trust_保全')===2 ? '聽他講。' : n('trust_保全')===1 ? '問他值幾點到幾點。'
+          : n('met_保全')>=3 ? '再站一次。' : '站在大廳等。';
+    Q.push('晚上的十四樓大廳。'+g);
+  }
   if(b('open_tower14') && !b('zero_answered')){
     var t14 = n('met_櫃檯')>=5 ? '白天的十四樓大廳。再約一個訪問。' : '白天的十四樓大廳。再跟櫃檯約一次訪問。';
     if(b('names_seen')){ P.push(t14); t14up=true; } else Q.push(t14);
@@ -52,7 +58,7 @@ function todoLines(v){
   if(n('trust_貓草')===1 && n('met_鐵塔')>=1 && !b('asked_貓草_鐵塔')) Q.push('深夜的便利商店。問他她的經紀人。');
   if(n('trust_貓草')>=2 && !b('asked_貓草_格莉奇')) Q.push('深夜的洗衣店。他有時候也在那裡。');
   // 三階之後他才會讓人跟他回家，而且要先有那六行名單（橋段2 九）
-  if(n('trust_貓草')>=3 && b('clue_list') && !b('seen_catgrass_home')) Q.push('深夜的便利商店。他說可以去他家。');
+  if(n('trust_貓草')>=3 && b('clue_list') && !b('seen_catgrass_home')) Q.push('深夜的便利商店。他說可以跟他回家。');
   // 「本子差不多了」是收尾用的一句，底下還有事情可以做的時候不佔位置
   if(sumLine>=0 && Q.length) P.splice(sumLine,1);
   L=P.concat(Q,L);
