@@ -14,7 +14,7 @@ function todoLines(v){
   if(n('day')>=2 && n('hole_sightings')===0) L.push('晚上七點多，一樓。信箱前面。');
   if(n('hole_sightings')>=1 && !b('see_admin')) L.push('問管理員那個穿西裝的。');
   if(n('hole_sightings')===1 && n('day')>=5) L.push('一樓晚上。他還會來。');
-  if(n('hole_sightings')===2 && n('day')>=8) L.push('一樓晚上。再去一次。');
+  if(n('hole_sightings')===2 && n('day')>=10) L.push('一樓晚上。再去一次。');
   if(n('day')>=4 && n('night_visits')===0) L.push('深夜。便利商店還開著。');
   if(b('open_laundry') && !b('laundry_night1')) P.push('隔壁那家洗衣店，深夜也開。');
   if(b('laundry_night1') && n('trust_斑比')<2) P.push('洗衣店那個人晚上會在。再去一次。');

@@ -59,7 +59,7 @@ html,body{height:100%;margin:0;background:#04080c;color:var(--text);overflow:hid
   <div class="quip" id="nights"></div>
 
   <div class="role">原作・劇本</div>
-  <div class="name">林亞澤<small>調查篇，一百一十三段，她問了十二天</small></div>
+  <div class="name">林亞澤<small>調查篇，一百一十三段，她問了十四天</small></div>
   <div class="role">視覺・立繪・場景</div>
   <div class="name">AI 生成＋人工修版<small>去背、三檔色溫、站位校正</small></div>
   <div class="role">平台</div>
@@ -102,7 +102,7 @@ function render(){
     c.appendChild(pic); var nm=el('div','c-nm',DISPLAY[q]||q); var k=(q==='黑洞先生')?num(values.hole_sightings):num(values['met_'+q]);
     var tag=TAG[q]||TAG[q==='材料行老闆'?'老闆':q]||'';
     nm.appendChild(el('span',null, k>0?((q==='黑洞先生'?'擦身而過 ':'見了 ')+k+' 次'+(tag?'・'+tag:'')):tag)); c.appendChild(nm); cast.appendChild(c); n++; });
-  document.getElementById('castNote').textContent = n? ('十二天，'+n+' 個人。'):'她誰都沒有見到。';
+  document.getElementById('castNote').textContent = n? ('十四天，'+n+' 個人。'):'她誰都沒有見到。';
   // 三、她去過的地方
   var vis=list(values.visited).map(function(v){ return LOC_NAME[v]||v; });
   document.getElementById('places').textContent = vis.length? vis.join('　'):'她哪裡都沒有去。';

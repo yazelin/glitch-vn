@@ -88,14 +88,15 @@ def loc_from_headings(headings):
 ENDING_CONDS = ({"variable": "day", "op": "gte", "value": 4},
                 {"variable": "night_visits", "op": "gte", "value": 3},
                 {"variable": "strikes", "op": "gte", "value": 3})
-CN_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10, "十一": 11}
+CN_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10,
+          "十一": 11, "十二": 12, "十三": 13, "十四": 14}
 # 整份檔都是同一天的
 FILE_DAY = {"調查篇-第一天-定稿": 1, "調查篇-第二天": 2}
 
 
 def day_conds(file, headings):
     """從檔名與標題讀出這一段哪幾天才會播。回 conds 清單（可能是空的）。
-    「第五到第七天之間」→ 5..7；「第八到第十一天之間」→ 8..11；「最後一天」→ >= 11；
+    「第五到第九天之間」→ 5..9；「第十到第十三天之間」→ 10..13；「最後一天」→ 收尾門檻；
     「第二天」→ == 2。判不出來就不加，寧可少擋不要亂擋。"""
     if file in FILE_DAY:
         return [{"variable": "day", "op": "eq", "value": FILE_DAY[file]}]
@@ -887,7 +888,7 @@ def build(cards):
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == to[1]
                                             and e["data"]["condition"].get("variable") == "pick")]
         rules[:] = [r for r in rules if r["segment"] != to[1]]
-    # 第十二天：一開板就進收尾那一場，不管條件（沒查完就是沒查完的版本）
+    # 第十四天：一開板就進收尾那一場，不管條件（沒查完就是沒查完的版本）
     ending = next((r for r in rules if r["section"].startswith("十二、最後一頁")), None)
     if ending:
         # 這一段是插播跳進來的，不經過頂樓那張入口場景：卡頭寫了場景的卡都要自己帶背景（推送層看 force_bg）
@@ -902,8 +903,8 @@ def build(cards):
         b.force_bg = end_segs or [ending["segment"]]
         first_end = next(n["id"] for n in b.nodes if n["data"].get("segment") == ending["segment"])
         rules[:] = [r for r in rules if r is not ending]
-        b.add({"type": "interrupt", "title": "第十二天，收尾", "text": "",
-               "interruptCondition": {"kind": "variable", "variable": "day", "op": "gte", "value": 12},
+        b.add({"type": "interrupt", "title": "第十四天，收尾", "text": "",
+               "interruptCondition": {"kind": "variable", "variable": "day", "op": "gte", "value": 14},
                "interruptOnce": True, "interruptExit": "jump", "interruptTargetNodeId": first_end})
     # 進門那一下：入口 ─met>=N─▶ 閘（判時段）─▶ 招呼卡 ─▶ 選單；閘的預設與入口的預設都直接進選單。
     # 門檻高的先判（第五次起排在第三次起前面），入口→選單的無條件邊最後接。

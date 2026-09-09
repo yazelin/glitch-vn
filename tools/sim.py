@@ -2,7 +2,7 @@
 """帶變數狀態的模擬器：從 board.json 出發，看結局走不走得到、哪些段落永遠開不了。
 
     python3 tools/sim.py            # 貪婪走法：每個時段把所有能開的段落都走一遍
-    python3 tools/sim.py --days 14
+    python3 tools/sim.py --days 16
 
 不是玩家會怎麼玩，是「規則有沒有把路堵死」。做法：
   一天四個時段，每個時段依序到每個地點，把當下能開的段落全部播掉（套它們的 variableOps），
@@ -105,7 +105,7 @@ def apply(ns, V):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--days", type=int, default=14)
+    ap.add_argument("--days", type=int, default=16)
     ap.add_argument("--luck", action="store_true", help="訪客一律在場（黑洞先生、貓草那些機率）")
     a = ap.parse_args()
     V = {v["name"]: v["defaultValue"] for v in b["variables"]}
