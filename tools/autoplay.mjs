@@ -87,12 +87,16 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   // 選項卡：標籤長成「01 問他 0x 那邊的事」。Larch 的元件在 shadow DOM 裡，
   // querySelectorAll 穿不進去，只有 Playwright 的 locator 穿得過（2026-09-09 抓到：
   // 之前用 evaluate 找元素一直找不到，鐵塔門口那一場因此整段被跳過，十四樓開不了）。
-  const optLoc = page.locator('button, [role="button"], li, a')
+  const optLoc = page.locator('button, [role="button"], li, a, div, span, p')
                      .filter({ hasText: /^\s*0?[1-9][\s\u3000.、)]/ });
   const optHits = [];
   for (const b of await optLoc.all()) {
     const t = ((await b.textContent()) || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
-    if (t.length >= 3 && t.length <= 40) optHits.push({ b, t });
+    if (t.length < 3 || t.length > 40) continue;                    // 只要最裡面那一層，外框的文字會很長
+    const box = await b.boundingBox().catch(() => null);
+    if (!box || box.height > 90) continue;
+    if (optHits.some(o => o.t === t)) continue;
+    optHits.push({ b, t });
   }
   if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${optHits[0].t}`);
     await optHits[0].b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
