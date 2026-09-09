@@ -84,16 +84,22 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     if (!spot) { out('沒地方可去，這一段不出門'); await bf2.locator('#skip').click(); } await page.waitForTimeout(2500); continue; }
   const mf = await menuFrame();
   if (mf) { await pickMenu(mf, spot, when); await page.waitForTimeout(1800); continue; }
-  // 選項卡：Larch 把選項渲染成按鈕，標籤長成「01 問他 0x 那邊的事」。
-  // 之前用 ^0[1-9]\s 對，遇到全形空白或標籤前有空白就對不到，然後被一般的點擊帶去最後一個分支
-  // （2026-09-09 抓到：鐵塔門口那一場整段被跳過，十四樓因此開不了）。
-  const optHits = [];
-  for (const b of await page.locator('button').all()) {
-    const t = ((await b.textContent()) || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
-    if (/^0?[1-9][ .、)]/.test(t) && t.length > 2) optHits.push({ b, t });
-  }
+  // 選項卡：Larch 的選項不一定是 <button>，實測是可點的區塊，標籤長成「01 問他 0x 那邊的事」。
+  // 用文字去找，找不到就會被一般的點擊帶去最後一個分支（2026-09-09 抓到：鐵塔門口那一場整段被跳過）。
+  const optHits = await page.evaluate(() => {
+    const seen = [];
+    for (const e of document.querySelectorAll('button,[role="button"],li,a,div,span,p')) {
+      const t = (e.textContent || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
+      if (!/^0?[1-9][ .、)]/.test(t) || t.length < 3 || t.length > 40) continue;
+      if (!e.getClientRects().length) continue;
+      if (e.querySelector('button,[role="button"],li,a')) continue;   // 只要最裡面那一層
+      const r = e.getBoundingClientRect();
+      seen.push({ t, x: r.x + r.width / 2, y: r.y + r.height / 2 });
+    }
+    return seen;
+  });
   if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${optHits[0].t}`);
-    await optHits[0].b.click(); await page.waitForTimeout(900); continue; }
+    await page.mouse.click(optHits[0].x, optHits[0].y); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++; if (stuck>40) { out('★ 卡住 40 下沒變：'+t.slice(0,120)); await page.screenshot({ path: `${SD}/stuck.png` }); break; } }
   await page.mouse.click(640,640); await page.waitForTimeout(420);
