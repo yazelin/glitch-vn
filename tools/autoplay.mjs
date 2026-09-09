@@ -125,8 +125,14 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     out('  ★ 選項抓不到，已存 choice-dom.html / choice-aria.txt / choice.png');
     flush(); await browser.close(); process.exit(0);
   }
-  if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${optHits[0].t}`);
-    await optHits[0].b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
+  // 錄音那一題：對貓草按下去他會轉身，那一晚就不算（design/調查篇-橋段2.md 七）。
+  // 自動玩家每一題都選第一個，所以會把他那三個晚上全燒掉。認得出是他就選不開。
+  let pick_ = optHits[0];
+  if (optHits.length > 1 && /開錄音機/.test(optHits[0].t) && /貓草|關東煮/.test(lastCard)) {
+    pick_ = optHits.find(o => /不開/.test(o.t)) || optHits[0];
+  }
+  if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${pick_.t}`);
+    await pick_.b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++;
     // 卡住的時候多半是有一個視窗要按（取得道具那種，按鈕在外掛的 iframe 裡）。
