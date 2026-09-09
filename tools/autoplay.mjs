@@ -117,16 +117,24 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     await optHits[0].b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++;
-    // 卡住的時候多半是有一個視窗要按（取得道具那種）。點掉不是上排工具列的那幾顆。
+    // 卡住的時候多半是有一個視窗要按（取得道具那種，按鈕在外掛的 iframe 裡）。
+    // 跳過工具列、跳過純數字的（那是背包上的件數，點下去只會把背包打開）。
     if (stuck % 9 === 8) {
-      const NAV = ['存檔','讀取','歷史','自動','快轉','全屏','標題','設定','背包','關閉'];
-      for (const b of await page.getByRole('button').all()) {
-        const label = ((await b.textContent().catch(()=>'')) || '').replace(/\s+/g,'').trim();
-        if (!label || NAV.includes(label) || label.length > 12) continue;
-        out(`  [卡住] 試著點「${label}」`);
-        await b.click({ timeout: 2500 }).catch(()=>{});
-        break;
+      const NAV = ['存檔','讀取','歷史','自動','快轉','全屏','標題','設定','背包','關閉','先走'];
+      const WANT = /確定|好的|收下|放進|取得|繼續|知道了|完成|回去|離開|返回/;
+      let done_ = false;
+      for (const scope of [page, ...frames()]) {
+        for (const b of await scope.getByRole('button').all().catch(()=>[])) {
+          const label = ((await b.textContent().catch(()=>'')) || '').replace(/\s+/g,'').trim();
+          if (!label || NAV.includes(label) || /^\d+$/.test(label) || label.length > 12) continue;
+          if (stuck < 26 && !WANT.test(label)) continue;   // 先只點看起來像確認的，再放寬
+          out(`  [卡住] 試著點「${label}」`);
+          await b.click({ timeout: 2500 }).catch(()=>{});
+          done_ = true; break;
+        }
+        if (done_) break;
       }
+      if (!done_) await page.keyboard.press('Escape').catch(()=>{});
     } if (stuck>40) { out('★ 卡住 40 下沒變：'+t.slice(0,120)); await page.screenshot({ path: `${SD}/stuck.png` }); break; } }
   await page.mouse.click(640,640); await page.waitForTimeout(420);
   if (step % 50 === 0) flush();
