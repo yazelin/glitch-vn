@@ -78,6 +78,7 @@
      "list_text",
      "page1_text",
      "page1_lead",
+     "page1_gaps",
      "met_管理員",
      "met_諾亞",
      "met_斑比",
@@ -14133,11 +14134,14 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "早上八點多。門開著。\n工作檯",
-    "text": "早上八點多。門開著。\n工作檯上那台一九六四年的又拆開了，零件排在報紙上，順序跟上次不一樣。\n靠牆那幾台沒有外殼，露出裡面一排一排的零件。\n桌子後面那張木頭椅子空著，坐墊塌下去一塊。她坐在那裡，把本子攤在膝蓋上。\n諾亞在剝一段線，沒有抬頭。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
+    "type": "choice",
+    "title": "選擇：{{page1_gaps",
+    "text": "{{page1_gaps}}",
+    "choices": [
+     "就這樣寫完",
+     "再看一次那一頁"
+    ],
+    "choiceMode": "branch",
     "segment": "seg108"
    }
   },
@@ -14146,6 +14150,51 @@
    "type": "story",
    "position": {
     "x": 124800,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "她把本子攤在膝蓋上，翻回第一",
+    "text": "她把本子攤在膝蓋上，翻回第一頁。\n七條橫線。她用手指壓著紙，從上面數下來。\n數到第七條的時候手指停住，又移回第一條。",
+    "speaker": "旁白",
+    "segment": "seg109"
+   }
+  },
+  {
+   "id": "inv-417",
+   "type": "story",
+   "position": {
+    "x": 125100,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-418",
+   "type": "story",
+   "position": {
+    "x": 125400,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "早上八點多。門開著。\n工作檯",
+    "text": "早上八點多。門開著。\n工作檯上那台一九六四年的又拆開了，零件排在報紙上，順序跟上次不一樣。\n靠牆那幾台沒有外殼，露出裡面一排一排的零件。\n桌子後面那張木頭椅子空著，坐墊塌下去一塊。她坐在那裡，把本子攤在膝蓋上。\n諾亞在剝一段線，沒有抬頭。",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-419",
+   "type": "story",
+   "position": {
+    "x": 125700,
     "y": 0
    },
    "data": {
@@ -14162,55 +14211,7 @@
       "value": 1
      }
     ],
-    "segment": "seg108"
-   }
-  },
-  {
-   "id": "inv-417",
-   "type": "story",
-   "position": {
-    "x": 125100,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "那一行上面劃了三道。第一道是",
-    "text": "那一行上面劃了三道。第一道是直的，後面兩道從左下往右上，收筆的地方把紙戳破了一點。\n紙的背面凸起來。往後數三頁還摸得到。\n她的拇指從那一行上面壓過去，然後往後翻。\n前面那幾十頁，劃掉的比留下來的多。\n後半本是她自己畫的表，一格一個人。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
-    "segment": "seg108"
-   }
-  },
-  {
-   "id": "inv-418",
-   "type": "story",
-   "position": {
-    "x": 125400,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：管理員：很高。西裝。",
-    "text": "管理員：很高。西裝。帽子我沒印象。他都走樓梯。\n諾亞：金色的帽子。短靴擦得很亮。我們點過頭很多次了。\n便利商店店員：他買過東西嗎……我不確定他有沒有進來過。\n材料行老闆：有一個穿西裝的來問過真空管。是不是他我不知道。\n斑比：她有提過一個室友。我沒問。客戶的事我不問。\n貓草：她講過「我室友」。就這樣。從來沒露過臉。\n保全：監視器上常常有一個人站在對面。我沒下去問過。\n0x：不回答。",
-    "speaker": "玩家",
-    "sceneCode": "roof",
-    "segment": "seg108"
-   }
-  },
-  {
-   "id": "inv-419",
-   "type": "story",
-   "position": {
-    "x": 125700,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "再往後面翻。\n有一頁是空的。",
-    "text": "再往後面翻。\n有一頁是空的。整本只有這一頁沒有寫滿。\n上面只有一行，寫在最上面那一條線上。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14221,11 +14222,12 @@
     "y": 0
    },
    "data": {
-    "type": "setVariable",
-    "title": "（note_blank？）",
-    "text": "",
-    "variableOps": [],
-    "segment": "seg108"
+    "type": "dialogue",
+    "title": "那一行上面劃了三道。第一道是",
+    "text": "那一行上面劃了三道。第一道是直的，後面兩道從左下往右上，收筆的地方把紙戳破了一點。\n紙的背面凸起來。往後數三頁還摸得到。\n她的拇指從那一行上面壓過去，然後往後翻。\n前面那幾十頁，劃掉的比留下來的多。\n後半本是她自己畫的表，一格一個人。",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg110"
    }
   },
   {
@@ -14237,11 +14239,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：我答應過他。",
-    "text": "我答應過他。",
+    "title": "筆記：管理員：很高。西裝。",
+    "text": "管理員：很高。西裝。帽子我沒印象。他都走樓梯。\n諾亞：金色的帽子。短靴擦得很亮。我們點過頭很多次了。\n便利商店店員：他買過東西嗎……我不確定他有沒有進來過。\n材料行老闆：有一個穿西裝的來問過真空管。是不是他我不知道。\n斑比：她有提過一個室友。我沒問。客戶的事我不問。\n貓草：她講過「我室友」。就這樣。從來沒露過臉。\n保全：監視器上常常有一個人站在對面。我沒下去問過。\n0x：不回答。",
     "speaker": "玩家",
     "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14252,11 +14254,12 @@
     "y": 0
    },
    "data": {
-    "type": "setVariable",
-    "title": "（note_blank？）",
-    "text": "",
-    "variableOps": [],
-    "segment": "seg108"
+    "type": "dialogue",
+    "title": "再往後面翻。\n有一頁是空的。",
+    "text": "再往後面翻。\n有一頁是空的。整本只有這一頁沒有寫滿。\n上面只有一行，寫在最上面那一條線上。",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg110"
    }
   },
   {
@@ -14267,12 +14270,11 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "倒數第三頁。她自己的字，寫得",
-    "text": "倒數第三頁。她自己的字，寫得比平常草。\n只有一行。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
-    "segment": "seg108"
+    "type": "setVariable",
+    "title": "（note_blank？）",
+    "text": "",
+    "variableOps": [],
+    "segment": "seg110"
    }
   },
   {
@@ -14284,11 +14286,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "早上下樓的時候看一下信箱那邊",
-    "text": "早上下樓的時候看一下信箱那邊",
-    "speaker": "旁白",
+    "title": "筆記：我答應過他。",
+    "text": "我答應過他。",
+    "speaker": "玩家",
     "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14299,12 +14301,11 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "筆記：這是我的字。\n我不記",
-    "text": "這是我的字。\n我不記得我什麼時候寫的。",
-    "speaker": "玩家",
-    "sceneCode": "roof",
-    "segment": "seg108"
+    "type": "setVariable",
+    "title": "（note_blank？）",
+    "text": "",
+    "variableOps": [],
+    "segment": "seg110"
    }
   },
   {
@@ -14316,11 +14317,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "她往回翻了兩頁，找那一天的日",
-    "text": "她往回翻了兩頁，找那一天的日期。第十一天她寫到四點。\n她翻到最後一頁。\n{{page1_lead}}",
+    "title": "倒數第三頁。她自己的字，寫得",
+    "text": "倒數第三頁。她自己的字，寫得比平常草。\n只有一行。",
     "speaker": "旁白",
     "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14332,11 +14333,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "{{page1_text}}",
-    "text": "{{page1_text}}",
+    "title": "早上下樓的時候看一下信箱那邊",
+    "text": "早上下樓的時候看一下信箱那邊",
     "speaker": "旁白",
     "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14348,11 +14349,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：{{list_tex",
-    "text": "{{list_text}}",
+    "title": "筆記：這是我的字。\n我不記",
+    "text": "這是我的字。\n我不記得我什麼時候寫的。",
     "speaker": "玩家",
     "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14363,11 +14364,12 @@
     "y": 0
    },
    "data": {
-    "type": "setVariable",
-    "title": "（clue_list？）",
-    "text": "",
-    "variableOps": [],
-    "segment": "seg108"
+    "type": "dialogue",
+    "title": "她往回翻了兩頁，找那一天的日",
+    "text": "她往回翻了兩頁，找那一天的日期。第十一天她寫到四點。\n她翻到最後一頁。\n{{page1_lead}}",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg110"
    }
   },
   {
@@ -14379,11 +14381,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "第七行。\n她把筆放上去。\n筆",
-    "text": "第七行。\n她把筆放上去。\n筆尖沒有碰到紙。\n樓下的鐵門響了一聲。\n她寫了一行。",
+    "title": "{{page1_text}}",
+    "text": "{{page1_text}}",
     "speaker": "旁白",
     "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14395,11 +14397,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：還有一個。我沒有問到",
-    "text": "還有一個。我沒有問到名字。",
+    "title": "筆記：{{list_tex",
+    "text": "{{list_text}}",
     "speaker": "玩家",
     "sceneCode": "roof",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14407,6 +14409,53 @@
    "type": "story",
    "position": {
     "x": 129600,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（clue_list？）",
+    "text": "",
+    "variableOps": [],
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-433",
+   "type": "story",
+   "position": {
+    "x": 129900,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "第七行。\n她把筆放上去。\n筆",
+    "text": "第七行。\n她把筆放上去。\n筆尖沒有碰到紙。\n樓下的鐵門響了一聲。\n她寫了一行。",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-434",
+   "type": "story",
+   "position": {
+    "x": 130200,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：還有一個。我沒有問到",
+    "text": "還有一個。我沒有問到名字。",
+    "speaker": "玩家",
+    "sceneCode": "roof",
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-435",
+   "type": "story",
+   "position": {
+    "x": 130500,
     "y": 0
    },
    "data": {
@@ -14429,63 +14478,7 @@
      }
     ],
     "sceneCode": "roof",
-    "segment": "seg108"
-   }
-  },
-  {
-   "id": "inv-433",
-   "type": "story",
-   "position": {
-    "x": 129900,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "樓梯間沒有燈。第三階的邊角被",
-    "text": "樓梯間沒有燈。第三階的邊角被踩得發亮。\n她一層一層走下來。四樓有電視的聲音，二樓有人在洗碗。\n大廳。管理室的窗口開著，裡面沒有人。\n公告螢幕開著，聲音轉得很小。她在講這個月的周邊。\n信箱牆前面站著一個人。金色軟呢帽，深色西裝，短靴擦得很亮。\n那個人手上沒有東西，也沒有在看信箱。\n她走下最後一階的時候，那個人轉過來，等她走過去。\n兩個人點了一下頭。\n她沒有停。",
-    "speaker": "旁白",
-    "sceneCode": "lobby",
-    "segment": "seg108",
-    "variableOps": [
-     {
-      "id": "op-hole_sightings",
-      "variable": "hole_sightings",
-      "kind": "add",
-      "value": 1
-     }
-    ]
-   }
-  },
-  {
-   "id": "inv-434",
-   "type": "story",
-   "position": {
-    "x": 130200,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：他等我走過去，點了一",
-    "text": "他等我走過去，點了一下頭。",
-    "speaker": "玩家",
-    "sceneCode": "lobby",
-    "segment": "seg108"
-   }
-  },
-  {
-   "id": "inv-435",
-   "type": "story",
-   "position": {
-    "x": 130500,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "畫面：四次。",
-    "text": "四次。",
-    "speaker": "",
-    "sceneCode": "lobby",
-    "segment": "seg108"
+    "segment": "seg110"
    }
   },
   {
@@ -14497,11 +14490,19 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "大門在後面關上。\n外面的空氣",
-    "text": "大門在後面關上。\n外面的空氣比裡面涼。騎樓下面管理員在掃地，他沒有抬頭。\n她把外套的拉鍊拉到最上面。\n轉角那家便利商店的燈亮著。她往那邊走。",
+    "title": "樓梯間沒有燈。第三階的邊角被",
+    "text": "樓梯間沒有燈。第三階的邊角被踩得發亮。\n她一層一層走下來。四樓有電視的聲音，二樓有人在洗碗。\n大廳。管理室的窗口開著，裡面沒有人。\n公告螢幕開著，聲音轉得很小。她在講這個月的周邊。\n信箱牆前面站著一個人。金色軟呢帽，深色西裝，短靴擦得很亮。\n那個人手上沒有東西，也沒有在看信箱。\n她走下最後一階的時候，那個人轉過來，等她走過去。\n兩個人點了一下頭。\n她沒有停。",
     "speaker": "旁白",
     "sceneCode": "lobby",
-    "segment": "seg108"
+    "segment": "seg110",
+    "variableOps": [
+     {
+      "id": "op-hole_sightings",
+      "variable": "hole_sightings",
+      "kind": "add",
+      "value": 1
+     }
+    ]
    }
   },
   {
@@ -14512,12 +14513,12 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "（謝幕）",
-    "text": "",
-    "jumpBoardId": "board-credits",
-    "jumpNodeId": "credits-hud",
-    "segment": "seg108"
+    "type": "dialogue",
+    "title": "筆記：他等我走過去，點了一",
+    "text": "他等我走過去，點了一下頭。",
+    "speaker": "玩家",
+    "sceneCode": "lobby",
+    "segment": "seg110"
    }
   },
   {
@@ -14529,11 +14530,59 @@
    },
    "data": {
     "type": "dialogue",
+    "title": "畫面：四次。",
+    "text": "四次。",
+    "speaker": "",
+    "sceneCode": "lobby",
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-439",
+   "type": "story",
+   "position": {
+    "x": 131700,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "大門在後面關上。\n外面的空氣",
+    "text": "大門在後面關上。\n外面的空氣比裡面涼。騎樓下面管理員在掃地，他沒有抬頭。\n她把外套的拉鍊拉到最上面。\n轉角那家便利商店的燈亮著。她往那邊走。",
+    "speaker": "旁白",
+    "sceneCode": "lobby",
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-440",
+   "type": "story",
+   "position": {
+    "x": 132000,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "（謝幕）",
+    "text": "",
+    "jumpBoardId": "board-credits",
+    "jumpNodeId": "credits-hud",
+    "segment": "seg110"
+   }
+  },
+  {
+   "id": "inv-441",
+   "type": "story",
+   "position": {
+    "x": 132300,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
     "title": "六台滾筒，一台在轉。裡面那件",
     "text": "六台滾筒，一台在轉。裡面那件白色的每轉一圈就出現一次。\n上面那排烘乾機有三台亮著。\n長折衣桌，上面攤著別人折到一半的衣服。\n最裡面那一台烘乾機前面站著上次那個人。籃子放在腳邊，桌上放著一疊紙。\n她把衣服塞進最靠門那一台，投了幣。\n那一台沒有動。她又投了一次，滾筒才開始轉。",
     "speaker": "旁白",
     "sceneCode": "laundry",
-    "segment": "seg109",
+    "segment": "seg111",
     "variableOps": [
      {
       "id": "op-met_斑比",
@@ -14551,10 +14600,10 @@
    }
   },
   {
-   "id": "inv-439",
+   "id": "inv-442",
    "type": "story",
    "position": {
-    "x": 131700,
+    "x": 132600,
     "y": 0
    },
    "data": {
@@ -14563,7 +14612,7 @@
     "text": "自助洗衣店。烘乾一輪四十分鐘，所以進來的人都走不掉。\n上次那個人也在。十根手指上還是纏著指套跟膠布。\n我沒有再問。上次她說我認錯人了。\n最靠門那一台吃了我一次幣才轉。\n四十分鐘。我把六台洗衣機的編號都抄下來了。",
     "speaker": "玩家",
     "sceneCode": "laundry",
-    "segment": "seg109",
+    "segment": "seg111",
     "variableOps": [
      {
       "id": "op-laundry_coin",
@@ -14581,10 +14630,10 @@
    }
   },
   {
-   "id": "inv-440",
+   "id": "inv-443",
    "type": "story",
    "position": {
-    "x": 132000,
+    "x": 132900,
     "y": 0
    },
    "data": {
@@ -14595,10 +14644,10 @@
    }
   },
   {
-   "id": "inv-441",
+   "id": "inv-444",
    "type": "story",
    "position": {
-    "x": 132300,
+    "x": 133200,
     "y": 0
    },
    "data": {
@@ -14607,7 +14656,7 @@
     "text": "六台滾筒，兩台在轉。折衣桌上有人留了一隻襪子。\n最裡面那一台烘乾機前面站著同一個人。籃子放在腳邊。\n折衣桌上攤著一疊紙，邊緣對齊。她一張一張翻過去。\n她十根手指上纏著指套跟膠布，有幾圈翹起來。",
     "speaker": "旁白",
     "sceneCode": "laundry",
-    "segment": "seg110",
+    "segment": "seg112",
     "variableOps": [
      {
       "id": "op-met_斑比",
@@ -14625,10 +14674,10 @@
    }
   },
   {
-   "id": "inv-442",
+   "id": "inv-445",
    "type": "story",
    "position": {
-    "x": 132600,
+    "x": 133500,
     "y": 0
    },
    "data": {
@@ -14639,10 +14688,10 @@
    }
   },
   {
-   "id": "inv-443",
+   "id": "inv-446",
    "type": "story",
    "position": {
-    "x": 132900,
+    "x": 133800,
     "y": 0
    },
    "data": {
@@ -14772,7 +14821,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg111",
+    "segment": "seg113",
     "variableOps": [
      {
       "id": "op-trust_斑比",
@@ -14793,75 +14842,6 @@
    }
   },
   {
-   "id": "inv-444",
-   "type": "story",
-   "position": {
-    "x": 133200,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：洗衣店，第二次。她先",
-    "text": "洗衣店，第二次。她先開口，跟我講哪一台會停。\n她在看她自己的稿。她說印出來才看得到歪掉的地方。\n她說她看過太多次了，所以看不出來。她要一個沒有看過的人看。所以是我。\n她把一張放在桌上叫我看。我看不出來要看什麼。她自己說算了，這裡的燈不對。\n她那邊的燈是調過的。\n她給我一張紙，背面寫了地址。她說她下午以後都在。\n她說不然我會忘記我要看什麼。\n名字我還是沒有問到。",
-    "speaker": "玩家",
-    "segment": "seg111",
-    "variableOps": [
-     {
-      "id": "op-note_laundry_look",
-      "variable": "note_laundry_look",
-      "kind": "set",
-      "value": true
-     }
-    ]
-   }
-  },
-  {
-   "id": "inv-445",
-   "type": "story",
-   "position": {
-    "x": 133500,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
-   }
-  },
-  {
-   "id": "inv-446",
-   "type": "story",
-   "position": {
-    "x": 133800,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "玩家：妳幫誰畫的。",
-    "text": "妳幫誰畫的。",
-    "speaker": "玩家",
-    "dialogueLines": [
-     {
-      "id": "l0",
-      "speaker": "玩家",
-      "text": "妳幫誰畫的。",
-      "emotion": ""
-     },
-     {
-      "id": "l1",
-      "speaker": "斑比",
-      "text": "不好意思。",
-      "emotion": ""
-     }
-    ],
-    "segment": "seg112",
-    "display": {
-     "斑比": "洗衣店那個人"
-    }
-   }
-  },
-  {
    "id": "inv-447",
    "type": "story",
    "position": {
@@ -14870,14 +14850,14 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：我問她幫誰畫的。她沒",
-    "text": "我問她幫誰畫的。她沒有回答。\n她把桌上那幾張收起來，走到窗邊坐著。那些紙她本來要看完的。\n我猜她簽了什麼不能講的東西。\n她沒有生氣。她坐過去之前跟我說不好意思。",
+    "title": "筆記：洗衣店，第二次。她先",
+    "text": "洗衣店，第二次。她先開口，跟我講哪一台會停。\n她在看她自己的稿。她說印出來才看得到歪掉的地方。\n她說她看過太多次了，所以看不出來。她要一個沒有看過的人看。所以是我。\n她把一張放在桌上叫我看。我看不出來要看什麼。她自己說算了，這裡的燈不對。\n她那邊的燈是調過的。\n她給我一張紙，背面寫了地址。她說她下午以後都在。\n她說不然我會忘記我要看什麼。\n名字我還是沒有問到。",
     "speaker": "玩家",
-    "segment": "seg112",
+    "segment": "seg113",
     "variableOps": [
      {
-      "id": "op-note_laundry_shut",
-      "variable": "note_laundry_shut",
+      "id": "op-note_laundry_look",
+      "variable": "note_laundry_look",
       "kind": "set",
       "value": true
      }
@@ -14906,6 +14886,75 @@
     "y": 0
    },
    "data": {
+    "type": "dialogue",
+    "title": "玩家：妳幫誰畫的。",
+    "text": "妳幫誰畫的。",
+    "speaker": "玩家",
+    "dialogueLines": [
+     {
+      "id": "l0",
+      "speaker": "玩家",
+      "text": "妳幫誰畫的。",
+      "emotion": ""
+     },
+     {
+      "id": "l1",
+      "speaker": "斑比",
+      "text": "不好意思。",
+      "emotion": ""
+     }
+    ],
+    "segment": "seg114",
+    "display": {
+     "斑比": "洗衣店那個人"
+    }
+   }
+  },
+  {
+   "id": "inv-450",
+   "type": "story",
+   "position": {
+    "x": 135000,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：我問她幫誰畫的。她沒",
+    "text": "我問她幫誰畫的。她沒有回答。\n她把桌上那幾張收起來，走到窗邊坐著。那些紙她本來要看完的。\n我猜她簽了什麼不能講的東西。\n她沒有生氣。她坐過去之前跟我說不好意思。",
+    "speaker": "玩家",
+    "segment": "seg114",
+    "variableOps": [
+     {
+      "id": "op-note_laundry_shut",
+      "variable": "note_laundry_shut",
+      "kind": "set",
+      "value": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "inv-451",
+   "type": "story",
+   "position": {
+    "x": 135300,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-452",
+   "type": "story",
+   "position": {
+    "x": 135600,
+    "y": 0
+   },
+   "data": {
     "type": "interrupt",
     "title": "第三天收尾",
     "text": "",
@@ -14920,10 +14969,10 @@
    }
   },
   {
-   "id": "inv-450",
+   "id": "inv-453",
    "type": "story",
    "position": {
-    "x": 135000,
+    "x": 135900,
     "y": 0
    },
    "data": {
@@ -14934,14 +14983,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg113"
+    "segment": "seg115"
    }
   },
   {
-   "id": "inv-451",
+   "id": "inv-454",
    "type": "story",
    "position": {
-    "x": 135300,
+    "x": 136200,
     "y": 0
    },
    "data": {
@@ -14949,14 +14998,14 @@
     "title": "第三天。",
     "text": "第三天。",
     "speaker": "旁白",
-    "segment": "seg113"
+    "segment": "seg115"
    }
   },
   {
-   "id": "inv-452",
+   "id": "inv-455",
    "type": "story",
    "position": {
-    "x": 135600,
+    "x": 136500,
     "y": 0
    },
    "data": {
@@ -14964,14 +15013,14 @@
     "title": "筆記：三個地方。問到的都是",
     "text": "三個地方。問到的都是別人的事。\n她的事沒有人講。可是每個人都講了另一個人。",
     "speaker": "玩家",
-    "segment": "seg113"
+    "segment": "seg115"
    }
   },
   {
-   "id": "inv-453",
+   "id": "inv-456",
    "type": "story",
    "position": {
-    "x": 135900,
+    "x": 136800,
     "y": 0
    },
    "data": {
@@ -14989,10 +15038,10 @@
    }
   },
   {
-   "id": "inv-454",
+   "id": "inv-457",
    "type": "story",
    "position": {
-    "x": 136200,
+    "x": 137100,
     "y": 0
    },
    "data": {
@@ -15003,14 +15052,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg114"
+    "segment": "seg116"
    }
   },
   {
-   "id": "inv-455",
+   "id": "inv-458",
    "type": "story",
    "position": {
-    "x": 136500,
+    "x": 137400,
     "y": 0
    },
    "data": {
@@ -15018,14 +15067,14 @@
     "title": "第四天。今天三點才睡。",
     "text": "第四天。今天三點才睡。",
     "speaker": "旁白",
-    "segment": "seg114"
+    "segment": "seg116"
    }
   },
   {
-   "id": "inv-456",
+   "id": "inv-459",
    "type": "story",
    "position": {
-    "x": 136800,
+    "x": 137700,
     "y": 0
    },
    "data": {
@@ -15033,14 +15082,14 @@
     "title": "筆記：原來這個時間便利商店",
     "text": "原來這個時間便利商店還有人。\n結論：她是裝的。",
     "speaker": "玩家",
-    "segment": "seg114"
+    "segment": "seg116"
    }
   },
   {
-   "id": "inv-457",
+   "id": "inv-460",
    "type": "story",
    "position": {
-    "x": 137100,
+    "x": 138000,
     "y": 0
    },
    "data": {
@@ -15058,10 +15107,10 @@
    }
   },
   {
-   "id": "inv-458",
+   "id": "inv-461",
    "type": "story",
    "position": {
-    "x": 137400,
+    "x": 138300,
     "y": 0
    },
    "data": {
@@ -15072,14 +15121,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg115"
+    "segment": "seg117"
    }
   },
   {
-   "id": "inv-459",
+   "id": "inv-462",
    "type": "story",
    "position": {
-    "x": 137700,
+    "x": 138600,
     "y": 0
    },
    "data": {
@@ -15087,14 +15136,14 @@
     "title": "第五天。",
     "text": "第五天。",
     "speaker": "旁白",
-    "segment": "seg115"
+    "segment": "seg117"
    }
   },
   {
-   "id": "inv-460",
+   "id": "inv-463",
    "type": "story",
    "position": {
-    "x": 138000,
+    "x": 138900,
     "y": 0
    },
    "data": {
@@ -15110,14 +15159,14 @@
       "value": 1
      }
     ],
-    "segment": "seg115"
+    "segment": "seg117"
    }
   },
   {
-   "id": "inv-461",
+   "id": "inv-464",
    "type": "story",
    "position": {
-    "x": 138300,
+    "x": 139200,
     "y": 0
    },
    "data": {
@@ -15135,10 +15184,10 @@
    }
   },
   {
-   "id": "inv-462",
+   "id": "inv-465",
    "type": "story",
    "position": {
-    "x": 138600,
+    "x": 139500,
     "y": 0
    },
    "data": {
@@ -15149,14 +15198,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg116"
+    "segment": "seg118"
    }
   },
   {
-   "id": "inv-463",
+   "id": "inv-466",
    "type": "story",
    "position": {
-    "x": 138900,
+    "x": 139800,
     "y": 0
    },
    "data": {
@@ -15164,14 +15213,14 @@
     "title": "第六天。",
     "text": "第六天。",
     "speaker": "旁白",
-    "segment": "seg116"
+    "segment": "seg118"
    }
   },
   {
-   "id": "inv-464",
+   "id": "inv-467",
    "type": "story",
    "position": {
-    "x": 139200,
+    "x": 140100,
     "y": 0
    },
    "data": {
@@ -15179,14 +15228,14 @@
     "title": "筆記：問同一個人同一件事，",
     "text": "問同一個人同一件事，第二次不會有新東西。\n第二次有的是他記不記得我。",
     "speaker": "玩家",
-    "segment": "seg116"
+    "segment": "seg118"
    }
   },
   {
-   "id": "inv-465",
+   "id": "inv-468",
    "type": "story",
    "position": {
-    "x": 139500,
+    "x": 140400,
     "y": 0
    },
    "data": {
@@ -15204,10 +15253,10 @@
    }
   },
   {
-   "id": "inv-466",
+   "id": "inv-469",
    "type": "story",
    "position": {
-    "x": 139800,
+    "x": 140700,
     "y": 0
    },
    "data": {
@@ -15218,14 +15267,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg117"
+    "segment": "seg119"
    }
   },
   {
-   "id": "inv-467",
+   "id": "inv-470",
    "type": "story",
    "position": {
-    "x": 140100,
+    "x": 141000,
     "y": 0
    },
    "data": {
@@ -15233,14 +15282,14 @@
     "title": "第七天。四點。",
     "text": "第七天。四點。",
     "speaker": "旁白",
-    "segment": "seg117"
+    "segment": "seg119"
    }
   },
   {
-   "id": "inv-468",
+   "id": "inv-471",
    "type": "story",
    "position": {
-    "x": 140400,
+    "x": 141300,
     "y": 0
    },
    "data": {
@@ -15256,14 +15305,14 @@
       "value": 1
      }
     ],
-    "segment": "seg117"
+    "segment": "seg119"
    }
   },
   {
-   "id": "inv-469",
+   "id": "inv-472",
    "type": "story",
    "position": {
-    "x": 140700,
+    "x": 141600,
     "y": 0
    },
    "data": {
@@ -15281,10 +15330,10 @@
    }
   },
   {
-   "id": "inv-470",
+   "id": "inv-473",
    "type": "story",
    "position": {
-    "x": 141000,
+    "x": 141900,
     "y": 0
    },
    "data": {
@@ -15295,14 +15344,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg118"
+    "segment": "seg120"
    }
   },
   {
-   "id": "inv-471",
+   "id": "inv-474",
    "type": "story",
    "position": {
-    "x": 141300,
+    "x": 142200,
     "y": 0
    },
    "data": {
@@ -15310,14 +15359,14 @@
     "title": "第八天。",
     "text": "第八天。",
     "speaker": "旁白",
-    "segment": "seg118"
+    "segment": "seg120"
    }
   },
   {
-   "id": "inv-472",
+   "id": "inv-475",
    "type": "story",
    "position": {
-    "x": 141600,
+    "x": 142500,
     "y": 0
    },
    "data": {
@@ -15325,14 +15374,14 @@
     "title": "筆記：我開始被記住了。店員",
     "text": "我開始被記住了。店員不說歡迎光臨，老闆先把管子拿出來。\n我沒有做什麼。我只是一直去。",
     "speaker": "玩家",
-    "segment": "seg118"
+    "segment": "seg120"
    }
   },
   {
-   "id": "inv-473",
+   "id": "inv-476",
    "type": "story",
    "position": {
-    "x": 141900,
+    "x": 142800,
     "y": 0
    },
    "data": {
@@ -15350,10 +15399,10 @@
    }
   },
   {
-   "id": "inv-474",
+   "id": "inv-477",
    "type": "story",
    "position": {
-    "x": 142200,
+    "x": 143100,
     "y": 0
    },
    "data": {
@@ -15364,14 +15413,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg119"
+    "segment": "seg121"
    }
   },
   {
-   "id": "inv-475",
+   "id": "inv-478",
    "type": "story",
    "position": {
-    "x": 142500,
+    "x": 143400,
     "y": 0
    },
    "data": {
@@ -15379,14 +15428,14 @@
     "title": "第九天。",
     "text": "第九天。",
     "speaker": "旁白",
-    "segment": "seg119"
+    "segment": "seg121"
    }
   },
   {
-   "id": "inv-476",
+   "id": "inv-479",
    "type": "story",
    "position": {
-    "x": 142800,
+    "x": 143700,
     "y": 0
    },
    "data": {
@@ -15402,14 +15451,14 @@
       "value": 1
      }
     ],
-    "segment": "seg119"
+    "segment": "seg121"
    }
   },
   {
-   "id": "inv-477",
+   "id": "inv-480",
    "type": "story",
    "position": {
-    "x": 143100,
+    "x": 144000,
     "y": 0
    },
    "data": {
@@ -15427,10 +15476,10 @@
    }
   },
   {
-   "id": "inv-478",
+   "id": "inv-481",
    "type": "story",
    "position": {
-    "x": 143400,
+    "x": 144300,
     "y": 0
    },
    "data": {
@@ -15441,14 +15490,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg120"
+    "segment": "seg122"
    }
   },
   {
-   "id": "inv-479",
+   "id": "inv-482",
    "type": "story",
    "position": {
-    "x": 143700,
+    "x": 144600,
     "y": 0
    },
    "data": {
@@ -15456,14 +15505,14 @@
     "title": "第十天。四點多。",
     "text": "第十天。四點多。",
     "speaker": "旁白",
-    "segment": "seg120"
+    "segment": "seg122"
    }
   },
   {
-   "id": "inv-480",
+   "id": "inv-483",
    "type": "story",
    "position": {
-    "x": 144000,
+    "x": 144900,
     "y": 0
    },
    "data": {
@@ -15479,14 +15528,14 @@
       "value": 1
      }
     ],
-    "segment": "seg120"
+    "segment": "seg122"
    }
   },
   {
-   "id": "inv-481",
+   "id": "inv-484",
    "type": "story",
    "position": {
-    "x": 144300,
+    "x": 145200,
     "y": 0
    },
    "data": {
@@ -15504,10 +15553,10 @@
    }
   },
   {
-   "id": "inv-482",
+   "id": "inv-485",
    "type": "story",
    "position": {
-    "x": 144600,
+    "x": 145500,
     "y": 0
    },
    "data": {
@@ -15518,52 +15567,7 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg121"
-   }
-  },
-  {
-   "id": "inv-483",
-   "type": "story",
-   "position": {
-    "x": 144900,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "第十一天。她寫到四點。",
-    "text": "第十一天。她寫到四點。",
-    "speaker": "旁白",
-    "segment": "seg121"
-   }
-  },
-  {
-   "id": "inv-484",
-   "type": "story",
-   "position": {
-    "x": 145200,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：明天上午，頂樓。\n早",
-    "text": "明天上午，頂樓。\n早上下樓的時候看一下信箱那邊。",
-    "speaker": "玩家",
-    "segment": "seg121"
-   }
-  },
-  {
-   "id": "inv-485",
-   "type": "story",
-   "position": {
-    "x": 145500,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "手機亮了一下。她把它拿起來，",
-    "text": "手機亮了一下。她把它拿起來，點進去。\n畫面裡她坐在同一個位置，同一個背景。右上角的人數六百多。",
-    "speaker": "旁白",
-    "segment": "seg122"
+    "segment": "seg123"
    }
   },
   {
@@ -15575,12 +15579,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：逼——嗶！大家好，我",
-    "text": "逼——嗶！大家好，我是格莉奇。\n今天的事情有點多，我們一件一件來。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "phone",
-    "segment": "seg122"
+    "title": "第十一天。她寫到四點。",
+    "text": "第十一天。她寫到四點。",
+    "speaker": "旁白",
+    "segment": "seg123"
    }
   },
   {
@@ -15592,10 +15594,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "聊天室一秒滾三四行。她一句都",
-    "text": "聊天室一秒滾三四行。她一句都沒有看完，也沒有人在等她看完。\n人數跳到七百。\n她看了三分鐘，把手機放回去。",
-    "speaker": "旁白",
-    "segment": "seg122"
+    "title": "筆記：明天上午，頂樓。\n早",
+    "text": "明天上午，頂樓。\n早上下樓的時候看一下信箱那邊。",
+    "speaker": "玩家",
+    "segment": "seg123"
    }
   },
   {
@@ -15607,10 +15609,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：第二天晚上，她開台。",
-    "text": "第二天晚上，她開台。七百多人。\n開場那一句跟廣告一模一樣。字一樣，停的地方也一樣。\n聊天室裡沒有人覺得奇怪。他們是來聽這一句的。",
-    "speaker": "玩家",
-    "segment": "seg122"
+    "title": "手機亮了一下。她把它拿起來，",
+    "text": "手機亮了一下。她把它拿起來，點進去。\n畫面裡她坐在同一個位置，同一個背景。右上角的人數六百多。",
+    "speaker": "旁白",
+    "segment": "seg124"
    }
   },
   {
@@ -15622,10 +15624,12 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "手機亮了。這一次她沒有立刻點",
-    "text": "手機亮了。這一次她沒有立刻點。\n點進去的時候已經開了十幾分鐘。畫面裡她在讀聊天室，唸一個 ID，說一句謝謝，再唸下一個。",
-    "speaker": "旁白",
-    "segment": "seg123"
+    "title": "格莉奇：逼——嗶！大家好，我",
+    "text": "逼——嗶！大家好，我是格莉奇。\n今天的事情有點多，我們一件一件來。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "phone",
+    "segment": "seg124"
    }
   },
   {
@@ -15637,12 +15641,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：今天也在，謝謝你。\n",
-    "text": "今天也在，謝謝你。\n早安人，謝謝你。現在是晚上喔。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "phone",
-    "segment": "seg123"
+    "title": "聊天室一秒滾三四行。她一句都",
+    "text": "聊天室一秒滾三四行。她一句都沒有看完，也沒有人在等她看完。\n人數跳到七百。\n她看了三分鐘，把手機放回去。",
+    "speaker": "旁白",
+    "segment": "seg124"
    }
   },
   {
@@ -15653,15 +15655,11 @@
     "y": 0
    },
    "data": {
-    "type": "choice",
-    "title": "選擇：輸入框是空的。",
-    "text": "輸入框是空的。",
-    "choices": [
-     "打一行送出去",
-     "不打"
-    ],
-    "choiceMode": "branch",
-    "segment": "seg123"
+    "type": "dialogue",
+    "title": "筆記：第二天晚上，她開台。",
+    "text": "第二天晚上，她開台。七百多人。\n開場那一句跟廣告一模一樣。字一樣，停的地方也一樣。\n聊天室裡沒有人覺得奇怪。他們是來聽這一句的。",
+    "speaker": "玩家",
+    "segment": "seg124"
    }
   },
   {
@@ -15673,10 +15671,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "她打了「你記得昨天講到哪嗎」",
-    "text": "她打了「你記得昨天講到哪嗎」。看了三秒，把「昨天」刪掉，改成「你記得開場講了什麼嗎」。送出去。\n那一行在聊天室裡往上滾，四秒就不見了。\n她沒有唸到。",
+    "title": "手機亮了。這一次她沒有立刻點",
+    "text": "手機亮了。這一次她沒有立刻點。\n點進去的時候已經開了十幾分鐘。畫面裡她在讀聊天室，唸一個 ID，說一句謝謝，再唸下一個。",
     "speaker": "旁白",
-    "segment": "seg124"
+    "segment": "seg125"
    }
   },
   {
@@ -15688,10 +15686,12 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：第五天。我留了一行，",
-    "text": "第五天。我留了一行，她沒有唸到。\n一秒三行，她唸的是她抓得到的那幾行。我那一行剛好在她眨眼的時候過去。\n不算沒被記住。算沒被看到。這兩個不一樣。",
-    "speaker": "玩家",
-    "segment": "seg124"
+    "title": "格莉奇：今天也在，謝謝你。\n",
+    "text": "今天也在，謝謝你。\n早安人，謝謝你。現在是晚上喔。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "phone",
+    "segment": "seg125"
    }
   },
   {
@@ -15702,10 +15702,14 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "她看著輸入框，沒有打。\n聊天",
-    "text": "她看著輸入框，沒有打。\n聊天室裡有人問「今天講到哪了」。她唸到那一則，說謝謝，然後接著講。\n她把手機關掉。",
-    "speaker": "旁白",
+    "type": "choice",
+    "title": "選擇：輸入框是空的。",
+    "text": "輸入框是空的。",
+    "choices": [
+     "打一行送出去",
+     "不打"
+    ],
+    "choiceMode": "branch",
     "segment": "seg125"
    }
   },
@@ -15718,10 +15722,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：第五天。有人在聊天室",
-    "text": "第五天。有人在聊天室問她講到哪，她說謝謝。\n那個人問的跟我想問的一樣。她的回答也一樣。\n我沒有留。留了也是謝謝。",
-    "speaker": "玩家",
-    "segment": "seg125"
+    "title": "她打了「你記得昨天講到哪嗎」",
+    "text": "她打了「你記得昨天講到哪嗎」。看了三秒，把「昨天」刪掉，改成「你記得開場講了什麼嗎」。送出去。\n那一行在聊天室裡往上滾，四秒就不見了。\n她沒有唸到。",
+    "speaker": "旁白",
+    "segment": "seg126"
    }
   },
   {
@@ -15733,9 +15737,9 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "手機亮了。她在板前面點進去。",
-    "text": "手機亮了。她在板前面點進去。\n開場那一句。聊天室裡一排一樣的字：早安。晚上九點的早安。",
-    "speaker": "旁白",
+    "title": "筆記：第五天。我留了一行，",
+    "text": "第五天。我留了一行，她沒有唸到。\n一秒三行，她唸的是她抓得到的那幾行。我那一行剛好在她眨眼的時候過去。\n不算沒被記住。算沒被看到。這兩個不一樣。",
+    "speaker": "玩家",
     "segment": "seg126"
    }
   },
@@ -15748,12 +15752,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：逼——嗶！大家好，我",
-    "text": "逼——嗶！大家好，我是格莉奇。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "phone",
-    "segment": "seg126"
+    "title": "她看著輸入框，沒有打。\n聊天",
+    "text": "她看著輸入框，沒有打。\n聊天室裡有人問「今天講到哪了」。她唸到那一則，說謝謝，然後接著講。\n她把手機關掉。",
+    "speaker": "旁白",
+    "segment": "seg127"
    }
   },
   {
@@ -15765,10 +15767,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "有人貼了一個連結，字是「金魚",
-    "text": "有人貼了一個連結，字是「金魚腦合輯 第七集」。下面有人回「這集有我」。\n沒有人罵他。她讀到那一則的時候，唸了那個 ID，說謝謝，然後接著講。",
-    "speaker": "旁白",
-    "segment": "seg126"
+    "title": "筆記：第五天。有人在聊天室",
+    "text": "第五天。有人在聊天室問她講到哪，她說謝謝。\n那個人問的跟我想問的一樣。她的回答也一樣。\n我沒有留。留了也是謝謝。",
+    "speaker": "玩家",
+    "segment": "seg127"
    }
   },
   {
@@ -15780,10 +15782,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：第八天。聊天室在傳合",
-    "text": "第八天。聊天室在傳合輯。「這集有我」。\n他們把她忘記的事剪成片，然後排隊看自己有沒有在裡面。\n她唸了那個 ID，說謝謝。我不知道她知不知道那是什麼。我開始覺得她知道。",
-    "speaker": "玩家",
-    "segment": "seg126"
+    "title": "手機亮了。她在板前面點進去。",
+    "text": "手機亮了。她在板前面點進去。\n開場那一句。聊天室裡一排一樣的字：早安。晚上九點的早安。",
+    "speaker": "旁白",
+    "segment": "seg128"
    }
   },
   {
@@ -15795,11 +15797,58 @@
    },
    "data": {
     "type": "dialogue",
+    "title": "格莉奇：逼——嗶！大家好，我",
+    "text": "逼——嗶！大家好，我是格莉奇。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "phone",
+    "segment": "seg128"
+   }
+  },
+  {
+   "id": "inv-501",
+   "type": "story",
+   "position": {
+    "x": 150300,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "有人貼了一個連結，字是「金魚",
+    "text": "有人貼了一個連結，字是「金魚腦合輯 第七集」。下面有人回「這集有我」。\n沒有人罵他。她讀到那一則的時候，唸了那個 ID，說謝謝，然後接著講。",
+    "speaker": "旁白",
+    "segment": "seg128"
+   }
+  },
+  {
+   "id": "inv-502",
+   "type": "story",
+   "position": {
+    "x": 150600,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：第八天。聊天室在傳合",
+    "text": "第八天。聊天室在傳合輯。「這集有我」。\n他們把她忘記的事剪成片，然後排隊看自己有沒有在裡面。\n她唸了那個 ID，說謝謝。我不知道她知不知道那是什麼。我開始覺得她知道。",
+    "speaker": "玩家",
+    "segment": "seg128"
+   }
+  },
+  {
+   "id": "inv-503",
+   "type": "story",
+   "position": {
+    "x": 150900,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
     "title": "一棟舊大樓。信箱牆的漆掉了一",
     "text": "一棟舊大樓。信箱牆的漆掉了一半，第三排有兩格沒有門。\n牆上掛著一台公告螢幕，本來是播管理費繳納期限的。現在播的是廣告。",
     "speaker": "旁白",
     "sceneCode": "lobby",
-    "segment": "seg127",
+    "segment": "seg129",
     "variableOps": [
      {
       "id": "op-dest",
@@ -15829,10 +15878,10 @@
    }
   },
   {
-   "id": "inv-501",
+   "id": "inv-504",
    "type": "story",
    "position": {
-    "x": 150300,
+    "x": 151200,
     "y": 0
    },
    "data": {
@@ -15842,14 +15891,14 @@
     "speaker": "格莉奇",
     "remote": true,
     "screen": "lobby",
-    "segment": "seg127"
+    "segment": "seg129"
    }
   },
   {
-   "id": "inv-502",
+   "id": "inv-505",
    "type": "story",
    "position": {
-    "x": 150600,
+    "x": 151500,
     "y": 0
    },
    "data": {
@@ -15858,14 +15907,14 @@
     "text": "第一天。晴。我從樓下開始問起。\n本子是她的周邊，一千二。內頁空白，文案說可以自己寫。第一頁我先留著。",
     "speaker": "玩家",
     "sceneCode": "lobby",
-    "segment": "seg127"
+    "segment": "seg129"
    }
   },
   {
-   "id": "inv-503",
+   "id": "inv-506",
    "type": "story",
    "position": {
-    "x": 150900,
+    "x": 151800,
     "y": 0
    },
    "data": {
@@ -15954,14 +16003,14 @@
      }
     ],
     "sceneCode": "lobby",
-    "segment": "seg127"
+    "segment": "seg129"
    }
   },
   {
-   "id": "inv-504",
+   "id": "inv-507",
    "type": "story",
    "position": {
-    "x": 151200,
+    "x": 152100,
     "y": 0
    },
    "data": {
@@ -15970,14 +16019,14 @@
     "text": "管理員。六十幾歲。他知道記者跟粉絲各自會說什麼謊，\n表示這兩種人他都送走過。他不打算告訴我任何事。",
     "speaker": "玩家",
     "sceneCode": "lobby",
-    "segment": "seg127"
+    "segment": "seg129"
    }
   },
   {
-   "id": "inv-505",
+   "id": "inv-508",
    "type": "story",
    "position": {
-    "x": 151500,
+    "x": 152400,
     "y": 0
    },
    "data": {
@@ -16066,7 +16115,7 @@
      }
     ],
     "sceneCode": "lobby",
-    "segment": "seg127",
+    "segment": "seg129",
     "variableOps": [
      {
       "id": "op-clue_notebook",
@@ -16078,10 +16127,10 @@
    }
   },
   {
-   "id": "inv-506",
+   "id": "inv-509",
    "type": "story",
    "position": {
-    "x": 151800,
+    "x": 152700,
     "y": 0
    },
    "data": {
@@ -16090,14 +16139,14 @@
     "text": "他沒有告訴我她住幾樓。他只是在抱怨他的失物箱。\n一個會把整袋菜留在信箱前面的人，一個月來問三次同一本本子在不在。",
     "speaker": "玩家",
     "sceneCode": "lobby",
-    "segment": "seg127"
+    "segment": "seg129"
    }
   },
   {
-   "id": "inv-507",
+   "id": "inv-510",
    "type": "story",
    "position": {
-    "x": 152100,
+    "x": 153000,
     "y": 0
    },
    "data": {
@@ -16162,7 +16211,7 @@
      }
     ],
     "sceneCode": "lobby",
-    "segment": "seg127",
+    "segment": "seg129",
     "variableOps": [
      {
       "id": "op-open_roof",
@@ -16174,10 +16223,10 @@
    }
   },
   {
-   "id": "inv-508",
+   "id": "inv-511",
    "type": "story",
    "position": {
-    "x": 152400,
+    "x": 153300,
     "y": 0
    },
    "data": {
@@ -16186,14 +16235,14 @@
     "text": "樓梯間沒有燈。第三階的邊角被踩得發亮。",
     "speaker": "旁白",
     "sceneCode": "lobby",
-    "segment": "seg127"
+    "segment": "seg129"
    }
   },
   {
-   "id": "inv-509",
+   "id": "inv-512",
    "type": "story",
    "position": {
-    "x": 152700,
+    "x": 153600,
     "y": 0
    },
    "data": {
@@ -16204,10 +16253,10 @@
    }
   },
   {
-   "id": "inv-510",
+   "id": "inv-513",
    "type": "story",
    "position": {
-    "x": 153000,
+    "x": 153900,
     "y": 0
    },
    "data": {
@@ -16216,7 +16265,7 @@
     "text": "木牌上的字被曬到只剩下筆畫的影子。門開著。\n裡面堆滿收音機。木頭外殼的、塑膠外殼的、有些沒有外殼，\n露出裡面一排一排的零件。",
     "speaker": "旁白",
     "sceneCode": "roof",
-    "segment": "seg128",
+    "segment": "seg130",
     "variableOps": [
      {
       "id": "op-noah_intro",
@@ -16228,10 +16277,10 @@
    }
   },
   {
-   "id": "inv-511",
+   "id": "inv-514",
    "type": "story",
    "position": {
-    "x": 153300,
+    "x": 154200,
     "y": 0
    },
    "data": {
@@ -16332,7 +16381,7 @@
      }
     ],
     "sceneCode": "roof",
-    "segment": "seg128",
+    "segment": "seg130",
     "variableOps": [
      {
       "id": "op-open_parts",
@@ -16344,10 +16393,10 @@
    }
   },
   {
-   "id": "inv-512",
+   "id": "inv-515",
    "type": "story",
    "position": {
-    "x": 153600,
+    "x": 154500,
     "y": 0
    },
    "data": {
@@ -16406,7 +16455,7 @@
      }
     ],
     "sceneCode": "roof",
-    "segment": "seg128",
+    "segment": "seg130",
     "variableOps": [
      {
       "id": "op-clue_real_noah",
@@ -16418,10 +16467,10 @@
    }
   },
   {
-   "id": "inv-513",
+   "id": "inv-516",
    "type": "story",
    "position": {
-    "x": 153900,
+    "x": 154800,
     "y": 0
    },
    "data": {
@@ -16430,14 +16479,14 @@
     "text": "他不覺得那奇怪。\n我今天問了兩個人。兩個人都當那是正常的。",
     "speaker": "玩家",
     "sceneCode": "roof",
-    "segment": "seg128"
+    "segment": "seg130"
    }
   },
   {
-   "id": "inv-514",
+   "id": "inv-517",
    "type": "story",
    "position": {
-    "x": 154200,
+    "x": 155100,
     "y": 0
    },
    "data": {
@@ -16496,7 +16545,7 @@
      }
     ],
     "sceneCode": "roof",
-    "segment": "seg128",
+    "segment": "seg130",
     "variableOps": [
      {
       "id": "op-clue_older",
@@ -16520,10 +16569,10 @@
    }
   },
   {
-   "id": "inv-515",
+   "id": "inv-518",
    "type": "story",
    "position": {
-    "x": 154500,
+    "x": 155400,
     "y": 0
    },
    "data": {
@@ -16532,14 +16581,14 @@
     "text": "一個禮拜三次是為了開台買的線。本子上的日期比那還早。本子比頻道老。\n如果那是道具，沒有必要做舊。",
     "speaker": "玩家",
     "sceneCode": "roof",
-    "segment": "seg128"
+    "segment": "seg130"
    }
   },
   {
-   "id": "inv-516",
+   "id": "inv-519",
    "type": "story",
    "position": {
-    "x": 154800,
+    "x": 155700,
     "y": 0
    },
    "data": {
@@ -16574,53 +16623,7 @@
      }
     ],
     "sceneCode": "roof",
-    "segment": "seg128"
-   }
-  },
-  {
-   "id": "inv-517",
-   "type": "story",
-   "position": {
-    "x": 155100,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "工作檯上那台收音機忽然響了一",
-    "text": "工作檯上那台收音機忽然響了一聲，很短，然後又沒了。\n諾亞低下頭去，繼續弄他的。",
-    "speaker": "旁白",
-    "sceneCode": "roof",
-    "segment": "seg128"
-   }
-  },
-  {
-   "id": "inv-518",
-   "type": "story",
-   "position": {
-    "x": 155400,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
-   }
-  },
-  {
-   "id": "inv-519",
-   "type": "story",
-   "position": {
-    "x": 155700,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "忠孝東路七段，車站前。廣告看",
-    "text": "忠孝東路七段，車站前。廣告看板在騎樓那一排店的上面，畫面每十五秒換一次。\n其中一格是她。",
-    "speaker": "旁白",
-    "sceneCode": "street",
-    "segment": "seg129"
+    "segment": "seg130"
    }
   },
   {
@@ -16632,12 +16635,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：……所以我今天也會記",
-    "text": "……所以我今天也會記得你們的。我保證。\n逼——嗶！",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "street",
-    "segment": "seg129"
+    "title": "工作檯上那台收音機忽然響了一",
+    "text": "工作檯上那台收音機忽然響了一聲，很短，然後又沒了。\n諾亞低下頭去，繼續弄他的。",
+    "speaker": "旁白",
+    "sceneCode": "roof",
+    "segment": "seg130"
    }
   },
   {
@@ -16648,12 +16650,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "筆記：她講「我保證」的時候",
-    "text": "她講「我保證」的時候會停半拍。\n那是剪接，還是她本來就會停。",
-    "speaker": "玩家",
-    "sceneCode": "street",
-    "segment": "seg129"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -16661,6 +16661,55 @@
    "type": "story",
    "position": {
     "x": 156600,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "忠孝東路七段，車站前。廣告看",
+    "text": "忠孝東路七段，車站前。廣告看板在騎樓那一排店的上面，畫面每十五秒換一次。\n其中一格是她。",
+    "speaker": "旁白",
+    "sceneCode": "street",
+    "segment": "seg131"
+   }
+  },
+  {
+   "id": "inv-523",
+   "type": "story",
+   "position": {
+    "x": 156900,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "格莉奇：……所以我今天也會記",
+    "text": "……所以我今天也會記得你們的。我保證。\n逼——嗶！",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "street",
+    "segment": "seg131"
+   }
+  },
+  {
+   "id": "inv-524",
+   "type": "story",
+   "position": {
+    "x": 157200,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：她講「我保證」的時候",
+    "text": "她講「我保證」的時候會停半拍。\n那是剪接，還是她本來就會停。",
+    "speaker": "玩家",
+    "sceneCode": "street",
+    "segment": "seg131"
+   }
+  },
+  {
+   "id": "inv-525",
+   "type": "story",
+   "position": {
+    "x": 157500,
     "y": 0
    },
    "data": {
@@ -16719,7 +16768,7 @@
      }
     ],
     "sceneCode": "street",
-    "segment": "seg129",
+    "segment": "seg131",
     "variableOps": [
      {
       "id": "op-deadend_fan",
@@ -16731,10 +16780,10 @@
    }
   },
   {
-   "id": "inv-523",
+   "id": "inv-526",
    "type": "story",
    "position": {
-    "x": 156900,
+    "x": 157800,
     "y": 0
    },
    "data": {
@@ -16743,14 +16792,14 @@
     "text": "每一個人都說那是節目。\n沒有人覺得需要確認。",
     "speaker": "玩家",
     "sceneCode": "street",
-    "segment": "seg129"
+    "segment": "seg131"
    }
   },
   {
-   "id": "inv-524",
+   "id": "inv-527",
    "type": "story",
    "position": {
-    "x": 157200,
+    "x": 158100,
     "y": 0
    },
    "data": {
@@ -16759,14 +16808,14 @@
     "text": "看板換到下一格。是一支手機廣告。\n街上的人繼續走。",
     "speaker": "旁白",
     "sceneCode": "street",
-    "segment": "seg129"
+    "segment": "seg131"
    }
   },
   {
-   "id": "inv-525",
+   "id": "inv-528",
    "type": "story",
    "position": {
-    "x": 157500,
+    "x": 158400,
     "y": 0
    },
    "data": {
@@ -16777,10 +16826,10 @@
    }
   },
   {
-   "id": "inv-526",
+   "id": "inv-529",
    "type": "story",
    "position": {
-    "x": 157800,
+    "x": 158700,
     "y": 0
    },
    "data": {
@@ -16789,14 +16838,14 @@
     "text": "下午的大廳比早上暗。管理室的窗口開著一半，裡面有一台電風扇對著人吹。\n管理員坐在裡面吃便當，背對著公告螢幕。\n螢幕還在播，聲音開得很小。",
     "speaker": "旁白",
     "sceneCode": "lobby",
-    "segment": "seg130"
+    "segment": "seg132"
    }
   },
   {
-   "id": "inv-527",
+   "id": "inv-530",
    "type": "story",
    "position": {
-    "x": 158100,
+    "x": 159000,
     "y": 0
    },
    "data": {
@@ -16933,53 +16982,7 @@
      }
     ],
     "sceneCode": "lobby",
-    "segment": "seg130"
-   }
-  },
-  {
-   "id": "inv-528",
-   "type": "story",
-   "position": {
-    "x": 158400,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：下午兩點。管理員在管",
-    "text": "下午兩點。管理員在管理室裡吃便當。\n他問我頂樓那個有沒有跟我收錢。我還沒上去，他還是問了。\n問這一句的時候他把筷子放下來。\n一個什麼都丟，一個什麼都留。他們天天見面。他們不合。先記著。\n他說他管到樓梯口，上面是別人的事。",
-    "speaker": "玩家",
-    "sceneCode": "lobby",
-    "segment": "seg130"
-   }
-  },
-  {
-   "id": "inv-529",
-   "type": "story",
-   "position": {
-    "x": 158700,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "窗口剩下一條縫，裡面有電視的",
-    "text": "窗口剩下一條縫，裡面有電視的聲音。\n公告螢幕跳到下一支，賣鍋子的。",
-    "speaker": "旁白",
-    "sceneCode": "lobby",
-    "segment": "seg130"
-   }
-  },
-  {
-   "id": "inv-530",
-   "type": "story",
-   "position": {
-    "x": 159000,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "segment": "seg132"
    }
   },
   {
@@ -16991,11 +16994,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "七點四十。大廳只有信箱牆那一",
-    "text": "七點四十。大廳只有信箱牆那一邊亮著。\n管理室的燈關了，窗口拉下來。\n第三排那兩格還是沒有門。裡面塞著幾張廣告單。\n螢幕開著。",
-    "speaker": "旁白",
+    "title": "筆記：下午兩點。管理員在管",
+    "text": "下午兩點。管理員在管理室裡吃便當。\n他問我頂樓那個有沒有跟我收錢。我還沒上去，他還是問了。\n問這一句的時候他把筷子放下來。\n一個什麼都丟，一個什麼都留。他們天天見面。他們不合。先記著。\n他說他管到樓梯口，上面是別人的事。",
+    "speaker": "玩家",
     "sceneCode": "lobby",
-    "segment": "seg131"
+    "segment": "seg132"
    }
   },
   {
@@ -17007,12 +17010,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：逼——嗶！大家好，我",
-    "text": "逼——嗶！大家好，我是格莉奇。\n這個月的周邊有新東西喔，詳細請看下面的連結。欸，等一下，螢幕上沒有連結。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "lobby",
-    "segment": "seg131"
+    "title": "窗口剩下一條縫，裡面有電視的",
+    "text": "窗口剩下一條縫，裡面有電視的聲音。\n公告螢幕跳到下一支，賣鍋子的。",
+    "speaker": "旁白",
+    "sceneCode": "lobby",
+    "segment": "seg132"
    }
   },
   {
@@ -17023,12 +17025,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "每一格下面有一張名牌，打字機",
-    "text": "每一格下面有一張名牌，打字機打的。有幾張的邊角翹起來。\n筆記本攤在膝蓋上。一格一格抄，抄到第十一格。\n諾亞從樓梯上下來，一手拎著垃圾袋。他往信箱牆那邊看了一眼，\n點了一下頭，然後從後門出去。",
-    "speaker": "旁白",
-    "sceneCode": "lobby",
-    "segment": "seg131"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -17040,11 +17040,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：晚上七點四十。一樓沒",
-    "text": "晚上七點四十。一樓沒有人。\n信箱十九格。有名牌的十一格，其中三張看不出字。\n沒有一個名字對得上。名牌比住在裡面的人舊。\n管理員從早上到現在，一次都沒有說過她不住這裡。",
-    "speaker": "玩家",
+    "title": "七點四十。大廳只有信箱牆那一",
+    "text": "七點四十。大廳只有信箱牆那一邊亮著。\n管理室的燈關了，窗口拉下來。\n第三排那兩格還是沒有門。裡面塞著幾張廣告單。\n螢幕開著。",
+    "speaker": "旁白",
     "sceneCode": "lobby",
-    "segment": "seg131"
+    "segment": "seg133"
    }
   },
   {
@@ -17056,19 +17056,12 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "後門開了一次。諾亞走回樓梯口",
-    "text": "後門開了一次。諾亞走回樓梯口，手上沒有東西了。\n螢幕還在播。",
-    "speaker": "旁白",
-    "sceneCode": "lobby",
-    "segment": "seg131",
-    "variableOps": [
-     {
-      "id": "op-note_mailbox",
-      "variable": "note_mailbox",
-      "kind": "set",
-      "value": true
-     }
-    ]
+    "title": "格莉奇：逼——嗶！大家好，我",
+    "text": "逼——嗶！大家好，我是格莉奇。\n這個月的周邊有新東西喔，詳細請看下面的連結。欸，等一下，螢幕上沒有連結。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "lobby",
+    "segment": "seg133"
    }
   },
   {
@@ -17079,10 +17072,12 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "每一格下面有一張名牌，打字機",
+    "text": "每一格下面有一張名牌，打字機打的。有幾張的邊角翹起來。\n筆記本攤在膝蓋上。一格一格抄，抄到第十一格。\n諾亞從樓梯上下來，一手拎著垃圾袋。他往信箱牆那邊看了一眼，\n點了一下頭，然後從後門出去。",
+    "speaker": "旁白",
+    "sceneCode": "lobby",
+    "segment": "seg133"
    }
   },
   {
@@ -17094,11 +17089,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "車站前那條街，忠孝東路七段。",
-    "text": "車站前那條街，忠孝東路七段。騎樓下的鐵門一半一半拉開，有人在裡面搬箱子。\n廣告看板架在那排店的上面，畫面每十五秒換一次。銀行、房仲、一支手機，然後又是銀行。\n往車站走的人沒有停。",
-    "speaker": "旁白",
-    "sceneCode": "street",
-    "segment": "seg132"
+    "title": "筆記：晚上七點四十。一樓沒",
+    "text": "晚上七點四十。一樓沒有人。\n信箱十九格。有名牌的十一格，其中三張看不出字。\n沒有一個名字對得上。名牌比住在裡面的人舊。\n管理員從早上到現在，一次都沒有說過她不住這裡。",
+    "speaker": "玩家",
+    "sceneCode": "lobby",
+    "segment": "seg133"
    }
   },
   {
@@ -17106,6 +17101,60 @@
    "type": "story",
    "position": {
     "x": 161400,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "後門開了一次。諾亞走回樓梯口",
+    "text": "後門開了一次。諾亞走回樓梯口，手上沒有東西了。\n螢幕還在播。",
+    "speaker": "旁白",
+    "sceneCode": "lobby",
+    "segment": "seg133",
+    "variableOps": [
+     {
+      "id": "op-note_mailbox",
+      "variable": "note_mailbox",
+      "kind": "set",
+      "value": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "inv-539",
+   "type": "story",
+   "position": {
+    "x": 161700,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-540",
+   "type": "story",
+   "position": {
+    "x": 162000,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "車站前那條街，忠孝東路七段。",
+    "text": "車站前那條街，忠孝東路七段。騎樓下的鐵門一半一半拉開，有人在裡面搬箱子。\n廣告看板架在那排店的上面，畫面每十五秒換一次。銀行、房仲、一支手機，然後又是銀行。\n往車站走的人沒有停。",
+    "speaker": "旁白",
+    "sceneCode": "street",
+    "segment": "seg134"
+   }
+  },
+  {
+   "id": "inv-541",
+   "type": "story",
+   "position": {
+    "x": 162300,
     "y": 0
    },
    "data": {
@@ -17176,53 +17225,7 @@
      }
     ],
     "sceneCode": "street",
-    "segment": "seg132"
-   }
-  },
-  {
-   "id": "inv-539",
-   "type": "story",
-   "position": {
-    "x": 161700,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "鐵門拉到頂。\n看板換到那支手",
-    "text": "鐵門拉到頂。\n看板換到那支手機廣告。畫面裡的人在講電話，沒有聲音。\n騎樓下那家店的人在門口停了兩秒，抬頭看了一眼，然後進去了。",
-    "speaker": "旁白",
-    "sceneCode": "street",
-    "segment": "seg132"
-   }
-  },
-  {
-   "id": "inv-540",
-   "type": "story",
-   "position": {
-    "x": 162000,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：上午沒有她。看板是有",
-    "text": "上午沒有她。看板是有時段的，早上是銀行，中午換一批，有聲音的下午才排。\n下午再來。",
-    "speaker": "玩家",
-    "sceneCode": "street",
-    "segment": "seg132"
-   }
-  },
-  {
-   "id": "inv-541",
-   "type": "story",
-   "position": {
-    "x": 162300,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "segment": "seg134"
    }
   },
   {
@@ -17234,11 +17237,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "下午的看板有聲音。喇叭裝在看",
-    "text": "下午的看板有聲音。喇叭裝在看板下緣，聲音打下來，騎樓底下聽得很清楚。\n飲料、房仲、手機。\n然後是她。",
+    "title": "鐵門拉到頂。\n看板換到那支手",
+    "text": "鐵門拉到頂。\n看板換到那支手機廣告。畫面裡的人在講電話，沒有聲音。\n騎樓下那家店的人在門口停了兩秒，抬頭看了一眼，然後進去了。",
     "speaker": "旁白",
     "sceneCode": "street",
-    "segment": "seg133"
+    "segment": "seg134"
    }
   },
   {
@@ -17250,12 +17253,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：逼——嗶！我是格莉奇",
-    "text": "逼——嗶！我是格莉奇。\n這款抱枕買一個送一個喔。倉庫還有很多，真的很多，多到我想跟大家講一件事，就是",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "street",
-    "segment": "seg133"
+    "title": "筆記：上午沒有她。看板是有",
+    "text": "上午沒有她。看板是有時段的，早上是銀行，中午換一批，有聲音的下午才排。\n下午再來。",
+    "speaker": "玩家",
+    "sceneCode": "street",
+    "segment": "seg134"
    }
   },
   {
@@ -17266,12 +17268,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "畫面換成房仲的廣告。\n十五秒",
-    "text": "畫面換成房仲的廣告。\n十五秒到了。\n騎樓下的人沒有抬頭。",
-    "speaker": "旁白",
-    "sceneCode": "street",
-    "segment": "seg133"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -17279,6 +17279,55 @@
    "type": "story",
    "position": {
     "x": 163500,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "下午的看板有聲音。喇叭裝在看",
+    "text": "下午的看板有聲音。喇叭裝在看板下緣，聲音打下來，騎樓底下聽得很清楚。\n飲料、房仲、手機。\n然後是她。",
+    "speaker": "旁白",
+    "sceneCode": "street",
+    "segment": "seg135"
+   }
+  },
+  {
+   "id": "inv-546",
+   "type": "story",
+   "position": {
+    "x": 163800,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "格莉奇：逼——嗶！我是格莉奇",
+    "text": "逼——嗶！我是格莉奇。\n這款抱枕買一個送一個喔。倉庫還有很多，真的很多，多到我想跟大家講一件事，就是",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "street",
+    "segment": "seg135"
+   }
+  },
+  {
+   "id": "inv-547",
+   "type": "story",
+   "position": {
+    "x": 164100,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "畫面換成房仲的廣告。\n十五秒",
+    "text": "畫面換成房仲的廣告。\n十五秒到了。\n騎樓下的人沒有抬頭。",
+    "speaker": "旁白",
+    "sceneCode": "street",
+    "segment": "seg135"
+   }
+  },
+  {
+   "id": "inv-548",
+   "type": "story",
+   "position": {
+    "x": 164400,
     "y": 0
    },
    "data": {
@@ -17325,7 +17374,7 @@
      }
     ],
     "sceneCode": "street",
-    "segment": "seg133",
+    "segment": "seg135",
     "variableOps": [
      {
       "id": "op-deadend_fan",
@@ -17337,10 +17386,10 @@
    }
   },
   {
-   "id": "inv-546",
+   "id": "inv-549",
    "type": "story",
    "position": {
-    "x": 163800,
+    "x": 164700,
     "y": 0
    },
    "data": {
@@ -17349,14 +17398,14 @@
     "text": "下午三點多。她在上面。十五秒。\n她講到一半就被換掉了。前面那幾支都講得完，她那一支是剪過的。\n問了六個人。五個沒有停。一個問我那是不是飲料。\n明天我要站到對面去數，看她多久輪一次。",
     "speaker": "玩家",
     "sceneCode": "street",
-    "segment": "seg133"
+    "segment": "seg135"
    }
   },
   {
-   "id": "inv-547",
+   "id": "inv-550",
    "type": "story",
    "position": {
-    "x": 164100,
+    "x": 165000,
     "y": 0
    },
    "data": {
@@ -17367,10 +17416,10 @@
    }
   },
   {
-   "id": "inv-548",
+   "id": "inv-551",
    "type": "story",
    "position": {
-    "x": 164400,
+    "x": 165300,
     "y": 0
    },
    "data": {
@@ -17379,14 +17428,14 @@
     "text": "七點二十。站牌下面站著五個人，四個在看手機。\n站牌上寫著南港行政中心，括號南港車站。動態站牌跑著到站時間：藍十五，五分。六〇五，十二分。\n對面那排店的後面看得到一棟舊樓。頂樓有一間鐵皮加蓋的。",
     "speaker": "旁白",
     "sceneCode": "busstop",
-    "segment": "seg134"
+    "segment": "seg136"
    }
   },
   {
-   "id": "inv-549",
+   "id": "inv-552",
    "type": "story",
    "position": {
-    "x": 164700,
+    "x": 165600,
     "y": 0
    },
    "data": {
@@ -17463,53 +17512,7 @@
      }
     ],
     "sceneCode": "busstop",
-    "segment": "seg134"
-   }
-  },
-  {
-   "id": "inv-550",
-   "type": "story",
-   "position": {
-    "x": 165000,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "門關上。站牌下面剩四個人。\n",
-    "text": "門關上。站牌下面剩四個人。\n動態站牌跳成：六〇五，四分。",
-    "speaker": "旁白",
-    "sceneCode": "busstop",
-    "segment": "seg134"
-   }
-  },
-  {
-   "id": "inv-551",
-   "type": "story",
-   "position": {
-    "x": 165300,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：七點二十，南港車站前",
-    "text": "七點二十，南港車站前的站牌。一個高中生。\n他講到「我國中就」，車來了。\n國中到現在至少三年。頻道開兩年。這裡對不起來。\n附註：他大概是隨口講的。年份要問年紀大一點的人。",
-    "speaker": "玩家",
-    "sceneCode": "busstop",
-    "segment": "seg134"
-   }
-  },
-  {
-   "id": "inv-552",
-   "type": "story",
-   "position": {
-    "x": 165600,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "segment": "seg136"
    }
   },
   {
@@ -17521,11 +17524,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：下午三點。公車站沒有",
-    "text": "下午三點。公車站沒有人。\n跑馬燈每跑幾個字就被到站時間切掉。我看了六輪，\n才把整句拼出來：格莉奇周邊出清，到本月底，數量有限。\n我不知道我為什麼要把它拼完。\n我在這裡站了二十分鐘。我想不出下一個要問誰。",
-    "speaker": "玩家",
+    "title": "門關上。站牌下面剩四個人。\n",
+    "text": "門關上。站牌下面剩四個人。\n動態站牌跳成：六〇五，四分。",
+    "speaker": "旁白",
     "sceneCode": "busstop",
-    "segment": "seg135"
+    "segment": "seg136"
    }
   },
   {
@@ -17536,10 +17539,12 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：七點二十，南港車站前",
+    "text": "七點二十，南港車站前的站牌。一個高中生。\n他講到「我國中就」，車來了。\n國中到現在至少三年。頻道開兩年。這裡對不起來。\n附註：他大概是隨口講的。年份要問年紀大一點的人。",
+    "speaker": "玩家",
+    "sceneCode": "busstop",
+    "segment": "seg136"
    }
   },
   {
@@ -17550,12 +17555,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "七點。站牌下面站了六個人。\n",
-    "text": "七點。站牌下面站了六個人。\n對面那排店的鐵門一家一家拉下來。",
-    "speaker": "旁白",
-    "sceneCode": "busstop",
-    "segment": "seg136"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -17563,6 +17566,52 @@
    "type": "story",
    "position": {
     "x": 166800,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：下午三點。公車站沒有",
+    "text": "下午三點。公車站沒有人。\n跑馬燈每跑幾個字就被到站時間切掉。我看了六輪，\n才把整句拼出來：格莉奇周邊出清，到本月底，數量有限。\n我不知道我為什麼要把它拼完。\n我在這裡站了二十分鐘。我想不出下一個要問誰。",
+    "speaker": "玩家",
+    "sceneCode": "busstop",
+    "segment": "seg137"
+   }
+  },
+  {
+   "id": "inv-557",
+   "type": "story",
+   "position": {
+    "x": 167100,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-558",
+   "type": "story",
+   "position": {
+    "x": 167400,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "七點。站牌下面站了六個人。\n",
+    "text": "七點。站牌下面站了六個人。\n對面那排店的鐵門一家一家拉下來。",
+    "speaker": "旁白",
+    "sceneCode": "busstop",
+    "segment": "seg138"
+   }
+  },
+  {
+   "id": "inv-559",
+   "type": "story",
+   "position": {
+    "x": 167700,
     "y": 0
    },
    "data": {
@@ -17633,53 +17682,7 @@
      }
     ],
     "sceneCode": "busstop",
-    "segment": "seg136"
-   }
-  },
-  {
-   "id": "inv-557",
-   "type": "story",
-   "position": {
-    "x": 167100,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "車走了。站牌下面剩兩個人，一",
-    "text": "車走了。站牌下面剩兩個人，一個在講電話，一個低頭看手機。\n對面最後一家還亮著。",
-    "speaker": "旁白",
-    "sceneCode": "busstop",
-    "segment": "seg136"
-   }
-  },
-  {
-   "id": "inv-558",
-   "type": "story",
-   "position": {
-    "x": 167400,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：晚上七點，公車站。一",
-    "text": "晚上七點，公車站。一個在這裡等了十幾年的阿姨。\n站牌不準。這裡的人看對面那排鐵門幾點拉下來。全部關完就是末班。\n她最後那一句被車切掉了。\n這裡有一批每天同一個時間站在這裡的人。我不知道她認得的是什麼。",
-    "speaker": "玩家",
-    "sceneCode": "busstop",
-    "segment": "seg136"
-   }
-  },
-  {
-   "id": "inv-559",
-   "type": "story",
-   "position": {
-    "x": 167700,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "segment": "seg138"
    }
   },
   {
@@ -17691,11 +17694,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "南港站二號出口，忠孝東路七段",
-    "text": "南港站二號出口，忠孝東路七段這一邊。手扶梯一直在吐人。上來的人不看路，看手機，然後往三個方向散開。\n柱子旁邊站著一個發傳單的。她的手每兩秒伸出去一次，跟手扶梯同一個節拍。\n沒有人停下來。",
+    "title": "車走了。站牌下面剩兩個人，一",
+    "text": "車走了。站牌下面剩兩個人，一個在講電話，一個低頭看手機。\n對面最後一家還亮著。",
     "speaker": "旁白",
-    "sceneCode": "metro",
-    "segment": "seg137"
+    "sceneCode": "busstop",
+    "segment": "seg138"
    }
   },
   {
@@ -17703,6 +17706,52 @@
    "type": "story",
    "position": {
     "x": 168300,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：晚上七點，公車站。一",
+    "text": "晚上七點，公車站。一個在這裡等了十幾年的阿姨。\n站牌不準。這裡的人看對面那排鐵門幾點拉下來。全部關完就是末班。\n她最後那一句被車切掉了。\n這裡有一批每天同一個時間站在這裡的人。我不知道她認得的是什麼。",
+    "speaker": "玩家",
+    "sceneCode": "busstop",
+    "segment": "seg138"
+   }
+  },
+  {
+   "id": "inv-562",
+   "type": "story",
+   "position": {
+    "x": 168600,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-563",
+   "type": "story",
+   "position": {
+    "x": 168900,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "南港站二號出口，忠孝東路七段",
+    "text": "南港站二號出口，忠孝東路七段這一邊。手扶梯一直在吐人。上來的人不看路，看手機，然後往三個方向散開。\n柱子旁邊站著一個發傳單的。她的手每兩秒伸出去一次，跟手扶梯同一個節拍。\n沒有人停下來。",
+    "speaker": "旁白",
+    "sceneCode": "metro",
+    "segment": "seg139"
+   }
+  },
+  {
+   "id": "inv-564",
+   "type": "story",
+   "position": {
+    "x": 169200,
     "y": 0
    },
    "data": {
@@ -17737,14 +17786,14 @@
      }
     ],
     "sceneCode": "metro",
-    "segment": "seg137"
+    "segment": "seg139"
    }
   },
   {
-   "id": "inv-562",
+   "id": "inv-565",
    "type": "story",
    "position": {
-    "x": 168600,
+    "x": 169500,
     "y": 0
    },
    "data": {
@@ -17791,7 +17840,7 @@
      }
     ],
     "sceneCode": "metro",
-    "segment": "seg137",
+    "segment": "seg139",
     "variableOps": [
      {
       "id": "op-met_flyer",
@@ -17803,10 +17852,10 @@
    }
   },
   {
-   "id": "inv-563",
+   "id": "inv-566",
    "type": "story",
    "position": {
-    "x": 168900,
+    "x": 169800,
     "y": 0
    },
    "data": {
@@ -17815,14 +17864,14 @@
     "text": "上午八點十二分，南港站二號出口。二十五分鐘。\n我攔了五個人。三個以為我要問路，兩個沒有停。\n沒有人會停。早上不要來這裡。\n早上這一趟我什麼都沒有拿到。",
     "speaker": "玩家",
     "sceneCode": "metro",
-    "segment": "seg137"
+    "segment": "seg139"
    }
   },
   {
-   "id": "inv-564",
+   "id": "inv-567",
    "type": "story",
    "position": {
-    "x": 169200,
+    "x": 170100,
     "y": 0
    },
    "data": {
@@ -17833,10 +17882,10 @@
    }
   },
   {
-   "id": "inv-565",
+   "id": "inv-568",
    "type": "story",
    "position": {
-    "x": 169500,
+    "x": 170400,
     "y": 0
    },
    "data": {
@@ -17845,14 +17894,14 @@
     "text": "下午的手扶梯一次只送上來七八個人，中間有很長的空白。\n柱子旁邊那個垃圾桶最上面壓著十幾張同一款傳單，摺法都一樣。\n發傳單的還在。她把那一疊換到另一隻手。",
     "speaker": "旁白",
     "sceneCode": "metro",
-    "segment": "seg138"
+    "segment": "seg140"
    }
   },
   {
-   "id": "inv-566",
+   "id": "inv-569",
    "type": "story",
    "position": {
-    "x": 169800,
+    "x": 170700,
     "y": 0
    },
    "data": {
@@ -17965,61 +18014,7 @@
      }
     ],
     "sceneCode": "metro",
-    "segment": "seg138"
-   }
-  },
-  {
-   "id": "inv-567",
-   "type": "story",
-   "position": {
-    "x": 170100,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "柱子旁邊空了。\n她把傳單摺起",
-    "text": "柱子旁邊空了。\n她把傳單摺起來，放進外套口袋。",
-    "speaker": "旁白",
-    "sceneCode": "metro",
-    "segment": "seg138",
-    "variableOps": [
-     {
-      "id": "op-met_flyer",
-      "variable": "met_flyer",
-      "kind": "set",
-      "value": true
-     }
-    ]
-   }
-  },
-  {
-   "id": "inv-568",
-   "type": "story",
-   "position": {
-    "x": 170400,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：發傳單的。一天五百張",
-    "text": "發傳單的。一天五百張。她看的是手。\n站著不動的人記得住經過的人。經過的人什麼都記不住。\n她說有一個每次都收，每次都跟她說謝謝。\n一個常常經過這裡、每一次都當第一次的人。\n我開始在每一個人的話裡面找她。這樣不好。",
-    "speaker": "玩家",
-    "sceneCode": "metro",
-    "segment": "seg138"
-   }
-  },
-  {
-   "id": "inv-569",
-   "type": "story",
-   "position": {
-    "x": 170700,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "segment": "seg140"
    }
   },
   {
@@ -18031,11 +18026,19 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "出口旁邊立著一個廣告燈箱。裡",
-    "text": "出口旁邊立著一個廣告燈箱。裡面的她比真人大。\n畫面不會動。燈箱上緣有一個朝下的小喇叭。\n上來的人從燈箱前面走過去。沒有人抬頭。",
+    "title": "柱子旁邊空了。\n她把傳單摺起",
+    "text": "柱子旁邊空了。\n她把傳單摺起來，放進外套口袋。",
     "speaker": "旁白",
     "sceneCode": "metro",
-    "segment": "seg139"
+    "segment": "seg140",
+    "variableOps": [
+     {
+      "id": "op-met_flyer",
+      "variable": "met_flyer",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -18047,12 +18050,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：我會記得你們的。",
-    "text": "我會記得你們的。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "metro",
-    "segment": "seg139"
+    "title": "筆記：發傳單的。一天五百張",
+    "text": "發傳單的。一天五百張。她看的是手。\n站著不動的人記得住經過的人。經過的人什麼都記不住。\n她說有一個每次都收，每次都跟她說謝謝。\n一個常常經過這裡、每一次都當第一次的人。\n我開始在每一個人的話裡面找她。這樣不好。",
+    "speaker": "玩家",
+    "sceneCode": "metro",
+    "segment": "seg140"
    }
   },
   {
@@ -18060,6 +18062,53 @@
    "type": "story",
    "position": {
     "x": 171600,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-573",
+   "type": "story",
+   "position": {
+    "x": 171900,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "出口旁邊立著一個廣告燈箱。裡",
+    "text": "出口旁邊立著一個廣告燈箱。裡面的她比真人大。\n畫面不會動。燈箱上緣有一個朝下的小喇叭。\n上來的人從燈箱前面走過去。沒有人抬頭。",
+    "speaker": "旁白",
+    "sceneCode": "metro",
+    "segment": "seg141"
+   }
+  },
+  {
+   "id": "inv-574",
+   "type": "story",
+   "position": {
+    "x": 172200,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "格莉奇：我會記得你們的。",
+    "text": "我會記得你們的。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "metro",
+    "segment": "seg141"
+   }
+  },
+  {
+   "id": "inv-575",
+   "type": "story",
+   "position": {
+    "x": 172500,
     "y": 0
    },
    "data": {
@@ -18106,56 +18155,7 @@
      }
     ],
     "sceneCode": "metro",
-    "segment": "seg139"
-   }
-  },
-  {
-   "id": "inv-573",
-   "type": "story",
-   "position": {
-    "x": 171900,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "她往後退兩步。聲音沒有了。\n",
-    "text": "她往後退兩步。聲音沒有了。\n她走回去。聲音又有了。\n燈箱下面剩下她一個。",
-    "speaker": "旁白",
-    "sceneCode": "metro",
-    "segment": "seg139"
-   }
-  },
-  {
-   "id": "inv-574",
-   "type": "story",
-   "position": {
-    "x": 172200,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "格莉奇：我會記得你們的。",
-    "text": "我會記得你們的。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "metro",
-    "segment": "seg139"
-   }
-  },
-  {
-   "id": "inv-575",
-   "type": "story",
-   "position": {
-    "x": 172500,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：捷運二號出口的燈箱。",
-    "text": "捷運二號出口的燈箱。只有一句，一直重播。\n十一秒一次。我數到十九次，每一次停的地方都一樣。\n我在下面站了很久。",
-    "speaker": "玩家",
-    "sceneCode": "metro",
-    "segment": "seg139"
+    "segment": "seg141"
    }
   },
   {
@@ -18166,10 +18166,12 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "她往後退兩步。聲音沒有了。\n",
+    "text": "她往後退兩步。聲音沒有了。\n她走回去。聲音又有了。\n燈箱下面剩下她一個。",
+    "speaker": "旁白",
+    "sceneCode": "metro",
+    "segment": "seg141"
    }
   },
   {
@@ -18181,11 +18183,12 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "自動門開了又關。冰櫃的壓縮機",
-    "text": "自動門開了又關。冰櫃的壓縮機在響。\n收銀台旁邊立著一個紙板人形，比真人矮一點，笑得很用力。",
-    "speaker": "旁白",
-    "sceneCode": "store",
-    "segment": "seg140"
+    "title": "格莉奇：我會記得你們的。",
+    "text": "我會記得你們的。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "metro",
+    "segment": "seg141"
    }
   },
   {
@@ -18197,12 +18200,11 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "格莉奇：逼——嗶！大家好，我",
-    "text": "逼——嗶！大家好，我是格莉奇。\n買兩件就送一張。送完為止喔。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "store",
-    "segment": "seg140"
+    "title": "筆記：捷運二號出口的燈箱。",
+    "text": "捷運二號出口的燈箱。只有一句，一直重播。\n十一秒一次。我數到十九次，每一次停的地方都一樣。\n我在下面站了很久。",
+    "speaker": "玩家",
+    "sceneCode": "metro",
+    "segment": "seg141"
    }
   },
   {
@@ -18210,6 +18212,53 @@
    "type": "story",
    "position": {
     "x": 173700,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-580",
+   "type": "story",
+   "position": {
+    "x": 174000,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "自動門開了又關。冰櫃的壓縮機",
+    "text": "自動門開了又關。冰櫃的壓縮機在響。\n收銀台旁邊立著一個紙板人形，比真人矮一點，笑得很用力。",
+    "speaker": "旁白",
+    "sceneCode": "store",
+    "segment": "seg142"
+   }
+  },
+  {
+   "id": "inv-581",
+   "type": "story",
+   "position": {
+    "x": 174300,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "格莉奇：逼——嗶！大家好，我",
+    "text": "逼——嗶！大家好，我是格莉奇。\n買兩件就送一張。送完為止喔。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "store",
+    "segment": "seg142"
+   }
+  },
+  {
+   "id": "inv-582",
+   "type": "story",
+   "position": {
+    "x": 174600,
     "y": 0
    },
    "data": {
@@ -18274,14 +18323,14 @@
      }
     ],
     "sceneCode": "store",
-    "segment": "seg140"
+    "segment": "seg142"
    }
   },
   {
-   "id": "inv-580",
+   "id": "inv-583",
    "type": "story",
    "position": {
-    "x": 174000,
+    "x": 174900,
     "y": 0
    },
    "data": {
@@ -18291,14 +18340,14 @@
     "speaker": "格莉奇",
     "remote": true,
     "screen": "store",
-    "segment": "seg140"
+    "segment": "seg142"
    }
   },
   {
-   "id": "inv-581",
+   "id": "inv-584",
    "type": "story",
    "position": {
-    "x": 174300,
+    "x": 175200,
     "y": 0
    },
    "data": {
@@ -18357,7 +18406,7 @@
      }
     ],
     "sceneCode": "store",
-    "segment": "seg140",
+    "segment": "seg142",
     "variableOps": [
      {
       "id": "op-deadend_clerk",
@@ -18369,10 +18418,10 @@
    }
   },
   {
-   "id": "inv-582",
+   "id": "inv-585",
    "type": "story",
    "position": {
-    "x": 174600,
+    "x": 175500,
     "y": 0
    },
    "data": {
@@ -18381,14 +18430,14 @@
     "text": "便利商店。她在收銀台旁邊，也在天花板的喇叭裡。四十秒一次，我算了兩輪。\n立牌不賣，總公司的。上個月才換的，店員想不起來上一個是誰。\n他背得出她那句廣告詞。問他那是誰，他說是那個一直講話的。\n背得出來，跟記得住，好像不是同一件事。",
     "speaker": "玩家",
     "sceneCode": "store",
-    "segment": "seg140"
+    "segment": "seg142"
    }
   },
   {
-   "id": "inv-583",
+   "id": "inv-586",
    "type": "story",
    "position": {
-    "x": 174900,
+    "x": 175800,
     "y": 0
    },
    "data": {
@@ -18399,10 +18448,10 @@
    }
   },
   {
-   "id": "inv-584",
+   "id": "inv-587",
    "type": "story",
    "position": {
-    "x": 175200,
+    "x": 176100,
     "y": 0
    },
    "data": {
@@ -18411,14 +18460,14 @@
     "text": "下午三點。店裡只有她一個客人。\n冰櫃的壓縮機還在響。紙板人形還在收銀台旁邊，笑得跟剛才一樣用力。",
     "speaker": "旁白",
     "sceneCode": "store",
-    "segment": "seg141"
+    "segment": "seg143"
    }
   },
   {
-   "id": "inv-585",
+   "id": "inv-588",
    "type": "story",
    "position": {
-    "x": 175500,
+    "x": 176400,
     "y": 0
    },
    "data": {
@@ -18428,14 +18477,14 @@
     "speaker": "格莉奇",
     "remote": true,
     "screen": "store",
-    "segment": "seg141"
+    "segment": "seg143"
    }
   },
   {
-   "id": "inv-586",
+   "id": "inv-589",
    "type": "story",
    "position": {
-    "x": 175800,
+    "x": 176700,
     "y": 0
    },
    "data": {
@@ -18488,54 +18537,7 @@
      }
     ],
     "sceneCode": "store",
-    "segment": "seg141"
-   }
-  },
-  {
-   "id": "inv-587",
-   "type": "story",
-   "position": {
-    "x": 176100,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "格莉奇：逼——嗶！大家好，我",
-    "text": "逼——嗶！大家好，我是格莉奇。",
-    "speaker": "格莉奇",
-    "remote": true,
-    "screen": "store",
-    "segment": "seg141"
-   }
-  },
-  {
-   "id": "inv-588",
-   "type": "story",
-   "position": {
-    "x": 176400,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：第二次。他沒有認出我",
-    "text": "第二次。他沒有認出我。\n我問了同一個問題。一模一樣的答案，連前面那個停頓都在同一個位置。\n人真的想不起來的時候，第二次會想得比較久，或者比較短。不會一樣。\n所以要嘛他在背，要嘛他根本沒有在想。我選第一個。\n廣告是循環的。從中間進去，她會先講結尾再講開頭。",
-    "speaker": "玩家",
-    "sceneCode": "store",
-    "segment": "seg141"
-   }
-  },
-  {
-   "id": "inv-589",
-   "type": "story",
-   "position": {
-    "x": 176700,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "segment": "seg143"
    }
   },
   {
@@ -18547,11 +18549,12 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "晚上八點。外面暗了，店裡的燈",
-    "text": "晚上八點。外面暗了，店裡的燈沒有變。\n冰櫃的壓縮機還在響。店員蹲在飲料櫃前面補貨。",
-    "speaker": "旁白",
-    "sceneCode": "store",
-    "segment": "seg142"
+    "title": "格莉奇：逼——嗶！大家好，我",
+    "text": "逼——嗶！大家好，我是格莉奇。",
+    "speaker": "格莉奇",
+    "remote": true,
+    "screen": "store",
+    "segment": "seg143"
    }
   },
   {
@@ -18559,6 +18562,52 @@
    "type": "story",
    "position": {
     "x": 177300,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "筆記：第二次。他沒有認出我",
+    "text": "第二次。他沒有認出我。\n我問了同一個問題。一模一樣的答案，連前面那個停頓都在同一個位置。\n人真的想不起來的時候，第二次會想得比較久，或者比較短。不會一樣。\n所以要嘛他在背，要嘛他根本沒有在想。我選第一個。\n廣告是循環的。從中間進去，她會先講結尾再講開頭。",
+    "speaker": "玩家",
+    "sceneCode": "store",
+    "segment": "seg143"
+   }
+  },
+  {
+   "id": "inv-592",
+   "type": "story",
+   "position": {
+    "x": 177600,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-593",
+   "type": "story",
+   "position": {
+    "x": 177900,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "晚上八點。外面暗了，店裡的燈",
+    "text": "晚上八點。外面暗了，店裡的燈沒有變。\n冰櫃的壓縮機還在響。店員蹲在飲料櫃前面補貨。",
+    "speaker": "旁白",
+    "sceneCode": "store",
+    "segment": "seg144"
+   }
+  },
+  {
+   "id": "inv-594",
+   "type": "story",
+   "position": {
+    "x": 178200,
     "y": 0
    },
    "data": {
@@ -18641,7 +18690,7 @@
      }
     ],
     "sceneCode": "store",
-    "segment": "seg142",
+    "segment": "seg144",
     "variableOps": [
      {
       "id": "op-trust_店員",
@@ -18653,10 +18702,10 @@
    }
   },
   {
-   "id": "inv-592",
+   "id": "inv-595",
    "type": "story",
    "position": {
-    "x": 177600,
+    "x": 178500,
     "y": 0
    },
    "data": {
@@ -18665,14 +18714,14 @@
     "text": "廣告又播了一次。\n兩個人都沒有抬頭。",
     "speaker": "旁白",
     "sceneCode": "store",
-    "segment": "seg142"
+    "segment": "seg144"
    }
   },
   {
-   "id": "inv-593",
+   "id": "inv-596",
    "type": "story",
    "position": {
-    "x": 177900,
+    "x": 178800,
     "y": 0
    },
    "data": {
@@ -18681,14 +18730,14 @@
     "text": "第三次。這次是他先開口。\n他沒有問我要不要袋子。\n買一樣的東西買三次，人就會記得你。這在便利商店大概算常識。\n前面問的都是她的事。這一件是他的事，他先愣了一下，然後講了最多。",
     "speaker": "玩家",
     "sceneCode": "store",
-    "segment": "seg142"
+    "segment": "seg144"
    }
   },
   {
-   "id": "inv-594",
+   "id": "inv-597",
    "type": "story",
    "position": {
-    "x": 178200,
+    "x": 179100,
     "y": 0
    },
    "data": {
@@ -18699,10 +18748,10 @@
    }
   },
   {
-   "id": "inv-595",
+   "id": "inv-598",
    "type": "story",
    "position": {
-    "x": 178500,
+    "x": 179400,
     "y": 0
    },
    "data": {
@@ -18720,10 +18769,10 @@
    }
   },
   {
-   "id": "inv-596",
+   "id": "inv-599",
    "type": "story",
    "position": {
-    "x": 178800,
+    "x": 179700,
     "y": 0
    },
    "data": {
@@ -18734,14 +18783,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg143"
+    "segment": "seg145"
    }
   },
   {
-   "id": "inv-597",
+   "id": "inv-600",
    "type": "story",
    "position": {
-    "x": 179100,
+    "x": 180000,
     "y": 0
    },
    "data": {
@@ -18749,14 +18798,14 @@
     "title": "筆記：第一天結束。\n拿到三",
     "text": "第一天結束。\n拿到三件事：她會掉整袋菜不會掉本子、那本本子比頻道老、\n她一個禮拜問同一個問題三次而且沒有人覺得奇怪。\n結論：她是真的。",
     "speaker": "玩家",
-    "segment": "seg143"
+    "segment": "seg145"
    }
   },
   {
-   "id": "inv-598",
+   "id": "inv-601",
    "type": "story",
    "position": {
-    "x": 179400,
+    "x": 180300,
     "y": 0
    },
    "data": {
@@ -18765,14 +18814,14 @@
     "text": "自動門開了又關。冰櫃的壓縮機在響。\n收銀台旁邊立著一個紙板人形，比真人矮一點，笑得很用力。",
     "speaker": "旁白",
     "sceneCode": "store",
-    "segment": "seg144"
+    "segment": "seg146"
    }
   },
   {
-   "id": "inv-599",
+   "id": "inv-602",
    "type": "story",
    "position": {
-    "x": 179700,
+    "x": 180600,
     "y": 0
    },
    "data": {
@@ -18782,14 +18831,14 @@
     "speaker": "格莉奇",
     "remote": true,
     "screen": "store",
-    "segment": "seg144"
+    "segment": "seg146"
    }
   },
   {
-   "id": "inv-600",
+   "id": "inv-603",
    "type": "story",
    "position": {
-    "x": 180000,
+    "x": 180900,
     "y": 0
    },
    "data": {
@@ -18836,7 +18885,7 @@
      }
     ],
     "sceneCode": "store",
-    "segment": "seg144",
+    "segment": "seg146",
     "variableOps": [
      {
       "id": "op-deadend_clerk",
@@ -18848,10 +18897,10 @@
    }
   },
   {
-   "id": "inv-601",
+   "id": "inv-604",
    "type": "story",
    "position": {
-    "x": 180300,
+    "x": 181200,
     "y": 0
    },
    "data": {
@@ -18860,14 +18909,14 @@
     "text": "她在每一台螢幕上。沒有一個人認識她。",
     "speaker": "玩家",
     "sceneCode": "store",
-    "segment": "seg144"
+    "segment": "seg146"
    }
   },
   {
-   "id": "inv-602",
+   "id": "inv-605",
    "type": "story",
    "position": {
-    "x": 180600,
+    "x": 181500,
     "y": 0
    },
    "data": {
@@ -18914,7 +18963,7 @@
      }
     ],
     "sceneCode": "store",
-    "segment": "seg144",
+    "segment": "seg146",
     "variableOps": [
      {
       "id": "op-open_store",
@@ -18926,10 +18975,10 @@
    }
   },
   {
-   "id": "inv-603",
+   "id": "inv-606",
    "type": "story",
    "position": {
-    "x": 180900,
+    "x": 181800,
     "y": 0
    },
    "data": {
@@ -18938,14 +18987,14 @@
     "text": "深夜的常客。每次都一樣。\n我今天問了兩個人「有沒有人一直重複」，兩個人都想得出一個。\n這個城市裡重複的人比我想的多。",
     "speaker": "玩家",
     "sceneCode": "store",
-    "segment": "seg144"
+    "segment": "seg146"
    }
   },
   {
-   "id": "inv-604",
+   "id": "inv-607",
    "type": "story",
    "position": {
-    "x": 181200,
+    "x": 182100,
     "y": 0
    },
    "data": {
@@ -18956,10 +19005,10 @@
    }
   },
   {
-   "id": "inv-605",
+   "id": "inv-608",
    "type": "story",
    "position": {
-    "x": 181500,
+    "x": 182400,
     "y": 0
    },
    "data": {
@@ -18968,14 +19017,14 @@
     "text": "廣告看板每十五秒換一次。她站在對面數了六輪。\n她出現兩次。",
     "speaker": "旁白",
     "sceneCode": "street",
-    "segment": "seg145"
+    "segment": "seg147"
    }
   },
   {
-   "id": "inv-606",
+   "id": "inv-609",
    "type": "story",
    "position": {
-    "x": 181800,
+    "x": 182700,
     "y": 0
    },
    "data": {
@@ -19022,14 +19071,14 @@
      }
     ],
     "sceneCode": "street",
-    "segment": "seg145"
+    "segment": "seg147"
    }
   },
   {
-   "id": "inv-607",
+   "id": "inv-610",
    "type": "story",
    "position": {
-    "x": 182100,
+    "x": 183000,
     "y": 0
    },
    "data": {
@@ -19038,14 +19087,14 @@
     "text": "「真的假的有差嗎。」\n我今天被問倒了。我想不出一句話回他。",
     "speaker": "玩家",
     "sceneCode": "street",
-    "segment": "seg145"
+    "segment": "seg147"
    }
   },
   {
-   "id": "inv-608",
+   "id": "inv-611",
    "type": "story",
    "position": {
-    "x": 182400,
+    "x": 183300,
     "y": 0
    },
    "data": {
@@ -19056,10 +19105,10 @@
    }
   },
   {
-   "id": "inv-609",
+   "id": "inv-612",
    "type": "story",
    "position": {
-    "x": 182700,
+    "x": 183600,
     "y": 0
    },
    "data": {
@@ -19077,10 +19126,10 @@
    }
   },
   {
-   "id": "inv-610",
+   "id": "inv-613",
    "type": "story",
    "position": {
-    "x": 183000,
+    "x": 183900,
     "y": 0
    },
    "data": {
@@ -19091,14 +19140,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg147"
+    "segment": "seg149"
    }
   },
   {
-   "id": "inv-611",
+   "id": "inv-614",
    "type": "story",
    "position": {
-    "x": 183300,
+    "x": 184200,
     "y": 0
    },
    "data": {
@@ -19106,14 +19155,14 @@
     "title": "筆記：第二天。\n便利商店的",
     "text": "第二天。\n便利商店的店員不認識她。街上的人不在乎是真是假。\n一樓遇到一個住戶，講了三句話，什麼都沒問到。\n結論：這棟樓沒有東西。明天換一個方向。",
     "speaker": "玩家",
-    "segment": "seg147"
+    "segment": "seg149"
    }
   },
   {
-   "id": "inv-612",
+   "id": "inv-615",
    "type": "story",
    "position": {
-    "x": 183600,
+    "x": 184500,
     "y": 0
    },
    "data": {
@@ -19122,14 +19171,14 @@
     "text": "兩點十分。\n冰櫃的壓縮機還在響。\n紙板人形還在收銀台旁邊，笑得跟上次一樣用力。\n貓草坐在靠窗那一桌。關東煮，兩顆蘿蔔，一杯無糖。\n桌上多了一個紙袋，摺口壓得很平。",
     "speaker": "旁白",
     "sceneCode": "store",
-    "segment": "seg148"
+    "segment": "seg150"
    }
   },
   {
-   "id": "inv-613",
+   "id": "inv-616",
    "type": "story",
    "position": {
-    "x": 183900,
+    "x": 184800,
     "y": 0
    },
    "data": {
@@ -19206,7 +19255,7 @@
      }
     ],
     "sceneCode": "store",
-    "segment": "seg148",
+    "segment": "seg150",
     "variableOps": [
      {
       "id": "op-open_figure",
@@ -19218,10 +19267,10 @@
    }
   },
   {
-   "id": "inv-614",
+   "id": "inv-617",
    "type": "story",
    "position": {
-    "x": 184200,
+    "x": 185100,
     "y": 0
    },
    "data": {
@@ -19230,7 +19279,7 @@
     "text": "深夜的便利商店。靠窗那一桌。他今天先開口。\n他講的是抱枕在出清，一個四百八變成買一送一。他說他不會退。\n他把店的位置講給我聽，我沒有問。\n他今天一次都沒有提到她。",
     "speaker": "玩家",
     "sceneCode": "store",
-    "segment": "seg148",
+    "segment": "seg150",
     "variableOps": [
      {
       "id": "op-met_貓草",
@@ -19242,10 +19291,10 @@
    }
   },
   {
-   "id": "inv-615",
+   "id": "inv-618",
    "type": "story",
    "position": {
-    "x": 184500,
+    "x": 185400,
     "y": 0
    },
    "data": {
@@ -19256,10 +19305,10 @@
    }
   },
   {
-   "id": "inv-616",
+   "id": "inv-619",
    "type": "story",
    "position": {
-    "x": 184800,
+    "x": 185700,
     "y": 0
    },
    "data": {
@@ -19268,14 +19317,14 @@
     "text": "鐵門拉到一半。裡面亮著，外面沒有招牌。\n桌上七個馬克杯，六個是空的。\n靠牆那一面用布蓋著，布的下緣壓著一排圖釘。\n她背對著門，手上那支筆沒有停。",
     "speaker": "旁白",
     "sceneCode": "studio",
-    "segment": "seg149"
+    "segment": "seg151"
    }
   },
   {
-   "id": "inv-617",
+   "id": "inv-620",
    "type": "story",
    "position": {
-    "x": 185100,
+    "x": 186000,
     "y": 0
    },
    "data": {
@@ -19304,7 +19353,7 @@
      }
     ],
     "sceneCode": "studio",
-    "segment": "seg149",
+    "segment": "seg151",
     "variableOps": [
      {
       "id": "op-met_斑比",
@@ -19316,10 +19365,10 @@
    }
   },
   {
-   "id": "inv-618",
+   "id": "inv-621",
    "type": "story",
    "position": {
-    "x": 185400,
+    "x": 186300,
     "y": 0
    },
    "data": {
@@ -19330,10 +19379,10 @@
    }
   },
   {
-   "id": "inv-619",
+   "id": "inv-622",
    "type": "story",
    "position": {
-    "x": 185700,
+    "x": 186600,
     "y": 0
    },
    "data": {
@@ -19379,51 +19428,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg150"
-   }
-  },
-  {
-   "id": "inv-620",
-   "type": "story",
-   "position": {
-    "x": 186000,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：公車站。等車的阿姨說",
-    "text": "公車站。等車的阿姨說我在看時刻表，所以我不是這裡的人。\n這裡的人不看。",
-    "speaker": "玩家",
-    "segment": "seg150"
-   }
-  },
-  {
-   "id": "inv-621",
-   "type": "story",
-   "position": {
-    "x": 186300,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
-   }
-  },
-  {
-   "id": "inv-622",
-   "type": "story",
-   "position": {
-    "x": 186600,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "站牌上的跑馬燈每跑幾個字就停",
-    "text": "站牌上的跑馬燈每跑幾個字就停一下。三十秒一輪。\n廣告、班距、廣告。第三輪是她的：一個手機殼，殼上是她的天線。\n沒有人抬頭。",
-    "speaker": "旁白",
-    "segment": "seg151"
+    "segment": "seg152"
    }
   },
   {
@@ -19434,10 +19439,11 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：公車站。等車的阿姨說",
+    "text": "公車站。等車的阿姨說我在看時刻表，所以我不是這裡的人。\n這裡的人不看。",
+    "speaker": "玩家",
+    "segment": "seg152"
    }
   },
   {
@@ -19445,6 +19451,49 @@
    "type": "story",
    "position": {
     "x": 187200,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-625",
+   "type": "story",
+   "position": {
+    "x": 187500,
+    "y": 0
+   },
+   "data": {
+    "type": "dialogue",
+    "title": "站牌上的跑馬燈每跑幾個字就停",
+    "text": "站牌上的跑馬燈每跑幾個字就停一下。三十秒一輪。\n廣告、班距、廣告。第三輪是她的：一個手機殼，殼上是她的天線。\n沒有人抬頭。",
+    "speaker": "旁白",
+    "segment": "seg153"
+   }
+  },
+  {
+   "id": "inv-626",
+   "type": "story",
+   "position": {
+    "x": 187800,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-627",
+   "type": "story",
+   "position": {
+    "x": 188100,
     "y": 0
    },
    "data": {
@@ -19484,51 +19533,7 @@
       "emotion": ""
      }
     ],
-    "segment": "seg152"
-   }
-  },
-  {
-   "id": "inv-625",
-   "type": "story",
-   "position": {
-    "x": 187500,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "筆記：二號出口發傳單的。他",
-    "text": "二號出口發傳單的。他記得我，因為我站在出口寫字。\n他一天遞出去幾百張，記得的不是臉。",
-    "speaker": "玩家",
-    "segment": "seg152"
-   }
-  },
-  {
-   "id": "inv-626",
-   "type": "story",
-   "position": {
-    "x": 187800,
-    "y": 0
-   },
-   "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
-   }
-  },
-  {
-   "id": "inv-627",
-   "type": "story",
-   "position": {
-    "x": 188100,
-    "y": 0
-   },
-   "data": {
-    "type": "dialogue",
-    "title": "手扶梯一直在吐人。上來的人不",
-    "text": "手扶梯一直在吐人。上來的人不看路，看手機，然後往三個方向散開。\n沒有一個人停下來。她站了一個時段，被撞了兩次，兩次都是對方說對不起。",
-    "speaker": "旁白",
-    "segment": "seg153"
+    "segment": "seg154"
    }
   },
   {
@@ -19539,10 +19544,11 @@
     "y": 0
    },
    "data": {
-    "type": "boardJump",
-    "title": "回調查板",
-    "jumpBoardId": "inv",
-    "jumpNodeId": "inv-001"
+    "type": "dialogue",
+    "title": "筆記：二號出口發傳單的。他",
+    "text": "二號出口發傳單的。他記得我，因為我站在出口寫字。\n他一天遞出去幾百張，記得的不是臉。",
+    "speaker": "玩家",
+    "segment": "seg154"
    }
   },
   {
@@ -19553,11 +19559,10 @@
     "y": 0
    },
    "data": {
-    "type": "dialogue",
-    "title": "看板每十五秒換一格。銀行、房",
-    "text": "看板每十五秒換一格。銀行、房仲、一支手機，然後又是她。\n她那一格沒有聲音。畫面裡她在講話，字幕寫「我會記得你們的」。\n底下經過的人沒有一個抬頭。",
-    "speaker": "旁白",
-    "segment": "seg154"
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
    }
   },
   {
@@ -19569,10 +19574,10 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：南港車站前。她的廣告",
-    "text": "南港車站前。她的廣告在看板上，沒有聲音，字幕寫我會記得你們的。\n我站了一個時段。沒有人抬頭。我是唯一一個看完的。",
-    "speaker": "玩家",
-    "segment": "seg154"
+    "title": "手扶梯一直在吐人。上來的人不",
+    "text": "手扶梯一直在吐人。上來的人不看路，看手機，然後往三個方向散開。\n沒有一個人停下來。她站了一個時段，被撞了兩次，兩次都是對方說對不起。",
+    "speaker": "旁白",
+    "segment": "seg155"
    }
   },
   {
@@ -19597,23 +19602,11 @@
     "y": 0
    },
    "data": {
-    "type": "setVariable",
-    "title": "（問幾次了）",
-    "text": "",
-    "variableOps": [
-     {
-      "id": "op-met",
-      "variable": "met_貓草",
-      "kind": "add",
-      "value": 1
-     },
-     {
-      "id": "op-visits",
-      "variable": "cat_visits",
-      "kind": "add",
-      "value": 1
-     }
-    ]
+    "type": "dialogue",
+    "title": "看板每十五秒換一格。銀行、房",
+    "text": "看板每十五秒換一格。銀行、房仲、一支手機，然後又是她。\n她那一格沒有聲音。畫面裡她在講話，字幕寫「我會記得你們的」。\n底下經過的人沒有一個抬頭。",
+    "speaker": "旁白",
+    "segment": "seg156"
    }
   },
   {
@@ -19624,23 +19617,11 @@
     "y": 0
    },
    "data": {
-    "type": "setVariable",
-    "title": "（問幾次了）",
-    "text": "",
-    "variableOps": [
-     {
-      "id": "op-met",
-      "variable": "met_貓草",
-      "kind": "add",
-      "value": 1
-     },
-     {
-      "id": "op-visits",
-      "variable": "cat_visits",
-      "kind": "add",
-      "value": 1
-     }
-    ]
+    "type": "dialogue",
+    "title": "筆記：南港車站前。她的廣告",
+    "text": "南港車站前。她的廣告在看板上，沒有聲音，字幕寫我會記得你們的。\n我站了一個時段。沒有人抬頭。我是唯一一個看完的。",
+    "speaker": "玩家",
+    "segment": "seg156"
    }
   },
   {
@@ -19648,6 +19629,20 @@
    "type": "story",
    "position": {
     "x": 190200,
+    "y": 0
+   },
+   "data": {
+    "type": "boardJump",
+    "title": "回調查板",
+    "jumpBoardId": "inv",
+    "jumpNodeId": "inv-001"
+   }
+  },
+  {
+   "id": "inv-635",
+   "type": "story",
+   "position": {
+    "x": 190500,
     "y": 0
    },
    "data": {
@@ -19671,10 +19666,64 @@
    }
   },
   {
-   "id": "inv-635",
+   "id": "inv-636",
    "type": "story",
    "position": {
-    "x": 190500,
+    "x": 190800,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": [
+     {
+      "id": "op-met",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "inv-637",
+   "type": "story",
+   "position": {
+    "x": 191100,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（問幾次了）",
+    "text": "",
+    "variableOps": [
+     {
+      "id": "op-met",
+      "variable": "met_貓草",
+      "kind": "add",
+      "value": 1
+     },
+     {
+      "id": "op-visits",
+      "variable": "cat_visits",
+      "kind": "add",
+      "value": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "inv-638",
+   "type": "story",
+   "position": {
+    "x": 191400,
     "y": 0
    },
    "data": {
@@ -19705,10 +19754,10 @@
    }
   },
   {
-   "id": "inv-636",
+   "id": "inv-639",
    "type": "story",
    "position": {
-    "x": 190800,
+    "x": 191700,
     "y": 0
    },
    "data": {
@@ -19717,14 +19766,14 @@
     "text": "",
     "contact": "格莉奇",
     "msg": "格莉奇 開始直播了",
-    "segment": "seg122"
+    "segment": "seg124"
    }
   },
   {
-   "id": "inv-637",
+   "id": "inv-640",
    "type": "story",
    "position": {
-    "x": 191100,
+    "x": 192000,
     "y": 0
    },
    "data": {
@@ -19735,14 +19784,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg122"
+    "segment": "seg124"
    }
   },
   {
-   "id": "inv-638",
+   "id": "inv-641",
    "type": "story",
    "position": {
-    "x": 191400,
+    "x": 192300,
     "y": 0
    },
    "data": {
@@ -19773,10 +19822,10 @@
    }
   },
   {
-   "id": "inv-639",
+   "id": "inv-642",
    "type": "story",
    "position": {
-    "x": 191700,
+    "x": 192600,
     "y": 0
    },
    "data": {
@@ -19785,14 +19834,14 @@
     "text": "",
     "contact": "格莉奇",
     "msg": "格莉奇 開始直播了",
-    "segment": "seg123"
+    "segment": "seg125"
    }
   },
   {
-   "id": "inv-640",
+   "id": "inv-643",
    "type": "story",
    "position": {
-    "x": 192000,
+    "x": 192900,
     "y": 0
    },
    "data": {
@@ -19803,14 +19852,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg123"
+    "segment": "seg125"
    }
   },
   {
-   "id": "inv-641",
+   "id": "inv-644",
    "type": "story",
    "position": {
-    "x": 192300,
+    "x": 193200,
     "y": 0
    },
    "data": {
@@ -19841,10 +19890,10 @@
    }
   },
   {
-   "id": "inv-642",
+   "id": "inv-645",
    "type": "story",
    "position": {
-    "x": 192600,
+    "x": 193500,
     "y": 0
    },
    "data": {
@@ -19853,14 +19902,14 @@
     "text": "",
     "contact": "格莉奇",
     "msg": "格莉奇 開始直播了",
-    "segment": "seg126"
+    "segment": "seg128"
    }
   },
   {
-   "id": "inv-643",
+   "id": "inv-646",
    "type": "story",
    "position": {
-    "x": 192900,
+    "x": 193800,
     "y": 0
    },
    "data": {
@@ -19871,14 +19920,14 @@
     "backgroundNight": "@@bg-desk-night",
     "transition": "fade",
     "transitionMs": 340,
-    "segment": "seg126"
+    "segment": "seg128"
    }
   },
   {
-   "id": "inv-644",
+   "id": "inv-647",
    "type": "story",
    "position": {
-    "x": 193200,
+    "x": 194100,
     "y": 0
    },
    "data": {
@@ -19897,48 +19946,6 @@
    }
   },
   {
-   "id": "inv-645",
-   "type": "story",
-   "position": {
-    "x": 193500,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-646",
-   "type": "story",
-   "position": {
-    "x": 193800,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第3次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
-   "id": "inv-647",
-   "type": "story",
-   "position": {
-    "x": 194100,
-    "y": 0
-   },
-   "data": {
-    "type": "setVariable",
-    "title": "（lobby 第5次起）",
-    "text": "",
-    "variableOps": []
-   }
-  },
-  {
    "id": "inv-648",
    "type": "story",
    "position": {
@@ -19947,7 +19954,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第3次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19961,7 +19968,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -19975,7 +19982,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（lobby 第3次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -19989,7 +19996,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20003,7 +20010,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（lobby 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20017,7 +20024,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（lobby 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20031,7 +20038,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20045,7 +20052,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20059,7 +20066,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（roof 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20073,7 +20080,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20087,7 +20094,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（roof 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20101,7 +20108,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（roof 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20115,7 +20122,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20129,7 +20136,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20143,7 +20150,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（studio 第3次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20157,7 +20164,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20171,7 +20178,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（studio 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20185,7 +20192,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（studio 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20199,7 +20206,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20227,7 +20234,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20255,7 +20262,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20283,7 +20290,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20311,7 +20318,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（tower14 第3次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20325,7 +20332,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20339,7 +20346,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第4次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20353,7 +20360,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（tower14 第3次起）",
     "text": "",
     "variableOps": []
    }
@@ -20367,7 +20374,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第4次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20381,7 +20388,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第5次起）",
+    "title": "（store 第4次起）",
     "text": "",
     "variableOps": []
    }
@@ -20395,7 +20402,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（store 第4次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20409,7 +20416,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第5次起）",
+    "title": "（store 第4次起）",
     "text": "",
     "variableOps": []
    }
@@ -20423,7 +20430,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第3次起）",
+    "title": "（store 第5次起）",
     "text": "",
     "variableOps": []
    }
@@ -20437,7 +20444,7 @@
    },
    "data": {
     "type": "setVariable",
-    "title": "（parts 第1次起）",
+    "title": "（store 第4次起）",
     "text": "",
     "variableOps": []
    }
@@ -20531,6 +20538,48 @@
    "type": "story",
    "position": {
     "x": 207000,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第5次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-691",
+   "type": "story",
+   "position": {
+    "x": 207300,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第3次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-692",
+   "type": "story",
+   "position": {
+    "x": 207600,
+    "y": 0
+   },
+   "data": {
+    "type": "setVariable",
+    "title": "（parts 第1次起）",
+    "text": "",
+    "variableOps": []
+   }
+  },
+  {
+   "id": "inv-693",
+   "type": "story",
+   "position": {
+    "x": 207900,
     "y": 0
    },
    "data": {
@@ -24080,46 +24129,32 @@
   },
   {
    "id": "e390",
-   "source": "inv-415",
-   "target": "inv-416",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e391",
-   "source": "inv-416",
-   "target": "inv-417",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e392",
-   "source": "inv-417",
-   "target": "inv-418",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e393",
-   "source": "inv-418",
-   "target": "inv-420",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e394",
-   "source": "inv-420",
-   "target": "inv-419",
+   "source": "inv-009",
+   "target": "inv-415",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "note_blank",
+     "variable": "pick",
      "op": "eq",
-     "value": true
+     "value": "seg108"
     }
    }
+  },
+  {
+   "id": "e393",
+   "source": "inv-418",
+   "target": "inv-419",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e394",
+   "source": "inv-419",
+   "target": "inv-420",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e395",
@@ -24130,15 +24165,15 @@
   },
   {
    "id": "e396",
-   "source": "inv-419",
-   "target": "inv-422",
+   "source": "inv-421",
+   "target": "inv-423",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e397",
-   "source": "inv-422",
-   "target": "inv-421",
+   "source": "inv-423",
+   "target": "inv-422",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24152,35 +24187,43 @@
   },
   {
    "id": "e398",
-   "source": "inv-422",
-   "target": "inv-423",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e399",
-   "source": "inv-421",
-   "target": "inv-423",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e400",
    "source": "inv-423",
    "target": "inv-424",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e401",
-   "source": "inv-424",
+   "id": "e399",
+   "source": "inv-422",
    "target": "inv-425",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e402",
+   "id": "e400",
    "source": "inv-425",
+   "target": "inv-424",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "note_blank",
+     "op": "eq",
+     "value": true
+    }
+   }
+  },
+  {
+   "id": "e401",
+   "source": "inv-425",
+   "target": "inv-426",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e402",
+   "source": "inv-424",
    "target": "inv-426",
    "sourceHandle": "right",
    "animated": true
@@ -24195,14 +24238,35 @@
   {
    "id": "e404",
    "source": "inv-427",
-   "target": "inv-429",
+   "target": "inv-428",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e405",
+   "source": "inv-428",
+   "target": "inv-429",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e406",
    "source": "inv-429",
-   "target": "inv-428",
+   "target": "inv-430",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e407",
+   "source": "inv-430",
+   "target": "inv-432",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e408",
+   "source": "inv-432",
+   "target": "inv-431",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24215,36 +24279,15 @@
    }
   },
   {
-   "id": "e406",
-   "source": "inv-429",
-   "target": "inv-430",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e407",
-   "source": "inv-428",
-   "target": "inv-430",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e408",
-   "source": "inv-430",
-   "target": "inv-431",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e409",
-   "source": "inv-431",
-   "target": "inv-432",
+   "source": "inv-432",
+   "target": "inv-433",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e410",
-   "source": "inv-432",
+   "source": "inv-431",
    "target": "inv-433",
    "sourceHandle": "right",
    "animated": true
@@ -24279,18 +24322,10 @@
   },
   {
    "id": "e415",
-   "source": "inv-009",
-   "target": "inv-415",
+   "source": "inv-437",
+   "target": "inv-438",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg108"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e416",
@@ -24307,21 +24342,6 @@
    "animated": true
   },
   {
-   "id": "e418",
-   "source": "inv-045",
-   "target": "inv-438",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg109"
-    }
-   }
-  },
-  {
    "id": "e419",
    "source": "inv-441",
    "target": "inv-442",
@@ -24330,6 +24350,13 @@
   },
   {
    "id": "e420",
+   "source": "inv-442",
+   "target": "inv-443",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e421",
    "source": "inv-045",
    "target": "inv-441",
    "sourceHandle": "right",
@@ -24339,16 +24366,9 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg110"
+     "value": "seg111"
     }
    }
-  },
-  {
-   "id": "e421",
-   "source": "inv-443",
-   "target": "inv-444",
-   "sourceHandle": "right",
-   "animated": true
   },
   {
    "id": "e422",
@@ -24360,7 +24380,7 @@
   {
    "id": "e423",
    "source": "inv-045",
-   "target": "inv-443",
+   "target": "inv-444",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -24368,7 +24388,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg111"
+     "value": "seg112"
     }
    }
   },
@@ -24397,7 +24417,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg112"
+     "value": "seg113"
     }
    }
   },
@@ -24417,267 +24437,275 @@
   },
   {
    "id": "e429",
-   "source": "inv-451",
-   "target": "inv-452",
+   "source": "inv-045",
+   "target": "inv-449",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg114"
+    }
+   }
+  },
+  {
+   "id": "e430",
+   "source": "inv-452",
+   "target": "inv-453",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e430",
+   "id": "e431",
    "source": "inv-453",
    "target": "inv-454",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e431",
+   "id": "e432",
    "source": "inv-454",
    "target": "inv-455",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e432",
-   "source": "inv-455",
-   "target": "inv-456",
+   "id": "e433",
+   "source": "inv-456",
+   "target": "inv-457",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e433",
+   "id": "e434",
    "source": "inv-457",
    "target": "inv-458",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e434",
+   "id": "e435",
    "source": "inv-458",
    "target": "inv-459",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e435",
-   "source": "inv-459",
-   "target": "inv-460",
+   "id": "e436",
+   "source": "inv-460",
+   "target": "inv-461",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e436",
+   "id": "e437",
    "source": "inv-461",
    "target": "inv-462",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e437",
+   "id": "e438",
    "source": "inv-462",
    "target": "inv-463",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e438",
-   "source": "inv-463",
-   "target": "inv-464",
+   "id": "e439",
+   "source": "inv-464",
+   "target": "inv-465",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e439",
+   "id": "e440",
    "source": "inv-465",
    "target": "inv-466",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e440",
+   "id": "e441",
    "source": "inv-466",
    "target": "inv-467",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e441",
-   "source": "inv-467",
-   "target": "inv-468",
+   "id": "e442",
+   "source": "inv-468",
+   "target": "inv-469",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e442",
+   "id": "e443",
    "source": "inv-469",
    "target": "inv-470",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e443",
+   "id": "e444",
    "source": "inv-470",
    "target": "inv-471",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e444",
-   "source": "inv-471",
-   "target": "inv-472",
+   "id": "e445",
+   "source": "inv-472",
+   "target": "inv-473",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e445",
+   "id": "e446",
    "source": "inv-473",
    "target": "inv-474",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e446",
+   "id": "e447",
    "source": "inv-474",
    "target": "inv-475",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e447",
-   "source": "inv-475",
-   "target": "inv-476",
+   "id": "e448",
+   "source": "inv-476",
+   "target": "inv-477",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e448",
+   "id": "e449",
    "source": "inv-477",
    "target": "inv-478",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e449",
+   "id": "e450",
    "source": "inv-478",
    "target": "inv-479",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e450",
-   "source": "inv-479",
-   "target": "inv-480",
+   "id": "e451",
+   "source": "inv-480",
+   "target": "inv-481",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e451",
+   "id": "e452",
    "source": "inv-481",
    "target": "inv-482",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e452",
+   "id": "e453",
    "source": "inv-482",
    "target": "inv-483",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e453",
-   "source": "inv-483",
-   "target": "inv-484",
+   "id": "e454",
+   "source": "inv-484",
+   "target": "inv-485",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e454",
+   "id": "e455",
    "source": "inv-485",
    "target": "inv-486",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e455",
+   "id": "e456",
    "source": "inv-486",
    "target": "inv-487",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e456",
-   "source": "inv-487",
-   "target": "inv-488",
+   "id": "e457",
+   "source": "inv-488",
+   "target": "inv-489",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e457",
+   "id": "e458",
    "source": "inv-489",
    "target": "inv-490",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e458",
+   "id": "e459",
    "source": "inv-490",
    "target": "inv-491",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e459",
+   "id": "e460",
    "source": "inv-492",
    "target": "inv-493",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e460",
-   "source": "inv-494",
-   "target": "inv-495",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e461",
-   "source": "inv-496",
-   "target": "inv-497",
+   "source": "inv-493",
+   "target": "inv-494",
    "sourceHandle": "right",
    "animated": true
   },
   {
    "id": "e462",
+   "source": "inv-495",
+   "target": "inv-496",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e463",
    "source": "inv-497",
    "target": "inv-498",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e463",
-   "source": "inv-498",
-   "target": "inv-499",
+   "id": "e464",
+   "source": "inv-499",
+   "target": "inv-500",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e464",
+   "id": "e465",
    "source": "inv-500",
    "target": "inv-501",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e465",
+   "id": "e466",
    "source": "inv-501",
    "target": "inv-502",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e466",
-   "source": "inv-502",
-   "target": "inv-503",
    "sourceHandle": "right",
    "animated": true
   },
@@ -24724,6 +24752,13 @@
    "animated": true
   },
   {
+   "id": "e473",
+   "source": "inv-509",
+   "target": "inv-510",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
    "id": "e474",
    "source": "inv-510",
    "target": "inv-511",
@@ -24734,13 +24769,6 @@
    "id": "e475",
    "source": "inv-511",
    "target": "inv-512",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e476",
-   "source": "inv-512",
-   "target": "inv-513",
    "sourceHandle": "right",
    "animated": true
   },
@@ -24781,18 +24809,10 @@
   },
   {
    "id": "e482",
-   "source": "inv-009",
-   "target": "inv-510",
+   "source": "inv-518",
+   "target": "inv-519",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg128"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e483",
@@ -24810,10 +24830,18 @@
   },
   {
    "id": "e485",
-   "source": "inv-521",
-   "target": "inv-522",
+   "source": "inv-009",
+   "target": "inv-513",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg130"
+    }
+   }
   },
   {
    "id": "e486",
@@ -24838,18 +24866,10 @@
   },
   {
    "id": "e489",
-   "source": "inv-013",
-   "target": "inv-519",
+   "source": "inv-525",
+   "target": "inv-526",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg129"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e490",
@@ -24867,10 +24887,18 @@
   },
   {
    "id": "e492",
-   "source": "inv-528",
-   "target": "inv-529",
+   "source": "inv-013",
+   "target": "inv-522",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg131"
+    }
+   }
   },
   {
    "id": "e493",
@@ -24881,18 +24909,10 @@
   },
   {
    "id": "e494",
-   "source": "inv-005",
-   "target": "inv-526",
+   "source": "inv-530",
+   "target": "inv-531",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg130"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e495",
@@ -24910,10 +24930,18 @@
   },
   {
    "id": "e497",
-   "source": "inv-533",
-   "target": "inv-534",
+   "source": "inv-005",
+   "target": "inv-529",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg132"
+    }
+   }
   },
   {
    "id": "e498",
@@ -24931,18 +24959,10 @@
   },
   {
    "id": "e500",
-   "source": "inv-005",
-   "target": "inv-531",
+   "source": "inv-536",
+   "target": "inv-537",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg131"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e501",
@@ -24960,10 +24980,18 @@
   },
   {
    "id": "e503",
-   "source": "inv-539",
-   "target": "inv-540",
+   "source": "inv-005",
+   "target": "inv-534",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg133"
+    }
+   }
   },
   {
    "id": "e504",
@@ -24974,18 +25002,10 @@
   },
   {
    "id": "e505",
-   "source": "inv-013",
-   "target": "inv-537",
+   "source": "inv-541",
+   "target": "inv-542",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg132"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e506",
@@ -25003,10 +25023,18 @@
   },
   {
    "id": "e508",
-   "source": "inv-544",
-   "target": "inv-545",
+   "source": "inv-013",
+   "target": "inv-540",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg134"
+    }
+   }
   },
   {
    "id": "e509",
@@ -25024,18 +25052,10 @@
   },
   {
    "id": "e511",
-   "source": "inv-013",
-   "target": "inv-542",
+   "source": "inv-547",
+   "target": "inv-548",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg133"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e512",
@@ -25053,44 +25073,8 @@
   },
   {
    "id": "e514",
-   "source": "inv-550",
-   "target": "inv-551",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e515",
-   "source": "inv-551",
-   "target": "inv-552",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e516",
-   "source": "inv-037",
-   "target": "inv-548",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg134"
-    }
-   }
-  },
-  {
-   "id": "e517",
-   "source": "inv-553",
-   "target": "inv-554",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e518",
-   "source": "inv-037",
-   "target": "inv-553",
+   "source": "inv-013",
+   "target": "inv-545",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25103,37 +25087,37 @@
    }
   },
   {
-   "id": "e519",
-   "source": "inv-555",
-   "target": "inv-556",
+   "id": "e515",
+   "source": "inv-551",
+   "target": "inv-552",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e520",
-   "source": "inv-556",
-   "target": "inv-557",
+   "id": "e516",
+   "source": "inv-552",
+   "target": "inv-553",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e521",
-   "source": "inv-557",
-   "target": "inv-558",
+   "id": "e517",
+   "source": "inv-553",
+   "target": "inv-554",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e522",
-   "source": "inv-558",
-   "target": "inv-559",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e523",
-   "source": "inv-037",
+   "id": "e518",
+   "source": "inv-554",
    "target": "inv-555",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e519",
+   "source": "inv-037",
+   "target": "inv-551",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25144,6 +25128,42 @@
      "value": "seg136"
     }
    }
+  },
+  {
+   "id": "e520",
+   "source": "inv-556",
+   "target": "inv-557",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e521",
+   "source": "inv-037",
+   "target": "inv-556",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg137"
+    }
+   }
+  },
+  {
+   "id": "e522",
+   "source": "inv-558",
+   "target": "inv-559",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e523",
+   "source": "inv-559",
+   "target": "inv-560",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e524",
@@ -25161,10 +25181,18 @@
   },
   {
    "id": "e526",
-   "source": "inv-562",
-   "target": "inv-563",
+   "source": "inv-037",
+   "target": "inv-558",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg138"
+    }
+   }
   },
   {
    "id": "e527",
@@ -25175,18 +25203,10 @@
   },
   {
    "id": "e528",
-   "source": "inv-041",
-   "target": "inv-560",
+   "source": "inv-564",
+   "target": "inv-565",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg137"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e529",
@@ -25204,10 +25224,18 @@
   },
   {
    "id": "e531",
-   "source": "inv-567",
-   "target": "inv-568",
+   "source": "inv-041",
+   "target": "inv-563",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg139"
+    }
+   }
   },
   {
    "id": "e532",
@@ -25218,18 +25246,10 @@
   },
   {
    "id": "e533",
-   "source": "inv-041",
-   "target": "inv-565",
+   "source": "inv-569",
+   "target": "inv-570",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg138"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e534",
@@ -25247,10 +25267,18 @@
   },
   {
    "id": "e536",
-   "source": "inv-572",
-   "target": "inv-573",
+   "source": "inv-041",
+   "target": "inv-568",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg140"
+    }
+   }
   },
   {
    "id": "e537",
@@ -25275,18 +25303,10 @@
   },
   {
    "id": "e540",
-   "source": "inv-041",
-   "target": "inv-570",
+   "source": "inv-576",
+   "target": "inv-577",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg139"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e541",
@@ -25304,10 +25324,18 @@
   },
   {
    "id": "e543",
-   "source": "inv-579",
-   "target": "inv-580",
+   "source": "inv-041",
+   "target": "inv-573",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg141"
+    }
+   }
   },
   {
    "id": "e544",
@@ -25332,18 +25360,10 @@
   },
   {
    "id": "e547",
-   "source": "inv-029",
-   "target": "inv-577",
+   "source": "inv-583",
+   "target": "inv-584",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg140"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e548",
@@ -25361,10 +25381,18 @@
   },
   {
    "id": "e550",
-   "source": "inv-586",
-   "target": "inv-587",
+   "source": "inv-029",
+   "target": "inv-580",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg142"
+    }
+   }
   },
   {
    "id": "e551",
@@ -25382,18 +25410,10 @@
   },
   {
    "id": "e553",
-   "source": "inv-029",
-   "target": "inv-584",
+   "source": "inv-589",
+   "target": "inv-590",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg141"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e554",
@@ -25411,10 +25431,18 @@
   },
   {
    "id": "e556",
-   "source": "inv-592",
-   "target": "inv-593",
+   "source": "inv-029",
+   "target": "inv-587",
    "sourceHandle": "right",
-   "animated": true
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg143"
+    }
+   }
   },
   {
    "id": "e557",
@@ -25425,18 +25453,10 @@
   },
   {
    "id": "e558",
-   "source": "inv-029",
-   "target": "inv-590",
+   "source": "inv-594",
+   "target": "inv-595",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg142"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e559",
@@ -25454,22 +25474,30 @@
   },
   {
    "id": "e561",
+   "source": "inv-029",
+   "target": "inv-593",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg144"
+    }
+   }
+  },
+  {
+   "id": "e562",
    "source": "inv-598",
    "target": "inv-599",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e562",
+   "id": "e563",
    "source": "inv-599",
    "target": "inv-600",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e563",
-   "source": "inv-600",
-   "target": "inv-601",
    "sourceHandle": "right",
    "animated": true
   },
@@ -25496,18 +25524,10 @@
   },
   {
    "id": "e567",
-   "source": "inv-029",
-   "target": "inv-598",
+   "source": "inv-604",
+   "target": "inv-605",
    "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg144"
-    }
-   }
+   "animated": true
   },
   {
    "id": "e568",
@@ -25525,15 +25545,8 @@
   },
   {
    "id": "e570",
-   "source": "inv-607",
-   "target": "inv-608",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e571",
-   "source": "inv-013",
-   "target": "inv-605",
+   "source": "inv-029",
+   "target": "inv-601",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25541,9 +25554,16 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg145"
+     "value": "seg146"
     }
    }
+  },
+  {
+   "id": "e571",
+   "source": "inv-608",
+   "target": "inv-609",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e572",
@@ -25561,29 +25581,8 @@
   },
   {
    "id": "e574",
-   "source": "inv-612",
-   "target": "inv-613",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e575",
-   "source": "inv-613",
-   "target": "inv-614",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e576",
-   "source": "inv-614",
-   "target": "inv-615",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e577",
-   "source": "inv-029",
-   "target": "inv-612",
+   "source": "inv-013",
+   "target": "inv-608",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25591,9 +25590,30 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg148"
+     "value": "seg147"
     }
    }
+  },
+  {
+   "id": "e575",
+   "source": "inv-612",
+   "target": "inv-613",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e576",
+   "source": "inv-613",
+   "target": "inv-614",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e577",
+   "source": "inv-615",
+   "target": "inv-616",
+   "sourceHandle": "right",
+   "animated": true
   },
   {
    "id": "e578",
@@ -25611,8 +25631,8 @@
   },
   {
    "id": "e580",
-   "source": "inv-017",
-   "target": "inv-616",
+   "source": "inv-029",
+   "target": "inv-615",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25620,7 +25640,7 @@
      "kind": "variable",
      "variable": "pick",
      "op": "eq",
-     "value": "seg149"
+     "value": "seg150"
     }
    }
   },
@@ -25640,30 +25660,8 @@
   },
   {
    "id": "e583",
-   "source": "inv-037",
+   "source": "inv-017",
    "target": "inv-619",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "pick",
-     "op": "eq",
-     "value": "seg150"
-    }
-   }
-  },
-  {
-   "id": "e584",
-   "source": "inv-622",
-   "target": "inv-623",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e585",
-   "source": "inv-037",
-   "target": "inv-622",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25676,23 +25674,23 @@
    }
   },
   {
-   "id": "e586",
-   "source": "inv-624",
-   "target": "inv-625",
+   "id": "e584",
+   "source": "inv-622",
+   "target": "inv-623",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e587",
-   "source": "inv-625",
-   "target": "inv-626",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e588",
-   "source": "inv-041",
+   "id": "e585",
+   "source": "inv-623",
    "target": "inv-624",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e586",
+   "source": "inv-037",
+   "target": "inv-622",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25705,16 +25703,16 @@
    }
   },
   {
-   "id": "e589",
-   "source": "inv-627",
-   "target": "inv-628",
+   "id": "e587",
+   "source": "inv-625",
+   "target": "inv-626",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e590",
-   "source": "inv-041",
-   "target": "inv-627",
+   "id": "e588",
+   "source": "inv-037",
+   "target": "inv-625",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25727,23 +25725,23 @@
    }
   },
   {
-   "id": "e591",
-   "source": "inv-629",
-   "target": "inv-630",
+   "id": "e589",
+   "source": "inv-627",
+   "target": "inv-628",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e592",
-   "source": "inv-630",
-   "target": "inv-631",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e593",
-   "source": "inv-013",
+   "id": "e590",
+   "source": "inv-628",
    "target": "inv-629",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e591",
+   "source": "inv-041",
+   "target": "inv-627",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -25756,106 +25754,157 @@
    }
   },
   {
+   "id": "e592",
+   "source": "inv-630",
+   "target": "inv-631",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e593",
+   "source": "inv-041",
+   "target": "inv-630",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg155"
+    }
+   }
+  },
+  {
    "id": "e594",
+   "source": "inv-632",
+   "target": "inv-633",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e595",
+   "source": "inv-633",
+   "target": "inv-634",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e596",
+   "source": "inv-013",
+   "target": "inv-632",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "pick",
+     "op": "eq",
+     "value": "seg156"
+    }
+   }
+  },
+  {
+   "id": "e597",
    "source": "inv-169",
    "target": "inv-171",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e594",
+   "id": "e597",
    "source": "inv-169",
    "target": "inv-174",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e594",
+   "id": "e597",
    "source": "inv-169",
    "target": "inv-176",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e594",
+   "id": "e597",
    "source": "inv-172",
    "target": "inv-174",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e595",
+   "id": "e598",
    "source": "inv-172",
    "target": "inv-176",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-272",
    "target": "inv-274",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-272",
    "target": "inv-278",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-279",
    "target": "inv-281",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-279",
    "target": "inv-285",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-286",
    "target": "inv-288",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-286",
    "target": "inv-292",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-294",
    "target": "inv-296",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-294",
    "target": "inv-300",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e596",
+   "id": "e599",
    "source": "inv-346",
-   "target": "inv-632",
+   "target": "inv-635",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e597",
-   "source": "inv-632",
+   "id": "e600",
+   "source": "inv-635",
    "target": "inv-369",
    "sourceHandle": "right",
    "animated": true,
@@ -25869,72 +25918,36 @@
    }
   },
   {
-   "id": "e598",
-   "source": "inv-632",
+   "id": "e601",
+   "source": "inv-635",
    "target": "inv-367",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e597",
+   "id": "e600",
    "source": "inv-346",
    "target": "inv-348",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e597",
+   "id": "e600",
    "source": "inv-353",
    "target": "inv-355",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e597",
+   "id": "e600",
    "source": "inv-353",
-   "target": "inv-633",
-   "sourceHandle": "choice-1",
-   "animated": true
-  },
-  {
-   "id": "e598",
-   "source": "inv-633",
-   "target": "inv-369",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "cat_asked_glitch",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e599",
-   "source": "inv-633",
-   "target": "inv-367",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e600",
-   "source": "inv-359",
-   "target": "inv-361",
-   "sourceHandle": "choice-0",
-   "animated": true
-  },
-  {
-   "id": "e600",
-   "source": "inv-359",
-   "target": "inv-634",
+   "target": "inv-636",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
    "id": "e601",
-   "source": "inv-634",
+   "source": "inv-636",
    "target": "inv-369",
    "sourceHandle": "right",
    "animated": true,
@@ -25949,7 +25962,7 @@
   },
   {
    "id": "e602",
-   "source": "inv-634",
+   "source": "inv-636",
    "target": "inv-367",
    "sourceHandle": "right",
    "animated": true
@@ -25957,57 +25970,86 @@
   {
    "id": "e603",
    "source": "inv-359",
+   "target": "inv-361",
+   "sourceHandle": "choice-0",
+   "animated": true
+  },
+  {
+   "id": "e603",
+   "source": "inv-359",
+   "target": "inv-637",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e604",
+   "source": "inv-637",
+   "target": "inv-369",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "cat_asked_glitch",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e605",
+   "source": "inv-637",
+   "target": "inv-367",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e606",
+   "source": "inv-359",
    "target": "inv-363",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e603",
-   "source": "inv-491",
-   "target": "inv-492",
+   "id": "e606",
+   "source": "inv-415",
+   "target": "inv-418",
    "sourceHandle": "choice-0",
    "animated": true
   },
   {
-   "id": "e604",
-   "source": "inv-491",
-   "target": "inv-494",
+   "id": "e606",
+   "source": "inv-415",
+   "target": "inv-416",
    "sourceHandle": "choice-1",
    "animated": true
   },
   {
-   "id": "e605",
+   "id": "e606",
+   "source": "inv-494",
+   "target": "inv-495",
+   "sourceHandle": "choice-0",
+   "animated": true
+  },
+  {
+   "id": "e607",
+   "source": "inv-494",
+   "target": "inv-497",
+   "sourceHandle": "choice-1",
+   "animated": true
+  },
+  {
+   "id": "e608",
    "source": "inv-346",
    "target": "inv-349",
    "sourceHandle": "choice-2",
    "animated": true
   },
   {
-   "id": "e606",
+   "id": "e609",
    "source": "inv-353",
    "target": "inv-356",
    "sourceHandle": "choice-2",
-   "animated": true
-  },
-  {
-   "id": "e607",
-   "source": "inv-635",
-   "target": "inv-636",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e608",
-   "source": "inv-636",
-   "target": "inv-637",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e609",
-   "source": "inv-637",
-   "target": "inv-485",
-   "sourceHandle": "right",
    "animated": true
   },
   {
@@ -26027,7 +26069,7 @@
   {
    "id": "e612",
    "source": "inv-640",
-   "target": "inv-489",
+   "target": "inv-488",
    "sourceHandle": "right",
    "animated": true
   },
@@ -26048,159 +26090,55 @@
   {
    "id": "e615",
    "source": "inv-643",
-   "target": "inv-496",
+   "target": "inv-492",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e615",
+   "id": "e616",
+   "source": "inv-644",
+   "target": "inv-645",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e617",
+   "source": "inv-645",
+   "target": "inv-646",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e618",
+   "source": "inv-646",
+   "target": "inv-499",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e618",
    "source": "inv-166",
    "target": "inv-168",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e614",
+   "id": "e617",
+   "source": "inv-416",
+   "target": "inv-418",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e617",
    "source": "inv-174",
    "target": "inv-176",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e615",
-   "source": "inv-002",
-   "target": "inv-645",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e616",
-   "source": "inv-645",
-   "target": "inv-250",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e617",
-   "source": "inv-645",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
    "id": "e618",
-   "source": "inv-250",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e619",
    "source": "inv-002",
-   "target": "inv-646",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e620",
-   "source": "inv-646",
-   "target": "inv-249",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e621",
-   "source": "inv-646",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e622",
-   "source": "inv-249",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e623",
-   "source": "inv-002",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e624",
-   "source": "inv-003",
-   "target": "inv-647",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e625",
-   "source": "inv-647",
-   "target": "inv-250",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e626",
-   "source": "inv-647",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e627",
-   "source": "inv-003",
    "target": "inv-648",
    "sourceHandle": "right",
    "animated": true,
@@ -26209,14 +26147,109 @@
      "kind": "variable",
      "variable": "met_管理員",
      "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e619",
+   "source": "inv-648",
+   "target": "inv-250",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e620",
+   "source": "inv-648",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e621",
+   "source": "inv-250",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e622",
+   "source": "inv-002",
+   "target": "inv-649",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e628",
-   "source": "inv-648",
+   "id": "e623",
+   "source": "inv-649",
    "target": "inv-249",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e624",
+   "source": "inv-649",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e625",
+   "source": "inv-249",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e626",
+   "source": "inv-002",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e627",
+   "source": "inv-003",
+   "target": "inv-650",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e628",
+   "source": "inv-650",
+   "target": "inv-250",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26230,7 +26263,7 @@
   },
   {
    "id": "e629",
-   "source": "inv-648",
+   "source": "inv-650",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
@@ -26238,51 +26271,7 @@
   {
    "id": "e630",
    "source": "inv-003",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e631",
-   "source": "inv-004",
-   "target": "inv-649",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_管理員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e632",
-   "source": "inv-649",
-   "target": "inv-250",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e633",
-   "source": "inv-649",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e634",
-   "source": "inv-004",
-   "target": "inv-650",
+   "target": "inv-651",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26295,8 +26284,8 @@
    }
   },
   {
-   "id": "e635",
-   "source": "inv-650",
+   "id": "e631",
+   "source": "inv-651",
    "target": "inv-249",
    "sourceHandle": "right",
    "animated": true,
@@ -26310,8 +26299,52 @@
    }
   },
   {
+   "id": "e632",
+   "source": "inv-651",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e633",
+   "source": "inv-003",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e634",
+   "source": "inv-004",
+   "target": "inv-652",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_管理員",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e635",
+   "source": "inv-652",
+   "target": "inv-250",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
    "id": "e636",
-   "source": "inv-650",
+   "source": "inv-652",
    "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
@@ -26319,124 +26352,22 @@
   {
    "id": "e637",
    "source": "inv-004",
-   "target": "inv-005",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e638",
-   "source": "inv-006",
-   "target": "inv-651",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e639",
-   "source": "inv-651",
-   "target": "inv-252",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e640",
-   "source": "inv-651",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e641",
-   "source": "inv-252",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e642",
-   "source": "inv-006",
-   "target": "inv-652",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e643",
-   "source": "inv-652",
-   "target": "inv-251",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e644",
-   "source": "inv-652",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e645",
-   "source": "inv-251",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e646",
-   "source": "inv-006",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e647",
-   "source": "inv-007",
    "target": "inv-653",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_諾亞",
+     "variable": "met_管理員",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e648",
+   "id": "e638",
    "source": "inv-653",
-   "target": "inv-252",
+   "target": "inv-249",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26444,20 +26375,27 @@
      "kind": "variable",
      "variable": "slot",
      "op": "lte",
-     "value": 2
+     "value": 1
     }
    }
   },
   {
-   "id": "e649",
+   "id": "e639",
    "source": "inv-653",
-   "target": "inv-009",
+   "target": "inv-005",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e650",
-   "source": "inv-007",
+   "id": "e640",
+   "source": "inv-004",
+   "target": "inv-005",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e641",
+   "source": "inv-006",
    "target": "inv-654",
    "sourceHandle": "right",
    "animated": true,
@@ -26466,14 +26404,109 @@
      "kind": "variable",
      "variable": "met_諾亞",
      "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e642",
+   "source": "inv-654",
+   "target": "inv-252",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e643",
+   "source": "inv-654",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e644",
+   "source": "inv-252",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e645",
+   "source": "inv-006",
+   "target": "inv-655",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e651",
-   "source": "inv-654",
+   "id": "e646",
+   "source": "inv-655",
    "target": "inv-251",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e647",
+   "source": "inv-655",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e648",
+   "source": "inv-251",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e649",
+   "source": "inv-006",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e650",
+   "source": "inv-007",
+   "target": "inv-656",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e651",
+   "source": "inv-656",
+   "target": "inv-252",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26487,7 +26520,7 @@
   },
   {
    "id": "e652",
-   "source": "inv-654",
+   "source": "inv-656",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
@@ -26495,51 +26528,7 @@
   {
    "id": "e653",
    "source": "inv-007",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e654",
-   "source": "inv-008",
-   "target": "inv-655",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_諾亞",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e655",
-   "source": "inv-655",
-   "target": "inv-252",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e656",
-   "source": "inv-655",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e657",
-   "source": "inv-008",
-   "target": "inv-656",
+   "target": "inv-657",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26552,8 +26541,8 @@
    }
   },
   {
-   "id": "e658",
-   "source": "inv-656",
+   "id": "e654",
+   "source": "inv-657",
    "target": "inv-251",
    "sourceHandle": "right",
    "animated": true,
@@ -26567,8 +26556,52 @@
    }
   },
   {
+   "id": "e655",
+   "source": "inv-657",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e656",
+   "source": "inv-007",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e657",
+   "source": "inv-008",
+   "target": "inv-658",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_諾亞",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e658",
+   "source": "inv-658",
+   "target": "inv-252",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 2
+    }
+   }
+  },
+  {
    "id": "e659",
-   "source": "inv-656",
+   "source": "inv-658",
    "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
@@ -26576,166 +26609,71 @@
   {
    "id": "e660",
    "source": "inv-008",
-   "target": "inv-009",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e661",
-   "source": "inv-010",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e662",
-   "source": "inv-011",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e663",
-   "source": "inv-012",
-   "target": "inv-013",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e664",
-   "source": "inv-014",
-   "target": "inv-657",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e665",
-   "source": "inv-657",
-   "target": "inv-262",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e666",
-   "source": "inv-657",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e667",
-   "source": "inv-262",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e668",
-   "source": "inv-014",
-   "target": "inv-658",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e669",
-   "source": "inv-658",
-   "target": "inv-261",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e670",
-   "source": "inv-658",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e671",
-   "source": "inv-261",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e672",
-   "source": "inv-014",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e673",
-   "source": "inv-015",
    "target": "inv-659",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_斑比",
+     "variable": "met_諾亞",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e674",
+   "id": "e661",
    "source": "inv-659",
-   "target": "inv-262",
+   "target": "inv-251",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "gte",
-     "value": 1
+     "op": "lte",
+     "value": 2
     }
    }
   },
   {
-   "id": "e675",
+   "id": "e662",
    "source": "inv-659",
-   "target": "inv-017",
+   "target": "inv-009",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e676",
-   "source": "inv-015",
+   "id": "e663",
+   "source": "inv-008",
+   "target": "inv-009",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e664",
+   "source": "inv-010",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e665",
+   "source": "inv-011",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e666",
+   "source": "inv-012",
+   "target": "inv-013",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e667",
+   "source": "inv-014",
    "target": "inv-660",
    "sourceHandle": "right",
    "animated": true,
@@ -26744,14 +26682,109 @@
      "kind": "variable",
      "variable": "met_斑比",
      "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e668",
+   "source": "inv-660",
+   "target": "inv-262",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e669",
+   "source": "inv-660",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e670",
+   "source": "inv-262",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e671",
+   "source": "inv-014",
+   "target": "inv-661",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e677",
-   "source": "inv-660",
+   "id": "e672",
+   "source": "inv-661",
    "target": "inv-261",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e673",
+   "source": "inv-661",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e674",
+   "source": "inv-261",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e675",
+   "source": "inv-014",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e676",
+   "source": "inv-015",
+   "target": "inv-662",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e677",
+   "source": "inv-662",
+   "target": "inv-262",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26765,7 +26798,7 @@
   },
   {
    "id": "e678",
-   "source": "inv-660",
+   "source": "inv-662",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
@@ -26773,51 +26806,7 @@
   {
    "id": "e679",
    "source": "inv-015",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e680",
-   "source": "inv-016",
-   "target": "inv-661",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_斑比",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e681",
-   "source": "inv-661",
-   "target": "inv-262",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e682",
-   "source": "inv-661",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e683",
-   "source": "inv-016",
-   "target": "inv-662",
+   "target": "inv-663",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -26830,8 +26819,8 @@
    }
   },
   {
-   "id": "e684",
-   "source": "inv-662",
+   "id": "e680",
+   "source": "inv-663",
    "target": "inv-261",
    "sourceHandle": "right",
    "animated": true,
@@ -26845,8 +26834,52 @@
    }
   },
   {
+   "id": "e681",
+   "source": "inv-663",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e682",
+   "source": "inv-015",
+   "target": "inv-017",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e683",
+   "source": "inv-016",
+   "target": "inv-664",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_斑比",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e684",
+   "source": "inv-664",
+   "target": "inv-262",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 1
+    }
+   }
+  },
+  {
    "id": "e685",
-   "source": "inv-662",
+   "source": "inv-664",
    "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
@@ -26854,165 +26887,70 @@
   {
    "id": "e686",
    "source": "inv-016",
-   "target": "inv-017",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e687",
-   "source": "inv-018",
-   "target": "inv-021",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e688",
-   "source": "inv-019",
-   "target": "inv-021",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e689",
-   "source": "inv-020",
-   "target": "inv-021",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e690",
-   "source": "inv-022",
-   "target": "inv-663",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e691",
-   "source": "inv-663",
-   "target": "inv-258",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e692",
-   "source": "inv-663",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e693",
-   "source": "inv-258",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e694",
-   "source": "inv-022",
-   "target": "inv-664",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e695",
-   "source": "inv-664",
-   "target": "inv-260",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e696",
-   "source": "inv-664",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e697",
-   "source": "inv-260",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e698",
-   "source": "inv-022",
    "target": "inv-665",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_櫃檯",
+     "variable": "met_斑比",
      "op": "gte",
      "value": 3
     }
    }
   },
   {
-   "id": "e699",
+   "id": "e687",
    "source": "inv-665",
-   "target": "inv-257",
+   "target": "inv-261",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
      "variable": "slot",
-     "op": "lte",
+     "op": "gte",
      "value": 1
     }
    }
   },
   {
-   "id": "e700",
+   "id": "e688",
    "source": "inv-665",
-   "target": "inv-025",
+   "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e701",
-   "source": "inv-257",
-   "target": "inv-025",
+   "id": "e689",
+   "source": "inv-016",
+   "target": "inv-017",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e702",
+   "id": "e690",
+   "source": "inv-018",
+   "target": "inv-021",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e691",
+   "source": "inv-019",
+   "target": "inv-021",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e692",
+   "source": "inv-020",
+   "target": "inv-021",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e693",
    "source": "inv-022",
    "target": "inv-666",
    "sourceHandle": "right",
@@ -27020,57 +26958,6 @@
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e703",
-   "source": "inv-666",
-   "target": "inv-259",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e704",
-   "source": "inv-666",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e705",
-   "source": "inv-259",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e706",
-   "source": "inv-022",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e707",
-   "source": "inv-023",
-   "target": "inv-667",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
      "variable": "met_櫃檯",
      "op": "gte",
      "value": 5
@@ -27078,8 +26965,8 @@
    }
   },
   {
-   "id": "e708",
-   "source": "inv-667",
+   "id": "e694",
+   "source": "inv-666",
    "target": "inv-258",
    "sourceHandle": "right",
    "animated": true,
@@ -27093,8 +26980,154 @@
    }
   },
   {
-   "id": "e709",
+   "id": "e695",
+   "source": "inv-666",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e696",
+   "source": "inv-258",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e697",
+   "source": "inv-022",
+   "target": "inv-667",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e698",
    "source": "inv-667",
+   "target": "inv-260",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e699",
+   "source": "inv-667",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e700",
+   "source": "inv-260",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e701",
+   "source": "inv-022",
+   "target": "inv-668",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e702",
+   "source": "inv-668",
+   "target": "inv-257",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e703",
+   "source": "inv-668",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e704",
+   "source": "inv-257",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e705",
+   "source": "inv-022",
+   "target": "inv-669",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e706",
+   "source": "inv-669",
+   "target": "inv-259",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e707",
+   "source": "inv-669",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e708",
+   "source": "inv-259",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e709",
+   "source": "inv-022",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
@@ -27102,13 +27135,13 @@
   {
    "id": "e710",
    "source": "inv-023",
-   "target": "inv-668",
+   "target": "inv-670",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_保全",
+     "variable": "met_櫃檯",
      "op": "gte",
      "value": 5
     }
@@ -27116,125 +27149,7 @@
   },
   {
    "id": "e711",
-   "source": "inv-668",
-   "target": "inv-260",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e712",
-   "source": "inv-668",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e713",
-   "source": "inv-023",
-   "target": "inv-669",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e714",
-   "source": "inv-669",
-   "target": "inv-257",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e715",
-   "source": "inv-669",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e716",
-   "source": "inv-023",
-   "target": "inv-670",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_保全",
-     "op": "gte",
-     "value": 3
-    }
-   }
-  },
-  {
-   "id": "e717",
    "source": "inv-670",
-   "target": "inv-259",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "gte",
-     "value": 2
-    }
-   }
-  },
-  {
-   "id": "e718",
-   "source": "inv-670",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e719",
-   "source": "inv-023",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e720",
-   "source": "inv-024",
-   "target": "inv-671",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_櫃檯",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e721",
-   "source": "inv-671",
    "target": "inv-258",
    "sourceHandle": "right",
    "animated": true,
@@ -27248,16 +27163,16 @@
    }
   },
   {
-   "id": "e722",
-   "source": "inv-671",
+   "id": "e712",
+   "source": "inv-670",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e723",
-   "source": "inv-024",
-   "target": "inv-672",
+   "id": "e713",
+   "source": "inv-023",
+   "target": "inv-671",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27270,8 +27185,8 @@
    }
   },
   {
-   "id": "e724",
-   "source": "inv-672",
+   "id": "e714",
+   "source": "inv-671",
    "target": "inv-260",
    "sourceHandle": "right",
    "animated": true,
@@ -27285,16 +27200,16 @@
    }
   },
   {
-   "id": "e725",
-   "source": "inv-672",
+   "id": "e715",
+   "source": "inv-671",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e726",
-   "source": "inv-024",
-   "target": "inv-673",
+   "id": "e716",
+   "source": "inv-023",
+   "target": "inv-672",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27307,8 +27222,8 @@
    }
   },
   {
-   "id": "e727",
-   "source": "inv-673",
+   "id": "e717",
+   "source": "inv-672",
    "target": "inv-257",
    "sourceHandle": "right",
    "animated": true,
@@ -27322,16 +27237,16 @@
    }
   },
   {
-   "id": "e728",
-   "source": "inv-673",
+   "id": "e718",
+   "source": "inv-672",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e729",
-   "source": "inv-024",
-   "target": "inv-674",
+   "id": "e719",
+   "source": "inv-023",
+   "target": "inv-673",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27344,8 +27259,8 @@
    }
   },
   {
-   "id": "e730",
-   "source": "inv-674",
+   "id": "e720",
+   "source": "inv-673",
    "target": "inv-259",
    "sourceHandle": "right",
    "animated": true,
@@ -27359,8 +27274,126 @@
    }
   },
   {
-   "id": "e731",
+   "id": "e721",
+   "source": "inv-673",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e722",
+   "source": "inv-023",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e723",
+   "source": "inv-024",
+   "target": "inv-674",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e724",
    "source": "inv-674",
+   "target": "inv-258",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e725",
+   "source": "inv-674",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e726",
+   "source": "inv-024",
+   "target": "inv-675",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_保全",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e727",
+   "source": "inv-675",
+   "target": "inv-260",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e728",
+   "source": "inv-675",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e729",
+   "source": "inv-024",
+   "target": "inv-676",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_櫃檯",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e730",
+   "source": "inv-676",
+   "target": "inv-257",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e731",
+   "source": "inv-676",
    "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
@@ -27368,100 +27401,50 @@
   {
    "id": "e732",
    "source": "inv-024",
-   "target": "inv-025",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e733",
-   "source": "inv-026",
-   "target": "inv-675",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e734",
-   "source": "inv-675",
-   "target": "inv-254",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e735",
-   "source": "inv-254",
-   "target": "inv-029",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e736",
-   "source": "inv-026",
-   "target": "inv-676",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_店員",
-     "op": "gte",
-     "value": 4
-    }
-   }
-  },
-  {
-   "id": "e737",
-   "source": "inv-676",
-   "target": "inv-253",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e738",
-   "source": "inv-253",
-   "target": "inv-029",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e739",
-   "source": "inv-026",
-   "target": "inv-029",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e740",
-   "source": "inv-027",
    "target": "inv-677",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_店員",
+     "variable": "met_保全",
      "op": "gte",
-     "value": 5
+     "value": 3
     }
    }
   },
   {
-   "id": "e741",
+   "id": "e733",
    "source": "inv-677",
-   "target": "inv-254",
+   "target": "inv-259",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "gte",
+     "value": 2
+    }
+   }
+  },
+  {
+   "id": "e734",
+   "source": "inv-677",
+   "target": "inv-025",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e742",
-   "source": "inv-027",
+   "id": "e735",
+   "source": "inv-024",
+   "target": "inv-025",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e736",
+   "source": "inv-026",
    "target": "inv-678",
    "sourceHandle": "right",
    "animated": true,
@@ -27470,27 +27453,27 @@
      "kind": "variable",
      "variable": "met_店員",
      "op": "gte",
-     "value": 4
+     "value": 5
     }
    }
   },
   {
-   "id": "e743",
+   "id": "e737",
    "source": "inv-678",
-   "target": "inv-253",
+   "target": "inv-254",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e744",
-   "source": "inv-027",
+   "id": "e738",
+   "source": "inv-254",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e745",
-   "source": "inv-028",
+   "id": "e739",
+   "source": "inv-026",
    "target": "inv-679",
    "sourceHandle": "right",
    "animated": true,
@@ -27499,21 +27482,57 @@
      "kind": "variable",
      "variable": "met_店員",
      "op": "gte",
+     "value": 4
+    }
+   }
+  },
+  {
+   "id": "e740",
+   "source": "inv-679",
+   "target": "inv-253",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e741",
+   "source": "inv-253",
+   "target": "inv-029",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e742",
+   "source": "inv-026",
+   "target": "inv-029",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e743",
+   "source": "inv-027",
+   "target": "inv-680",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_店員",
+     "op": "gte",
      "value": 5
     }
    }
   },
   {
-   "id": "e746",
-   "source": "inv-679",
+   "id": "e744",
+   "source": "inv-680",
    "target": "inv-254",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e747",
-   "source": "inv-028",
-   "target": "inv-680",
+   "id": "e745",
+   "source": "inv-027",
+   "target": "inv-681",
    "sourceHandle": "right",
    "animated": true,
    "data": {
@@ -27526,161 +27545,73 @@
    }
   },
   {
-   "id": "e748",
-   "source": "inv-680",
+   "id": "e746",
+   "source": "inv-681",
    "target": "inv-253",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e749",
-   "source": "inv-028",
+   "id": "e747",
+   "source": "inv-027",
    "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e750",
-   "source": "inv-030",
-   "target": "inv-681",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "met_材料行老闆",
-     "op": "gte",
-     "value": 5
-    }
-   }
-  },
-  {
-   "id": "e751",
-   "source": "inv-681",
-   "target": "inv-256",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e752",
-   "source": "inv-681",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e753",
-   "source": "inv-256",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e754",
-   "source": "inv-030",
+   "id": "e748",
+   "source": "inv-028",
    "target": "inv-682",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
+     "variable": "met_店員",
      "op": "gte",
-     "value": 3
+     "value": 5
     }
    }
   },
   {
-   "id": "e755",
+   "id": "e749",
    "source": "inv-682",
-   "target": "inv-255",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e756",
-   "source": "inv-682",
-   "target": "inv-033",
+   "target": "inv-254",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e757",
-   "source": "inv-255",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e758",
-   "source": "inv-030",
+   "id": "e750",
+   "source": "inv-028",
    "target": "inv-683",
    "sourceHandle": "right",
    "animated": true,
    "data": {
     "condition": {
      "kind": "variable",
-     "variable": "met_材料行老闆",
-     "op": "eq",
-     "value": 1
+     "variable": "met_店員",
+     "op": "gte",
+     "value": 4
     }
    }
   },
   {
-   "id": "e759",
+   "id": "e751",
    "source": "inv-683",
-   "target": "inv-229",
-   "sourceHandle": "right",
-   "animated": true,
-   "data": {
-    "condition": {
-     "kind": "variable",
-     "variable": "slot",
-     "op": "lte",
-     "value": 1
-    }
-   }
-  },
-  {
-   "id": "e760",
-   "source": "inv-683",
-   "target": "inv-033",
+   "target": "inv-253",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e761",
-   "source": "inv-230",
-   "target": "inv-033",
+   "id": "e752",
+   "source": "inv-028",
+   "target": "inv-029",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e762",
+   "id": "e753",
    "source": "inv-030",
-   "target": "inv-033",
-   "sourceHandle": "right",
-   "animated": true
-  },
-  {
-   "id": "e763",
-   "source": "inv-031",
    "target": "inv-684",
    "sourceHandle": "right",
    "animated": true,
@@ -27694,7 +27625,7 @@
    }
   },
   {
-   "id": "e764",
+   "id": "e754",
    "source": "inv-684",
    "target": "inv-256",
    "sourceHandle": "right",
@@ -27709,15 +27640,22 @@
    }
   },
   {
-   "id": "e765",
+   "id": "e755",
    "source": "inv-684",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e766",
-   "source": "inv-031",
+   "id": "e756",
+   "source": "inv-256",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e757",
+   "source": "inv-030",
    "target": "inv-685",
    "sourceHandle": "right",
    "animated": true,
@@ -27731,7 +27669,7 @@
    }
   },
   {
-   "id": "e767",
+   "id": "e758",
    "source": "inv-685",
    "target": "inv-255",
    "sourceHandle": "right",
@@ -27746,15 +27684,22 @@
    }
   },
   {
-   "id": "e768",
+   "id": "e759",
    "source": "inv-685",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e769",
-   "source": "inv-031",
+   "id": "e760",
+   "source": "inv-255",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e761",
+   "source": "inv-030",
    "target": "inv-686",
    "sourceHandle": "right",
    "animated": true,
@@ -27768,7 +27713,7 @@
    }
   },
   {
-   "id": "e770",
+   "id": "e762",
    "source": "inv-686",
    "target": "inv-229",
    "sourceHandle": "right",
@@ -27783,22 +27728,29 @@
    }
   },
   {
-   "id": "e771",
+   "id": "e763",
    "source": "inv-686",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e772",
-   "source": "inv-031",
+   "id": "e764",
+   "source": "inv-230",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e773",
-   "source": "inv-032",
+   "id": "e765",
+   "source": "inv-030",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e766",
+   "source": "inv-031",
    "target": "inv-687",
    "sourceHandle": "right",
    "animated": true,
@@ -27812,7 +27764,7 @@
    }
   },
   {
-   "id": "e774",
+   "id": "e767",
    "source": "inv-687",
    "target": "inv-256",
    "sourceHandle": "right",
@@ -27827,15 +27779,15 @@
    }
   },
   {
-   "id": "e775",
+   "id": "e768",
    "source": "inv-687",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e776",
-   "source": "inv-032",
+   "id": "e769",
+   "source": "inv-031",
    "target": "inv-688",
    "sourceHandle": "right",
    "animated": true,
@@ -27849,7 +27801,7 @@
    }
   },
   {
-   "id": "e777",
+   "id": "e770",
    "source": "inv-688",
    "target": "inv-255",
    "sourceHandle": "right",
@@ -27864,15 +27816,15 @@
    }
   },
   {
-   "id": "e778",
+   "id": "e771",
    "source": "inv-688",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e779",
-   "source": "inv-032",
+   "id": "e772",
+   "source": "inv-031",
    "target": "inv-689",
    "sourceHandle": "right",
    "animated": true,
@@ -27886,7 +27838,7 @@
    }
   },
   {
-   "id": "e780",
+   "id": "e773",
    "source": "inv-689",
    "target": "inv-229",
    "sourceHandle": "right",
@@ -27901,8 +27853,89 @@
    }
   },
   {
-   "id": "e781",
+   "id": "e774",
    "source": "inv-689",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e775",
+   "source": "inv-031",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e776",
+   "source": "inv-032",
+   "target": "inv-690",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 5
+    }
+   }
+  },
+  {
+   "id": "e777",
+   "source": "inv-690",
+   "target": "inv-256",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e778",
+   "source": "inv-690",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e779",
+   "source": "inv-032",
+   "target": "inv-691",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "gte",
+     "value": 3
+    }
+   }
+  },
+  {
+   "id": "e780",
+   "source": "inv-691",
+   "target": "inv-255",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e781",
+   "source": "inv-691",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
@@ -27910,98 +27943,135 @@
   {
    "id": "e782",
    "source": "inv-032",
+   "target": "inv-692",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "met_材料行老闆",
+     "op": "eq",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e783",
+   "source": "inv-692",
+   "target": "inv-229",
+   "sourceHandle": "right",
+   "animated": true,
+   "data": {
+    "condition": {
+     "kind": "variable",
+     "variable": "slot",
+     "op": "lte",
+     "value": 1
+    }
+   }
+  },
+  {
+   "id": "e784",
+   "source": "inv-692",
    "target": "inv-033",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e783",
+   "id": "e785",
+   "source": "inv-032",
+   "target": "inv-033",
+   "sourceHandle": "right",
+   "animated": true
+  },
+  {
+   "id": "e786",
    "source": "inv-034",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e784",
+   "id": "e787",
    "source": "inv-035",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e785",
+   "id": "e788",
    "source": "inv-036",
    "target": "inv-037",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e786",
+   "id": "e789",
    "source": "inv-038",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e787",
+   "id": "e790",
    "source": "inv-039",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e788",
+   "id": "e791",
    "source": "inv-040",
    "target": "inv-041",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e789",
+   "id": "e792",
    "source": "inv-042",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e790",
+   "id": "e793",
    "source": "inv-043",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e791",
+   "id": "e794",
    "source": "inv-044",
    "target": "inv-045",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e792",
+   "id": "e795",
    "source": "inv-046",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e793",
+   "id": "e796",
    "source": "inv-047",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e794",
+   "id": "e797",
    "source": "inv-048",
    "target": "inv-049",
    "sourceHandle": "right",
    "animated": true
   },
   {
-   "id": "e795",
-   "source": "inv-690",
-   "target": "inv-500",
+   "id": "e798",
+   "source": "inv-693",
+   "target": "inv-503",
    "sourceHandle": "right",
    "animated": true
   }
@@ -28405,16 +28475,10 @@
    0
   ],
   "seg109": [
-   0,
-   1,
-   2,
-   3
+   0
   ],
   "seg110": [
-   0,
-   1,
-   2,
-   3
+   0
   ],
   "seg111": [
    0,
@@ -28428,28 +28492,34 @@
    2,
    3
   ],
-  "seg127": [
+  "seg113": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "seg114": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "seg129": [
    0
   ],
-  "seg128": [
+  "seg130": [
    0,
    1,
    2
-  ],
-  "seg129": [
-   2
-  ],
-  "seg130": [
-   1
   ],
   "seg131": [
    2
   ],
   "seg132": [
-   0
+   1
   ],
   "seg133": [
-   1
+   2
   ],
   "seg134": [
    0
@@ -28458,49 +28528,45 @@
    1
   ],
   "seg136": [
-   2
+   0
   ],
   "seg137": [
-   0
+   1
   ],
   "seg138": [
-   1
+   2
   ],
   "seg139": [
-   2
+   0
   ],
   "seg140": [
-   0
+   1
   ],
   "seg141": [
-   1
-  ],
-  "seg142": [
    2
   ],
-  "seg144": [
+  "seg142": [
    0
   ],
-  "seg145": [
+  "seg143": [
    1
   ],
-  "seg148": [
+  "seg144": [
+   2
+  ],
+  "seg146": [
+   0
+  ],
+  "seg147": [
+   1
+  ],
+  "seg150": [
    3
   ],
-  "seg149": [
+  "seg151": [
    1,
    2,
    3
-  ],
-  "seg150": [
-   0,
-   1,
-   2
-  ],
-  "seg151": [
-   0,
-   1,
-   2
   ],
   "seg152": [
    0,
@@ -28516,10 +28582,22 @@
    0,
    1,
    2
+  ],
+  "seg155": [
+   0,
+   1,
+   2
+  ],
+  "seg156": [
+   0,
+   1,
+   2
   ]
  },
  "force_bg": [
-  "seg108"
+  "seg108",
+  "seg109",
+  "seg110"
  ],
  "variables": [
   {
@@ -28626,6 +28704,13 @@
    "label": "list_text",
    "type": "string",
    "defaultValue": ""
+  },
+  {
+   "id": "page1_gaps",
+   "name": "page1_gaps",
+   "label": "page1_gaps",
+   "type": "string",
+   "defaultValue": "她把本子翻到第一頁。"
   },
   {
    "id": "bambi_asked_at",
@@ -30517,40 +30602,7 @@
    "label": "深夜，跟保全講話"
   },
   {
-   "segment": "seg108",
-   "section": "十二、最後一頁（`roof` 上午 → `lobby`・收尾）",
-   "file": "調查篇-橋段2",
-   "dest": "roof",
-   "slots": [
-    0
-   ],
-   "conds": [
-    {
-     "variable": "day",
-     "op": "gte",
-     "value": 4
-    },
-    {
-     "variable": "night_visits",
-     "op": "gte",
-     "value": 3
-    },
-    {
-     "variable": "strikes",
-     "op": "gte",
-     "value": 3
-    },
-    {
-     "variable": "clue_list",
-     "op": "eq",
-     "value": true
-    }
-   ],
-   "or": false,
-   "label": "把筆記寫完"
-  },
-  {
-   "segment": "seg109",
+   "segment": "seg111",
    "section": "第一晚（`trust_斑比` 0，一句話都沒有）",
    "file": "調查篇-橋段2",
    "dest": "laundry",
@@ -30578,7 +30630,7 @@
    "label": "坐著等烘乾"
   },
   {
-   "segment": "seg110",
+   "segment": "seg112",
    "section": "第二晚（`laundry_night1 == true`・`trust_斑比` 0）",
    "file": "調查篇-橋段2",
    "dest": "laundry",
@@ -30606,7 +30658,7 @@
    "label": "再去洗衣店"
   },
   {
-   "segment": "seg111",
+   "segment": "seg113",
    "section": "甲・桌上那幾張（`trust_斑比` 1 → 2）",
    "file": "調查篇-橋段2",
    "dest": "laundry",
@@ -30634,7 +30686,7 @@
    "label": "問她桌上那幾張"
   },
   {
-   "segment": "seg112",
+   "segment": "seg114",
    "section": "乙・幫誰畫的（停在 1，可以重來）",
    "file": "調查篇-橋段2",
    "dest": "laundry",
@@ -30651,7 +30703,7 @@
    "label": "問她幫誰畫的"
   },
   {
-   "segment": "seg128",
+   "segment": "seg130",
    "section": "一之二・頂樓收音機店（第一天・下午）",
    "file": "調查篇-第一天-定稿",
    "dest": "roof",
@@ -30681,7 +30733,7 @@
    "label": "上頂樓"
   },
   {
-   "segment": "seg129",
+   "segment": "seg131",
    "section": "一之三・車站前那條街（第一天・晚上）",
    "file": "調查篇-第一天-定稿",
    "dest": "street",
@@ -30701,7 +30753,7 @@
    "label": "站在看板底下"
   },
   {
-   "segment": "seg130",
+   "segment": "seg132",
    "section": "下午",
    "file": "調查篇-第一天-定稿",
    "dest": "lobby",
@@ -30721,7 +30773,7 @@
    "label": "再去一樓"
   },
   {
-   "segment": "seg131",
+   "segment": "seg133",
    "section": "晚上",
    "file": "調查篇-第一天-定稿",
    "dest": "lobby",
@@ -30744,7 +30796,7 @@
    "label": "抄信箱的名牌"
   },
   {
-   "segment": "seg132",
+   "segment": "seg134",
    "section": "上午",
    "file": "調查篇-第一天-定稿",
    "dest": "street",
@@ -30764,7 +30816,7 @@
    "label": "問看板的事"
   },
   {
-   "segment": "seg133",
+   "segment": "seg135",
    "section": "下午",
    "file": "調查篇-第一天-定稿",
    "dest": "street",
@@ -30784,7 +30836,7 @@
    "label": "隨便問一個人"
   },
   {
-   "segment": "seg134",
+   "segment": "seg136",
    "section": "上午",
    "file": "調查篇-第一天-定稿",
    "dest": "busstop",
@@ -30804,7 +30856,7 @@
    "label": "問藍十五"
   },
   {
-   "segment": "seg135",
+   "segment": "seg137",
    "section": "下午",
    "file": "調查篇-第一天-定稿",
    "dest": "busstop",
@@ -30824,7 +30876,7 @@
    "label": "等一班車"
   },
   {
-   "segment": "seg136",
+   "segment": "seg138",
    "section": "晚上",
    "file": "調查篇-第一天-定稿",
    "dest": "busstop",
@@ -30844,7 +30896,7 @@
    "label": "問車怎麼這麼久"
   },
   {
-   "segment": "seg137",
+   "segment": "seg139",
    "section": "上午",
    "file": "調查篇-第一天-定稿",
    "dest": "metro",
@@ -30864,7 +30916,7 @@
    "label": "跟發傳單的講話"
   },
   {
-   "segment": "seg138",
+   "segment": "seg140",
    "section": "下午",
    "file": "調查篇-第一天-定稿",
    "dest": "metro",
@@ -30884,7 +30936,7 @@
    "label": "接一張傳單"
   },
   {
-   "segment": "seg139",
+   "segment": "seg141",
    "section": "晚上",
    "file": "調查篇-第一天-定稿",
    "dest": "metro",
@@ -30904,7 +30956,7 @@
    "label": "站在二號出口"
   },
   {
-   "segment": "seg140",
+   "segment": "seg142",
    "section": "上午",
    "file": "調查篇-第一天-定稿",
    "dest": "store",
@@ -30924,7 +30976,7 @@
    "label": "問立牌可不可以買"
   },
   {
-   "segment": "seg141",
+   "segment": "seg143",
    "section": "下午",
    "file": "調查篇-第一天-定稿",
    "dest": "store",
@@ -30944,7 +30996,7 @@
    "label": "再進去一次"
   },
   {
-   "segment": "seg142",
+   "segment": "seg144",
    "section": "晚上",
    "file": "調查篇-第一天-定稿",
    "dest": "store",
@@ -30972,7 +31024,7 @@
    "label": "問店員一件事"
   },
   {
-   "segment": "seg144",
+   "segment": "seg146",
    "section": "場景一・便利商店（第二天・上午）",
    "file": "調查篇-第二天",
    "dest": "store",
@@ -30992,7 +31044,7 @@
    "label": "問立牌放多久了"
   },
   {
-   "segment": "seg145",
+   "segment": "seg147",
    "section": "場景二・車站前那條街（第二天・下午）",
    "file": "調查篇-第二天",
    "dest": "street",
@@ -31012,7 +31064,7 @@
    "label": "問路人聽過格莉奇嗎"
   },
   {
-   "segment": "seg148",
+   "segment": "seg150",
    "section": "一、又在出清（`store`・深夜・`trust_貓草 == 1`）",
    "file": "調查篇-缺卡",
    "dest": "store",
@@ -31035,7 +31087,7 @@
    "label": "問他出清什麼"
   },
   {
-   "segment": "seg149",
+   "segment": "seg151",
    "section": "二、走進去（`studio` 到訪卡）",
    "file": "調查篇-缺卡",
    "dest": "studio",
@@ -31056,7 +31108,7 @@
    "label": "走進去"
   },
   {
-   "segment": "seg150",
+   "segment": "seg152",
    "section": "等車的阿姨",
    "file": "調查篇-路人",
    "dest": "busstop",
@@ -31078,7 +31130,7 @@
    "label": "跟旁邊的人講話"
   },
   {
-   "segment": "seg151",
+   "segment": "seg153",
    "section": "跑馬燈",
    "file": "調查篇-路人",
    "dest": "busstop",
@@ -31100,7 +31152,7 @@
    "label": "看跑馬燈"
   },
   {
-   "segment": "seg152",
+   "segment": "seg154",
    "section": "發傳單的",
    "file": "調查篇-路人",
    "dest": "metro",
@@ -31125,7 +31177,7 @@
    "label": "跟發傳單的講話"
   },
   {
-   "segment": "seg153",
+   "segment": "seg155",
    "section": "趕時間的",
    "file": "調查篇-路人",
    "dest": "metro",
@@ -31147,7 +31199,7 @@
    "label": "站在出口看人"
   },
   {
-   "segment": "seg154",
+   "segment": "seg156",
    "section": "看板底下",
    "file": "調查篇-路人",
    "dest": "street",

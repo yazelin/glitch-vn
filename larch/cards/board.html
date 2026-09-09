@@ -243,6 +243,18 @@ function advance(){
 }
 function metKey(p){ return 'met_'+(p==='老闆'?'材料行老闆':p); }
 // 名單那一頁。沒走過那一場的只留 ID，不補註解，也不補一句解釋。
+// 最後一天早上那張選擇卡的題目。她自己數第一頁還有幾行沒填。
+function gapsText(){
+  var m={}; String(values.page1||'').split(',').forEach(function(kv){
+    var i=kv.indexOf('='); if(i>0&&kv.slice(i+1)) m[kv.slice(0,i)]=1; });
+  var keys=['name_cat','name_tower','name_zero','name_bambi','name_noah','name_del'];
+  var n=0, i; for(i=0;i<keys.length;i++) if(!m[keys[i]]) n++;
+  var cn=['零','一','兩','三','四','五','六'][n];
+  if(!(values.names_seen===true||values.names_seen==='true'))
+    return '她把本子翻到第一頁。\n七條橫線，上面一個字都沒有。';
+  if(n===0) return '她把本子翻到第一頁。\n六行都填上了。第七條還是空的。';
+  return '她把本子翻到第一頁。\n六行裡有'+cn+'行我還填不出來。';
+}
 // 收尾旁白唸的第一頁。玩家在筆記卡填過的名字照他填的唸，沒填的畫一個空括號。
 function writePage1(){
   var NAMES=[['name_cat','@CatGrass_80'],['name_tower','@Tower_Manager'],['name_zero','@Null_0x99'],
@@ -285,6 +297,7 @@ function go(spotId){
   // 第一頁那兩段收尾旁白也在這裡補一次：筆記卡要玩家自己翻開才會寫，
   // 沒翻過的人看過牆之後仍然會被唸成「她一個字都沒有寫」（2026-09-09）。
   if(values.names_seen===true||values.names_seen==='true') writePage1();
+  setVar('page1_gaps', gapsText());
   var visited=list(values.visited); if(visited.indexOf(spotId)<0) visited.push(spotId); setVar('visited', visited.join(','));
   // 上午／下午走日版入口，晚上走 @e，深夜走 @n（三種色溫，design/調查篇-場景.md）。
   // 板上其他地方只認前面的地點代號；@n 只給入口那條邊看。

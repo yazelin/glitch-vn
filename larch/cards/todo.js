@@ -28,7 +28,7 @@ function todoLines(v){
     if(n('trust_貓草')<3) left.push('深夜那個人');
     if(n('trust_保全')<3 && b('open_tower14')) left.push('大廳那個保全');
     if(left.length) P.push('本子還有空的地方。'+left[0]+'我還沒問完。');
-    P.push('上午，頂樓。把筆記寫完。');
+    else P.push('本子差不多了。剩下的時間再走一遍。');
   }
   // 2026-09-07 自動玩家跑完一輪抓到的斷點：店員的信任、貓草那條線、抄信箱，沒有人提醒就永遠走不到
   if(n('day')>=2 && !b('note_mailbox')) L.push('晚上去一樓，把信箱的名牌抄下來。');

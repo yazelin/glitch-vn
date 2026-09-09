@@ -436,7 +436,7 @@ def build(cards):
                                            "seen_catgrass_home", "clue_notfix", "asked_0x_黑洞", "asked_諾亞_帳號", "page1", "trust_保全",
                                            "asked_鐵塔_斑比", "asked_貓草_斑比", "tube_bought", "tube_given", "asked_斑比_鐵塔"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
-                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries", "list_text", "page1_text", "page1_lead"] + MET_VARS})
+                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries", "list_text", "page1_text", "page1_lead", "page1_gaps"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
     menu_of, entries_of, greetings = {}, {}, []
     for loc in LOCS:
@@ -772,6 +772,8 @@ def build(cards):
         if s["key"][0] == "調查篇-直播":
             back = None          # 插播裡的段落演完就回板（interruptExit return）
         elif s["key"][1].startswith("十二、最後一頁"):
+            back = None          # 收尾拆成三段：這一段只有那張選擇卡，往下走由選項接（2026-09-09）
+        elif s["key"][1].startswith("寫完・"):
             # 結局演完跳到謝幕那一塊版子（design/調查篇-謝幕.md；推送層把 board-credits 換成真的 id）
             back = b.add({"type": "boardJump", "title": "（謝幕）", "text": "", "jumpBoardId": "board-credits",
                           "jumpNodeId": "credits-hud", "segment": sid})
@@ -889,8 +891,17 @@ def build(cards):
     ending = next((r for r in rules if r["section"].startswith("十二、最後一頁")), None)
     if ending:
         # 這一段是插播跳進來的，不經過頂樓那張入口場景：卡頭寫了場景的卡都要自己帶背景（推送層看 force_bg）
-        b.force_bg = [ending["segment"]]
+        # 收尾固定在最後一天（2026-09-09 拍板）：頂樓那一格不再進選單，只有這張插播叫得動它。
+        # 提早收尾會讓玩得順的人跳過第十與第十一天的收尾筆記，那兩則是最後兩條刪除線。
+        end_segs = sorted({n["data"]["segment"] for n in b.nodes
+                           if (n["data"].get("segment") or "").startswith("seg")
+                           and n["data"].get("segment") in
+                           {sid_ for (ff, _l, sec), (_f, sid_) in seg_first.items()
+                            if ff == "調查篇-橋段2" and (sec.startswith("十二、最後一頁")
+                                                        or sec.startswith("再看・") or sec.startswith("寫完・"))}})
+        b.force_bg = end_segs or [ending["segment"]]
         first_end = next(n["id"] for n in b.nodes if n["data"].get("segment") == ending["segment"])
+        rules[:] = [r for r in rules if r is not ending]
         b.add({"type": "interrupt", "title": "第十二天，收尾", "text": "",
                "interruptCondition": {"kind": "variable", "variable": "day", "op": "gte", "value": 12},
                "interruptOnce": True, "interruptExit": "jump", "interruptTargetNodeId": first_end})
@@ -941,6 +952,7 @@ ONCE_BY_FLAG = {
 }
 # 問答矩陣鐵塔那一場：場面 → 格一（進門就是這一格，不用選）；格三演完 → 收尾（三格共用）
 CHAINS = [("調查篇-問答矩陣", "一、場面（三格共用）", "格一・問鐵塔關於格莉奇"),
+          ("調查篇-橋段2", "再看・第一頁", "寫完・那一場"),
           ("調查篇-問答矩陣", "格三・問鐵塔關於斑比", "收尾（三格共用）")]
 MET_VARS = [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
 LABELS_MD = ROOT / "design/調查篇-選單標籤.md"
@@ -971,6 +983,7 @@ def variables():
          ("hole_sightings", "number", 0), ("noah_stage", "number", 0),
          ("night_visits", "number", 0), ("strikes", "number", 0), ("visited", "string", ""),
          ("tries", "string", ""), ("list_text", "string", ""),
+         ("page1_gaps", "string", "她把本子翻到第一頁。"),
          ("bambi_asked_at", "number", 0)]
     for k in ("roof", "laundry", "figure", "parts", "studio", "tower14"):
         v.append((f"open_{k}", "boolean", False))
