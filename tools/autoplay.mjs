@@ -116,7 +116,18 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${optHits[0].t}`);
     await optHits[0].b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
-  if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++; if (stuck>40) { out('★ 卡住 40 下沒變：'+t.slice(0,120)); await page.screenshot({ path: `${SD}/stuck.png` }); break; } }
+  if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++;
+    // 卡住的時候多半是有一個視窗要按（取得道具那種）。點掉不是上排工具列的那幾顆。
+    if (stuck % 9 === 8) {
+      const NAV = ['存檔','讀取','歷史','自動','快轉','全屏','標題','設定','背包','關閉'];
+      for (const b of await page.getByRole('button').all()) {
+        const label = ((await b.textContent().catch(()=>'')) || '').replace(/\s+/g,'').trim();
+        if (!label || NAV.includes(label) || label.length > 12) continue;
+        out(`  [卡住] 試著點「${label}」`);
+        await b.click({ timeout: 2500 }).catch(()=>{});
+        break;
+      }
+    } if (stuck>40) { out('★ 卡住 40 下沒變：'+t.slice(0,120)); await page.screenshot({ path: `${SD}/stuck.png` }); break; } }
   await page.mouse.click(640,640); await page.waitForTimeout(420);
   if (step % 50 === 0) flush();
 }
