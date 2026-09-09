@@ -202,6 +202,10 @@ var SPOTS=[
 // 0.6 不是 1.0，因為每一次都遇到會把那一場的份量磨掉。
 // 必要的相遇不擲骰：第一次（第二天起）、第二次（第五到七天）、第三次（第八到十一天）那幾個時間窗裡他一定在，
 // 窗外才是三成五。斑比在洗衣店晚上一定在（她是通往工作室的唯一一條路）。
+// 貓草在洗衣店深夜：本來一律兩成。他升到二階之後會自己講他都去那裡，
+// 那之後提到四成五（`調查篇-場景.md` 二那張訪客表的建議），保底也從三次縮到兩次。
+// 理由是量出來的：他第十二天才升到二階，後面只剩一到兩個深夜（2026-09-09）。
+function catLaundry(){ return num(values.trust_貓草,0)>=2 ? 0.45 : 0.20; }
 function holeProb(){ var d=num(values.day,1), h=num(values.hole_sightings,0);
   if((h===0&&d>=2)||(h===1&&d>=5&&d<=9)||(h===2&&d>=10&&d<=13)) return 1; return 0.35; }
 // 第四欄是機率，第五欄是保底：同一個地點同一個時段去到第 N 次，那一次他一定在。
@@ -214,7 +218,7 @@ var VISITS=[
  ['store',  2,'斑比',    0.20,     3],
  ['figure', 1,'貓草',    0.40,     2],
  ['figure', 2,'貓草',    0.40,     2],
- ['laundry',3,'貓草',    0.20,     3],
+ ['laundry',3,'貓草',    catLaundry,3],
  ['laundry',2,'斑比',    1.00,     0],
  ['parts',  1,'諾亞',    0.15,     3]
 ];
@@ -234,7 +238,8 @@ function whoIsThere(spotId, slot){
     if(v[0]!==spotId || v[1]!==slot || out.indexOf(v[2])>=0) continue;
     var pr=(typeof v[3]==='function')?v[3]():v[3];
     var key=spotId+slot+v[2], c=num(m[key],0)+1;
-    if(Math.random()<pr || (v[4]>0 && c>=v[4])){ out.push(v[2]); m[key]=0; }
+    var pity=v[4]; if(v[0]==='laundry'&&v[2]==='貓草'&&num(values.trust_貓草,0)>=2) pity=2;
+    if(Math.random()<pr || (pity>0 && c>=pity)){ out.push(v[2]); m[key]=0; }
     else m[key]=c;
     dirty=true;
   }

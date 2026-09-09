@@ -18,7 +18,7 @@ function todoLines(v){
   if(n('day')>=4 && n('night_visits')===0) L.push('深夜。便利商店還開著。');
   if(b('open_laundry') && !b('laundry_night1')) P.push('隔壁那家洗衣店，深夜也開。');
   if(b('laundry_night1') && n('trust_斑比')<2) P.push('洗衣店那個人晚上會在。再去一次。');
-  if(b('open_studio') && n('trust_斑比')<3) P.push('畫她的人約我去工作室。稿子帶著。');
+  if(b('open_studio') && n('trust_斑比')<3) P.push('晚上去工作室。稿子帶著。');  // 寫時段，不然深夜也被拿去跑工作室
   if(n('trust_斑比')>=3 && !b('names_seen')) P.push('深夜再去工作室一次。');
   if(b('names_seen') && n('strikes')<3) P.push('回頭看前幾天寫的結論。');
   // 收尾那一行：還有線沒走完的話，先讓她自己說一句，不然玩家第九天就把本子寫完了。
