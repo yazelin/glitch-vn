@@ -30614,7 +30614,7 @@
    "conds": [
     {
      "variable": "trust_貓草",
-     "op": "eq",
+     "op": "lte",
      "value": 0
     },
     {
@@ -30637,7 +30637,7 @@
    "conds": [
     {
      "variable": "trust_貓草",
-     "op": "eq",
+     "op": "lte",
      "value": 0
     },
     {
@@ -30660,7 +30660,7 @@
    "conds": [
     {
      "variable": "trust_貓草",
-     "op": "eq",
+     "op": "lte",
      "value": 0
     },
     {
