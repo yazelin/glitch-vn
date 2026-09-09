@@ -10,7 +10,7 @@
   **這一份自己不存任何東西**，玩家打的字一律 larch:set 寫回變數，
   由播放器的存檔（larch-save-<projectId> 裡的 values）負責持久化。
 
-  miniGameReadVars ：notes notes_free met page1
+  miniGameReadVars ：notes notes_free met page1 met_<每個人>
   miniGameWriteVars：notes_free page1 page1_text page1_lead open_notes
 
   「第一頁」（2026-09-06，design/調查篇-背包與謎題.md 六之二）：
@@ -98,6 +98,7 @@ function setVar(n,v){ if(n) parent.postMessage({type:'larch:set',name:n,value:v}
 function finish(result,payload){ if(done)return; done=true;
   parent.postMessage({type:'larch:complete',result:result,payload:payload},'*'); }
 function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
+function num(v,d){ var x=Number(v); return isNaN(x)||v===''||v==null?d:x; }
 function el(t,cls,txt){ var e=document.createElement(t); if(cls)e.className=cls;
   if(txt!=null)e.textContent=txt; return e; }
 
@@ -165,7 +166,12 @@ function savePage1(m){
   setVar('page1_text', '第一頁。六個 ID，旁邊是她自己填的字。\n'+lines.join('\n'));
 }
 function drawPage1(m){
+  // 板上遇過的人，加上只在劇情裡碰得到的（0x 從來不出現在調查板上，
+  // 只有第六次那一趟才見得到她，所以她要從 met_0x 補進來。2026-09-10）
   var people=list(values.met).filter(function(p){ return p && p!=='路人'; });
+  ['管理員','諾亞','斑比','鐵塔','0x','貓草','店員','材料行老闆','櫃檯','保全'].forEach(function(p){
+    if(num(values['met_'+p],0)>0 && people.indexOf(p)<0) people.push(p);
+  });
   var cur=page1Map();
   savePage1(cur);   // 這一頁一出現就把收尾要唸的兩段寫好，就算她一格都沒填
   var box=el('div','p1'); var ol=el('ol');

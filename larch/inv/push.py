@@ -422,7 +422,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                                                 # 便條與這一頁共用 todo.js，少讀一個變數就會寫出跟板上不一樣的三行（2026-09-09）
                                                 "tube_bought", "tube_given", "see_admin", "note_mailbox",
                                                 "trust_店員", "trust_貓草", "met_斑比", "names_seen", "clue_list",
-                                                "open_tower14", "open_figure", "met_櫃檯", "zero_answered"] + note_codes,
+                                                "open_tower14", "open_figure", "met_櫃檯", "zero_answered"]
+                                               # 第一頁的下拉要列得出只在劇情裡碰到的人（0x）
+                                               + [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x",
+                                                                      "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
+                                               + note_codes,
                            "miniGameWriteVars": ["notes_free", "page1", "page1_text", "page1_lead", "open_notes"]}, 0, 0)
     add_edge("inv-notes-int", "inv-notes")
     phone_src = (HERE.parent / "cards/phone.html").read_text(encoding="utf-8")
