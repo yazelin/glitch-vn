@@ -10,7 +10,7 @@ BASE = pathlib.Path(sys.argv[1])
 # 里程碑：字串出現在紀錄裡就算走到
 MILE = [
     ("店員信任", "選「問店員一件事」"),
-    ("洗衣店開", "選「問店員這條街深夜還有什麼開著」"),
+    ("洗衣店開", ("選「問店員這條街深夜還有什麼開著」", "選「問管理員這附近晚上還有什麼開著」")),
     ("洗衣店第一晚", "選「坐著等烘乾」"),
     ("工作室開", "選「問她桌上那幾張」"),
     ("斑比信任三", "選「問斑比守則本是不是她畫的」"),
@@ -33,14 +33,15 @@ for d in sorted(BASE.glob("*/")):
     pol, seed = d.name.rsplit("-", 1)
     days = [int(x) for x in re.findall(r"=== 板 第 (\d+) 天", s)]
     r = {"走法": pol, "種子": seed,
-         "結局": "好結局" if "選「把筆記寫完」" in s else ("短結局" if "選「翻到倒數第三頁」" in s else "時間到"),
+         # 收尾固定在最後一天之後，結局好壞看名單那一頁出不出來（clue_list＝看過斑比那面牆）
+         "結局": "有名單" if "@Bambi_Draft3" in s else "空的最後一頁",
          "最後一天": max(days) if days else 0,
          "出門": int(m.group(1)) if (m := re.search(r"出門 (\d+) 次", s)) else 0,
          "不出門": s.count("這個深夜不出門"),
          "選過": int(m2.group(1)) if (m2 := re.search(r"選過 (\d+) 格", s)) else 0}
     for name, pat in MILE:
-        hit = [i for i, line in enumerate(s.split("\n")) if pat in line]
-        r[name] = "○" if hit else "—"
+        pats = pat if isinstance(pat, tuple) else (pat,)
+        r[name] = "○" if any(p in s for p in pats) else "—"
     r["註解"] = sum(1 for _, pat in ANNOT if pat in s)
     r["看到牆"] = r["那面牆"]
     rows.append(r)
@@ -57,9 +58,9 @@ print("\n=== 彙總")
 by = collections.defaultdict(list)
 for r in rows:
     by[r["走法"]].append(r)
-print("走法\t輪數\t好結局\t看到牆\t見到0x\t註解中位數\t出門中位數")
+print("走法\t輪數\t有名單\t看到牆\t見到0x\t註解中位數\t出門中位數")
 for pol, rs in sorted(by.items()):
-    print(f"{pol}\t{len(rs)}\t{sum(1 for r in rs if r['結局']=='好結局')}"
+    print(f"{pol}\t{len(rs)}\t{sum(1 for r in rs if r['結局']=='有名單')}"
           f"\t{sum(1 for r in rs if r['那面牆']=='○')}\t{sum(1 for r in rs if r['見到 0x']=='○')}"
           f"\t{statistics.median(r['註解'] for r in rs)}\t{statistics.median(r['出門'] for r in rs)}")
 
