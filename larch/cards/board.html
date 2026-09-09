@@ -31,22 +31,22 @@
 -->
 <style>
 :root{
-  --board:#2a2320; --board2:#382e28; --edge:#1a1512;
-  --text:#ece9f4; --dim:#a39a8f; --cyan:#7fd6e8; --pin:#c9463d; --pin2:#e0c35a;
+  --board:#c9a273; --board2:#d8b183; --edge:#8a6942;
+  --text:#2f2318; --dim:#59452f; --cyan:#1d5d63; --pin:#c9463d; --pin2:#e0c35a;
   --paper:#f2efe6; --paper2:#e6e1d3; --ink:#2a2a33; --ink2:#5d5a66; --sticky:#f0d98a; --sticky2:#e2c96e;
-  --sky-a:#2a2320; --sky-b:#2a2320;
+  --sky-a:#d8b183; --sky-b:#b98d5e;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--board);color:var(--text);
   font:15px/1.5 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   -webkit-text-size-adjust:100%;overflow:hidden}
-/* 軟木板：兩層顆粒加一條斜光 */
-.sky{position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 20% 30%,rgba(255,255,255,.035) 0 1px,transparent 2px) 0 0/7px 9px,
-    radial-gradient(circle at 70% 60%,rgba(0,0,0,.18) 0 1px,transparent 2px) 3px 4px/11px 13px,
-    linear-gradient(115deg,var(--board2) 0%,var(--board) 45%,var(--edge) 100%)}
-.sky::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 120px rgba(0,0,0,.55)}
+/* 軟木板（可以釘圖釘的那種壓製軟木），淺色。
+   碎屑用 canvas 畫，不用 CSS 疊點陣：CSS 的點陣一定是等距的，放大看就是格子布。
+   底色與色溫由 paintCork() 依時段畫進去（2026-09-09 改）。 */
+.sky{position:absolute;inset:0;background:var(--board)}
+.sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sky::after{content:"";position:absolute;inset:0;
+  box-shadow:inset 0 0 90px rgba(74,47,24,.34),inset 0 0 18px rgba(74,47,24,.26)}
 .wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.4vh 3vw 2vh}
 header{flex:none;display:flex;align-items:baseline;gap:.9em;flex-wrap:wrap}
 h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;letter-spacing:.04em}
@@ -55,6 +55,14 @@ h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMi
 .map{position:relative;flex:1;margin-top:1vh;min-height:0}
 .map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .map .st{stroke:rgba(255,255,255,.13);stroke-linecap:round;fill:none}
+/* 街廓的白框。preserveAspectRatio 是 none，所以線寬要用 non-scaling-stroke，
+   不然直線跟橫線會粗細不一樣。 */
+/* 街廓：跟紅線同一種東西，白色的線段沿著街廓拉一圈，角上有一顆釘。
+   preserveAspectRatio 是 none，所以線寬要用 non-scaling-stroke，不然直橫粗細不一樣。 */
+.map #blocks polyline{fill:none;stroke:rgba(255,255,255,.82);stroke-width:2;
+  vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.map #blocks circle{fill:rgba(255,255,255,.9);stroke:rgba(110,78,46,.55);stroke-width:.9;
+  vector-effect:non-scaling-stroke}
 /* 她的便條：板子左上角一張大的，寫明天要做的事 */
 .todo{position:absolute;left:1.5%;top:2%;transform:rotate(-1.5deg);width:13.5em;background:linear-gradient(180deg,#f2efe6,#e6e1d3);
   color:var(--ink);padding:.7em .8em .8em;border-radius:2px;box-shadow:0 6px 14px rgba(0,0,0,.45);z-index:1;pointer-events:none}
@@ -91,7 +99,7 @@ button.spot.locked .name{color:var(--ink2);font-weight:500}
 button.spot.closed{opacity:.55}
 footer{flex:none;display:flex;justify-content:flex-end;align-items:center;margin-top:.6vh}
 button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;font-size:clamp(12px,1.5vw,14px);
-  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:.25em .1em}
+  background:none;border:0;border-bottom:1px solid rgba(60,40,22,.45);padding:.25em .1em}
 button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(--cyan);outline:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 /* 直向手機：地圖式排版擠不下，改成兩欄便條牆，往下捲。街道線與紅線不畫，待辦便條排最上面 */
@@ -104,14 +112,16 @@ button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(-
   .name{font-size:14px}.who{font-size:11.5px}.who.hint{font-size:11.5px}
 }
 </style></head>
-<body><div class="sky" id="sky"></div><div class="wrap">
+<body><div class="sky" id="sky"><canvas id="cork"></canvas></div><div class="wrap">
   <header>
     <h1>今天要去哪<span style="font-size:.55em;opacity:.7;margin-left:.6em">南港</span></h1><span class="when" id="when"></span>
     <span class="hint" id="hint"></span>
   </header>
   <div class="map" id="grid">
     <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <!-- 街道那幾條灰線拿掉了：便條會依進度出現，灰線兩頭沒有便條的時候看起來像斷線（2026-09-08 試玩抓到） -->
+      <!-- 街廓：白線框出六塊街區，沒有被框到的縫就是路（2026-09-09）。
+           線畫在卡片底下，框住的是那一區的地點，不是單一棟房子。 -->
+      <g id="blocks"></g>
       <g id="threads"></g>
     </svg>
   </div>
@@ -145,7 +155,8 @@ var THREADS=[
  ['names_seen','studio','roof'],['names_seen','studio','store'],['names_seen','studio','booth'],['names_seen','studio','tower14']
 ];
 // 天色：時間只從這裡感覺得到（design/調查篇-場景.md「白天與夜晚是兩種色溫」）
-var SKY=[['#3a2f27','#2a2320'],['#3d2d22','#2a2320'],['#221f2c','#2a2320'],['#1c1724','#2a2320']];
+// 木頭在四個時段的色溫：上午偏冷白、下午偏暖、晚上壓下來、深夜再壓一階。
+var SKY=[['#dcb98f','#c09a6c'],['#e0b783','#c1955f'],['#b4906a','#947454'],['#9b7f60','#7a6249']];
 
 // 地點：代號、名字、每個時段的狀態、在街區上的位置（百分比）
 //   '名字' = 那個人常駐　　''  = 開著可是沒有常駐　　null = 這個時間進不去
@@ -241,6 +252,60 @@ function advance(){
   if(slot>=3 || (slot===2 && day<4)){ values.slot=0; values.day=day+1; setVar('slot',0); setVar('day',day+1); }
   else { values.slot=slot+1; setVar('slot',slot+1); }
 }
+// 軟木的碎屑。固定亂數種子，重畫不會跳。
+function paintCork(a,b){
+  var c=document.getElementById('cork'); if(!c||!c.getContext) return;
+  var r=c.getBoundingClientRect(); if(!r.width||!r.height) return;
+  var dpr=Math.min(2,window.devicePixelRatio||1);
+  c.width=Math.round(r.width*dpr); c.height=Math.round(r.height*dpr);
+  var x=c.getContext('2d'), W=c.width, H=c.height;
+  var g=x.createLinearGradient(0,0,W*0.4,H); g.addColorStop(0,a); g.addColorStop(1,b);
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  var seed=20260909; function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
+  function chips(n,minR,maxR,maxA){
+    for(var i=0;i<n;i++){
+      var px=rnd()*W, py=rnd()*H, rx=(minR+rnd()*(maxR-minR))*dpr, ry=rx*(0.42+rnd()*0.75),
+          rot=rnd()*3.1416, al=0.03+rnd()*maxA;
+      x.fillStyle=(rnd()<0.5?'rgba(96,60,28,':'rgba(255,241,213,')+al.toFixed(3)+')';
+      x.beginPath(); x.ellipse(px,py,rx,ry,rot,0,6.2832); x.fill();
+    }
+  }
+  var base=Math.round(W*H/70);
+  chips(base,0.6,2.4,0.14);              // 細屑，軟木的顆粒感在這一層
+  chips(Math.round(base/14),2.2,6,0.11); // 比較大的碎片
+  chips(Math.round(base/220),7,20,0.05); // 色斑
+  var v=x.createRadialGradient(W/2,H/2,Math.min(W,H)*0.32,W/2,H/2,Math.max(W,H)*0.72);
+  v.addColorStop(0,'rgba(74,47,24,0)'); v.addColorStop(1,'rgba(74,47,24,.28)');
+  x.fillStyle=v; x.fillRect(0,0,W,H);
+}
+window.addEventListener('resize',function(){ if(window.__sky) paintCork(window.__sky[0],window.__sky[1]); });
+// 街廓：白線沿著每一塊街區拉一圈，角上一顆釘。沒有被圈到的縫就是路。
+// 抖動用固定的位移表，不用亂數，不然每次開板線都在動。
+var BLOCKS=[
+  [[7.5,11],[33.5,11],[33.5,63],[7.5,63]],
+  [[37,15],[56,15],[56,67],[37,67]],
+  [[65,10],[97,10],[97,40],[65,40]],
+  [[53,46],[97,46],[97,77],[53,77]],
+  [[11,71],[60,71],[60,97],[11,97]],
+  [[64,82],[93,82],[93,98],[64,98]]
+];
+var JIT=[.5,-.4,.35,-.3,.45,-.5,.3,-.35,.4,-.45,.25,-.28];
+function drawBlocks(){
+  var g=document.getElementById('blocks'); if(!g) return;
+  g.textContent=''; var NS='http://www.w3.org/2000/svg', k=0;
+  BLOCKS.forEach(function(pts){
+    var pl=document.createElementNS(NS,'polyline'), out=[];
+    pts.forEach(function(p){
+      var dx=JIT[k++%JIT.length], dy=JIT[k++%JIT.length];
+      out.push((p[0]+dx).toFixed(2)+','+(p[1]+dy).toFixed(2));
+      var c=document.createElementNS(NS,'circle');
+      c.setAttribute('cx',p[0]+dx); c.setAttribute('cy',p[1]+dy); c.setAttribute('r',.75);
+      g.appendChild(c);
+    });
+    out.push(out[0]);
+    pl.setAttribute('points',out.join(' ')); g.insertBefore(pl,g.firstChild);
+  });
+}
 function metKey(p){ return 'met_'+(p==='老闆'?'材料行老闆':p); }
 // 名單那一頁。沒走過那一場的只留 ID，不補註解，也不補一句解釋。
 // 最後一天早上那張選擇卡的題目。她自己數第一頁還有幾行沒填。
@@ -317,8 +382,9 @@ function start(){
 
   document.getElementById('when').textContent='第 '+day+' 天 ・ '+SLOTS[slot];
   document.getElementById('hint').textContent='去一個地方就過一個時段';
+  drawBlocks();
   var sky=document.getElementById('sky');
-  sky.style.setProperty('--sky-a', SKY[slot][0]); sky.style.setProperty('--sky-b', SKY[slot][1]);
+  window.__sky=SKY[slot]; paintCork(SKY[slot][0], SKY[slot][1]);
   var map=document.getElementById('grid');
   map.className='map';
   Array.prototype.slice.call(map.querySelectorAll('button.spot, .todo')).forEach(function(b){ b.remove(); });
