@@ -53,6 +53,8 @@ function todoLines(v){
   if(n('trust_貓草')>=2 && !b('asked_貓草_格莉奇')) Q.push('深夜的洗衣店。他有時候也在那裡。');
   // 三階之後他才會讓人跟他回家，而且要先有那六行名單（橋段2 九）
   if(n('trust_貓草')>=3 && b('clue_list') && !b('seen_catgrass_home')) Q.push('深夜的便利商店。他說可以跟他回家。');
+  // 名單到手之後才問得到諾亞那個帳號，而那一行是名單第五行唯一的來源
+  if(b('names_seen') && !b('asked_諾亞_帳號')) Q.push('上午的頂樓。問他有沒有那個帳號。');
   // 保全那四階：他在十四樓的晚上與深夜。沒有人提醒的話玩家不會為了一個保全一直去大廳。
   // 排在貓草後面：他那條線不進名單那一頁，價值最低。
   if(b('open_tower14') && n('trust_保全')<3){
@@ -64,7 +66,20 @@ function todoLines(v){
 
   // 「本子差不多了」是收尾用的一句，底下還有事情可以做的時候不佔位置
   if(sumLine>=0 && Q.length) P.splice(sumLine,1);
-  L=P.concat(Q,L);
+  // 只有三行位置，而中後期同時開著五六條線。依現在的時段排：
+  // 寫了時段又對得上的排前面，沒寫時段的次之，對不上的排最後（2026-09-09）。
+  var SLOTW=['上午','下午','晚上','深夜'], now=SLOTW[n('slot')]||'';
+  function fit(t){
+    var m=t.match(/上午|下午|晚上|深夜|白天/); if(!m) return 1;
+    if(m[0]==='白天') return (now==='上午'||now==='下午')?0:2;
+    return m[0]===now?0:2;
+  }
+  // 主線與第二層一起排：先看時段合不合，同樣合的才比層級。
+  // 這樣晚上不會被三行白天的事佔滿，而主線只要對得上時段就一定排第一。
+  var all=[];
+  P.forEach(function(t,i){ all.push({t:t,k:fit(t)*100+i}); });
+  Q.forEach(function(t,i){ all.push({t:t,k:fit(t)*100+30+i}); });
+  L=all.sort(function(x,y){return x.k-y.k;}).map(function(o){return o.t;}).concat(L);
   if(!L.length) L.push('再去一次同一個地方。');
   return L.slice(0,3);
 }
