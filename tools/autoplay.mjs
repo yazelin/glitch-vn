@@ -87,8 +87,9 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   // 選項卡：標籤長成「01 問他 0x 那邊的事」。Larch 的元件在 shadow DOM 裡，
   // querySelectorAll 穿不進去，只有 Playwright 的 locator 穿得過（2026-09-09 抓到：
   // 之前用 evaluate 找元素一直找不到，鐵塔門口那一場因此整段被跳過，十四樓開不了）。
-  const optLoc = page.locator('button, [role="button"], li, a, div, span, p')
-                     .filter({ hasText: /^\s*0?[1-9][\s\u3000.、)]/ });
+  // 標籤是「01打一行送出去」，數字跟字之間沒有空白（畫面上看到的那個空隙是排版）。
+  // 之前的正規式要求數字後面接空白或標點，所以一顆都對不到（2026-09-09 用無障礙樹比對出來）。
+  const optLoc = page.getByRole('button').filter({ hasText: /^\s*0[1-9]/ });
   const optHits = [];
   for (const b of await optLoc.all()) {
     const t = ((await b.textContent()) || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
@@ -97,6 +98,20 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     if (!box || box.height > 90) continue;
     if (optHits.some(o => o.t === t)) continue;
     optHits.push({ b, t });
+  }
+  if (!optHits.length && /(^|[\s\u3000])0[1-9][\s\u3000]/.test(t) && process.env.DUMP) {
+    // 診斷：看到選項文字卻抓不到元素的時候，把畫面、DOM、無障礙樹都存下來（2026-09-09）
+    const names = [];
+    for (const b of await page.getByRole('button').all()) {
+      names.push({ name: (await b.getAttribute('aria-label')) || '', inner: ((await b.innerText().catch(()=>'')) || '').replace(/\s+/g,' ').trim(),
+                   txt: ((await b.textContent().catch(()=>'')) || '').replace(/\s+/g,' ').trim() });
+    }
+    fs.writeFileSync(`${SD}/choice-buttons.json`, JSON.stringify(names, null, 1));
+    fs.writeFileSync(`${SD}/choice-dom.html`, await page.content());
+    fs.writeFileSync(`${SD}/choice-aria.txt`, await page.locator('body').ariaSnapshot().catch(e=>String(e)));
+    await page.screenshot({ path: `${SD}/choice.png` });
+    out('  ★ 選項抓不到，已存 choice-dom.html / choice-aria.txt / choice.png');
+    flush(); await browser.close(); process.exit(0);
   }
   if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${optHits[0].t}`);
     await optHits[0].b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
