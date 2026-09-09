@@ -38,7 +38,8 @@ const pickSpot = async (bf) => {
   const slotName = (when.match(/上午|下午|晚上|深夜/)||[''])[0];
   if (POLICY==='casual' && slotName==='深夜' && rnd()<0.5) { out('→ 這個深夜不出門'); return 'skip'; }
   if (POLICY==='random') { target=rpick(spots); }
-  else if (POLICY!=='explore') for (const line of todo) { const t=(line.match(/上午|下午|晚上|深夜/)||[''])[0]; if (t && t!==slotName) continue; for (const [k,n] of SPOT_HINT) if (line.includes(k)) { const s=spots.find(x=>x.name===n); if (s) { target=s; break; } } if (target) break; }
+  else if (POLICY!=='explore') for (const line of todo) { const t=(line.match(/上午|下午|晚上|深夜|白天/)||[''])[0];
+    if (t==='白天' ? (slotName!=='上午'&&slotName!=='下午') : (t && t!==slotName)) continue; for (const [k,n] of SPOT_HINT) if (line.includes(k)) { const s=spots.find(x=>x.name===n); if (s) { target=s; break; } } if (target) break; }
   if (!target) { spots.sort((a,b)=>(visits[a.name]||0)-(visits[b.name]||0)); target=spots[0]; }
   if (!target) return null;
   visits[target.name]=(visits[target.name]||0)+1; outings++;

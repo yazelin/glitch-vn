@@ -24,7 +24,7 @@ function todoLines(v){
   // 收尾那一行：還有線沒走完的話，先讓她自己說一句，不然玩家第九天就把本子寫完了。
   if(b('clue_list') && n('day')>=4 && n('night_visits')>=3 && n('strikes')>=3){
     var left=[];
-    if(!b('zero_answered') && b('open_tower14')) left.push('十四樓那個訪問');
+    if(!b('zero_answered') && b('open_tower14')) left.push('白天的十四樓，那個訪問');
     if(n('trust_貓草')<3) left.push('深夜那個人');
     if(n('trust_保全')<3 && b('open_tower14')) left.push('大廳那個保全');
     if(left.length) P.push('本子還有空的地方。'+left[0]+'我還沒問完。');
@@ -41,7 +41,7 @@ function todoLines(v){
   if(!b('open_tower14') && b('open_studio')) Q.push('深夜去工作室。問她 0x 那張圖是誰畫的。');
   // 貓草那條線本來排在第三層，二十五輪自動試玩一次都沒有浮上來（深夜全給了工作室）。
   if(n('night_visits')>=1 && n('trust_貓草')<1) Q.push('深夜的便利商店。關東煮前面那個人，再去講一次。');
-  if(b('open_tower14') && !b('zero_answered')) Q.push(n('met_櫃檯')>=5 ? '十四樓大廳。再約一個訪問。' : '十四樓大廳。再跟櫃檯約一次訪問。');
+  if(b('open_tower14') && !b('zero_answered')) Q.push(n('met_櫃檯')>=5 ? '白天的十四樓大廳。再約一個訪問。' : '白天的十四樓大廳。再跟櫃檯約一次訪問。');
   L=P.concat(Q,L);
   if(!L.length) L.push('再去一次同一個地方。');
   return L.slice(0,3);
