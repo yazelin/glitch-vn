@@ -381,6 +381,11 @@ function go(spotId){
 
 function start(){
   if(values.dest){ advance(); setVar('dest',''); setVar('here',''); }
+  // 收尾那三段字要在這裡也寫一次：出門前寫的那一份看不到那一趟拿到的東西，
+  // 而最後一趟拿到的（例如貓草家）正好決定名單那一頁有幾行註解（2026-09-09 實測）。
+  setVar('list_text', listText());
+  setVar('page1_gaps', gapsText());
+  if(values.names_seen===true||values.names_seen==='true') writePage1();
   var slot=num(values.slot,0), day=num(values.day,1);
   var met=list(values.met);
   // gate 沒填的就是一開始就有的（一樓、車站前那條街、公車站、捷運出口、便利商店）。
