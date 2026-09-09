@@ -21,7 +21,15 @@ function todoLines(v){
   if(b('open_studio') && n('trust_斑比')<3) P.push('畫她的人約我去工作室。稿子帶著。');
   if(n('trust_斑比')>=3 && !b('names_seen')) P.push('深夜再去工作室一次。');
   if(b('names_seen') && n('strikes')<3) P.push('回頭看前幾天寫的結論。');
-  if(b('clue_list') && n('day')>=4 && n('night_visits')>=3 && n('strikes')>=3) P.push('上午，頂樓。把筆記寫完。');
+  // 收尾那一行：還有線沒走完的話，先讓她自己說一句，不然玩家第九天就把本子寫完了。
+  if(b('clue_list') && n('day')>=4 && n('night_visits')>=3 && n('strikes')>=3){
+    var left=[];
+    if(!b('zero_answered') && b('open_tower14')) left.push('十四樓那個訪問');
+    if(n('trust_貓草')<3) left.push('深夜那個人');
+    if(n('trust_保全')<3 && b('open_tower14')) left.push('大廳那個保全');
+    if(left.length) P.push('本子還有空的地方。'+left[0]+'我還沒問完。');
+    P.push('上午，頂樓。把筆記寫完。');
+  }
   // 2026-09-07 自動玩家跑完一輪抓到的斷點：店員的信任、貓草那條線、抄信箱，沒有人提醒就永遠走不到
   if(n('day')>=2 && !b('note_mailbox')) L.push('晚上去一樓，把信箱的名牌抄下來。');
   if(n('day')>=2 && n('trust_店員')<1) P.push(n('met_店員')>=3 ? '便利商店晚上再去一次。問店員一件事。' : '便利商店。多去幾次，讓他認得。');

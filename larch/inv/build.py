@@ -433,7 +433,7 @@ def build(cards):
                                            "trust_斑比", "strikes", "clue_list", "rec_ok",
                                            "note_mailbox", "trust_店員", "trust_貓草", "cat_visits", "zero_answered",
                                            # 結局名單那一頁的註解：板每個時段組一次 list_text
-                                           "seen_catgrass_home", "clue_notfix", "asked_0x_黑洞", "asked_諾亞_帳號", "page1",
+                                           "seen_catgrass_home", "clue_notfix", "asked_0x_黑洞", "asked_諾亞_帳號", "page1", "trust_保全",
                                            "asked_鐵塔_斑比", "asked_貓草_斑比", "tube_bought", "tube_given", "asked_斑比_鐵塔"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
                       "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries", "list_text", "page1_text", "page1_lead"] + MET_VARS})
