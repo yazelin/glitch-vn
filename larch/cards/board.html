@@ -243,6 +243,16 @@ function advance(){
 }
 function metKey(p){ return 'met_'+(p==='老闆'?'材料行老闆':p); }
 // 名單那一頁。沒走過那一場的只留 ID，不補註解，也不補一句解釋。
+// 收尾旁白唸的第一頁。玩家在筆記卡填過的名字照他填的唸，沒填的畫一個空括號。
+function writePage1(){
+  var NAMES=[['name_cat','@CatGrass_80'],['name_tower','@Tower_Manager'],['name_zero','@Null_0x99'],
+             ['name_bambi','@Bambi_Draft3'],['name_noah','@Radio_Noah'],['name_del','@考完就刪']];
+  var m={}; String(values.page1||'').split(',').forEach(function(kv){
+    var i=kv.indexOf('='); if(i>0) m[kv.slice(0,i)]=kv.slice(i+1); });
+  var lines=NAMES.map(function(n){ return n[1]+'　'+(m[n[0]]||'（　）'); });
+  setVar('page1_lead','七條橫線是她自己畫的，用尺量過，間距一樣。\n前面六條上面有字。');
+  setVar('page1_text','第一頁。六個 ID，旁邊是她自己填的字。\n'+lines.join('\n'));
+}
 function listText(){
   function on(k){ return values[k]===true||values[k]==='true'; }
   var home=on('seen_catgrass_home'), L=[];
@@ -272,6 +282,9 @@ function go(spotId){
   // 結局名單那一頁：一張卡，六行 ID，走過的那一場才有註解（design/調查篇-橋段2.md 十四）。
   // 在這裡組是因為板每一個時段都會跑，收尾前一定是新的；筆記卡要玩家自己翻開才會寫。
   setVar('list_text', listText());
+  // 第一頁那兩段收尾旁白也在這裡補一次：筆記卡要玩家自己翻開才會寫，
+  // 沒翻過的人看過牆之後仍然會被唸成「她一個字都沒有寫」（2026-09-09）。
+  if(values.names_seen===true||values.names_seen==='true') writePage1();
   var visited=list(values.visited); if(visited.indexOf(spotId)<0) visited.push(spotId); setVar('visited', visited.join(','));
   // 上午／下午走日版入口，晚上走 @e，深夜走 @n（三種色溫，design/調查篇-場景.md）。
   // 板上其他地方只認前面的地點代號；@n 只給入口那條邊看。
