@@ -84,22 +84,18 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     if (!spot) { out('沒地方可去，這一段不出門'); await bf2.locator('#skip').click(); } await page.waitForTimeout(2500); continue; }
   const mf = await menuFrame();
   if (mf) { await pickMenu(mf, spot, when); await page.waitForTimeout(1800); continue; }
-  // 選項卡：Larch 的選項不一定是 <button>，實測是可點的區塊，標籤長成「01 問他 0x 那邊的事」。
-  // 用文字去找，找不到就會被一般的點擊帶去最後一個分支（2026-09-09 抓到：鐵塔門口那一場整段被跳過）。
-  const optHits = await page.evaluate(() => {
-    const seen = [];
-    for (const e of document.querySelectorAll('button,[role="button"],li,a,div,span,p')) {
-      const t = (e.textContent || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
-      if (!/^0?[1-9][ .、)]/.test(t) || t.length < 3 || t.length > 40) continue;
-      if (!e.getClientRects().length) continue;
-      if (e.querySelector('button,[role="button"],li,a')) continue;   // 只要最裡面那一層
-      const r = e.getBoundingClientRect();
-      seen.push({ t, x: r.x + r.width / 2, y: r.y + r.height / 2 });
-    }
-    return seen;
-  });
+  // 選項卡：標籤長成「01 問他 0x 那邊的事」。Larch 的元件在 shadow DOM 裡，
+  // querySelectorAll 穿不進去，只有 Playwright 的 locator 穿得過（2026-09-09 抓到：
+  // 之前用 evaluate 找元素一直找不到，鐵塔門口那一場因此整段被跳過，十四樓開不了）。
+  const optLoc = page.locator('button, [role="button"], li, a')
+                     .filter({ hasText: /^\s*0?[1-9][\s\u3000.、)]/ });
+  const optHits = [];
+  for (const b of await optLoc.all()) {
+    const t = ((await b.textContent()) || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
+    if (t.length >= 3 && t.length <= 40) optHits.push({ b, t });
+  }
   if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${optHits[0].t}`);
-    await page.mouse.click(optHits[0].x, optHits[0].y); await page.waitForTimeout(900); continue; }
+    await optHits[0].b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++; if (stuck>40) { out('★ 卡住 40 下沒變：'+t.slice(0,120)); await page.screenshot({ path: `${SD}/stuck.png` }); break; } }
   await page.mouse.click(640,640); await page.waitForTimeout(420);
