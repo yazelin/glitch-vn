@@ -11,10 +11,12 @@ function todoLines(v){
   else if(n('met_諾亞')<1) L.push('樓上那間，門開著就是有開。');
   if(b('open_parts') && n('met_材料行老闆')<1) L.push('車站後面那家材料行。那顆管子。');
   if(b('tube_bought') && !b('tube_given')) L.push('管子買到了。拿上去頂樓給他。');
-  if(n('day')>=2 && n('hole_sightings')===0) L.push('晚上七點多，一樓。信箱前面。');
-  if(n('hole_sightings')>=1 && !b('see_admin')) L.push('問管理員那個穿西裝的。');
-  if(n('hole_sightings')===1 && n('day')>=5) L.push('一樓晚上。他還會來。');
-  if(n('hole_sightings')===2 && n('day')>=10) L.push('一樓晚上。再去一次。');
+  // 目擊那條線本來排第三層，六條主線一擠就永遠不出現，而錄音那三格全鎖在 see_admin 後面
+  // （2026-09-10 實測：自動玩家一輪都沒問過管理員那個穿西裝的）。
+  if(n('day')>=2 && n('hole_sightings')===0) Q.push('晚上七點多，一樓。信箱前面。');
+  if(n('hole_sightings')>=1 && !b('see_admin')) Q.push('白天的一樓。問管理員那個穿西裝的。');
+  if(n('hole_sightings')===1 && n('day')>=5) Q.push('一樓晚上。他還會來。');
+  if(n('hole_sightings')===2 && n('day')>=10) Q.push('一樓晚上。再去一次。');
   if(n('day')>=4 && n('night_visits')===0) L.push('深夜。便利商店還開著。');
   if(b('open_laundry') && !b('laundry_night1')) P.push('晚上去隔壁那家洗衣店。深夜也開。');
   if(b('laundry_night1') && n('trust_斑比')<2) P.push('洗衣店那個人晚上會在。再去一次。');
@@ -68,6 +70,10 @@ function todoLines(v){
   // 升到三之後還有深夜那一場（對面那個人）。原本便條在他滿階之後就不提他了，
   // 那一場十輪零次（2026-09-10）。
   if(n('trust_保全')>=3 && !b('guard_told')) Q.push('深夜的十四樓大廳。再去跟保全講話。');
+  // 問過管理員之後，其他人也有各自的一份目擊，而那三格同時是錄音的入口
+  if(b('see_admin') && !b('see_clerk') && n('trust_店員')>=1) Q.push('便利商店。問店員那個穿西裝的。');
+  if(b('see_admin') && !b('see_parts') && b('open_parts')) Q.push('白天的材料行。問老闆那個穿西裝的。');
+  if(b('see_admin') && !b('see_noah') && n('met_諾亞')>=4) Q.push('頂樓。問諾亞那個穿西裝的。');
   // 保全那四階：他在十四樓的晚上與深夜。沒有人提醒的話玩家不會為了一個保全一直去大廳。
   // 排在貓草後面：他那條線不進名單那一頁，價值最低。
   if(b('open_tower14') && n('trust_保全')<3){

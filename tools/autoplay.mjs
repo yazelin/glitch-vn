@@ -56,6 +56,11 @@ const pickMenu = async (mf, spot, when) => {
   // 便條提到的字出現在哪一格的標籤裡，那一格優先（人會這樣讀）
   const overlap = (a,b) => { let best=0; for (let i=0;i<a.length;i++) for (let j=i+3;j<=a.length;j++) if (b.includes(a.slice(i,j))) best=Math.max(best,j-i); return best; };
   const hinted = fresh.map(i => ({ i, s: Math.max(0, ...lastTodo.map(t => overlap(i.label, t))) })).filter(x => x.s >= 3).sort((a,b) => b.s - a.s).map(x => x.i);
+  // DEBUG_TAPE=1：優先挑會跳出錄音的那幾格，用來驗錄音帶進背包之後播不播得出來
+  if (process.env.DEBUG_TAPE && !taped) {
+    const rec = fresh.find(i => /問諾亞那個穿西裝的|問店員那個穿西裝的|問老闆那個穿西裝的/.test(i.label));
+    if (rec) { done.add(spot+'|'+rec.label); out(`  → 選「${rec.label}」（找錄音）`); await rec.el.click(); return; }
+  }
   const pick = POLICY==='random' ? (rpick(fresh.length?fresh:items))
              : POLICY==='explore' ? (fresh[0] || items[items.length-1])
              : (hinted[0] || fresh[0] || items[items.length-1]);
