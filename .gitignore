@@ -37,3 +37,10 @@ larch/inv/preview.json
 larch/inv/out/payload.json
 larch/cards/.phone-test.html
 larch/cards/.phone-banner-test.html
+
+# 建置產出：board.json 與 payload.json 每次跑 build.py／push.py --dry 都會重產，
+# 一份 620 KB，這幾天推了二三十次就在歷史裡留了二三十份（2026-09-10 量到 larch/inv
+# 在歷史裡佔 50 MB，工作區只有 2.2 MB）。**它從 design/ 產得出來，不該進 git。**
+# 新環境第一件事就是 python3 larch/inv/build.py --out larch/inv/out/board.json。
+larch/inv/out/board.json
+larch/inv/out/payload.json
