@@ -53,15 +53,42 @@ FLAG_TEXT = {
     "seen_catgrass_home": "去過他家", "clue_notfix": "深夜碰過經紀人",
     "tube_bought": "買到那顆管子", "tube_given": "管子交出去了",
     "see_admin": "管理員說過那個人", "rec_ok": "錄音機修好了",
+    "see_stairs": "管理員說過他走樓梯", "see_clerk": "店員說過那個人",
+    "see_noah": "諾亞說過那個人", "see_parts": "老闆說過那個人",
+    "see_cat": "他說過那個人", "see_bambi": "她說過那個人", "see_guard": "保全說過對面那個人",
+    "seen_lostbox": "看過失物箱", "admin_third": "管理員那件事問到第三次",
+    "bambi_revised": "她說過上次講錯了", "bambi_third": "同一件事問過她第三次",
+    "cat_reask": "周邊那件事再問過", "noah_reask": "同一件事再問過諾亞",
+    "cat_room_mentioned": "他提過他的房間", "deadend_cat_glitch": "問過他她的東西在哪一區",
+    "deadend_cat": "問過他她是不是真的會忘", "note_blank": "翻到那一頁空白的",
+    "open_store": "便利商店開了", "open_catgrass_home": "他家的門口出現了",
+    "clue_cantfix": "拿到修不好那一條", "clue_real": "拿到四十版那一條",
+    "clue_real_noah": "拿到諾亞那一條", "clue_older": "拿到日期比較早那一條",
+    "clue_notebook": "拿到守則本那一條", "clue_lostbox": "拿到失物箱那一條",
+    "clue_seventh": "拿到第七行那一條", "names_seen": "看過那面牆",
+    "blocked_agency": "在經紀公司門口被擋過", "strike_cat_buy": "劃掉他買周邊那一條",
+    "strike_fake": "劃掉她是裝的那一條", "note_mailbox": "抄過信箱",
+    "noah_intro": "上過頂樓", "noah_alone": "諾亞下樓過", "met_flyer": "跟發傳單的講過話",
 }
+ITEM_TEXT = {"rec_guard": "保全那一卷", "rec_noah": "諾亞那一卷", "rec_clerk": "店員那一卷",
+             "rec_bambi": "她那一卷", "rec_parts": "老闆那一卷"}
 OPS = {"gte": "≥", "lte": "≤", "gt": ">", "lt": "<", "eq": "="}
 
 
 def cond_text(c):
     var, op, val = c["variable"], c["op"], c.get("value")
+    if op == "hasItem":
+        return "背包裡有" + ITEM_TEXT.get(str(val), str(val))
     if var in FLAG_TEXT:
         base = FLAG_TEXT[var]
-        return base if val is True else f"還沒{base}"
+        if val is True:
+            return base
+        # 否定句：「洗衣店開了」→「洗衣店還沒開」，「看過那面牆」→「還沒看過那面牆」
+        if base.endswith("開了"):
+            return base[:-2] + "還沒開"
+        if base.endswith("了"):
+            return base[:-1] + "還沒發生"
+        return f"還沒{base}"
     if var in VAR_TEXT:
         t = VAR_TEXT[var]
         if op == "eq":
@@ -71,8 +98,11 @@ def cond_text(c):
         who = var.split("_")[1:]
         name = "、".join(who)
         return f"問過{name}" if val is True else f"還沒問過{name}"
-    if var.startswith("note_") or var.startswith("see_") or var.startswith("clue_"):
-        return f"{var} 成立" if val is True else f"{var} 還沒成立"
+    if var.startswith(("note_", "see_", "clue_", "deadend_", "strike_", "open_")):
+        nice = var.replace("note_", "記下").replace("see_", "問到").replace("clue_", "線索")
+        return f"{nice} 成立" if val is True else f"還沒{nice}"
+    if val is True or val is False:
+        return f"{var} 成立" if val is True else f"還沒{var}"
     return f"{var} {OPS.get(op, op)} {val}"
 
 
@@ -341,6 +371,180 @@ def build_people():
          "調查篇的八個人物與那張誰能問誰的總表。")
 
 
+# ── 四、地點與時段 ──────────────────────────────────────────
+def board_tables():
+    """從 board.html 撈兩張表：地點常駐（live）與訪客機率（VISITS）。
+    那兩張是玩家看得到的行為，直接讀卡片原始碼，不要另外抄一份。"""
+    js = (ROOT / "larch/cards/board.html").read_text(encoding="utf-8")
+    spots = []
+    blk = re.search(r"var SPOTS=\[(.*?)\n\];", js, re.S).group(1)
+    for m in re.finditer(r"\{id:'(\w+)',\s*name:'(.+?)',\s*live:\[(.*?)\]"
+                         r"(?:,\s*gate:'(\w+)')?", blk):
+        live = [x.strip().strip("'") for x in m.group(3).split(",")]
+        spots.append({"id": m.group(1), "name": m.group(2),
+                      "live": ["" if x == "null" else x for x in live],
+                      "null": [x == "null" for x in live],
+                      "gate": m.group(4) or ""})
+    visits = []
+    blk2 = re.search(r"var VISITS=\[(.*?)\n\];", js, re.S).group(1)
+    for m in re.finditer(r"\['(\w+)',\s*(\d),'(.+?)',\s*([\w.]+)", blk2):
+        visits.append((m.group(1), int(m.group(2)), m.group(3), m.group(4)))
+    return spots, visits
+
+
+def build_places():
+    spots, visits = board_tables()
+    extra = {}
+    for loc, slot, who, pr in visits:
+        extra.setdefault(loc, []).append((SLOT_NAME[slot], who, pr))
+    rows = []
+    for sp in spots:
+        cells = []
+        for i in range(4):
+            if sp["null"][i]:
+                cells.append('<span class="no">沒開</span>')
+            elif sp["live"][i]:
+                cells.append('<span class="yes">' + html.escape(DISPLAY.get(sp["live"][i], sp["live"][i])) + "</span>")
+            else:
+                cells.append('<span class="no">開著，可能沒人</span>')
+        gate = FLAG_TEXT.get(sp["gate"], sp["gate"]) if sp["gate"] else "一開始就在"
+        vis = "；".join(f"{s} {DISPLAY.get(w, w)}" + ("" if pr in ("1.00", "1") else f"（{pr}）")
+                        for s, w, pr in extra.get(sp["id"], [])) or "—"
+        rows.append("<tr><td>" + html.escape(sp["name"]) + "</td>" +
+                    "".join(f"<td>{c}</td>" for c in cells) +
+                    f'<td class="w">{html.escape(gate)}</td><td class="w">{html.escape(vis)}</td></tr>')
+    body = f"""
+<h1>地點與時段</h1>
+<p class="lede">誰常駐在哪裡、什麼時候在、要什麼條件那個地方才會出現在板上。
+括號裡的數字是他剛好也在的機率，去到第二或第三次就一定遇得到。</p>
+
+<div class="box"><table>
+<thead><tr><th>地點</th><th>上午</th><th>下午</th><th>晚上</th><th>深夜</th><th>怎麼開</th><th>誰會剛好也在</th></tr></thead>
+<tbody>{''.join(rows)}</tbody>
+</table></div>
+
+<h2>兩件要知道的</h2>
+<p><strong>「開著，可能沒人」跟「沒開」是兩件事。</strong>
+一樓的晚上沒有常駐，管理員下班了，可是那正是那個穿西裝的唯一會出現的時段。
+空手而回本來就是這一款的一部分。</p>
+<p><strong>錄音間門口永遠進不去。</strong>那是刻意的。你會在騎樓那個門口被擋住，
+而那件事會讓深夜在便利商店撞到他變成整款最好的一個瞬間。</p>
+"""
+    page("places.html", "地點與時段", body, "調查篇十二個地點的常駐、時段與開啟條件。")
+
+
+# ── 五、支線與條件 ──────────────────────────────────────────
+def build_threads():
+    by_loc = {}
+    for r in BOARD["rules"]:
+        if not r.get("label"):
+            continue
+        by_loc.setdefault(r["dest"], []).append(r)
+    blocks = []
+    for loc in sorted(by_loc, key=lambda l: list(LOC_NAME).index(l) if l in LOC_NAME else 99):
+        rows = []
+        for r in sorted(by_loc[loc], key=lambda r: (min(r["slots"]), r.get("label"))):
+            slots = "、".join(SLOT_NAME[i] for i in sorted(r["slots"]))
+            if len(r["slots"]) == 4:
+                slots = "任一時段"
+            rows.append(f'<tr><td class="w">{html.escape(r["label"])}</td>'
+                        f'<td>{slots}</td><td class="w">{html.escape(rule_conds(r))}</td></tr>')
+        blocks.append(f"""<h2>{html.escape(LOC_NAME.get(loc, loc))}
+<span class="tag">{len(rows)} 格</span></h2>
+<div class="box"><table>
+<thead><tr><th>那一格</th><th>時段</th><th>要什麼</th></tr></thead>
+<tbody>{''.join(rows)}</tbody></table></div>""")
+    body = f"""
+<h1>支線與條件</h1>
+<p class="lede">板上每一個地方能點的每一格，以及它要什麼條件才會出現。
+全部從板子直接產，共 {len(BOARD['rules'])} 格。<strong>這一頁有雷。</strong></p>
+<details class="spoiler" open><summary>展開全部條件</summary>
+{''.join(blocks)}
+</details>
+"""
+    page("threads.html", "支線與條件", body, "調查篇每一格的觸發條件，從板子直接產生。")
+
+
+# ── 六、完整攻略 ────────────────────────────────────────────
+def build_walkthrough(route_file):
+    rows, day, slot, place = [], None, None, None
+    for ln in pathlib.Path(route_file).read_text(encoding="utf-8").split("\n"):
+        m = re.match(r"^=== 板 第 (\d+) 天 ・ (上午|下午|晚上|深夜)", ln)
+        if m:
+            day, slot, place = m.group(1), m.group(2), None
+            continue
+        m = re.match(r"^→ 去 (\S+)", ln)
+        if m:
+            place = m.group(1)
+            continue
+        m = re.search(r"→ 選「(.+?)」", ln)
+        if m and place:
+            rows.append((day, slot, place, m.group(1)))
+            place = None
+    out, last = [], None
+    for d, s_, p, c in rows:
+        head = f'<tr><td rowspan="0">第 {d} 天</td>' if d != last else "<tr><td></td>"
+        last = d
+        out.append(f'<tr><td>{"第 " + d + " 天" if head.startswith("<tr><td r") else ""}</td>'
+                   f"<td>{s_}</td><td>{html.escape(p)}</td>"
+                   f'<td class="w">{html.escape(c)}</td></tr>')
+    body = f"""
+<h1>完整攻略</h1>
+<p class="lede"><strong>整頁有雷。</strong>底下這條路線是真的跑完的一輪，
+不是推算的：六條線全部走到，最後那一頁六行註解全滿。共 {len(rows)} 步。</p>
+
+<h2>先記四件事</h2>
+<div class="box"><table>
+<thead><tr><th>要點</th><th>為什麼</th></tr></thead>
+<tbody>
+<tr><td class="w">深夜留給那條街</td><td class="w">開洗衣店與洗衣店第一晚都不限時段，晚上做就好。
+十個深夜要留給深夜才有的人。</td></tr>
+<tr><td class="w">第三天下午去騎樓那個門口</td><td class="w">跟著他進電梯那一場裡選問 0x，
+十四樓當天就開。靠別的路要等到第七天以後，後面全部來不及。</td></tr>
+<tr><td class="w">工作室先問守則本</td><td class="w">工作室有三個問題，只有守則本那一格會把信任推到三。
+另外兩個問完再問，不然兩個晚上就沒了。</td></tr>
+<tr><td class="w">不要對深夜那個人按錄音</td><td class="w">他會轉身，那一晚不算。
+可以錄的是店員、老闆、諾亞、保全。</td></tr>
+</tbody></table></div>
+
+<details class="spoiler" open><summary>逐日路線（{len(rows)} 步）</summary>
+<div class="box"><table>
+<thead><tr><th>天</th><th>時段</th><th>去哪裡</th><th>做什麼</th></tr></thead>
+<tbody>{''.join(out)}</tbody></table></div>
+</details>
+
+<p>第十四天上午自動收尾，不用選。走完這一條的人，最後那一頁六行都會有她自己問到的東西。</p>
+"""
+    page("walkthrough.html", "完整攻略", body, "調查篇的逐日路線，取自真的跑完的一輪。")
+
+
+# ── 七、名詞表 ──────────────────────────────────────────────
+def build_glossary():
+    seen = {}
+    for r in BOARD["rules"]:
+        for c in r["conds"]:
+            seen.setdefault(c["variable"], 0)
+            seen[c["variable"]] += 1
+    rows = []
+    for v, n in sorted(seen.items(), key=lambda kv: -kv[1]):
+        if v in ("dest", "pick", "slot"):
+            continue
+        desc = FLAG_TEXT.get(v) or (VAR_TEXT.get(v, "").format(v="N") if v in VAR_TEXT else "")
+        rows.append(f'<tr><td><code>{html.escape(v)}</code></td>'
+                    f'<td class="w">{html.escape(desc or "—")}</td><td>{n}</td></tr>')
+    body = f"""
+<h1>名詞表</h1>
+<p class="lede">板上真的被拿來當條件的旗標與計數，共 {len(rows)} 個。
+給想拆解這一款怎麼運作的人。<strong>有雷。</strong></p>
+<details class="spoiler"><summary>展開</summary>
+<div class="box"><table>
+<thead><tr><th>名字</th><th>意思</th><th>被幾格讀到</th></tr></thead>
+<tbody>{''.join(rows)}</tbody></table></div>
+</details>
+"""
+    page("glossary.html", "名詞表", body, "調查篇的變數與旗標一覽。")
+
+
 def build_stub(fn, title, note):
     body = f"""<h1>{html.escape(title)}</h1>
 <p class="lede">{html.escape(note)}</p>
@@ -353,10 +557,14 @@ def main():
     build_index()
     build_canon()
     build_people()
-    build_stub("places.html", "地點與時段", "十一個地點各自誰在、什麼條件才開。")
-    build_stub("threads.html", "支線與條件", "每一格的觸發條件，從板子直接產。")
-    build_stub("walkthrough.html", "完整攻略", "逐日路線，取自跑通的那一輪。")
-    build_stub("glossary.html", "名詞表", "變數與旗標，給想拆解的人。")
+    build_places()
+    build_threads()
+    route = ROOT / "design/調查篇-通關路線.txt"
+    if route.exists():
+        build_walkthrough(route)
+    else:
+        build_stub("walkthrough.html", "完整攻略", "還沒有把跑通的那一輪存進 design/調查篇-通關路線.txt。")
+    build_glossary()
     print(f"寫出 {OUT}/ 共 {len(PAGES)} 頁")
     print(f"  規則 {len(BOARD['rules'])} 條、變數 {len(BOARD['variables'])} 個、卡片 {len(BOARD['nodes'])} 張")
 
