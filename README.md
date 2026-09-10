@@ -35,7 +35,7 @@
     tools/playrate.sh        一次跑好幾種走法好幾輪，統計各自走到哪裡
     tools/playreport.py      把一批紀錄整理成里程碑表與觸及率
     tools/pathlint.py        靜態路徑檢查，不開瀏覽器（見下面「調查篇」的驗收）
-    tools/gen_guide.py       產生 guide/ 那七頁公式站
+    tools/gen_guide.py       產生 docs/guide/ 那七頁公式站
     art/live2d/              格莉奇的 Live2D 模型。build.py 把 sprite-glitch.png 切成 34 層、
                              mkpsd.py 組成 Cubism 讀得懂的 PSD、run-cubism.sh 在 Wine 底下開
                              Cubism Editor（Ubuntu 也做得完，見該資料夾 README）。
@@ -78,9 +78,11 @@
                                  修掉的十件事。**改門檻之前先讀這一份**
     design/調查篇-每日收尾.md     第三到十三天每天換日的插播，刪除線落在五八十十二
     design/調查篇-保全.md         保全那四階，加上深夜那一場「對面那個人」
-    design/調查篇-通關路線.txt    真的跑完六條線那一輪的紀錄，公式站的攻略頁吃這一份
-    guide/                        調查篇公式站，七頁，**程式生的，不要手改**。
-                                 還沒公開：docs/ 一推上 main 就等於上架，驗過再搬
+    design/調查篇-通關路線.txt    完美通關那一輪的逐字稿，公式站的攻略頁吃這一份。
+                                 完美＝六條線走到、第一頁六個名字填滿、名單六行註解全滿。
+                                 重跑：PREFER 逼出四場、BAG 挑背包、FILLPAGE1 填第一頁（見 tools/autoplay.mjs）
+    docs/guide/                   調查篇公式站，七頁，**程式生的，不要手改**。
+                                 2026-09-11 上架，正篇站的 nav 有一格「調查篇」
     larch/cards/board.html        調查板：選地點、算遇到誰、時間往前走
     larch/cards/notes.html        調查筆記：第一頁（六 ID 對人）／名單／目擊／問答／空白頁
     larch/cards/host.html         假的 Larch 宿主，開發用

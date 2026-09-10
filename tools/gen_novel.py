@@ -494,7 +494,8 @@ def page(title, desc, body, cur, wide=False, ld="", js=""):
         for h, n in (("index.html", "首頁"), ("novel.html", "閱讀"),
                      ("extras.html", "番外"),
                      ("characters.html", "角色"), ("timeline.html", "時間軸"),
-                     ("screens.html", "畫面"), ("vn.html", "遊玩版")))
+                     ("screens.html", "畫面"), ("vn.html", "遊玩版"),
+                     ("guide/", "調查篇")))
     t, d = html.escape(title), html.escape(desc)
     canon = BASE + ("" if cur == "index.html" else cur)
     return f'''<!doctype html>

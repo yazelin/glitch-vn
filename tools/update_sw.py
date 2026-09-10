@@ -2,7 +2,7 @@
 """用內容 hash 產 sw.js 的快取版號。**不要手動 bump，遲早會忘。**
 
 兩層各自算自己的 hash：
-  SHELL  八個頁面 + manifest + icon + 字型，改一行字就換版
+  SHELL  八個頁面 + 公式站七頁 + manifest + icon + 字型，改一行字就換版
   ASSET  img/ 與 voice/ 的檔名清單，只有增刪或改名才換版
 
 ASSET 用「檔名 + 大小」而不是完整內容雜湊，因為七百多個音檔全讀一次太慢，
@@ -17,7 +17,9 @@ DOCS = ROOT / "docs"
 SW = DOCS / "sw.js"
 
 SHELL = ["index.html", "novel.html", "characters.html", "timeline.html",
-         "extras.html", "screens.html", "vn.html", "credits.html", "manifest.webmanifest"]
+         "extras.html", "screens.html", "vn.html", "credits.html", "manifest.webmanifest"] \
+        + [f"guide/{n}.html" for n in ("index", "canon", "people", "places",
+                                       "threads", "walkthrough", "glossary")]
 
 
 def shell_hash():

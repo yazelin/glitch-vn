@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>完整攻略・格莉奇與黑洞先生・調查篇</title>
+<meta name="description" content="調查篇的逐日路線，取自真的跑完的一輪。">
+<style>
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../fonts/noto-serif-tc-400.woff2") format("woff2")}
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:600;font-display:swap;
+  src:url("../fonts/noto-serif-tc-600.woff2") format("woff2")}
+:root{
+  --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
+  --cy:#25c2e8; --mint:#7cf3c0; --purple:#b78bff;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84; --r:3px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.85 "Noto Serif TC",Songti TC,PMingLiU,Georgia,serif}
+nav.top{position:sticky;top:0;z-index:8;background:var(--bg);border-bottom:1px solid var(--hair)}
+nav.top .in{max-width:64em;margin:0 auto;padding:11px 24px;display:flex;gap:18px;
+  flex-wrap:wrap;align-items:baseline;font-size:14px}
+nav.top .home{font-weight:600;color:var(--text);text-decoration:none;margin-right:auto}
+nav.top a.l{color:var(--muted);text-decoration:none}
+nav.top a.l:hover{color:var(--mint);text-shadow:0 0 9px rgba(124,243,192,.55)}
+nav.top a.l[aria-current]{color:var(--cy)}
+main{max-width:64em;margin:0 auto;padding:34px 24px 90px}
+h1{font-size:clamp(26px,4.4vw,38px);line-height:1.25;margin:0 0 8px;letter-spacing:.02em}
+h2{font-size:22px;margin:46px 0 6px;letter-spacing:.02em}
+h2::before{content:"";display:block;width:34px;height:2px;background:var(--cy);margin-bottom:12px}
+h3{font-size:17px;margin:26px 0 4px;color:var(--cy)}
+p{margin:0 0 14px;max-width:44em}
+.lede{color:var(--muted)}
+strong{color:#fff;font-weight:600}
+code{font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--sunk);border:1px solid var(--hair);padding:.06em .38em;border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+.box{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r);background:var(--win)}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--hair);white-space:nowrap}
+thead th{color:var(--muted);font-weight:400;font-size:13px;background:var(--sunk)}
+tbody tr:last-child td{border-bottom:none}
+td.w{white-space:normal;min-width:16em}
+.yes{color:var(--mint)}.no{color:var(--faint)}.refuse{color:var(--purple)}
+.tag{font-size:12.5px;color:var(--faint);border:1px solid var(--hair2);
+  padding:1px 7px;border-radius:999px;margin-left:8px;white-space:nowrap}
+.spoiler{border:1px solid var(--hair2);border-radius:var(--r);padding:0 16px;margin:20px 0;background:var(--win)}
+.spoiler summary{cursor:pointer;padding:13px 0;color:var(--cy);font-size:15px;list-style:none}
+.spoiler summary::before{content:"▸ ";}
+.spoiler[open] summary::before{content:"▾ ";}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(15em,1fr));gap:2px;margin:16px 0}
+.cards a{display:block;padding:15px 16px;background:var(--win);border:1px solid var(--hair);
+  text-decoration:none;color:var(--text)}
+.cards a:hover{border-color:var(--mint);color:var(--mint)}
+.cards small{display:block;color:var(--faint);font-size:13px;margin-top:3px}
+footer{max-width:64em;margin:0 auto;padding:24px;border-top:1px solid var(--hair);
+  color:var(--faint);font-size:13.5px}
+</style>
+</head>
+<body>
+<nav class="top"><div class="in"><a class="home" href="index.html">調查篇・公式站</a><a class="l" href="index.html">怎麼玩</a><a class="l" href="canon.html">跟正篇的關係</a><a class="l" href="people.html">出場人物</a><a class="l" href="places.html">地點與時段</a><a class="l" href="threads.html">支線與條件</a><a class="l" href="walkthrough.html" aria-current='page'>完整攻略</a><a class="l" href="glossary.html">名詞表</a><a class="l" href="../index.html">回正篇</a></div></nav>
+<main>
+
+<h1>完整攻略</h1>
+<p class="lede"><strong>整頁有雷。</strong>底下這條路線是真的跑完的一輪，
+不是推算的：六條線全部走到，守則本第一頁六個名字填滿，
+最後那一頁六行註解也全滿。共 43 步。</p>
+
+<h2>先記六件事</h2>
+<div class="box"><table>
+<thead><tr><th>要點</th><th>為什麼</th></tr></thead>
+<tbody>
+<tr><td class="w">深夜留給那條街</td><td class="w">開洗衣店與洗衣店第一晚都不限時段，晚上做就好。
+十個深夜要留給深夜才有的人。</td></tr>
+<tr><td class="w">第三天下午去騎樓那個門口</td><td class="w">跟著他進電梯那一場裡選問 0x，
+十四樓當天就開。靠別的路要等到第七天以後，後面全部來不及。</td></tr>
+<tr><td class="w">工作室先問守則本</td><td class="w">工作室有三個問題，只有守則本那一格會把信任推到三。
+另外兩個問完再問，不然兩個晚上就沒了。</td></tr>
+<tr><td class="w">不要對深夜那個人按錄音</td><td class="w">他會轉身，那一晚不算。
+可以錄的是店員、老闆、諾亞、保全。</td></tr>
+<tr><td class="w">有三格會跳出包包</td><td class="w">失物箱、把信箱那一頁拿給諾亞看、
+把保全那一段放給管理員聽。演到一半會跳出包包，要挑指定那一件才接得下去
+（前兩格是守則本，第三格是錄音・保全）。不挑的話會再問一次，兩次都不挑就回板，
+那一場下次還會出現。</td></tr>
+<tr><td class="w">六個名字要自己填</td><td class="w">六個 ID 都抄到之後，守則本會多一個
+「第一頁」分頁。名單那一頁的註解跟第一頁的名字是兩回事，兩邊都要做才是完整結局。</td></tr>
+</tbody></table></div>
+
+<details class="spoiler" open><summary>逐日路線（43 步）</summary>
+<div class="box"><table>
+<thead><tr><th>天</th><th>時段</th><th>去哪裡</th><th>做什麼</th></tr></thead>
+<tbody><tr><td>第 1 天</td><td>下午</td><td>頂樓收音機店</td><td class="w">上頂樓</td></tr><tr><td></td><td>晚上</td><td>車站前那條街</td><td class="w">站在看板底下</td></tr><tr><td>第 2 天</td><td>上午</td><td>便利商店</td><td class="w">問立牌放多久了</td></tr><tr><td></td><td>晚上</td><td>一樓</td><td class="w">抄信箱的名牌</td></tr><tr><td>第 3 天</td><td>下午</td><td>車站前那條街</td><td class="w">進去那棟樓看看</td></tr><tr><td></td><td>晚上</td><td>便利商店</td><td class="w">問店員一件事</td></tr><tr><td>第 4 天</td><td>下午</td><td>十四樓大廳</td><td class="w">跟櫃檯約訪問</td></tr><tr><td></td><td>晚上</td><td>便利商店</td><td class="w">問店員這條街深夜還有什麼開著</td></tr><tr><td>第 5 天</td><td>上午</td><td>十四樓大廳</td><td class="w">跟櫃檯約訪問</td></tr><tr><td></td><td>下午</td><td>十四樓大廳</td><td class="w">跟櫃檯約訪問</td></tr><tr><td></td><td>晚上</td><td>自助洗衣店</td><td class="w">在路上攔她</td></tr><tr><td></td><td>深夜</td><td>便利商店</td><td class="w">跟靠窗那個人講話</td></tr><tr><td>第 6 天</td><td>上午</td><td>十四樓大廳</td><td class="w">跟櫃檯約訪問</td></tr><tr><td></td><td>下午</td><td>十四樓大廳</td><td class="w">約一個訪問</td></tr><tr><td></td><td>晚上</td><td>自助洗衣店</td><td class="w">坐著等烘乾</td></tr><tr><td></td><td>深夜</td><td>便利商店</td><td class="w">跟關東煮那個人講話</td></tr><tr><td>第 7 天</td><td>上午</td><td>南港站二號出口</td><td class="w">站在出口看人</td></tr><tr><td></td><td>下午</td><td>材料行</td><td class="w">買諾亞等的那顆管子</td></tr><tr><td></td><td>晚上</td><td>自助洗衣店</td><td class="w">再去洗衣店</td></tr><tr><td></td><td>深夜</td><td>便利商店</td><td class="w">再跟關東煮那個人講話</td></tr><tr><td>第 8 天</td><td>上午</td><td>一樓</td><td class="w">問管理員那台螢幕</td></tr><tr><td></td><td>下午</td><td>頂樓收音機店</td><td class="w">把信箱那一頁拿給他看</td></tr><tr><td></td><td>晚上</td><td>自助洗衣店</td><td class="w">問她桌上那幾張</td></tr><tr><td></td><td>深夜</td><td>便利商店</td><td class="w">第三次跟關東煮那個人講話</td></tr><tr><td>第 9 天</td><td>上午</td><td>車站前站牌</td><td class="w">跟旁邊的人講話</td></tr><tr><td></td><td>下午</td><td>斑比工作室</td><td class="w">敲門</td></tr><tr><td></td><td>晚上</td><td>斑比工作室</td><td class="w">問斑比守則本是不是她畫的</td></tr><tr><td></td><td>深夜</td><td>斑比工作室</td><td class="w">深夜，去工作室</td></tr><tr><td>第 10 天</td><td>上午</td><td>頂樓收音機店</td><td class="w">問他有沒有一個網路帳號</td></tr><tr><td></td><td>晚上</td><td>一樓</td><td class="w">再去信箱那邊</td></tr><tr><td></td><td>深夜</td><td>便利商店</td><td class="w">問店員那個穿西裝的</td></tr><tr><td>第 11 天</td><td>上午</td><td>一樓</td><td class="w">問管理員那個穿西裝的</td></tr><tr><td></td><td>下午</td><td>材料行</td><td class="w">問老闆那個穿西裝的</td></tr><tr><td></td><td>晚上</td><td>一樓</td><td class="w">翻到倒數第三頁</td></tr><tr><td></td><td>深夜</td><td>便利商店</td><td class="w">問她的經紀人</td></tr><tr><td>第 12 天</td><td>上午</td><td>車站前那條街</td><td class="w">站在看板底下</td></tr><tr><td></td><td>下午</td><td>手辦店</td><td class="w">問這個賣得好不好</td></tr><tr><td></td><td>晚上</td><td>一樓</td><td class="w">翻到倒數第三頁</td></tr><tr><td></td><td>深夜</td><td>自助洗衣店</td><td class="w">問她格莉奇的事</td></tr><tr><td>第 13 天</td><td>上午</td><td>車站前站牌</td><td class="w">看跑馬燈</td></tr><tr><td></td><td>下午</td><td>手辦店</td><td class="w">問畫她的人是誰</td></tr><tr><td></td><td>晚上</td><td>一樓</td><td class="w">翻到倒數第三頁</td></tr><tr><td></td><td>深夜</td><td>便利商店</td><td class="w">跟他回家</td></tr></tbody></table></div>
+</details>
+
+<p>第十四天上午自動收尾，不用選。走完這一條的人，最後那一頁六行都會有她自己問到的東西。</p>
+
+</main>
+<footer>《格莉奇與黑洞先生・調查篇》公式站　這一頁由 <code>tools/gen_guide.py</code>
+從板子與稿子產生，2026-09-11 重建。門檻改了就重跑，不要手改這裡。</footer>
+</body>
+</html>

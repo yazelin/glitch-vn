@@ -50,6 +50,7 @@ const pickSpot = async (bf) => {
 };
 let lastTodo = [];
 const bagDone = new Set();   // 已經試過挑的背包卡，避免在同一張上空轉
+let page1Done = false, notesTried = '';   // FILLPAGE1 用
 const pickMenu = async (mf, spot, when) => {
   const items=[]; for (const b of await mf.locator('button.seg').all()) items.push({ label:(await b.locator('.label').textContent()).trim(), el:b });
   const fresh0 = items.filter(i=>!done.has(spot+'|'+i.label)); const fresh = fresh0.filter(i=>!/再問|第三次|同一件事/.test(i.label)).concat(fresh0.filter(i=>/再問|第三次|同一件事/.test(i.label)));
@@ -149,6 +150,72 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     if (/開錄音機/.test(pick_.t)) taped = true;      // 錄到了，下一次開板去包包裡把那一卷播出來
     await pick_.b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
+  // FILLPAGE1=1：從 HUD 打開守則本，把第一頁那六個名字填好。
+  // 自動玩家不會自己填，所以逐字稿的第一頁六個括號永遠是空的，當攻略用不夠格。
+  // 第一頁那個分頁要六個 ID 都抄到（斑比那面牆）才會出現，所以填不成就下次再試。
+  if (process.env.FILLPAGE1 && !page1Done) {
+    for (const f of frames()) {
+      const sels = f.locator('select[aria-label$="是誰"]');
+      const n = await sels.count().catch(() => 0);
+      if (!n) continue;
+      const ANS = { '@CatGrass_80': '貓草', '@Tower_Manager': '鐵塔', '@Null_0x99': '0x',
+                    '@Bambi_Draft3': '斑比', '@Radio_Noah': '諾亞', '@考完就刪': '查不到' };
+      let ok = 0;
+      for (let i = 0; i < n; i++) {
+        const sel = sels.nth(i);
+        const lab = ((await sel.getAttribute('aria-label')) || '').replace(/\s*是誰$/, '');
+        const want = ANS[lab];
+        if (!want) continue;
+        if (await sel.selectOption({ label: want }).then(() => true).catch(() => false)) ok++;
+      }
+      out(`  [第一頁] 填好 ${ok}/6`);
+      if (ok === 6) page1Done = true;
+      await f.locator('#close').click({ timeout: 2500 }).catch(() => {});
+      await page.waitForTimeout(1500);
+      break;
+    }
+  }
+  // 筆記卡沒開的話，從 HUD 的守則本開它（每天最多試一次）
+  if (process.env.FILLPAGE1 && !page1Done && when && notesTried !== when) {
+    notesTried = when;
+    // HUD 那顆的名字在 aria-label 上，不是文字內容，所以 hasText 抓不到；
+    // getByRole 的 name 吃 accessible name，才對得到（2026-09-11 用它自己的診斷印出來比對）。
+    const hud = page.getByRole('button', { name: /背包/ }).first();
+    const hasHud = await hud.count().catch(() => 0);
+    if (!hasHud) {
+      const cand = await page.evaluate(() => [...document.querySelectorAll('button,[role=button]')]
+        .map(e => ((e.getAttribute('aria-label') || e.textContent || '').replace(/\s+/g, '')).slice(0, 14))
+        .filter(Boolean).slice(0, 16));
+      out('  [第一頁] 找不到背包 HUD，畫面上的按鈕：' + cand.join('｜'));
+    }
+    if (hasHud) {
+      out('  [第一頁] 開背包');
+      await hud.click({ timeout: 2500 }).catch(() => {});
+      await page.waitForTimeout(1200);
+      for (const f of [page, ...frames()]) {
+        const row = f.locator('button, [role=button], li, div[class*=item]').filter({ hasText: /守則本/ });
+        if (!(await row.count().catch(() => 0))) continue;
+        await row.first().click({ timeout: 2500 }).catch(() => {});
+        await page.waitForTimeout(500);
+        await f.locator('button').filter({ hasText: /使用道具|使用/ }).first().click({ timeout: 2500 }).catch(() => {});
+        await page.waitForTimeout(2000);
+        break;
+      }
+      // 第一頁那個分頁要自己點
+      let tabbed = false;
+      for (const f of frames()) {
+        const t = f.locator('nav button').filter({ hasText: /^第一頁$/ });
+        if (await t.count().catch(() => 0)) { await t.first().click().catch(() => {}); tabbed = true; await page.waitForTimeout(900); }
+      }
+      if (!tabbed) {
+        const tabs = [];
+        for (const f of frames()) for (const bb of await f.locator('nav button').all().catch(() => []))
+          tabs.push(((await bb.textContent().catch(() => '')) || '').trim());
+        out('  [第一頁] 沒有第一頁分頁，看到的分頁：' + (tabs.join('｜') || '（一個都沒有，筆記卡沒開起來）'));
+      }
+      continue;
+    }
+  }
   // 背包卡（open-bag）：道具列在外掛 iframe 裡，要先點那一件、再按「使用道具」。
   // BAG=守則本 指定挑哪一件；沒設就不動，讓它照「沒挑到」那條預設邊走。
   if (process.env.BAG && t.includes('道具欄') && !bagDone.has(t.slice(0, 40))) {

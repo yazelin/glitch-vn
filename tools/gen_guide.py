@@ -8,8 +8,8 @@
   larch/inv/out/board.json   建置產出的板子：選單規則、條件、變數、卡片
   design/調查篇-*.md         稿子：總表、機制、跟正篇的關係那幾段散文
 
-輸出寫到 guide/（**不是 docs/**）。docs 一推上 main 就等於公開，
-所以驗過再搬（2026-09-10 拍板：還沒完成先不要上架）。
+輸出寫到 docs/guide/（2026-09-11 拍板上架；在那之前放在 repo 根目錄的 guide/，
+因為 docs 一推上 main 就等於公開）。正篇站的 nav 有一格「調查篇」指到這裡。
 """
 import json
 import pathlib
@@ -19,7 +19,7 @@ import datetime
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BOARD = json.loads((ROOT / "larch/inv/out/board.json").read_text(encoding="utf-8"))
-OUT = ROOT / "guide"
+OUT = ROOT / "docs/guide"
 TODAY = datetime.date.today().isoformat()
 
 LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街",
@@ -115,9 +115,9 @@ def rule_conds(r):
 # ── 頁面骨架 ────────────────────────────────────────────────
 CSS = """
 @font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:400;font-display:swap;
-  src:url("../docs/fonts/noto-serif-tc-400.woff2") format("woff2")}
+  src:url("../fonts/noto-serif-tc-400.woff2") format("woff2")}
 @font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:600;font-display:swap;
-  src:url("../docs/fonts/noto-serif-tc-600.woff2") format("woff2")}
+  src:url("../fonts/noto-serif-tc-600.woff2") format("woff2")}
 :root{
   --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
   --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
@@ -177,7 +177,7 @@ def nav(current):
     for f, label in PAGES:
         cur = " aria-current='page'" if f == current else ""
         out.append(f'<a class="l" href="{f}"{cur}>{label}</a>')
-    out.append('<a class="l" href="../docs/index.html">回正篇</a>')
+    out.append('<a class="l" href="../index.html">回正篇</a>')
     out.append("</div></nav>")
     return "".join(out)
 
@@ -481,6 +481,13 @@ def build_walkthrough(route_file):
         if m and place:
             rows.append((day, slot, place, m.group(1)))
             place = None
+            continue
+        # 打開包包挑東西也是一步，而且不挑就接不下去（失物箱、諾亞信箱、放錄音給管理員聽）。
+        # 它不是選單那一格，是那一格演到一半跳出來的，所以要另外抓。
+        m = re.search(r"\[背包\] 挑「(.+?)」", ln)
+        if m and rows:
+            d0, s0, p0, c0 = rows[-1]
+            rows.append((d0, s0, p0, f"（打開包包，挑「{m.group(1)}」）"))
     out, last = [], None
     for d, s_, p, c in rows:
         head = f'<tr><td rowspan="0">第 {d} 天</td>' if d != last else "<tr><td></td>"
@@ -491,9 +498,10 @@ def build_walkthrough(route_file):
     body = f"""
 <h1>完整攻略</h1>
 <p class="lede"><strong>整頁有雷。</strong>底下這條路線是真的跑完的一輪，
-不是推算的：六條線全部走到，最後那一頁六行註解全滿。共 {len(rows)} 步。</p>
+不是推算的：六條線全部走到，守則本第一頁六個名字填滿，
+最後那一頁六行註解也全滿。共 {len(rows)} 步。</p>
 
-<h2>先記四件事</h2>
+<h2>先記六件事</h2>
 <div class="box"><table>
 <thead><tr><th>要點</th><th>為什麼</th></tr></thead>
 <tbody>
@@ -505,6 +513,12 @@ def build_walkthrough(route_file):
 另外兩個問完再問，不然兩個晚上就沒了。</td></tr>
 <tr><td class="w">不要對深夜那個人按錄音</td><td class="w">他會轉身，那一晚不算。
 可以錄的是店員、老闆、諾亞、保全。</td></tr>
+<tr><td class="w">有三格會跳出包包</td><td class="w">失物箱、把信箱那一頁拿給諾亞看、
+把保全那一段放給管理員聽。演到一半會跳出包包，要挑指定那一件才接得下去
+（前兩格是守則本，第三格是錄音・保全）。不挑的話會再問一次，兩次都不挑就回板，
+那一場下次還會出現。</td></tr>
+<tr><td class="w">六個名字要自己填</td><td class="w">六個 ID 都抄到之後，守則本會多一個
+「第一頁」分頁。名單那一頁的註解跟第一頁的名字是兩回事，兩邊都要做才是完整結局。</td></tr>
 </tbody></table></div>
 
 <details class="spoiler" open><summary>逐日路線（{len(rows)} 步）</summary>
