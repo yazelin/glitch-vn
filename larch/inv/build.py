@@ -440,8 +440,9 @@ def card_node(c):
         if any(l.get("direction") for l in c["lines"]):
             d["dialogueLines"] = [
                 {"id": f"l{i}",
-                 "speaker": "" if l.get("direction") else c["speaker"],
-                 "text": re.sub(r"^（旁白・描述動作）", "", l["text"]), "emotion": ""}
+                 "speaker": NARRATOR if l.get("direction") else c["speaker"],
+                 "text": re.sub(r"^（旁白・描述動作）", "", l["text"]),
+                 "emotion": "描述動作" if l.get("direction") else ""}
                 for i, l in enumerate(c["lines"]) if l["text"]]
         if c.get("remote"):
             d["remote"] = True          # 推送層據此不掛立繪
@@ -452,13 +453,16 @@ def card_node(c):
     spoken = [l for l in lines if l.get("speaker")]
     if not spoken:
         return None
-    # 舞台指示（斜體那幾行）留在卡上，講者留空。parse.py 寫的是「不進配音」，不是不進卡片；
-    # 先前整行丟掉，管理員那句「你也有。」前面少了她把本子拿出來並排的那一下，變成沒頭沒腦（2026-09-10）。
+    # 舞台指示（斜體那幾行）留在卡上。parse.py 寫的是「不進配音」，不是不進卡片；
+    # 先前整行丟掉，管理員那句「你也有。」前面少了她把本子拿出來並排的那一下，變成沒頭沒腦。
+    # **講者要填「旁白」，不可以留空字串**：實測空字串的那一行會沿用上一個講者的名牌，
+    # 動作句會掛成上一個角色在講話（2026-09-10 在測試專案量過）。
+    # 情緒填「描述動作」，那是設計稿給旁白動作句用的值（橋段.md 排卡註），配音要跳過這些行時認它。
     seq = [l for l in c["lines"] if l.get("speaker") or l.get("direction")]
     dl = [{"id": f"l{i}",
-           "speaker": "" if l.get("direction") else l["speaker"],
+           "speaker": NARRATOR if l.get("direction") else l["speaker"],
            "text": re.sub(r"^（旁白・描述動作）", "", l["text"]),
-           "emotion": ""}
+           "emotion": "描述動作" if l.get("direction") else ""}
           for i, l in enumerate(seq)]
     d = {"type": "dialogue", "title": f"{spoken[0]['speaker']}：{spoken[0]['text'][:10]}",
          "text": spoken[0]["text"], "speaker": spoken[0]["speaker"], "dialogueLines": dl}

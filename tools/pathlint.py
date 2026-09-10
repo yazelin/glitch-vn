@@ -11,6 +11,8 @@
        29 條選項線被吃掉，白板上選擇卡旁邊一條線都沒有）
  五、選擇卡的選項數跟它接出去的 choice-N 邊數對不上
  六、設計稿裡的舞台指示（斜體那幾行）有沒有真的進到卡上
+ 七、有沒有講者留空字串的台詞行
+     （空字串會沿用上一個講者的名牌，動作句會掛成上一個角色在講話，2026-09-10 實測）
      （2026-09-10 中過：card_node 把 direction 整行過濾掉，204 行動作全部沒演，
        「你也有。」前面少了她把本子拿出來並排的那一下）
 可達性不在這裡，那是 tools/sim.py 的事。
@@ -120,6 +122,12 @@ for _d in _P.DOCS:
             _t = re.sub(r"^（旁白・描述動作）", "", _l["text"])[:14]
             if _t not in _blob:
                 bad.append(f"指示沒進卡　{_c['file']}　{_l['text'][:30]}")
+
+# 七、講者留空的行
+for _n in b["nodes"]:
+    for _l in ((_n.get("data") or {}).get("dialogueLines") or []):
+        if not _l.get("speaker"):
+            bad.append(f"講者留空　{_n['id']}　{str(_l.get('text'))[:26]}")
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")
