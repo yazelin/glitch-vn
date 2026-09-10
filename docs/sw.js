@@ -9,8 +9,8 @@
    結果就是「圖都在、按播放沒有聲音」。 */
 
 /* cache:start — tools/update_sw.py 產生，勿手改 */
-const SHELL_CACHE = 'gvn-shell-f360b7f9e9';
-const ASSET_CACHE = 'gvn-assets-b9a769bf1b';
+const SHELL_CACHE = 'gvn-shell-eec941a5fc';
+const ASSET_CACHE = 'gvn-assets-4e83c96377';
 /* cache:end */
 
 const KEEP = [SHELL_CACHE, ASSET_CACHE];
@@ -22,7 +22,7 @@ const MATCH = { ignoreSearch: true, ignoreVary: true };
 
 const SHELL_FILES = [
   './', './index.html', './novel.html', './characters.html',
-  './timeline.html', './extras.html', './vn.html', './credits.html',
+  './timeline.html', './extras.html', './screens.html', './vn.html', './credits.html',
   './manifest.webmanifest', './offline.json',
   './img/icon-v2-192.png', './img/icon-v2-512.png',
   './img/icon-v2-maskable-512.png', './img/icon-v2-32.png',

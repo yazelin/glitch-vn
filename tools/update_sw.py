@@ -2,7 +2,7 @@
 """用內容 hash 產 sw.js 的快取版號。**不要手動 bump，遲早會忘。**
 
 兩層各自算自己的 hash：
-  SHELL  五個頁面 + manifest + icon，改一行字就換版
+  SHELL  八個頁面 + manifest + icon + 字型，改一行字就換版
   ASSET  img/ 與 voice/ 的檔名清單，只有增刪或改名才換版
 
 ASSET 用「檔名 + 大小」而不是完整內容雜湊，因為七百多個音檔全讀一次太慢，
@@ -17,7 +17,7 @@ DOCS = ROOT / "docs"
 SW = DOCS / "sw.js"
 
 SHELL = ["index.html", "novel.html", "characters.html", "timeline.html",
-         "extras.html", "vn.html", "credits.html", "manifest.webmanifest"]
+         "extras.html", "screens.html", "vn.html", "credits.html", "manifest.webmanifest"]
 
 
 def shell_hash():
@@ -36,9 +36,12 @@ def shell_hash():
 
 def asset_hash():
     h = hashlib.sha256()
+    # rglob 不是 glob：調查篇的圖在 img/inv/ 底下，只掃一層會漏掉那 90 個檔，
+    # 增刪或改名都不會換版（2026-09-10）。名字用相對路徑，免得兩層同名的檔互相蓋掉。
     for d in ("img", "voice"):
-        for p in sorted((DOCS / d).glob("*")):
-            h.update(f"{p.name}:{p.stat().st_size}".encode())
+        for p in sorted((DOCS / d).rglob("*")):
+            if p.is_file():
+                h.update(f"{p.relative_to(DOCS)}:{p.stat().st_size}".encode())
     return h.hexdigest()[:10]
 
 
