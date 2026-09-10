@@ -8630,17 +8630,9 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "櫃檯：您好，請問有預約嗎。",
-    "text": "您好，請問有預約嗎。",
-    "speaker": "櫃檯",
-    "dialogueLines": [
-     {
-      "id": "l0",
-      "speaker": "櫃檯",
-      "text": "您好，請問有預約嗎。",
-      "emotion": ""
-     }
-    ],
+    "title": "她的手在預約簿上停了一下，翻",
+    "text": "她的手在預約簿上停了一下，翻到下一頁，然後抬頭。",
+    "speaker": "旁白",
     "segment": "greet-tower14-met_櫃檯-3",
     "castHint": "櫃檯"
    }
@@ -8654,17 +8646,9 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "櫃檯：您好，請問有預約嗎。",
-    "text": "您好，請問有預約嗎。",
-    "speaker": "櫃檯",
-    "dialogueLines": [
-     {
-      "id": "l0",
-      "speaker": "櫃檯",
-      "text": "您好，請問有預約嗎。",
-      "emotion": ""
-     }
-    ],
+    "title": "桌上那盆花換過了。同一個花瓶",
+    "text": "桌上那盆花換過了。同一個花瓶，這次是白色的。\n她抬頭的時間跟前幾次一樣長。",
+    "speaker": "旁白",
     "segment": "greet-tower14-met_櫃檯-5",
     "castHint": "櫃檯"
    }
@@ -19609,7 +19593,15 @@
     "title": "筆記：公車站。等車的阿姨說",
     "text": "公車站。等車的阿姨說我在看時刻表，所以我不是這裡的人。\n這裡的人不看。",
     "speaker": "玩家",
-    "segment": "seg154"
+    "segment": "seg154",
+    "variableOps": [
+     {
+      "id": "op-seen_aunt",
+      "variable": "seen_aunt",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -19638,7 +19630,15 @@
     "title": "站牌上的跑馬燈每跑幾個字就停",
     "text": "站牌上的跑馬燈每跑幾個字就停一下。三十秒一輪。\n廣告、班距、廣告。第三輪是她的：一個手機殼，殼上是她的天線。\n沒有人抬頭。",
     "speaker": "旁白",
-    "segment": "seg155"
+    "segment": "seg155",
+    "variableOps": [
+     {
+      "id": "op-seen_ticker",
+      "variable": "seen_ticker",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -19714,7 +19714,15 @@
     "title": "筆記：二號出口發傳單的。他",
     "text": "二號出口發傳單的。他記得我，因為我站在出口寫字。\n他一天遞出去幾百張，記得的不是臉。",
     "speaker": "玩家",
-    "segment": "seg156"
+    "segment": "seg156",
+    "variableOps": [
+     {
+      "id": "op-seen_flyer",
+      "variable": "seen_flyer",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -19743,7 +19751,15 @@
     "title": "手扶梯一直在吐人。上來的人不",
     "text": "手扶梯一直在吐人。上來的人不看路，看手機，然後往三個方向散開。\n沒有一個人停下來。她站了一個時段，被撞了兩次，兩次都是對方說對不起。",
     "speaker": "旁白",
-    "segment": "seg157"
+    "segment": "seg157",
+    "variableOps": [
+     {
+      "id": "op-seen_rush",
+      "variable": "seen_rush",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -19787,7 +19803,15 @@
     "title": "筆記：南港車站前。她的廣告",
     "text": "南港車站前。她的廣告在看板上，沒有聲音，字幕寫我會記得你們的。\n我站了一個時段。沒有人抬頭。我是唯一一個看完的。",
     "speaker": "玩家",
-    "segment": "seg158"
+    "segment": "seg158",
+    "variableOps": [
+     {
+      "id": "op-seen_board",
+      "variable": "seen_board",
+      "kind": "set",
+      "value": true
+     }
+    ]
    }
   },
   {
@@ -31330,6 +31354,11 @@
      "variable": "day",
      "op": "gte",
      "value": 2
+    },
+    {
+     "variable": "seen_aunt",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -31352,6 +31381,11 @@
      "variable": "day",
      "op": "gte",
      "value": 2
+    },
+    {
+     "variable": "seen_ticker",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -31379,6 +31413,11 @@
      "variable": "met_flyer",
      "op": "eq",
      "value": true
+    },
+    {
+     "variable": "seen_flyer",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -31399,6 +31438,11 @@
      "variable": "day",
      "op": "gte",
      "value": 2
+    },
+    {
+     "variable": "seen_rush",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,
@@ -31421,6 +31465,11 @@
      "variable": "day",
      "op": "gte",
      "value": 2
+    },
+    {
+     "variable": "seen_board",
+     "op": "eq",
+     "value": false
     }
    ],
    "or": false,

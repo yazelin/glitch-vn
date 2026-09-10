@@ -953,6 +953,9 @@ ONCE_BY_FLAG = {
     "二、問店員・關於黑洞先生": "see_clerk", "Ａ・斑比的工作室": "names_seen", "五、深夜的鐵塔": "clue_notfix",
     "Ａ・問她的事": "deadend_cat_glitch", "Ｂ・問他手上那個": "cat_room_mentioned", "九、你不要寫出去喔": "seen_catgrass_home",
     "第一晚": "laundry_night1", "甲・桌上那幾張": "open_studio",
+    # 路人那五格是死路，設計上要有內容，可是同一段看第二次就沒有內容了（2026-09-10）
+    "等車的阿姨": "seen_aunt", "跑馬燈": "seen_ticker", "發傳單的": "seen_flyer",
+    "趕時間的": "seen_rush", "看板底下": "seen_board",
 }
 # 問答矩陣鐵塔那一場：場面 → 格一（進門就是這一格，不用選）；格三演完 → 收尾（三格共用）
 CHAINS = [("調查篇-問答矩陣", "一、場面（三格共用）", "格一・問鐵塔關於格莉奇"),
