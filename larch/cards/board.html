@@ -31,10 +31,10 @@
 -->
 <style>
 :root{
-  --board:#c9a273; --board2:#d8b183; --edge:#8a6942;
-  --text:#2f2318; --dim:#59452f; --cyan:#1d5d63; --pin:#c9463d; --pin2:#e0c35a;
+  --board:#2c231d; --board2:#42352c; --edge:#151009;
+  --text:#ece5da; --dim:#a2917e; --cyan:#7fd6e8; --pin:#c9463d; --pin2:#e0c35a;
   --paper:#f2efe6; --paper2:#e6e1d3; --ink:#2a2a33; --ink2:#5d5a66; --sticky:#f0d98a; --sticky2:#e2c96e;
-  --sky-a:#d8b183; --sky-b:#b98d5e;
+  --sky-a:#42352c; --sky-b:#2c231d;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--board);color:var(--text);
@@ -59,10 +59,8 @@ h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMi
    不然直線跟橫線會粗細不一樣。 */
 /* 街廓：跟紅線同一種東西，白色的線段沿著街廓拉一圈，角上有一顆釘。
    preserveAspectRatio 是 none，所以線寬要用 non-scaling-stroke，不然直橫粗細不一樣。 */
-.map #blocks polyline{fill:none;stroke:rgba(255,255,255,.82);stroke-width:2;
-  vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
-.map #blocks circle{fill:rgba(255,255,255,.9);stroke:rgba(110,78,46,.55);stroke-width:.9;
-  vector-effect:non-scaling-stroke}
+.map #blocks rect{fill:rgba(255,255,255,.028);stroke:rgba(255,255,255,.34);stroke-width:1.2;
+  vector-effect:non-scaling-stroke;stroke-linejoin:round}
 /* 她的便條：板子左上角一張大的，寫明天要做的事 */
 .todo{position:absolute;left:1.5%;top:2%;transform:rotate(-1.5deg);width:13.5em;background:linear-gradient(180deg,#f2efe6,#e6e1d3);
   color:var(--ink);padding:.7em .8em .8em;border-radius:2px;box-shadow:0 6px 14px rgba(0,0,0,.45);z-index:1;pointer-events:none}
@@ -99,7 +97,7 @@ button.spot.locked .name{color:var(--ink2);font-weight:500}
 button.spot.closed{opacity:.55}
 footer{flex:none;display:flex;justify-content:flex-end;align-items:center;margin-top:.6vh}
 button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;font-size:clamp(12px,1.5vw,14px);
-  background:none;border:0;border-bottom:1px solid rgba(60,40,22,.45);padding:.25em .1em}
+  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:.25em .1em}
 button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(--cyan);outline:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 /* 直向手機：地圖式排版擠不下，改成兩欄便條牆，往下捲。街道線與紅線不畫，待辦便條排最上面 */
@@ -156,7 +154,9 @@ var THREADS=[
 ];
 // 天色：時間只從這裡感覺得到（design/調查篇-場景.md「白天與夜晚是兩種色溫」）
 // 木頭在四個時段的色溫：上午偏冷白、下午偏暖、晚上壓下來、深夜再壓一階。
-var SKY=[['#dcb98f','#c09a6c'],['#e0b783','#c1955f'],['#b4906a','#947454'],['#9b7f60','#7a6249']];
+// 深色軟木。淺木在真的螢幕上太亮，便條與拍立得都浮不出來（2026-09-10 試玩回報）。
+// 顆粒維持 canvas 畫的那一套，只換色溫：上午偏暖、下午再暖一點、晚上壓下來、深夜最沉。
+var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];
 
 // 地點：代號、名字、每個時段的狀態、在街區上的位置（百分比）
 //   '名字' = 那個人常駐　　''  = 開著可是沒有常駐　　null = 這個時間進不去
@@ -288,30 +288,27 @@ function paintCork(a,b){
 window.addEventListener('resize',function(){ if(window.__sky) paintCork(window.__sky[0],window.__sky[1]); });
 // 街廓：白線沿著每一塊街區拉一圈，角上一顆釘。沒有被圈到的縫就是路。
 // 抖動用固定的位移表，不用亂數，不然每次開板線都在動。
-var BLOCKS=[
-  [[7.5,11],[33.5,11],[33.5,63],[7.5,63]],
-  [[37,15],[56,15],[56,67],[37,67]],
-  [[65,10],[97,10],[97,40],[65,40]],
-  [[53,46],[97,46],[97,77],[53,77]],
-  [[11,71],[60,71],[60,97],[11,97]],
-  [[64,82],[93,82],[93,98],[64,98]]
-];
-var JIT=[.5,-.4,.35,-.3,.45,-.5,.3,-.35,.4,-.45,.25,-.28];
+// 街廓：先定兩條直路與兩條橫路，街區就是它們之間那幾格。
+// 這樣路寬一定一致，而且**框不可能互相疊到**（2026-09-10 試玩抓到：
+// 手寫六個矩形在寬螢幕上會壓在一起，看不出哪裡是路）。
+// 橫路壓在 67.5 的話材料行（y=69）會站在路中間，往下挪到 71.5
+var ROAD_X=[35.5,62.5], ROAD_Y=[40.5,71.5];   // 路的中心線（百分比）
+var EDGE=[6.5,97.5,9.5,98.5];                  // 左、右、上、下的外緣
+var LANE=2.2;                                  // 路面寬度的一半
 function drawBlocks(){
   var g=document.getElementById('blocks'); if(!g) return;
-  g.textContent=''; var NS='http://www.w3.org/2000/svg', k=0;
-  BLOCKS.forEach(function(pts){
-    var pl=document.createElementNS(NS,'polyline'), out=[];
-    pts.forEach(function(p){
-      var dx=JIT[k++%JIT.length], dy=JIT[k++%JIT.length];
-      out.push((p[0]+dx).toFixed(2)+','+(p[1]+dy).toFixed(2));
-      var c=document.createElementNS(NS,'circle');
-      c.setAttribute('cx',p[0]+dx); c.setAttribute('cy',p[1]+dy); c.setAttribute('r',.75);
-      g.appendChild(c);
-    });
-    out.push(out[0]);
-    pl.setAttribute('points',out.join(' ')); g.insertBefore(pl,g.firstChild);
-  });
+  g.textContent='';
+  var NS='http://www.w3.org/2000/svg';
+  var xs=[EDGE[0]].concat(ROAD_X, EDGE[1]), ys=[EDGE[2]].concat(ROAD_Y, EDGE[3]);
+  for(var i=0;i<xs.length-1;i++) for(var j=0;j<ys.length-1;j++){
+    var x0=xs[i]+(i?LANE:0), x1=xs[i+1]-(i+1<xs.length-1?LANE:0);
+    var y0=ys[j]+(j?LANE:0), y1=ys[j+1]-(j+1<ys.length-1?LANE:0);
+    var r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',x0); r.setAttribute('y',y0);
+    r.setAttribute('width',(x1-x0).toFixed(2)); r.setAttribute('height',(y1-y0).toFixed(2));
+    r.setAttribute('rx','0.6');
+    g.appendChild(r);
+  }
 }
 function metKey(p){ return 'met_'+(p==='老闆'?'材料行老闆':p); }
 // 名單那一頁。沒走過那一場的只留 ID，不補註解，也不補一句解釋。
