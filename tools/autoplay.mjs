@@ -49,6 +49,7 @@ const pickSpot = async (bf) => {
   await target.el.click(); return target.name;
 };
 let lastTodo = [];
+const bagDone = new Set();   // 已經試過挑的背包卡，避免在同一張上空轉
 const pickMenu = async (mf, spot, when) => {
   const items=[]; for (const b of await mf.locator('button.seg').all()) items.push({ label:(await b.locator('.label').textContent()).trim(), el:b });
   const fresh0 = items.filter(i=>!done.has(spot+'|'+i.label)); const fresh = fresh0.filter(i=>!/再問|第三次|同一件事/.test(i.label)).concat(fresh0.filter(i=>/再問|第三次|同一件事/.test(i.label)));
@@ -148,22 +149,33 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     if (/開錄音機/.test(pick_.t)) taped = true;      // 錄到了，下一次開板去包包裡把那一卷播出來
     await pick_.b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
+  // 背包卡（open-bag）：道具列在外掛 iframe 裡，要先點那一件、再按「使用道具」。
+  // BAG=守則本 指定挑哪一件；沒設就不動，讓它照「沒挑到」那條預設邊走。
+  if (process.env.BAG && t.includes('道具欄') && !bagDone.has(t.slice(0, 40))) {
+    let clicked = false;
+    for (const f of [page, ...frames()]) {   // 面板是 inline 渲染，可能在主頁面也可能在 iframe
+      const row = f.locator('button, [role=button], li, div[class*=item], div[class*=slot]')
+                   .filter({ hasText: new RegExp(process.env.BAG) });
+      if (!(await row.count().catch(()=>0))) continue;
+      await row.first().click({ timeout: 2500 }).catch(()=>{});
+      await page.waitForTimeout(500);
+      const use = f.locator('button').filter({ hasText: /使用道具|使用/ });
+      if (await use.count().catch(()=>0)) await use.first().click({ timeout: 2500 }).catch(()=>{});
+      out(`  [背包] 挑「${process.env.BAG}」`);
+      clicked = true; break;
+    }
+    // 同一張背包卡只試一次，點不到就放它走預設邊，不要在這裡空轉
+    bagDone.add(t.slice(0, 40));
+    if (!clicked) {   // 找不到就把候選印出來，下一輪才知道要對什麼
+      const cand = await page.evaluate(() => [...document.querySelectorAll('button,[role=button],li')]
+        .map(e => (e.textContent||'').replace(/\s+/g,'').slice(0,18)).filter(Boolean).slice(0,14));
+      out('  [背包] 沒點到，畫面上的按鈕：' + cand.join('｜'));
+    }
+    if (clicked) { await page.waitForTimeout(1500); stuck = 0; continue; }
+  }
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++;
     // 卡住的時候多半是有一個視窗要按（取得道具那種，按鈕在外掛的 iframe 裡）。
     // 跳過工具列、跳過純數字的（那是背包上的件數，點下去只會把背包打開）。
-    // 背包卡（open-bag）：外掛 iframe 裡列著道具，點名字就是拿它出來。
-    // BAG=守則本 指定要挑哪一件；沒設就不動，讓它照預設分支走。
-    if (process.env.BAG && stuck % 5 === 4) {
-      for (const f of frames()) {
-        const it = f.locator('button, li, [role=button]').filter({ hasText: new RegExp(process.env.BAG) });
-        if (await it.count().catch(()=>0)) {
-          out(`  [背包] 挑「${process.env.BAG}」`);
-          await it.first().click({ timeout: 2500 }).catch(()=>{});
-          stuck = 0; break;
-        }
-      }
-      if (stuck === 0) continue;
-    }
     if (stuck % 9 === 8) {
       const NAV = ['存檔','讀取','歷史','自動','快轉','全屏','標題','設定','背包','關閉','先走'];
       const WANT = /確定|好的|收下|放進|取得|繼續|知道了|完成|回去|離開|返回/;
