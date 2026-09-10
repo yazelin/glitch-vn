@@ -225,6 +225,25 @@ nav.top a.l[aria-current]{color:var(--cy)}
   font-family:ui-monospace,Menlo,Consolas,monospace}
 
 .cast{display:grid;gap:46px;margin-top:44px}
+/* ── 畫面頁的畫廊 ────────────────────────────────
+   一列放幾張由容器寬度決定，圖片一律 webp（tools/gen_inv_art.py 轉的）。
+   縮圖長邊 480，點開才載大圖，所以 <a> 包 <img>，不做 lightbox。 */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:16px 0 6px}
+.gal.tall{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.gal figure{margin:0}
+.gal a{display:block;border:1px solid var(--hair);border-radius:var(--r);overflow:hidden;
+  background:var(--sunk);line-height:0}
+.gal a:hover{border-color:var(--mint)}
+.gal img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
+.gal.tall img{aspect-ratio:2/3;object-fit:contain;background:var(--sunk)}
+.gal figcaption{font-size:12.5px;color:var(--faint);padding:5px 2px 0;line-height:1.5}
+.times{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--faint);
+  padding:4px 2px 0}
+.times b{color:var(--cy);font-weight:400}
+.todo-list{list-style:none;padding:0;margin:14px 0}
+.todo-list li{border:1px solid var(--hair);border-radius:var(--r);padding:12px 15px;
+  margin-bottom:2px;color:var(--muted);font-size:14.5px}
+.todo-list li b{color:var(--text);font-weight:600;margin-right:.6em}
 .card{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center}
 /* 照高度對齊，不照寬度。裁掉透明邊之後每個人的長寬比差很多。 */
 .card .pic{display:flex;justify-content:center;align-items:flex-end;height:400px}
@@ -378,7 +397,7 @@ if ('serviceWorker' in navigator) addEventListener('load', function () {
 </head>
 <body>
 <nav class="top"><div class="in">
-<a class="home" href="index.html">格莉奇與黑洞先生</a><a class="l" href="index.html">首頁</a><a class="l" href="novel.html" aria-current='page'>閱讀</a><a class="l" href="extras.html">番外</a><a class="l" href="characters.html">角色</a><a class="l" href="timeline.html">時間軸</a><a class="l" href="vn.html">遊玩版</a>
+<a class="home" href="index.html">格莉奇與黑洞先生</a><a class="l" href="index.html">首頁</a><a class="l" href="novel.html" aria-current='page'>閱讀</a><a class="l" href="extras.html">番外</a><a class="l" href="characters.html">角色</a><a class="l" href="timeline.html">時間軸</a><a class="l" href="screens.html">畫面</a><a class="l" href="vn.html">遊玩版</a>
 </div></nav>
 <main class="wrap">
 <header class="bk">

@@ -247,6 +247,25 @@ nav.top a.l[aria-current]{color:var(--cy)}
   font-family:ui-monospace,Menlo,Consolas,monospace}
 
 .cast{display:grid;gap:46px;margin-top:44px}
+/* ── 畫面頁的畫廊 ────────────────────────────────
+   一列放幾張由容器寬度決定，圖片一律 webp（tools/gen_inv_art.py 轉的）。
+   縮圖長邊 480，點開才載大圖，所以 <a> 包 <img>，不做 lightbox。 */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:16px 0 6px}
+.gal.tall{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.gal figure{margin:0}
+.gal a{display:block;border:1px solid var(--hair);border-radius:var(--r);overflow:hidden;
+  background:var(--sunk);line-height:0}
+.gal a:hover{border-color:var(--mint)}
+.gal img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
+.gal.tall img{aspect-ratio:2/3;object-fit:contain;background:var(--sunk)}
+.gal figcaption{font-size:12.5px;color:var(--faint);padding:5px 2px 0;line-height:1.5}
+.times{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--faint);
+  padding:4px 2px 0}
+.times b{color:var(--cy);font-weight:400}
+.todo-list{list-style:none;padding:0;margin:14px 0}
+.todo-list li{border:1px solid var(--hair);border-radius:var(--r);padding:12px 15px;
+  margin-bottom:2px;color:var(--muted);font-size:14.5px}
+.todo-list li b{color:var(--text);font-weight:600;margin-right:.6em}
 .card{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center}
 /* 照高度對齊，不照寬度。裁掉透明邊之後每個人的長寬比差很多。 */
 .card .pic{display:flex;justify-content:center;align-items:flex-end;height:400px}
@@ -470,7 +489,7 @@ def page(title, desc, body, cur, wide=False, ld="", js=""):
         for h, n in (("index.html", "首頁"), ("novel.html", "閱讀"),
                      ("extras.html", "番外"),
                      ("characters.html", "角色"), ("timeline.html", "時間軸"),
-                     ("vn.html", "遊玩版")))
+                     ("screens.html", "畫面"), ("vn.html", "遊玩版")))
     t, d = html.escape(title), html.escape(desc)
     canon = BASE + ("" if cur == "index.html" else cur)
     return f'''<!doctype html>
@@ -871,6 +890,114 @@ TL_BODY = ('<header class="bk"><div class="eyebrow">時間軸</div>'
   '<h2>正文的十二天</h2><ul class="tl days">' + tl_days() + '</ul>'
   '<p class="note">守則本一天一版，可是<strong>正文只講出兩個版號</strong>：第一天的第一千零四版，與第五天的第一千零七版。中間那幾天沒有寫出來，這一頁也就不替它們補上號碼。</p><p class="note">第五章與第六章是同一個禮拜，在時間上交錯。書把它們分成兩章講，'
   '是因為那個禮拜有兩件事同時在走：她一次一次去那間店，以及她坐下來查那六個名字。</p>')
+
+# ── 畫面頁 ──────────────────────────────────────────────
+# **素材服務於一個頁面的目的，不是開檔案庫。** 角色頁放立繪因為那頁在介紹人，
+# 殺青頁放背景因為那頁在演謝幕。這一頁的目的是「這兩款長什麼樣」。
+# 圖一律 webp：正篇在 docs/img/，調查篇在 docs/img/inv/（tools/gen_inv_art.py 轉的）。
+INV_PLACE = {
+    "lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街",
+    "busstop": "車站前站牌", "metro": "南港站二號出口", "store": "便利商店",
+    "parts": "材料行", "laundry": "自助洗衣店", "figure": "手辦店",
+    "studio": "斑比工作室", "tower14": "十四樓大廳", "booth-hall": "騎樓那個門口",
+    "catgrass-door": "貓草家門口", "catgrass-home": "貓草家",
+    "desk": "她自己的桌子", "curtain-call-inv": "謝幕",
+}
+# 沒有後綴的那一張是深夜版（push.py 的 BG_MAP 拿它當 night_key），
+# -evening 才是晚上。標錯會讓同一個地方出現兩張「晚上」。
+INV_TIME = {"day": "白天", "evening": "晚上", "night": "深夜", "day2": "白天", "": "深夜"}
+INV_CAST = {"admin": "管理員", "clerk": "便利商店店員", "guard": "保全",
+            "parts": "材料行老闆", "reception": "櫃檯"}
+INV_SCREEN = {"notice": "一樓的公告螢幕", "standee": "便利商店的紙板立牌",
+              "billboard": "車站前的看板", "tv": "材料行的舊電視", "phone": "她的手機"}
+INV_ITEM = {"rulebook": "守則本", "phone": "手機", "recorder": "錄音機",
+            "tape": "錄音帶", "bag": "背包"}
+
+
+def _gal(items, tall=False):
+    """items = [(檔名不含副檔名, 說明, 補充)]"""
+    out = [f'<div class="gal{" tall" if tall else ""}">']
+    for stem, cap, extra in items:
+        thumb = f"img/inv/{stem}-t.webp"
+        full = f"img/inv/{stem}.webp"
+        if not (DOCS / thumb).exists():
+            thumb = full
+        out.append(f'<figure><a href="{full}" target="_blank" rel="noopener">'
+                   f'<img src="{thumb}" alt="{html.escape(cap)}" loading="lazy"></a>'
+                   f'<figcaption>{html.escape(cap)}'
+                   f'{f"<br>{html.escape(extra)}" if extra else ""}</figcaption></figure>')
+    out.append("</div>")
+    return "".join(out)
+
+
+def _inv_places():
+    """調查篇的場景照地點分組，同一個地方的白天／晚上／深夜排在一起。"""
+    stems = sorted(p.stem for p in (DOCS / "img/inv").glob("bg-*.webp")
+                   if not p.stem.endswith("-t"))
+    groups = {}
+    for st in stems:
+        body = st[3:]                       # 去掉 bg-
+        for suffix in ("-day2", "-day", "-evening", "-night"):
+            if body.endswith(suffix):
+                key, t = body[: -len(suffix)], suffix[1:]
+                break
+        else:
+            key, t = body, ""
+        groups.setdefault(key, []).append((t, st))
+    order = list(INV_PLACE)
+    rows = []
+    for key in sorted(groups, key=lambda k: order.index(k) if k in order else 99):
+        name = INV_PLACE.get(key, key)
+        for t, st in sorted(groups[key], key=lambda x: ["day", "day2", "evening", "night", ""].index(x[0])):
+            # 只有一張的地方（門口、貓草家、謝幕、她的桌子）不標時段，那不是變體
+            rows.append((st, name, INV_TIME.get(t, t) if len(groups[key]) > 1 else ""))
+    return rows
+
+
+SCREENS_BODY = (
+    '<header class="bk"><div class="eyebrow">畫面</div>'
+    '<h1>這兩款長什麼樣</h1>'
+    '<p>正篇是七章加一個遊玩版，調查篇是十四天的外傳。'
+    '兩邊的場景照同一組公式產，所以放在一起看得出是同一部作品。</p>'
+    '<p class="legend">圖都可以點開看大的。</p></header>'
+
+    '<h2>調查篇的街區</h2>'
+    '<p>同一個地方會有白天、晚上、深夜三種色溫。'
+    '玩家一次開板等於一個時段，看到哪一種取決於他幾點出門。</p>'
+    + _gal([(st, name, t) for st, name, t in _inv_places()]) +
+
+    '<h2>調查篇的新面孔</h2>'
+    '<p>五個只在外傳出現的人。他們不知道自己在一本書裡，'
+    '也不知道自己講的話會被寫進別人的本子。</p>'
+    + _gal([(f"sprite-{k}", v, "") for k, v in INV_CAST.items()], tall=True) +
+
+    '<h2>她只在螢幕上</h2>'
+    '<p>格莉奇在調查篇裡沒有立繪。她出現在五種螢幕上，'
+    '會講話、聽得到，可是玩家走到哪裡她都在別的地方。</p>'
+    + _gal([(f"screen-{k}", v, "") for k, v in INV_SCREEN.items()]) +
+
+    '<h2>背包裡的東西</h2>'
+    + _gal([(("bag" if k == "bag" else f"item-{k}"), v, "") for k, v in INV_ITEM.items()]) +
+
+    '<h2>正篇的場景</h2>'
+    + '<div class="gal">' + "".join(
+        f'<figure><a href="img/{p.name}" target="_blank" rel="noopener">'
+        f'<img src="img/{p.name}" alt="{p.stem[3:]}" loading="lazy"></a></figure>'
+        for p in sorted(DOCS.glob("img/bg-*.webp"))) + '</div>'
+
+    '<h2>還沒做的</h2>'
+    '<p>外傳的內容做完了，聲音那一半還沒開始。這幾項做好之後會加進這一頁。</p>'
+    '<ul class="todo-list">'
+    '<li><b>配音</b>四百零七張對話卡，目前零。正篇那邊有十五個講者的參考音。</li>'
+    '<li><b>BGM</b>一首都還沒接。</li>'
+    '<li><b>音效</b>同上。</li>'
+    '<li><b>表情差分</b>五個新角色目前各一張基本立繪。</li>'
+    '</ul>')
+
+(DOCS / "screens.html").write_text(page(
+    "畫面・格莉奇與黑洞先生",
+    "正篇與調查篇的場景、立繪、螢幕與道具。同一組公式產的，放在一起看得出是同一部作品。",
+    SCREENS_BODY, "screens.html", wide=True), encoding="utf-8")
 
 (DOCS / "timeline.html").write_text(page(
     "時間軸・格莉奇與黑洞先生",
