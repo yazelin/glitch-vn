@@ -236,6 +236,11 @@ nav.top a.l[aria-current]{color:var(--cy)}
 .gal a:hover{border-color:var(--mint)}
 .gal img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
 .gal.tall img{aspect-ratio:2/3;object-fit:contain;background:var(--sunk)}
+/* 螢幕道具是直的（0.39～0.80）、背包道具是正方形，塞進 16/9 用 cover 會把頭尾裁掉。
+   這兩排改成整張放進去，框自己留邊。 */
+.gal.fit img{object-fit:contain;background:var(--sunk)}
+.gal.fit.prop img{aspect-ratio:3/4}
+.gal.fit.item img{aspect-ratio:1/1}
 .gal figcaption{font-size:12.5px;color:var(--faint);padding:5px 2px 0;line-height:1.5}
 .times{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--faint);
   padding:4px 2px 0}

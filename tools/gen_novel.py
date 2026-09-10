@@ -258,6 +258,11 @@ nav.top a.l[aria-current]{color:var(--cy)}
 .gal a:hover{border-color:var(--mint)}
 .gal img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
 .gal.tall img{aspect-ratio:2/3;object-fit:contain;background:var(--sunk)}
+/* 螢幕道具是直的（0.39～0.80）、背包道具是正方形，塞進 16/9 用 cover 會把頭尾裁掉。
+   這兩排改成整張放進去，框自己留邊。 */
+.gal.fit img{object-fit:contain;background:var(--sunk)}
+.gal.fit.prop img{aspect-ratio:3/4}
+.gal.fit.item img{aspect-ratio:1/1}
 .gal figcaption{font-size:12.5px;color:var(--faint);padding:5px 2px 0;line-height:1.5}
 .times{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--faint);
   padding:4px 2px 0}
@@ -914,9 +919,9 @@ INV_ITEM = {"rulebook": "守則本", "phone": "手機", "recorder": "錄音機",
             "tape": "錄音帶", "bag": "背包"}
 
 
-def _gal(items, tall=False):
-    """items = [(檔名不含副檔名, 說明, 補充)]"""
-    out = [f'<div class="gal{" tall" if tall else ""}">']
+def _gal(items, tall=False, cls=""):
+    """items = [(檔名不含副檔名, 說明, 補充)]；cls 例如 "fit prop"（整張放進去，不裁）"""
+    out = [f'<div class="gal{" tall" if tall else ""}{" " + cls if cls else ""}">']
     for stem, cap, extra in items:
         thumb = f"img/inv/{stem}-t.webp"
         full = f"img/inv/{stem}.webp"
@@ -974,10 +979,10 @@ SCREENS_BODY = (
     '<h2>她只在螢幕上</h2>'
     '<p>格莉奇在調查篇裡沒有立繪。她出現在五種螢幕上，'
     '會講話、聽得到，可是玩家走到哪裡她都在別的地方。</p>'
-    + _gal([(f"screen-{k}", v, "") for k, v in INV_SCREEN.items()]) +
+    + _gal([(f"screen-{k}", v, "") for k, v in INV_SCREEN.items()], cls="fit prop") +
 
     '<h2>背包裡的東西</h2>'
-    + _gal([(("bag" if k == "bag" else f"item-{k}"), v, "") for k, v in INV_ITEM.items()]) +
+    + _gal([(("bag" if k == "bag" else f"item-{k}"), v, "") for k, v in INV_ITEM.items()], cls="fit item") +
 
     '<h2>正篇的場景</h2>'
     + '<div class="gal">' + "".join(
