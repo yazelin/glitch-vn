@@ -122,6 +122,17 @@ def api(method, path, body=None, tries=4):
                 return json.loads(r.read() or b"{}")
         except urllib.error.HTTPError as e:
             msg = e.read()[:300].decode("utf-8", "replace")
+            # 409＝我們手上的 ETag 過期了。開著編輯器分頁的時候它會一直墊高專案版本，
+            # 重抓一次 ETag 再送就好，不是真的衝突。
+            if e.code == 409 and i < tries - 1:
+                print(f"  Larch 回 409（版本被墊高），重抓 ETag 再送")
+                ETAGS.pop(path, None)
+                api("GET", path)
+                if ETAGS.get(path):
+                    head["If-Match"] = ETAGS[path]
+                req = urllib.request.Request(API + path, data, head, method=method)
+                time.sleep(2)
+                continue
             if e.code < 500 or i == tries - 1:
                 raise SystemExit(f"{method} {path} → {e.code} {msg}")
             print(f"  Larch 回 {e.code}，{2 ** i * 5} 秒後重試")
