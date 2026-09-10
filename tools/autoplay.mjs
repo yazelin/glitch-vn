@@ -27,7 +27,7 @@ const frames = () => page.frames().filter(f => f !== page.mainFrame());
 const frameWith = async (s) => { for (const f of frames()) { try { if ((await f.locator('body').innerText()).includes(s)) return f; } catch(e){} } return null; };
 const boardFrame = () => frameWith('今天要去哪');
 const menuFrame = async () => { for (const f of frames()) { try { if (await f.locator('button.seg').count() || await f.locator('button#skip', { hasText: '先走' }).count()) return f; } catch(e){} } return null; };
-const done = new Set(); const visits = {}; const phoneDays = new Set(); let tapeTried=false; let outings=0; let lastCard=''; let stuck=0;
+const done = new Set(); const visits = {}; const phoneDays = new Set(); let tapeTried=false, taped=false; let outings=0; let lastCard=''; let stuck=0;
 const SPOT_HINT = [['樓下','一樓'],['信箱','一樓'],['管理員','一樓'],['一樓','一樓'],['樓上那間','頂樓收音機店'],['頂樓','頂樓收音機店'],['材料行','材料行'],['便利商店','便利商店'],['洗衣店','自助洗衣店'],['工作室','斑比工作室'],['經紀公司','車站前那條街'],['車站','車站前那條街'],['十四樓','十四樓大廳'],['手辦','手辦店'],['關東煮','便利商店'],['那家店','便利商店'],['店員','便利商店']];
 const pickSpot = async (bf) => {
   const when = await bf.locator('#when').textContent();
@@ -71,7 +71,7 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   const bf = await boardFrame();
   if (bf) { await page.waitForTimeout(600); const bf2=await boardFrame(); if(!bf2) continue; when = await bf2.locator('#when').textContent();
     // 每天上午開一次手機翻一遍（design/調查篇-手機.md 驗收）：HUD 背包 → 手機 → 使用道具 → 記下看到的貼文 → 收起來
-    if (when.includes('上午') && !phoneDays.has(when.split(' ・')[0])) { phoneDays.add(when.split(' ・')[0]);
+    if ((when.includes('上午') && !phoneDays.has(when.split(' ・')[0])) || (taped && !tapeTried)) { phoneDays.add(when.split(' ・')[0]);
       try { await page.mouse.click(1180,112); await page.waitForTimeout(1200); const it=page.locator('text=手機').first(); if (await it.count()) { await it.click(); await page.waitForTimeout(500); }
         // 錄到的那一卷要能在包包裡聽（design/調查篇-背包與謎題.md）。整輪驗一次就好。
         if (!tapeTried) {
@@ -132,6 +132,7 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     pick_ = optHits.find(o => /不開/.test(o.t)) || optHits[0];
   }
   if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${pick_.t}`);
+    if (/開錄音機/.test(pick_.t)) taped = true;      // 錄到了，下一次開板去包包裡把那一卷播出來
     await pick_.b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++;
