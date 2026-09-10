@@ -16,7 +16,7 @@ function todoLines(v){
   if(n('hole_sightings')===1 && n('day')>=5) L.push('一樓晚上。他還會來。');
   if(n('hole_sightings')===2 && n('day')>=10) L.push('一樓晚上。再去一次。');
   if(n('day')>=4 && n('night_visits')===0) L.push('深夜。便利商店還開著。');
-  if(b('open_laundry') && !b('laundry_night1')) P.push('隔壁那家洗衣店，深夜也開。');
+  if(b('open_laundry') && !b('laundry_night1')) P.push('晚上去隔壁那家洗衣店。深夜也開。');
   if(b('laundry_night1') && n('trust_斑比')<2) P.push('洗衣店那個人晚上會在。再去一次。');
   if(b('open_studio') && n('trust_斑比')<3) P.push('晚上去工作室。稿子帶著。');  // 寫時段，不然深夜也被拿去跑工作室
   if(n('trust_斑比')>=3 && !b('names_seen')) P.push('深夜再去工作室一次。');
@@ -41,8 +41,10 @@ function todoLines(v){
   if(n('day')>=2 && !b('note_mailbox')) L.push('晚上去一樓，把信箱的名牌抄下來。');
   if(n('day')>=2 && n('trust_店員')<1) P.push(n('met_店員')>=3 ? '便利商店晚上再去一次。問店員一件事。' : '便利商店。多去幾次，讓他認得。');
 
+  // 兩句都寫上「晚上」：那兩格本來就不限深夜，可是便條裡的「深夜」兩個字
+  // 會把玩家帶去用掉深夜（十個深夜有兩個這樣花掉，保全最後那一場就排不進來，2026-09-10）。
   // 2026-09-08 自動玩家第十天才問到這一句：原本掛了 trust_貓草，把通往斑比的唯一一條路壓在貓草那條線後面
-  if(n('trust_店員')>=1 && !b('open_laundry') && n('day')>=4) P.push('問店員這條街深夜還有什麼開著。');
+  if(n('trust_店員')>=1 && !b('open_laundry') && n('day')>=4) P.push('晚上的便利商店。問店員這條街深夜還有什麼開著。');
   // 十四樓那條線自己排一層：它不是結局的必要條件，可是沒有人提醒就不會有人去第六次。
   // 十四樓最早的一把鑰匙其實在白天：第三天起車站前那條街那個門口。
   // 那一場一次性，裡面有一個選項要問 0x 才會開十四樓（問答矩陣 格二）。
