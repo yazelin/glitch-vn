@@ -258,6 +258,8 @@ def desk_scene(b, after, sid):
 class Board:
     def __init__(self):
         self.nodes, self.edges, self.n, self.x = [], [], 0, 0
+        self.en = 0                  # 邊的流水號自己算：有幾處會過濾 b.edges，
+                                     # 拿 len(self.edges) 當號碼會在刪掉邊之後重號，撞 id 的線 react-flow 只會畫一條
 
     def add(self, data, nid=None):
         self.n += 1
@@ -268,7 +270,8 @@ class Board:
         return nid
 
     def edge(self, s, t, cond=None):
-        e = {"id": f"e{len(self.edges)+1}", "source": s, "target": t,
+        self.en += 1
+        e = {"id": f"e{self.en}", "source": s, "target": t,
              "sourceHandle": "right", "animated": True}
         if cond:
             e["data"] = {"condition": {"kind": "variable", **cond}}

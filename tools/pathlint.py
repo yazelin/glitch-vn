@@ -6,6 +6,10 @@
      → 玩家會點到錯的那一張（工作室問 0x 那格中過，白天的短版蓋掉深夜版）
  二、條件比對的值沒有任何一張卡設得到 → 那一格永遠開不了
  三、條件讀的變數沒有任何地方會寫 → 通常是打錯字
+ 四、兩條邊撞同一個 id → react-flow 拿 id 當 key，撞號的只會畫一條，多的那些線直接消失
+     （2026-09-10 中過：build.py 有五處會過濾 b.edges，用 len(edges)+1 當號碼就會重號，
+       29 條選項線被吃掉，白板上選擇卡旁邊一條線都沒有）
+ 五、選擇卡的選項數跟它接出去的 choice-N 邊數對不上
 可達性不在這裡，那是 tools/sim.py 的事。
 """
 import json, re, sys, collections, pathlib, itertools
@@ -76,6 +80,28 @@ for r in b["rules"]:
             if nums and ((op in ("gte", "gt") and val > max(nums))
                          or (op in ("lte", "lt") and val < min(nums))):
                 bad.append(f"值到不了　{who}　{var} {NUMOPS[op]} {val}，最高只到 {max(nums)}")
+
+# 四、撞 id 的邊
+seen = collections.defaultdict(list)
+for e in b["edges"]:
+    seen[e["id"]].append(e)
+for eid, es in seen.items():
+    if len(es) > 1:
+        bad.append(f"邊撞 id　{eid} 有 {len(es)} 條：" +
+                   "、".join(f"{e['source']}→{e['target']}" for e in es[:4]))
+
+# 五、選擇卡的選項數 vs 接出去的 choice-N 邊數
+out_ch = collections.Counter()
+for e in b["edges"]:
+    if str(e.get("sourceHandle", "")).startswith("choice-"):
+        out_ch[e["source"]] += 1
+for n in b["nodes"]:
+    d = n.get("data") or {}
+    if d.get("type") != "choice":
+        continue
+    want, got = len(d.get("choices") or []), out_ch[n["id"]]
+    if want != got:
+        bad.append(f"選項沒接好　{n['id']}　{d.get('title')}：{want} 個選項只有 {got} 條線")
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條，問題 {len(bad)} 件")
