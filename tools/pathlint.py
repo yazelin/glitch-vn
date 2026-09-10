@@ -10,6 +10,9 @@
      （2026-09-10 中過：build.py 有五處會過濾 b.edges，用 len(edges)+1 當號碼就會重號，
        29 條選項線被吃掉，白板上選擇卡旁邊一條線都沒有）
  五、選擇卡的選項數跟它接出去的 choice-N 邊數對不上
+ 六、設計稿裡的舞台指示（斜體那幾行）有沒有真的進到卡上
+     （2026-09-10 中過：card_node 把 direction 整行過濾掉，204 行動作全部沒演，
+       「你也有。」前面少了她把本子拿出來並排的那一下）
 可達性不在這裡，那是 tools/sim.py 的事。
 """
 import json, re, sys, collections, pathlib, itertools
@@ -103,6 +106,21 @@ for n in b["nodes"]:
     if want != got:
         bad.append(f"選項沒接好　{n['id']}　{d.get('title')}：{want} 個選項只有 {got} 條線")
 
+# 六、舞台指示有沒有進到卡上
+sys.path.insert(0, str(ROOT / "larch/inv"))
+import parse as _P                                                  # noqa: E402
+_blob = json.dumps(b["nodes"], ensure_ascii=False)
+_dirs = 0
+for _d in _P.DOCS:
+    for _c, _ in [(x, None) for x in _P.parse_file(_d)[0]]:
+        for _l in _c["lines"]:
+            if not _l.get("direction"):
+                continue
+            _dirs += 1
+            _t = re.sub(r"^（旁白・描述動作）", "", _l["text"])[:14]
+            if _t not in _blob:
+                bad.append(f"指示沒進卡　{_c['file']}　{_l['text'][:30]}")
+
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
-print(f"—— 規則 {len(b['rules'])} 條，問題 {len(bad)} 件")
+print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")
 sys.exit(1 if bad else 0)

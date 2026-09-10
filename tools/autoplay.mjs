@@ -61,6 +61,14 @@ const pickMenu = async (mf, spot, when) => {
     const rec = fresh.find(i => /問諾亞那個穿西裝的|問店員那個穿西裝的|問老闆那個穿西裝的/.test(i.label));
     if (rec) { done.add(spot+'|'+rec.label); out(`  → 選「${rec.label}」（找錄音）`); await rec.el.click(); return; }
   }
+  // PREFER=甲,乙：指定要優先點的格（用來把難排到的場逼出來驗，例如三張背包卡）
+  if (process.env.PREFER) {
+    const want = process.env.PREFER.split(',').map(x=>x.trim()).filter(Boolean);
+    const hit = items.find(i => want.some(w => i.label.includes(w)));
+    if (hit && !done.has(spot+'|'+hit.label)) {
+      done.add(spot+'|'+hit.label); out(`  → 選「${hit.label}」（PREFER）`); await hit.el.click(); return;
+    }
+  }
   const pick = POLICY==='random' ? (rpick(fresh.length?fresh:items))
              : POLICY==='explore' ? (fresh[0] || items[items.length-1])
              : (hinted[0] || fresh[0] || items[items.length-1]);
@@ -143,6 +151,19 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++;
     // 卡住的時候多半是有一個視窗要按（取得道具那種，按鈕在外掛的 iframe 裡）。
     // 跳過工具列、跳過純數字的（那是背包上的件數，點下去只會把背包打開）。
+    // 背包卡（open-bag）：外掛 iframe 裡列著道具，點名字就是拿它出來。
+    // BAG=守則本 指定要挑哪一件；沒設就不動，讓它照預設分支走。
+    if (process.env.BAG && stuck % 5 === 4) {
+      for (const f of frames()) {
+        const it = f.locator('button, li, [role=button]').filter({ hasText: new RegExp(process.env.BAG) });
+        if (await it.count().catch(()=>0)) {
+          out(`  [背包] 挑「${process.env.BAG}」`);
+          await it.first().click({ timeout: 2500 }).catch(()=>{});
+          stuck = 0; break;
+        }
+      }
+      if (stuck === 0) continue;
+    }
     if (stuck % 9 === 8) {
       const NAV = ['存檔','讀取','歷史','自動','快轉','全屏','標題','設定','背包','關閉','先走'];
       const WANT = /確定|好的|收下|放進|取得|繼續|知道了|完成|回去|離開|返回/;

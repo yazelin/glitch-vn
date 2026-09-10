@@ -418,8 +418,12 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         add_edge(m, f"{m}-back")
     # 翻開守則本：HUD 用道具 → open_notes=true → 這張 interrupt 插播 → 筆記卡 → 回原處
     add_node("inv-notes-int", {"type": "interrupt", "title": "翻開守則本", "text": "",
+                               # in_bag：劇情裡開背包挑守則本時 open_notes 也會被設起來，
+                               # 沒有這一項就會插播筆記，回來又停在背包卡上（跟 open_tape 同一個坑）
                                "interruptCondition": {"kind": "variable", "variable": "open_notes",
-                                                      "op": "eq", "value": True},
+                                                      "op": "eq", "value": True, "match": "all",
+                                                      "conditions": [{"variable": "open_notes", "op": "eq", "value": True},
+                                                                     {"variable": "in_bag", "op": "eq", "value": False}]},
                                "interruptOnce": False, "interruptExit": "return"}, 0, 0)
     # 筆記卡查的是 notes 逗號清單，可是故事卡只會把 see_x／clue_x 設成 true（對話卡設不了清單）。
     # 所以卡片端 has() 也認旗標，這裡把 notes.html 裡出現的每一個代號列進白名單並宣告成變數。
@@ -473,7 +477,10 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         add_node(nid, phone_data(contact, messages), x, y)
     # 從背包打開手機：open_phone=true → 插播 → 手機卡 → 收起來回原處（跟守則本同一條路）
     add_node("inv-phone-int", {"type": "interrupt", "title": "打開手機", "text": "",
-                               "interruptCondition": {"kind": "variable", "variable": "open_phone", "op": "eq", "value": True},
+                               "interruptCondition": {"kind": "variable", "variable": "open_phone", "op": "eq", "value": True,
+                                                      "match": "all",
+                                                      "conditions": [{"variable": "open_phone", "op": "eq", "value": True},
+                                                                     {"variable": "in_bag", "op": "eq", "value": False}]},
                                "interruptOnce": False, "interruptExit": "return"}, 0, 0)
     add_node("inv-phone", phone_card("full"), 0, 0)
     add_edge("inv-phone-int", "inv-phone")

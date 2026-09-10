@@ -279,6 +279,31 @@ class Board:
         return e
 
 
+# 背包裡每一件東西都有「用了它」的效果（守則本 open_notes、手機 open_phone、錄音卷 open_tape），
+# 而那三個效果各自掛著一張 interrupt。劇情裡開背包挑東西時效果照樣會發，插播完又回到背包卡，
+# 玩家會覺得卡住。所以進背包前設 in_bag=true（interrupt 的條件都多一項 in_bag==false），
+# 挑完或放棄再一次把三個旗標全部清掉。少清一個就會在離開那一刻補插播。
+BAG_CLEAR = [{"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": False},
+             {"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False},
+             {"id": "op-notes", "variable": "open_notes", "kind": "set", "value": False},
+             {"id": "op-phone", "variable": "open_phone", "kind": "set", "value": False}]
+
+
+def bag_card(b, meta, sid):
+    """一張打開背包卡"""
+    return b.add({"type": "plugin", "title": f"背包：{meta}", "text": "",
+                  "pluginId": "larch-inventory", "pluginCardId": "open-bag",
+                  "pluginVersion": "1.9.0", "pluginName": "背包系統", "pluginCardName": "打開背包",
+                  "pluginIcon": "backpack", "pluginColor": "#6f9474",
+                  "pluginPresentation": "inline", "pluginSkippable": True,
+                  "pluginValues": {"title": "拿什麼出來", "bagVar": "inventory",
+                                   "pickVar": "inventoryLastUsed", "consume": False, "allowSkip": True,
+                                   "emptyText": "包包裡沒有東西。"},
+                  "pluginReadVars": ["inventory", "inventoryCount", "inventoryLastUsed"],
+                  "pluginWriteVars": ["inventory", "inventoryCount", "inventoryLastUsed", "pluginResult"],
+                  "segment": sid})
+
+
 def expand_rec(b, prev, c, sid, tapes):
     """錄音巨集：prev ─rec_ok─▶ 選擇（開錄音機／不開）─0─▶ 反應 talk ─▶ 取得道具 ─▶（接下一張）
                      └─預設──────────────────────────────────────────────▶（接下一張）
@@ -388,7 +413,8 @@ def card_node(c):
     if not lines:
         return None
     if c["kind"] in ("narrate", "note", "plate", "screen"):
-        text = "\n".join(l["text"] for l in lines)
+        text = "\n".join(re.sub(r"^（旁白・描述動作）", "", l["text"])
+                         for l in c["lines"] if l["text"])
         d = {"type": "dialogue", "title": text[:14], "text": text, "speaker": NARRATOR}
         if c["kind"] == "screen":
             d["speaker"] = ""            # 畫面：只有字，沒有講者名，不配音（橋段2 十二 排卡註一）
@@ -408,6 +434,15 @@ def card_node(c):
         text = "\n".join(l["text"] for l in lines)
         d = {"type": "dialogue", "title": f"{c['speaker']}：{text[:10]}",
              "text": text, "speaker": c["speaker"]}
+        # 單一講者的卡裡也可能夾舞台指示（貓草那兩支剪輯就是靠中間那一句隔開，
+        # 橋段2 十之三：兩支的文字要一個字都一樣）。夾了就改用 dialogueLines，
+        # 指示那一行講者留空，才不會算成格莉奇在講話。
+        if any(l.get("direction") for l in c["lines"]):
+            d["dialogueLines"] = [
+                {"id": f"l{i}",
+                 "speaker": "" if l.get("direction") else c["speaker"],
+                 "text": re.sub(r"^（旁白・描述動作）", "", l["text"]), "emotion": ""}
+                for i, l in enumerate(c["lines"]) if l["text"]]
         if c.get("remote"):
             d["remote"] = True          # 推送層據此不掛立繪
             # 格莉奇只在螢幕上：哪一種螢幕看地點（直播那三晚是手機），推送層換成合成好的螢幕道具（tools/make_screens.py）
@@ -417,8 +452,14 @@ def card_node(c):
     spoken = [l for l in lines if l.get("speaker")]
     if not spoken:
         return None
-    dl = [{"id": f"l{i}", "speaker": l["speaker"], "text": l["text"], "emotion": ""}
-          for i, l in enumerate(spoken)]
+    # 舞台指示（斜體那幾行）留在卡上，講者留空。parse.py 寫的是「不進配音」，不是不進卡片；
+    # 先前整行丟掉，管理員那句「你也有。」前面少了她把本子拿出來並排的那一下，變成沒頭沒腦（2026-09-10）。
+    seq = [l for l in c["lines"] if l.get("speaker") or l.get("direction")]
+    dl = [{"id": f"l{i}",
+           "speaker": "" if l.get("direction") else l["speaker"],
+           "text": re.sub(r"^（旁白・描述動作）", "", l["text"]),
+           "emotion": ""}
+          for i, l in enumerate(seq)]
     d = {"type": "dialogue", "title": f"{spoken[0]['speaker']}：{spoken[0]['text'][:10]}",
          "text": spoken[0]["text"], "speaker": spoken[0]["speaker"], "dialogueLines": dl}
     if c.get("scene"):
@@ -674,17 +715,7 @@ def build(cards):
                     b.edge(prev, gate)
                 first = first or gate
                 prev = gate
-                bag = b.add({"type": "plugin", "title": f"背包：{c['meta']}", "text": "",
-                             "pluginId": "larch-inventory", "pluginCardId": "open-bag",
-                             "pluginVersion": "1.9.0", "pluginName": "背包系統", "pluginCardName": "打開背包",
-                             "pluginIcon": "backpack", "pluginColor": "#6f9474",
-                             "pluginPresentation": "inline", "pluginSkippable": True,
-                             "pluginValues": {"title": "拿什麼出來", "bagVar": "inventory",
-                                              "pickVar": "inventoryLastUsed", "consume": False, "allowSkip": True,
-                                              "emptyText": "包包裡沒有東西。"},
-                             "pluginReadVars": ["inventory", "inventoryCount", "inventoryLastUsed"],
-                             "pluginWriteVars": ["inventory", "inventoryCount", "inventoryLastUsed", "pluginResult"],
-                             "segment": sid})
+                bag = bag_card(b, c["meta"], sid)
                 if prev:
                     b.edge(prev, bag)
                 first = first or bag
@@ -749,15 +780,22 @@ def build(cards):
                 continue
             if pending_bag:
                 bag, want = pending_bag
-                b.edge(bag, nid, {"variable": "inventoryLastUsed", "op": "eq", "value": want})
-                d.setdefault("variableOps", []).extend([
-                    {"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": False},
-                    {"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}])
+                cond = {"variable": "inventoryLastUsed", "op": "eq", "value": want}
+                b.edge(bag, nid, cond)
+                d.setdefault("variableOps", []).extend(BAG_CLEAR)
+                # 第二次機會：沒挑到不直接把人送回板，先講一句她還沒走，再開一次包包。
+                # 這幾場都是一次性的，第一次關掉包包就永久錯過那一段，而玩家不會知道自己錯過什麼。
+                # 第二次還是不挑，那是他的決定，遊戲不再追（走廊與顧店同一個原則）。
+                again_say = b.add({"type": "dialogue", "title": "包包還在她手上。",
+                                   "text": "包包還在她手上。\n她沒有走。",
+                                   "speaker": NARRATOR, "segment": sid})
+                again = bag_card(b, want, sid)
                 leave = b.add({"type": "setVariable", "title": "（放棄，出背包）", "text": "",
-                               "variableOps": [{"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": False},
-                                               {"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}],
-                               "segment": sid})
-                b.edge(bag, leave)              # 預設：沒挑到就回板。一定排在條件邊後面
+                               "variableOps": list(BAG_CLEAR), "segment": sid})
+                b.edge(bag, again_say)          # 預設：沒挑到。一定排在條件邊後面
+                b.edge(again_say, again)
+                b.edge(again, nid, dict(cond))  # 第二次挑對了，接的是同一張
+                b.edge(again, leave)            # 還是不挑就回板
                 b.edge(leave, back_id)
                 pending_bag = None
             elif prev:
@@ -772,8 +810,7 @@ def build(cards):
             continue
         if pending_bag:                          # 背包卡是最後一張：只剩預設邊
             leave = b.add({"type": "setVariable", "title": "（出背包）", "text": "",
-                           "variableOps": [{"id": "op-inbag", "variable": "in_bag", "kind": "set", "value": False}],
-                           "segment": sid})
+                           "variableOps": list(BAG_CLEAR), "segment": sid})
             b.edge(pending_bag[0], leave)
             b.edge(leave, back_id)
         if s["key"][0] == "調查篇-直播":
