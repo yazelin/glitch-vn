@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>跟正篇的關係・格莉奇與黑洞先生・調查篇</title>
+<meta name="description" content="調查篇發生在正篇之後，為什麼永遠找不到格莉奇與黑洞先生，以及那六個 ID。">
+<style>
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../docs/fonts/noto-serif-tc-400.woff2") format("woff2")}
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:600;font-display:swap;
+  src:url("../docs/fonts/noto-serif-tc-600.woff2") format("woff2")}
+:root{
+  --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
+  --cy:#25c2e8; --mint:#7cf3c0; --purple:#b78bff;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84; --r:3px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.85 "Noto Serif TC",Songti TC,PMingLiU,Georgia,serif}
+nav.top{position:sticky;top:0;z-index:8;background:var(--bg);border-bottom:1px solid var(--hair)}
+nav.top .in{max-width:64em;margin:0 auto;padding:11px 24px;display:flex;gap:18px;
+  flex-wrap:wrap;align-items:baseline;font-size:14px}
+nav.top .home{font-weight:600;color:var(--text);text-decoration:none;margin-right:auto}
+nav.top a.l{color:var(--muted);text-decoration:none}
+nav.top a.l:hover{color:var(--mint);text-shadow:0 0 9px rgba(124,243,192,.55)}
+nav.top a.l[aria-current]{color:var(--cy)}
+main{max-width:64em;margin:0 auto;padding:34px 24px 90px}
+h1{font-size:clamp(26px,4.4vw,38px);line-height:1.25;margin:0 0 8px;letter-spacing:.02em}
+h2{font-size:22px;margin:46px 0 6px;letter-spacing:.02em}
+h2::before{content:"";display:block;width:34px;height:2px;background:var(--cy);margin-bottom:12px}
+h3{font-size:17px;margin:26px 0 4px;color:var(--cy)}
+p{margin:0 0 14px;max-width:44em}
+.lede{color:var(--muted)}
+strong{color:#fff;font-weight:600}
+code{font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--sunk);border:1px solid var(--hair);padding:.06em .38em;border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+.box{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r);background:var(--win)}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--hair);white-space:nowrap}
+thead th{color:var(--muted);font-weight:400;font-size:13px;background:var(--sunk)}
+tbody tr:last-child td{border-bottom:none}
+td.w{white-space:normal;min-width:16em}
+.yes{color:var(--mint)}.no{color:var(--faint)}.refuse{color:var(--purple)}
+.tag{font-size:12.5px;color:var(--faint);border:1px solid var(--hair2);
+  padding:1px 7px;border-radius:999px;margin-left:8px;white-space:nowrap}
+.spoiler{border:1px solid var(--hair2);border-radius:var(--r);padding:0 16px;margin:20px 0;background:var(--win)}
+.spoiler summary{cursor:pointer;padding:13px 0;color:var(--cy);font-size:15px;list-style:none}
+.spoiler summary::before{content:"▸ ";}
+.spoiler[open] summary::before{content:"▾ ";}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(15em,1fr));gap:2px;margin:16px 0}
+.cards a{display:block;padding:15px 16px;background:var(--win);border:1px solid var(--hair);
+  text-decoration:none;color:var(--text)}
+.cards a:hover{border-color:var(--mint);color:var(--mint)}
+.cards small{display:block;color:var(--faint);font-size:13px;margin-top:3px}
+footer{max-width:64em;margin:0 auto;padding:24px;border-top:1px solid var(--hair);
+  color:var(--faint);font-size:13.5px}
+</style>
+</head>
+<body>
+<nav class="top"><div class="in"><a class="home" href="index.html">調查篇・公式站</a><a class="l" href="index.html">怎麼玩</a><a class="l" href="canon.html" aria-current='page'>跟正篇的關係</a><a class="l" href="people.html">出場人物</a><a class="l" href="places.html">地點與時段</a><a class="l" href="threads.html">支線與條件</a><a class="l" href="walkthrough.html">完整攻略</a><a class="l" href="glossary.html">名詞表</a><a class="l" href="../docs/index.html">回正篇</a></div></nav>
+<main>
+
+<h1>跟正篇的關係</h1>
+<p class="lede">調查篇是外傳。玩之前不必讀完正篇，讀過的人會多聽懂幾句。</p>
+
+<h2>時間點：正文之後</h2>
+<p>正篇結束在第十二天早上，她走出房間去問他今天累不累。
+<strong>調查篇發生在那之後不特定的某一段日子</strong>，玩家不知道也不需要知道那件事。
+兩邊的「十二天」與「十四天」是各自的十四天，沒有因果。</p>
+
+<h2>玩家是誰</h2>
+<p>一個沒有名字的人。她帶著一本本子、一台會卡的錄音機，來查一個直播主是不是真的會忘記。
+遊戲從頭到尾不解釋她為什麼要查，也不給她動機。<strong>她問得到的東西全部是別人的事。</strong></p>
+
+<h2>為什麼永遠找不到他們兩個</h2>
+<h3>格莉奇：她無所不在，只是隔著一層螢幕</h3>
+<p>一樓的公告螢幕、便利商店的循環廣告、車站的廣告看板、材料行的舊電視、
+十四樓大廳那台沒有開聲音的螢幕。她會講話，你聽得到，可是你走到哪裡她都在別的地方。</p>
+
+<h3>黑洞先生：每個人看到的都不一樣</h3>
+<p>正典寫死了：看到的是那個人自己叫不出名字的缺口的形狀。
+她的遺忘是一整件、邊緣乾淨的，所以她看到的他有形狀。
+普通人的遺忘是糊的，看到的就是一個很高的、穿西裝的先生，平凡到不值得跟人提起。</p>
+<p>所以本子上那七份目擊沒有兩份一樣，而<strong>八份裡有一份是矮的</strong>。
+遊戲把它們並排放在同一頁上，一個字都不解釋。</p>
+
+<h2>那六個 ID</h2>
+<p>正篇第六章她查過自己守則本的第一頁：七條橫線，前六條上面有字。
+調查篇讓你從另一邊把那六個人找出來，而<strong>第七行到最後還是空的</strong>。</p>
+
+<details class="spoiler"><summary>這一段有雷：那六個是誰</summary>
+<p>看過斑比那面牆的人會拿到六行 ID。名字要玩家自己在守則本第一頁填，
+下拉裡只有你真的見過的人。第五行那個人自己不知道他在上面，
+第六行那個帳號兩年前就刪了，只有一個人講得出他的事。</p>
+</details>
+
+<h2>不點破</h2>
+<p>這一款有一條寫在設計稿最前面的規矩：<strong>重複要溫柔，永遠不點破</strong>。
+沒有任何一張卡會說「你發現他們講的不一樣」，也沒有系統提示告訴你哪一條是線索。
+矛盾就擺在那裡，看不看得出來是你的事。</p>
+
+</main>
+<footer>《格莉奇與黑洞先生・調查篇》公式站　這一頁由 <code>tools/gen_guide.py</code>
+從板子與稿子產生，2026-09-10 重建。門檻改了就重跑，不要手改這裡。</footer>
+</body>
+</html>

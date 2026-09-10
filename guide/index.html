@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>怎麼玩・格莉奇與黑洞先生・調查篇</title>
+<meta name="description" content="《格莉奇與黑洞先生・調查篇》的機制說明：時段、便條、信任、背包、地點。">
+<style>
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../docs/fonts/noto-serif-tc-400.woff2") format("woff2")}
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:600;font-display:swap;
+  src:url("../docs/fonts/noto-serif-tc-600.woff2") format("woff2")}
+:root{
+  --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
+  --cy:#25c2e8; --mint:#7cf3c0; --purple:#b78bff;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84; --r:3px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.85 "Noto Serif TC",Songti TC,PMingLiU,Georgia,serif}
+nav.top{position:sticky;top:0;z-index:8;background:var(--bg);border-bottom:1px solid var(--hair)}
+nav.top .in{max-width:64em;margin:0 auto;padding:11px 24px;display:flex;gap:18px;
+  flex-wrap:wrap;align-items:baseline;font-size:14px}
+nav.top .home{font-weight:600;color:var(--text);text-decoration:none;margin-right:auto}
+nav.top a.l{color:var(--muted);text-decoration:none}
+nav.top a.l:hover{color:var(--mint);text-shadow:0 0 9px rgba(124,243,192,.55)}
+nav.top a.l[aria-current]{color:var(--cy)}
+main{max-width:64em;margin:0 auto;padding:34px 24px 90px}
+h1{font-size:clamp(26px,4.4vw,38px);line-height:1.25;margin:0 0 8px;letter-spacing:.02em}
+h2{font-size:22px;margin:46px 0 6px;letter-spacing:.02em}
+h2::before{content:"";display:block;width:34px;height:2px;background:var(--cy);margin-bottom:12px}
+h3{font-size:17px;margin:26px 0 4px;color:var(--cy)}
+p{margin:0 0 14px;max-width:44em}
+.lede{color:var(--muted)}
+strong{color:#fff;font-weight:600}
+code{font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--sunk);border:1px solid var(--hair);padding:.06em .38em;border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+.box{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r);background:var(--win)}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--hair);white-space:nowrap}
+thead th{color:var(--muted);font-weight:400;font-size:13px;background:var(--sunk)}
+tbody tr:last-child td{border-bottom:none}
+td.w{white-space:normal;min-width:16em}
+.yes{color:var(--mint)}.no{color:var(--faint)}.refuse{color:var(--purple)}
+.tag{font-size:12.5px;color:var(--faint);border:1px solid var(--hair2);
+  padding:1px 7px;border-radius:999px;margin-left:8px;white-space:nowrap}
+.spoiler{border:1px solid var(--hair2);border-radius:var(--r);padding:0 16px;margin:20px 0;background:var(--win)}
+.spoiler summary{cursor:pointer;padding:13px 0;color:var(--cy);font-size:15px;list-style:none}
+.spoiler summary::before{content:"▸ ";}
+.spoiler[open] summary::before{content:"▾ ";}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(15em,1fr));gap:2px;margin:16px 0}
+.cards a{display:block;padding:15px 16px;background:var(--win);border:1px solid var(--hair);
+  text-decoration:none;color:var(--text)}
+.cards a:hover{border-color:var(--mint);color:var(--mint)}
+.cards small{display:block;color:var(--faint);font-size:13px;margin-top:3px}
+footer{max-width:64em;margin:0 auto;padding:24px;border-top:1px solid var(--hair);
+  color:var(--faint);font-size:13.5px}
+</style>
+</head>
+<body>
+<nav class="top"><div class="in"><a class="home" href="index.html">調查篇・公式站</a><a class="l" href="index.html" aria-current='page'>怎麼玩</a><a class="l" href="canon.html">跟正篇的關係</a><a class="l" href="people.html">出場人物</a><a class="l" href="places.html">地點與時段</a><a class="l" href="threads.html">支線與條件</a><a class="l" href="walkthrough.html">完整攻略</a><a class="l" href="glossary.html">名詞表</a><a class="l" href="../docs/index.html">回正篇</a></div></nav>
+<main>
+
+<h1>調查篇怎麼玩</h1>
+<p class="lede">她不在畫面上。你會在十四天裡一直錯過她，然後從別人嘴裡把她拼回來。
+這一頁講機制，剩下的分在上面那幾頁。</p>
+
+<h2>一次開板，一個時段</h2>
+<p>板子攤開就是她出門前的那張街區圖。你只選要去哪裡，時間自己往前走：
+<strong>上午、下午、晚上、深夜</strong>，深夜過完換日。深夜要到<strong>第四天</strong>才亮，
+前三天她還在照正常時間睡。</p>
+
+<div class="box"><table>
+<thead><tr><th>區間</th><th>可出門</th></tr></thead>
+<tbody>
+<tr><td>第一天（上午是開場，不經過板）</td><td>2 段</td></tr>
+<tr><td>第二到三天</td><td>各 3 段</td></tr>
+<tr><td>第四到十三天</td><td>各 4 段</td></tr>
+<tr><td>合計</td><td><strong>48 段</strong>　白天 25、晚上 13、深夜 10</td></tr>
+</tbody></table></div>
+
+<p>第十四天上午只有收尾，玩家不選地點。<strong>時間是這一款唯一的成本</strong>，
+沒有失敗、沒有扣分、沒有戰鬥，只有「今天這一段要花在誰身上」。</p>
+
+<h2>板上那張便條</h2>
+<p>左上角那張便條是她自己寫的待辦，最多三行，會照現在的時段排：
+寫了時段又對得上的排前面。<strong>它是全篇唯一的引導</strong>，
+而且是用她的口氣寫的，不是任務清單。實測不看便條的玩家一輪都走不完。</p>
+
+<h2>信任是次數換的</h2>
+<p>沒有好感度選項，也沒有正確答案。每一個人的信任只有一種升法：<strong>一直出現</strong>。
+店員要見三次才願意講一件事；深夜那個人要三個晚上才開口；十四樓的櫃檯要去六趟。
+這一款在講的事就是這個。</p>
+
+<h2>背包裡有三樣</h2>
+<div class="box"><table>
+<thead><tr><th>道具</th><th>用途</th></tr></thead>
+<tbody>
+<tr><td>守則本</td><td class="w">她自己的筆記。問到的東西會記進去，玩家也可以自己打字。
+第一頁是那六個 ID，見過的人才填得進去。</td></tr>
+<tr><td>手機</td><td class="w">四頁：訊息、她的貼文、留言區、直播。舊留言翻得到，訊息只收不回。</td></tr>
+<tr><td>錄音機</td><td class="w">有人講話的時候按得下去。錄到的那一卷進背包，可以再播一次，
+其中一卷還能放給另一個人聽。<strong>有兩個人不給錄。</strong></td></tr>
+</tbody></table></div>
+
+<h2>地點</h2>
+<p>板上總共 11 個地點，一開始只有幾個，其餘要有人告訴你才會出現在板上。
+誰在哪裡、什麼時候在，見<a href="places.html">地點與時段</a>。</p>
+
+<div class="cards">
+<a href="canon.html">跟正篇的關係<small>什麼時候發生、為什麼找不到他們</small></a>
+<a href="people.html">出場人物<small>誰能問誰，四十二種組合裡真的有東西的那些</small></a>
+<a href="threads.html">支線與條件<small>每一格要什麼條件才開</small></a>
+<a href="walkthrough.html">完整攻略<small>逐日路線，有雷</small></a>
+</div>
+
+</main>
+<footer>《格莉奇與黑洞先生・調查篇》公式站　這一頁由 <code>tools/gen_guide.py</code>
+從板子與稿子產生，2026-09-10 重建。門檻改了就重跑，不要手改這裡。</footer>
+</body>
+</html>

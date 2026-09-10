@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>名詞表・格莉奇與黑洞先生・調查篇</title>
+<meta name="description" content="變數與旗標，給想拆解的人。">
+<style>
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../docs/fonts/noto-serif-tc-400.woff2") format("woff2")}
+@font-face{font-family:"Noto Serif TC";font-style:normal;font-weight:600;font-display:swap;
+  src:url("../docs/fonts/noto-serif-tc-600.woff2") format("woff2")}
+:root{
+  --bg:#04080c; --ink:#0b1a22; --win:#11161b; --sunk:#0a1319;
+  --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
+  --cy:#25c2e8; --mint:#7cf3c0; --purple:#b78bff;
+  --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84; --r:3px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.85 "Noto Serif TC",Songti TC,PMingLiU,Georgia,serif}
+nav.top{position:sticky;top:0;z-index:8;background:var(--bg);border-bottom:1px solid var(--hair)}
+nav.top .in{max-width:64em;margin:0 auto;padding:11px 24px;display:flex;gap:18px;
+  flex-wrap:wrap;align-items:baseline;font-size:14px}
+nav.top .home{font-weight:600;color:var(--text);text-decoration:none;margin-right:auto}
+nav.top a.l{color:var(--muted);text-decoration:none}
+nav.top a.l:hover{color:var(--mint);text-shadow:0 0 9px rgba(124,243,192,.55)}
+nav.top a.l[aria-current]{color:var(--cy)}
+main{max-width:64em;margin:0 auto;padding:34px 24px 90px}
+h1{font-size:clamp(26px,4.4vw,38px);line-height:1.25;margin:0 0 8px;letter-spacing:.02em}
+h2{font-size:22px;margin:46px 0 6px;letter-spacing:.02em}
+h2::before{content:"";display:block;width:34px;height:2px;background:var(--cy);margin-bottom:12px}
+h3{font-size:17px;margin:26px 0 4px;color:var(--cy)}
+p{margin:0 0 14px;max-width:44em}
+.lede{color:var(--muted)}
+strong{color:#fff;font-weight:600}
+code{font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--sunk);border:1px solid var(--hair);padding:.06em .38em;border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+.box{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r);background:var(--win)}
+th,td{padding:9px 13px;text-align:left;border-bottom:1px solid var(--hair);white-space:nowrap}
+thead th{color:var(--muted);font-weight:400;font-size:13px;background:var(--sunk)}
+tbody tr:last-child td{border-bottom:none}
+td.w{white-space:normal;min-width:16em}
+.yes{color:var(--mint)}.no{color:var(--faint)}.refuse{color:var(--purple)}
+.tag{font-size:12.5px;color:var(--faint);border:1px solid var(--hair2);
+  padding:1px 7px;border-radius:999px;margin-left:8px;white-space:nowrap}
+.spoiler{border:1px solid var(--hair2);border-radius:var(--r);padding:0 16px;margin:20px 0;background:var(--win)}
+.spoiler summary{cursor:pointer;padding:13px 0;color:var(--cy);font-size:15px;list-style:none}
+.spoiler summary::before{content:"▸ ";}
+.spoiler[open] summary::before{content:"▾ ";}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(15em,1fr));gap:2px;margin:16px 0}
+.cards a{display:block;padding:15px 16px;background:var(--win);border:1px solid var(--hair);
+  text-decoration:none;color:var(--text)}
+.cards a:hover{border-color:var(--mint);color:var(--mint)}
+.cards small{display:block;color:var(--faint);font-size:13px;margin-top:3px}
+footer{max-width:64em;margin:0 auto;padding:24px;border-top:1px solid var(--hair);
+  color:var(--faint);font-size:13.5px}
+</style>
+</head>
+<body>
+<nav class="top"><div class="in"><a class="home" href="index.html">調查篇・公式站</a><a class="l" href="index.html">怎麼玩</a><a class="l" href="canon.html">跟正篇的關係</a><a class="l" href="people.html">出場人物</a><a class="l" href="places.html">地點與時段</a><a class="l" href="threads.html">支線與條件</a><a class="l" href="walkthrough.html">完整攻略</a><a class="l" href="glossary.html" aria-current='page'>名詞表</a><a class="l" href="../docs/index.html">回正篇</a></div></nav>
+<main>
+<h1>名詞表</h1>
+<p class="lede">變數與旗標，給想拆解的人。</p>
+<p>這一頁還沒有做。</p>
+</main>
+<footer>《格莉奇與黑洞先生・調查篇》公式站　這一頁由 <code>tools/gen_guide.py</code>
+從板子與稿子產生，2026-09-10 重建。門檻改了就重跑，不要手改這裡。</footer>
+</body>
+</html>
