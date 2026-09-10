@@ -1091,8 +1091,8 @@
    },
    "data": {
     "type": "dialogue",
-    "title": "筆記：第三次。他沒有叫我出",
-    "text": "第三次。他沒有叫我出去。\n我站的位置跟前兩次一樣。",
+    "title": "筆記：第二次。他沒有叫我出",
+    "text": "第二次。他沒有叫我出去。\n我站的位置跟上次一樣。",
     "speaker": "玩家",
     "segment": "seg001"
    }
@@ -29017,7 +29017,7 @@
  "rules": [
   {
    "segment": "seg000",
-   "section": "一、這裡不能站（`met_保全 <= 2`）",
+   "section": "一、這裡不能站（`met_保全 <= 1`）",
    "file": "調查篇-保全",
    "dest": "tower14",
    "slots": [
@@ -29028,7 +29028,7 @@
     {
      "variable": "met_保全",
      "op": "lte",
-     "value": 2
+     "value": 1
     }
    ],
    "or": false,
@@ -29038,7 +29038,7 @@
   },
   {
    "segment": "seg001",
-   "section": "二、他不講話了（`met_保全 == 3`）",
+   "section": "二、他不講話了（`met_保全 == 2`）",
    "file": "調查篇-保全",
    "dest": "tower14",
    "slots": [
@@ -29049,7 +29049,7 @@
     {
      "variable": "met_保全",
      "op": "eq",
-     "value": 3
+     "value": 2
     }
    ],
    "or": false,
