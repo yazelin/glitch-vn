@@ -44,3 +44,9 @@ larch/cards/.phone-banner-test.html
 # 新環境第一件事就是 python3 larch/inv/build.py --out larch/inv/out/board.json。
 larch/inv/out/board.json
 larch/inv/out/payload.json
+
+# 動線上專案之前抓的整包快照（GET /projects 的回應，一份 1.4 MB）。
+# 那是救援用的，留在工作區就好——larch/inv 那批建置產物已經示範過
+# 一份大 JSON 反覆進 git 會在歷史裡長到什麼樣子。要重抓隨時抓得到。
+backup/main-project-*
+backup/*-headers.txt

@@ -12,6 +12,7 @@ X = "0x"
 # ── 一 ──────────────────────────────────────────────
 c.scene("十四樓會客室", "一張桌子，兩張椅子，一盆真的植物。", "bg-office-14f",
         start=True, transition="fadeBlack", ms=600)
+c.cg("bg-office-14f", "十四樓・一盆真的植物")
 c.stage((G, "left"), (X, "right"))
 c.narrate("0x 的公司在十四樓，會客室裡沒有多餘的東西：一張桌子，兩張椅子，一盆真的植物。")
 c.talk((X, "妳只有十五分鐘。"), (G, "用不到。"))
@@ -233,6 +234,7 @@ c.narrate("他看著她。他看了很久，久到電視上的雪下了好幾層
 c.talk((HOLE, "不累。"), (G, "喔。那就好。"), emotion="深夜家常")
 c.stage()
 c.scene("廚房", "她走去廚房，開始找麵粉。", "bg-kitchen-morning", transition="wipeRight")
+c.cg("bg-kitchen-morning", "廚房・她開始找麵粉")
 c.stage((G, "left"))
 c.narrate("她走去廚房，開始找麵粉。她不知道自己為什麼要烤麵包。",
           "她只知道現在很想烤，而且她的手知道要怎麼做。")

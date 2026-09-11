@@ -78,7 +78,12 @@ def main():
                        "borderRadius": 0, "backdropBlur": 0},
         "cgGalleryEnabled": True,
         "cgGallerySource": "picked",
-        "cgGalleryItems": [{"url": assets[k], "title": t} for k, t in (
+        # **每一張都要 locked。** 不設的話玩家一開遊戲就在收藏裡看得到全部十四張，
+        # 標題本身就有雷（「錄音間・第十一次」「休息室・兩點五十分」）。
+        # 解鎖點在七章的板上，每一張一張 setVariable 卡（見 novelkit.Chapter.cg）。
+        # 播放器是照 url 對的，所以這裡的 url 與 cgOps 的 url 要是同一個字串。
+        "cgGalleryItems": [{"url": assets[k], "title": t, "locked": True}
+                           for k, t in (
             ("bg-studio-2am", "直播室・凌晨兩點"),
             ("bg-living-night", "客廳・電視播的是雪"),
             ("bg-table-lamp", "守則本・第一千零四版"),
@@ -102,7 +107,10 @@ def main():
         print(f"  {k:20s} {str(v)[:56]}")
     print(f"  dialogueUi           {got['dialogueUi']['panelColor']} / "
           f"{got['dialogueUi']['speakerColor']}")
-    print(f"  cgGalleryItems       {len(got.get('cgGalleryItems') or [])} 張")
+    items = got.get("cgGalleryItems") or []
+    print(f"  cgGalleryItems       {len(items)} 張，"
+          f"鎖著的 {sum(1 for x in items if x.get('locked'))} 張")
+    print(f"  boards               {[len(b['nodes']) for b in r['boards']]}")
 
 
 if __name__ == "__main__":
