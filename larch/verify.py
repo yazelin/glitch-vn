@@ -31,6 +31,15 @@ for b in p["boards"]:
             if not L.get("url"): bad.append(f"{b['id']}：{nid} 有立繪圖層沒有圖")
         if d.get("type") == "scene" and not d.get("background"):
             bad.append(f"{b['id']}：{nid} 場景卡沒有背景")
+        # 兩個人站同一格＝立繪疊在一起，畫面上只看得到一個。
+        # 2026-09-12 中過：第四章那一場黑洞先生「在她背後的走廊經過」，
+        # 寫的人把她的 farRight 複製了一次，五張卡兩個人疊著，那句話演不出來。
+        _slots = [a.get("slot") for a in ((d.get("stage") or {}).get("actors") or [])]
+        _dup = {x for x in _slots if _slots.count(x) > 1}
+        if _dup:
+            bad.append(f"{b['id']}：{nid} 有兩個人站同一格 {sorted(_dup)}　"
+                       + "、".join(f"{a.get('name')}@{a.get('slot')}"
+                                   for a in ((d.get("stage") or {}).get("actors") or [])))
     # 主線是線性的，只有 choice 卡可以分岔，而且每一條都要接回同一張主線卡。
     for s, t in out.items():
         if len(t) <= 1: continue

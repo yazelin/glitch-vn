@@ -43,7 +43,7 @@ BG = {
     "lobby":   ("bg-lobby-day",   "bg-apartment-hall"),
     "roof":    ("bg-roof-day",    "bg-noah-shop"),
     "street":  ("bg-street-day2", "bg-street-night"),
-    "studio":  ("bg-studio-day",  "bg-bambi-studio"),
+    "studio":  ("bg-bambi-studio-day",  "bg-bambi-studio"),   # 不可以叫 bg-studio-day，會撞正篇（見 push.py 的 BG）
     "booth":   ("bg-booth-hall",  "bg-booth-hall"),   # 十一樓走廊，錄音間在走廊底那扇開著的門裡（2026-09-08 生的）
     "tower14": ("bg-tower14-day", "bg-tower14-night"),
     "store":   ("bg-store-day",   "bg-store-night"),

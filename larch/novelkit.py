@@ -203,9 +203,20 @@ class Chapter:
             self._n += 1
             nid = f"{self.bid}-{self._n:03d}"
             eid = f"e{self._n}"
-        self._x += 300
+        # 蛇行排版。**不要排成一條橫線**：正篇本來是 y 全部 0、x 間距 300，
+        # 而卡片本身寬 306，所以每一張都疊在前一張上面六個像素，連接線全部藏在
+        # 卡片底下，整塊版子在編輯器裡看起來像一條沒有線的長條（2026-09-12）。
+        #
+        # 一列 WRAP 張，從左到右；下一列反過來從右到左。**折行那條線因此是短短
+        # 一段垂直的**，不會像從左到右排那樣往回穿過整列卡片的背面。
+        # CW 留 154px 的縫（460 − 306）讓相鄰的線看得見。
+        CW, CH, WRAP = 460, 320, 12
+        i = len(self.nodes)
+        row, col = divmod(i, WRAP)
+        if row % 2:
+            col = WRAP - 1 - col
         self.nodes.append({"id": nid, "type": "story",
-                           "position": {"x": self._x, "y": 0}, "data": data})
+                           "position": {"x": col * CW, "y": row * CH}, "data": data})
         # 支線的每一條末端都接到下一張主線卡，這就是匯流點
         srcs = self.pending or ([self.prev] if self.prev else [])
         for k, s0 in enumerate(srcs):
