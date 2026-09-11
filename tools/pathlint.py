@@ -27,9 +27,12 @@
        擋不住「選哪一格」，玩家走得完可是走不出完美結局（2026-09-11 退回過一次）
      （選項吃條件是 2026-09-11 實測的，見 design/調查篇.md 七。以前以為不吃，
        所以走廊那一場把劇情複製了一份繞過去）
+ 十、台詞裡寫死的天數跟實際流程對不上
+     （2026-09-09 把全篇從十二天拉到十四天，板上改了，散在別處的數字沒有全部跟上；
+       「第Ｎ天收尾」的條件是 day eq N+1，那是刻意的差一——日記第 Ｎ 天寫，第 Ｎ+1 天才讀到）
 可達性不在這裡，那是 tools/sim.py 的事。
 
-**九項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
+**十項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
 跑這一支，確認該項會紅、還原後會綠。改這裡的規則要順手改那一支，不然那一項等於沒在驗。
 `PATHLINT_BOARD` 可以指定要檢查哪一份板子（自我測試用的）。
 """
@@ -195,6 +198,74 @@ else:
     for _s in (b.get("walk") or {}).get("board") or []:
         if _s.get("label") and _steps.get((str(_s.get("day")), str(_s.get("slot")))) != _s["label"]:
             bad.append(f"軌道少了選單那一格　第 {_s['day']} 天 時段{_s['slot']}　「{_s['label']}」")
+
+# ── 十、台詞裡寫死的天數要跟實際流程一致 ──────────────────────────
+# 2026-09-12 加。2026-09-09 把全篇從十二天拉到十四天的時候，板上的卡跟著改了，
+# 可是散在別處的數字沒有全部跟上（市集簡介還寫「十一天」）。這一項只管板子，
+# 板子以外的（push.py 的 DESC、板子插件的註解、設計稿）驗不到，那些要靠人看。
+#
+# 規矩有三條，都是從板子自己讀出來的，不寫死任何一個數字：
+#   ・「第Ｎ天，收尾」那張插播的 `day gte X` 就是全篇長度，標題的 Ｎ 要等於 X
+#   ・「第Ｎ天收尾」是**第 Ｎ 天寫的日記，第 Ｎ+1 天一開板才讀到**，所以條件是 day eq N+1
+#     （這個差一不是 bug，是 build.py 第 602 行寫死的 n_day + 1，別「修」掉它）
+#   ・「第Ｎ天直播」是當天晚上的插播，條件是 day eq N
+# 然後拿全篇長度去對台詞：「這Ｎ天」要等於全篇長度，最後那則收尾的日期要等於全篇長度減一。
+_CN = {"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9,"十":10,
+       "十一":11,"十二":12,"十三":13,"十四":14,"十五":15,"十六":16}
+
+def _day_of(cond):
+    """插播條件裡的 day：回傳 (op, 值)。條件可能是單條，也可能包一層 conditions。"""
+    for c in (cond.get("conditions") or [cond]):
+        if c.get("variable") == "day":
+            return c.get("op"), c.get("value")
+    return None, None
+
+_last_day = _fin = None
+_wrap = {}          # 第Ｎ天收尾 → 條件那一天
+for _n in b["nodes"]:
+    _d = _n["data"]
+    if _d.get("type") != "interrupt":
+        continue
+    _t = _d.get("title") or ""
+    _m = re.search(r"第([一二三四五六七八九十]+)天", _t)
+    if not _m or _m.group(1) not in _CN:
+        continue
+    _say = _CN[_m.group(1)]
+    _op, _val = _day_of(_d.get("interruptCondition") or {})
+    if "收尾" in _t and _op == "gte":                      # 最後那一天
+        _last_day, _fin = _val, _n["id"]
+        if _say != _val:
+            bad.append(f"天數對不上　{_n['id']}　標題寫第{_say}天，可是它在 day>={_val} 才進來")
+    elif "收尾" in _t:                                      # 每天的收尾日記
+        _wrap[_say] = (_n["id"], _op, _val)
+        if not (_op == "eq" and _val == _say + 1):
+            bad.append(f"天數對不上　{_n['id']}　「{_t}」要在第 {_say+1} 天一開板讀到"
+                       f"（day eq {_say+1}），現在是 day {_op} {_val}")
+    elif "直播" in _t:
+        if not (_op == "eq" and _val == _say):
+            bad.append(f"天數對不上　{_n['id']}　「{_t}」要 day eq {_say}，現在是 day {_op} {_val}")
+
+if _last_day is None:
+    bad.append("天數對不上　板上找不到「第Ｎ天，收尾」那張插播，全篇有幾天無從驗起")
+else:
+    _miss = [d for d in range(1, _last_day) if d not in _wrap]
+    if _miss:
+        bad.append(f"天數對不上　收尾日記缺了第 {'、'.join(map(str, _miss))} 天"
+                   f"（全篇 {_last_day} 天，第 1 到 {_last_day-1} 天每天都要有一則）")
+    _tail = max(_wrap) if _wrap else None
+    for _n in b["nodes"]:
+        _d = _n["data"]
+        _txt = " ".join([_d.get("title") or "", _d.get("text") or ""]
+                        + [l.get("text") or "" for l in (_d.get("dialogueLines") or [])])
+        for _m in re.finditer(r"這([一二三四五六七八九十]+)天", _txt):
+            if _CN.get(_m.group(1)) not in (None, _last_day):
+                bad.append(f"天數對不上　{_n['id']}　台詞說「這{_m.group(1)}天」，"
+                           f"實際走完是 {_last_day} 天")
+        # 收尾那一場的旁白會報最後一則日記的日期（「第十三天她寫到四點」）。
+        for _m in re.finditer(r"第([一二三四五六七八九十]+)天她寫到", _txt):
+            if _tail and _CN.get(_m.group(1)) != _tail:
+                bad.append(f"天數對不上　{_n['id']}　台詞說「第{_m.group(1)}天她寫到」，"
+                           f"最後一則收尾日記是第 {_tail} 天")
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")

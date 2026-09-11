@@ -2,9 +2,9 @@
 """pathlint 的負控制。跑：python3 tools/pathlint_selftest.py
 
 檢查器最常見的壞法是**安靜地不再檢查**：規則寫錯、欄位改名、資料結構變了，
-它照樣印「沒有問題」。所以九項每一項都在這裡注一個故障進板子的副本，
+它照樣印「沒有問題」。所以十項每一項都在這裡注一個故障進板子的副本，
 確認那一項真的會叫；注入前的乾淨板子則必須是綠的。
-（第九項有四種壞法，所以它有四個注入。報表照「項」數，括號裡才是注入數。）
+（第九項與第十項各有四種壞法，所以各有四個注入。報表照「項」數，括號裡才是注入數。）
 
 每一項只注一個故障，跑完就丟。原始的 board.json 不會被動到
 （走 PATHLINT_BOARD 指到暫存目錄的副本）。
@@ -33,7 +33,7 @@ def run(board_path):
     return (int(m.group(1)) if m else -1), r.stdout
 
 
-# ── 十二個注入（九項，第九項四個）。每一支收一份板子（可以改），回傳這一項預期會出現的字串 ──
+# ── 十六個注入（十項，第九、十項各四個）。每一支收一份板子（可以改），回傳這一項預期會出現的字串 ──
 
 
 def inject_dup_label(b):
@@ -196,6 +196,60 @@ def inject_rail_no_label(b):
     raise SystemExit("板上沒有 walk 變數")
 
 
+def inject_wrap_day_shift(b):
+    """十之一、某一天的收尾日記掛錯天
+
+    2026-09-09 拉長全篇的時候，每一則日記的條件都要跟著 +1。漏掉一則的話，
+    玩家會在同一天的一開板讀到兩則，或者整則永遠不出現，而板子本身是綠的。
+    """
+    for n in b["nodes"]:
+        d = n.get("data") or {}
+        if d.get("type") == "interrupt" and "收尾" in (d.get("title") or ""):
+            c = d.get("interruptCondition") or {}
+            if c.get("op") == "eq":
+                c["value"] = c["value"] + 1
+                return "天數對不上"
+    raise SystemExit("板上沒有每日收尾的插播")
+
+
+def inject_curtain_day(b):
+    """十之二、謝幕那句「這十四天」沒跟著全篇長度改
+
+    這一項就是這次要防的原形：十二天拉到十四天，格莉奇那句沒改，
+    玩家走完十四天，她說「這十二天你去了很多地方」。
+    """
+    for n in b["nodes"]:
+        d = n.get("data") or {}
+        if (d.get("text") or "").strip():
+            d["text"] = d["text"] + "\n這十二天你去了很多地方。"
+            return "天數對不上"
+    raise SystemExit("板上沒有有字的卡")
+
+
+def inject_missing_wrap(b):
+    """十之三、中間少了一則收尾日記（拉長天數時最容易漏的）"""
+    for n in list(b["nodes"]):
+        d = n.get("data") or {}
+        if d.get("type") == "interrupt" and "收尾" in (d.get("title") or "") \
+                and (d.get("interruptCondition") or {}).get("op") == "eq":
+            d["title"] = "插播"
+            return "天數對不上　收尾日記缺了第"
+    raise SystemExit("板上沒有每日收尾的插播")
+
+
+def inject_live_day(b):
+    """十之四、她開台那晚的插播掛到別天"""
+    for n in b["nodes"]:
+        d = n.get("data") or {}
+        if d.get("type") == "interrupt" and "直播" in (d.get("title") or ""):
+            for c in ((d.get("interruptCondition") or {}).get("conditions")
+                      or [d.get("interruptCondition") or {}]):
+                if c.get("variable") == "day":
+                    c["value"] = c["value"] + 3
+            return "天數對不上"
+    raise SystemExit("板上沒有直播插播")
+
+
 CASES = [("一、重複標籤", inject_dup_label),
          ("二、值對不到", inject_unreachable_value),
          ("三、沒有人寫", inject_unwritten_var),
@@ -207,7 +261,11 @@ CASES = [("一、重複標籤", inject_dup_label),
          ("九、劇情模式走不出去", inject_story_deadend),
          ("九之二、選項條件對不上", inject_choice_cond_length),
          ("九之三、軌道斷了", inject_rail_gap),
-         ("九之四、軌道沒帶標籤", inject_rail_no_label)]
+         ("九之四、軌道沒帶標籤", inject_rail_no_label),
+         ("十、收尾日記掛錯天", inject_wrap_day_shift),
+         ("十之二、謝幕天數沒跟上", inject_curtain_day),
+         ("十之三、少一則收尾日記", inject_missing_wrap),
+         ("十之四、直播插播掛錯天", inject_live_day)]
 
 
 def main():
