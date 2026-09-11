@@ -15,9 +15,15 @@
      （空字串會沿用上一個講者的名牌，動作句會掛成上一個角色在講話，2026-09-10 實測）
      （2026-09-10 中過：card_node 把 direction 整行過濾掉，204 行動作全部沒演，
        「你也有。」前面少了她把本子拿出來並排的那一下）
+ 八、選項條件（`choiceConditions`）壞掉的三種樣子
+     ・陣列長度跟 `choices` 對不上 → 平台按索引取，錯位等於把條件掛到別格去
+     ・一張選擇卡在劇情模式下每一格都被擋掉 → 那張卡走不出去（劇情模式的死路）
+     ・劇情模式的軌道有對不到卡的步（`walk.miss`）→ 那一步沒有人擋，鐵路在那裡斷掉
+     （選項吃條件是 2026-09-11 實測的，見 design/調查篇.md 七。以前以為不吃，
+       所以走廊那一場把劇情複製了一份繞過去）
 可達性不在這裡，那是 tools/sim.py 的事。
 
-**七項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
+**八項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
 跑這一支，確認該項會紅、還原後會綠。改這裡的規則要順手改那一支，不然那一項等於沒在驗。
 `PATHLINT_BOARD` 可以指定要檢查哪一份板子（自我測試用的）。
 """
@@ -134,6 +140,32 @@ for _n in b["nodes"]:
     for _l in ((_n.get("data") or {}).get("dialogueLines") or []):
         if not _l.get("speaker"):
             bad.append(f"講者留空　{_n['id']}　{str(_l.get('text'))[:26]}")
+
+# 八、選項條件
+def _blocks_story(cond):
+    """這一格在劇情模式下按不按得下去：條件裡掛了 mode（== free）就是按不下去。"""
+    for c in (cond or {}).get("conditions") or [cond or {}]:
+        if c.get("variable") == "mode":
+            return True
+    return False
+
+
+for _n in b["nodes"]:
+    _d = _n.get("data") or {}
+    if _d.get("type") != "choice":
+        continue
+    _ch, _cc = _d.get("choices") or [], _d.get("choiceConditions")
+    if _cc is None:
+        bad.append(f"選項條件缺陣列　{_n['id']}　{_d.get('title')}：{len(_ch)} 個選項沒有 choiceConditions")
+        continue
+    if len(_cc) != len(_ch):
+        bad.append(f"選項條件對不上　{_n['id']}　{_d.get('title')}：{len(_ch)} 個選項配 {len(_cc)} 格條件")
+        continue
+    if _ch and all(_blocks_story(c) for c in _cc):
+        bad.append(f"劇情模式走不出去　{_n['id']}　{_d.get('title')}：每一格都掛了 mode")
+for _m in (b.get("walk") or {}).get("miss") or []:
+    bad.append(f"軌道斷了　第 {_m.get('day')} 天 時段{_m.get('slot')}　{_m.get('why')}　"
+               + "｜".join(_m.get("labels") or [])[:40])
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")

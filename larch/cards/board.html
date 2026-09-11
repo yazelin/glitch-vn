@@ -13,10 +13,18 @@
   iframe 是 sandbox="allow-scripts"：沒有網路、沒有 localStorage、沒有 same-origin。
   所以這一份不引用任何外部資源，要留下的東西一律 larch:set 寫回變數。
 
-  miniGameReadVars ：day slot met dest night_visits seen_booth visited met_<每個人> 以及 THREADS 用到的 open_*／names_seen／see_stairs
+  miniGameReadVars ：mode walk day slot met dest night_visits seen_booth visited met_<每個人> 以及 THREADS 用到的 open_*／names_seen／see_stairs
                      open_roof open_laundry open_figure open_parts
                      open_studio open_tower14
   miniGameWriteVars：day slot dest here night_visits met visited met_<每個人>
+
+  **劇情模式**（`mode == 'story'`，design/調查篇.md 七之〇）：這個時段只開攻略的下一步，
+  其餘全部灰掉，「這一段不出門」也收起來（休息一次之後每一步都會錯開）。
+  軌道從 `walk` 變數讀，形狀是 `天,時段,地點代號` 用分號串起來，
+  由 larch/inv/build.py 從 design/調查篇-通關路線.txt 算出來放進變數的預設值。
+  這張卡是 sandbox 的 iframe，載不了外部檔案，所以軌道走變數不走注入。
+  **走不到就自己讓開**：那一格沒開、這個時間沒開、或者根本還沒畫在板上，
+  就退回自由探索的畫面，不把玩家鎖死在一張全灰的板子上。
 
   **解鎖是一個地點一個布林，不是一串逗號清單。** 清單要「讀出來、加一個、寫回去」，
   而普通對話卡做不到那件事（它只能設一個值）。布林的話，管理員講完那句話的那張卡
@@ -132,6 +140,12 @@ function finish(result,payload){ if(done)return; done=true;
   parent.postMessage({type:'larch:complete',result:result,payload:payload},'*'); }
 function num(v,d){ var n=Number(v); return isNaN(v)||v===''||v==null?d:n; }
 function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
+// 劇情模式的軌道："天,時段,地點代號" 用分號串起來 → { "3,1": "street", … }
+function walkMap(){
+  var m={}, a=String(values.walk||'').split(';');
+  for(var i=0;i<a.length;i++){ var p=a[i].split(','); if(p.length===3&&p[2]) m[p[0]+','+p[1]]=p[2]; }
+  return m;
+}
 
 /*@@TODO@@*/
 if(typeof todoLines!=='function'){ window.todoLines=function(){ return []; }; }
@@ -401,6 +415,22 @@ function start(){
   var visited=list(values.visited);
   var lines=document.getElementById('threads'); lines.textContent='';
   function spotAt(id){ for(var i=0;i<SPOTS.length;i++) if(SPOTS[i].id===id) return SPOTS[i]; return null; }
+  // 便條上引的話都是別人講過的：講過之前那一張根本不畫（下面 SPOTS.forEach 同一條規則）
+  function drawn(s){
+    if(!s.showIf) return true;
+    var ks=[].concat(s.showIf);
+    for(var q=0;q<ks.length;q++) if(values[ks[q]]===true||values[ks[q]]==='true') return true;
+    return false;
+  }
+  // 劇情模式：這個時段只開攻略的下一步。走不到就自己讓開（railOff），不把人鎖在全灰的板子上。
+  var railTo=null, railOff=false;
+  if(String(values.mode||'free')==='story'){
+    railTo = walkMap()[day+','+slot] || null;
+    var rs = railTo ? spotAt(railTo) : null;
+    if(!rs || !drawn(rs) || !isOpen(rs) || rs.live[slot]===null || rs.live[slot]===undefined){
+      railTo=null; railOff=true;
+    }
+  }
   THREADS.forEach(function(t){
     if(!(values[t[0]]===true||values[t[0]]==='true')) return;
     var a=spotAt(t[1]), b=spotAt(t[2]); if(!a||!b) return;
@@ -432,7 +462,7 @@ function start(){
     // 沒開又沒有提示的（trust 3 那幾個私人地方）根本不畫。
     if(!open && !s.hint) return;
     // 便條上引的話都是別人講過的：講過之前這一張不畫（2026-09-08 試玩抓到：第三天就看到「他說他都在那裡買」）
-    if(s.showIf){ var ks=[].concat(s.showIf), any=false; for(var q=0;q<ks.length;q++) if(values[ks[q]]===true||values[ks[q]]==='true') any=true; if(!any) return; }
+    if(!drawn(s)) return;
     var live=s.live[slot];
     var been = visited.indexOf(s.id)>=0 || s.id==='lobby';   // 開場那一趟就在一樓，不經過板
     var b=document.createElement('button');
@@ -458,10 +488,23 @@ function start(){
     else { w.textContent=been?'有人在':'沒去過'; w.className='who unknown'; }   // 去過可是那個人還沒認識
     var note=(!b.disabled)?noteFor(s):null;
     if(note){ w.className='who hint'; w.textContent=note; }
+    // 劇情模式：不是攻略那一格就關起來。灰字說清楚是模式擋的，不要讓玩家以為那一格壞了。
+    if(railTo && s.id!==railTo && !b.disabled){
+      b.disabled=true; b.className+=' closed';
+      w.className='who unknown'; w.textContent='劇情模式：這個時段不去這裡';
+    }
     b.appendChild(n); b.appendChild(w);
     if(!b.disabled) b.addEventListener('click',function(){ go(s.id); });
     map.appendChild(b);
   });
+
+  // 軌道上的時段不給休息：不出門一次之後，後面每一步的天與時段都會錯開。
+  if(railTo){
+    document.getElementById('skip').style.display='none';
+    document.getElementById('hint').textContent='劇情模式・下一步：'+(spotAt(railTo)||{}).name;
+  } else if(railOff){
+    document.getElementById('hint').textContent='劇情模式・這一段照你自己的判斷走';
+  }
 
   document.getElementById('skip').addEventListener('click',function(){
     advance();

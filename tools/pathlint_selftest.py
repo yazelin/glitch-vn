@@ -2,8 +2,9 @@
 """pathlint 的負控制。跑：python3 tools/pathlint_selftest.py
 
 檢查器最常見的壞法是**安靜地不再檢查**：規則寫錯、欄位改名、資料結構變了，
-它照樣印「沒有問題」。所以七項每一項都在這裡注一個故障進板子的副本，
+它照樣印「沒有問題」。所以八項每一項都在這裡注一個故障進板子的副本，
 確認那一項真的會叫；注入前的乾淨板子則必須是綠的。
+（第八項有三種壞法，所以它有三個注入。報表照「項」數，括號裡才是注入數。）
 
 每一項只注一個故障，跑完就丟。原始的 board.json 不會被動到
 （走 PATHLINT_BOARD 指到暫存目錄的副本）。
@@ -32,7 +33,7 @@ def run(board_path):
     return (int(m.group(1)) if m else -1), r.stdout
 
 
-# ── 七個注入。每一支收一份板子（可以改），回傳這一項預期會出現的字串 ──────
+# ── 十個注入（八項，第八項三個）。每一支收一份板子（可以改），回傳這一項預期會出現的字串 ──
 
 
 def inject_dup_label(b):
@@ -119,13 +120,63 @@ def inject_empty_speaker(b):
     raise SystemExit("板上沒有 dialogueLines")
 
 
+def inject_story_deadend(b):
+    """八、一張選擇卡在劇情模式下每一格都被擋掉
+
+    挑軌道上的一張卡（它已經有幾格掛著 mode），把剩下那一格也掛上去。
+    這就是「劇情模式的鐵路斷在這裡」的樣子：卡片畫得出來，可是一格都按不下去。
+    """
+    off = {"variable": "mode", "op": "eq", "value": "free"}
+    for n in b["nodes"]:
+        d = n.get("data") or {}
+        if d.get("type") != "choice":
+            continue
+        cc = d.get("choiceConditions")
+        if not cc or len(cc) != len(d.get("choices") or []):
+            continue
+        blocked = [i for i, c in enumerate(cc) if c and any(
+            x.get("variable") == "mode" for x in (c.get("conditions") or []))]
+        if not blocked or len(blocked) == len(cc):
+            continue
+        for i, c in enumerate(cc):
+            if i in blocked:
+                continue
+            cc[i] = {"kind": "variable", "variable": "mode", "op": "eq", "value": "free",
+                     "match": "all", "conditions": [dict(off)]}
+        return "劇情模式走不出去"
+    raise SystemExit("板上沒有掛在軌道上的選擇卡")
+
+
+def inject_choice_cond_length(b):
+    """八之二、choiceConditions 的長度跟 choices 對不上
+
+    平台是按索引取的，少一格等於把後面那些條件整排錯位掛到別格去，而且不會報錯。
+    """
+    for n in b["nodes"]:
+        d = n.get("data") or {}
+        if d.get("type") == "choice" and len(d.get("choiceConditions") or []) > 1:
+            d["choiceConditions"].pop()
+            return "選項條件對不上"
+    raise SystemExit("板上沒有兩格以上的選擇卡")
+
+
+def inject_rail_gap(b):
+    """八之三、劇情模式的軌道有一步對不到卡"""
+    b.setdefault("walk", {}).setdefault("miss", []).append(
+        {"day": 9, "slot": 2, "labels": ["注入・對不到的一步"], "why": "對不到選擇卡"})
+    return "軌道斷了"
+
+
 CASES = [("一、重複標籤", inject_dup_label),
          ("二、值對不到", inject_unreachable_value),
          ("三、沒有人寫", inject_unwritten_var),
          ("四、邊撞 id", inject_edge_id_clash),
          ("五、選項沒接好", inject_missing_choice_edge),
          ("六、指示沒進卡", inject_dropped_direction),
-         ("七、講者留空", inject_empty_speaker)]
+         ("七、講者留空", inject_empty_speaker),
+         ("八、劇情模式走不出去", inject_story_deadend),
+         ("八之二、選項條件對不上", inject_choice_cond_length),
+         ("八之三、軌道斷了", inject_rail_gap)]
 
 
 def main():
@@ -165,7 +216,13 @@ def main():
         if n != 0:
             fails.append("還原")
 
-    print(f"\n七項負控制：{len(CASES) - len([f for f in fails if f != '還原'])}/{len(CASES)} 會叫"
+    # 一項可以有好幾個注入（第八項有三個），報表照「項」數，括號裡才是注入數
+    def item(name):
+        return name.split("、")[0].split("之")[0]
+    items = {item(n) for n, _ in CASES}
+    bad_items = {item(f) for f in fails if f != "還原"}
+    print(f"\n{len(items)}項負控制：{len(items) - len(bad_items)}/{len(items)} 會叫"
+          f"（共 {len(CASES)} 個注入）"
           + ("" if not fails else "　★ 沒過：" + "、".join(fails)))
     return 1 if fails else 0
 
