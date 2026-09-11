@@ -16,11 +16,17 @@
      （2026-09-10 中過：card_node 把 direction 整行過濾掉，204 行動作全部沒演，
        「你也有。」前面少了她把本子拿出來並排的那一下）
 可達性不在這裡，那是 tools/sim.py 的事。
+
+**七項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
+跑這一支，確認該項會紅、還原後會綠。改這裡的規則要順手改那一支，不然那一項等於沒在驗。
+`PATHLINT_BOARD` 可以指定要檢查哪一份板子（自我測試用的）。
 """
-import json, re, sys, collections, pathlib, itertools
+import json, os, re, sys, collections, pathlib, itertools
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-b = json.loads((ROOT / "larch/inv/out/board.json").read_text(encoding="utf-8"))
+# 板子的路徑可以換掉，tools/pathlint_selftest.py 靠這個把注入故障的副本餵進來。
+BOARD = pathlib.Path(os.environ.get("PATHLINT_BOARD") or ROOT / "larch/inv/out/board.json")
+b = json.loads(BOARD.read_text(encoding="utf-8"))
 
 sets, adds, card_writes = collections.defaultdict(set), collections.defaultdict(set), set()
 for n in b["nodes"]:

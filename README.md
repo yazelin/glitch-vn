@@ -35,6 +35,7 @@
     tools/playrate.sh        一次跑好幾種走法好幾輪，統計各自走到哪裡
     tools/playreport.py      把一批紀錄整理成里程碑表與觸及率
     tools/pathlint.py        靜態路徑檢查，不開瀏覽器（見下面「調查篇」的驗收）
+    tools/pathlint_selftest.py  pathlint 的負控制，七項各注一個故障確認它會叫
     tools/gen_guide.py       產生 docs/guide/ 那七頁公式站
     art/live2d/              格莉奇的 Live2D 模型。build.py 把 sprite-glitch.png 切成 34 層、
                              mkpsd.py 組成 Cubism 讀得懂的 PSD、run-cubism.sh 在 Wine 底下開
@@ -95,8 +96,12 @@
 驗收：
 
     node tools/card_test.mjs           # 實跑 postMessage 契約，sandbox 跟正式一樣
-    python3 tools/pathlint.py          # 靜態抓路徑 bug：同地點同時段的重複標籤、
-                                       # 值永遠對不到的條件、沒有人寫的變數。零依賴，秒回
+    python3 tools/pathlint.py          # 靜態抓路徑 bug，七項：同地點同時段的重複標籤、
+                                       # 值永遠對不到的條件、沒有人寫的變數、邊撞 id、
+                                       # 選項沒接好、舞台指示沒進卡、講者留空。零依賴，秒回
+    python3 tools/pathlint_selftest.py # **pathlint 的負控制**，七項各注一個故障進板子的副本，
+                                       # 注入後必須紅、還原後必須綠。改 pathlint 的規則要順手改它，
+                                       # 不然那一項會安靜地不再檢查（實測：拿掉第四項，這支會紅）
     python3 tools/gen_guide.py         # 重生公式站那七頁（資料只來自 board.json 與稿子）
     python3 tools/vars.py              # 掃出所有變數，抓命名衝突
     python3 tools/vars.py --cards      # 比對插件卡跟設計文件有沒有分家
