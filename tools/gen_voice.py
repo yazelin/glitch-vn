@@ -25,8 +25,16 @@ SPOKEN = ROOT / "art/voice/spoken.json"
 PICKED = ROOT / "art/voice/picked.json"
 
 
+BOARD_OF = {}   # 代號 → 哪一塊板子（"inv" 是調查篇，其餘是正篇的章節）
+
+
 def utterances():
-    """空跑七章，收集每一句要唸的話。回傳 [(講者, 台詞, 情緒, 代號)]。"""
+    """空跑七章＋讀調查篇的板子，收集每一句要唸的話。
+
+    回傳 [(講者, 台詞, 情緒, 代號)]。**不要改這個形狀**，六支工具照它解包。
+    哪一句屬於哪一塊板子記在 BOARD_OF[代號] 裡：EXTERNAL 那條保護只套在正篇上，
+    調查篇沒有外部長檔、本機參考音也備齊了。
+    """
     import novelkit as nk
     import voice as V
     built = {}
@@ -38,6 +46,12 @@ def utterances():
     nk.A = _A(nk.A)
     for f in sorted((ROOT / "larch").glob("build_ch0*.py")):
         runpy.run_path(str(f), run_name="__main__")
+    # 《調查篇》不是用 novelkit 建的，它的板子是 larch/inv/build.py 產的 JSON。
+    # 少了這一段，整份外傳（一千六百多句）在配音管線裡等於不存在——
+    # gen_voice 與 split_take 都看不到（2026-09-11 抓到）。
+    inv = ROOT / "larch/inv/out/board.json"
+    if inv.exists():
+        built["inv"] = json.loads(inv.read_text(encoding="utf-8"))["nodes"]
 
     out, seen = [], set()
     for bid in sorted(built):
@@ -59,10 +73,15 @@ def utterances():
             for sp, tx, emo in items:
                 if not sp or not tx or not tx.strip():
                     continue
+                # 舞台指示（斜體那幾行）掛旁白但情緒是「描述動作」，設計上不配音
+                # （parse.py 開頭那一行：斜體＝舞台指示，不進配音）。
+                if emo == "描述動作":
+                    continue
                 k = V.key(sp, tx, emo)
                 if k in seen:            # 同一句話只生一次
                     continue
                 seen.add(k)
+                BOARD_OF[k] = bid
                 out.append((sp, tx, emo or None, k))
     return out
 
@@ -105,13 +124,16 @@ def main():
     # 沒有參考音的角色直接跳過，不要擋住其他人。貓草只打字不出聲，
     # 本來就可能整個不配——那不是缺漏，是設計。
     # 外部配音的角色缺檔就是缺檔，不可以拿本機的聲音補（見 voice.EXTERNAL）
-    ext = sorted({s for s, _, _, _ in todo if s in getattr(V, "EXTERNAL", ())})
+    def is_ext(u):
+        return u[0] in getattr(V, "EXTERNAL", ()) and BOARD_OF.get(u[3]) != "inv"
+    ext = sorted({u[0] for u in todo if is_ext(u)})
     if ext:
-        n = len([1 for s, _, _, _ in todo if s in ext])
-        print(f"\n★ 跳過外部配音角色的 {n} 句：{ext}")
+        n = len([1 for u in todo if is_ext(u)])
+        print(f"\n★ 跳過正篇裡外部配音角色的 {n} 句：{ext}")
         print("  那些要回頭從長檔補切，不可以就地生，不然會變成另一個人的聲音")
-        todo = [u for u in todo if u[0] not in ext]
-    skip = sorted({s for s, _, _, _ in todo if not V.VOICE.get(s)})
+        print("  （調查篇不在此限：那邊沒有外部長檔，本機參考音也備齊了）")
+        todo = [u for u in todo if not is_ext(u)]
+    skip = sorted({u[0] for u in todo if not V.VOICE.get(u[0])})
     if skip:
         print(f"\n跳過（還沒選參考音）：{skip}")
         todo = [u for u in todo if V.VOICE.get(u[0])]

@@ -168,7 +168,7 @@ def main():
     a = ap.parse_args()
 
     import gen_voice as gv, voice as V
-    rows = [(t, e, k) for w, t, e, k in gv.utterances() if w == a.who]
+    rows = [(t, e, k) for w, t, e, k, *_ in gv.utterances() if w == a.who]
     if not rows:
         sys.exit(f"找不到 {a.who} 的台詞")
     out = pathlib.Path(a.out or ROOT / "art/voice")
