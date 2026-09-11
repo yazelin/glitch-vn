@@ -2,9 +2,9 @@
 """pathlint 的負控制。跑：python3 tools/pathlint_selftest.py
 
 檢查器最常見的壞法是**安靜地不再檢查**：規則寫錯、欄位改名、資料結構變了，
-它照樣印「沒有問題」。所以八項每一項都在這裡注一個故障進板子的副本，
+它照樣印「沒有問題」。所以九項每一項都在這裡注一個故障進板子的副本，
 確認那一項真的會叫；注入前的乾淨板子則必須是綠的。
-（第八項有三種壞法，所以它有三個注入。報表照「項」數，括號裡才是注入數。）
+（第九項有四種壞法，所以它有四個注入。報表照「項」數，括號裡才是注入數。）
 
 每一項只注一個故障，跑完就丟。原始的 board.json 不會被動到
 （走 PATHLINT_BOARD 指到暫存目錄的副本）。
@@ -33,7 +33,7 @@ def run(board_path):
     return (int(m.group(1)) if m else -1), r.stdout
 
 
-# ── 十個注入（八項，第八項三個）。每一支收一份板子（可以改），回傳這一項預期會出現的字串 ──
+# ── 十二個注入（九項，第九項四個）。每一支收一份板子（可以改），回傳這一項預期會出現的字串 ──
 
 
 def inject_dup_label(b):
@@ -181,6 +181,21 @@ def inject_rail_gap(b):
     return "軌道斷了"
 
 
+def inject_rail_no_label(b):
+    """九之四、軌道字串只剩地點、掉了選單那一格的標籤
+
+    這就是 2026-09-11 被退回的那個形狀：板上只擋「去哪裡」，選單沒人擋，
+    自動玩家在第 2 天晚上選了別的一格，貓草那條線整條斷掉，結局少兩行註解，
+    而檢查器從頭到尾都是綠的。
+    """
+    for v in b["variables"]:
+        if v["name"] == "walk":
+            v["defaultValue"] = ";".join("|".join(s.split("|")[:3])
+                                         for s in str(v.get("defaultValue") or "").split(";"))
+            return "軌道少了選單那一格"
+    raise SystemExit("板上沒有 walk 變數")
+
+
 CASES = [("一、重複標籤", inject_dup_label),
          ("二、值對不到", inject_unreachable_value),
          ("三、沒有人寫", inject_unwritten_var),
@@ -191,7 +206,8 @@ CASES = [("一、重複標籤", inject_dup_label),
          ("八、變數名怪", inject_bad_var_name),
          ("九、劇情模式走不出去", inject_story_deadend),
          ("九之二、選項條件對不上", inject_choice_cond_length),
-         ("九之三、軌道斷了", inject_rail_gap)]
+         ("九之三、軌道斷了", inject_rail_gap),
+         ("九之四、軌道沒帶標籤", inject_rail_no_label)]
 
 
 def main():
@@ -231,7 +247,7 @@ def main():
         if n != 0:
             fails.append("還原")
 
-    # 一項可以有好幾個注入（第九項有三個），報表照「項」數，括號裡才是注入數
+    # 一項可以有好幾個注入（第九項有四個），報表照「項」數，括號裡才是注入數
     def item(name):
         return name.split("、")[0].split("之")[0]
     items = {item(n) for n, _ in CASES}

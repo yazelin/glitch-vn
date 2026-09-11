@@ -37,6 +37,7 @@ larch/inv/preview.json
 larch/inv/out/payload.json
 larch/cards/.phone-test.html
 larch/cards/.phone-banner-test.html
+larch/cards/.menu-test.html
 
 # 建置產出：board.json 與 payload.json 每次跑 build.py／push.py --dry 都會重產，
 # 一份 620 KB，這幾天推了二三十次就在歷史裡留了二三十份（2026-09-10 量到 larch/inv

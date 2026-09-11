@@ -14,7 +14,9 @@ const POLICY=process.env.POLICY || 'notes';
 let seed=(Number(process.env.SEED)||1)>>>0;
 const rnd=()=>{ seed=(seed+0x6D2B79F5)>>>0; let t=seed; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; };
 const rpick=(a)=>a[Math.floor(rnd()*a.length)];
-const pv = JSON.parse(fs.readFileSync('/home/ct/glitch-vn/larch/inv/preview.json','utf8'));
+// 從跑它的那個 repo 讀，不要寫死絕對路徑：在 worktree 裡驗收的時候，
+// push.py 寫的是 worktree 的那一份，寫死就會去玩別的專案（2026-09-11 踩到）。
+const pv = JSON.parse(fs.readFileSync(process.env.PREVIEW || 'larch/inv/preview.json','utf8'));
 // 記憶體吃緊的機器上一次跑一輪也會被系統擋掉，所以關掉用不到的東西（2026-09-09）
 const browser = await chromium.launch({ args: ['--disable-gpu','--disable-dev-shm-usage',
   '--disable-extensions','--no-sandbox','--js-flags=--max-old-space-size=384','--renderer-process-limit=2'] });

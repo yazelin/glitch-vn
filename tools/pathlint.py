@@ -23,6 +23,8 @@
      ・陣列長度跟 `choices` 對不上 → 平台按索引取，錯位等於把條件掛到別格去
      ・一張選擇卡在劇情模式下每一格都被擋掉 → 那張卡走不出去（劇情模式的死路）
      ・劇情模式的軌道有對不到卡的步（`walk.miss`）→ 那一步沒有人擋，鐵路在那裡斷掉
+     ・軌道字串（`walk` 變數的預設值）少了選單那一格的標籤 → 擋得住「去哪裡」，
+       擋不住「選哪一格」，玩家走得完可是走不出完美結局（2026-09-11 退回過一次）
      （選項吃條件是 2026-09-11 實測的，見 design/調查篇.md 七。以前以為不吃，
        所以走廊那一場把劇情複製了一份繞過去）
 可達性不在這裡，那是 tools/sim.py 的事。
@@ -179,6 +181,20 @@ for _n in b["nodes"]:
 for _m in (b.get("walk") or {}).get("miss") or []:
     bad.append(f"軌道斷了　第 {_m.get('day')} 天 時段{_m.get('slot')}　{_m.get('why')}　"
                + "｜".join(_m.get("labels") or [])[:40])
+# 軌道字串（walk 變數的預設值）要連選單那一格的標籤一起帶。少了它，劇情模式擋得住
+# 「去哪裡」擋不住「選哪一格」，玩家走得完可是走不出完美結局（2026-09-11 退回過一次）。
+_walkvar = next((v.get("defaultValue") for v in b["variables"] if v["name"] == "walk"), None)
+if _walkvar is None:
+    bad.append("軌道沒有 walk 變數")
+else:
+    _steps = {}
+    for _s in str(_walkvar).split(";"):
+        _p = _s.split("|")
+        if len(_p) >= 4:
+            _steps[(_p[0], _p[1])] = _p[3]
+    for _s in (b.get("walk") or {}).get("board") or []:
+        if _s.get("label") and _steps.get((str(_s.get("day")), str(_s.get("slot")))) != _s["label"]:
+            bad.append(f"軌道少了選單那一格　第 {_s['day']} 天 時段{_s['slot']}　「{_s['label']}」")
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")

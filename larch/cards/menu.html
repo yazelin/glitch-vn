@@ -12,8 +12,16 @@
   RULES 由推送層（larch/inv/push.py）在推上去之前注入，每一個地點一份，
   所以同一份 HTML 在十二個地點各自不同。本檔獨立打開時 RULES 是空的。
 
-  miniGameReadVars ：day slot here 以及 RULES 裡出現的每一個變數（推送層算）
+  miniGameReadVars ：mode walk day slot here 以及 RULES 裡出現的每一個變數（推送層算）
   miniGameWriteVars：pick
+
+  **劇情模式**（`mode == 'story'`，design/調查篇.md 七之〇）：這一格只留攻略要選的那一個，
+  「先走」也收起來。軌道跟調查板讀同一個 `walk` 變數
+  （`天|時段|地點代號|選單標籤` 用分號串，larch/inv/build.py 算的）。
+  **2026-09-11 補的**：先前只擋了板上的「去哪裡」，沒擋這一張的「選哪一格」，
+  於是劇情模式走得完可是走不出完美結局——第 2 天晚上選錯一格，
+  貓草那條線整條斷掉，結局少兩行註解。
+  **這一步的標籤不在這個時段的清單上就整個放行**（安全閥），不要留一張空的選單把人鎖住。
 
   畫面（2026-09-07 重做）：她的守則本攤開在場景上，右頁是這一趟能做的事，一行一件，
   她的口氣。左邊是皮面的書脊。場景在書後面透出來。
@@ -125,6 +133,19 @@ function start(){
   document.getElementById('who').textContent=here.length?here.map(show).join('、')+' 在':'這裡沒有人';
   var box=document.getElementById('list'); box.textContent='';
   var ok=RULES.filter(function(r){ return passes(r, slot, here); });
+  // 劇情模式：這一個時段只留攻略要選的那一格。軌道跟調查板讀同一份 walk 變數。
+  // 對不到（那一格這個時候不在清單上、或者這一步在選單上本來就沒選東西）就整個放行。
+  if(String(values.mode||'free')==='story'){
+    var want=null, a=String(values.walk||'').split(';');
+    for(var wi=0; wi<a.length; wi++){
+      var p=a[wi].split('|');
+      if(p.length>=4 && num(p[0],-1)===day && num(p[1],-1)===slot && p[2]===LOC){ want=p[3]; break; }
+    }
+    if(want){
+      var only=ok.filter(function(r){ return (r.label||r.seg)===want; });
+      if(only.length){ ok=only; document.getElementById('skip').style.display='none'; }
+    }
+  }
   if(!ok.length){
     box.appendChild(el('p','empty','這個時間這裡問不到什麼。'));
   }
