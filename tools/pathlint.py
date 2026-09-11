@@ -15,6 +15,9 @@
      （空字串會沿用上一個講者的名牌，動作句會掛成上一個角色在講話，2026-09-10 實測）
      （2026-09-10 中過：card_node 把 direction 整行過濾掉，204 行動作全部沒演，
        「你也有。」前面少了她把本子拿出來並排的那一下）
+ 八、板上有沒有名字長得不像變數的 variableOps
+     （2026-09-11 中過：設計稿把箭頭寫進反引號裡「`trust_斑比 ← 3`」，
+       解析器把整串當變數名，那張卡就沒把 trust_斑比 設成 3，斑比五之一那條路默默失效）
 可達性不在這裡，那是 tools/sim.py 的事。
 
 **七項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
@@ -134,6 +137,15 @@ for _n in b["nodes"]:
     for _l in ((_n.get("data") or {}).get("dialogueLines") or []):
         if not _l.get("speaker"):
             bad.append(f"講者留空　{_n['id']}　{str(_l.get('text'))[:26]}")
+
+# 八、變數名長得對不對
+_VARNAME = re.compile(r"[a-z][A-Za-z0-9_\u4e00-\u9fff]*")
+for _n in b["nodes"]:
+    for _o in ((_n.get("data") or {}).get("variableOps") or []):
+        _v = _o.get("variable") or ""
+        if not _VARNAME.fullmatch(_v):
+            bad.append(f"變數名怪　{_n['id']}　「{_v}」"
+                       f"（設計稿多半是把箭頭或註解寫進反引號裡了）")
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")

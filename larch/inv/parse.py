@@ -82,6 +82,9 @@ SKIP = ["排卡註", "觸發條件一覽", "格式", "配音", "讀音", "待拍
         "共用音檔", "為什麼一張", "不可以做的事", "自己驗過"]
 
 VAR = re.compile(r"\*\*→\s*(?:解鎖\s*|下台\s*)?`([^`]+)`\s*(?:←\s*(\S+)|[＋+]\s*(\d+)|(?:\d+\s*→\s*)?(\d+)\b)?")
+# 變數名長什麼樣：小寫英文開頭，之後可以接英數、底線與中文（met_貓草、asked_0x_黑洞）。
+# 不可以有空白、箭頭、點。「解鎖 `roof`」那種前面會自己補 open_，所以也吃得下。
+VAR_NAME = re.compile(r"[a-z][A-Za-z0-9_\u4e00-\u9fff]*")
 VAR_PIECE = re.compile(r"`([^`]+)`\s*(?:[←＝=]\s*(\S+)|[＋+]\s*(\d+)|[−\-]\s*(\d+)|(?:(\d+)\s*→\s*)?(\d+)\b)?")
 
 
@@ -192,6 +195,15 @@ def parse_file(path):
                     if not v:
                         continue
                     name = v.group(1)
+                    # 反引號裡不一定是變數。兩種踩過的：
+                    #   「…見 `調查篇-背包與謎題.md` 三之一」← 註解裡的檔名引用
+                    #   「`trust_斑比 ← 3`」            ← 箭頭寫進反引號裡面了
+                    # 兩個都會靜默產生一個假變數，而那張卡真正要設的值就沒設到
+                    # （2026-09-11 抓到：斑比五之一那張因此沒把 trust_斑比 設成 3）。
+                    if not VAR_NAME.fullmatch(name):
+                        if "解鎖" not in ln and "下台" not in ln:
+                            problems.append(f"{path.stem}：`{name}` 不像變數名，這一行沒收 → {ln.strip()[:60]}")
+                        continue
                     # 「**→ 解鎖 `roof`**」＝把 open_roof 設 true（變數帳一：一個地點一個布林）
                     if "解鎖" in ln and not name.startswith("open_"):
                         if not re.fullmatch(r"[a-z0-9_]+", name):

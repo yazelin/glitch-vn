@@ -119,13 +119,28 @@ def inject_empty_speaker(b):
     raise SystemExit("板上沒有 dialogueLines")
 
 
+def inject_bad_var_name(b):
+    """八、variableOps 的名字長得不像變數
+
+    設計稿把箭頭寫進反引號裡（`trust_斑比 ← 3`）或是註解裡引到檔名，
+    解析器會把整串當變數名，那張卡真正要設的值就沒設到。
+    """
+    for n in b["nodes"]:
+        ops = (n.get("data") or {}).get("variableOps") or []
+        if ops:
+            ops[0]["variable"] = ops[0]["variable"] + " ← 3"
+            return "變數名怪"
+    raise SystemExit("板上沒有 variableOps")
+
+
 CASES = [("一、重複標籤", inject_dup_label),
          ("二、值對不到", inject_unreachable_value),
          ("三、沒有人寫", inject_unwritten_var),
          ("四、邊撞 id", inject_edge_id_clash),
          ("五、選項沒接好", inject_missing_choice_edge),
          ("六、指示沒進卡", inject_dropped_direction),
-         ("七、講者留空", inject_empty_speaker)]
+         ("七、講者留空", inject_empty_speaker),
+         ("八、變數名怪", inject_bad_var_name)]
 
 
 def main():
@@ -165,7 +180,7 @@ def main():
         if n != 0:
             fails.append("還原")
 
-    print(f"\n七項負控制：{len(CASES) - len([f for f in fails if f != '還原'])}/{len(CASES)} 會叫"
+    print(f"\n八項負控制：{len(CASES) - len([f for f in fails if f != '還原'])}/{len(CASES)} 會叫"
           + ("" if not fails else "　★ 沒過：" + "、".join(fails)))
     return 1 if fails else 0
 
