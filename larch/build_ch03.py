@@ -58,9 +58,9 @@ c.narrate("彩排四點結束。正式開播是當天晚上八點，同一個場
 c.stage()
 c.scene("當天晚上・場地的直播室", "開播十分鐘，留言區的人數就破了兩萬。",
         "bg-collab-studio", transition="wipeLeft")
-# 畫廊那一張是 bg-studio-day（同一個房間的白天版，早先畫的）。這一場後來改用
-# 專門畫的 bg-collab-studio 當背景，所以卡片上看到的跟收藏到的不是同一個檔。
-c.cg("bg-studio-day", "聯動・猜歌")
+# 收的就是這一場的背景。**這裡與 settings.cgGalleryItems 要是同一個 key**，
+# 播放器認的是網址字串，兩邊不一樣就永遠解不開。
+c.cg("bg-collab-studio", "聯動・猜歌")
 c.stage(G)
 c.narrate("聯動的企劃是猜歌。這是鐵塔跟 0x 那邊的經紀人一起想的，"
           "理由是「兩邊的粉絲都可以參與，而且不需要兩位有太多對話」。")

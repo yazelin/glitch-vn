@@ -89,7 +89,10 @@ def main():
             ("bg-table-lamp", "守則本・第一千零四版"),
             ("bg-booth", "錄音間・第十一次"),
             ("bg-greenroom", "休息室・兩點五十分"),
-            ("bg-studio-day", "聯動・猜歌"),
+            # **收的要跟畫面上看到的是同一張。** 這一筆本來指著 bg-studio-day
+            # （同一個房間的白天版，早先畫的），可是第三章那一場的背景後來換成
+            # 專門畫的 bg-collab-studio，玩家收到的跟看到的不是同一張。
+            ("bg-collab-studio", "聯動・猜歌"),
             ("bg-corridor", "後台走廊・燈一段一段熄"),
             ("bg-bambi-studio", "斑比的工作室・七個馬克杯"),
             ("bg-apartment-hall", "門口・凌晨一點"),
