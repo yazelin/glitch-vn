@@ -12,6 +12,7 @@ X = "0x"
 # ── 一 ──────────────────────────────────────────────
 c.scene("彩排休息室", "聯動的彩排訂在下午三點，0x 兩點五十分就到了。", "bg-greenroom",
         start=True, transition="fadeBlack", ms=600)
+c.cg("bg-greenroom", "休息室・兩點五十分")
 c.stage(G)
 c.narrate("聯動的彩排訂在下午三點，0x 兩點五十分就到了。")
 c.narrate("她的行程表上寫的就是兩點五十分。格莉奇後來才知道，"
@@ -57,6 +58,9 @@ c.narrate("彩排四點結束。正式開播是當天晚上八點，同一個場
 c.stage()
 c.scene("當天晚上・場地的直播室", "開播十分鐘，留言區的人數就破了兩萬。",
         "bg-collab-studio", transition="wipeLeft")
+# 收的就是這一場的背景。**這裡與 settings.cgGalleryItems 要是同一個 key**，
+# 播放器認的是網址字串，兩邊不一樣就永遠解不開。
+c.cg("bg-collab-studio", "聯動・猜歌")
 c.stage(G)
 c.narrate("聯動的企劃是猜歌。這是鐵塔跟 0x 那邊的經紀人一起想的，"
           "理由是「兩邊的粉絲都可以參與，而且不需要兩位有太多對話」。")
@@ -120,6 +124,7 @@ c.narrate("三秒之後它跳回 99.98。快到大部分的人都以為自己看
 # ── 四 ──────────────────────────────────────────────
 c.stage()
 c.scene("後台走廊", "下播之後，後台的走廊很長。", "bg-corridor", transition="blurCut")
+c.cg("bg-corridor", "後台走廊・燈一段一段熄")
 c.narrate("下播之後，後台的走廊很長，燈是那種一段一段亮的感應燈，你走過去它才亮。")
 c.stage((X, "left"), (G, "right"))
 c.narrate("0x 走在前面。格莉奇追上去。")

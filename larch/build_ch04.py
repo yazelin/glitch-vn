@@ -12,6 +12,7 @@ B = "斑比"
 # ── 一 ──────────────────────────────────────────────
 c.scene("斑比的工作室", "桌子上有兩台螢幕、一台繪圖板、七個馬克杯。", "bg-bambi-studio",
         start=True, transition="fadeBlack", ms=600)
+c.cg("bg-bambi-studio", "斑比的工作室・七個馬克杯")
 c.stage((B, "left"), (G, "right"))
 c.narrate("斑比的工作室是一個房間，房間裡有一張桌子，"
           "桌子上有兩台螢幕、一台繪圖板、七個馬克杯。")

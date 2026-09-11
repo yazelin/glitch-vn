@@ -28,6 +28,8 @@
     tools/cut_faces.py       表情差分去背（綠幕→清內部殘留→負控制驗收）
     tools/make_icons.py      PWA 圖示（從立繪按實際 ink 邊界裁，不是目測置中）
     tools/update_sw.py       用內容 hash 產 sw.js 的快取版號，別手動 bump
+    tools/autoplay_main.mjs  正篇的自動玩家：從標題點到底，記下十四張 CG 各在哪一步
+                             解開，走到一半另開分頁看畫廊當負控制。動了正篇的版子就跑一輪
     tools/autoplay.mjs       調查篇的自動玩家：照板上便條從第一天玩到結局，對白與每一步
                              都存成逐字稿。POLICY 換走法（notes／firstline／casual／
                              explore／random），SEED 固定亂數。**它是判難度的量尺**：

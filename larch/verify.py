@@ -55,7 +55,11 @@ for b in p["boards"]:
         k = n["data"].get("type") or "dialogue"
         kinds[k] = kinds.get(k, 0) + 1
     lines = sum(len(n["data"].get("dialogueLines") or []) for n in b["nodes"])
-    print(f"{b['name']}：{len(b['nodes'])} 卡　{kinds}　多句對話 {lines} 句")
+    # **翻譯是平台上翻的，建置腳本產不出來。** 重建一章而沒有把它撈回來的話
+    # 這個數字會直接變成 0，印出來才看得見（見 novelkit.Chapter.push）。
+    loc = sum(1 for n in b["nodes"] if n["data"].get("localizations"))
+    print(f"{b['name']}：{len(b['nodes'])} 卡　{kinds}　多句對話 {lines} 句"
+          f"　翻譯 {loc} 張")
     print(f"  起點 {start or '★ 沒有起點卡'}")
 # ── 旁白不要幫別人講話 ───────────────────────────────
 # 整張卡的每一段都是「…」的旁白卡，名牌會寫「旁白」可是內容是別人的台詞。
@@ -121,6 +125,43 @@ for b in p["boards"]:
                     on[who] = i
             else:
                 on.pop(who, None)
+
+# ── CG 收藏：畫廊清單與解鎖點是兩份資料，要對得起來 ──
+# 只設 locked 不給解鎖點＝十四張永遠的問號；只給解鎖點不設 locked＝一開遊戲
+# 就在收藏裡看到「錄音間・第十一次」這種有雷的標題。兩邊都要數。
+_items = (p.get("settings") or {}).get("cgGalleryItems") or []
+if _items:
+    _hit = {}
+    for b in p["boards"]:
+        for n in b["nodes"]:
+            d = n["data"]
+            for op in (d.get("cgOps") or []):
+                where = f"{b['id']}:{n['id']}"
+                # **只有 setVariable 吃 cgOps。** 寫在對話卡上平台不會報錯，
+                # 只是永遠不解鎖。
+                if d.get("type") != "setVariable":
+                    bad.append(f"{where} 的 cgOps 掛在 {d.get('type')} 卡上，"
+                               f"只有 setVariable 吃得到")
+                # **text 不可以留空。** 卡片模式下就是一張點不動的空白卡。
+                if not (d.get("text") or "").strip():
+                    bad.append(f"{where} 是沒有字的 setVariable 卡，卡片模式會卡死")
+                if (op.get("mode") or "unlock") != "unlock":
+                    continue
+                _hit.setdefault(op.get("url"), []).append(where)
+    _gal = {x.get("url"): x.get("title") for x in _items}
+    for x in _items:
+        if not x.get("locked"):
+            bad.append(f"CG「{x.get('title')}」沒有 locked，一開遊戲就看得到（劇透）")
+        if x.get("url") not in _hit:
+            bad.append(f"CG「{x.get('title')}」沒有解鎖點，畫廊裡會是永遠的問號")
+    for _u, _w in _hit.items():
+        if _u not in _gal:
+            bad.append(f"解鎖了畫廊沒有的圖：{str(_u)[-42:]}（{_w[0]}）")
+        elif len(_w) > 1:
+            warn.append(f"CG「{_gal[_u]}」有 {len(_w)} 個解鎖點：{'、'.join(_w)}")
+    print(f"\nCG 收藏：{len(_items)} 張，鎖著 {sum(1 for x in _items if x.get('locked'))} 張，"
+          f"解鎖動作 {sum(len(v) for v in _hit.values())} 個，"
+          f"對到 {len([u for u in _hit if u in _gal])} 張")
 
 # ── 配音有沒有掛齊 ───────────────────────────────────
 # **鍵算錯不會報錯，只會安靜地沒有聲音。** 查表的鍵是「講者＋台詞＋情緒」，

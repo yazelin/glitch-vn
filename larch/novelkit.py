@@ -190,21 +190,26 @@ class Chapter:
     def __init__(self, bid, name, desc, cids):
         self.bid, self.name, self.desc, self.cids = bid, name, desc, cids
         self.nodes, self.edges, self.prev, self._x, self._n = [], [], None, 0, 0
+        self._cg = 0            # CG 解鎖卡自己一組流水號，不佔劇情卡的號碼
         self.pending = []       # 支線走完等著接回主線的那幾張
         self._bgm = None        # 現在在播哪一首，一樣就不重下（會從頭重播）
         self.cast = []          # 目前站在台上的人 [(名字, 位置)]
 
     # ── 內部 ────────────────────────────────────────────
-    def _add(self, data):
-        self._n += 1
-        nid = f"{self.bid}-{self._n:03d}"
+    def _add(self, data, nid=None, eid=None):
+        # nid 給了就不動流水號。**在中間插卡不可以把後面的卡片 id 全部往後推**——
+        # 讀者的存檔記的是卡片 id，整章重編等於把所有進度打散（CG 解鎖卡就是這樣插的）。
+        if nid is None:
+            self._n += 1
+            nid = f"{self.bid}-{self._n:03d}"
+            eid = f"e{self._n}"
         self._x += 300
         self.nodes.append({"id": nid, "type": "story",
                            "position": {"x": self._x, "y": 0}, "data": data})
         # 支線的每一條末端都接到下一張主線卡，這就是匯流點
         srcs = self.pending or ([self.prev] if self.prev else [])
         for k, s0 in enumerate(srcs):
-            self.edges.append({"id": f"e{self._n}-{k}", "source": s0,
+            self.edges.append({"id": f"{eid}-{k}", "source": s0,
                                "target": nid, "sourceHandle": "right", "animated": True})
         self.pending = []
         self.prev = nid
@@ -274,6 +279,33 @@ class Chapter:
         # **空陣列不是清台。** 播放器是「有新的才換」，給空陣列它會把上一張的人留著。
         # 清台靠一個透明的演員（見 GHOST 與 _stage），這是實測出來的。
         return self._card(d)
+
+    def cg(self, key, title):
+        """把一張背景收進 CG 收藏。放在那張背景真正出現的那一場。
+
+        **畫廊清單與解鎖動作是兩份資料。** `settings.cgGalleryItems` 的
+        `locked: True` 決定它一開始是不是問號（見 larch/settings.py），
+        這裡的卡決定什麼時候解開。只做一邊就會變成「畫廊有這張但永遠解不開」
+        或「解鎖了但畫廊沒有」。
+
+        **只有 `setVariable` 這個型別的卡吃 `cgOps`**，搬不到對話卡或場景卡上。
+        播放器認的是 `url`（`cgGalleryItems[i].url` 與 `cgOps[i].url` 要是同一個字串），
+        `id` 只是這個動作自己的名字。
+
+        **`text` 不可以留空。** 播放器的自動前進條件是
+        `!(mode === "card" || text.trim())`，空白的話卡片模式就是一張點不動的
+        空白卡，標題還寫著「設定變量」，玩家直接卡在那裡。
+
+        卡片 id 是 `chNN-cgN`，不佔劇情卡的流水號：在中間插卡不可以把後面
+        整章的 id 往後推，讀者的存檔記的就是那些 id。
+        """
+        assert key in A, f"沒有這張圖：{key}"
+        self._cg += 1
+        return self._add({"type": "setVariable", "title": "CG 收藏",
+                          "text": f"記住這個畫面。\n「{title}」收進了 CG 收藏。",
+                          "cgOps": [{"id": f"cg-{key}", "url": A[key],
+                                     "mode": "unlock"}]},
+                         nid=f"{self.bid}-cg{self._cg}", eid=f"ecg{self._cg}")
 
     def stage(self, *who):
         """設定台上有誰。('格莉奇','left') 或直接給名字（自動排位）。"""
@@ -492,20 +524,46 @@ class Chapter:
                            "jumpBoardId": board_id, "jumpNodeId": node_id})
 
     def push(self, summary):
-        proj = api()
-        proj["boards"] = [b for b in proj.get("boards", []) if b["id"] != self.bid]
-        proj["boards"].append({"id": self.bid, "kind": "story", "mode": "story",
-                               "name": self.name, "description": self.desc,
-                               "nodes": self.nodes, "edges": self.edges})
-        # **重建一章不可以把板子順序打亂。** push 是「先移除再附加」，
-        # 所以每重建一章那章就跑到陣列最後，章節選單照陣列順序顯示的話
-        # 讀者看到的就是亂序（實測跑成 ch01/ch03/ch04/ch06/ch08/ch02/ch05/ch07）。
-        proj["boards"].sort(key=lambda b: b["id"])
-        # 起點固定在第一章。故事流程是靠卡片上的 boardJump 串的
-        # （ch01→…→ch08，只有 ch08 帶 chapterEnd），跟這個欄位無關；
-        # 這裡只是讓編輯器開起來停在第一章。
-        proj["activeBoardId"] = "ch01"
-        r = api({"project": proj, "summary": summary}, "PUT")
-        b = [x for x in r["boards"] if x["id"] == self.bid][0]
-        print(f"{self.name}：卡片 {len(b['nodes'])}　邊 {len(b['edges'])}")
+        # **一次只推自己這一塊版子。** 以前這裡走 `PUT /projects`，要把整包
+        # 一點四 MB（八塊版子）送上去，2026-09-11 開始伺服器吃不下，連著回
+        # 502（重試第三次才過）。`PUT /boards/:id` 只送這一章，幾十 KB，
+        # 而且碰不到 settings／characters／media，`PUT /projects` 那條
+        # 「只留你送的」的坑也一起避開。
+        # 板子順序與 activeBoardId 不用在這裡管：兩個都已經在專案上了，
+        # 這支端點是就地更新，不會把版子搬到陣列最後。
+        path = f"/boards/{self.bid}"
+        old = {n["id"]: n for n in ((api(path=path).get("board") or {})
+                                    .get("nodes") or [])}
+        # **重建一章會把線上的翻譯整批刪掉，而且不會報錯。** 平台的翻譯功能把譯文寫在
+        # 每張卡的 `data.localizations` 裡，建置腳本產不出那個欄位，所以照原樣推上去
+        # 就是「我這一份沒有」＝刪掉。下一個專案要是有翻譯要保，就在這裡照卡片 id
+        # 把線上那一份接回來（`n["data"]["localizations"] = o["data"]["localizations"]`），
+        # 2026-09-11 第一章的八十一張日文就是這樣救回來的。
+        #
+        # **這個專案刻意不留翻譯。** 那批 ja-JP 是平台上跑過一次翻譯留下的，只翻了第一章，
+        # 作者決定拿掉，所以這裡不接回來——推一次就清掉了。專案層的語言清單是另一份資料，
+        # 在 larch/setup_language.py 清；只清一邊會留下殘骸。
+        #
+        # `measured` 是編輯器量出來的尺寸，平台寫的，那個要留著。
+        drop = 0
+        for n in self.nodes:
+            o = old.get(n["id"])
+            if not o:
+                continue
+            if (o.get("data") or {}).get("localizations"):
+                drop += 1
+            if o.get("measured"):
+                n["measured"] = o["measured"]
+        r = api({"name": self.name, "kind": "story", "mode": "story",
+                 "description": self.desc, "nodes": self.nodes,
+                 "edges": self.edges, "summary": summary}, "PUT", path)
+        # **PUT 的回應沒有 nodes／edges**（只回 `{projectId, board:{id,name,…}}`），
+        # 所以要驗有沒有推上去只能再讀一次。
+        b = api(path=path).get("board") or {}
+        back = sum(1 for n in b["nodes"] if (n["data"].get("localizations") or []))
+        print(f"{self.name}：卡片 {len(b['nodes'])}／{len(self.nodes)}　"
+              f"邊 {len(b['edges'])}／{len(self.edges)}　"
+              f"翻譯 清掉 {drop} 張，剩 {back} 張")
+        assert len(b["nodes"]) == len(self.nodes), f"{self.bid}：卡片回讀對不上"
+        assert len(b["edges"]) == len(self.edges), f"{self.bid}：邊回讀對不上"
         return r
