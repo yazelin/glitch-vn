@@ -19,7 +19,7 @@
 推完一定回讀比對卡數與帶條件的邊數。整包 PUT 專案會清版子，所以
 順序固定是「PUT 專案設定 → PUT 版子」，不能反過來。
 """
-import argparse, base64, json, pathlib, re, sys, time, urllib.error, urllib.request
+import argparse, base64, json, os, pathlib, re, sys, time, urllib.error, urllib.request
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
@@ -106,6 +106,12 @@ def api(method, path, body=None, tries=4):
             api("GET", path)
         except SystemExit:
             pass
+        # **ETag 是專案層的版本號，所有版子共用一個**（2026-09-11 實測：帶 If-Match: 0
+        # 去建新版子，回的 409 裡 conflictRevision 就是專案的版本）。所以還不存在的版子
+        # GET 不到自己的 ETag，拿任何一塊既有版子的來用就建得起來。少了這一段，
+        # 推到一個沒有謝幕版子的專案會卡在 428。
+        if path not in ETAGS and ETAGS:
+            ETAGS[path] = next(iter(ETAGS.values()))
     data = json.dumps(body, ensure_ascii=False).encode() if body is not None else None
     head = {"Authorization": "Bearer " + key(), "Content-Type": "application/json"}
     if method == "PUT" and ETAGS.get(path):
@@ -152,6 +158,12 @@ def load_state():
 
 
 def save_state(s):
+    # INV_PROJECT 是驗收用的分身，**不可以寫回 state.json**。
+    # 2026-09-11 踩到：只把 state 複製一份不夠，素材網址那些鍵是同一個 dict，
+    # 存下去就把正式專案的 id 蓋成分身的了。
+    if os.environ.get("INV_PROJECT"):
+        print("  （INV_PROJECT 模式，不寫 state.json）")
+        return
     STATE.write_text(json.dumps(s, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
@@ -818,6 +830,13 @@ def main():
         return
 
     # 1. 專案
+    # INV_PROJECT=<id> 可以把整包推去別的專案（驗收用的分身），state.json 不會被改到。
+    # 沒有它就照 state.json 走，也就是正式那個。
+    if os.environ.get("INV_PROJECT"):
+        state = dict(state)
+        state["projectId"] = os.environ["INV_PROJECT"]
+        state.pop("boardId", None)
+        print("★ 這一次推到", state["projectId"], "（不是正式專案）")
     if "projectId" not in state:
         r = api("POST", "/projects", {"name": NAME, "description": DESC})
         pid = (r.get("project") or r).get("id") or r.get("id")
