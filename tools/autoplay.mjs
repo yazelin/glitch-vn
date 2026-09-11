@@ -78,11 +78,17 @@ const pickMenu = async (mf, spot, when) => {
   done.add(spot+'|'+pick.label); out(`  → 選「${pick.label}」`); await pick.el.click();
 };
 await page.goto(pv.playUrl, { waitUntil: 'load', timeout: 60000 }); await page.waitForTimeout(4000);
+// MODE=story／free：第一張是「開場：這一輪要怎麼玩」，01 劇情模式、02 自由探索。
+// 沒設就不特別挑，讓它照一般選項邏輯走（預設變數是 free，所以行為跟以前一樣）。
+const MODE = process.env.MODE || '';
 await page.locator('button', { hasText: '開始遊戲' }).first().click(); await page.waitForTimeout(3000);
 let spot=null, when=''; const t0=Date.now();
 for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   const t = await text();
   if (t.includes('開始遊戲') && t.includes('繼續遊戲')) { out('\n=== 回到標題（遊戲結束）'); break; }
+  // 結局停在謝幕那一張、不一定回標題。少了這一條，卡住處理會去點「再看一次」，
+  // 於是自己又開一輪——2026-09-11 兩輪各跑了三遍，記憶體也是這樣爆的。
+  if (t.includes('故事暫告一段落')) { out('\n=== 走到謝幕（遊戲結束）'); break; }
   const bf = await boardFrame();
   if (bf) { await page.waitForTimeout(600); const bf2=await boardFrame(); if(!bf2) continue; when = await bf2.locator('#when').textContent();
     // 每天上午開一次手機翻一遍（design/調查篇-手機.md 驗收）：HUD 背包 → 手機 → 使用道具 → 記下看到的貼文 → 收起來
@@ -117,6 +123,13 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   // 標籤是「01打一行送出去」，數字跟字之間沒有空白（畫面上看到的那個空隙是排版）。
   // 之前的正規式要求數字後面接空白或標點，所以一顆都對不到（2026-09-09 用無障礙樹比對出來）。
   const optLoc = page.getByRole('button').filter({ hasText: /^\s*0[1-9]/ });
+  // 開場那張：MODE 指定就照指定的挑
+  if (MODE && /這一輪要怎麼玩|劇情模式|自由探索/.test(t)) {
+    const want = MODE === 'story' ? /^\s*01/ : /^\s*02/;
+    const b0 = (await page.getByRole('button').filter({ hasText: want }).all())[0];
+    if (b0) { out(`  → 開場選「${MODE === 'story' ? '劇情模式' : '自由探索'}」`);
+              await b0.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(1600); continue; }
+  }
   const optHits = [];
   for (const b of await optLoc.all()) {
     const t = ((await b.textContent()) || '').replace(/[\s\u00a0\u3000]+/g, ' ').trim();
