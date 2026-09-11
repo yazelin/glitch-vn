@@ -108,10 +108,16 @@ def api(method, path, body=None, tries=4):
             pass
         # **ETag 是專案層的版本號，所有版子共用一個**（2026-09-11 實測：帶 If-Match: 0
         # 去建新版子，回的 409 裡 conflictRevision 就是專案的版本）。所以還不存在的版子
-        # GET 不到自己的 ETag，拿任何一塊既有版子的來用就建得起來。少了這一段，
+        # GET 不到自己的 ETag，借一個既有的版本號來用就建得起來。少了這一段，
         # 推到一個沒有謝幕版子的專案會卡在 428。
-        if path not in ETAGS and ETAGS:
-            ETAGS[path] = next(iter(ETAGS.values()))
+        # **借的時候要挑，不能拿第一個。** ETAGS 裡混著兩種東西：專案／版子的版本號
+        # （`"7"`，這種才是 revision），以及清單那類端點回的弱驗證碼
+        # （`W/"d1-GOPw…"`）。借到弱驗證碼就回 400「If-Match revision 格式無效」
+        # ——2026-09-11 推到全新的分身專案時踩到：主版子推得上去，謝幕那一塊一直建不起來。
+        if path not in ETAGS:
+            rev = next((v for v in ETAGS.values() if re.fullmatch(r'"?\d+"?', v or "")), None)
+            if rev:
+                ETAGS[path] = rev
     data = json.dumps(body, ensure_ascii=False).encode() if body is not None else None
     head = {"Authorization": "Bearer " + key(), "Content-Type": "application/json"}
     if method == "PUT" and ETAGS.get(path):
@@ -133,7 +139,16 @@ def api(method, path, body=None, tries=4):
             if e.code == 409 and i < tries - 1:
                 print(f"  Larch 回 409（版本被墊高），重抓 ETag 再送")
                 ETAGS.pop(path, None)
-                api("GET", path)
+                try:
+                    api("GET", path)
+                except SystemExit:
+                    pass          # 還不存在的版子 GET 不到自己的，底下用 409 回的版本號
+                # 409 的內文帶著專案當下的版本（conflictRevision）。建新版子的時候
+                # 只有這條路拿得到正確的號碼：自己 GET 是 404，借別人的又已經過期。
+                if path not in ETAGS:
+                    m_rev = re.search(r'"conflictRevision"\s*:\s*"?(\d+)"?', msg)
+                    if m_rev:
+                        ETAGS[path] = m_rev.group(1)
                 if ETAGS.get(path):
                     head["If-Match"] = ETAGS[path]
                 req = urllib.request.Request(API + path, data, head, method=method)
@@ -368,7 +383,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                         .replace("/*@@DISPLAY@@*/{}", json.dumps(DISPLAY_UI, ensure_ascii=False)))
                 d["miniGameHtml"] = html
                 vs = sorted({cc["variable"] for r in rs for c in r["conds"] for cc in (c.get("any") or [c])})
-                d["miniGameReadVars"] = ["day", "slot", "here", "asked_斑比_鐵塔"] + vs
+                # mode／walk：劇情模式要把這一格限制成攻略的那一個（menu.html 裡的 walk 那一段）
+                d["miniGameReadVars"] = ["mode", "walk", "day", "slot", "here", "asked_斑比_鐵塔"] + vs
                 d["miniGameWriteVars"] = ["pick"]
                 menus.append(n["id"])
         elif d.get("type") == "dialogue" and d.get("sceneCode"):

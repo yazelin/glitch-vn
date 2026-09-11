@@ -498,7 +498,10 @@ def build(cards):
                                            "seen_catgrass_home", "clue_notfix", "asked_0x_黑洞", "asked_諾亞_帳號", "page1", "trust_保全", "met_保全", "guard_told", "see_clerk", "see_parts", "see_noah",
                                            "asked_鐵塔_斑比", "asked_貓草_斑比", "asked_貓草_鐵塔", "asked_貓草_格莉奇", "seen_catgrass_home", "tube_bought", "tube_given", "asked_斑比_鐵塔"] + [f"open_{k}" for k in
                                           ("roof", "laundry", "figure", "parts", "studio", "tower14")] + MET_VARS,
-                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries", "list_text", "page1_text", "page1_lead", "page1_gaps"] + MET_VARS})
+                      # page1 只有劇情模式會寫：那六格是守則本上的工具動作，
+                      # 軌道擋得住「去哪裡」「選哪一格」，擋不住「要不要翻開本子填」。
+                      # 自由探索一個字都不碰（2026-09-11 拍板）。
+                      "miniGameWriteVars": ["day", "slot", "dest", "here", "night_visits", "met", "visited", "tries", "list_text", "page1", "page1_text", "page1_lead", "page1_gaps"] + MET_VARS})
     # 2. 每個地點：入口場景 → 選單
     menu_of, entries_of, greetings = {}, {}, []
     for loc in LOCS:
@@ -1129,19 +1132,44 @@ def load_route():
 
 
 def rail(b, rules, board, choices):
-    """把通關路線那一輪的選擇對到板上的卡，回傳 {節點 id: 該選第幾格}。
+    """把通關路線那一輪的每一步對到板上，回傳 ({節點 id: 該選第幾格}, 對不上的步)。
 
-    對法：路線那一步的（地名, 選單標籤）先對到一條規則，拿到它的段落代號，
-    再從那個段落起往後找第一張**選項標籤一模一樣**、而且還沒被這一步用掉的選擇卡。
-    只靠標籤會對錯：「開錄音機／不開」全篇有五張，答案還不一樣（貓草那一張是不開）。
+    **每一步都要逐項查過**，不是只看對得上幾張（2026-09-11 退回過一次：
+    軌道只擋「去哪裡」不擋「選單選哪一格」，自動玩家在第 2 天晚上就選了別的，
+    貓草那條線整條斷掉，結局少兩行註解，而 build 只報了「對上 10/11」）：
 
-    對不到的列在回傳的第二個值裡，build 會印出來，tools/pathlint.py 第八項會把它判紅。"""
+      一、地名對得到地點代號嗎（`NAME_LOC`，跟 push.py 的 LOC_NAME 同一張表）
+      二、那個地點的選單上真的有這一格嗎（規則的 dest ＋ label）
+      三、那一格在這個時段開著嗎（規則的 slots）
+      四、那一步的選擇卡對得到板上哪一張（標籤一模一樣、段落在選單那一段之後）
+
+    選擇卡只靠標籤會對錯：「開錄音機／不開」全篇有五張，答案還不一樣（貓草那一張是不開）。
+    四項任何一項不過就進 miss，build 會印出來，tools/pathlint.py 第九項會把它判紅。"""
     picks, used, miss = {}, set(), []
-    seg_of = {}
+    seg_of, rule_of = {}, {}
     for r in rules:
         if r.get("label"):
             seg_of.setdefault((r["dest"], r["label"]), r["segment"])
-    step = {(s["day"], s["slot"]): s for s in board}
+            rule_of.setdefault((r["dest"], r["label"]), []).append(r)
+    step = {}
+    for s in board:
+        tag = {"day": s["day"], "slot": s["slot"]}
+        if not s.get("loc"):
+            miss.append({**tag, "labels": [s.get("place", "")], "why": "地名對不到地點代號"})
+            continue
+        step[(s["day"], s["slot"])] = s
+        if not s["label"]:
+            continue                      # 那一趟在選單上什麼都沒選（選單是空的），不必擋
+        rs = rule_of.get((s["loc"], s["label"]))
+        if not rs:
+            miss.append({**tag, "labels": [s["label"]], "why": f"{s['loc']} 的選單上沒有這一格"})
+            continue
+        if not any((not r["slots"]) or s["slot"] in r["slots"] for r in rs):
+            miss.append({**tag, "labels": [s["label"]],
+                         "why": f"{s['loc']}「{s['label']}」這個時段不開（開在時段 "
+                                + "／".join(str(x) for r in rs for x in (r["slots"] or ["任一"])) + "）"})
+            continue
+        s["seg"] = rs[0]["segment"]
     chnodes = [n for n in b.nodes if (n["data"].get("type") == "choice")]
     for day, slot, labels, k in choices:
         s = step.get((day, slot)) or {}
@@ -1158,11 +1186,17 @@ def rail(b, rules, board, choices):
             continue
         used.add(hit["id"])
         picks[hit["id"]] = k
-    for s in board:
-        if not s.get("loc"):
-            miss.append({"day": s["day"], "slot": s["slot"], "labels": [s.get("place", "")],
-                         "why": "地名對不到地點代號"})
     return picks, miss
+
+
+def walk_str(board):
+    """軌道字串：`天|時段|地點代號|選單標籤`，一步一段，分號隔開。
+
+    欄位分隔用半形 `|`，因為選單標籤裡有全形逗號（「深夜，去工作室」），
+    也有頓號。標籤要一起送進去，不然選單那一張擋不了「選哪一格」——
+    2026-09-11 就是少了它，劇情模式走得完可是走不出完美結局。"""
+    return ";".join(f"{s['day']}|{s['slot']}|{s['loc']}|{s.get('label', '')}"
+                    for s in board if s.get("loc"))
 
 
 def load_labels():
@@ -1180,8 +1214,9 @@ def load_labels():
 def variables(walk=""):
     # mode：開場那張卡寫的。'story' 劇情模式（板只開攻略的下一步、選擇卡只開該選的那一格）、
     #       'free' 自由探索。預設 free：萬一沒經過開場那張卡，玩到的就是原本那一版。
-    # walk：劇情模式的軌道，"天,時段,地點代號" 用分號串起來。放在變數的預設值裡，
-    #       調查板讀它就好，不必再多一條注入管線（板卡是 sandbox 的 iframe，載不了外部檔案）。
+    # walk：劇情模式的軌道，"天|時段|地點代號|選單標籤" 用分號串起來（見 walk_str）。
+    #       放在變數的預設值裡，板卡與選單卡讀它就好，不必再多一條注入管線
+    #       （兩張都是 sandbox 的 iframe，載不了外部檔案）。
     v = [("mode", "string", "free"), ("walk", "string", walk),
          ("day", "number", 1), ("slot", "number", 0), ("dest", "string", ""),
          ("here", "string", ""), ("pick", "string", ""), ("met", "string", ""),
@@ -1250,8 +1285,7 @@ def main():
     # 劇情模式的軌道：板上每個時段去哪、每一張選擇卡該選哪一格（design/調查篇.md 七之〇）
     route_board, route_choices = load_route()
     picks, rail_miss = rail(b, rules, route_board, route_choices)
-    walk_str = ";".join(f"{s['day']},{s['slot']},{s['loc']}" for s in route_board if s.get("loc"))
-    vs = variables(walk_str)
+    vs = variables(walk_str(route_board))
     for n in b.nodes:
         d = n["data"]
         if d.get("type") != "choice":
@@ -1284,8 +1318,13 @@ def main():
     print(f"段落入口沒有任何 pick 邊進來的：{len(unreached)} 條")
     print(f"時段判讀：任一 {sum(1 for r in rules if len(r['slots'])==4)}、指定 {sum(1 for r in rules if 0<len(r['slots'])<4)}、沒寫 {sum(1 for r in rules if not r['slots'])}")
     print(f"含「或」要拆的規則：{sum(1 for r in rules if r['or'])} 條")
-    print(f"劇情模式軌道：板上 {len(route_board)} 步、選擇卡對上 {len(picks)}/{len(route_choices)} 張"
-          + (f"、對不到 {len(rail_miss)} 步" if rail_miss else ""))
+    _n_loc = sum(1 for s in route_board if s.get("loc"))
+    _n_seg = sum(1 for s in route_board if s.get("seg"))
+    _n_nolabel = sum(1 for s in route_board if s.get("loc") and not s.get("label"))
+    print(f"劇情模式軌道：板上 {len(route_board)} 步 → 地名對到 {_n_loc}、"
+          f"選單那一格對到規則 {_n_seg}、選單上沒東西可選 {_n_nolabel}；"
+          f"選擇卡對上 {len(picks)}/{len(route_choices)} 張"
+          + (f"　★ 對不到 {len(rail_miss)} 步" if rail_miss else ""))
     for m_ in rail_miss[:8]:
         print(f"  ・第 {m_['day']} 天 時段{m_['slot']}　{m_['why']}　{'｜'.join(m_['labels'])[:40]}")
     if b.unlabeled:

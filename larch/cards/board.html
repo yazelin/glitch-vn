@@ -16,15 +16,17 @@
   miniGameReadVars ：mode walk day slot met dest night_visits seen_booth visited met_<每個人> 以及 THREADS 用到的 open_*／names_seen／see_stairs
                      open_roof open_laundry open_figure open_parts
                      open_studio open_tower14
-  miniGameWriteVars：day slot dest here night_visits met visited met_<每個人>
+  miniGameWriteVars：day slot dest here night_visits met visited met_<每個人> page1（只有劇情模式寫）
 
   **劇情模式**（`mode == 'story'`，design/調查篇.md 七之〇）：這個時段只開攻略的下一步，
   其餘全部灰掉，「這一段不出門」也收起來（休息一次之後每一步都會錯開）。
-  軌道從 `walk` 變數讀，形狀是 `天,時段,地點代號` 用分號串起來，
+  軌道從 `walk` 變數讀，形狀是 `天|時段|地點代號|選單標籤` 用分號串起來，
   由 larch/inv/build.py 從 design/調查篇-通關路線.txt 算出來放進變數的預設值。
   這張卡是 sandbox 的 iframe，載不了外部檔案，所以軌道走變數不走注入。
+  選單那一張（menu.html）讀同一份，擋的是「選哪一格」。
   **走不到就自己讓開**：那一格沒開、這個時間沒開、或者根本還沒畫在板上，
   就退回自由探索的畫面，不把玩家鎖死在一張全灰的板子上。
+  另外劇情模式會把守則本第一頁那六格自己填好（autoPage1），因為那是工具動作、不經過選單。
 
   **解鎖是一個地點一個布林，不是一串逗號清單。** 清單要「讀出來、加一個、寫回去」，
   而普通對話卡做不到那件事（它只能設一個值）。布林的話，管理員講完那句話的那張卡
@@ -140,10 +142,12 @@ function finish(result,payload){ if(done)return; done=true;
   parent.postMessage({type:'larch:complete',result:result,payload:payload},'*'); }
 function num(v,d){ var n=Number(v); return isNaN(v)||v===''||v==null?d:n; }
 function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){return s.trim();}).filter(Boolean); }
-// 劇情模式的軌道："天,時段,地點代號" 用分號串起來 → { "3,1": "street", … }
+// 劇情模式的軌道："天|時段|地點代號|選單標籤" 用分號串起來 → { "3,1": {loc:'street', label:'…'} }
+// 欄位用 | 分，因為選單標籤裡有全形逗號（「深夜，去工作室」）。選單那一張讀同一份。
 function walkMap(){
   var m={}, a=String(values.walk||'').split(';');
-  for(var i=0;i<a.length;i++){ var p=a[i].split(','); if(p.length===3&&p[2]) m[p[0]+','+p[1]]=p[2]; }
+  for(var i=0;i<a.length;i++){ var p=a[i].split('|');
+    if(p.length>=3&&p[2]) m[p[0]+','+p[1]]={loc:p[2], label:p[3]||''}; }
   return m;
 }
 
@@ -338,6 +342,21 @@ function gapsText(){
   if(n===0) return '她把本子翻到第一頁。\n六行都填上了。第七條還是空的。';
   return '她把本子翻到第一頁。\n六行裡有'+cn+'行我還填不出來。';
 }
+// 劇情模式：守則本第一頁那六格自己填好（2026-09-11 拍板，
+// 原話是「劇情就是要無腦一點的玩家，想推理的就是玩自由模式了」）。
+// 軌道擋得住「去哪裡」「選單選哪一格」，擋不住「要不要翻開守則本填那六格」——
+// 那是玩家自己的工具動作，不經過選單，所以永遠不會進軌道。
+// 答案照正典（design/novel.md）。**最後一行的正解就是「查不到」**：
+// 故事裡那個帳號的主人沒有出現過，不是漏問。
+// **自由探索一個字都不可以動。**
+var PAGE1_ANSWER='name_cat=貓草,name_tower=鐵塔,name_zero=0x,name_bambi=斑比,name_noah=諾亞,name_del=查不到';
+function autoPage1(){
+  if(String(values.mode||'free')!=='story') return;
+  // 看過斑比那面牆才有這一頁（names_seen），跟收尾唸第一頁的門檻同一個
+  if(!(values.names_seen===true||values.names_seen==='true')) return;
+  if(String(values.page1||'')===PAGE1_ANSWER) return;
+  values.page1=PAGE1_ANSWER; setVar('page1', PAGE1_ANSWER);
+}
 // 收尾旁白唸的第一頁。玩家在筆記卡填過的名字照他填的唸，沒填的畫一個空括號。
 function writePage1(){
   var NAMES=[['name_cat','@CatGrass_80'],['name_tower','@Tower_Manager'],['name_zero','@Null_0x99'],
@@ -379,6 +398,7 @@ function go(spotId){
   setVar('list_text', listText());
   // 第一頁那兩段收尾旁白也在這裡補一次：筆記卡要玩家自己翻開才會寫，
   // 沒翻過的人看過牆之後仍然會被唸成「她一個字都沒有寫」（2026-09-09）。
+  autoPage1();
   if(values.names_seen===true||values.names_seen==='true') writePage1();
   setVar('page1_gaps', gapsText());
   var visited=list(values.visited); if(visited.indexOf(spotId)<0) visited.push(spotId); setVar('visited', visited.join(','));
@@ -395,6 +415,7 @@ function start(){
   // 收尾那三段字要在這裡也寫一次：出門前寫的那一份看不到那一趟拿到的東西，
   // 而最後一趟拿到的（例如貓草家）正好決定名單那一頁有幾行註解（2026-09-09 實測）。
   setVar('list_text', listText());
+  autoPage1();
   setVar('page1_gaps', gapsText());
   if(values.names_seen===true||values.names_seen==='true') writePage1();
   var slot=num(values.slot,0), day=num(values.day,1);
@@ -425,7 +446,8 @@ function start(){
   // 劇情模式：這個時段只開攻略的下一步。走不到就自己讓開（railOff），不把人鎖在全灰的板子上。
   var railTo=null, railOff=false;
   if(String(values.mode||'free')==='story'){
-    railTo = walkMap()[day+','+slot] || null;
+    var w = walkMap()[day+','+slot];
+    railTo = w ? w.loc : null;
     var rs = railTo ? spotAt(railTo) : null;
     if(!rs || !drawn(rs) || !isOpen(rs) || rs.live[slot]===null || rs.live[slot]===undefined){
       railTo=null; railOff=true;

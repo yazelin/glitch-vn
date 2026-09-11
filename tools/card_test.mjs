@@ -105,7 +105,7 @@ console.log('\n=== 調查板：劇情模式只開攻略的下一步（design/調
   // 軌道不是這支測試自己編的：讀 build.py 算出來的那一份，走味了這裡就會紅。
   const board = JSON.parse(fs.readFileSync('larch/inv/out/board.json', 'utf8'));
   const WALK = board.variables.find(v => v.name === 'walk').defaultValue;
-  ok('軌道有第一天下午那一步', WALK.startsWith('1,1,roof;'), WALK.slice(0, 24));
+  ok('軌道帶得動地點與選單那一格', WALK.startsWith('1|1|roof|上頂樓;'), WALK.slice(0, 28));
 
   const V = { mode: 'story', walk: WALK, day: 1, slot: 1, open_roof: true, met: '管理員,諾亞' };
   const fr = await open('board.html', V);
@@ -124,6 +124,61 @@ console.log('\n=== 調查板：劇情模式只開攻略的下一步（design/調
   const off = await open('board.html', { mode: 'story', walk: WALK, day: 1, slot: 1, met: '管理員' });
   ok('攻略那一格進不去就讓開', !(await off.locator('button.spot', { hasText: '一樓' }).isDisabled()));
   ok('讓開的時候說一聲', (await off.locator('#hint').textContent()).includes('自己的判斷'));
+}
+
+console.log('\n=== 調查板：劇情模式把守則本第一頁那六格自己填好 ===');
+{
+  // 那六格是玩家自己翻本子填的工具動作，不經過選單，所以軌道擋不到它。
+  // 2026-09-11 拍板：劇情模式直接填好，自由探索一個字都不碰。
+  const board = JSON.parse(fs.readFileSync('larch/inv/out/board.json', 'utf8'));
+  const WALK = board.variables.find(v => v.name === 'walk').defaultValue;
+  const V = { walk: WALK, day: 13, slot: 3, names_seen: true, met: '管理員,諾亞,斑比,鐵塔,0x,貓草,店員' };
+
+  await open('board.html', { ...V, mode: 'story' });
+  const s = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('劇情模式寫回填好的 page1',
+     s.page1 === 'name_cat=貓草,name_tower=鐵塔,name_zero=0x,name_bambi=斑比,name_noah=諾亞,name_del=查不到',
+     String(s.page1));
+  ok('收尾唸的第一頁六格都有字', typeof s.page1_text === 'string' && !s.page1_text.includes('（　）'),
+     String(s.page1_text || '').split('\n').slice(1).join(' / '));
+  ok('最後一行是查不到（正典就是查不到，不是漏問）',
+     String(s.page1_text || '').includes('@考完就刪　查不到'));
+  ok('她自己數的缺口變成零', String(s.page1_gaps || '').includes('六行都填上了'), String(s.page1_gaps));
+
+  await open('board.html', { ...V, mode: 'free' });
+  const f = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('自由探索一個字都不碰', f.page1 === undefined, `page1=${f.page1}`);
+  ok('自由探索的第一頁還是六個空括號',
+     (String(f.page1_text || '').match(/（　）/g) || []).length === 6, String(f.page1_text));
+}
+
+console.log('\n=== 地點選單：劇情模式只留攻略那一格 ===');
+{
+  // 選單的 RULES 是推送層注入的，本檔獨立打開是空的。這裡自己注一份兩格的假規則，
+  // 兩格都無條件成立，差別只在劇情模式擋不擋得掉第二格。
+  // （2026-09-11 退回的就是這裡：板擋了「去哪裡」，選單沒人擋「選哪一格」。）
+  const RULES = [{ seg: 'segAAA', label: '甲', slots: [], conds: [], who: [] },
+                 { seg: 'segBBB', label: '乙', slots: [], conds: [], who: [] }];
+  const src = fs.readFileSync(path.join(DIR, 'menu.html'), 'utf8')
+    .replace('@@LOC_NAME@@', '一樓').replace('@@LOC@@', 'lobby')
+    .replace('/*@@RULES@@*/[]', JSON.stringify(RULES));
+  const tmp = path.join(DIR, '.menu-test.html');
+  fs.writeFileSync(tmp, src);
+  const V = { day: 2, slot: 2, here: '管理員', walk: '2|2|lobby|甲' };
+
+  const st = await open('.menu-test.html', { ...V, mode: 'story' });
+  ok('劇情模式只留一格', (await st.locator('button.seg').count()) === 1, `${await st.locator('button.seg').count()} 格`);
+  ok('留下的是攻略那一格', (await st.locator('button.seg').first().textContent()).includes('甲'));
+  ok('「先走」收起來', !(await st.locator('#skip').isVisible()));
+
+  const fr2 = await open('.menu-test.html', { ...V, mode: 'free' });
+  ok('自由探索兩格都在', (await fr2.locator('button.seg').count()) === 2);
+  ok('自由探索留著「先走」', await fr2.locator('#skip').isVisible());
+
+  // 安全閥：軌道指的那一格這個時候不在清單上，就整個放行，不要留一張空選單
+  const safe = await open('.menu-test.html', { ...V, mode: 'story', walk: '2|2|lobby|丙' });
+  ok('對不到就整個放行', (await safe.locator('button.seg').count()) === 2);
+  fs.unlinkSync(tmp);
 }
 
 console.log('\n=== 調查板：一顆布林開一個地方 ===');
