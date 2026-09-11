@@ -35,7 +35,7 @@
     tools/playrate.sh        一次跑好幾種走法好幾輪，統計各自走到哪裡
     tools/playreport.py      把一批紀錄整理成里程碑表與觸及率
     tools/pathlint.py        靜態路徑檢查，不開瀏覽器（見下面「調查篇」的驗收）
-    tools/pathlint_selftest.py  pathlint 的負控制，七項各注一個故障確認它會叫
+    tools/pathlint_selftest.py  pathlint 的負控制，八項各注一個故障確認它會叫
     tools/gen_guide.py       產生 docs/guide/ 那七頁公式站
     art/live2d/              格莉奇的 Live2D 模型。build.py 把 sprite-glitch.png 切成 34 層、
                              mkpsd.py 組成 Cubism 讀得懂的 PSD、run-cubism.sh 在 Wine 底下開
@@ -69,7 +69,8 @@
 所以台詞一律不叫名字、也不可以用「先生」「小姐」。這個決定可逆：台詞本來就不帶性別稱呼，
 以後要加男版只補一批男聲，一句台詞都不用改。`larch/voice.py` 的 `玩家男` 留著沒刪就是為了這個。
 
-    design/調查篇.md              總設計：這個故事在講什麼、核心迴圈、硬約束
+    design/調查篇.md              總設計：這個故事在講什麼、核心迴圈、硬約束、
+                                 七之〇 開場選模式（劇情模式／自由探索）
     design/調查篇-場景.md         十二個地點、線索表、問答矩陣、關係與解鎖
     design/調查篇-變數.md         **實作的時候唯一要看的表**：誰讀誰寫、七個閘誰打開
     design/調查篇-信心.md         他的信心怎麼掉下來：四次遭遇、三階段筆記、最後那一頁
@@ -88,7 +89,7 @@
                                  重跑：PREFER 逼出四場、BAG 挑背包、FILLPAGE1 填第一頁（見 tools/autoplay.mjs）
     docs/guide/                   調查篇公式站，七頁，**程式生的，不要手改**。
                                  2026-09-11 上架，正篇站的 nav 有一格「調查篇」
-    larch/cards/board.html        調查板：選地點、算遇到誰、時間往前走
+    larch/cards/board.html        調查板：選地點、算遇到誰、時間往前走；劇情模式下只開攻略的下一步
     larch/cards/notes.html        調查筆記：第一頁（六 ID 對人）／名單／目擊／問答／空白頁
     larch/cards/host.html         假的 Larch 宿主，開發用
     art/bg-investigation/         七張新場景背景
@@ -99,13 +100,17 @@
 
 驗收：
 
-    node tools/card_test.mjs           # 實跑 postMessage 契約，sandbox 跟正式一樣
-    python3 tools/pathlint.py          # 靜態抓路徑 bug，七項：同地點同時段的重複標籤、
+    node tools/card_test.mjs           # 實跑 postMessage 契約，sandbox 跟正式一樣。
+                                       # 劇情模式那一組吃的是 build.py 算出來的軌道，軌道走味就會紅
+    python3 tools/pathlint.py          # 靜態抓路徑 bug，八項：同地點同時段的重複標籤、
                                        # 值永遠對不到的條件、沒有人寫的變數、邊撞 id、
-                                       # 選項沒接好、舞台指示沒進卡、講者留空。零依賴，秒回
-    python3 tools/pathlint_selftest.py # **pathlint 的負控制**，七項各注一個故障進板子的副本，
+                                       # 選項沒接好、舞台指示沒進卡、講者留空、
+                                       # 選項條件壞掉（陣列長度對不上／劇情模式走不出去／軌道斷了）。
+                                       # 零依賴，秒回
+    python3 tools/pathlint_selftest.py # **pathlint 的負控制**，八項各注一個故障進板子的副本，
                                        # 注入後必須紅、還原後必須綠。改 pathlint 的規則要順手改它，
-                                       # 不然那一項會安靜地不再檢查（實測：拿掉第四項，這支會紅）
+                                       # 不然那一項會安靜地不再檢查（實測：拿掉第四項，這支會紅）。
+                                       # 第八項有三種壞法，所以它有三個注入，報表照「項」數算
     python3 tools/gen_guide.py         # 重生公式站那七頁（資料只來自 board.json 與稿子）
     python3 tools/vars.py              # 掃出所有變數，抓命名衝突
     python3 tools/vars.py --cards      # 比對插件卡跟設計文件有沒有分家
@@ -315,6 +320,24 @@ build.py 有自我檢查：任何一條邊掛了 dest／pick 以外的條件就 
 取得道具的畫面收不下來所以錄音帶從來沒進過背包、守則本的下拉列不出 0x、
 0x 那一場漏設兩個旗標、名單註解發給沒走過那一場的人、
 還有五個變數沒進板卡的讀取清單所以階段判斷是瞎的。
+
+**2026-09-11：開場多一張選模式的卡，走廊那一場複製出來的兩段收回來了。**
+Larch 的 `choice` 卡**吃條件**（`data.choiceConditions`，跟 `choices` 一一對應的陣列，
+不掛條件的那一格填 `null`；條件不成立的選項會 disabled）。這是這一天在測試專案實測的，
+以前的設計稿寫「還沒確認」，而且為了繞過它把劇情複製了一份。
+
+- **開場選模式**（`design/調查篇.md` 七之〇）：第一張卡寫 `mode`。
+  `story` 劇情模式＝調查板只開攻略的下一步、劇情裡的選擇卡只有該選的那一格按得下去
+  （其餘掛 `mode == free`）；
+  `free` 自由探索＝原本那一版，完全不變（預設值就是 `free`）。
+  軌道從 `design/調查篇-通關路線.txt` 算出來放進 `walk` 變數的預設值，不要手抄第二份。
+  **地點選單那一張還沒掛模式**，走岔了不會鎖死（板上有安全閥，見 `board.html` 的 rail 那一段）。
+- **走廊收掉兩段**：`格二之二`、`格三之二` 刪了，格二與格三互相接回去，
+  問過的那一格靠 `asked_鐵塔_*` 擋掉。兩格都問完的時候那張選擇卡整張跳過，
+  體感跟以前一樣（收複製卡不可以順手把節奏改掉）。順手補了從來沒有人寫的 `asked_鐵塔_0x`。
+- **顧店那一場評估過，收不回來**，理由寫在 `design/調查篇-橋段.md` 的排卡註：
+  那兩份複製差在「選項指去哪裡」與「尾巴的筆記」，兩件都不是條件擋得掉的。
+- 段落 163 → 161、卡片 434 → 432。**這一輪沒有推上 Larch**，上面那組 745／242 還是 09-10 推的那一版。
 
 街區定在台北南港（南港車站、二號出口、藍15 與 605、南港路的材料行、中信兄弟的看板）。
 還沒做的：BGM 與音效（一首都還沒接）、五個新角色的表情差分、上架與官網那一頁。

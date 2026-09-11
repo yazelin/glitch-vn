@@ -100,6 +100,32 @@ console.log('\n=== 調查板 ===');
      `here="${sets.here}"（一樓晚上常駐是空，黑洞先生 60%）`);
 }
 
+console.log('\n=== 調查板：劇情模式只開攻略的下一步（design/調查篇.md 七之〇）===');
+{
+  // 軌道不是這支測試自己編的：讀 build.py 算出來的那一份，走味了這裡就會紅。
+  const board = JSON.parse(fs.readFileSync('larch/inv/out/board.json', 'utf8'));
+  const WALK = board.variables.find(v => v.name === 'walk').defaultValue;
+  ok('軌道有第一天下午那一步', WALK.startsWith('1,1,roof;'), WALK.slice(0, 24));
+
+  const V = { mode: 'story', walk: WALK, day: 1, slot: 1, open_roof: true, met: '管理員,諾亞' };
+  const fr = await open('board.html', V);
+  ok('攻略那一格點得下去', !(await fr.locator('button.spot', { hasText: '頂樓收音機店' }).isDisabled()));
+  const lobby = fr.locator('button.spot', { hasText: '一樓' });
+  ok('其餘的關起來', await lobby.isDisabled());
+  ok('灰字說是模式擋的', (await lobby.locator('.who').textContent()).includes('劇情模式'));
+  ok('「這一段不出門」收起來（休息一次軌道就錯開）', !(await fr.locator('#skip').isVisible()));
+  ok('標頭寫下一步', (await fr.locator('#hint').textContent()).includes('頂樓收音機店'));
+
+  const free = await open('board.html', { ...V, mode: 'free' });
+  ok('自由探索什麼都不擋', !(await free.locator('button.spot', { hasText: '一樓' }).isDisabled()));
+  ok('自由探索留著「這一段不出門」', await free.locator('#skip').isVisible());
+
+  // 安全閥：攻略那一格進不去（這裡是 open_roof 沒開）就退回自由探索的畫面，不要鎖死玩家
+  const off = await open('board.html', { mode: 'story', walk: WALK, day: 1, slot: 1, met: '管理員' });
+  ok('攻略那一格進不去就讓開', !(await off.locator('button.spot', { hasText: '一樓' }).isDisabled()));
+  ok('讓開的時候說一聲', (await off.locator('#hint').textContent()).includes('自己的判斷'));
+}
+
 console.log('\n=== 調查板：一顆布林開一個地方 ===');
 {
   // **解鎖要能被一張普通對話卡打開。** 逗號清單要「讀出來、加一個、寫回去」，

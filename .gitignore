@@ -44,3 +44,6 @@ larch/cards/.phone-banner-test.html
 # 新環境第一件事就是 python3 larch/inv/build.py --out larch/inv/out/board.json。
 larch/inv/out/board.json
 larch/inv/out/payload.json
+
+# agent 的 worktree 放這裡，不進版控
+.claude/

@@ -26,6 +26,12 @@
     > 深夜的便利商店。
 
     **→ `open_figure` ← true**            ← 變數寫入，掛在前一張卡上
+
+    **choice・走廊**                      ← 選擇卡，引言是題目
+    > 他還在走。
+
+    - 問他 0x 那邊的事　→ 格二　（掛 `asked_鐵塔_0x` == false）   ← 條件不成立的那一格 disabled
+    - 不問了　→ 收尾
 """
 import argparse, json, pathlib, re, sys
 
@@ -49,8 +55,18 @@ CAST = ["格莉奇", "黑洞先生", "貓草", "鐵塔", "0x", "斑比", "諾亞
         "管理員", "店員", "保全", "材料行老闆", "櫃檯", "住戶",
         "路人", "路人乙", "高中生", "阿姨", "送貨的", "發傳單的", "上班族"]
 # 選擇卡：「**choice・層一**」，引言是題目，底下「- 標籤　→ 二」一行一個選項，目標是同一場裡的節
+#
+# 選項後面可以再掛一個條件（2026-09-11 加）：
+#
+#     - 問周邊上那些圖是誰畫的　→ 格三　（掛 `asked_鐵塔_斑比` == false）
+#
+# 條件不成立的那一格在 Larch 上會 disabled（滑過去顯示「條件尚未達成」），
+# 2026-09-11 在測試專案實測過。以前以為選項不吃條件，所以走廊那一場把劇情複製了一份繞過去。
+# 語法沿用卡片那邊已經在用的「掛 `var`」。比較運算子寫 == != >= <= > <。
 CHOICE = re.compile(r"^\*\*choice・(.+?)\*\*\s*$")
-OPTION = re.compile(r"^-\s*(.+?)\s*→\s*(\S+)\s*$")
+OPTION = re.compile(r"^-\s*(.+?)\s*→\s*(\S+?)"
+                    r"(?:\s*（掛\s*`([^`]+)`\s*(==|!=|>=|<=|>|<)\s*([^）]+?)\s*）)?\s*$")
+OPS = {"==": "eq", "!=": "neq", ">=": "gte", "<=": "lte", ">": "gt", "<": "lt"}
 HEAD = re.compile(r"^\*\*(" + "|".join(FIXED + CAST) + r")\*\*(?:（(.*?)）)?\s*$")
 SCENE = re.compile(r"`scene:\s*([a-z_0-9]+)`")
 SLOT = re.compile(r"(上午|下午|晚上|深夜)")
@@ -151,7 +167,13 @@ def parse_file(path):
                    "lines": [], "vars": [], "file": path.stem, "line": i}
             continue
         if cur is not None and cur["kind"] == "choice" and (om := OPTION.match(ln)):
-            cur["options"].append({"label": om.group(1), "target": om.group(2)})
+            opt = {"label": om.group(1), "target": om.group(2), "cond": None}
+            if om.group(3):
+                raw = om.group(4), om.group(5).strip()
+                val = {"true": True, "false": False}.get(raw[1].lower(),
+                                                        int(raw[1]) if re.fullmatch(r"-?\d+", raw[1]) else raw[1])
+                opt["cond"] = {"variable": om.group(3), "op": OPS[raw[0]], "value": val}
+            cur["options"].append(opt)
             continue
         m = HEAD.match(ln)
         if m:

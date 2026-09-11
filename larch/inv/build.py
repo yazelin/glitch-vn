@@ -28,6 +28,15 @@ BID = "inv"
 SLOT = {"上午": 0, "下午": 1, "晚上": 2, "深夜": 3}
 LOCS = ["lobby", "roof", "street", "studio", "booth", "tower14",
         "store", "parts", "busstop", "metro", "laundry", "figure"]
+# 地點代號 → 板上那張便條的地名。**跟 larch/inv/push.py 的 LOC_NAME 是同一張表。**
+# 這裡要它是因為通關路線那份逐字稿記的是地名（自動玩家照板上讀的），要換回代號。
+# 兩邊漂掉的話：路線裡那個地名對不到代號，軌道就會少一步，
+# tools/pathlint.py 第八項會紅（走不到的一步）。
+LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街", "studio": "斑比工作室",
+            "booth": "錄音間門口", "tower14": "十四樓大廳", "store": "便利商店", "parts": "材料行",
+            "busstop": "車站前站牌", "metro": "南港站二號出口", "laundry": "自助洗衣店", "figure": "手辦店"}
+NAME_LOC = {v: k for k, v in LOC_NAME.items()}
+ROUTE = ROOT / "design/調查篇-通關路線.txt"
 # 場景代號→背景。白天／深夜兩套（色溫規格見 design/調查篇-場景.md）。
 # 值是 art 檔名的主幹，推送層再換成 Larch 的 asset URL。
 BG = {
@@ -318,7 +327,8 @@ def expand_rec(b, prev, c, sid, tapes):
     name = f"錄音・{who}"
     tapes.append({"id": item_id, "name": name, "who": who, "quote": quote})
     choice = b.add({"type": "choice", "title": f"錄音：{who}", "text": "錄音機在包包裡。",
-                    "choices": ["開錄音機", "不開"], "choiceMode": "branch", "segment": sid})
+                    "choices": ["開錄音機", "不開"], "choiceMode": "branch", "segment": sid,
+                    "choiceConditions": [None, None]})
     # 匯流點：一張空的 setVariable 卡（沒有字會自動跳過），兩條路都接到它，下一張卡再接它
     merge = b.add({"type": "setVariable", "title": "（匯流）", "text": "", "variableOps": [], "segment": sid})
     if slot_need is None:
@@ -525,6 +535,7 @@ def build(cards):
     rules, unresolved, orphans, tapes = [], [], [], []
     labels, unlabeled = load_labels(), []
     choice_links, seg_first, seg_end, leftover_notes = [], {}, {}, []
+    choice_skips = []          # （閘, 選擇卡, 反向條件, 走哪一格的目標）：條件成立就整張跳過
     for i, s in enumerate(segs):
         sid = f"seg{i:03d}"
         if (s["key"][0], s["key"][1]) in SKIP_SECTIONS:
@@ -728,9 +739,26 @@ def build(cards):
                 continue
             if c["kind"] == "choice":
                 prompt = "\n".join(l["text"] for l in c["lines"] if not l.get("direction"))
+                conds = [o.get("cond") for o in c["options"]]
                 nid = b.add({"type": "choice", "title": f"選擇：{prompt[:12]}", "text": prompt,
-                             "choices": [o["label"] for o in c["options"]], "choiceMode": "branch", "segment": sid})
-                if prev:
+                             "choices": [o["label"] for o in c["options"]], "choiceMode": "branch", "segment": sid,
+                             "choiceConditions": [choice_cond([x] if x else []) for x in conds]})
+                # 只剩一格有條件、其餘無條件的卡：條件不成立的時候整張跳過，直接去第一格無條件的目標。
+                # 不補這個閘的話，走廊兩格都問完之後會跑出一張「一格灰的、一格不問了」的選擇卡，
+                # 而它以前是直接收尾的（收回複製卡不可以順手把體感改掉）。
+                # 一條邊只掛得下一個條件，所以這件事只有「恰好一格有條件」的時候做得到。
+                onec = [i for i, x in enumerate(conds) if x]
+                plain = [i for i, x in enumerate(conds) if not x]
+                if len(onec) == 1 and plain:
+                    v = conds[onec[0]]
+                    gate = b.add({"type": "setVariable", "title": f"（{v['variable']}？）", "text": "",
+                                  "variableOps": [], "segment": sid})
+                    if prev:
+                        b.edge(prev, gate)
+                    first = first or gate
+                    # 兩條邊都等選項接好了才拉：條件邊一定要排在預設邊前面
+                    choice_skips.append((gate, nid, {**v, "op": NEG[v["op"]]}, plain[0]))
+                elif prev:
                     b.edge(prev, nid)
                 first = first or nid
                 prev = nid
@@ -895,6 +923,11 @@ def build(cards):
             unresolved.append({"segment": "", "section": f"選項 → {target}", "notes": ["對不到那一節"], "text": l1})
             continue
         b.edge(nid, hit[0]); b.edges[-1]["sourceHandle"] = f"choice-{k_}"
+        # 那一格如果是某張卡的「整張跳過」出口，閘的兩條邊在這裡才拉得出來（目標剛剛才算出來）
+        for gate, cnid, neg, k0 in choice_skips:
+            if cnid == nid and k0 == k_:
+                b.edge(gate, hit[0], neg)      # 條件成立＝那一格已經沒得選了，整張跳過
+                b.edge(gate, cnid)             # 預設：照樣演這張卡
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == hit[1]
                                             and e["data"]["condition"].get("variable") == "pick")]
         rules[:] = [r for r in rules if r["segment"] != hit[1]]
@@ -981,6 +1014,11 @@ def build(cards):
                 if k == 0:
                     b.edge(g["last"], menu)
             b.edge(en, menu)
+    # 「整張跳過」的閘一定要兩條邊都接上（條件邊 ＋ 預設邊），少一條就是選項目標沒對到，
+    # 那張卡會變成走不出去的死路。
+    for gate, cnid, _neg, k0 in choice_skips:
+        outs = [e for e in b.edges if e["source"] == gate]
+        assert len(outs) == 2, f"跳過閘 {gate} 只接了 {len(outs)} 條邊（選擇卡 {cnid} 第 {k0} 格）"
     b.unlabeled = unlabeled
     return b, rules, unresolved, orphans, len(segs), tapes
 
@@ -1007,10 +1045,10 @@ CHAINS = [("調查篇-問答矩陣", "一、場面（三格共用）", "格一�
           # 第三晚的甲跟乙都要走到「他先開口」（那一張才給 trust 1），可是甲原本演完就回板，
           # 選「問他吃的那一份」的人拿不到「三次了」，整條線停在零階（2026-09-10 實測）
           ("調查篇-橋段2", "甲・那一份（第三次）", "他先開口（第三次"),
-          ("調查篇-問答矩陣", "格三・問鐵塔關於斑比", "收尾（三格共用）"),
-          # 走廊那兩條路各自複製了一段，演完都要接收尾，不然會直接回板（2026-09-10）
-          ("調查篇-問答矩陣", "格三之二・問鐵塔關於斑比", "收尾（三格共用）"),
-          ("調查篇-問答矩陣", "格二之二・問鐵塔關於 0x", "收尾（三格共用）")]
+          # 2026-09-11：走廊原本複製出來的格二之二、格三之二已經收回同一張卡（選項吃條件），
+          # 兩條接收尾的線跟著刪掉。格三演完接收尾這一條還在，因為格三後面那張選擇卡
+          # 在兩格都問過的時候會被閘整張跳過（choice_skip），跳過之後就要有人接住。
+          ("調查篇-問答矩陣", "格三・問鐵塔關於斑比", "收尾（三格共用）")]
 MET_VARS = [f"met_{w}" for w in ("管理員", "諾亞", "斑比", "鐵塔", "0x", "貓草", "店員", "材料行老闆", "櫃檯", "保全")]
 LABELS_MD = ROOT / "design/調查篇-選單標籤.md"
 # 第一天定稿的「上午／下午／晚上」節標題在五個地點重複，靠地點分
@@ -1019,6 +1057,112 @@ LABEL_DAY1 = {("lobby", "下午"): "再去一樓", ("lobby", "晚上"): "抄信�
               ("busstop", "上午"): "問藍十五", ("busstop", "下午"): "等一班車", ("busstop", "晚上"): "問車怎麼這麼久",
               ("metro", "上午"): "跟發傳單的講話", ("metro", "下午"): "接一張傳單", ("metro", "晚上"): "站在二號出口",
               ("store", "上午"): "問立牌可不可以買", ("store", "下午"): "再進去一次", ("store", "晚上"): "問店員一件事"}
+
+
+# ── 開場選模式（design/調查篇.md 七之〇）────────────────────────────────────
+# 劇情模式的軌道來自 design/調查篇-通關路線.txt，那是一輪真的跑完的完美通關逐字稿。
+# 這裡只解析它，不重跑：板上每一個時段該去哪、劇情裡每一張選擇卡該選哪一格。
+NEG = {"eq": "neq", "neq": "eq", "gte": "lt", "lt": "gte", "lte": "gt", "gt": "lte"}
+# 掛上去＝只有自由探索按得下去，劇情模式那一格會 disabled。
+# **寫 `mode == free` 不寫 `mode != story` 是故意的**：字串的 eq 這塊板子上已經在用了
+# （`dest == lobby` 那批邊），neq 配字串還沒在平台上驗過。萬一 neq 判反，
+# 壞掉的會是自由探索——那是預設玩法，不可以拿它去賭一個沒驗過的運算子。
+STORY_OFF = {"variable": "mode", "op": "eq", "value": "free"}
+
+
+def choice_cond(clauses):
+    """一格選項的條件。形狀跟邊的條件一樣（2026-09-11 在測試專案實測），
+    多條用 conditions 陣列裝、match=all，最外層再抄第一條（平台兩邊都讀）。
+    沒有條件的那一格要填 None，不可以省略——choiceConditions 是跟 choices 一一對應的陣列。"""
+    if not clauses:
+        return None
+    c0 = clauses[0]
+    return {"kind": "variable", "variable": c0["variable"], "op": c0["op"], "value": c0["value"],
+            "match": "all", "conditions": [dict(x) for x in clauses]}
+
+
+MODE_KEYS = ("題目", "劇情模式", "自由探索")
+
+
+def load_mode_card():
+    """開場那張卡的字：design/調查篇.md 七之〇 最後那張兩欄表。稿子是來源，這裡只讀。"""
+    out = {}
+    for ln in (ROOT / "design/調查篇.md").read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^\|\s*(題目|劇情模式|自由探索)\s*\|\s*(.+?)\s*\|\s*$", ln)
+        if m and m.group(2) not in ("內容", "行為"):
+            out.setdefault(m.group(1), m.group(2))
+    assert all(k in out for k in MODE_KEYS), f"design/調查篇.md 七之〇 少了開場那張卡的字：{out}"
+    return out
+
+
+def load_route():
+    """通關路線逐字稿 → 一輪完美通關的每一步。
+
+        board   [{day, slot, loc, label}]     板上那個時段去哪、在選單上選哪一段
+        choices [(day, slot, [選項標籤…], 選了第幾格)]
+
+    來源格式是 tools/autoplay.mjs 印出來的：`=== 板 第 N 天 ・ 時段` 起一段，
+    `→ 去 地名`、`→ 選「選單標籤」`、`[選項] 01甲 | 02乙 → 選 01甲`。
+    解析法跟 tools/gen_guide.py 的 build_walkthrough() 同一套。"""
+    board, choices, cur = [], [], None
+    if not ROUTE.exists():
+        return board, choices
+    for ln in ROUTE.read_text(encoding="utf-8").split("\n"):
+        if m := re.match(r"^=== 板 第 (\d+) 天 ・ (上午|下午|晚上|深夜)", ln):
+            cur = {"day": int(m.group(1)), "slot": SLOT[m.group(2)], "loc": None, "label": ""}
+            board.append(cur)
+            continue
+        if cur is None:
+            continue
+        if m := re.match(r"^→ 去 (\S+)", ln):
+            cur["loc"] = NAME_LOC.get(m.group(1))
+            cur["place"] = m.group(1)
+            continue
+        if m := re.search(r"→ 選「(.+?)」", ln):
+            if not cur["label"]:
+                cur["label"] = m.group(1)
+            continue
+        if m := re.search(r"\[選項\] (.+?) → 選 (\d\d)", ln):
+            labels = [re.sub(r"^\d\d", "", x.strip()) for x in m.group(1).split("|")]
+            choices.append((cur["day"], cur["slot"], labels, int(m.group(2)) - 1))
+    return board, choices
+
+
+def rail(b, rules, board, choices):
+    """把通關路線那一輪的選擇對到板上的卡，回傳 {節點 id: 該選第幾格}。
+
+    對法：路線那一步的（地名, 選單標籤）先對到一條規則，拿到它的段落代號，
+    再從那個段落起往後找第一張**選項標籤一模一樣**、而且還沒被這一步用掉的選擇卡。
+    只靠標籤會對錯：「開錄音機／不開」全篇有五張，答案還不一樣（貓草那一張是不開）。
+
+    對不到的列在回傳的第二個值裡，build 會印出來，tools/pathlint.py 第八項會把它判紅。"""
+    picks, used, miss = {}, set(), []
+    seg_of = {}
+    for r in rules:
+        if r.get("label"):
+            seg_of.setdefault((r["dest"], r["label"]), r["segment"])
+    step = {(s["day"], s["slot"]): s for s in board}
+    chnodes = [n for n in b.nodes if (n["data"].get("type") == "choice")]
+    for day, slot, labels, k in choices:
+        s = step.get((day, slot)) or {}
+        sid0 = seg_of.get((s.get("loc"), s.get("label")), "")
+        cands = [n for n in chnodes if n["data"].get("choices") == labels and n["id"] not in used]
+        after = [n for n in cands if (n["data"].get("segment") or "") >= sid0]
+        hit = (after or cands or [None])[0]
+        if hit is None:
+            # 同一張卡在逐字稿裡被記了兩次（結局那一張，自動玩家重播了一次）：
+            # 已經對上而且答案一樣就當重複，不算對不到。
+            same = [n for n in chnodes if n["data"].get("choices") == labels and picks.get(n["id"]) == k]
+            if not same:
+                miss.append({"day": day, "slot": slot, "labels": labels, "why": "對不到選擇卡"})
+            continue
+        used.add(hit["id"])
+        picks[hit["id"]] = k
+    for s in board:
+        if not s.get("loc"):
+            miss.append({"day": s["day"], "slot": s["slot"], "labels": [s.get("place", "")],
+                         "why": "地名對不到地點代號"})
+    return picks, miss
 
 
 def load_labels():
@@ -1033,8 +1177,13 @@ def load_labels():
     return out
 
 
-def variables():
-    v = [("day", "number", 1), ("slot", "number", 0), ("dest", "string", ""),
+def variables(walk=""):
+    # mode：開場那張卡寫的。'story' 劇情模式（板只開攻略的下一步、選擇卡只開該選的那一格）、
+    #       'free' 自由探索。預設 free：萬一沒經過開場那張卡，玩到的就是原本那一版。
+    # walk：劇情模式的軌道，"天,時段,地點代號" 用分號串起來。放在變數的預設值裡，
+    #       調查板讀它就好，不必再多一條注入管線（板卡是 sandbox 的 iframe，載不了外部檔案）。
+    v = [("mode", "string", "free"), ("walk", "string", walk),
+         ("day", "number", 1), ("slot", "number", 0), ("dest", "string", ""),
          ("here", "string", ""), ("pick", "string", ""), ("met", "string", ""),
          ("notes", "string", "[]"), ("notes_free", "string", "[]"),
          ("hole_sightings", "number", 0), ("noah_stage", "number", 0),
@@ -1058,7 +1207,6 @@ def main():
         cs, _ = P.parse_file(d)
         cards += cs
     b, rules, unresolved, orphans, nseg, tapes = build(cards)
-    vs = variables()
 
     bid_ = next(n["id"] for n in b.nodes if n["data"].get("type") == "miniGame" and n["data"]["title"] == "調查板")
     for n in b.nodes:
@@ -1075,10 +1223,21 @@ def main():
         day_bg, night_bg = BG["lobby"]
         open_scene = b.add({"type": "scene", "title": "開場・一樓", "text": "",
                             "background": f"@@{day_bg}", "backgroundNight": f"@@{night_bg}",
-                            "transition": "fadeBlack", "transitionMs": 600, "start": True,
+                            "transition": "fadeBlack", "transitionMs": 600,
                             "autoAdvance": {"enabled": True, "mode": "delay", "delayMs": 500}})
         b.edge(open_scene, first_id)
         first_node["data"].pop("start", None)
+        # 真正的第一張卡是選模式（design/調查篇.md 七之〇）。兩格各接一張設變數卡，
+        # 設完都進開場那張場景。choice 卡自己的 variableOps 是進卡就發，分不出玩家選了哪一格。
+        mc = load_mode_card()
+        mode_pick = b.add({"type": "choice", "title": "開場：這一輪要怎麼玩", "text": mc["題目"],
+                           "choices": [mc["劇情模式"], mc["自由探索"]], "choiceMode": "branch",
+                           "choiceConditions": [None, None], "start": True})
+        for k_, val in enumerate(("story", "free")):
+            setm = b.add({"type": "setVariable", "title": f"（mode ← {val}）", "text": "",
+                          "variableOps": [{"id": "op-mode", "variable": "mode", "kind": "set", "value": val}]})
+            b.edge(mode_pick, setm); b.edges[-1]["sourceHandle"] = f"choice-{k_}"
+            b.edge(setm, open_scene)
         # 開場那一趟 here 是管理員；板之後的第一次開板不該再推進時間（dest 是空的，本來就不會）
         # 開場那一段從選單拿掉：它只演一次，而且是遊戲自己開的
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == opening["segment"])]
@@ -1088,6 +1247,28 @@ def main():
             {"id": "op-here", "variable": "here", "kind": "set", "value": "管理員"},
             {"id": "op-met", "variable": "met", "kind": "set", "value": "管理員"},
             {"id": "op-met-admin", "variable": "met_管理員", "kind": "add", "value": 1}])
+    # 劇情模式的軌道：板上每個時段去哪、每一張選擇卡該選哪一格（design/調查篇.md 七之〇）
+    route_board, route_choices = load_route()
+    picks, rail_miss = rail(b, rules, route_board, route_choices)
+    walk_str = ";".join(f"{s['day']},{s['slot']},{s['loc']}" for s in route_board if s.get("loc"))
+    vs = variables(walk_str)
+    for n in b.nodes:
+        d = n["data"]
+        if d.get("type") != "choice":
+            continue
+        cc = list(d.get("choiceConditions") or [None] * len(d.get("choices") or []))
+        if len(cc) != len(d.get("choices") or []):
+            cc = [None] * len(d["choices"])
+        if n["id"] in picks:
+            # 不該選的那幾格掛 mode != story：劇情模式按不下去，自由探索照舊全開
+            for i in range(len(cc)):
+                if i == picks[n["id"]]:
+                    continue
+                old = (cc[i] or {}).get("conditions") or []
+                cc[i] = choice_cond(list(old) + [dict(STORY_OFF)])
+        d["choiceConditions"] = cc
+    board_node["data"]["miniGameReadVars"] = ["mode", "walk"] + board_node["data"]["miniGameReadVars"]
+
     # 可達性：每個段落入口都要有一條 pick 邊
     seg_entries = {n["data"]["segment"]: n["id"] for n in b.nodes if n["data"].get("segment")}
     firsts = {}
@@ -1103,6 +1284,10 @@ def main():
     print(f"段落入口沒有任何 pick 邊進來的：{len(unreached)} 條")
     print(f"時段判讀：任一 {sum(1 for r in rules if len(r['slots'])==4)}、指定 {sum(1 for r in rules if 0<len(r['slots'])<4)}、沒寫 {sum(1 for r in rules if not r['slots'])}")
     print(f"含「或」要拆的規則：{sum(1 for r in rules if r['or'])} 條")
+    print(f"劇情模式軌道：板上 {len(route_board)} 步、選擇卡對上 {len(picks)}/{len(route_choices)} 張"
+          + (f"、對不到 {len(rail_miss)} 步" if rail_miss else ""))
+    for m_ in rail_miss[:8]:
+        print(f"  ・第 {m_['day']} 天 時段{m_['slot']}　{m_['why']}　{'｜'.join(m_['labels'])[:40]}")
     if b.unlabeled:
         print(f"沒有選單標籤的段落（退回節標題）：{len(b.unlabeled)} 條")
         for f_, sec in b.unlabeled[:12]:
@@ -1119,6 +1304,7 @@ def main():
         out = pathlib.Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps({"boardId": BID, "nodes": b.nodes, "edges": b.edges, "seg_slots": getattr(b, "seg_slots", {}), "force_bg": getattr(b, "force_bg", []),
                                    "variables": vs, "rules": rules, "tapes": tapes,
+                                   "walk": {"board": route_board, "picks": picks, "miss": rail_miss},
                                    "unresolved": unresolved, "orphans": orphans},
                                   ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"\n寫出 {out}")
