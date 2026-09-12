@@ -532,6 +532,11 @@ def _attach_voice(d):
             VSTAT["skip"] += 1
             continue
         if sp in LARCH_SPK:
+            # **本機那份要拔掉，不是不算。** 保全與店員 2026-09-12 改走 Larch，
+            # 原因是輸入本身錯了（參考音是女聲、角色是男性）。urls.json 裡還留著
+            # 改判之前生的 121 句，_voice() 照樣掛得上去——板上就會是「有聲音、
+            # 而且是錯的性別」，比沒有聲音更難發現。等 Larch 那批生好再掛回來。
+            holder.pop("voiceUrl", None)
             VSTAT["larch"] += 1
             continue
         VSTAT["total"] += 1
