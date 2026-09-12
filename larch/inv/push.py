@@ -28,6 +28,8 @@ BOARD_JSON = HERE / "out" / "board.json"
 CARDS = ROOT / "larch/cards"
 MAIN_ASSETS = json.loads((ROOT / "larch/assets.json").read_text(encoding="utf-8"))
 NEW_BG_DIR = ROOT / "art/bg-investigation"
+# 手機直播頁那段循環影片。**在別的 repo 上**，見上面 VIDEO 那段註解。
+LIVE_VIDEO = "https://yazelin.github.io/glitch-live/assets/live-loop.mp4"
 
 # 立繪：新五個在 art/inv-cast（2026-09-05 codex 生、09-07 去背），正文七個沿用 assets.json 的網址。
 # 鍵是調查板 here 裡的名字。黑洞先生刻意不上台：他在這款裡只能是旁白描述的「穿西裝的先生」。
@@ -81,6 +83,9 @@ POSSIBLE = {"lobby": {"管理員", "黑洞先生"}, "roof": {"諾亞"}, "street"
 INVENTORY_DEFAULT = json.dumps([
     {"id": "rulebook", "n": "守則本", "d": "一千二。第一頁還是空的。", "c": False,
      "e": "set", "v": "open_notes", "x": True},
+    # 「沒有人會打來。」留在這裡是對的：phone-v2 把電話那一頁拿掉之後，
+    # 那句話回到它原本的位置（design/調查篇-背包與謎題.md 二之一）。
+    # 但前面那串頁面列舉要改成三頁，不然背包上承諾一個點不進去的分頁。
     {"id": "phone", "n": "手機", "d": "訊息、她的頁面、直播。沒有人會打來。", "c": False,
      "e": "set", "v": "open_phone", "x": True},
     # 錄音機本身不是動作道具：對話裡有人講話的時候才按得下去（那時候會跳「開錄音機」）。放在包包裡是讓玩家知道它在
@@ -495,6 +500,13 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     def phone_card(mode, banner=None):
         """她的手機（design/調查篇-手機.md）。full＝從背包打開；banner＝收到訊息的橫幅，兩秒自己走。"""
         html = (phone_src.replace("/*@@MODE@@*/'full'", json.dumps(mode))
+                # 整合 glitch-live 的深色卡片（phone-v2 / c411160）之後多的三個注入點。
+                # VIDEO 走外部網址：影片放在 glitch-live 的 GitHub Pages 上，
+                # **那個 repo 改名、轉私有、刪掉，遊戲裡的直播畫面就會一片黑而且不報錯**，
+                # 所以 tools/card_test.mjs 有一條消費端檢查在盯那個網址回不回 200。
+                .replace("/*@@VIDEO@@*/''", json.dumps(LIVE_VIDEO))
+                .replace("/*@@COMPOSE@@*/true", json.dumps(True))
+                .replace("/*@@NIGHTS@@*/null", "null")   # 第一版不注入，用卡片自己那份
                 .replace("/*@@BANNER@@*/null", json.dumps(banner, ensure_ascii=False))
                 .replace("/*@@POSTS@@*/[]", json.dumps(posts, ensure_ascii=False))
                 .replace("/*@@OLD@@*/[]", json.dumps(old_thread, ensure_ascii=False))
@@ -502,8 +514,10 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         d = {"type": "miniGame", "title": ("手機：" + banner["who"]) if banner else "她的手機", "text": "",
              "miniGameHtml": html, "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
              "miniGameFrame": {"showButton": False, "showTitle": False},
-             "miniGameReadVars": ["day", "slot", "phone_log", "phone_day_seen", "open_studio", "met_櫃檯"],
-             "miniGameWriteVars": ["phone_log", "open_phone", "phone_day_seen"]}
+             "miniGameReadVars": ["day", "slot", "phone_log", "phone_day_seen",
+                                  "phone_msg_seen", "phone_live_seen", "open_studio", "met_櫃檯"],
+             "miniGameWriteVars": ["phone_log", "open_phone", "phone_day_seen",
+                                   "phone_msg_seen", "phone_live_seen", "live_comment"]}
         return d
     def phone_data(contact, messages):
         return phone_card("banner", {"who": contact, "text": messages})
@@ -591,6 +605,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         ("open_phone", "boolean", False, "從背包打開手機"),
         ("recorder_now", "boolean", False, "永遠是假：錄音機在對話裡按，不在包包裡按"),
         ("phone_day_seen", "number", 0, "她翻到第幾天的貼文（紅點用）"),
+        # 整合 phone-v2 之後的三個（紅點與第五天留言）。**沒宣告的話插件的變數閘門
+        # 會靜默丟掉寫入**，紅點看起來就是「點了也不滅」。
+        ("phone_msg_seen", "number", 0, "訊息那一頁看到第幾則（紅點用）"),
+        ("phone_live_seen", "number", 0, "直播那一頁看到第幾天（紅點用）"),
+        ("live_comment", "boolean", False, "第五天在直播聊天室留過一行"),
         ("rec_ok", "boolean", False, "錄音機清過毛了"),
         ("page1", "string", "", "第一頁：六個 ID 各對到誰"),
         ("page1_text", "string", "第一頁。她一個字都沒有寫。", "第一頁：收尾旁白唸的版本（沒看到牆的人唸預設）"),
@@ -927,6 +946,11 @@ def main():
     bag_image = local_asset("art/items/bag.png", state, pid, False, "prop") if (ROOT / "art/items/bag.png").exists() else ""
     proj["settings"] = settings_patch(proj.get("settings"), bag_image)
     proj["variables"] = vs
+    # **匯出的單檔版只看這個欄位**，線上播放器只看卡片自己的 voiceMode，兩邊各要各的。
+    # 少了它的失敗長相是「線上每一句都有聲音、匯出版一句都不播，而且完全不報錯」。
+    # 欄位原本不存在（不是 off，是沒有這個鍵），falsy 一樣是關的。
+    for lang in (proj.get("languages") or []):
+        lang["voiceMode"] = "shared"
     check_missing_bg(st)
     if SUBBED:
         print(f"※ {len(SUBBED)} 處用了別的時段代替：{SUBBED}")

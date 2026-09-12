@@ -276,6 +276,10 @@ class Board:
                                      # 拿 len(self.edges) 當號碼會在刪掉邊之後重號，撞 id 的線 react-flow 只會畫一條
 
     def add(self, data, nid=None):
+        # **掛配音收在這一個地方。** 卡片不是只從 card_node 出來的：錄音那幾張
+        # 反應卡、錄音帶卡都是在流程裡直接組 data 的。原本掛在 card_node 裡，
+        # 這些就整批沒有聲音，而且板上看起來跟有聲音的卡一模一樣。
+        _attach_voice(data)
         self.n += 1
         nid = nid or f"{BID}-{self.n:03d}"
         self.x += 300
@@ -423,7 +427,16 @@ def var_value(raw):
 
 
 def card_node(c):
-    """一張解析出來的卡 → Larch dialogue 節點資料。形狀照 novelkit。"""
+    """一張解析出來的卡 → Larch dialogue 節點資料。形狀照 novelkit。
+
+    掛配音在這裡收口。**不要在各個分支裡各叫一次**：這支有四個 return
+    （沒台詞、筆記、單講者、多講者），原本只有多講者那一支掛了，
+    另外三支的 275 張單人卡整批沒有聲音，而且板上看起來完全正常。
+    """
+    return _card_node(c)
+
+
+def _card_node(c):
     lines = [l for l in c["lines"] if not l.get("direction")]
     if not lines:
         return None
@@ -485,6 +498,47 @@ def card_node(c):
         d["sceneCode"] = c["scene"]
     if c.get("exits"):
         d["exits"] = c["exits"]
+    return d
+
+
+# ── 掛配音（規格第二節）────────────────────────────────────────
+# **查表那段不自己寫一份。** 鍵要跟 tools/gen_voice.py 收句子時算的一模一樣
+# （單人卡用卡片的 speaker/speakText/emotion，多人卡用每一行自己的三個欄位），
+# 差一個欄位就全部對不上，而且不會報錯，只會安靜地沒有聲音。正篇那份已經是
+# larch/novelkit.py 的 _voice()，這裡直接叫它；抄第二份出來就是在等兩邊分岔。
+# 這裡只多做一件事：把「該有而沒有」的數出來——靜默跳過跟成功長得一模一樣。
+import sys as _sys; _sys.path.insert(0, str(ROOT / "larch"))
+import novelkit as _NK
+from voice import LARCH_VOICE as _LV
+
+LARCH_SPK = set(_LV)     # 路人那批的音色掛在 Larch，本機沒有檔，不算對不到
+VSTAT = {"total": 0, "hit": 0, "miss": [], "skip": 0, "larch": 0}
+
+
+def _attach_voice(d):
+    _NK._voice(d)
+    lines = d.get("dialogueLines") or []
+    # 單人卡的聲音掛在卡片層，不在行上——只數 dialogueLines 會漏掉三百多句。
+    items = ([(l.get("speaker"), l.get("text"), l.get("emotion"), l) for l in lines]
+             if lines else
+             [(d.get("speaker"), d.get("speakText") or d.get("text"), d.get("emotion"), d)])
+    for sp, tx, emo, holder in items:
+        if not sp or not tx or not str(tx).strip():
+            continue
+        # **排除條件要跟產生端同一份**（gen_voice：斜體舞台指示＝情緒「描述動作」，
+        # 設計上不配音）。兩邊不一致，M 會被一批本來就不該有音檔的行灌大，
+        # 真正對不到的那幾句就藏在裡面。
+        if (emo or "") == "描述動作":
+            VSTAT["skip"] += 1
+            continue
+        if sp in LARCH_SPK:
+            VSTAT["larch"] += 1
+            continue
+        VSTAT["total"] += 1
+        if holder.get("voiceUrl"):
+            VSTAT["hit"] += 1
+        else:
+            VSTAT["miss"].append((sp, str(tx)[:20], emo or ""))
     return d
 
 
@@ -1352,6 +1406,17 @@ def main():
                                    "unresolved": unresolved, "orphans": orphans},
                                   ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"\n寫出 {out}")
+        # **對不到的必須被數出來**（規格第二節）。M > 0 不一定是錯的
+        # （路人還沒選音色、純刪節號的沉默不該配音），但它必須被印出來並且有人看過。
+        _m = len(VSTAT["miss"])
+        print(f"配音：不配音 {VSTAT['skip']} 句　Larch 音色 {VSTAT['larch']} 句")
+        print(f"配音：板上 {VSTAT['total']} 句　掛上 {VSTAT['hit']} 句　對不到 {_m} 句")
+        if _m:
+            import collections as _c
+            _w = _c.Counter(x[0] for x in VSTAT["miss"])
+            print(f"  對不到的角色：{dict(_w.most_common())}")
+            for _x in VSTAT["miss"][:5]:
+                print(f"    {_x[0]}｜{_x[1]}｜{_x[2]}")
     # 自我檢查：兩種路由變數以外不可以有任何條件邊
     hung = {n["data"]["title"][1:-2] for n in b.nodes if n["data"].get("title", "").endswith("？）")}   # 「掛 `var`」的閘
     bad = [e for e in b.edges if e.get("data") and
