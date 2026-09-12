@@ -16,7 +16,7 @@
     ~/voice-venv/bin/python tools/batch_voice.py 格莉奇
     ~/voice-venv/bin/python tools/batch_voice.py 格莉奇 --max 200 --dry
 """
-import argparse, difflib, json, os, pathlib, subprocess, sys
+import argparse, difflib, json, os, pathlib, re, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
@@ -24,16 +24,33 @@ sys.path.insert(0, str(ROOT / "larch"))
 OUT = ROOT / "art/voice"
 
 
-def groups(rows, max_chars, max_n):
-    """連續、同指示的句子併成一段。"""
+def groups(rows, max_chars, max_n, solo_under=0):
+    """連續、同指示的句子併成一段。
+
+    `solo_under`：短於這個字數的句子**自己一段**，不跟別人併。
+
+    2026-09-12 量出來的：組長段再切，失敗率對字數有一個很乾淨的轉折——
+    1-4 字 13%、5-6 字 11%，到 7-8 字掉到 1%，再上去是 0%。
+    失敗的長相不是聽錯而是切到隔壁句去：短句在長段裡沒有夠長的錨點，
+    對齊一歪，整句換成鄰居的聲音（「那你是什麼。」切出來是「知道了」）。
+
+    短句本來就不需要切——一句一段、一段一個檔，沒有對齊問題。
+    「短句各自生語調會飄」那個顧慮是為長一點的句子設的，
+    落在 2 到 5 字的句子（「不是。」「好。」）上幾乎聽不出來。
+
+    **預設 0（不啟用）**，正篇那條路徑一個字都不變；調查篇跑的時候帶 --solo-under 7。
+    """
     out, cur, ins = [], [], None
     for r in rows:
-        if r[4] != ins or len(cur) >= max_n or \
+        if (solo_under and len(re.sub(r"[^\w]", "", r[1])) < solo_under) or \
+                r[4] != ins or len(cur) >= max_n or \
                 sum(len(x[1]) for x in cur) + len(r[1]) > max_chars:
             if cur:
                 out.append(cur)
             cur, ins = [], r[4]
         cur.append(r)
+        if solo_under and len(re.sub(r"[^\w]", "", r[1])) < solo_under:
+            out.append(cur); cur, ins = [], None      # 這一句自己走，下一句重新起頭
     if cur:
         out.append(cur)
     return out
@@ -44,6 +61,9 @@ def main():
     ap.add_argument("who")
     ap.add_argument("--max", type=int, default=180)
     ap.add_argument("--n", type=int, default=9)
+    ap.add_argument("--solo-under", type=int, default=0,
+                    help="短於這個字數的句子自己生一段，不併進長段。"
+                         "調查篇用 7（2026-09-12 量的轉折點，見 groups 的說明）")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--only", default=None,
                     help="只重做這些代號（逗號分隔）。用來挑出音高偏高的那批"
@@ -60,8 +80,8 @@ def main():
         want = set(a.only.split(","))
         rows = [r for r in rows if r[3] in want]
         print(f"只重做 {len(rows)} 句")
-    gs = [g for g in groups(rows, a.max, a.n) if len(g) > 1]
-    solo = sum(1 for g in groups(rows, a.max, a.n) if len(g) == 1)
+    gs = [g for g in groups(rows, a.max, a.n, a.solo_under) if len(g) > 1]
+    solo = sum(1 for g in groups(rows, a.max, a.n, a.solo_under) if len(g) == 1)
     print(f"{a.who} 共 {len(rows)} 句 → {len(gs)} 段（另有 {solo} 句單獨，不動）")
     for g in gs[:3]:
         print(f"  {len(g)} 句 {sum(len(x[1]) for x in g)} 字："

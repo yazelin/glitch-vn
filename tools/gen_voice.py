@@ -14,7 +14,7 @@
     python3 tools/gen_voice.py --who 格莉奇     # 只生某個角色
     python3 tools/gen_voice.py                 # 生全部缺的
 """
-import collections, json, os, pathlib, runpy, subprocess, sys
+import collections, json, os, pathlib, re, runpy, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "larch"))
@@ -133,9 +133,25 @@ def main():
         print("  那些要回頭從長檔補切，不可以就地生，不然會變成另一個人的聲音")
         print("  （調查篇不在此限：那邊沒有外部長檔，本機參考音也備齊了）")
         todo = [u for u in todo if not is_ext(u)]
+    # **沒有可唸的字的句子跳過，而且要跟「沒有參考音」分開報。**
+    # 台詞裡有純沉默的行（「……」「…………」），TTS 拿到只有標點的輸入生不出東西。
+    #
+    # 2026-09-12 這四句差點消失：那天回報「還缺 64 句」，其中 60 句是沒有參考音的路人
+    # ——那個解釋有名字、有原因、看起來完整，剩下的 4 句就順勢被算進去了。
+    # 逐句查出來才發現它們是貓草、玩家、斑比的純刪節號。
+    # **過濾的是角色，漏掉的是內容。** 一個看起來完整的解釋會把不屬於它的東西一起吸收掉，
+    # 所以這兩類一定要分開列，數字變了的人才看得出來變在哪一類。
+    def has_words(u):
+        return bool(re.sub(r"[^\w]", "", V.to_speech(u[1])))
+    silent = [u for u in todo if not has_words(u)]
+    if silent:
+        print(f"\n跳過（沒有可唸的字）：{len(silent)} 句　"
+              + "、".join(f"{u[0]}「{u[1][:8]}」" for u in silent[:6]))
+        todo = [u for u in todo if has_words(u)]
     skip = sorted({u[0] for u in todo if not V.VOICE.get(u[0])})
     if skip:
-        print(f"\n跳過（還沒選參考音）：{skip}")
+        n = len([1 for u in todo if not V.VOICE.get(u[0])])
+        print(f"\n跳過（還沒選參考音）：{n} 句　{skip}")
         todo = [u for u in todo if V.VOICE.get(u[0])]
     if not todo:
         print("沒有要生的。")
