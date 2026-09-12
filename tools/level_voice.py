@@ -15,7 +15,7 @@
     python3 tools/level_voice.py --who 格莉奇
     python3 tools/level_voice.py --dry      # 只量不改
 """
-import argparse, json, pathlib, subprocess, sys
+import argparse, json, os, pathlib, subprocess, sys
 import hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -101,11 +101,24 @@ def main():
               f"measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
               f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:"
               f"offset={m['target_offset']}:linear=true:print_format=summary")
+        # **先寫暫存再換過去。** 直接寫目的檔的話，跑到一半被殺會留下一個
+        # 半寫的 mp3：檔案在、大小不對、播起來截斷，而且不會報錯。
+        # 2026-09-13 被殺了一次（查下來沒有中鏢，是運氣）。os.replace 是原子的。
+        tmp = f.with_suffix(".tmp.mp3")
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(b), "-af", af,
-                        "-ar", "16000", "-ac", "1", "-b:a", "64k", str(f)],
+                        "-ar", "16000", "-ac", "1", "-b:a", "64k", str(tmp)],
                        capture_output=True)
+        if not tmp.exists() or tmp.stat().st_size < 512:
+            tmp.unlink(missing_ok=True)
+            print("壓失敗，原檔留著", f.name)
+            continue
+        os.replace(tmp, f)
         led[f.name] = sha(f)
         done += 1
+        # **帳本要邊做邊寫。** 原本只在收尾寫一次，被殺就整批白做——
+        # 下一次重跑會把已經在目標上的檔再壓一遍，每壓一遍多一代 mp3 轉檔損失。
+        if done % 20 == 0:
+            LEDGER.write_text(json.dumps(led, indent=0), encoding="utf-8")
         if done % 50 == 0:
             print(f"  {done}/{len(files)}", flush=True)
     LEDGER.write_text(json.dumps(led, indent=0), encoding="utf-8")
