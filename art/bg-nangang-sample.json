@@ -1,0 +1,83 @@
+[
+ {
+  "name": "bg-street-day2",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "THE STREET IN FRONT OF A MAJOR TRAIN STATION. Looking down the road: a covered arcade on both sides with scooters parked under it and red no-parking paint on the kerb, shopfronts behind rolling shutters, a pedestrian crossing in the middle distance, and at the far end the station itself — a very large modern glass-curtain-wall building several storeys high, NOT a small traditional station house. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. MIDDAY: flat neutral daylight, soft shadows, pale blue sky. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-street-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "THE STREET IN FRONT OF A MAJOR TRAIN STATION. Looking down the road: a covered arcade on both sides with scooters parked under it and red no-parking paint on the kerb, shopfronts behind rolling shutters, a pedestrian crossing in the middle distance, and at the far end the station itself — a very large modern glass-curtain-wall building several storeys high, NOT a small traditional station house. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. EARLY EVENING around seven: deep blue sky, shop lights and street lamps on, warm pools of light on the ground, the outside air cooler than the lit interiors. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-street-night",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "THE STREET IN FRONT OF A MAJOR TRAIN STATION. Looking down the road: a covered arcade on both sides with scooters parked under it and red no-parking paint on the kerb, shopfronts behind rolling shutters, a pedestrian crossing in the middle distance, and at the far end the station itself — a very large modern glass-curtain-wall building several storeys high, NOT a small traditional station house. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. THREE IN THE MORNING: almost everything shut, black-violet sky, one or two lights still on, wet asphalt reflecting them, completely empty. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-busstop-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CITY BUS STOP BESIDE A WIDE ROAD. A plain steel-and-glass shelter with a flat roof and a row of moulded plastic seats, a round enamel bus-stop sign on a pole beside it and a separate tall slim illuminated route panel listing stops vertically, NOT a Japanese wooden bus shelter. Behind it a tiled apartment block with air conditioners, a scooter parked on the pavement. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. MIDDAY: flat neutral daylight, soft shadows, pale blue sky. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-busstop-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CITY BUS STOP BESIDE A WIDE ROAD. A plain steel-and-glass shelter with a flat roof and a row of moulded plastic seats, a round enamel bus-stop sign on a pole beside it and a separate tall slim illuminated route panel listing stops vertically, NOT a Japanese wooden bus shelter. Behind it a tiled apartment block with air conditioners, a scooter parked on the pavement. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. EARLY EVENING around seven: deep blue sky, shop lights and street lamps on, warm pools of light on the ground, the outside air cooler than the lit interiors. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-busstop",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CITY BUS STOP BESIDE A WIDE ROAD. A plain steel-and-glass shelter with a flat roof and a row of moulded plastic seats, a round enamel bus-stop sign on a pole beside it and a separate tall slim illuminated route panel listing stops vertically, NOT a Japanese wooden bus shelter. Behind it a tiled apartment block with air conditioners, a scooter parked on the pavement. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. THREE IN THE MORNING: almost everything shut, black-violet sky, one or two lights still on, wet asphalt reflecting them, completely empty. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-metro-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A METRO STATION EXIT SEEN FROM THE BOTTOM OF THE STAIRS LOOKING UP TO THE STREET. A wide staircase with a central steel handrail on the left and A PAIR OF ESCALATORS on the right, walls of large grey stone panels (not small white tiles), a round support column, a simple overhead sign board. Through the opening at the top: city buildings and a slice of sky. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. MIDDAY: flat neutral daylight, soft shadows, pale blue sky. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-metro-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A METRO STATION EXIT SEEN FROM THE BOTTOM OF THE STAIRS LOOKING UP TO THE STREET. A wide staircase with a central steel handrail on the left and A PAIR OF ESCALATORS on the right, walls of large grey stone panels (not small white tiles), a round support column, a simple overhead sign board. Through the opening at the top: city buildings and a slice of sky. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. EARLY EVENING around seven: deep blue sky, shop lights and street lamps on, warm pools of light on the ground, the outside air cooler than the lit interiors. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-metro",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A METRO STATION EXIT SEEN FROM THE BOTTOM OF THE STAIRS LOOKING UP TO THE STREET. A wide staircase with a central steel handrail on the left and A PAIR OF ESCALATORS on the right, walls of large grey stone panels (not small white tiles), a round support column, a simple overhead sign board. Through the opening at the top: city buildings and a slice of sky. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. THREE IN THE MORNING: almost everything shut, black-violet sky, one or two lights still on, wet asphalt reflecting them, completely empty. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ }
+]

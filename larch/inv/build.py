@@ -43,7 +43,12 @@ BG = {
     "lobby":   ("bg-lobby-day",   "bg-apartment-hall"),
     "roof":    ("bg-roof-day",    "bg-noah-shop"),
     "street":  ("bg-street-day2", "bg-street-night"),
-    "studio":  ("bg-bambi-studio-day",  "bg-bambi-studio"),   # 不可以叫 bg-studio-day，會撞正篇（見 push.py 的 BG）
+    # **白天那個不可以叫 bg-studio-day，會撞正篇的 assets.json。** 撞名的話
+    # push.py 的查找順序會在第二步就中，本機那張斑比工作室永遠上不去，
+    # 玩家看到的是正篇那張直播間（2026-09-12 使用者實玩抓到）。
+    # 晚上那張沒有這個問題，它是照地點代號組的（第 520 行 f"@@bg-{loc}-evening"），
+    # 所以檔名維持 bg-studio-evening，不要跟著改。
+    "studio":  ("bg-bambi-studio-day",  "bg-bambi-studio"),
     "booth":   ("bg-booth-hall",  "bg-booth-hall"),   # 十一樓走廊，錄音間在走廊底那扇開著的門裡（2026-09-08 生的）
     "tower14": ("bg-tower14-day", "bg-tower14-night"),
     "store":   ("bg-store-day",   "bg-store-night"),

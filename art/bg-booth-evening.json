@@ -1,0 +1,10 @@
+[
+ {
+  "name": "bg-booth-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/bg-investigation/bg-booth-hall.jpg"
+  ],
+  "prompt": "Repaint this scene at EARLY EVENING, around seven at night: the sky outside is deep blue, interior and street lights are on and are now the brightest thing in frame, warm pools of light on the floor and ground, cooler blue shadows away from the lamps. Keep the layout of the reference image EXACTLY: the same room or street seen from the same camera position and angle, the same furniture and fittings in the same places, the same architecture, the same number of every object. Do not move anything, do not add or remove anything. ONLY the lighting and the time of day change. Flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment as the reference image."
+ }
+]

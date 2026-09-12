@@ -1,0 +1,164 @@
+[
+ {
+  "name": "bg-lobby-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "THE GROUND-FLOOR ENTRANCE HALL OF AN OLD WALK-UP APARTMENT BLOCK. A wall of eleven small metal letterboxes with name-card slots, TWO OF THEM IN THE THIRD ROW MISSING THEIR DOORS and stuffed with leaflets, a terrazzo floor, a folding chair against the wall, a caretaker's office window with a sliding glass hatch, stairs going up at the back, a small notice screen mounted on the wall. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. MIDDAY: flat neutral daylight, soft shadows, pale blue sky. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-lobby-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "THE GROUND-FLOOR ENTRANCE HALL OF AN OLD WALK-UP APARTMENT BLOCK. A wall of eleven small metal letterboxes with name-card slots, TWO OF THEM IN THE THIRD ROW MISSING THEIR DOORS and stuffed with leaflets, a terrazzo floor, a folding chair against the wall, a caretaker's office window with a sliding glass hatch, stairs going up at the back, a small notice screen mounted on the wall. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. EARLY EVENING around seven: deep blue sky outside, lights on inside, warm pools of light. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-roof-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A TINY RADIO-REPAIR SHOP BUILT ON A ROOFTOP. Corrugated metal walls and roof, a wooden signboard weathered blank above the open doorway, shelves crammed with old valve radios and cassette decks, a workbench with a soldering iron and a half-disassembled set, a stainless water tank and potted plants on the roof deck outside, city rooftops beyond. Taiwanese setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters, vertical Chinese shop signs. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs. MIDDAY: flat neutral daylight, soft shadows, pale blue sky. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-roof-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A TINY RADIO-REPAIR SHOP BUILT ON A ROOFTOP. Corrugated metal walls and roof, a wooden signboard weathered blank above the open doorway, shelves crammed with old valve radios and cassette decks, a workbench with a soldering iron and a half-disassembled set, a stainless water tank and potted plants on the roof deck outside, city rooftops beyond. Taiwanese setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters, vertical Chinese shop signs. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs. EARLY EVENING around seven: deep blue sky outside, lights on inside, warm pools of light. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-store-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CONVENIENCE STORE INTERIOR. A HOT-FOOD COUNTER WITH A STAINLESS ODEN POT of simmering broth and skewers near the till, a tall glass drinks fridge, a magazine rack, a coffee machine, A COUNTER BAR WITH HIGH STOOLS ALONG THE FRONT WINDOW, the checkout counter on the right. THIS IS NOT A BEDROOM. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. MIDDAY: daylight floods in through the front glass, flat and neutral. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-store-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CONVENIENCE STORE INTERIOR. A HOT-FOOD COUNTER WITH A STAINLESS ODEN POT of simmering broth and skewers near the till, a tall glass drinks fridge, a magazine rack, a coffee machine, A COUNTER BAR WITH HIGH STOOLS ALONG THE FRONT WINDOW, the checkout counter on the right. THIS IS NOT A BEDROOM. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. EARLY EVENING around seven: dark blue outside the glass, the interior fluorescent light now the brightest thing. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-store-night",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CONVENIENCE STORE INTERIOR. A HOT-FOOD COUNTER WITH A STAINLESS ODEN POT of simmering broth and skewers near the till, a tall glass drinks fridge, a magazine rack, a coffee machine, A COUNTER BAR WITH HIGH STOOLS ALONG THE FRONT WINDOW, the checkout counter on the right. THIS IS NOT A BEDROOM. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. THREE IN THE MORNING: pitch dark outside the glass, the fluorescent light flat and slightly too bright for the hour, cold cyan on every surface. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-parts-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CRAMPED SECOND-HAND ELECTRONIC PARTS SHOP. Floor-to-ceiling wooden cabinets of hundreds of tiny drawers, cardboard trays of connectors and capacitors, A ROW OF GLASS VACUUM TUBES standing on the counter, coils of wire on hooks, a mechanical scale, a boxy old CRT television on a high shelf switched on showing a pale glow. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. MIDDAY: daylight floods in through the front glass, flat and neutral. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-parts-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CRAMPED SECOND-HAND ELECTRONIC PARTS SHOP. Floor-to-ceiling wooden cabinets of hundreds of tiny drawers, cardboard trays of connectors and capacitors, A ROW OF GLASS VACUUM TUBES standing on the counter, coils of wire on hooks, a mechanical scale, a boxy old CRT television on a high shelf switched on showing a pale glow. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. EARLY EVENING around seven: dark blue outside the glass, the interior fluorescent light now the brightest thing. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-parts",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A CRAMPED SECOND-HAND ELECTRONIC PARTS SHOP. Floor-to-ceiling wooden cabinets of hundreds of tiny drawers, cardboard trays of connectors and capacitors, A ROW OF GLASS VACUUM TUBES standing on the counter, coils of wire on hooks, a mechanical scale, a boxy old CRT television on a high shelf switched on showing a pale glow. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. THREE IN THE MORNING: pitch dark outside the glass, the fluorescent light flat and slightly too bright for the hour, cold cyan on every surface. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-laundry-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SELF-SERVICE LAUNDROMAT. EXACTLY SIX front-loading drum washers in a single row along the right wall — count them, six, no more — a long folding table with a few moulded chairs in the middle, a coin/card machine by the door, a wire trolley basket, full-height glass frontage onto the street. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. MIDDAY: daylight floods in through the front glass, flat and neutral. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-laundry-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SELF-SERVICE LAUNDROMAT. EXACTLY SIX front-loading drum washers in a single row along the right wall — count them, six, no more — a long folding table with a few moulded chairs in the middle, a coin/card machine by the door, a wire trolley basket, full-height glass frontage onto the street. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. EARLY EVENING around seven: dark blue outside the glass, the interior fluorescent light now the brightest thing. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-laundry",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SELF-SERVICE LAUNDROMAT. EXACTLY SIX front-loading drum washers in a single row along the right wall — count them, six, no more — a long folding table with a few moulded chairs in the middle, a coin/card machine by the door, a wire trolley basket, full-height glass frontage onto the street. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. THREE IN THE MORNING: pitch dark outside the glass, the fluorescent light flat and slightly too bright for the hour, cold cyan on every surface. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-figure-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SMALL ANIME FIGURE SHOP. Glass display cabinets floor to ceiling packed with boxed figures and blind-box models, a central island display table, a gashapon machine by the door, a small counter at the back, strip lighting inside the cabinets. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. MIDDAY: daylight floods in through the front glass, flat and neutral. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-figure-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SMALL ANIME FIGURE SHOP. Glass display cabinets floor to ceiling packed with boxed figures and blind-box models, a central island display table, a gashapon machine by the door, a small counter at the back, strip lighting inside the cabinets. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. EARLY EVENING around seven: dark blue outside the glass, the interior fluorescent light now the brightest thing. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-figure",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A SMALL ANIME FIGURE SHOP. Glass display cabinets floor to ceiling packed with boxed figures and blind-box models, a central island display table, a gashapon machine by the door, a small counter at the back, strip lighting inside the cabinets. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. THREE IN THE MORNING: pitch dark outside the glass, the fluorescent light flat and slightly too bright for the hour, cold cyan on every surface. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-bambi-studio-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A ONE-ROOM ILLUSTRATOR'S STUDIO IN A CONVERTED GROUND-FLOOR GARAGE UNIT. A roll-up shutter door at the front standing half open onto a lane, a white cloth backdrop pinned to the side wall, a big plain work table with two monitors and a drawing tablet, SEVEN MUGS scattered on the table, wooden crates and a stool, a desk lamp. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. MIDDAY: flat neutral daylight, soft shadows, pale blue sky. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ },
+ {
+  "name": "bg-studio-evening",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg"
+  ],
+  "prompt": "A ONE-ROOM ILLUSTRATOR'S STUDIO IN A CONVERTED GROUND-FLOOR GARAGE UNIT. A roll-up shutter door at the front standing half open onto a lane, a white cloth backdrop pinned to the side wall, a big plain work table with two monitors and a drawing tablet, SEVEN MUGS scattered on the table, wooden crates and a stool, a desk lamp. Taiwanese interior. Terrazzo or plain tile floor, exposed conduit on the ceiling, a window-unit air conditioner, fluorescent tube lighting. NOT Japanese. EARLY EVENING around seven: deep blue sky outside, lights on inside, warm pools of light. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images."
+ }
+]

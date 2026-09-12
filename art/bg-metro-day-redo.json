@@ -1,0 +1,12 @@
+[
+ {
+  "name": "bg-metro-day",
+  "size": "1536x1024",
+  "refs": [
+   "art/ref-room.jpg",
+   "art/ref-room2.jpg",
+   "art/out/bg-metro-evening.png"
+  ],
+  "prompt": "A METRO STATION EXIT SEEN FROM THE BOTTOM OF THE STAIRS LOOKING UP TO THE STREET. A wide staircase with a central steel handrail on the left and TWO SEPARATE ESCALATORS SIDE BY SIDE on the right — count them, exactly two escalator units each with its own moving handrail and glass balustrade, one going up and one going down, standing next to each other, walls of large grey stone panels (not small white tiles), a round support column, a simple overhead sign board. Through the opening at the top: city buildings and a slice of sky. Taiwanese urban setting, Taipei Nangang district. Concrete buildings with two-by-four tile cladding, window-unit air conditioners bolted across the facades, rolling metal shutters on shop fronts, vertical Chinese shop signs stacked up the pillars, a continuous covered arcade along the ground floor with square pillars. NOT Japanese: no wooden shopfronts, no noren curtains, no hiragana, no traditional tiled roofs, no Japanese vending machines. MIDDAY: flat neutral daylight, soft shadows, pale blue sky. IMPORTANT STYLE RULES: flat lofi-anime cel shading, minimal gradients, no depth-of-field, no bloom, no people, no readable text anywhere. Same flat illustrative treatment and saturation as the reference images. Match the layout of the last reference image exactly: same staircase, same two escalators, same wall panels; only the lighting changes to midday."
+ }
+]
