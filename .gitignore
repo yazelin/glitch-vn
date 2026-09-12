@@ -62,3 +62,5 @@ art/bgm/inv-candidates/*.mp3
 art/bgm/inv-candidates/ab-60s/
 # 複檢資料夾同 art/voice/review/：是既有音檔的複本，聽完就沒用了。
 art/voice/recheck-larch-vs-local/
+# 統一響度之前的原檔備份。跟 art/voice/review/ 同一類：是既有音檔的複本。
+art/voice/pre-level/

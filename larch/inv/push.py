@@ -49,6 +49,8 @@ ITEM_LOCAL = {"rulebook": "art/items/item-rulebook.png", "phone": "art/items/ite
 API = "https://larch.ink/api/agent"
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import bgm as BGM     # 背景→BGM 那張表，跟 build.py 讀的是同一份
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+import novelkit as NK   # _voice()：查表掛 voiceUrl，跟 build.py 用同一支
 
 KEY_PATH = pathlib.Path.home() / ".config/larch/key"
 
@@ -459,6 +461,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
 
     # 預設邊：板上什麼都沒選（休息）、選單什麼都沒挑，都回調查板。**要排在條件邊後面。**
     def add_node(nid, data, x, y):
+        # **配音也要在這裡收口。** 這一層自己會生卡片（錄音帶那幾張、插播那幾張），
+        # 那些卡不經過 build.py 的 Board.add，所以掛配音掛在那一邊是掛不到的。
+        # 2026-09-13 抓到：錄音帶四句引文本機都有檔，板上卻沒有聲音。
+        # 跟 BGM 那件是同一個形狀（交辦狀態-1806.md 第六、九條）。
+        NK._voice(data)
         nodes.append({"id": nid, "type": "story", "position": {"x": x, "y": y}, "data": data})
 
     def add_edge(s, t, cond=None):

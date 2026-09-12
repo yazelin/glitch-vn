@@ -545,14 +545,13 @@ def _attach_voice(d):
         if (emo or "") == "描述動作":
             VSTAT["skip"] += 1
             continue
+        # 走 Larch 音色那九個角色 2026-09-13 生完了，檔案跟本機生的一起放在
+        # docs/voice，所以這裡不再特別處理，只另外數一筆好對帳。
+        # （2026-09-12 到 13 之間這裡是「拔掉」：那時 urls.json 裡還留著改判之前
+        # 用女聲參考音生的 121 句，_voice() 照樣掛得上去，板上會是「有聲音、
+        # 而且是錯的性別」——比沒有聲音更難發現，因為所有數字都會變好看。）
         if sp in LARCH_SPK:
-            # **本機那份要拔掉，不是不算。** 保全與店員 2026-09-12 改走 Larch，
-            # 原因是輸入本身錯了（參考音是女聲、角色是男性）。urls.json 裡還留著
-            # 改判之前生的 121 句，_voice() 照樣掛得上去——板上就會是「有聲音、
-            # 而且是錯的性別」，比沒有聲音更難發現。等 Larch 那批生好再掛回來。
-            holder.pop("voiceUrl", None)
             VSTAT["larch"] += 1
-            continue
         VSTAT["total"] += 1
         if holder.get("voiceUrl"):
             VSTAT["hit"] += 1
