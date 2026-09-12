@@ -189,8 +189,15 @@ def bg_url(key_, state, pid=None, dry=False):
         return assets[key_]
     if key_ in MAIN_ASSETS:
         return MAIN_ASSETS[key_]
-    local = NEW_BG_DIR / f"{key_}.jpg"
-    if local.exists():
+    # **不要寫死副檔名。** 2026-09-12 中過：白天那批重畫成 .png，這裡只找 .jpg，
+    # 找不到就回 None，呼叫端把 background 寫成空字串，一聲不響。線上 22 張場景卡
+    # 因此沒有背景，而回讀的卡數／邊數完全一致，看起來像推成功了。
+    # 能上去的三張（lobby-day、roof-day、figure-day）正好是還維持 .jpg 的那三張。
+    cand = sorted(NEW_BG_DIR.glob(f"{key_}.*"))
+    local = cand[0] if cand else None
+    if len(cand) > 1:
+        raise SystemExit(f"★ {key_} 有好幾個副檔名，不知道要傳哪一個：{[c.name for c in cand]}")
+    if local:
         if dry:
             return f"(上傳) {local.name}"
         assets[key_] = upload(pid, local)
@@ -889,6 +896,13 @@ def main():
     bag_image = local_asset("art/items/bag.png", state, pid, False, "prop") if (ROOT / "art/items/bag.png").exists() else ""
     proj["settings"] = settings_patch(proj.get("settings"), bag_image)
     proj["variables"] = vs
+    # 缺背景就停手。**這一行是 2026-09-12 補的**：missing_bg 本來只印在最前面那行
+    # 統計裡，而推完的最後幾行是「回讀一致」，看 log 的人（我）只看尾巴就回報成功。
+    # 要擋在推之前，而不是印在讀不到的地方。真的要帶著缺口推就設 INV_ALLOW_MISSING_BG=1。
+    if missing_bg and not os.environ.get("INV_ALLOW_MISSING_BG"):
+        raise SystemExit(f"★ 有 {len(missing_bg)} 張場景卡找不到背景，沒有推。\n"
+                         f"   {missing_bg}\n"
+                         f"   先確認 art/bg-investigation 底下那些代號都有檔案（副檔名不限）。")
     api("PUT", f"/projects/{pid}", {"project": proj})
     print("PUT 專案設定與變數：ok")
 

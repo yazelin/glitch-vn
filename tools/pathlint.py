@@ -30,9 +30,13 @@
  十、台詞裡寫死的天數跟實際流程對不上
      （2026-09-09 把全篇從十二天拉到十四天，板上改了，散在別處的數字沒有全部跟上；
        「第Ｎ天收尾」的條件是 day eq N+1，那是刻意的差一——日記第 Ｎ 天寫，第 Ｎ+1 天才讀到）
+ 十一、板上有 @@bg- 代號對不到任何圖檔
+     （對不到的話 push.py 會把 background 寫成空字串，而卡數／邊數的回讀完全一致，
+       看起來像推成功了。2026-09-12 中過：白天那批重畫成 .png，push.py 寫死找 .jpg，
+       線上 22 張場景卡沒有背景）
 可達性不在這裡，那是 tools/sim.py 的事。
 
-**十項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
+**十一項每一項都有負控制**，在 `tools/pathlint_selftest.py`：它把故障注進板子的副本，
 跑這一支，確認該項會紅、還原後會綠。改這裡的規則要順手改那一支，不然那一項等於沒在驗。
 `PATHLINT_BOARD` 可以指定要檢查哪一份板子（自我測試用的）。
 """
@@ -266,6 +270,36 @@ else:
             if _tail and _CN.get(_m.group(1)) != _tail:
                 bad.append(f"天數對不上　{_n['id']}　台詞說「第{_m.group(1)}天她寫到」，"
                            f"最後一則收尾日記是第 {_tail} 天")
+
+# ── 十一、板上每個 @@bg- 代號都要對得到圖 ────────────────────────────
+# 2026-09-12 加。這一項防的是「推成功了但線上沒有背景」：
+# push.py 找不到圖的時候 bg_url() 回 None，呼叫端把 background 寫成空字串，
+# 卡數與邊數完全一致，回讀比對也說「一致」，看起來像推成功了。
+# 實際上線上 22 張場景卡沒有背景，而 missing_bg 只印在 log 最前面那一行。
+# 真因是 push.py 把副檔名寫死成 .jpg，而白天那批重畫成了 .png。
+# 所以這裡**不比對副檔名**，只問「這個代號有沒有對應的檔案」。
+_bgdir = pathlib.Path(__file__).resolve().parent.parent / "art/bg-investigation"
+_mainassets = pathlib.Path(__file__).resolve().parent.parent / "larch/assets.json"
+_shared = set(json.loads(_mainassets.read_text(encoding="utf-8"))) if _mainassets.exists() else set()
+_codes = {}
+def _scan_bg(o, nid):
+    if isinstance(o, dict):
+        for k, v in o.items():
+            if k in ("background", "sceneCode") and isinstance(v, str) and v.startswith("@@"):
+                _codes.setdefault(v[2:], []).append(nid)
+            _scan_bg(v, nid)
+    elif isinstance(o, list):
+        for v in o:
+            _scan_bg(v, nid)
+for _n in b["nodes"]:
+    _scan_bg(_n["data"], _n["id"])
+for _k in sorted(_codes):
+    if _k in _shared:                                   # 刻意共用正篇素材的那幾張
+        continue
+    if not list(_bgdir.glob(_k + ".*")):
+        bad.append(f"代號對不到圖　{_k}　用在 {len(_codes[_k])} 張卡（{_codes[_k][0]}…）"
+                   f"：art/bg-investigation 底下沒有這個名字的檔案，"
+                   f"推上去那些卡的背景會是空的")
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")

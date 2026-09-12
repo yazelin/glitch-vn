@@ -2,7 +2,7 @@
 """pathlint 的負控制。跑：python3 tools/pathlint_selftest.py
 
 檢查器最常見的壞法是**安靜地不再檢查**：規則寫錯、欄位改名、資料結構變了，
-它照樣印「沒有問題」。所以十項每一項都在這裡注一個故障進板子的副本，
+它照樣印「沒有問題」。所以十一項每一項都在這裡注一個故障進板子的副本，
 確認那一項真的會叫；注入前的乾淨板子則必須是綠的。
 （第九項與第十項各有四種壞法，所以各有四個注入。報表照「項」數，括號裡才是注入數。）
 
@@ -250,6 +250,22 @@ def inject_live_day(b):
     raise SystemExit("板上沒有直播插播")
 
 
+def inject_bg_code_typo(b):
+    """十一、板上一個 @@bg- 代號對不到任何圖檔
+
+    這就是 2026-09-12 那個形狀：代號換了副檔名（或打錯字）之後，
+    push.py 把 background 寫成空字串，卡數與邊數的回讀完全一致，
+    所以「推成功了」是假的，線上那幾張場景卡沒有背景。
+    """
+    for n in b["nodes"]:
+        d = n.get("data") or {}
+        v = d.get("background")
+        if isinstance(v, str) and v.startswith("@@bg-"):
+            d["background"] = v + "-注入打錯字"
+            return "代號對不到圖"
+    raise SystemExit("板上沒有 @@bg- 代號")
+
+
 CASES = [("一、重複標籤", inject_dup_label),
          ("二、值對不到", inject_unreachable_value),
          ("三、沒有人寫", inject_unwritten_var),
@@ -265,7 +281,8 @@ CASES = [("一、重複標籤", inject_dup_label),
          ("十、收尾日記掛錯天", inject_wrap_day_shift),
          ("十之二、謝幕天數沒跟上", inject_curtain_day),
          ("十之三、少一則收尾日記", inject_missing_wrap),
-         ("十之四、直播插播掛錯天", inject_live_day)]
+         ("十之四、直播插播掛錯天", inject_live_day),
+         ("十一、代號對不到圖", inject_bg_code_typo)]
 
 
 def main():
