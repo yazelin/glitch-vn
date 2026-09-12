@@ -283,8 +283,12 @@ def self_test(payload, route_steps, spoken):
     print("好的（真的 payload，沒有動過）：")
     good = run(payload, route_steps, spoken, None)
     good.show()
-    # 負控制只問「好的有沒有紅」，SKIP 在這裡是預期狀態，不算失敗
-    all_fine = not [r for r in good.rows if r[0] == FAIL]
+    # **兩件事要分開判。** 一件是「六個弄壞法各自被該抓的那一項抓到」（負控制本身有效），
+    # 另一件是「沒動過的資料有沒有紅」（有沒有假陽性）。原本只有一個旗標，
+    # 於是 2026-09-12 掛完配音之後 S3 合理地紅了（431 句還沒配），六個案例明明
+    # 全部 ✔，結論卻印成「負控制無效」——**那句話會叫人去修一個沒有壞的工具。**
+    base_red = [r[1].split("　")[0] for r in good.rows if r[0] == FAIL]
+    all_fine = True
     for name, want, p, steps in cases:
         print(f"\n{name}　（應該由 {want} 抓到）")
         rep = run(p, steps, spoken, None)
@@ -310,9 +314,12 @@ def self_test(payload, route_steps, spoken):
     print("案例五不是壞掉，是證明 SKIP 不是永久失明：bgm 一出現，S2 就從 SKIP 轉成實驗並抓到空字串。")
     print("案例六不是壞掉，是走通「全部驗過而且全綠、結束碼 0」那條路——")
     print("那條路今天在真資料上走不到（S2、S3 必 SKIP），不走一次就等於沒測過。")
-    print("\n" + ("PASS 負控制有效：好的沒有紅，五種壞法各自被該抓的那一項抓到，全綠那條路也走得通。"
+    print("\n" + ("PASS 負控制有效：五種壞法各自被該抓的那一項抓到，全綠那條路也走得通。"
                   if all_fine else
                   "FAIL 負控制無效——先修檢查再談驗收。"))
+    if base_red:
+        print(f"※ 沒動過的資料上本來就有紅的：{'、'.join(base_red)}。"
+              "那是真的缺漏，不是負控制失效——這兩件分開看。")
     return 0 if all_fine else 1
 
 

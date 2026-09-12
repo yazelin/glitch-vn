@@ -47,6 +47,9 @@ ITEM_LOCAL = {"rulebook": "art/items/item-rulebook.png", "phone": "art/items/ite
               "tape": "art/items/item-tape.png"}
 
 API = "https://larch.ink/api/agent"
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import bgm as BGM     # 背景→BGM 那張表，跟 build.py 讀的是同一份
+
 KEY_PATH = pathlib.Path.home() / ".config/larch/key"
 
 NAME = "格莉奇與黑洞先生・調查篇"
@@ -424,9 +427,13 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                     keys = [f"bg-{code}-evening", night_key] if 2 in slots else [night_key, f"bg-{code}-evening"]
                 else:
                     keys = [day_key, night_key]
-                url, _ = pick_bg(keys[0], keys[1], state, pid, dry)
+                url, used = pick_bg(keys[0], keys[1], state, pid, dry)
                 if url:
                     d["background"] = url
+                    # **這裡也是換曲點。** 段落中途換場景就是換地點，畫面換了
+                    # 音樂沒換的話，玩家會在便利商店裡聽到洗衣店那首。
+                    # 掛在 build 那一邊漏掉的就是這 9 張，而板上看起來完全正常。
+                    BGM.apply(d, used)
         elif d.get("type") == "plugin" and d.get("pluginCardId") == "grant-item":
             if not d["pluginValues"].get("itemImage"):
                 d["pluginValues"]["itemImage"] = item_url["tape"]
@@ -767,6 +774,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
              "cond_edges": sum(1 for e in edges if e.get("data")),
              "variables": len(vs), "menus": len(menus), "missing_bg": missing_bg,
              "read_vars_max": max(len(n["data"].get("miniGameReadVars", [])) for n in nodes)}
+    BGM.dedupe(nodes, edges)
     return nodes, edges, list(vs.values()), stats
 
 
@@ -896,6 +904,7 @@ def main():
         check_missing_bg(st)
         if SUBBED:
             print(f"※ {len(SUBBED)} 處用了別的時段代替：{SUBBED}")
+        BGM.report("推送時段落中途換場景")
         out = HERE / "out" / "payload.json"
         out.write_text(json.dumps({"nodes": nodes, "edges": edges, "variables": vs}, ensure_ascii=False, indent=1),
                        encoding="utf-8")
@@ -938,6 +947,7 @@ def main():
                 var["defaultValue"] = v
                 print(f"★ 測試覆寫 {k} = {v!r}（驗完要重推正常版）")
     print("payload：", json.dumps(st, ensure_ascii=False))
+    BGM.report("推送時段落中途換場景")
 
     # 4. 專案設定與變數（整包 PUT 會清版子，所以在推版子之前做）
     proj = api("GET", f"/projects/{pid}")

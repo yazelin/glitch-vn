@@ -280,6 +280,7 @@ class Board:
         # 反應卡、錄音帶卡都是在流程裡直接組 data 的。原本掛在 card_node 裡，
         # 這些就整批沒有聲音，而且板上看起來跟有聲音的卡一模一樣。
         _attach_voice(data)
+        _attach_bgm(data)
         self.n += 1
         nid = nid or f"{BID}-{self.n:03d}"
         self.x += 300
@@ -513,6 +514,19 @@ from voice import LARCH_VOICE as _LV
 
 LARCH_SPK = set(_LV)     # 路人那批的音色掛在 Larch，本機沒有檔，不算對不到
 VSTAT = {"total": 0, "hit": 0, "miss": [], "skip": 0, "larch": 0}
+
+
+# ── 掛 BGM（規格第三節）────────────────────────────────────────
+# 表在 larch/inv/bgm.py，push.py 段落中途換場景那一段讀的是同一份。
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import bgm as BGM
+
+
+def _attach_bgm(d):
+    bg = (d.get("background") or "")
+    if bg.startswith("@@"):
+        BGM.apply(d, bg[2:])
+    return d
 
 
 def _attach_voice(d):
@@ -1413,6 +1427,7 @@ def main():
         print(f"\n寫出 {out}")
         # **對不到的必須被數出來**（規格第二節）。M > 0 不一定是錯的
         # （路人還沒選音色、純刪節號的沉默不該配音），但它必須被印出來並且有人看過。
+        BGM.report("建置")
         _m = len(VSTAT["miss"])
         print(f"配音：不配音 {VSTAT['skip']} 句　Larch 音色 {VSTAT['larch']} 句")
         print(f"配音：板上 {VSTAT['total']} 句　掛上 {VSTAT['hit']} 句　對不到 {_m} 句")
