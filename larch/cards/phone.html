@@ -37,8 +37,19 @@ h2{margin:14px 18px 8px;font-size:17px;font-weight:600}
 .msg .bub{background:#fff;border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:8px 12px;font-size:14px;line-height:1.6}
 .msg .when{font-size:10px;color:var(--ink2);margin:3px 0 0 2px}
 #reply{flex:none;display:flex;gap:8px;padding:8px 12px;border-top:1px solid var(--line);background:#fafafa}
+/* `#reply{display:flex}` 的優先序比瀏覽器內建的 `[hidden]{display:none}` 高，
+   所以 show() 裡的 hidden=true 完全沒有效果，這條回應列在直播頁與電話頁也一直掛著。
+   2026-09-12 抓到（本機殼實際渲染看出來的，讀程式看不出來）。 */
+#reply[hidden]{display:none}
 #reply span{flex:1;border:1px solid var(--line);border-radius:18px;padding:7px 12px;font-size:13px;color:#b8bcc4;background:#f1f2f4}
-#reply i{width:34px;border-radius:50%;background:#dfe1e6}
+/* 送出鈕。**故意是死的**：輸入框是 span 不是 input，這一顆也沒有掛 click。
+   整條回應列是佈景，給玩家看他打得出字、送不出去（「她不回。」）。
+   箭頭用 CSS 畫：插件的 iframe 是 sandbox="allow-scripts"，沒有網路，
+   圖示字型與外部 SVG 都載不進來（同一份檔的電池用 ▮▮▮ 也是這個原因）。
+   高度要寫死並 align-self:center，靠 flex 的 stretch 撐的話會跟著左邊那格的行高跑，圓就歪了。 */
+#reply i{flex:none;width:34px;height:34px;align-self:center;border-radius:50%;background:var(--line);position:relative}
+#reply i::after{content:"↑";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font:normal 600 17px/1 system-ui,"Noto Sans TC",sans-serif;font-style:normal;color:var(--tab)}
 /* 格莉奇的頁面 */
 .prof{display:flex;gap:12px;align-items:center;padding:14px 18px 6px}
 .prof .av{width:52px;height:52px;border-radius:50%;background:#cfd4dc center/cover no-repeat}
