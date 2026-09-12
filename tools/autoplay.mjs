@@ -6,6 +6,14 @@ import { createRequire } from 'node:module';
 const require_ = createRequire(import.meta.url);
 const { chromium } = require_('/home/ct/line-sticker-studio/node_modules/playwright');
 import fs from 'node:fs';
+// ★ 這支讀十個環境變數：SEED POLICY MODE PREFER FILLPAGE1 BAG DEBUG_TAPE DUMP OUT PREVIEW
+//   **加新的環境變數，要同時去改 design/調查篇-通關路線.txt 的檔頭那份清單。**
+//   那份清單把十個全部列出來，沒設的也寫「（沒設）」。
+//   2026-09-12 的教訓：重產基準時漏了 PREFER，路線對不上；補上之後又漏了 FILLPAGE1，
+//   還是對不上。兩次都是靠「逐字稿裡有沒有留下痕跡」反推哪些被設過
+//   （找不到「（找錄音）」與「道具欄」所以判定 BAG 與 DEBUG_TAPE 沒設）。
+//   **那個反推會失敗**：下一個變數可能不留痕跡，那時候看起來只會像「路線又變了」，
+//   而且沒有人會知道反推失敗了。把沒設的也寫進檔頭，就沒有東西需要反推。
 const SD=process.env.OUT || '/tmp';
 // 走法：notes＝照便條（預設）、firstline＝只看便條第一行、casual＝一半的深夜不出門、
 // explore＝不看便條，挑去得最少的地方、random＝擲骰。
@@ -110,8 +118,23 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
         }
         const use=page.locator('button', { hasText: '使用道具' }).first(); if (await use.count()) { await use.click(); await page.waitForTimeout(2500); }
         let pf=null; for (const f of frames()) { try { if ((await f.locator('#close').count())) pf=f; } catch(e){} }
-        if (pf) { const msgs=(await pf.locator('.msg .bub').allTextContents()).map(t=>t.slice(0,16)); await pf.locator('nav button', { hasText: '格莉奇' }).click(); await page.waitForTimeout(300);
-          const posts=await pf.locator('.post .txt').allTextContents(); out(`  [手機] 訊息 ${msgs.length} 則 ${JSON.stringify(msgs)}；貼文 ${posts.length} 則：${posts.map(t=>t.slice(0,10)).join('｜')}`);
+        if (pf) { const msgs=(await pf.locator('.msg .bub').allTextContents()).map(t=>t.slice(0,16));
+          // 回應列只該出現在訊息頁。2026-09-12 修過：#reply{display:flex} 蓋掉內建的
+          // [hidden]{display:none}，所以那個 hidden 從來沒生效，直播頁與電話頁也掛著。
+          // 送出鈕的箭頭同一天補的（本來是空的 <i>），這裡順便確認它畫得出來。
+          const seen = async () => await pf.locator('#reply').isVisible().catch(()=>null);
+          const arrow = await pf.locator('#reply i').evaluate(e=>getComputedStyle(e,'::after').content).catch(()=>'?');
+          const rep = { 訊息: await seen() };
+          await pf.locator('nav button', { hasText: '格莉奇' }).click(); await page.waitForTimeout(300);
+          const posts=await pf.locator('.post .txt').allTextContents(); rep['格莉奇'] = await seen();
+          await pf.locator('nav button', { hasText: '直播' }).click(); await page.waitForTimeout(300);
+          const live=(await pf.locator('.live p').allTextContents()).join('／'); rep['直播'] = await seen();
+          await pf.locator('nav button', { hasText: '電話' }).click(); await page.waitForTimeout(300);
+          const call=(await pf.locator('.call div').allTextContents()).join('／'); rep['電話'] = await seen();
+          out(`  [手機] 訊息 ${msgs.length} 則 ${JSON.stringify(msgs)}；貼文 ${posts.length} 則：${posts.map(t=>t.slice(0,10)).join('｜')}`);
+          out(`  [手機] 直播頁「${live}」；電話頁「${call}」`);
+          out(`  [手機] 回應列各頁 ${JSON.stringify(rep)}（只有訊息該是 true）；送出鈕箭頭 ${arrow}`);
+          await pf.locator('nav button', { hasText: '訊息' }).click(); await page.waitForTimeout(200);
           await pf.locator('#close').click(); await page.waitForTimeout(2000); }
         else { out('  [手機] 打不開'); await page.keyboard.press('Escape'); }
       } catch(e) { out('  [手機] 出錯 '+String(e).slice(0,80)); }
