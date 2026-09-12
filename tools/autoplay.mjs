@@ -117,7 +117,8 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
           }
         }
         const use=page.locator('button', { hasText: '使用道具' }).first(); if (await use.count()) { await use.click(); await page.waitForTimeout(2500); }
-        let pf=null; for (const f of frames()) { try { if ((await f.locator('#close').count())) pf=f; } catch(e){} }
+        let pf=null; for (const f of frames()) { try { if ((await f.locator('#t-close').count())) pf=f; } catch(e){} }   // 整合 phone-v2 之後收起來搬進分頁列第五格，id 從 #close 變 #t-close。
+        // **找不到不會報錯**，會掉進下面的 else 印「[手機] 打不開」而且 exit 0——那是會騙過驗收的靜默失敗。
         if (pf) { const msgs=(await pf.locator('.msg .bub').allTextContents()).map(t=>t.slice(0,16));
           // 回應列只該出現在訊息頁。2026-09-12 修過：#reply{display:flex} 蓋掉內建的
           // [hidden]{display:none}，所以那個 hidden 從來沒生效，直播頁與電話頁也掛著。
@@ -128,14 +129,13 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
           await pf.locator('nav button', { hasText: '格莉奇' }).click(); await page.waitForTimeout(300);
           const posts=await pf.locator('.post .txt').allTextContents(); rep['格莉奇'] = await seen();
           await pf.locator('nav button', { hasText: '直播' }).click(); await page.waitForTimeout(300);
-          const live=(await pf.locator('.live p').allTextContents()).join('／'); rep['直播'] = await seen();
-          await pf.locator('nav button', { hasText: '電話' }).click(); await page.waitForTimeout(300);
-          const call=(await pf.locator('.call div').allTextContents()).join('／'); rep['電話'] = await seen();
+          const live=(await pf.locator('.offair p').allTextContents()).join('／'); rep['直播'] = await seen();
+          // 電話那一頁在 phone-v2 拿掉了（2026-09-12 yazelin 拍板），所以不再點它。
           out(`  [手機] 訊息 ${msgs.length} 則 ${JSON.stringify(msgs)}；貼文 ${posts.length} 則：${posts.map(t=>t.slice(0,10)).join('｜')}`);
-          out(`  [手機] 直播頁「${live}」；電話頁「${call}」`);
+          out(`  [手機] 直播頁「${live}」`);
           out(`  [手機] 回應列各頁 ${JSON.stringify(rep)}（只有訊息該是 true）；送出鈕箭頭 ${arrow}`);
           await pf.locator('nav button', { hasText: '訊息' }).click(); await page.waitForTimeout(200);
-          await pf.locator('#close').click(); await page.waitForTimeout(2000); }
+          await pf.locator('#t-close').click(); await page.waitForTimeout(2000); }
         else { out('  [手機] 打不開'); await page.keyboard.press('Escape'); }
       } catch(e) { out('  [手機] 出錯 '+String(e).slice(0,80)); }
       continue; } spot = await pickSpot(bf2); if (spot==='skip') { await bf2.locator('#skip').click(); await page.waitForTimeout(2000); continue; }

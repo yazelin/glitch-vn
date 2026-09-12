@@ -54,3 +54,11 @@ larch/inv/out/payload.json
 # 一份大 JSON 反覆進 git 會在歷史裡長到什麼樣子。要重抓隨時抓得到。
 backup/main-project-*
 backup/*-headers.txt
+
+# 《調查篇》BGM 候選：選中的五支已經在 docs/bgm（那一份才是發佈出去的），
+# 候選區留在磁碟上就好。59MB 的落選檔進 git 歷史刪不掉，而決定與證據
+# 寫在 art/bgm/inv-candidates/README.md，那一份要進。
+art/bgm/inv-candidates/*.mp3
+art/bgm/inv-candidates/ab-60s/
+# 複檢資料夾同 art/voice/review/：是既有音檔的複本，聽完就沒用了。
+art/voice/recheck-larch-vs-local/

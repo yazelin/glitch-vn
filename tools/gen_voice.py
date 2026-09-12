@@ -148,6 +148,17 @@ def main():
         print(f"\n跳過（沒有可唸的字）：{len(silent)} 句　"
               + "、".join(f"{u[0]}「{u[1][:8]}」" for u in silent[:6]))
         todo = [u for u in todo if has_words(u)]
+    # **改走 Larch 的角色不可以在本機生。** 它們的 VOICE 那一行留著當歷史紀錄，
+    # 所以 VOICE.get 仍然回得出東西——不擋的話 gen_voice 會照舊拿那支參考音生下去，
+    # 而那正是 2026-09-12 要修的問題（保全與店員的參考音是女聲，角色是男性）。
+    # 這跟 EXTERNAL 是同一類的保護，只是方向相反：EXTERNAL 是「成品在別處」，
+    # 這裡是「這個角色不該用本機的聲音」。
+    _larch = set(getattr(V, "LARCH_VOICE", {}))
+    _tol = [u for u in todo if u[0] in _larch]
+    if _tol:
+        who_l = sorted({u[0] for u in _tol})
+        print(f"\n跳過（改走 Larch，不可以本機生）：{len(_tol)} 句　{who_l}")
+        todo = [u for u in todo if u[0] not in _larch]
     skip = sorted({u[0] for u in todo if not V.VOICE.get(u[0])})
     if skip:
         n = len([1 for u in todo if not V.VOICE.get(u[0])])
