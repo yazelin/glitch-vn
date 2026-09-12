@@ -226,11 +226,22 @@ def sprite_url(name, state, pid, dry):
     return None
 
 
+SUBBED = []            # 用了別的時段代替的紀錄，推完會印出來
+
+
 def pick_bg(day_key, night_key, state, pid, dry):
-    """白天版還沒畫（2026-09-06），有哪一張用哪一張。都沒有就留空讓推送報出來。"""
+    """白天版還沒畫（2026-09-06），有哪一張用哪一張。都沒有就留空讓推送報出來。
+
+    **這個代替是靜默的，而且比缺圖更難發現**：只有三個時段全缺才會列進
+    missing_bg，少一張的話玩家會在早上看到晚上那張，推送一句話都不會說。
+    2026-09-12 加了 SUBBED，代替過的都記下來，推完印出來。
+    真正的守門是 tools/pathlint.py 第十一項，它一個代號一個代號查檔案。
+    """
     for k in (day_key, night_key):
         u = bg_url(k, state, pid, dry)
         if u:
+            if k != day_key:
+                SUBBED.append((day_key, k))
             return u, k
     return None, None
 
@@ -834,6 +845,23 @@ def settings_patch(settings, bag_image=""):
     return settings
 
 
+def check_missing_bg(st):
+    """缺背景就停手。**--dry 也要擋**，不然這道閘門只有真的連線那條路測得到。
+
+    2026-09-12 加。那天線上 22 張場景卡的 background 是空字串，而推送的回讀是
+    「卡片 770/770　邊 866/866　比對 一致」。missing_bg 有列出來，就在 log 的
+    第一行統計裡——而推完的最後幾行是「回讀一致」，看 log 的人（我）只看尾巴。
+    所以要擋在推之前，而不是印在讀不到的地方。
+    真的要帶著缺口推就設 INV_ALLOW_MISSING_BG=1。
+    """
+    miss = st.get("missing_bg") or []
+    if miss and not os.environ.get("INV_ALLOW_MISSING_BG"):
+        raise SystemExit(f"★ 有 {len(miss)} 張場景卡找不到背景，沒有推。\n"
+                         f"   {miss}\n"
+                         f"   art/bg-investigation 底下那些代號要有檔案（副檔名不限）。\n"
+                         f"   真的要帶著缺口推：INV_ALLOW_MISSING_BG=1")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
@@ -846,6 +874,9 @@ def main():
     if a.dry:
         nodes, edges, vs, st = assemble(board, state, dry=True)
         print(json.dumps(st, ensure_ascii=False, indent=1))
+        check_missing_bg(st)
+        if SUBBED:
+            print(f"※ {len(SUBBED)} 處用了別的時段代替：{SUBBED}")
         out = HERE / "out" / "payload.json"
         out.write_text(json.dumps({"nodes": nodes, "edges": edges, "variables": vs}, ensure_ascii=False, indent=1),
                        encoding="utf-8")
@@ -896,13 +927,9 @@ def main():
     bag_image = local_asset("art/items/bag.png", state, pid, False, "prop") if (ROOT / "art/items/bag.png").exists() else ""
     proj["settings"] = settings_patch(proj.get("settings"), bag_image)
     proj["variables"] = vs
-    # 缺背景就停手。**這一行是 2026-09-12 補的**：missing_bg 本來只印在最前面那行
-    # 統計裡，而推完的最後幾行是「回讀一致」，看 log 的人（我）只看尾巴就回報成功。
-    # 要擋在推之前，而不是印在讀不到的地方。真的要帶著缺口推就設 INV_ALLOW_MISSING_BG=1。
-    if missing_bg and not os.environ.get("INV_ALLOW_MISSING_BG"):
-        raise SystemExit(f"★ 有 {len(missing_bg)} 張場景卡找不到背景，沒有推。\n"
-                         f"   {missing_bg}\n"
-                         f"   先確認 art/bg-investigation 底下那些代號都有檔案（副檔名不限）。")
+    check_missing_bg(st)
+    if SUBBED:
+        print(f"※ {len(SUBBED)} 處用了別的時段代替：{SUBBED}")
     api("PUT", f"/projects/{pid}", {"project": proj})
     print("PUT 專案設定與變數：ok")
 

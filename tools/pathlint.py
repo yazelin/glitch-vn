@@ -298,8 +298,10 @@ for _k in sorted(_codes):
         continue
     if not list(_bgdir.glob(_k + ".*")):
         bad.append(f"代號對不到圖　{_k}　用在 {len(_codes[_k])} 張卡（{_codes[_k][0]}…）"
-                   f"：art/bg-investigation 底下沒有這個名字的檔案，"
-                   f"推上去那些卡的背景會是空的")
+                   f"：art/bg-investigation 底下沒有這個名字的檔案。"
+                   f"push.py 的 pick_bg 會默默改用同一地點別的時段那張"
+                   f"（三個時段全缺才會列進 missing_bg），"
+                   f"所以玩家會在早上看到晚上的那張，而推送不會有任何抱怨")
 
 print("\n".join(bad) if bad else "路徑檢查：沒有問題")
 print(f"—— 規則 {len(b['rules'])} 條、舞台指示 {_dirs} 行，問題 {len(bad)} 件")
