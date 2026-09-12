@@ -51,7 +51,19 @@ def utterances():
     # gen_voice 與 split_take 都看不到（2026-09-11 抓到）。
     inv = ROOT / "larch/inv/out/board.json"
     if inv.exists():
-        built["inv"] = json.loads(inv.read_text(encoding="utf-8"))["nodes"]
+        _b = json.loads(inv.read_text(encoding="utf-8"))
+        built["inv"] = _b["nodes"]
+        # **錄音帶那幾句不在 nodes 裡。** 播放卡是 push.py 從 board.json 的 tapes
+        # 清單現組的，所以只讀 nodes 的話，那幾句在配音管線裡等於不存在
+        # （2026-09-12 抓到：八句，urls.json 裡連代號都沒有）。
+        # 引文大多是濃縮過的，跟原場不是同一串字，所以要各自生一份。
+        # **要併進 "inv" 這個鍵，不可以自己開一個。** BOARD_OF 記的是板子代號，
+        # 而「正篇外部配音角色不可以就地生」那條保護是用板子代號放行調查篇的。
+        # 開成 "inv-tape" 的話，諾亞那一句會被當成正篇的而整句跳過（實際發生過）。
+        built["inv"] = built["inv"] + [
+            {"data": {"type": "dialogue", "speaker": t["who"],
+                      "text": t["quote"], "emotion": None}}
+            for t in (_b.get("tapes") or [])]
 
     out, seen = [], set()
     for bid in sorted(built):

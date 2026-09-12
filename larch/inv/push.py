@@ -577,9 +577,14 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                                   "interruptOnce": False, "interruptExit": "return"}, 0, 0)
         for i, t in enumerate(tapes):
             nid = f"inv-tape-{t['id']}"
-            # 先一張旁白讓玩家知道那是錄音機，再播那一句（講者與文字跟原場一模一樣，配音才會是同一份）
+            # 先一張旁白讓玩家知道那是錄音機，再播那一句。
+            # **那句「跟原場一模一樣」只有保全那一卷成立。** 2026-09-12 逐字比對過：
+            # 五卷裡只有 rec_guard 的引文對得到板上的原句，另外四卷都是濃縮過的，
+            # 所以它們的配音代號跟原場不同，要各自生一份。
+            # 「錄音機轉了一下。」是動作描述不是台詞，情緒標成「描述動作」，
+            # 跟斜體舞台指示歸同一類（配音端靠這個值排除，不是靠特例）。
             add_node(f"{nid}-pre", {"type": "dialogue", "title": f"錄音機：{t['name']}", "text": "錄音機轉了一下。",
-                                    "speaker": "旁白",
+                                    "speaker": "旁白", "emotion": "描述動作",
                                     "variableOps": [{"id": "op-tape", "variable": "open_tape", "kind": "set", "value": False}]},
                      400 + i * 320, 850)
             add_node(nid, {"type": "dialogue", "title": f"播：{t['name']}", "text": t["quote"],
