@@ -192,7 +192,13 @@ def table_match(rows, headings):
         if any(t and h.startswith(t) for t in toks2 for h in headings):
             return dest, slots
         # 三、純序數：「七・二」＝該人底下第二個 L3，對到以「二、」開頭的標題
-        if len(parts) >= 2 and re.fullmatch(r"[一二三四五六七八九十]+", parts[1]):
+        # **只有「這一節的人自己」那幾列可以走這一條。** 序數沒有帶任何內容，
+        # 而 `who not in stack` 那道閘只要求那個人名出現在標題裡——
+        # 「八、便利商店店員 ／ 四、再問一次 ／ 四之四、關於貓草」裡有「貓草」，
+        # 於是貓草自己的「七・四」（手辦店）靠一個「四」就對上了，
+        # 店員問貓草的那一段被送去手辦店。2026-09-14 實玩抓到：
+        # 玩家在手辦店問到「關東煮，兩顆蘿蔔，一杯無糖」。
+        if who == person and len(parts) >= 2 and re.fullmatch(r"[一二三四五六七八九十]+", parts[1]):
             if any(h.startswith(parts[1] + "、") or h.startswith(parts[1] + "・") for h in headings[1:]):
                 return dest, slots
     return None
@@ -642,6 +648,34 @@ def build(cards):
                 greetings.append({"loc": "parts", "var": "met_材料行老闆", "n": 1, "op": "eq",
                                   "slots": [0, 1], "first": first, "last": prev})
             continue
+        # **「每一次到訪都播」的卡片是進門就播，不是選單上的一個選項。**
+        # 掛成選項的話，玩家選了它就把那一格的時間花在一張旁白上，然後回板子——
+        # 2026-09-14 使用者實玩：第一次去斑比工作室只看到「敲門」，選完就結束，
+        # 要隔一個時段再去才問得到話。設計稿（問答矩陣「零、到訪」）寫的是
+        # 「每一次到訪都播」，而且註明它刻意只有旁白，不該夾在問話中間。
+        # 接法跟招呼卡同一種：入口場景 ─(時段)─▶ 這一段 ─▶ 選單。
+        if "每一次到訪都播" in (s["trigger"] or ""):
+            heads = s["cards"][0].get("headings", [])
+            loc_, _ = loc_from_headings(heads)
+            if loc_:
+                gid = f"greet-{loc_}-arrive"
+                first = prev = None
+                for c in s["cards"]:
+                    d = card_node(c)
+                    if not d:
+                        continue
+                    d["segment"] = gid
+                    nid = b.add(d)
+                    if prev:
+                        b.edge(prev, nid)
+                    first = first or nid
+                    prev = nid
+                if first:
+                    greetings.append({"loc": loc_, "var": None, "n": 0,
+                                      "slots": (slots_from_headings(heads)
+                                                or sorted({SLOT[x] for x in SLOT if x in (s["trigger"] or "")})),
+                                      "first": first, "last": prev})
+                continue
         if s["cards"][0]["file"] == "調查篇-招呼":
             heads = s["cards"][0].get("headings", [])
             loc_, _ = loc_from_headings(heads)
@@ -703,7 +737,14 @@ def build(cards):
             hit = table_match(table, heads)
             if not hit:
                 # 對不到具體那一列（池一…池五這種沒關鍵詞的子節）就用該人的第一列當預設
-                who = next((w for w in PERSON_LOC if any(w in h for h in heads)), None)
+                # **「這一節是誰在講」要從 L1／L2 標題取，不是「名字出現在標題裡就算」。**
+                # 「八、便利商店店員 ／ 四、再問一次 ／ 四之四、關於貓草」裡兩個名字都在，
+                # 而 PERSON_LOC 的順序讓貓草先中，於是店員的那一段拿到貓草的第一列
+                # （laundry・深夜）。被問的人寫在 L1，關於誰寫在 L3。
+                who = next((w for h in heads[:2] for w in PERSON_LOC
+                            if h.startswith(w) or f"、{w}" in h), None)
+                if who is None:
+                    who = next((w for w in PERSON_LOC if any(w in h for h in heads)), None)
                 row = next(((d_, sl) for w, _, d_, sl in table if w == who), None) if who else None
                 if row:
                     hit = row
@@ -1084,6 +1125,16 @@ def build(cards):
         for k, en in enumerate(ens):
             for g in gs:
                 sc = slot_cond(g["slots"])
+                if g["var"] is None:
+                    # 無條件到訪：入口 ─(時段)─▶ 這一段 ─▶ 選單。
+                    # 沒有次數閘，所以不需要中間那張 setVariable。
+                    if sc:
+                        b.edge(en, g["first"], sc)
+                    else:
+                        b.edge(en, g["first"])
+                    if k == 0:
+                        b.edge(g["last"], menu)
+                    continue
                 gate = b.add({"type": "setVariable", "title": f"（{loc} 第{g['n']}次起）", "text": "", "variableOps": []})
                 b.edge(en, gate, {"variable": g["var"], "op": g.get("op", "gte"), "value": g["n"]})
                 if sc:
