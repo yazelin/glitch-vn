@@ -89,7 +89,20 @@ def rows():
 
 
 CSS = """
-:root{--bg:#faf8f5;--ink:#221f1c;--dim:#6b645c;--line:#e0d9d0;--card:#fff;--warn:#8a4b1f;--larch:#2f5d50}
+/* 淺色是完整的一套；深色**每一個變數都要重新給**。
+   2026-09-14 踩到：只換了 --bg 與 --ink，卡片底色還是白的，
+   而且 --bg 寫成 #17151300（尾巴那兩位是 alpha=00，全透明），
+   深色模式下就是白底配近白字，整頁看不見。 */
+:root{
+  --bg:#faf8f5; --ink:#221f1c; --dim:#6b645c; --line:#e0d9d0;
+  --card:#fff; --row:#f4f1ec; --warn:#8a4b1f; --larch:#2f5d50;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#171513; --ink:#eae5de; --dim:#9a9188; --line:#33302c;
+    --card:#211e1b; --row:#211e1b; --warn:#e0a06a; --larch:#7fbfa8;
+  }
+}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Noto Sans TC","PingFang TC",system-ui,sans-serif}
 header{padding:20px 18px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
@@ -98,7 +111,7 @@ h1{margin:0 0 6px;font-size:19px;letter-spacing:.02em}
 .bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;align-items:center}
 button.f{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 10px;border-radius:999px;cursor:pointer;font-size:13px}
 button.f.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-input[type=search]{flex:1;min-width:180px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);font-size:13px}
+input[type=search]{flex:1;min-width:180px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font-size:13px}
 main{padding:14px 18px 60px;max-width:1180px}
 .grp{margin:26px 0 10px;font-size:15px;font-weight:600;border-left:3px solid var(--ink);padding-left:8px}
 .grp small{font-weight:400;color:var(--dim)}
@@ -114,8 +127,7 @@ audio{height:32px;width:210px}
 .sub{font-size:12px;color:var(--dim);max-width:230px}
 .sub b{color:var(--warn);font-weight:600}
 .none{color:var(--dim)}
-tr.quiet td{background:#f4f1ec}
-@media (prefers-color-scheme:dark){:root{--bg:#17151300;--ink:#eee}}
+tr.quiet td{background:var(--row)}
 """
 
 JS = """
