@@ -193,7 +193,13 @@ var SPOTS=[
   hint:'他等那顆管子等兩個禮拜了。他走不開。'},
  {id:'laundry', name:'自助洗衣店',  live:['','','',''], gate:'open_laundry', x:77, y:56, showIf:'open_laundry',
   hint:'隔壁那家深夜也開。'},
- {id:'figure',  name:'手辦店',      live:[null,'店員','店員',null], gate:'open_figure', x:46, y:57, showIf:'open_figure',
+ // **手辦店沒有常駐的人可以問。** 櫃台後面那個人是場景描述的一部分
+ // （橋段2 第八場：「櫃台後面的人在給一整箱扭蛋貼標價」），沒有台詞、沒有立繪，
+ // 板上那五段的講者只有旁白、玩家、貓草、格莉奇。原本這裡寫 '店員'，
+ // 跟便利商店那個店員同名，玩家讀起來是同一個人——他們是兩個人。
+ // **空字串不是 null**：null 代表那個時段沒開（劇情軌道靠它判斷目的地能不能去，
+ // 第 453 行），空字串是開著但沒有人可以問。自助洗衣店本來就是這樣寫的。
+ {id:'figure',  name:'手辦店',      live:[null,'','',null], gate:'open_figure', x:46, y:57, showIf:'open_figure',
   hint:'他說他都在那裡買。'},
  {id:'studio',  name:'斑比工作室',  live:[null,'斑比','斑比','斑比'], gate:'open_studio', x:46, y:26, showIf:['asked_鐵塔_斑比','asked_貓草_斑比','open_studio'],
   hint:'畫她的人。名字我還沒問到。'},

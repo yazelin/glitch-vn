@@ -82,7 +82,7 @@ NOT_WHO = {"玩家", "旁白", "格莉奇"}
 # 就不用「誰在」擋它（鐵塔在街上、0x 在十四樓那種：設計上就是別的方式碰到）。
 POSSIBLE = {"lobby": {"管理員", "黑洞先生"}, "roof": {"諾亞"}, "street": {"路人"}, "busstop": {"路人"},
             "metro": {"路人"}, "store": {"店員", "貓草", "鐵塔", "斑比"}, "parts": {"老闆", "諾亞"},
-            "laundry": {"貓草", "斑比"}, "figure": {"店員", "貓草"}, "studio": {"斑比"},
+            "laundry": {"貓草", "斑比"}, "figure": {"貓草"}, "studio": {"斑比"},
             "booth": {"鐵塔"}, "tower14": {"櫃檯", "保全"}}
 
 INVENTORY_DEFAULT = json.dumps([
