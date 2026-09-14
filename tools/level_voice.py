@@ -15,7 +15,7 @@
     python3 tools/level_voice.py --who 格莉奇
     python3 tools/level_voice.py --dry      # 只量不改
 """
-import argparse, json, os, pathlib, subprocess, sys
+import argparse, json, math, os, pathlib, subprocess, sys
 import hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -87,6 +87,14 @@ def main():
         m = measure(f)
         if not m:
             print("量不到", f.name)
+            continue
+        # **整段幾乎無聲的檔量出來是 -inf**（0.5 秒以內的氣音、純標點那種）。
+        # 餵給第二段 loudnorm 會得到 offset=inf，ffmpeg 直接失敗、不產暫存檔，
+        # 於是印「壓失敗」——而且因為沒進帳本，之後每一次重跑都再失敗一次。
+        # 這種檔沒有響度可以統一，記帳跳過。2026-09-15 有 24 個。
+        if not math.isfinite(float(m["input_i"])):
+            print("整段幾乎無聲，跳過", f.name)
+            led[f.name] = sha(f)
             continue
         # **已經在目標範圍內的就跳過。** 每壓一次多一代 mp3 轉檔損失，
         # 全批重跑幾次就聽得出來。容差開 1 dB：loudnorm 的 linear 模式固定
