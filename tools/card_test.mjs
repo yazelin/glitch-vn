@@ -377,6 +377,12 @@ if (fs.existsSync(path.join(DIR, '.phone-test.html'))) {
   ok('桌機舞台中央是一支窄版手機，不再把螢幕拉成滿版',
      shell && screen && shell.width <= 392 && screen.width < shell.width && shell.height < 720,
      shell ? `${Math.round(shell.width)}×${Math.round(shell.height)}，螢幕寬 ${Math.round(screen.width)}` : '找不到手機殼');
+  await fr.locator('.prof .av').waitFor();
+  const avatarStyle = await fr.locator('.prof .av').evaluate(e => ({
+    size: e.style.backgroundSize, position: e.style.backgroundPosition,
+  }));
+  ok('格莉奇頭像使用完整裁好的大頭貼，不再放大 340% 切掉臉',
+     avatarStyle.size === 'cover' && avatarStyle.position === 'center center', JSON.stringify(avatarStyle));
   ok('沒有訊息時一開就是格莉奇的頁面', (await fr.locator('nav button.on').textContent()).startsWith('格莉奇'));
   ok('第三天看得到三天內的貼文（第 1、1、2、3 天，四則）', (await fr.locator('.post').count()) === 4, `${await fr.locator('.post').count()} 則`);
   ok('第四天以後的貼文還沒出現', !(await fr.locator('.post .txt').allTextContents()).some(t => t.includes('手辦店的貨到了')));

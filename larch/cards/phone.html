@@ -662,7 +662,9 @@ function applyTheme(){
 function glitchAvatar(e){
   if(!AVATAR) return;
   e.style.backgroundImage='url("'+AVATAR+'")';
-  e.style.backgroundSize='340%'; e.style.backgroundPosition='52% 6%';
+  // AVATAR 已經是裁成正方形的圓形大頭貼，不是全身立繪；再放大到 340%
+  // 只會剩下頭髮、看不到臉。各尺寸容器都完整置中顯示同一張頭像。
+  e.style.backgroundSize='cover'; e.style.backgroundPosition='center';
 }
 function drawMsg(box){
   box.appendChild(el('div','ttl','訊息'));
