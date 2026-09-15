@@ -24,11 +24,32 @@ def rows():
     import voice as V
     from voice import LARCH_VOICE as LV
     labels = json.loads((ROOT / "art/voice/larch-labels.json").read_text(encoding="utf-8"))
+    SPOKEN = json.loads((ROOT / "art/voice/spoken.json").read_text(encoding="utf-8"))
     urls = json.loads((ROOT / "art/voice/urls.json").read_text(encoding="utf-8"))
     sil = {}
     sp = ROOT / "art/voice/silence.json"
     if sp.exists():
         sil = json.loads(sp.read_text(encoding="utf-8"))
+    # 瑕疵掃描（~/vn-bgm/scan_defects.py --speech --phase-check）標到的
+    fl = ROOT / "art/voice/flagged.json"
+    flagged = set(json.loads(fl.read_text(encoding="utf-8"))) if fl.exists() else set()
+    # 店員那幾句的 A/B：同一句的原文版與替身版並排，給人耳判
+    # 逐列的引擎來歷。**從產生那個檔的路徑判定，不從角色反推**——
+    # 保全與店員中途換過音色，有些句子走逐句有些走長檔，角色層看不見這種例外。
+    SRC = {}
+    srcp = ROOT / "art/voice/source.json"
+    if srcp.exists():
+        SRC = json.loads(srcp.read_text(encoding="utf-8"))
+    ab = {}
+    abp = ROOT / "art/voice/ab/meta.json"
+    if abp.exists():
+        for x in json.loads(abp.read_text(encoding="utf-8")):
+            ab.setdefault(x["key"], {})[x["tag"]] = x["file"]
+    # 建議先聽（tools/listen_list.py）：把 1900 句收到幾十句
+    LIS = {}
+    lp = ROOT / "art/voice/listen.json"
+    if lp.exists():
+        LIS = json.loads(lp.read_text(encoding="utf-8"))
     board = json.loads((ROOT / "larch/inv/out/board.json").read_text(encoding="utf-8"))
 
     items = []
@@ -69,21 +90,35 @@ def rows():
         if sp_ in LV:
             vid, lab = labels[sp_]
             line, voice = "Larch", lab
-            # **Larch 那條線沒有經過替身表**：平台是照板上的字唸的
-            # （POST /voice/generate 給的是 nodeId，不是文字），
-            # 所以 to_speech 在那條線上沒有施力點。
-            # 沒套的時候要看得見「本來會被改成什麼」，不然兩欄一樣等於沒說話。
-            sub = ("★ 該套而沒套", tx, said) if said != tx else None
+            # **替身有沒有套，看 spoken.json 記的是哪一種字**（見那兩支工具的註解）：
+            #   長檔（larch_take.py）記 to_speech 的輸出 → 套了
+            #   逐句（gen_larch_voice.py）記板上的字 → 沒套，平台照板上的字唸
+            rec = SPOKEN.get(k)
+            if said == tx:
+                sub = None
+            elif rec == said:
+                sub = ("有套（長檔）", tx, said)
+            elif rec == tx:
+                sub = ("★ 該套而沒套（逐句）", tx, said)
+            else:
+                sub = ("？沒有紀錄", tx, said)
         else:
             line, voice = "本機", "CosyVoice3 克隆"
             sub = ("有套", tx, said) if said != tx else None
         voiced.append({
             "who": sp_, "text": tx, "emo": emo or "", "key": k,
             "line": line, "voice": voice,
-            "has": k in urls,
+            # **要看實體檔案，不能看 urls.json。** 那份是發佈時寫的，
+            # 中間重生過就會脫節——2026-09-14 有 157 列指向不存在的檔，
+            # 在頁面上的長相是「點了沒聲音」，跟「這句配音壞掉」一模一樣。
+            "has": (ROOT / "docs/voice" / f"{k}.mp3").exists(),
             "sub": sub,
             "sil": sil.get(k, {}).get("silence"),
             "dur": sil.get(k, {}).get("dur"),
+            "flag": k in flagged,
+            "src": SRC.get(k, {"line": "不確定", "why": "沒有來歷紀錄（在來歷表建立之前生的）"}),
+            "ab": ab.get(k),
+            "pick": LIS.get(k),
         })
     return voiced, silent
 
@@ -95,12 +130,12 @@ CSS = """
    深色模式下就是白底配近白字，整頁看不見。 */
 :root{
   --bg:#faf8f5; --ink:#221f1c; --dim:#6b645c; --line:#e0d9d0;
-  --card:#fff; --row:#f4f1ec; --warn:#8a4b1f; --larch:#2f5d50;
+  --card:#fff; --row:#f4f1ec; --warn:#8a4b1f; --larch:#2f5d50; --pick:#9b2226;
 }
 @media (prefers-color-scheme:dark){
   :root{
     --bg:#171513; --ink:#eae5de; --dim:#9a9188; --line:#33302c;
-    --card:#211e1b; --row:#211e1b; --warn:#e0a06a; --larch:#7fbfa8;
+    --card:#211e1b; --row:#211e1b; --warn:#e0a06a; --larch:#7fbfa8; --pick:#f08a8a;
   }
 }
 *{box-sizing:border-box}
@@ -128,17 +163,30 @@ audio{height:32px;width:210px}
 .sub b{color:var(--warn);font-weight:600}
 .none{color:var(--dim)}
 tr.quiet td{background:var(--row)}
+.flagbox{margin-top:6px;padding:6px 8px;border-left:3px solid var(--warn);background:var(--row);font-size:12px;color:var(--dim);max-width:420px}
+.flagbox b{color:var(--warn)}
+.abbox{margin-top:6px;padding:6px 8px;border-left:3px solid var(--larch);background:var(--row);font-size:12px;color:var(--dim);max-width:460px}
+.abbox b{color:var(--larch)}
+.abbox audio{height:28px;width:180px;vertical-align:middle}
+.eng{font-size:12px;color:var(--dim);white-space:nowrap;border-left:3px solid var(--line);padding-left:6px}
+.eng.larch{color:var(--larch);border-color:var(--larch)}
+.pickbox{margin-top:6px;padding:6px 8px;border-left:3px solid var(--pick);background:var(--row);font-size:12px;color:var(--dim);max-width:460px}
+.pickbox b{color:var(--pick)}
+tr.pick td.t{box-shadow:inset 3px 0 0 var(--pick)}
+button.f.pickf{color:var(--pick);border-color:var(--pick)}
+.eng.unk{color:var(--warn);border-color:var(--warn);font-weight:600}
 """
 
 JS = """
 const rows=[...document.querySelectorAll('tr[data-who]')];
 const grps=[...document.querySelectorAll('.grp')];
-let who='', q='';
+let who='', q='', pick=false;
 function apply(){
   rows.forEach(r=>{
     const okW = !who || r.dataset.who===who;
     const okQ = !q || r.dataset.s.includes(q);
-    r.style.display = (okW&&okQ) ? '' : 'none';
+    const okP = !pick || r.dataset.pick==='1';
+    r.style.display = (okW&&okQ&&okP) ? '' : 'none';
   });
   grps.forEach(g=>{
     const tb=g.nextElementSibling;
@@ -148,7 +196,7 @@ function apply(){
 }
 document.querySelectorAll('button.f').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('button.f').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on'); who=b.dataset.w||''; apply();
+  b.classList.add('on'); who=b.dataset.w||''; pick=b.dataset.pick==='1'; apply();
 });
 document.querySelector('input[type=search]').oninput=e=>{q=e.target.value.trim();apply();};
 """
@@ -167,11 +215,24 @@ def build():
     p = []
     p.append(f"<!doctype html><meta charset=utf-8><title>調查篇配音對照</title><style>{CSS}</style>")
     p.append("<header><h1>《格莉奇與黑洞先生・調查篇》配音對照</h1>")
+    n_flag = sum(1 for r in voiced if r.get("flag"))
+    n_ab = sum(1 for r in voiced if r.get("ab"))
     p.append(f'<div class=sum>{len(voiced)} 句有配音（去重後）・{len(silent)} 句設計上不配音・'
              f'{n_sub} 句經過讀音替身・<b>{n_gap} 句該套而沒套</b>'
              + (f'・頭尾靜音平均 {sum(sils)/len(sils):.2f} 秒、最多 {max(sils):.2f} 秒' if sils else '')
-             + '</div>')
-    p.append('<div class=bar><button class="f on" data-w="">全部</button>')
+             + f'・瑕疵掃描標到 {n_flag} 句・{n_ab} 句有 A/B 兩版'
+             + '</div>'
+             + '<div class=sum style="margin-top:6px">'
+               '舞台指示（括號）<b>沒有被唸出去</b>：板上 88 句含括號，逐句比對'
+               '「實際唸出去的文字」全部不含括號，驗不了的 0 句。<br>'
+               '瑕疵掃描：2116 個檔，<b>6 句疑似</b>、39 句要看一眼、2071 句乾淨。'
+               '<b>6 個紅燈全部通不過相位檢驗</b>，跟前一輪 4196 個檔的結論一致，'
+               '很可能是切窗切出來的。那支工具對「音量正常但頻譜變成寬頻雜訊」有效，'
+               '<b>對截斷、爆音、吞字無效</b>——所以零紅燈不等於全部正確。'
+               '</div>')
+    npick = sum(1 for r in voiced if r.get("pick"))
+    p.append('<div class=bar><button class="f on" data-w="">全部</button>'
+             f'<button class="f pickf" data-w="" data-pick="1">建議先聽<small> {npick}</small></button>')
     for w in by:
         p.append(f'<button class=f data-w="{e(w)}">{e(w)}<small> {len(by[w])}</small></button>')
     p.append('<button class=f data-w="＿沒配音">沒配音</button>')
@@ -198,10 +259,33 @@ def build():
             au = (f'<audio controls preload=none src="{src}"></audio>' if r["has"]
                   else '<span class=none>沒有檔</span>')
             emo = f'<div class=emo>{e(r["emo"])}</div>' if r["emo"] else ''
+            if r.get("flag"):
+                emo += ('<div class=flagbox><b>瑕疵掃描標到這一句</b><br>'
+                        '6 個紅燈<b>全部通不過相位檢驗</b>，很可能是切窗切出來的，'
+                        '聽起來正常是預期內。聽到真的有雜訊才回報。</div>')
+            if r.get("ab"):
+                a1 = r["ab"].get("原文"); a2 = r["ab"].get("替身")
+                emo += ('<div class=abbox><b>這一句有兩個版本，請並排聽</b><br>'
+                        'ASR 說兩版同音／所以這條替身在 Larch 上可能沒作用／'
+                        '請聽它們是不是聽起來也一樣。<br>'
+                        + (f'原文版 <audio controls preload=none src="art/voice/ab/{a1}"></audio><br>' if a1 else '')
+                        + (f'替身版 <audio controls preload=none src="art/voice/ab/{a2}"></audio>' if a2 else '')
+                        + '</div>')
+            pk = r.get("pick")
+            if pk:
+                emo += ('<div class=pickbox><b>建議先聽</b>　' + e(pk["why"])
+                        + (f'<br>聽寫聽成：{e(pk["got"])}' if pk.get("got") else '')
+                        + '</div>')
             s = (r["who"] + r["text"]).lower()
-            p.append(f'<tr data-who="{e(w)}" data-s="{e(s)}">'
+            src = r.get("src") or {}
+            ln = src.get("line", "不確定")
+            cls = "eng larch" if ln.startswith("Larch") else ("eng" if ln.startswith("本機") else "eng unk")
+            engine = f'<div class="{cls}" title="{e(src.get("why",""))}">{e(ln)}</div>'
+            p.append(f'<tr data-who="{e(w)}" data-s="{e(s)}"'
+                     f'{" data-pick=1 class=pick" if pk else ""}>'
                      f'<td class=t>{e(r["text"])}{emo}</td>'
-                     f'<td>{au}</td><td class="{sc}">{siltxt}</td>'
+                     f'<td>{au}</td>{"<td>" + engine + "</td>"}'
+                     f'<td class="{sc}">{siltxt}</td>'
                      f'<td class=sub>{sub}</td></tr>')
         p.append('</table>')
 
@@ -213,13 +297,14 @@ def build():
             continue
         seen.add((who, tx))
         p.append(f'<tr class=quiet data-who="＿沒配音" data-s="{e((who+tx).lower())}">'
-                 f'<td class=t>{e(tx)}</td><td>{e(who)}</td><td></td>'
+                 f'<td class=t>{e(tx)}</td><td>{e(who)}</td><td></td><td></td>'
                  f'<td class=sub>{e(why)}</td></tr>')
     p.append(f'</table></main><script>{JS}</script>')
     OUT.write_text("\n".join(p), encoding="utf-8")
     print(f"寫出 {OUT}")
     print(f"  有配音 {len(voiced)} 句、沒配音 {len(silent)} 句（去重前）")
     print(f"  經過替身 {n_sub} 句、該套而沒套 {n_gap} 句")
+    print(f"  建議先聽 {sum(1 for r in voiced if r.get('pick'))} 句")
     if sils:
         print(f"  頭尾靜音：量到 {len(sils)} 句，平均 {sum(sils)/len(sils):.3f} 秒、最多 {max(sils):.3f} 秒")
 

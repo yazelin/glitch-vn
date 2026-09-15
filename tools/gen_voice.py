@@ -125,6 +125,14 @@ def main():
     if "--who" in args:
         who = args[args.index("--who") + 1]
         todo = [u for u in todo if u[0] == who]
+    # **--keys 是給「檔在、但檔是壞的」用的。** 長檔切壞、或短句生成整段跑掉，
+    # 檔案照樣存在而且大小正常，上面每一道篩子（have／picked／spoken）都篩不掉它。
+    if "--keys" in args:
+        want = {x for x in args[args.index("--keys") + 1].replace(",", " ").split() if x}
+        todo = [u for u in us if u[3] in want]
+        miss = want - {u[3] for u in todo}
+        if miss:
+            print(f"★ 全書找不到這幾個代號：{sorted(miss)}")
 
     print(f"全書 {len(us)} 句（去重後），已生 {len(us) - len(todo)}，這次要生 {len(todo)}")
     print("\n各角色：")
@@ -187,7 +195,7 @@ def main():
                      "text": V.to_speech(text),          # 讀音替身，見 voice.SUB
                      "prompt_wav": str(ROOT / ref) if not ref.startswith("/") else ref,
                      "prompt_text": ptext, "speed": speed,
-                     "instruct": V.instruct(who, emo)})
+                     "instruct": V.instruct_for(who, emo, text)})
     spoken.update({k: V.to_speech(t) for _, t, _, k in todo})
     SPOKEN.write_text(json.dumps(spoken, ensure_ascii=False, indent=0),
                       encoding="utf-8")
@@ -202,13 +210,17 @@ def main():
     py = pathlib.Path.home() / "voice-venv/bin/python"
     env = dict(os.environ, MODELSCOPE_OFFLINE="1", HF_HUB_OFFLINE="1")
     rc = subprocess.call([str(py), "-u", str(ROOT / "tools/voice_batch.py"),
-                          "--jobs", str(jf)], env=env)
+                          "--jobs", str(jf)]
+                         + (["--force"] if "--keys" in args else []), env=env)
     if rc:
         sys.exit(rc)
     print("\n轉 mp3（wav 進不了 git，見 .gitignore）")
     for w in sorted(OUT.glob("*.wav")):
         m = w.with_suffix(".mp3")
-        if m.exists():
+        # **要比時間，不是只看在不在。** split_take 切出來的是 wav，而同一個代號
+        # 可能已經有一個舊的 mp3（逐句生的那版）。只看「mp3 在不在」的話，
+        # 新切出來的 100 個 wav 會全部不生效，而且完全不報錯——2026-09-14 中過。
+        if m.exists() and m.stat().st_mtime >= w.stat().st_mtime:
             continue
         subprocess.check_call(["ffmpeg", "-v", "error", "-y", "-i", str(w),
                                "-ac", "1", "-b:a", "64k", str(m)])

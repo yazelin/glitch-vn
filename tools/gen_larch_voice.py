@@ -26,8 +26,12 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/140.0 Safari/537.36")
 
 
-def todo(board):
-    """回 [(nodeId, lineIndex 或 None, 講者, 台詞, emotion, 代號)]。"""
+def todo(board, force=()):
+    """回 [(nodeId, lineIndex 或 None, 講者, 台詞, emotion, 代號)]。
+
+    `force` 裡的代號即使已經有檔也照生一次，用來補「長檔切壞」的那幾句——
+    切壞的檔存在而且大小正常，靠「有沒有檔」永遠篩不掉它。
+    """
     import voice as V
     from voice import LARCH_VOICE as LV
     have = {p.stem for p in OUT.glob("*.mp3")} | {p.stem for p in (ROOT / "docs/voice").glob("*.mp3")}
@@ -42,7 +46,7 @@ def todo(board):
                 continue
             k = V.key(sp, tx, emo or None)
             # 同一句話在板上會出現好幾次，生一次就夠（檔名是內容雜湊）
-            if k in seen or k in have:
+            if k in seen or (k in have and k not in force):
                 continue
             seen.add(k)
             rows.append((n["id"], idx, sp, tx, emo or "", k))
@@ -53,6 +57,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--who", default="")
+    ap.add_argument("--keys", default="", help="逗號隔開的代號，已經有檔也重生")
     a = ap.parse_args()
 
     import push as P
@@ -60,7 +65,13 @@ def main():
     pid = json.loads((ROOT / "larch/inv/state.json").read_text())["projectId"]
     board = P.api("GET", f"/projects/{pid}/boards/board-main")
     board = board.get("board") or board
-    rows = todo(board)
+    force = {x for x in a.keys.replace(",", " ").split() if x}
+    rows = todo(board, force)
+    if force:
+        rows = [r for r in rows if r[5] in force]
+        miss = force - {r[5] for r in rows}
+        if miss:
+            print(f"★ 板上找不到這幾個代號：{sorted(miss)}")
     if a.who:
         rows = [r for r in rows if r[2] == a.who]
 
@@ -73,6 +84,8 @@ def main():
         return 0
 
     OUT.mkdir(parents=True, exist_ok=True)
+    spoken_p = ROOT / "art/voice/spoken.json"
+    spoken = json.loads(spoken_p.read_text(encoding="utf-8")) if spoken_p.exists() else {}
     ok = fail = 0
     for i, (nid, idx, sp, tx, emo, k) in enumerate(rows, 1):
         body = {"nodeId": nid, "voiceId": LV[sp][0], "emotion": emo or ""}
@@ -98,6 +111,16 @@ def main():
             req = urllib.request.Request(url, headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=120) as f:
                 (OUT / f"{k}.mp3").write_bytes(f.read())
+            # **記下「這一句實際唸出去的是什麼字」。** 本機那條線靠這份抓
+            # 「替身改了要重生」；Larch 這條線以前沒寫，所以改了替身之後
+            # 完全沒有東西看得出來哪幾句過期了——檔名是畫面文字的雜湊，改的是
+            # 要唸的字，檔名不會變、檔案也還在，工具只會安靜地跳過。
+            # **注意這一支跟長檔那一支的行為不一樣**：
+            #   逐句（這一支）：平台照板上的字唸，替身插不進去，所以記的是板上的字。
+            #   長檔（larch_take.py）：稿是我們自己組的，記的是 to_speech 的輸出。
+            spoken[k] = str(tx)
+            spoken_p.write_text(json.dumps(spoken, ensure_ascii=False, indent=0),
+                                encoding="utf-8")
             ok += 1
         except Exception as e:
             fail += 1

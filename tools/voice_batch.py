@@ -85,9 +85,11 @@ def _guard(cv, j, ptext, out, ref, torch, torchaudio):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--jobs", required=True)
+    # 檔在但檔是壞的時候用；平常不要開，會把挑過的錄音洗掉。
+    ap.add_argument("--force", action="store_true")
     a = ap.parse_args()
     jobs = json.loads(pathlib.Path(a.jobs).read_text(encoding="utf-8"))
-    todo = [j for j in jobs if not pathlib.Path(j["out"]).exists()]
+    todo = jobs if a.force else [j for j in jobs if not pathlib.Path(j["out"]).exists()]
     print(f"{len(jobs)} 句，要生 {len(todo)}", flush=True)
     if not todo:
         return
