@@ -42,8 +42,12 @@ def main():
             continue
         for s in r["segs"][:3]:
             by_word[s].append(r)
+    # **一個詞判過就整組退場。** 聽過的那一句如果是某個詞的代表，代表這個詞
+    # 已經有答案了；再換另一句上來問同一個詞，等於同一題問第二次。
+    # 2026-09-15 踩到：本人說「逼」那兩句都 OK，清單卻又換一句「逼」上來。
+    settled = {w for w, rs in by_word.items() if any(x["key"] in skip for x in rs)}
     for w, rs in sorted(by_word.items(), key=lambda x: -len(x[1])):
-        if len(rs) < 2:
+        if len(rs) < 2 or w in settled:
             continue
         rs = [x for x in rs if x["key"] not in skip]
         if len(rs) < 2:
