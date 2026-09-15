@@ -47,8 +47,18 @@ html{color-scheme:dark}   /* 預設暗的;玩家按了那顆鈕才換。不宣�
 html,body{margin:0;height:100%;overflow:hidden;color:var(--text);
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
 html{background:transparent}
-body{background:#07080c}
-#screen{position:fixed;inset:0;overflow:hidden;background:#07080c;isolation:isolate}
+body{background:
+  radial-gradient(900px 620px at 50% 4%,rgba(183,139,255,.13),transparent 62%),
+  radial-gradient(760px 520px at 12% 106%,rgba(37,194,232,.1),transparent 60%),
+  #04080c;
+  display:flex;align-items:center;justify-content:center;padding:18px}
+/* Larch 給 miniGame 的是整個舞台，所以手機機身必須屬於卡片本體。
+   2026-09-12 整合 glitch-live 時曾只複製 card.html，把這一層留在不進遊戲的預覽殼，
+   結果桌機上 #screen 被拉成 16:9 滿版。外框尺寸沿用預覽殼驗收過的 390 × 800。 */
+#phone{position:relative;flex:none;width:min(390px,calc(100vw - 36px));height:min(800px,calc(100vh - 36px));
+  background:#15171d;border-radius:38px;padding:12px;
+  box-shadow:0 30px 90px rgba(0,0,0,.72),0 0 0 2px #2a2d36,0 0 60px rgba(183,139,255,.12)}
+#screen{position:relative;width:100%;height:100%;overflow:hidden;background:#07080c;border-radius:28px;isolation:isolate}
 #vid,#poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 #poster{z-index:1}
 #vid{z-index:0}
@@ -258,8 +268,8 @@ body{background:#07080c}
 /* ══ 橫幅模式 ══ */
 /* 底改成透明，畫面不壓暗（調查篇-手機.md 六）。miniGame 層在有的裝置畫不出透明，
    白掉就把下面那行換成 background:rgba(6,8,12,.35)。 */
-body.banner{background:transparent}
-body.banner #screen{display:none}
+body.banner{background:transparent;display:block;padding:0}
+body.banner #phone{display:none}
 #strip{display:none;position:fixed;left:50%;top:18px;transform:translate(-50%,-140%);width:min(560px,92vw);
   background:rgba(12,17,22,.95);color:var(--text);border-radius:16px;padding:12px 16px;
   box-shadow:0 12px 40px rgba(0,0,0,.55);border:1px solid var(--line2);
@@ -276,7 +286,7 @@ body.banner #strip{display:flex}
 
 <div id="strip"><div class="av" id="s-av"></div><div><div class="who" id="s-who"></div><div class="txt" id="s-txt"></div></div></div>
 
-<div id="screen">
+<div id="phone"><div id="screen">
   <video id="vid" playsinline muted loop preload="auto"></video>
   <img id="poster" alt="格莉奇在直播間裡向鏡頭揮手">
   <div class="scrim-t live-ui"></div><div class="scrim-b live-ui"></div>
@@ -332,7 +342,7 @@ body.banner #strip{display:flex}
 
   <div id="wipe"></div>
   <div id="wmbox"></div>
-</div>
+</div></div>
 
 <script>
 'use strict';
@@ -343,6 +353,8 @@ body.banner #strip{display:flex}
    預設值靠下面的 fallback 給，不寫在 token 裡。VIDEO、COMPOSE、NIGHTS 是新的，要自己加。 */
 var MODE    = /*@@MODE@@*/'full';                  // 'full' | 'banner'
 var BANNER  = /*@@BANNER@@*/null;                  // {who, text}
+// 不等 larch:init 才透明：宿主送 init 前的那一幀也不可以把上一幕蓋成黑色。
+if(MODE==='banner') document.body.className='banner';
 var AVATAR  = /*@@AVATAR@@*/'';
 var VIDEO   = /*@@VIDEO@@*/'';
 var COMPOSE = /*@@COMPOSE@@*/true;                 // 第五天的留言橋段做不做在卡片裡（見整合文件）
@@ -644,7 +656,8 @@ function flipTheme(btn, ev){
 function applyTheme(){
   screen.classList.toggle('t-light', theme==='light');
   document.documentElement.style.colorScheme = theme==='light' ? 'light' : 'dark';
-  document.body.style.background = theme==='light' ? '#f4f6f9' : '#07080c';
+  // 主題只屬於手機螢幕。寫 body 的 inline background 會蓋過
+  // body.banner 的 transparent，讓兩秒通知變成滿版黑畫面。
 }
 function glitchAvatar(e){
   if(!AVATAR) return;
