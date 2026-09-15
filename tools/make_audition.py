@@ -150,16 +150,19 @@ input[type=search]{flex:1;min-width:180px;padding:5px 10px;border:1px solid var(
 main{padding:14px 18px 60px;max-width:1180px}
 .grp{margin:26px 0 10px;font-size:15px;font-weight:600;border-left:3px solid var(--ink);padding-left:8px}
 .grp small{font-weight:400;color:var(--dim)}
-table{width:100%;border-collapse:collapse}
+/* **要 fixed。** auto 版面下長台詞會把台詞欄撐到滿版，
+   最右邊的替身欄被壓成一個字寬的直條（2026-09-15 踩到）。 */
+table{width:100%;border-collapse:collapse;table-layout:fixed}
 td{border-bottom:1px solid var(--line);padding:8px 6px;vertical-align:top}
-td.t{min-width:260px}
+td:nth-child(2){width:18%}td:nth-child(3){width:16%}td:nth-child(4){width:8%}
+td.t{width:34%;word-break:break-word}
 .emo{color:var(--dim);font-size:12px}
 audio{height:32px;width:210px}
 .tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:4px;border:1px solid var(--line)}
 .tag.larch{color:var(--larch);border-color:var(--larch)}
 .sil{font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
 .sil.hi{color:var(--warn);font-weight:600}
-.sub{font-size:12px;color:var(--dim);max-width:230px}
+.sub{font-size:12px;color:var(--dim);width:24%;word-break:break-word}
 .sub b{color:var(--warn);font-weight:600}
 .none{color:var(--dim)}
 tr.quiet td{background:var(--row)}
@@ -168,7 +171,7 @@ tr.quiet td{background:var(--row)}
 .abbox{margin-top:6px;padding:6px 8px;border-left:3px solid var(--larch);background:var(--row);font-size:12px;color:var(--dim);max-width:460px}
 .abbox b{color:var(--larch)}
 .abbox audio{height:28px;width:180px;vertical-align:middle}
-.eng{font-size:12px;color:var(--dim);white-space:nowrap;border-left:3px solid var(--line);padding-left:6px}
+.eng{font-size:12px;color:var(--dim);border-left:3px solid var(--line);padding-left:6px}
 .eng.larch{color:var(--larch);border-color:var(--larch)}
 .pickbox{margin-top:6px;padding:6px 8px;border-left:3px solid var(--pick);background:var(--row);font-size:12px;color:var(--dim);max-width:460px}
 .pickbox b{color:var(--pick)}

@@ -13,7 +13,7 @@
 第 4 步一定要做，而且要對卡數。中途失敗的話板上會留著沒有括號的字，
 那個狀態看起來完全正常——**失敗長相是「畫面少了幾個動作描述」，不會報錯。**
 """
-import json, pathlib, re, sys, time, urllib.request
+import argparse, json, pathlib, re, sys, time, urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "larch"))
@@ -24,6 +24,13 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    # **--keys 是給「spoken.json 說配過了、但音檔證明沒有」用的。**
+    # 那份紀錄是這支工具自己的跳過依據，它一旦寫錯，這幾句就永遠跳過永遠不修。
+    # 真正的判準是聽寫（tools/paren_check.py），不是紀錄。
+    ap.add_argument("--keys", default="")
+    a = ap.parse_args()
+    force = {x for x in a.keys.replace(",", " ").split() if x}
     import push as P, voice as V
     from voice import LARCH_VOICE as LV
     pid = json.loads((ROOT / "larch/inv/state.json").read_text())["projectId"]
@@ -61,7 +68,7 @@ def main():
             k = V.key(sp, str(tx), holder.get("emotion") or None)
             # **已經是照新文字唸過的就跳過**，靠 spoken.json 比對，不是靠檔案在不在：
             # 檔名是「要顯示的字」的雜湊，改的是「要唸的字」，所以檔名不會變。
-            if spoken.get(k) == said:
+            if spoken.get(k) == said and k not in force:
                 continue
             # **用「講者＋台詞」當鍵，不要用卡片編號。** 推送層會自己加卡，
             # 所以本機 board.json 的 inv-NNN 跟線上的同名卡不是同一張

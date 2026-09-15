@@ -23,6 +23,16 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 def main():
     tri = json.loads((ROOT / "art/voice/triage.json").read_text(encoding="utf-8"))
+    # **本人聽過說沒問題的就不要再排上來。** 沒有這一份的話，每次重跑
+    # 同一批句子又會回到清單最前面，聽過的人看不出自己聽到哪裡了。
+    hp = ROOT / "art/voice/heard.json"
+    heard = set(json.loads(hp.read_text(encoding="utf-8"))) if hp.exists() else set()
+    # 已經修掉並複驗過的也不排（修好的紀錄在 paren-check / len-scan 跑完之後）
+    fixed = set()
+    fp = ROOT / "art/voice/fixed.json"
+    if fp.exists():
+        fixed = set(json.loads(fp.read_text(encoding="utf-8")))
+    skip = heard | fixed
     out = {}
 
     # 一、讀音：按詞聚合，每個出現兩次以上的詞留一句代表（挑差最多的那句）
@@ -35,6 +45,9 @@ def main():
     for w, rs in sorted(by_word.items(), key=lambda x: -len(x[1])):
         if len(rs) < 2:
             continue
+        rs = [x for x in rs if x["key"] not in skip]
+        if len(rs) < 2:
+            continue
         r = max(rs, key=lambda x: x["diff"])
         out.setdefault(r["key"], {
             "rank": 1, "why": f"「{w}」在 {len(rs)} 句裡都被聽錯，聽這一句就能判",
@@ -44,6 +57,8 @@ def main():
     lp = ROOT / "art/voice/len-scan.json"
     if lp.exists():
         for r in json.loads(lp.read_text(encoding="utf-8")):
+            if r["key"] in skip:
+                continue
             out.setdefault(r["key"], {
                 "rank": 2, "why": f"{r['n']} 個字唸了 {r['sec']} 秒，長度不對",
                 "got": ""})
@@ -52,18 +67,22 @@ def main():
     fp = ROOT / "art/voice/flagged.json"
     if fp.exists():
         for k in json.loads(fp.read_text(encoding="utf-8")):
+            if k in skip:
+                continue
             out.setdefault(k, {"rank": 3, "why": "瑕疵掃描標到（頻譜異常）", "got": ""})
 
     # 四、逐句情緒例外
     sys.path.insert(0, str(ROOT / "larch"))
     import voice as V
     for (sp, tx) in getattr(V, "LINE_EMO", {}):
+        if V.key(sp, tx) in skip:
+            continue
         out.setdefault(V.key(sp, tx), {"rank": 4, "why": "這一句的語氣指令是手動改的", "got": ""})
 
     p = ROOT / "art/voice/listen.json"
     p.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     n = collections.Counter(v["rank"] for v in out.values())
-    print(f"建議先聽 {len(out)} 句：")
+    print(f"建議先聽 {len(out)} 句（排掉聽過的 {len(heard)} 句、修好的 {len(fixed)} 句）：")
     for r, lab in ((1, "讀音（每個可疑詞一句）"), (2, "長度不對"),
                    (3, "瑕疵掃描"), (4, "語氣例外")):
         print(f"  {n[r]:>3} 句　{lab}")

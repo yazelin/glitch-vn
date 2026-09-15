@@ -196,9 +196,6 @@ def main():
                      "prompt_wav": str(ROOT / ref) if not ref.startswith("/") else ref,
                      "prompt_text": ptext, "speed": speed,
                      "instruct": V.instruct_for(who, emo, text)})
-    spoken.update({k: V.to_speech(t) for _, t, _, k in todo})
-    SPOKEN.write_text(json.dumps(spoken, ensure_ascii=False, indent=0),
-                      encoding="utf-8")
     jf = ROOT / "art/voice/jobs.json"
     jf.write_text(json.dumps(jobs, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\n寫好 {len(jobs)} 個工作 → {jf}")
@@ -214,6 +211,13 @@ def main():
                          + (["--force"] if "--keys" in args else []), env=env)
     if rc:
         sys.exit(rc)
+    # **紀錄要在生成之後才寫。** 寫在前面的話，--dry（只排工作不生成）
+    # 也會留下「這幾句唸的是新字」的紀錄，而檔案其實還是舊的——
+    # 於是「替身改了要重生」這個訊號被自己抹掉，那幾句從此永遠跳過。
+    # 2026-09-15 中過：一次 --dry 就把三句的過期訊號洗掉了。
+    spoken.update({k: V.to_speech(t) for _, t, _, k in todo})
+    SPOKEN.write_text(json.dumps(spoken, ensure_ascii=False, indent=0),
+                      encoding="utf-8")
     print("\n轉 mp3（wav 進不了 git，見 .gitignore）")
     for w in sorted(OUT.glob("*.wav")):
         m = w.with_suffix(".mp3")
