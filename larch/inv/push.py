@@ -415,6 +415,8 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 d["miniGameReadVars"] = ["mode", "walk", "day", "slot", "here", "asked_斑比_鐵塔"] + vs
                 d["miniGameWriteVars"] = ["pick"]
                 menus.append(n["id"])
+            elif d["miniGameHtml"].endswith("gacha-test.html"):
+                d["miniGameHtml"] = (CARDS / "gacha-test.html").read_text(encoding="utf-8")
         elif d.get("type") == "dialogue" and d.get("sceneCode"):
             # 段落中途換場景的卡：帶背景（play 時進這張卡就換）。日夜先都用夜版，白天版由入口決定。
             code = d.pop("sceneCode")

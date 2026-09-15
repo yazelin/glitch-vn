@@ -182,6 +182,7 @@ var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a
 // 可是那正是黑洞先生唯一會出現的時段，寫成 null 等於把全作最重要的一場關掉。
 // 空手而回本來就是這款的一部分（見設計文件三之一），所以預設是開著。
 var SPOTS=[
+ {id:'park',    name:'格莉奇遊樂園', live:['','','',''], x:48, y:12},
  {id:'lobby',   name:'一樓',        live:['管理員','管理員','',''], x:19, y:52},
  {id:'roof',    name:'頂樓收音機店', live:['諾亞','諾亞','諾亞',null], gate:'open_roof', x:19, y:22,
   hint:'有人說樓上那間什麼都留著。我需要一個壞掉的東西。'},
@@ -388,6 +389,13 @@ function listText(){
 }
 function go(spotId){
   var slot=num(values.slot,0), day=num(values.day,1);
+  // 遊樂園是與劇情無關的常駐入口：不骰訪客、不記造訪、不改人物或線索。
+  // dest 保留為 park；離開小遊戲回到本板時，start() 會照一般外出推進一個時段。
+  if(spotId==='park'){
+    setVar('dest','park');
+    finish('park',{day:day,slot:slot});
+    return;
+  }
   var here=whoIsThere(spotId,slot);
   setVar('here', here.join(','));
   // 碰過幾次：設計說「met_<誰> 由那一趟自己加」，加的地方就是這裡（2026-09-07）。
@@ -477,6 +485,7 @@ function start(){
   // 她自己寫在便條上的判斷，照狀態換（拉力不足的地方在這裡補）
   function noteFor(s){
     var d=num(values.day,1), h=num(values.hole_sightings,0);
+    if(s.id==='park') return '24 小時營業・玩小遊戲';
     if(s.id==='lobby' && slot===2 && ((h===1&&d>=5&&d<=7)||(h===2&&d>=8&&d<=11))) return '七點多。他會在。';   // 只在他真的會來的那幾天
     if(s.id==='street' && d>=3 && slot<=1 && !(values.seen_booth===true||values.seen_booth==='true')) return '經紀公司在車站那一邊。走過去看看。';
     if(s.id==='store' && slot===3 && num(values.night_visits,0)===0) return '深夜還開著。';
@@ -518,7 +527,7 @@ function start(){
     var note=(!b.disabled)?noteFor(s):null;
     if(note){ w.className='who hint'; w.textContent=note; }
     // 劇情模式：不是攻略那一格就關起來。灰字說清楚是模式擋的，不要讓玩家以為那一格壞了。
-    if(railTo && s.id!==railTo && !b.disabled){
+    if(railTo && s.id!==railTo && s.id!=='park' && !b.disabled){
       b.disabled=true; b.className+=' closed';
       w.className='who unknown'; w.textContent='劇情模式：這個時段不去這裡';
     }

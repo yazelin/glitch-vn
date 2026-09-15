@@ -1150,6 +1150,17 @@ def build(cards):
     for gate, cnid, _neg, k0 in choice_skips:
         outs = [e for e in b.edges if e["source"] == gate]
         assert len(outs) == 2, f"跳過閘 {gate} 只接了 {len(outs)} 條邊（選擇卡 {cnid} 第 {k0} 格）"
+    # 格莉奇遊樂園是地圖上的常駐入口，與調查進度無關，但會消耗一個時段。
+    # 放在整包既有節點與邊都建完之後，避免插隊造成所有流水號改變。
+    # 遊戲送 larch:complete 後直接回調查板；board.html 的 start() 會看到 dest=park，
+    # 把時間往後推一格，再清掉 dest。
+    park_game = b.add({"type": "miniGame", "title": "格莉奇遊樂園：扭蛋機", "text": "",
+                       "miniGameHtml": "@@larch/cards/gacha-test.html",
+                       "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
+                       "miniGameReadVars": ["gacha_state"],
+                       "miniGameWriteVars": ["gacha_state"]}, "inv-park-gacha")
+    b.edge(board_id, park_game, {"variable": "dest", "op": "eq", "value": "park"})
+    b.edge(park_game, board_id)
     b.unlabeled = unlabeled
     return b, rules, unresolved, orphans, len(segs), tapes
 
@@ -1347,6 +1358,7 @@ def variables(walk=""):
     #       （兩張都是 sandbox 的 iframe，載不了外部檔案）。
     v = [("mode", "string", "free"), ("walk", "string", walk),
          ("day", "number", 1), ("slot", "number", 0), ("dest", "string", ""),
+         ("gacha_state", "string", ""),
          ("here", "string", ""), ("pick", "string", ""), ("met", "string", ""),
          ("notes", "string", "[]"), ("notes_free", "string", "[]"),
          ("hole_sightings", "number", 0), ("noah_stage", "number", 0),
