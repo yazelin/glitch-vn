@@ -14,6 +14,7 @@
                     遊戲送 gacha:ready，這張卡回 gacha:state{state}
                     遊戲送 gacha:save{state}，這張卡轉成 larch:set 寫回 host
                     遊戲送 gacha:exit，這張卡送 larch:complete 結束這張卡
+                    遊戲送 glitch-park:music，這張卡播放／靜音共用遊樂園主題曲
 
 存檔用單一個變數 gacha_state（JSON 字串），不拆成好幾個變數——扭蛋機的存檔
 只有 owned／plays 兩個欄位，拆開沒有意義，合併寫讀比較不會漏欄位。
@@ -35,8 +36,31 @@ var dbg = document.getElementById('dbg');
 var game = document.getElementById('game');
 var GAME_ORIGIN = '*';   // 遊戲是 opaque origin，收發都只能用 '*'
 var state = null;        // 從 larch:init 拿到的 gacha_state（字串）解析後的物件
+var parkMusic = null;    // 背景音樂由 Larch 外層卡片持有，不在內層遊戲重複播放
+var parkMusicUrl = '';
 var log = [];
 function say(s) { log.push(s); if (log.length > 6) log.shift(); dbg.textContent = log.join('\n'); }
+
+function controlParkMusic(d) {
+  if (d.url && (!parkMusic || parkMusicUrl !== d.url)) {
+    if (parkMusic) { parkMusic.pause(); parkMusic.removeAttribute('src'); }
+    parkMusicUrl = d.url;
+    parkMusic = new Audio(d.url);
+    parkMusic.loop = true;
+    parkMusic.preload = 'metadata';
+    parkMusic.volume = .27;
+  }
+  if (!parkMusic) return;
+  if (d.action === 'mute') {
+    parkMusic.muted = !!d.muted;
+    if (d.muted) parkMusic.pause();
+  }
+  if (d.action === 'play' && !d.muted) {
+    parkMusic.muted = false;
+    parkMusic.play().catch(function () {});
+  }
+  say('遊樂園音樂：' + (parkMusic.muted ? '關' : '開'));
+}
 
 say('送出 larch:ready');
 parent.postMessage({ type: 'larch:ready' }, '*');
@@ -56,7 +80,9 @@ window.addEventListener('message', function (e) {
   // ── 跟內嵌遊戲的那一半（只認自己那個 iframe 送出來的） ──
   if (e.source !== game.contentWindow) return;
 
-  if (d.type === 'gacha:ready') {
+  if (d.type === 'glitch-park:music') {
+    controlParkMusic(d);
+  } else if (d.type === 'gacha:ready') {
     say('遊戲送 gacha:ready，回 gacha:state');
     game.contentWindow.postMessage({ type: 'gacha:state', state: state }, GAME_ORIGIN);
   } else if (d.type === 'gacha:save') {
@@ -65,6 +91,7 @@ window.addEventListener('message', function (e) {
     say('遊戲送 gacha:save → 轉成 larch:set gacha_state=' + s);
     parent.postMessage({ type: 'larch:set', name: 'gacha_state', value: s }, '*');
   } else if (d.type === 'gacha:exit') {
+    if (parkMusic) parkMusic.pause();
     say('遊戲送 gacha:exit → larch:complete');
     parent.postMessage({ type: 'larch:complete', result: 'exit', payload: {} }, '*');
   }
