@@ -10,6 +10,12 @@
 而且它長得跟「這批檔案很乾淨」一模一樣。`--self-test` 拿一個**已知加了靜音**
 的檔去跑，確認修法真的會動、而且量得到差值。
 
+**detection 要用 rms，不可以用 peak。** peak 只要有一個取樣點超過門檻就判定
+「聲音開始了」，房間底噪的一顆爆點就能騙過它——實測「那台還在？」前面有 0.65 秒
+的靜音，peak 只切掉 0.146 秒，rms 切掉 0.588 秒（自己解波形算 10ms RMS 得到 0.65，
+跟 rms 一致）。2026-09-15 本人回報「前半的靜音部份有點長」才發現，
+而工具當時回報的是 0.173 秒——**一個看起來很正常的低報值**。
+
 **先寫暫存再原子換過去**：跑到一半被中斷不會留下半寫的檔。
 帳本記在 art/voice/trimmed.json，可以中斷續跑。
 """
@@ -18,9 +24,9 @@ import argparse, json, pathlib, subprocess, sys, tempfile
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "art/voice"
 LEDGER = OUT / "trimmed.json"
-TRIM = ("silenceremove=start_periods=1:start_threshold=-50dB:detection=peak,"
+TRIM = ("silenceremove=start_periods=1:start_threshold=-50dB:detection=rms,"
         "areverse,"
-        "silenceremove=start_periods=1:start_threshold=-50dB:detection=peak,"
+        "silenceremove=start_periods=1:start_threshold=-50dB:detection=rms,"
         "areverse")
 KEEP = 0.05      # 頭尾各留一點點，不要切到氣音
 

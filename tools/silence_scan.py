@@ -2,7 +2,7 @@
 """量每個配音檔的頭尾靜音有多少秒。只量，不改檔案。
 
 作法：`silenceremove` 前後各跑一次（中間 `areverse` 把音檔倒過來），
-門檻 -50dB、`detection=peak`，比對修前修後的時長差。
+門檻 -50dB、`detection=rms`，比對修前修後的時長差。
 
 **不可以用管線接 ffprobe 量時長。** 管線出來的 wav 沒有時長標頭，
 ffprobe 回 `N/A`，於是每個檔都算成「沒有靜音」——一個假的零，
@@ -18,9 +18,9 @@ import argparse, json, pathlib, subprocess, sys, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "art/voice/silence.json"
-TRIM = ("silenceremove=start_periods=1:start_threshold=-50dB:detection=peak,"
+TRIM = ("silenceremove=start_periods=1:start_threshold=-50dB:detection=rms,"
         "areverse,"
-        "silenceremove=start_periods=1:start_threshold=-50dB:detection=peak,"
+        "silenceremove=start_periods=1:start_threshold=-50dB:detection=rms,"
         "areverse")
 
 

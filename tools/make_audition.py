@@ -52,16 +52,32 @@ def rows():
         LIS = json.loads(lp.read_text(encoding="utf-8"))
     board = json.loads((ROOT / "larch/inv/out/board.json").read_text(encoding="utf-8"))
 
+    # **「這一句在哪裡」。** 本人問過「我玩遊戲時好像都沒有走過這幾句」——
+    # 多數是筆記卡（背包裡讀的，不是走在場景裡聽到的）。地名表沿用 build.LOC_NAME，
+    # 不要另外抄一份。
+    sys.path.insert(0, str(ROOT / "larch/inv"))
+    try:
+        from build import LOC_NAME
+    except Exception:
+        LOC_NAME = {}
+    WHERE = {}
+
     items = []
     for n in board["nodes"]:
         d = n["data"]
         dl = d.get("dialogueLines") or []
+        loc = LOC_NAME.get(d.get("sceneCode") or "", d.get("sceneCode") or "")
+        kind = "筆記" if str(d.get("title") or "").startswith("筆記") else {
+            "dialogue": "對話", "scene": "場景", "interrupt": "插話",
+            "phone": "手機", "choice": "選項", "miniGame": "小遊戲"}.get(d.get("type"), d.get("type") or "")
         if dl:
             for l in dl:
                 items.append((l.get("speaker"), l.get("text"), l.get("emotion"), d.get("type")))
+                WHERE[(l.get("speaker"), (l.get("text") or "").strip())] = (loc, kind)
         elif d.get("text"):
-            items.append((d.get("speaker"), d.get("speakText") or d.get("text"),
-                          d.get("emotion"), d.get("type")))
+            tx0 = d.get("speakText") or d.get("text")
+            items.append((d.get("speaker"), tx0, d.get("emotion"), d.get("type")))
+            WHERE[(d.get("speaker"), (tx0 or "").strip())] = (loc, kind)
     for t in (board.get("tapes") or []):
         items.append((t["who"], t["quote"], None, "tape"))
 
@@ -119,6 +135,7 @@ def rows():
             "src": SRC.get(k, {"line": "不確定", "why": "沒有來歷紀錄（在來歷表建立之前生的）"}),
             "ab": ab.get(k),
             "pick": LIS.get(k),
+            "where": WHERE.get((sp_, tx)),
         })
     return voiced, silent
 
@@ -173,6 +190,9 @@ tr.quiet td{background:var(--row)}
 .abbox audio{height:28px;width:180px;vertical-align:middle}
 .eng{font-size:12px;color:var(--dim);border-left:3px solid var(--line);padding-left:6px}
 .eng.larch{color:var(--larch);border-color:var(--larch)}
+.where{display:inline-block;font-size:11px;color:var(--dim);border:1px solid var(--line);
+  border-radius:3px;padding:1px 5px;margin-right:4px;white-space:nowrap}
+.where.note{color:var(--warn);border-color:var(--warn)}
 .pickbox{margin-top:6px;padding:6px 8px;border-left:3px solid var(--pick);background:var(--row);font-size:12px;color:var(--dim);max-width:460px}
 .pickbox b{color:var(--pick)}
 tr.pick td.t{box-shadow:inset 3px 0 0 var(--pick)}
@@ -274,6 +294,11 @@ def build():
                         + (f'原文版 <audio controls preload=none src="art/voice/ab/{a1}"></audio><br>' if a1 else '')
                         + (f'替身版 <audio controls preload=none src="art/voice/ab/{a2}"></audio>' if a2 else '')
                         + '</div>')
+            wh = r.get("where")
+            if wh and (wh[0] or wh[1]):
+                cls = "where note" if wh[1] == "筆記" else "where"
+                lab = "・".join(x for x in wh if x)
+                emo = f'<div><span class="{cls}">{e(lab)}</span></div>' + emo
             pk = r.get("pick")
             if pk:
                 emo += ('<div class=pickbox><b>建議先聽</b>　' + e(pk["why"])

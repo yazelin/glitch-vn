@@ -76,6 +76,11 @@ LINE_SPK = re.compile(r"^>\s*\*\*(.+?)\*\*[：:]\s*(.*)$")
 # > *舞台指示*
 LINE_DIR = re.compile(r"^>\s*\*(.+)\*\s*$")
 LINE_ANY = re.compile(r"^>\s?(.*)$")
+
+# **給我看的註解不可以印在卡片上。** 設計文件裡會寫「~~劃掉這半~~　←　為什麼劃掉」，
+# 箭頭後面那一段是編輯說明，玩家不該看到，配音更不該唸出來。
+# 2026-09-15 本人在試聽頁上看到「← 第四段那句「她會再來」之後劃掉後半」才發現。
+EDIT_NOTE = re.compile(r"[　\s]*←[　\s].*$")
 # **→ `var` ← true** 或 **→ `met_貓草` ＋1**
 # 段落層的 metadata。這些不是卡片，是**建置真正需要的東西**：
 # 觸發決定這一段什麼時候播（＝邊的條件），變數決定它寫什麼。
@@ -251,7 +256,7 @@ def parse_file(path):
             cur["lines"].append({"speaker": None, "text": d.group(1),
                                  "direction": True})
         else:
-            t = LINE_ANY.match(ln).group(1).strip()
+            t = EDIT_NOTE.sub("", LINE_ANY.match(ln).group(1)).strip()
             if t:
                 cur["lines"].append({"speaker": None, "text": t})
     flush()
