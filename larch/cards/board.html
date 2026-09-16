@@ -147,6 +147,9 @@ function list(v){ return String(v==null?'':v).split(/[,、]/).map(function(s){re
 function walkMap(){
   var m={}, a=String(values.walk||'').split(';');
   for(var i=0;i<a.length;i++){ var p=a[i].split('|');
+    // 舊存檔保留的是舊攻略字串；兼容兩個已改名／改地點的步驟，避免劇情模式找不到後退回全開。
+    if(p[0]==='9'&&p[1]==='1'&&p[2]==='studio'&&p[3]==='敲門') p[3]='走進去';
+    if(p[0]==='12'&&p[1]==='1'&&p[2]==='figure'&&p[3]==='問他每次都買一樣的那個') p[2]='store';
     if(p.length>=3&&p[2]) m[p[0]+','+p[1]]={loc:p[2], label:p[3]||''}; }
   return m;
 }
@@ -390,7 +393,7 @@ function listText(){
 function go(spotId){
   var slot=num(values.slot,0), day=num(values.day,1);
   // 遊樂園是與劇情無關的常駐入口：不骰訪客、不記造訪、不改人物或線索。
-  // dest 保留為 park；離開小遊戲回到本板時，start() 會照一般外出推進一個時段。
+  // dest 保留為 park；離開小遊戲回到本板時，start() 看到是 park 就不推進時段（遊樂園不算外出）。
   if(spotId==='park'){
     setVar('dest','park');
     finish('park',{day:day,slot:slot});
@@ -426,7 +429,9 @@ function go(spotId){
 }
 
 function start(){
-  if(values.dest){ advance(); setVar('dest',''); setVar('here',''); }
+  // 遊樂園不吃時段（2026-09-17 他要劇情模式也能隨時去玩）：它二十四小時營業，去一趟回來還是同一個時段，
+  // 軌道那一格照留。之前是照一般外出推進，劇情模式去一次就少走一步，整條軌道往後滑。
+  if(values.dest){ if(values.dest!=='park') advance(); setVar('dest',''); setVar('here',''); }
   // 收尾那三段字要在這裡也寫一次：出門前寫的那一份看不到那一趟拿到的東西，
   // 而最後一趟拿到的（例如貓草家）正好決定名單那一頁有幾行註解（2026-09-09 實測）。
   setVar('list_text', listText());
@@ -458,12 +463,21 @@ function start(){
     for(var q=0;q<ks.length;q++) if(values[ks[q]]===true||values[ks[q]]==='true') return true;
     return false;
   }
-  // 劇情模式：這個時段只開攻略的下一步。走不到就自己讓開（railOff），不把人鎖在全灰的板子上。
+  // 劇情模式：這個時段只開攻略的下一步。
+  // 攻略指到的地方還沒解鎖（前一步該給的旗標沒拿到）就由軌道自己解鎖：軌道就是劇情，
+  // 不能因為一格漏了就悄悄退成全開。2026-09-17 實玩：第 4 天晚上沒問到店員，洗衣店沒開，
+  // 第 5 到第 8 天每個晚上軌道都指洗衣店，板子就每晚全開，之後選單也跟著全開。
+  // 只有這個時段真的沒開（live 是 null）或封掉的地方才讓開（railOff），不把人鎖在全灰的板子上。
   var railTo=null, railOff=false;
   if(String(values.mode||'free')==='story'){
     var w = walkMap()[day+','+slot];
     railTo = w ? w.loc : null;
     var rs = railTo ? spotAt(railTo) : null;
+    if(rs && !rs.sealed){
+      [].concat(rs.gate||[], rs.showIf||[]).forEach(function(k){
+        if(k && values[k]!==true && values[k]!=='true'){ values[k]=true; setVar(k, true); }
+      });
+    }
     if(!rs || !drawn(rs) || !isOpen(rs) || rs.live[slot]===null || rs.live[slot]===undefined){
       railTo=null; railOff=true;
     }

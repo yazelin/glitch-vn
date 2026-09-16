@@ -69,11 +69,17 @@ RAIL_NEW = """    var rs = railTo ? spotAt(railTo) : null;
     if(!rs || !drawn(rs) || !isOpen(rs) || rs.live[slot]===null || rs.live[slot]===undefined){"""
 
 
+# 遊樂園不吃時段（board.html start() 那一行，改了要兩邊一起改）
+PARK_OLD = "  if(values.dest){ advance(); setVar('dest',''); setVar('here',''); }"
+PARK_NEW = "  if(values.dest){ if(values.dest!=='park') advance(); setVar('dest',''); setVar('here',''); }"
+
+
 def swap_board_js(html, stats):
-    if RAIL_OLD in html:
-        html = html.replace(RAIL_OLD, RAIL_NEW, 1); stats["rail"] += 1
-    elif RAIL_NEW not in html:
-        print("  ★ 調查板卡片裡找不到軌道那一段的新舊版本，去對 board.html")
+    for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail")):
+        if old in html:
+            html = html.replace(old, new, 1); stats[name] += 1
+        elif new not in html:
+            print(f"  ★ 調查板卡片裡找不到這一段的新舊版本（{old[:30]}…），去對 board.html")
     return html
 
 

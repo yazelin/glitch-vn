@@ -95,7 +95,7 @@ await page.goto(pv.playUrl, { waitUntil: 'load', timeout: 60000 }); await page.w
 // 沒設就不特別挑，讓它照一般選項邏輯走（預設變數是 free，所以行為跟以前一樣）。
 const MODE = process.env.MODE || '';
 await page.locator('button', { hasText: '開始遊戲' }).first().click(); await page.waitForTimeout(3000);
-let spot=null, when=''; const t0=Date.now();
+let spot=null, when='', flick=0; const t0=Date.now();
 for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   const t = await text();
   if (t.includes('開始遊戲') && t.includes('繼續遊戲')) { out('\n=== 回到標題（遊戲結束）'); break; }
@@ -103,7 +103,11 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   // 於是自己又開一輪——2026-09-11 兩輪各跑了三遍，記憶體也是這樣爆的。
   if (t.includes('故事暫告一段落')) { out('\n=== 走到謝幕（遊戲結束）'); break; }
   const bf = await boardFrame();
-  if (bf) { await page.waitForTimeout(600); const bf2=await boardFrame(); if(!bf2) continue; when = await bf2.locator('#when').textContent();
+  // 2026-09-17：三輪都在第 6 天 CG 解鎖卡之後停住、什麼都不印——這一行的 `continue` 是唯一不印字的迴圈。
+  // 板子的 iframe 一直閃（找到→600ms 後不見→再找到）就會在這裡無聲地轉到時限。轉超過 20 次就留證據。
+  if (bf) { await page.waitForTimeout(600); const bf2=await boardFrame();
+    if(!bf2) { if (++flick > 20) { out('★ 調查板 iframe 閃了 20 次：' + t.slice(0, 160).replace(/\n/g, ' ')); await page.screenshot({ path: `${SD}/flicker-${step}.png` }).catch(()=>{}); flick = 0; } continue; }
+    flick = 0; when = await bf2.locator('#when').textContent();
     // 每天上午開一次手機翻一遍（design/調查篇-手機.md 驗收）：HUD 背包 → 手機 → 使用道具 → 記下看到的貼文 → 收起來
     if ((when.includes('上午') && !phoneDays.has(when.split(' ・')[0])) || (taped && !tapeTried)) { phoneDays.add(when.split(' ・')[0]);
       try { await page.mouse.click(1180,112); await page.waitForTimeout(1200); const it=page.locator('text=手機').first(); if (await it.count()) { await it.click(); await page.waitForTimeout(500); }
