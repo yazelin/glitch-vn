@@ -101,6 +101,10 @@ def patch(board, stats):
         d = n["data"]
         if d.get("type") == "miniGame" and "function walkMap()" in (d.get("miniGameHtml") or ""):
             d["miniGameHtml"] = swap_board_js(d["miniGameHtml"], stats)
+        # 六、謝幕字卷的副標：2026-09-09 拉成十四天，字卷那張卡沒跟上（字是隔開排的，grep「十二天」找不到）
+        for k in ("miniGameHtml", "pluginHtml", "html"):
+            if isinstance(d.get(k), str) and "十 二 天" in d[k]:
+                d[k] = d[k].replace("調 查 篇　・　十 二 天", "調 查 篇　・　十 四 天"); stats["strike"] += 1
         if d.get("type") == "dialogue" and "~~" in (d.get("text") or ""):
             d["text"] = strike(d["text"]); stats["strike"] += 1
         # 講者還是原名的時候先重查配音（改名之後就對不到 urls.json 的鍵了）
