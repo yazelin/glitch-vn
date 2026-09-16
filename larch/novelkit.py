@@ -22,6 +22,16 @@ A = json.loads((ROOT / "larch/assets.json").read_text())
 _VU = ROOT / "art/voice/urls.json"
 VOICE_URLS = json.loads(_VU.read_text(encoding="utf-8")) if _VU.exists() else {}
 
+# 播放走 jsDelivr。yazelin.github.io 這條路由實測 170KB/s、一句三百 KB 的旁白要拖兩到五秒，
+# jsDelivr 熱快取 0.1 秒（2026-09-17 量的）。urls.json 一律記 Pages 網址（publish_voice.py 的規矩），
+# 掛上卡片的那一刻才換。@main 的快取是十二小時，所以 publish_voice.py 推完會打 purge 讓新檔立刻生效。
+PAGES_VOICE = "https://yazelin.github.io/glitch-vn/voice/"
+CDN_VOICE = "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main/docs/voice/"
+
+
+def cdn(u):
+    return CDN_VOICE + u[len(PAGES_VOICE):] if u and u.startswith(PAGES_VOICE) else u
+
 
 def _voice(d):
     """把 voiceUrl 掛上卡片。**多人卡片一定要掛在行上**，卡片層只吃得下一個聲音。
@@ -40,7 +50,7 @@ def _voice(d):
             u = VOICE_URLS.get(V.key(l.get("speaker"), l.get("text"),
                                      l.get("emotion") or None))
             if u:
-                l["voiceUrl"] = u
+                l["voiceUrl"] = cdn(u)
                 got = True
     else:
         # speakText：畫面上的字跟要唸的字不一樣時用它（系統訊息不唸，見 chat）
@@ -48,7 +58,7 @@ def _voice(d):
                                  d.get("speakText") or d.get("text"),
                                  d.get("emotion") or None))
         if u:
-            d["voiceUrl"] = u
+            d["voiceUrl"] = cdn(u)
             got = True
     # **真正讓匯出版有聲音的開關在 project.languages，不在這裡。**
     # 匯出的播放器有一道閘：

@@ -46,6 +46,9 @@ const pickSpot = async (bf) => {
   lastTodo = todo;
   const spots = []; for (const b of await bf.locator('button.spot:not([disabled])').all()) spots.push({ name: (await b.locator('.name').textContent()).trim(), who: (await b.locator('.who').textContent()).trim(), el: b });
   out(`\n=== 板 ${when} | 便條：${todo.join(' / ')} | 可去：${spots.map(s=>s.name+'('+s.who+')').join('、')}`);
+  // 遊樂園是 WebGL 小遊戲，無頭瀏覽器開不了（Error creating WebGL context），進去就卡死；
+  // 而且劇情模式它永遠是開的，會把自動玩家從軌道上拐走。沒被 PREFER 點名就不去。
+  if (!/遊樂園/.test(process.env.PREFER||'')) { for (let i=spots.length-1;i>=0;i--) if (/遊樂園/.test(spots[i].name)) spots.splice(i,1); }
   let target=null;
   const slotName = (when.match(/上午|下午|晚上|深夜/)||[''])[0];
   if (POLICY==='casual' && slotName==='深夜' && rnd()<0.5) { out('→ 這個深夜不出門'); return 'skip'; }
