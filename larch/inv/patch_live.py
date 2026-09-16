@@ -24,7 +24,8 @@ import novelkit as NK        # cdn()
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 STATE = json.loads((HERE / "state.json").read_text(encoding="utf-8"))
 BASE = f"https://larch.ink/api/agent/projects/{STATE['projectId']}"
-BOARDS = ("board-main", "board-credits")
+# 主版最後推：平台把最後一次 PUT 的版子當主線（activeBoardId），配音生成只在主線找卡。
+BOARDS = ("board-credits", "board-main")
 
 
 def request(path, method="GET", body=None, etag=None):
