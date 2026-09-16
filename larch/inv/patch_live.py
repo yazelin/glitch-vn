@@ -155,10 +155,21 @@ def main():
               f"　（卡 {before[0]}、邊 {before[1]}，不動）")
         if a.dry or not any(stats.values()):
             continue
-        request(f"/boards/{bid}", "PUT", {
-            "name": board.get("name", bid), "kind": board.get("kind", "story"), "mode": board.get("mode", "story"),
-            "nodes": board["nodes"], "edges": board["edges"],
-            "summary": "patch_live.py：講者名改成她知道的叫法、音檔改走 jsDelivr"}, etag)
+        # 編輯器分頁開著就會一直墊高版本號（config.py 那邊記過），409 就重讀、重改、重送。
+        for attempt in range(5):
+            try:
+                request(f"/boards/{bid}", "PUT", {
+                    "name": board.get("name", bid), "kind": board.get("kind", "story"), "mode": board.get("mode", "story"),
+                    "nodes": board["nodes"], "edges": board["edges"],
+                    "summary": "patch_live.py：講者名改成她知道的叫法、音檔改走 jsDelivr"}, etag)
+                break
+            except urllib.error.HTTPError as e:
+                if e.code != 409 or attempt == 4:
+                    raise
+                print(f"  409 版本被墊高，重讀再送（第 {attempt + 1} 次）")
+                payload, etag = request(f"/boards/{bid}")
+                board = payload.get("board", payload)
+                patch(board, {k: 0 for k in stats})
         back, _ = request(f"/boards/{bid}")
         back = back.get("board", back)
         after = (len(back["nodes"]), len(back["edges"]))
