@@ -93,7 +93,10 @@ def main():
     spoken = json.loads(spoken_p.read_text(encoding="utf-8")) if spoken_p.exists() else {}
     ok = fail = 0
     for i, (nid, idx, sp, tx, emo, k) in enumerate(rows, 1):
-        body = {"nodeId": nid, "voiceId": LV[sp][0], "emotion": emo or ""}
+        # 平台只在「主線版子」找卡（activeBoardId）。最後一次 PUT 的版子會變成主線——
+        # 2026-09-17 patch_live 先推主版再推謝幕，主線就被謝幕搶走，每一句都回 404 找不到卡片。
+        # 帶 boardId 就不看 activeBoardId（reference_larch_agent_api 記過）。
+        body = {"nodeId": nid, "boardId": "board-main", "voiceId": LV[sp][0], "emotion": emo or ""}
         if idx is not None:
             body["lineIndex"] = idx
         try:
