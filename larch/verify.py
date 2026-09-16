@@ -229,6 +229,9 @@ _pk = ROOT / "art/voice/picked.json"
 if _pk.exists():
     import subprocess as _sp
     _p = json.loads(_pk.read_text())
+    # 2026-09-15 起 picked.json 是代號清單，來源檔固定在 art/voice/picked-src/<代號>.mp3；舊格式是 dict 帶 source
+    if isinstance(_p, list):
+        _p = {_k: {"source": str(ROOT / f"art/voice/picked-src/{_k}.mp3")} for _k in _p}
     _lost = []
     for _k, _v in _p.items():
         _src, _ins = pathlib.Path(_v["source"]), ROOT / f"art/voice/{_k}.mp3"

@@ -120,10 +120,12 @@ console.log('\n=== 調查板：劇情模式只開攻略的下一步（design/調
   ok('自由探索什麼都不擋', !(await free.locator('button.spot', { hasText: '一樓' }).isDisabled()));
   ok('自由探索留著「這一段不出門」', await free.locator('#skip').isVisible());
 
-  // 安全閥：攻略那一格進不去（這裡是 open_roof 沒開）就退回自由探索的畫面，不要鎖死玩家
+  // 攻略那一格還沒解鎖（這裡是 open_roof 沒開）：軌道自己把它打開，照樣只留那一格。
+  // 2026-09-17 之前是「退回自由探索」，實玩證明那會讓一格漏掉之後每個晚上都全開。
   const off = await open('board.html', { mode: 'story', walk: WALK, day: 1, slot: 1, met: '管理員' });
-  ok('攻略那一格進不去就讓開', !(await off.locator('button.spot', { hasText: '一樓' }).isDisabled()));
-  ok('讓開的時候說一聲', (await off.locator('#hint').textContent()).includes('自己的判斷'));
+  const offSets = Object.fromEntries((await msgs()).filter(x => x.type === 'larch:set').map(x => [x.name, x.value]));
+  ok('攻略那一格沒開，軌道自己把它打開', offSets.open_roof === true);
+  ok('打開之後照樣只留軌道那一格', await off.locator('button.spot', { hasText: '一樓' }).isDisabled());
 }
 
 console.log('\n=== 調查板：劇情模式把守則本第一頁那六格自己填好 ===');
