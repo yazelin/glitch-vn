@@ -34,6 +34,10 @@ def todo(board, force=()):
     """
     import voice as V
     from voice import LARCH_VOICE as LV
+    import push as P
+    # 線上卡片的講者是她知道的叫法（鐵塔→經紀人、諾亞→修收音機的，push.DISPLAY），
+    # 音色表與代號都用本名，先換回來；不換的話這幾個人的句子會被當成不認識的講者整批跳過。
+    REV = {v: k for k, v in P.DISPLAY.items()}
     have = {p.stem for p in OUT.glob("*.mp3")} | {p.stem for p in (ROOT / "docs/voice").glob("*.mp3")}
     rows, seen = [], set()
     for n in board["nodes"]:
@@ -42,6 +46,7 @@ def todo(board, force=()):
         items = ([(i, l.get("speaker"), l.get("text"), l.get("emotion")) for i, l in enumerate(dl)]
                  if dl else [(None, d.get("speaker"), d.get("speakText") or d.get("text"), d.get("emotion"))])
         for idx, sp, tx, emo in items:
+            sp = REV.get(sp, sp)
             if sp not in LV or not tx or not str(tx).strip():
                 continue
             k = V.key(sp, tx, emo or None)
