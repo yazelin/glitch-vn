@@ -64,6 +64,7 @@ button.spot .photo::after{content:"";position:absolute;inset:0;background:#0d0b0
 button.spot .photo.wait::after{opacity:1;transition:none}
 body{opacity:0;transition:opacity .45s ease}
 body.on{opacity:1}   /* 整張板子淡入，不要第一幀就整片跳出來（2026-09-18 作者：要流暢） */
+.sky .tex-img.now{transition:none}
 .sky::after{content:"";position:absolute;inset:0;
   box-shadow:inset 0 0 90px rgba(74,47,24,.34),inset 0 0 18px rgba(74,47,24,.26)}
 .wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.4vh 3vw 2vh}
@@ -323,9 +324,14 @@ function paintCork(a,b){
   if(CORK){
     // 有貼圖：底是圖，canvas 只畫時段色溫（CSS 上 multiply），顆粒不用畫
     var sk=document.getElementById('sky'); sk.className='sky tex';
-    if(!document.getElementById('texImg')){   // 貼圖另開一層放在 canvas 底下，載到才淡入；底色 --board 先撐著
+    if(!document.getElementById('texImg')){   // 貼圖另開一層放在 canvas 底下；跟整張板子一起現身（一次淡入），來不及就後補淡入
       var ti=document.createElement('div'); ti.id='texImg'; ti.className='tex-img'; sk.insertBefore(ti, sk.firstChild);
-      var im=new Image(); im.onload=function(){ ti.style.backgroundImage='url("'+CORK+'")'; requestAnimationFrame(function(){ ti.className='tex-img in'; }); }; im.src=CORK;
+      var im=new Image();
+      im.onload=function(){ ti.style.backgroundImage='url("'+CORK+'")';
+        if(!document.body.classList.contains('on')){ ti.className='tex-img in now'; window.__reveal(); }
+        else requestAnimationFrame(function(){ ti.className='tex-img in'; }); };
+      im.onerror=window.__reveal; im.src=CORK;
+      setTimeout(window.__reveal, 600);   // 最多等 0.6 秒（jsDelivr 暖了 0.3 秒內到）；沒到就先現身
     }
     var gt=x.createLinearGradient(0,0,W*0.4,H); gt.addColorStop(0,a); gt.addColorStop(1,b);
     x.fillStyle=gt; x.fillRect(0,0,W,H);
@@ -619,7 +625,8 @@ function start(){
 }
 
 parent.postMessage({type:'larch:ready'},'*');
-requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('on'); }); });
+window.__reveal=function(){ if(document.body.classList.contains('on')) return; requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('on'); }); }); };   // 整張板子只淡入一次：貼圖到了或等太久才現身（2026-09-18 作者：淡入兩次不行）
+setTimeout(window.__reveal, 1500);   // 保險：沒貼圖、init 晚到、圖壞掉都不能讓板子一直隱形
 window.addEventListener('message',function(e){
   var d=e.data; if(!d||d.type!=='larch:init')return;
   values=d.values||{}; vars=d.variables||{};

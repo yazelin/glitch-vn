@@ -286,8 +286,17 @@ FADE_OLD_PH = "        if(c){ ph.style.backgroundImage='url(\"'+ATLAS.url+'\")';
 FADE_NEW_PH = "        if(c){ ph.className='photo wait'; if(atlasReady) requestAnimationFrame(function(){ requestAnimationFrame(function(){ ph.classList.remove('wait'); }); }); ph.style.backgroundImage='url(\"'+ATLAS.url+'\")';"
 FADE_PAIRS = ((FADE_OLD_CSS, FADE_NEW_CSS), (FADE_OLD_PAINT, FADE_NEW_PAINT), (FADE_OLD_PRE, FADE_NEW_PRE), (FADE_OLD_PH, FADE_NEW_PH))
 STAG_PAIRS = (("function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p,i){ setTimeout(function(){ p.classList.remove('wait'); }, 60+i*70); }); }", "function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p){ p.classList.remove('wait'); }); }"), ("if(c){ ph.className='photo wait'; if(atlasReady) setTimeout(function(){ ph.classList.remove('wait'); }, 60+i*70); ph.style", "if(c){ ph.className='photo wait'; if(atlasReady) requestAnimationFrame(function(){ requestAnimationFrame(function(){ ph.classList.remove('wait'); }); }); ph.style"))   # 2026-09-18 作者：載到就淡入，不要一張一張延時；線上曾套過延時版，先換回來
-SMOOTH_PAIRS = (("button.spot .photo.wait::after{opacity:1;transition:none}\n", "button.spot .photo.wait::after{opacity:1;transition:none}\nbody{opacity:0;transition:opacity .45s ease}\nbody.on{opacity:1}   /* 整張板子淡入，不要第一幀就整片跳出來（2026-09-18 作者：要流暢） */\n"),
-                ("parent.postMessage({type:'larch:ready'},'*');\n", "parent.postMessage({type:'larch:ready'},'*');\nrequestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('on'); }); });\n"))
+ONE_READY = "parent.postMessage({type:'larch:ready'},'*');\nwindow.__reveal=function(){ if(document.body.classList.contains('on')) return; requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('on'); }); }); };   // 整張板子只淡入一次：貼圖到了或等太久才現身（2026-09-18 作者：淡入兩次不行）\nsetTimeout(window.__reveal, 1500);   // 保險：沒貼圖、init 晚到、圖壞掉都不能讓板子一直隱形\n"   # 整張板子只淡入一次（見 ONE_PAIRS）
+SMOOTH_CSS_V1 = "button.spot .photo.wait::after{opacity:1;transition:none}\nbody{opacity:0;transition:opacity .45s ease}\nbody.on{opacity:1}   /* 整張板子淡入，不要第一幀就整片跳出來（2026-09-18 作者：要流暢） */\n"
+ONE_CSS = SMOOTH_CSS_V1 + '.sky .tex-img.now{transition:none}\n'   # 貼圖來得及就直接現身，不再各自淡入
+SMOOTH_PAIRS = (("button.spot .photo.wait::after{opacity:1;transition:none}\n", ONE_CSS),
+                ("parent.postMessage({type:'larch:ready'},'*');\n", ONE_READY))
+ONE_PAIRS = (   # 2026-09-18 作者：「淡入了兩次」＝整板淡入＋貼圖淡入分開；改成貼圖到了才一起現身，最多等 0.6 秒
+    (FADE_NEW_PAINT,
+     '    var sk=document.getElementById(\'sky\'); sk.className=\'sky tex\';\n    if(!document.getElementById(\'texImg\')){   // 貼圖另開一層放在 canvas 底下；跟整張板子一起現身（一次淡入），來不及就後補淡入\n      var ti=document.createElement(\'div\'); ti.id=\'texImg\'; ti.className=\'tex-img\'; sk.insertBefore(ti, sk.firstChild);\n      var im=new Image();\n      im.onload=function(){ ti.style.backgroundImage=\'url("\'+CORK+\'")\';\n        if(!document.body.classList.contains(\'on\')){ ti.className=\'tex-img in now\'; window.__reveal(); }\n        else requestAnimationFrame(function(){ ti.className=\'tex-img in\'; }); };\n      im.onerror=window.__reveal; im.src=CORK;\n      setTimeout(window.__reveal, 600);   // 最多等 0.6 秒（jsDelivr 暖了 0.3 秒內到）；沒到就先現身\n    }\n'),
+    ("parent.postMessage({type:'larch:ready'},'*');\nrequestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('on'); }); });\n",
+     ONE_READY),
+    (SMOOTH_CSS_V1, ONE_CSS))
 CDN_PAIRS = ((CORK_R2, CORK_URL), (ATLAS_R2, _ATLAS["url"]))   # 線上已經是 R2 網址的卡：直接換字
 
 
@@ -298,12 +307,12 @@ def swap_board_js(html, stats):
                            (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail"), (TEX_OLD, TEX_NEW, "rail"),
                            (PHOTO_OLD, PHOTO_NEW, "rail"), (BLOCK_OLD, BLOCK_NEW, "rail"), (LINECSS_OLD, LINECSS_NEW, "rail"),
                            (HDR1_OLD, HDR1_NEW, "rail"), (HDR2_OLD, HDR2_NEW, "rail"), (HDR3_OLD, HDR3_NEW, "rail"), (HDR4_OLD, HDR4_NEW, "rail"), (HDR5_OLD, HDR5_NEW, "rail"),
-                           *[(o, n, "rail") for o, n in STAG_PAIRS], *[(o, n, "rail") for o, n in FADE_PAIRS], *[(o, n, "rail") for o, n in SMOOTH_PAIRS], *[(o, n, "rail") for o, n in CDN_PAIRS]):
+                           *[(o, n, "rail") for o, n in STAG_PAIRS], *[(o, n, "rail") for o, n in FADE_PAIRS], *[(o, n, "rail") for o, n in ONE_PAIRS], *[(o, n, "rail") for o, n in SMOOTH_PAIRS], *[(o, n, "rail") for o, n in CDN_PAIRS]):
         if new in html:
             continue
         if old in html:
             html = html.replace(old, new, 1); stats[name] += 1
-        elif not any(n in html for _, n in FADE_PAIRS + SMOOTH_PAIRS):   # 後面的對已經改寫過這些段落就不喊
+        elif not any(n in html for _, n in FADE_PAIRS + SMOOTH_PAIRS + ONE_PAIRS):   # 後面的對已經改寫過這些段落就不喊
             print(f"  ★ 調查板卡片裡找不到這一段的新舊版本（{old[:30]}…），去對 board.html")
     if "var ATLAS = " not in html and ATLAS_OLD in html:      # atlas 表只加一次（插在 PHOTOS 前面）
         html = html.replace(ATLAS_OLD, ATLAS_NEW, 1); stats["rail"] += 1
