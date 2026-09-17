@@ -182,6 +182,7 @@ LINECSS_NEW = ("  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n"
 # 手機卡（inv-phone、phone-bambi、phone-pr；larch/cards/phone.html 灌的）：主題換分頁不洗掉、背光與螢幕光、三句文案。
 # 2026-09-17 作者抓到／要求。改了 phone.html 要一起改這裡。
 PHONE_PAIRS = [
+    ('https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-bec1644c-0dfe-4447-86c0-0c592e2f939f/1787365134681_avatar-glitch.png', 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1789664271312_avatar-glitch-128.webp'),   # 格莉奇頭像 512px PNG 290 KB → 128px webp 8 KB
     ('https://yazelin.github.io/glitch-live/assets/live-loop.mp4', 'https://cdn.jsdelivr.net/gh/yazelin/glitch-live@main/assets/live-loop.mp4'),   # 直播影片改走 jsDelivr
     ("  if(!booted){ booted=true; show(phoneLog().length ? 'msg' : 'feed'); }", "  if(!booted){ booted=true; if(!vid.getAttribute('src')) vid.src=VIDEO; show(phoneLog().length ? 'msg' : 'feed'); }   // 一打開就預載直播影片，不等切到直播分頁（2026-09-18）"),
     ('window.checkCover=checkCover; window.wmRect=wmRect; window.show=show;', "// 點手機以外的地方也收起來（2026-09-17 作者要求）。橫幅模式沒有這回事。halo 是 pointer-events:none，點到它等於點到外面。\ndocument.addEventListener('click', function(e){\n  if(MODE!=='full' || !booted) return;\n  if(e.target && e.target.closest && e.target.closest('#phone')) return;\n  closePhone();\n});\nwindow.checkCover=checkCover; window.wmRect=wmRect; window.show=show;"),

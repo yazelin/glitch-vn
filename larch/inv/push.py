@@ -552,7 +552,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                 .replace("/*@@BANNER@@*/null", json.dumps(banner, ensure_ascii=False))
                 .replace("/*@@POSTS@@*/[]", json.dumps(posts, ensure_ascii=False))
                 .replace("/*@@OLD@@*/[]", json.dumps(old_thread, ensure_ascii=False))
-                .replace("/*@@AVATAR@@*/''", json.dumps(MAIN_ASSETS.get("avatar-glitch", ""))))
+                .replace("/*@@AVATAR@@*/''", json.dumps(local_asset("art/avatar/avatar-glitch-128.webp", state, pid, dry, "character"))))   # 2026-09-18：512px PNG 290 KB → 128px webp 8 KB，畫面最大只顯示 54px
         d = {"type": "miniGame", "title": ("手機：" + banner["who"]) if banner else "她的手機", "text": "",
              "miniGameHtml": html, "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
              "miniGameFrame": {"showButton": False, "showTitle": False},
