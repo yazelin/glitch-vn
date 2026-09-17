@@ -257,13 +257,39 @@ HDR5_OLD = '  background:none;border:0;border-bottom:1px solid rgba(255,255,255,
 HDR5_NEW = '  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.45);padding:.25em .1em}'
 
 
+# 進板不要「啪」：底色先在、軟木貼圖載到再淡入；拍立得先是白框，拼版載到照片再淡入（2026-09-18 作者：閃一下很不舒服）。
+FADE_OLD_CSS = ".sky.tex canvas{mix-blend-mode:multiply}\n"
+FADE_NEW_CSS = (".sky.tex canvas{mix-blend-mode:multiply}\n"
+                ".sky .tex-img{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transition:opacity .9s ease}\n"
+                ".sky .tex-img.in{opacity:1}\n"
+                "button.spot .photo{position:relative;overflow:hidden}\n"
+                "button.spot .photo::after{content:\"\";position:absolute;inset:0;background:#0d0b0a;opacity:0;transition:opacity 1.1s ease-out}   /* 拍立得顯影：黑的慢慢退 */\n"
+                "button.spot .photo.wait::after{opacity:1;transition:none}\n")
+FADE_OLD_PAINT = ("    var sk=document.getElementById('sky'); sk.className='sky tex';\n"
+                  "    if(sk.style.backgroundImage.indexOf(CORK)<0) sk.style.backgroundImage='url(\"'+CORK+'\")';\n")
+FADE_NEW_PAINT = ("    var sk=document.getElementById('sky'); sk.className='sky tex';\n"
+                  "    if(!document.getElementById('texImg')){   // 貼圖另開一層放在 canvas 底下，載到才淡入；底色 --board 先撐著\n"
+                  "      var ti=document.createElement('div'); ti.id='texImg'; ti.className='tex-img'; sk.insertBefore(ti, sk.firstChild);\n"
+                  "      var im=new Image(); im.onload=function(){ ti.style.backgroundImage='url(\"'+CORK+'\")'; requestAnimationFrame(function(){ ti.className='tex-img in'; }); }; im.src=CORK;\n"
+                  "    }\n")
+FADE_OLD_PRE = "var SKY_TEX=[['#c6a687','#a68870'],['#c2a283','#a3856c'],['#957a63','#77604d'],['#6e5644','#574334']];"
+FADE_NEW_PRE = (FADE_OLD_PRE + "\n"
+                "var atlasReady=!ATLAS;   // 拼版先預載；載到之前的照片掛 wait（透明），到了一起淡入\n"
+                "function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p,i){ setTimeout(function(){ p.classList.remove('wait'); }, 60+i*70); }); }\n"
+                "if(ATLAS){ var _ai=new Image(); _ai.onload=function(){ atlasReady=true; develop(); }; _ai.src=ATLAS.url; }")
+FADE_OLD_PH = "        if(c){ ph.style.backgroundImage='url(\"'+ATLAS.url+'\")';"
+FADE_NEW_PH = "        if(c){ ph.className='photo wait'; if(atlasReady) setTimeout(function(){ ph.classList.remove('wait'); }, 60+i*70); ph.style.backgroundImage='url(\"'+ATLAS.url+'\")';"
+FADE_PAIRS = ((FADE_OLD_CSS, FADE_NEW_CSS), (FADE_OLD_PAINT, FADE_NEW_PAINT), (FADE_OLD_PRE, FADE_NEW_PRE), (FADE_OLD_PH, FADE_NEW_PH))
+
+
 def swap_board_js(html, stats):
     for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail"),
                            (VIS_OLD_A, VIS_NEW_A, "rail"), (VIS_OLD_B, VIS_NEW_B, "rail"),
                            (CORK_OLD_SKY, CORK_NEW_SKY, "rail"), (CORK_OLD_PAINT, CORK_NEW_PAINT, "rail"),
                            (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail"), (TEX_OLD, TEX_NEW, "rail"),
                            (PHOTO_OLD, PHOTO_NEW, "rail"), (BLOCK_OLD, BLOCK_NEW, "rail"), (LINECSS_OLD, LINECSS_NEW, "rail"),
-                           (HDR1_OLD, HDR1_NEW, "rail"), (HDR2_OLD, HDR2_NEW, "rail"), (HDR3_OLD, HDR3_NEW, "rail"), (HDR4_OLD, HDR4_NEW, "rail"), (HDR5_OLD, HDR5_NEW, "rail")):
+                           (HDR1_OLD, HDR1_NEW, "rail"), (HDR2_OLD, HDR2_NEW, "rail"), (HDR3_OLD, HDR3_NEW, "rail"), (HDR4_OLD, HDR4_NEW, "rail"), (HDR5_OLD, HDR5_NEW, "rail"),
+                           *[(o, n, "rail") for o, n in FADE_PAIRS]):
         if new in html:
             continue
         if old in html:

@@ -57,6 +57,11 @@ html,body{margin:0;height:100%;background:var(--board);color:var(--text);
 .sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sky.tex{background-position:center;background-size:cover}
 .sky.tex canvas{mix-blend-mode:multiply}
+.sky .tex-img{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transition:opacity .9s ease}
+.sky .tex-img.in{opacity:1}
+button.spot .photo{position:relative;overflow:hidden}
+button.spot .photo::after{content:"";position:absolute;inset:0;background:#0d0b0a;opacity:0;transition:opacity 1.1s ease-out}   /* 拍立得顯影：黑的慢慢退 */
+button.spot .photo.wait::after{opacity:1;transition:none}
 .sky::after{content:"";position:absolute;inset:0;
   box-shadow:inset 0 0 90px rgba(74,47,24,.34),inset 0 0 18px rgba(74,47,24,.26)}
 .wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.4vh 3vw 2vh}
@@ -188,6 +193,9 @@ var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a
 // 貼圖本身是淺棕，色溫用 multiply 疊上去。2026-09-17 作者要固定深色（淺木太亮，便條浮不出來）：白天深暖褐，深夜再沉一階。
 var CORK = /*@@CORK@@*/'';
 var SKY_TEX=[['#c6a687','#a68870'],['#c2a283','#a3856c'],['#957a63','#77604d'],['#6e5644','#574334']];
+var atlasReady=!ATLAS;   // 拼版先預載；載到之前的照片掛 wait（透明），到了一起淡入
+function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p,i){ setTimeout(function(){ p.classList.remove('wait'); }, 60+i*70); }); }
+if(ATLAS){ var _ai=new Image(); _ai.onload=function(){ atlasReady=true; develop(); }; _ai.src=ATLAS.url; }
 
 // 地點：代號、名字、每個時段的狀態、在街區上的位置（百分比）
 //   '名字' = 那個人常駐　　''  = 開著可是沒有常駐　　null = 這個時間進不去
@@ -313,7 +321,10 @@ function paintCork(a,b){
   if(CORK){
     // 有貼圖：底是圖，canvas 只畫時段色溫（CSS 上 multiply），顆粒不用畫
     var sk=document.getElementById('sky'); sk.className='sky tex';
-    if(sk.style.backgroundImage.indexOf(CORK)<0) sk.style.backgroundImage='url("'+CORK+'")';
+    if(!document.getElementById('texImg')){   // 貼圖另開一層放在 canvas 底下，載到才淡入；底色 --board 先撐著
+      var ti=document.createElement('div'); ti.id='texImg'; ti.className='tex-img'; sk.insertBefore(ti, sk.firstChild);
+      var im=new Image(); im.onload=function(){ ti.style.backgroundImage='url("'+CORK+'")'; requestAnimationFrame(function(){ ti.className='tex-img in'; }); }; im.src=CORK;
+    }
     var gt=x.createLinearGradient(0,0,W*0.4,H); gt.addColorStop(0,a); gt.addColorStop(1,b);
     x.fillStyle=gt; x.fillRect(0,0,W,H);
     var vt=x.createRadialGradient(W/2,H/2,Math.min(W,H)*0.35,W/2,H/2,Math.max(W,H)*0.75);
@@ -559,7 +570,7 @@ function start(){
       var tk=slot===3?'night':slot===2?'evening':'day';
       if(ATLAS&&ATLAS.map[s.id]){
         var c=ATLAS.map[s.id][tk]||ATLAS.map[s.id].day||ATLAS.map[s.id].night;
-        if(c){ ph.style.backgroundImage='url("'+ATLAS.url+'")';
+        if(c){ ph.className='photo wait'; if(atlasReady) setTimeout(function(){ ph.classList.remove('wait'); }, 60+i*70); ph.style.backgroundImage='url("'+ATLAS.url+'")';
                ph.style.backgroundSize=(ATLAS.cols*100)+'% '+(ATLAS.rows*100)+'%';
                ph.style.backgroundPosition=(c[0]/(ATLAS.cols-1)*100)+'% '+(c[1]/(ATLAS.rows-1)*100)+'%'; }
         else ph.className='photo empty';
