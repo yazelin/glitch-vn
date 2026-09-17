@@ -135,10 +135,14 @@ def main():
         for n in board["nodes"]:
             if before[n["id"]] == json.dumps(n, ensure_ascii=False, sort_keys=True):
                 continue
-            o = json.loads(before[n["id"]])
+            o = json.loads(before[n["id"]]); nn = json.loads(json.dumps(n, ensure_ascii=False))
             for k in ("stage", "characterLayers"):
-                o["data"].pop(k, None); nn = json.loads(json.dumps(n)); nn["data"].pop(k, None)
-                assert json.dumps(o, sort_keys=True) == json.dumps(nn, sort_keys=True), f"{n['id']} 有 url 以外的改動"
+                o["data"].pop(k, None); nn["data"].pop(k, None)
+            assert json.dumps(o, sort_keys=True) == json.dumps(nn, sort_keys=True), f"{n['id']} 有 url 以外的改動"
+            # 而且 stage 裡除了 url 也不可以動
+            oa = json.loads(before[n["id"]])["data"]; na = n["data"]
+            strip = lambda s: json.dumps([{k: v for k, v in x.items() if k != "url"} for x in (s or {}).get("actors", [])], sort_keys=True)
+            assert strip(oa.get("stage")) == strip(na.get("stage")), f"{n['id']} 舞台除了 url 還有別的改動"
     for attempt in range(5):
         try:
             request(f"/boards/{BOARD_ID}", "PUT", {"name": board.get("name", BOARD_ID), "kind": board.get("kind", "story"), "mode": board.get("mode", "story"),
