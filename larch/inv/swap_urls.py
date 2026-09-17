@@ -17,11 +17,48 @@ from patch_live import request  # noqa: E402
 BOARDS = ("board-credits", "board-main")
 
 
+def swap_project(table, dry):
+    """版子以外的兩處：settings（背包插件的按鈕圖、收藏格）與 variables（道具圖預設值）。
+    走 PUT /projects/:id 整包（先 GET、只改這兩段、其餘原樣放回），推後對卡數、邊數、素材數、版子逐位元。"""
+    proj, etag = request("")
+    proj = proj.get("project", proj)
+    raw = json.dumps({"settings": proj["settings"], "variables": proj["variables"]}, ensure_ascii=False)
+    hits = {k: raw.count(k) for k in table if k in raw}
+    print(f"專案層（settings／variables）：{sum(hits.values())} 處，{len(hits)} 個網址")
+    if dry or not hits:
+        return
+    (HERE / "backups" / f"project-{datetime.datetime.now():%Y%m%d-%H%M}-before-swap.json").write_text(json.dumps(proj, ensure_ascii=False), encoding="utf-8")
+    for k, v in table.items():
+        raw = raw.replace(k, v)
+    body = dict(proj); body.update(json.loads(raw))
+    for attempt in range(5):
+        try:
+            request("", "PUT", {"project": body}, etag); break
+        except urllib.error.HTTPError as e:
+            if e.code != 409 or attempt == 4:
+                raise
+            print(f"  409，重讀再送（第 {attempt + 1} 次）")
+            proj, etag = request(""); proj = proj.get("project", proj)
+            raw = json.dumps({"settings": proj["settings"], "variables": proj["variables"]}, ensure_ascii=False)
+            for k, v in table.items():
+                raw = raw.replace(k, v)
+            body = dict(proj); body.update(json.loads(raw))
+    back, _ = request(""); back = back.get("project", back)
+    same = (len(back["nodes"]), len(back["edges"]), len(back["media"])) == (len(proj["nodes"]), len(proj["edges"]), len(proj["media"]))
+    boards_same = back["boards"] == proj["boards"]
+    left = sum(json.dumps({"settings": back["settings"], "variables": back["variables"]}, ensure_ascii=False).count(k) for k in table)
+    print(f"  回讀：卡 {len(back['nodes'])}　邊 {len(back['edges'])}　素材 {len(back['media'])}　版子逐位元{'相同' if boards_same else '★ 不同'}　舊網址殘留 {left}")
+    assert same and boards_same and not left
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("map"); ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--project", action="store_true", help="也換 settings／variables（PUT /projects 整包）")
     a = ap.parse_args()
     table = json.loads(pathlib.Path(a.map).read_text(encoding="utf-8"))
+    if a.project:
+        swap_project(table, a.dry)
     for bid in BOARDS:
         payload, etag = request(f"/boards/{bid}")
         board = payload.get("board", payload)
