@@ -9,7 +9,10 @@
 - **本子**：就是她買的守則本周邊，`art/items/item-rulebook.png`——厚的、磨舊的深色皮面書，書脊有凸稜、書口泛黃。
   每張都把這張圖當參考傳進去，不要讓模型自己想一本。
 - **錄音機**（錄音那五場）：`art/items/item-recorder.png`——深灰直立長方形口袋錄音機，上半是圓孔喇叭網、下半是透明卡帶窗，
-  頂端一排按鍵、最左那顆是紅色錄音鍵。放在櫃台上她這一側，卡帶窗朝觀者，紅色錄音燈亮著。同樣每張都傳圖。
+  頂端一排按鍵**剛好四顆：一紅（最左）三黑**（提示詞要寫 EXACTLY FOUR，模型會自己多畫一顆；2026-09-17 材料行那張畫成五顆，他抓到的）。
+  **立著放**在櫃台上她這一側（跟道具圖一樣直立，不是平躺），正面朝觀者、
+  按鍵在正上方那條邊、紅色錄音燈亮著。同樣每張都傳圖。（2026-09-17 第一次寫「lying on the counter」，四張變成平躺、按鍵跑到側邊，
+  只有諾亞那張自己立起來——他抓到的，之後一律寫 STANDS UPRIGHT。）
 
 ## 一之二、場景裡固定的東西（畫錯過的）
 
@@ -18,9 +21,13 @@
 
 ## 一之三、既有 CG 還沒統一的地方（2026-09-17 對過六張的手部）
 
-- 指甲：`golden-hat`、`promise`、`this-episode` 沒塗；`bambi-wall-v3`、`lost-notebook` 是紫色指甲油。標準是**不塗**，那兩張之後要重修。
+- 指甲：`golden-hat`、`lost-notebook`、`this-episode` 沒塗；`bambi-wall-v3`、`promise-v2` 是紫色指甲油。標準是**不塗**，那兩張之後要重修。
+  他說 `golden-hat-v2`、`lost-notebook-v1` 的手看起來最正常——重畫時拿這兩張當手部的畫風錨；`promise-v2`、`seventh-line-v1` 的袖口也可以。
+  不行的是 `this-episode-v2`（袖口抄了格莉奇的）。
 - 本子：`two-minutes`、`this-episode` 畫成線圈筆記本，跟守則本（皮面、凸稜書脊）不是同一本。標準是守則本。
-- 袖子：`promise` 是米白毛衣，其他深色。**不用統一**（衣服會換）。
+- 袖子：`promise` 是米白毛衣，其他深色。**不用統一**（衣服會換），但 `this-episode-v2` 的袖口跟手機畫面裡格莉奇的連帽衫袖口一模一樣——
+  是模型把畫面裡那個人的衣服抄到主角手上（2026-09-17 他抓到）。畫面裡有格莉奇時要明寫「主角的袖子跟她的不同」。
+  這張還有線圈筆記本要換成守則本，重畫時一起處理。
 
 ## 二、空間一定要有俯視平面圖（`layout-guides/*.svg` → png）
 
@@ -38,6 +45,17 @@ Image 3 is the EXACT recorder …（把外觀寫出來）… Image 4 is the EXAC
 Female protagonist appears ONLY as her two hands and this notebook … short clean UNPAINTED nails, no rings …
 CAMERA AND PROTAGONIST are on the customer side facing inward; the entrance is BEHIND THE CAMERA and must not appear.
 <對方> sits/stands behind a continuous solid <隔板>. Directly behind <對方> show only <那一側的東西>. Absolutely no <入口／街／天空／窗> anywhere.」
+
+## 三之二、道具要放在看得見的水平檯面上
+
+高櫃台的圖（材料行那種）畫面下半常常整片是櫃台的**垂直正面**，道具「放在櫃台上」就會被畫在那面板子上、看起來懸空
+（2026-09-17 材料行那張，他抓到的）。提示詞要明寫：畫面下方是櫃台在玩家這一側的**水平檯面**、看得到遠端的邊、
+錄音機與本子放在檯面上、有影子貼著木頭。俯視圖也要標「錄音機與本子在玩家這一側的檯面」。
+
+## 三之三、同一張圖不要一改再改
+
+image-edit 每改一次就多一代損失，斑比那張改到第四版整張出現波紋（2026-09-17 他抓到）。一張圖最多編輯兩次；
+要改的東西超過兩件，就**從立繪＋俯視圖＋道具圖重生一張全新的**，把所有要求一次寫進提示詞，不要拿舊圖當底再改。
 
 ## 四、驗收（每張都要看）
 
