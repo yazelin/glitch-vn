@@ -43,14 +43,14 @@
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.34)}
-html{color-scheme:dark}   /* 預設暗的;玩家按了那顆鈕才換。不宣告的話捲軸這類 UA 自己畫的東西會跟著玩家的系統走 */
+html{color-scheme:normal}   /* 2026-09-17 改 normal：dark 會讓透明 iframe 的根畫布被補成純黑，body 的半透明黑就透不出場景。捲軸樣式在上面自己畫了，不靠它 */
 html,body{margin:0;height:100%;overflow:hidden;color:var(--text);
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
 html{background:transparent}
 body{background:
   radial-gradient(900px 620px at 50% 4%,rgba(183,139,255,.13),transparent 62%),
   radial-gradient(760px 520px at 12% 106%,rgba(37,194,232,.1),transparent 60%),
-  #04080c;
+  rgba(4,8,12,.72);   /* 半透明壓黑：後面的場景透得出來，光暈疊在上面（2026-09-17 作者要的） */
   display:flex;align-items:center;justify-content:center;padding:18px}
 /* Larch 給 miniGame 的是整個舞台，所以手機機身必須屬於卡片本體。
    2026-09-12 整合 glitch-live 時曾只複製 card.html，把這一層留在不進遊戲的預覽殼，
@@ -672,7 +672,7 @@ function flipTheme(btn, ev){
 function applyTheme(){
   screen.classList.toggle('t-light', theme==='light');
   document.body.classList.toggle('t-light', theme==='light');   // 背光與螢幕光跟著主題
-  document.documentElement.style.colorScheme = MODE==='banner' ? 'normal' : (theme==='light' ? 'light' : 'dark');
+  document.documentElement.style.colorScheme = 'normal';   // 全頁也要 normal，根畫布才不會被補黑（見上面 html{color-scheme}）
   // 主題只屬於手機螢幕。寫 body 的 inline background 會蓋過
   // body.banner 的 transparent，讓兩秒通知變成滿版黑畫面。
 }

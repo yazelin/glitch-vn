@@ -182,6 +182,9 @@ LINECSS_NEW = ("  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n"
 # 手機卡（inv-phone、phone-bambi、phone-pr；larch/cards/phone.html 灌的）：主題換分頁不洗掉、背光與螢幕光、三句文案。
 # 2026-09-17 作者抓到／要求。改了 phone.html 要一起改這裡。
 PHONE_PAIRS = [
+    ('html{color-scheme:dark}   /* 預設暗的;玩家按了那顆鈕才換。不宣告的話捲軸這類 UA 自己畫的東西會跟著玩家的系統走 */', 'html{color-scheme:normal}   /* 2026-09-17 改 normal：dark 會讓透明 iframe 的根畫布被補成純黑，body 的半透明黑就透不出場景。捲軸樣式在上面自己畫了，不靠它 */'),
+    ('  radial-gradient(760px 520px at 12% 106%,rgba(37,194,232,.1),transparent 60%),\n  #04080c;', '  radial-gradient(760px 520px at 12% 106%,rgba(37,194,232,.1),transparent 60%),\n  rgba(4,8,12,.72);   /* 半透明壓黑：後面的場景透得出來，光暈疊在上面（2026-09-17 作者要的） */'),
+    ("  document.documentElement.style.colorScheme = MODE==='banner' ? 'normal' : (theme==='light' ? 'light' : 'dark');", "  document.documentElement.style.colorScheme = 'normal';   // 全頁也要 normal，根畫布才不會被補黑（見上面 html{color-scheme}）"),
     ("    screen.className=''; page.textContent='';", "    screen.className=''; if(theme==='light') screen.classList.add('t-light'); page.textContent='';"),
     ("  screen.className='page-on off tab-'+p;", "  screen.className='page-on off tab-'+p; if(theme==='light') screen.classList.add('t-light');"),
     ("  screen.classList.toggle('t-light', theme==='light');", "  screen.classList.toggle('t-light', theme==='light');\n  document.body.classList.toggle('t-light', theme==='light');"),
