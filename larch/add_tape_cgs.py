@@ -22,8 +22,10 @@ NEW = [
     # 換圖要用新檔名：媒體庫照檔名快取，同名會拿到舊圖。v2＝帶俯視圖與固定道具圖重畫（art/inv-cg/CG畫法.md）
     # v3／v4：錄音機立起來、按鍵在頂邊（第二版寫「lying」被畫成平躺）
     {"key": "tape-noah",  "title": "頂樓・錄音機開著",   "label": "問諾亞那個穿西裝的", "file": "cg-tape-noah-v2.webp"},
-    {"key": "tape-bambi", "title": "工作室・她一個人住嗎", "label": "問斑比她一個人住嗎", "file": "cg-tape-bambi-v4.webp"},
-    {"key": "tape-clerk", "title": "便利商店・穿西裝的那個", "label": "問店員那個穿西裝的", "file": "cg-tape-clerk-v3.webp"},
+    # bambi v5：v4 改太多次出現波紋，改從立繪＋俯視圖＋道具圖全新生成
+    {"key": "tape-bambi", "title": "工作室・她一個人住嗎", "label": "問斑比她一個人住嗎", "file": "cg-tape-bambi-v5.webp"},
+    # clerk v4：背景照 bg-store-night（台灣 7-11 亮色調），v3 被畫成灰暗倉庫
+    {"key": "tape-clerk", "title": "便利商店・穿西裝的那個", "label": "問店員那個穿西裝的", "file": "cg-tape-clerk-v4.webp"},
 ]
 # 既有 CG 換圖（標題不變，收藏格不變，只換 url）
 REPLACE = [

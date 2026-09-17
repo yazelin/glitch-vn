@@ -19,6 +19,11 @@
 - **斑比工作室那面牆＝兩年份格莉奇的直播截圖**：同一個人（格莉奇，銀白短髮、青色眼睛、深色連帽衫）幾十張小圖釘滿整面牆，
   螢幕上也是她。參考 `cg-story-bambi-wall-v3.webp` 的牆與 `art/sprite-glitch.png`。畫成風景照或城市照就是錯的（2026-09-17 他抓到）。
 
+- **背景要跟遊戲裡的場景圖同一間店**：每個地點都有 `art/bg-investigation/bg-<地點>-<day|evening|night>.png`，
+  照那場的時段把那張傳進去當背景參考，明寫「色調與乾淨度照這張」。便利商店是台灣 7-11 那種：白牆一條綠條、日光燈、
+  磨石子地、藍白冷藏櫃、咖啡機、包子蒸櫃、關東煮；深夜店內也是全亮。模型自己畫會變成灰暗倉庫（2026-09-17 店員第三版，他抓到）。
+  只有錄音機／守則本那種道具是用道具圖，背景不要靠模型自己想。
+
 ## 一之三、既有 CG 還沒統一的地方（2026-09-17 對過六張的手部）
 
 - 指甲：`golden-hat`、`lost-notebook`、`this-episode` 沒塗；`bambi-wall-v3`、`promise-v2` 是紫色指甲油。標準是**不塗**，那兩張之後要重修。
@@ -38,7 +43,8 @@
 
 ## 三、提示詞骨架（Codex image-edit，`codex-imagegen.sh <prompt> <out> <參考圖…>`）
 
-參考圖順序固定：**1 前一版或畫風錨（既有 CG）、2 俯視圖、3 錄音機、4 守則本**（要換人物立繪／背景再往後加）。
+參考圖順序固定：**1 前一版或畫風錨（既有 CG）、2 俯視圖、3 錄音機、4 守則本、5 該時段的場景背景圖**（要換人物立繪再往後加）。
+沒有立繪的人（店員、材料行老闆、保全）就拿他既有的 CG 當人物錨，提示詞要說「只取人物，不要抄它的背景」。
 提示詞照 `rebuild-direction-manifest.json` 那幾條的寫法：
 「Edit reference image 1. Reference image 2 is a TOP-DOWN FLOOR PLAN and must control spatial direction, not visual style.
 Image 3 is the EXACT recorder …（把外觀寫出來）… Image 4 is the EXACT notebook …
