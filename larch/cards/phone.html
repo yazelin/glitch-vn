@@ -268,6 +268,16 @@ body{background:
 /* ══ 橫幅模式 ══ */
 /* 底改成透明，畫面不壓暗（調查篇-手機.md 六）。miniGame 層在有的裝置畫不出透明，
    白掉就把下面那行換成 background:rgba(6,8,12,.35)。 */
+/* 背光與螢幕光（2026-09-17 作者要求，他之前做的手機都有）：#halo 是機身後面那團光，#screen 的 box-shadow 是螢幕本身溢出來的光。
+   跟著主題換色：深色紫青、淺色偏白。背景維持黑，光才漂亮（作者說的）。橫幅模式不畫。 */
+#halo{position:absolute;left:50%;top:50%;width:min(620px,130vw);height:min(1040px,130vh);transform:translate(-50%,-50%);
+  border-radius:50%;pointer-events:none;filter:blur(30px);animation:halo 7s ease-in-out infinite alternate;
+  background:radial-gradient(closest-side,rgba(183,139,255,.34),rgba(37,194,232,.18) 52%,transparent 100%);transition:background .35s}
+body.t-light #halo{background:radial-gradient(closest-side,rgba(226,236,255,.46),rgba(122,79,208,.20) 52%,transparent 100%)}
+@keyframes halo{from{opacity:.72}to{opacity:1}}
+#screen{box-shadow:0 0 36px rgba(183,139,255,.30),0 0 96px rgba(37,194,232,.18)}
+body.t-light #screen{box-shadow:0 0 36px rgba(214,228,255,.48),0 0 96px rgba(255,255,255,.2)}
+body.banner #halo{display:none}
 body.banner{background:transparent;display:block;padding:0}
 body.banner #phone{display:none}
 #strip{display:none;position:fixed;left:50%;top:18px;transform:translate(-50%,-140%);width:min(560px,92vw);
@@ -286,7 +296,7 @@ body.banner #strip{display:flex}
 
 <div id="strip"><div class="av" id="s-av"></div><div><div class="who" id="s-who"></div><div class="txt" id="s-txt"></div></div></div>
 
-<div id="phone"><div id="screen">
+<div id="halo"></div><div id="phone"><div id="screen">
   <video id="vid" playsinline muted loop preload="auto"></video>
   <img id="poster" alt="格莉奇在直播間裡向鏡頭揮手">
   <div class="scrim-t live-ui"></div><div class="scrim-b live-ui"></div>
@@ -354,7 +364,13 @@ body.banner #strip{display:flex}
 var MODE    = /*@@MODE@@*/'full';                  // 'full' | 'banner'
 var BANNER  = /*@@BANNER@@*/null;                  // {who, text}
 // 不等 larch:init 才透明：宿主送 init 前的那一幀也不可以把上一幕蓋成黑色。
-if(MODE==='banner') document.body.className='banner';
+if(MODE==='banner'){
+  // `color-scheme:dark` 會讓透明 iframe 的根畫布被瀏覽器補成黑色；
+  // 橫幅模式必須把根畫布切回 normal，才能透出 Larch 底下原本的場景。
+  document.documentElement.style.colorScheme='normal';
+  document.documentElement.style.background='transparent';
+  document.body.className='banner';
+}
 var AVATAR  = /*@@AVATAR@@*/'';
 var VIDEO   = /*@@VIDEO@@*/'';
 var COMPOSE = /*@@COMPOSE@@*/true;                 // 第五天的留言橋段做不做在卡片裡（見整合文件）
@@ -423,7 +439,7 @@ var POSTS_DEFAULT = [
    comments:[{id:'@Tower_Manager',text:'月底。'},{id:'@今天也在',text:'買了兩包。'},{id:'@早安人',text:'早安'}]},
   {day:2, text:'跟 @Null_0x99 的聯動排在下週。猜歌，不用兩個人講話。',
    comments:[{id:'@Null_0x99',text:'週四 21:00:00。'},{id:'@CatGrass_80',text:'她記得排程？'}]},
-  {day:3, text:'新的插畫。畫她的人說這一版嘴角對了。',
+  {day:3, text:'新的插畫。這一版嘴角對了。',
    comments:[{id:'@Bambi_Draft3',text:'第四十一版。'},{id:'@Tower_Manager',text:'辛苦。'}]},
   {day:4, text:'今晚也會開台。我會記得你們的。',
    comments:[{id:'@CatGrass_80',text:'在。',tm:'02:40'},{id:'@早安人',text:'早安'}]},
@@ -655,7 +671,8 @@ function flipTheme(btn, ev){
 }
 function applyTheme(){
   screen.classList.toggle('t-light', theme==='light');
-  document.documentElement.style.colorScheme = theme==='light' ? 'light' : 'dark';
+  document.body.classList.toggle('t-light', theme==='light');   // 背光與螢幕光跟著主題
+  document.documentElement.style.colorScheme = MODE==='banner' ? 'normal' : (theme==='light' ? 'light' : 'dark');
   // 主題只屬於手機螢幕。寫 body 的 inline background 會蓋過
   // body.banner 的 transparent，讓兩秒通知變成滿版黑畫面。
 }
@@ -680,7 +697,7 @@ function drawMsg(box){
     r.appendChild(av); r.appendChild(bd); box.appendChild(r);
   });
   var rp=el('div'); rp.id='reply';
-  rp.appendChild(el('span',null,'她不回。')); rp.appendChild(el('i'));
+  rp.appendChild(el('span',null,'簡訊與通知。這裡只收。')); rp.appendChild(el('i'));
   box.appendChild(rp);
 }
 function comment(c){
@@ -695,7 +712,7 @@ function drawFeed(box){
   var p=el('div','prof'), av=el('div','av'); glitchAvatar(av); p.appendChild(av);
   var t=el('div');
   t.appendChild(el('b',null,'格莉奇'));
-  t.appendChild(el('small',null,'官方帳號・每天開台'));
+  t.appendChild(el('small',null,'官方帳號・不定時開台'));
   t.appendChild(el('div','cnt','追蹤 1,204,880　貼文 '+POSTS.filter(function(x){return x.day<=day;}).length));
   p.appendChild(t); box.appendChild(p);
 
@@ -743,11 +760,11 @@ function show(p){
   if(p==='live' && onAir()){ markSeen('phone_live_seen', day); $('#dot-live').hidden=true; }
 
   if(p==='live' && onAir()){
-    screen.className=''; page.textContent='';
+    screen.className=''; if(theme==='light') screen.classList.add('t-light'); page.textContent='';
     startLive(); return;
   }
   try{ vid.pause(); }catch(e){}
-  screen.className='page-on off tab-'+p;
+  screen.className='page-on off tab-'+p; if(theme==='light') screen.classList.add('t-light');   // 換分頁不可以把主題洗掉（2026-09-17 作者抓到）
   page.textContent=''; page.scrollTop=0;
   page.appendChild(statusBar());
   PAGES[p](page);

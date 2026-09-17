@@ -179,6 +179,29 @@ LINECSS_NEW = ("  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n"
                ".map #blocks line{stroke:rgba(255,255,255,.38);stroke-width:1.2;vector-effect:non-scaling-stroke;stroke-linecap:round}\n/* 她的便條")
 
 
+# 手機卡（inv-phone、phone-bambi、phone-pr；larch/cards/phone.html 灌的）：主題換分頁不洗掉、背光與螢幕光、三句文案。
+# 2026-09-17 作者抓到／要求。改了 phone.html 要一起改這裡。
+PHONE_PAIRS = [
+    ("    screen.className=''; page.textContent='';", "    screen.className=''; if(theme==='light') screen.classList.add('t-light'); page.textContent='';"),
+    ("  screen.className='page-on off tab-'+p;", "  screen.className='page-on off tab-'+p; if(theme==='light') screen.classList.add('t-light');"),
+    ("  screen.classList.toggle('t-light', theme==='light');", "  screen.classList.toggle('t-light', theme==='light');\n  document.body.classList.toggle('t-light', theme==='light');"),
+    ("rp.appendChild(el('span',null,'她不回。'));", "rp.appendChild(el('span',null,'簡訊與通知。這裡只收。'));"),
+    ("'官方帳號・每天開台'", "'官方帳號・不定時開台'"),
+    ("text:'新的插畫。畫她的人說這一版嘴角對了。'", "text:'新的插畫。這一版嘴角對了。'"),
+    ('<div id="phone"><div id="screen">', '<div id="halo"></div><div id="phone"><div id="screen">'),
+    ('body.banner{background:transparent;display:block;padding:0}', '/* 背光與螢幕光（2026-09-17 作者要求，他之前做的手機都有）：#halo 是機身後面那團光，#screen 的 box-shadow 是螢幕本身溢出來的光。\n   跟著主題換色：深色紫青、淺色偏白。背景維持黑，光才漂亮（作者說的）。橫幅模式不畫。 */\n#halo{position:absolute;left:50%;top:50%;width:min(620px,130vw);height:min(1040px,130vh);transform:translate(-50%,-50%);\n  border-radius:50%;pointer-events:none;filter:blur(30px);animation:halo 7s ease-in-out infinite alternate;\n  background:radial-gradient(closest-side,rgba(183,139,255,.34),rgba(37,194,232,.18) 52%,transparent 100%);transition:background .35s}\nbody.t-light #halo{background:radial-gradient(closest-side,rgba(226,236,255,.46),rgba(122,79,208,.20) 52%,transparent 100%)}\n@keyframes halo{from{opacity:.72}to{opacity:1}}\n#screen{box-shadow:0 0 36px rgba(183,139,255,.30),0 0 96px rgba(37,194,232,.18)}\nbody.t-light #screen{box-shadow:0 0 36px rgba(214,228,255,.48),0 0 96px rgba(255,255,255,.2)}\nbody.banner #halo{display:none}\nbody.banner{background:transparent;display:block;padding:0}'),
+]
+
+
+def swap_phone_js(html, stats):
+    for old, new in PHONE_PAIRS:
+        if old in html:
+            html = html.replace(old, new, 1); stats["phone"] += 1
+        elif new not in html:
+            print(f"  ★ 手機卡裡找不到這一段的新舊版本（{old[:30]}…），去對 phone.html")
+    return html
+
+
 def swap_board_js(html, stats):
     for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail"),
                            (VIS_OLD_A, VIS_NEW_A, "rail"), (VIS_OLD_B, VIS_NEW_B, "rail"),
@@ -221,6 +244,8 @@ def patch(board, stats):
         d = n["data"]
         if d.get("type") == "miniGame" and "function walkMap()" in (d.get("miniGameHtml") or ""):
             d["miniGameHtml"] = swap_board_js(d["miniGameHtml"], stats)
+        if d.get("type") == "miniGame" and "function flipTheme(" in (d.get("miniGameHtml") or ""):
+            d["miniGameHtml"] = swap_phone_js(d["miniGameHtml"], stats)
         # 六、謝幕字卷的副標：2026-09-09 拉成十四天，字卷那張卡沒跟上（字是隔開排的，grep「十二天」找不到）
         for k in ("miniGameHtml", "pluginHtml", "html"):
             if isinstance(d.get(k), str) and "十 二 天" in d[k]:
@@ -281,9 +306,9 @@ def main():
             payload, etag = request(f"/boards/{bid}")
             board = payload.get("board", payload)
         before = (len(board["nodes"]), len(board["edges"]))
-        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0, "names": 0, "studio": 0, "stage": 0}
+        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0, "names": 0, "studio": 0, "stage": 0, "phone": 0}
         patch(board, stats)
-        print(f"{bid}：講者名 {stats['speaker']} 處、旁白名字 {stats['names']} 處、工作室背景 {stats['studio']} 處、結局清台 {stats['stage']} 張、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
+        print(f"{bid}：講者名 {stats['speaker']} 處、旁白名字 {stats['names']} 處、工作室背景 {stats['studio']} 處、結局清台 {stats['stage']} 張、手機卡 {stats['phone']} 處、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
               f"名字表 {stats['table']} 張卡、調查板軌道段落 {stats['rail']}、刪除線 {stats['strike']} 張"
               f"　（卡 {before[0]}、邊 {before[1]}，不動）")
         if a.dry or not any(stats.values()):
