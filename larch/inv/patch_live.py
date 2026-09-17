@@ -22,6 +22,17 @@ import push as PUSH          # DISPLAY／DISPLAY_UI 只在那裡寫一次
 import novelkit as NK        # cdn()
 import names as NAMES        # 旁白不講名字
 
+_R2 = "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/"
+_MAIN = _R2 + "project-bec1644c-0dfe-4447-86c0-0c592e2f939f/"      # 正篇專案
+_INV = _R2 + "project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/"       # 調查篇專案
+# 深夜背景掛到正篇專案的圖（一樓／頂樓／斑比工作室；build.py 的 BG 表深夜欄寫了本機沒有的名字，
+# 查找落到正篇）→ 換成調查篇自己的傍晚那張。2026-09-17 他在調查板與斑比深夜對話抓到。
+NIGHT_FIX = {
+    _MAIN + "1787369280354_bg-apartment-hall.jpg": _INV + "1789173031125_bg-lobby-evening.png",
+    _MAIN + "1787369384500_bg-noah-shop.jpg":      _INV + "1789173061225_bg-roof-evening.png",
+    _MAIN + "1787369297485_bg-bambi-studio.jpg":   _INV + "1789173211426_bg-studio-evening.png",
+}
+
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 STATE = json.loads((HERE / "state.json").read_text(encoding="utf-8"))
 BASE = f"https://larch.ink/api/agent/projects/{STATE['projectId']}"
@@ -116,6 +127,11 @@ def patch(board, stats):
                 d[k] = d[k].replace("調 查 篇　・　十 二 天", "調 查 篇　・　十 四 天"); stats["strike"] += 1
         if d.get("type") == "dialogue" and "~~" in (d.get("text") or ""):
             d["text"] = strike(d["text"]); stats["strike"] += 1
+        # 八、斑比工作室深夜掛到正篇的直播間背景（2026-09-17 他抓到）：場景卡與調查板 HTML 裡的網址一起換
+        for k in ("background", "backgroundNight", "miniGameHtml", "pluginHtml", "html"):
+            for old, new in NIGHT_FIX.items():
+                if isinstance(d.get(k), str) and old in d[k]:
+                    d[k] = d[k].replace(old, new); stats["studio"] += 1
         # 七、旁白正文與筆記標籤裡的名字（names.py），要排在重查配音之前：代號照字算
         if d.get("type") == "dialogue":
             stats["names"] += NAMES.hide_names(d)
@@ -160,9 +176,9 @@ def main():
             payload, etag = request(f"/boards/{bid}")
             board = payload.get("board", payload)
         before = (len(board["nodes"]), len(board["edges"]))
-        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0, "names": 0}
+        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0, "names": 0, "studio": 0}
         patch(board, stats)
-        print(f"{bid}：講者名 {stats['speaker']} 處、旁白名字 {stats['names']} 處、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
+        print(f"{bid}：講者名 {stats['speaker']} 處、旁白名字 {stats['names']} 處、工作室背景 {stats['studio']} 處、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
               f"名字表 {stats['table']} 張卡、調查板軌道段落 {stats['rail']}、刪除線 {stats['strike']} 張"
               f"　（卡 {before[0]}、邊 {before[1]}，不動）")
         if a.dry or not any(stats.values()):

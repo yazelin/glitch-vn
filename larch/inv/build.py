@@ -40,15 +40,17 @@ ROUTE = ROOT / "design/調查篇-通關路線.txt"
 # 場景代號→背景。白天／深夜兩套（色溫規格見 design/調查篇-場景.md）。
 # 值是 art 檔名的主幹，推送層再換成 Larch 的 asset URL。
 BG = {
-    "lobby":   ("bg-lobby-day",   "bg-apartment-hall"),
-    "roof":    ("bg-roof-day",    "bg-noah-shop"),
+    # 深夜欄**不可以寫正篇的檔名**（bg-apartment-hall、bg-noah-shop、bg-bambi-studio）：本機沒有，
+    # 查找會落到正篇專案的圖，跟白天那張不是同一個地方（2026-09-17 他在調查板抓到）。先沿用傍晚那張。
+    "lobby":   ("bg-lobby-day",   "bg-lobby-evening"),
+    "roof":    ("bg-roof-day",    "bg-roof-evening"),
     "street":  ("bg-street-day2", "bg-street-night"),
     # **白天那個不可以叫 bg-studio-day，會撞正篇的 assets.json。** 撞名的話
     # push.py 的查找順序會在第二步就中，本機那張斑比工作室永遠上不去，
     # 玩家看到的是正篇那張直播間（2026-09-12 使用者實玩抓到）。
     # 晚上那張沒有這個問題，它是照地點代號組的（第 520 行 f"@@bg-{loc}-evening"），
     # 所以檔名維持 bg-studio-evening，不要跟著改。
-    "studio":  ("bg-bambi-studio-day",  "bg-bambi-studio"),
+    "studio":  ("bg-bambi-studio-day",  "bg-studio-evening"),   # 同上，不可寫 bg-bambi-studio
     "booth":   ("bg-booth-hall",  "bg-booth-hall"),   # 十一樓走廊，錄音間在走廊底那扇開著的門裡（2026-09-08 生的）
     "tower14": ("bg-tower14-day", "bg-tower14-night"),
     "store":   ("bg-store-day",   "bg-store-night"),

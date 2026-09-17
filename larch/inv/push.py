@@ -60,8 +60,8 @@ DESC = ("AI 主播格莉奇說她只有 4KB 的記憶。全世界當成哏，只
         "同一家店去五次，店員就不再說歡迎光臨。")
 
 # 場景代號 → (白天, 夜晚) 背景，跟 build.py 的 BG 一致；只給段落中途換場景用
-BG_MAP = {"lobby": ("bg-lobby-day", "bg-apartment-hall"), "roof": ("bg-roof-day", "bg-noah-shop"),
-          "street": ("bg-street-day2", "bg-street-night"), "studio": ("bg-bambi-studio-day", "bg-bambi-studio"),
+BG_MAP = {"lobby": ("bg-lobby-day", "bg-lobby-evening"), "roof": ("bg-roof-day", "bg-roof-evening"),   # 深夜不可寫正篇的檔名（見 build.py BG）
+          "street": ("bg-street-day2", "bg-street-night"), "studio": ("bg-bambi-studio-day", "bg-studio-evening"),   # 深夜不可寫 bg-bambi-studio（那是正篇的）
           "booth": ("bg-booth-hall", "bg-booth-hall"), "tower14": ("bg-tower14-day", "bg-tower14-night"),
           "store": ("bg-store-day", "bg-store-night"), "parts": ("bg-parts-day", "bg-parts"),
           "busstop": ("bg-busstop-day", "bg-busstop"), "metro": ("bg-metro-day", "bg-metro"),
