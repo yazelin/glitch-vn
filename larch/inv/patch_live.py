@@ -189,6 +189,9 @@ LINECSS_NEW = ("  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n"
 # 手機卡（inv-phone、phone-bambi、phone-pr；larch/cards/phone.html 灌的）：主題換分頁不洗掉、背光與螢幕光、三句文案。
 # 2026-09-17 作者抓到／要求。改了 phone.html 要一起改這裡。
 PHONE_PAIRS = [
+    ("var STEPS = [[0,'連線中⋯⋯'],[420,'取得串流網址⋯⋯'],[980,'緩衝中 720p'],[1620,'進入聊天室⋯⋯'],[2180,'開始播放']];", "var STEPS = [[0,'連線中⋯⋯'],[180,'取得串流網址⋯⋯'],[400,'緩衝中 720p'],[640,'進入聊天室⋯⋯'],[860,'開始播放']];   // 假的載入一秒內跑完（2026-09-18 作者：太久）"),   # 直播假載入 2.45 秒 → 1 秒
+    ('  later(goLive, 2450);', '  later(goLive, 1000);'),
+    ("$('#lbar i').style.transition='width .5s ease';", "$('#lbar i').style.transition='width .22s ease';"),
     ('https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-bec1644c-0dfe-4447-86c0-0c592e2f939f/1787365134681_avatar-glitch.png', 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1789664271312_avatar-glitch-128.webp'),   # 格莉奇頭像 512px PNG 290 KB → 128px webp 8 KB
     ('https://yazelin.github.io/glitch-live/assets/live-loop.mp4', 'https://cdn.jsdelivr.net/gh/yazelin/glitch-live@main/assets/live-loop.mp4'),   # 直播影片改走 jsDelivr
     ("  if(!booted){ booted=true; show(phoneLog().length ? 'msg' : 'feed'); }", "  if(!booted){ booted=true; if(!vid.getAttribute('src')) vid.src=VIDEO; show(phoneLog().length ? 'msg' : 'feed'); }   // 一打開就預載直播影片，不等切到直播分頁（2026-09-18）"),
