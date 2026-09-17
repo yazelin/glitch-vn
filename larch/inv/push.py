@@ -398,6 +398,15 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     # 調查板的軟木貼圖（art/board-cork.webp，2026-09-17 作者給的細紋軟木參考）；沒有這個檔就留空，卡片退回程式畫的顆粒
     cork_url = local_asset("art/board-cork.webp", state, pid, dry, "bg") if (ROOT / "art/board-cork.webp").exists() else ""
     board_html = board_html.replace("/*@@CORK@@*/''", json.dumps(cork_url))
+    # 拍立得縮圖 atlas（tools/make_board_atlas.py 產 art/board-atlas.webp＋json）；沒有就留 null，卡片退回每格載整張圖
+    atlas_json = ROOT / "art/board-atlas.json"
+    if atlas_json.exists() and (ROOT / "art/board-atlas.webp").exists():
+        atlas = json.loads(atlas_json.read_text(encoding="utf-8"))
+        atlas["url"] = local_asset("art/board-atlas.webp", state, pid, dry, "bg")
+        board_html = board_html.replace("/*@@ATLAS@@*/null", json.dumps(atlas, ensure_ascii=False))
+    menu_html = (CARDS / "menu.html").read_text(encoding="utf-8")
+    notes_html = (CARDS / "notes.html").read_text(encoding="utf-8").replace("/*@@TODO@@*/", todo_js)
+    missing_bg = []
     board_id = None
     menus = []
     for n in nodes:

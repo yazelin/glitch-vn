@@ -73,6 +73,7 @@ h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMi
    preserveAspectRatio 是 none，所以線寬要用 non-scaling-stroke，不然直橫粗細不一樣。 */
 .map #blocks rect{fill:rgba(255,255,255,.028);stroke:rgba(255,255,255,.34);stroke-width:1.2;
   vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.map #blocks line{stroke:rgba(255,255,255,.38);stroke-width:1.2;vector-effect:non-scaling-stroke;stroke-linecap:round}
 /* 她的便條：板子左上角一張大的，寫明天要做的事 */
 .todo{position:absolute;left:1.5%;top:2%;transform:rotate(-1.5deg);width:13.5em;background:linear-gradient(180deg,#f2efe6,#e6e1d3);
   color:var(--ink);padding:.7em .8em .8em;border-radius:2px;box-shadow:0 6px 14px rgba(0,0,0,.45);z-index:1;pointer-events:none}
@@ -161,6 +162,9 @@ if(typeof todoLines!=='function'){ window.todoLines=function(){ return []; }; }
 var SLOTS=['上午','下午','晚上','深夜'];
 // 各地點的照片（日版、夜版），推送層注入；本檔獨立打開時是空的，拍立得會是灰的
 var PHOTOS = /*@@PHOTOS@@*/{};
+// 拍立得縮圖的 atlas（tools/make_board_atlas.py）：{url, cols, rows, map:{地點:{day:[col,row],…}}}。
+// 沒有的話退回 PHOTOS（每格載整張場景圖，慢）。2026-09-17 作者要求。
+var ATLAS = /*@@ATLAS@@*/null;
 var DISPLAY = /*@@DISPLAY@@*/{};   // 玩家看得到的人名（鐵塔→經紀人），變數裡仍是原名
 function show(n){ var d=DISPLAY[n]; if(!d) return n; if(typeof d==='string') return d; return (values[d.until]===true||values[d.until]==='true') ? n : d.name; }
 // 她把兩件事接起來的時候才拉線：[變數, 從, 到]
@@ -354,11 +358,16 @@ function drawBlocks(){
   for(var i=0;i<xs.length-1;i++) for(var j=0;j<ys.length-1;j++){
     var x0=xs[i]+(i?LANE:0), x1=xs[i+1]-(i+1<xs.length-1?LANE:0);
     var y0=ys[j]+(j?LANE:0), y1=ys[j+1]-(j+1<ys.length-1?LANE:0);
-    var r=document.createElementNS(NS,'rect');
-    r.setAttribute('x',x0); r.setAttribute('y',y0);
-    r.setAttribute('width',(x1-x0).toFixed(2)); r.setAttribute('height',(y1-y0).toFixed(2));
-    r.setAttribute('rx','0.6');
-    g.appendChild(r);
+    // 2026-09-17 作者要求：不畫圓角矩形（像網頁 UI 的框），改成四條直線在角上交叉、各自伸出去一點，
+    // 像玩家自己用線拉出來的區域（#）。線頭的位移用固定表，每次開板一樣。
+    var ext=1.4, k=(i*3+j)*4, JIT=[0.18,-0.22,0.12,-0.15,0.2,-0.1,0.14,-0.2,0.1,-0.18,0.16,-0.12,0.2,-0.14,0.11,-0.19,0.13,-0.21,0.17,-0.13,0.1,-0.16,0.19,-0.11];
+    var L=[[x0-ext,y0,x1+ext,y0],[x0-ext,y1,x1+ext,y1],[x0,y0-ext,x0,y1+ext],[x1,y0-ext,x1,y1+ext]];
+    for(var q=0;q<4;q++){
+      var ln=document.createElementNS(NS,'line'), jt=JIT[(k+q)%JIT.length];
+      ln.setAttribute('x1',(L[q][0]+(q>1?jt:0)).toFixed(2)); ln.setAttribute('y1',(L[q][1]+(q<2?jt:0)).toFixed(2));
+      ln.setAttribute('x2',(L[q][2]+(q>1?-jt:0)).toFixed(2)); ln.setAttribute('y2',(L[q][3]+(q<2?-jt:0)).toFixed(2));
+      g.appendChild(ln);
+    }
   }
 }
 function metKey(p){ return 'met_'+(p==='老闆'?'材料行老闆':p); }
@@ -545,10 +554,19 @@ function start(){
     b.style.setProperty('--rot', ((i*7)%9-4)*0.8+'deg');
     var n=document.createElement('span'); n.className='name'; n.textContent=nameFor(s,open);
     var w=document.createElement('span'); w.className='who';
-    if(been && PHOTOS[s.id]){
+    if(been && ((ATLAS&&ATLAS.map[s.id])||PHOTOS[s.id])){
       var ph=document.createElement('span'); ph.className='photo';
-      var url=PHOTOS[s.id][slot===3?'night':slot===2?'evening':'day']||PHOTOS[s.id].day||PHOTOS[s.id].night;
-      if(url) ph.style.backgroundImage='url("'+url+'")'; else ph.className='photo empty';
+      var tk=slot===3?'night':slot===2?'evening':'day';
+      if(ATLAS&&ATLAS.map[s.id]){
+        var c=ATLAS.map[s.id][tk]||ATLAS.map[s.id].day||ATLAS.map[s.id].night;
+        if(c){ ph.style.backgroundImage='url("'+ATLAS.url+'")';
+               ph.style.backgroundSize=(ATLAS.cols*100)+'% '+(ATLAS.rows*100)+'%';
+               ph.style.backgroundPosition=(c[0]/(ATLAS.cols-1)*100)+'% '+(c[1]/(ATLAS.rows-1)*100)+'%'; }
+        else ph.className='photo empty';
+      } else {
+        var url=PHOTOS[s.id][tk]||PHOTOS[s.id].day||PHOTOS[s.id].night;
+        if(url) ph.style.backgroundImage='url("'+url+'")'; else ph.className='photo empty';
+      }
       b.appendChild(ph);
     } else { b.className+=' note'; }
     if(!open){

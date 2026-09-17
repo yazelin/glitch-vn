@@ -131,15 +131,66 @@ CORK_NEW_CSS = (".sky canvas{position:absolute;inset:0;width:100%;height:100%;di
                 ".sky.tex{background-position:center;background-size:cover}\n.sky.tex canvas{mix-blend-mode:multiply}\n.sky::after")
 
 
+# 拍立得縮圖 atlas＋街廓改四條線（2026-09-17 作者要求；board.html 同一段改了要兩邊一起改）。
+_ATLAS = json.loads((HERE.parent.parent / "art/board-atlas.json").read_text(encoding="utf-8"))
+_ATLAS["url"] = _INV + "1789656782122_board-atlas.webp"
+ATLAS_OLD = "var PHOTOS = "
+ATLAS_NEW = "var ATLAS = " + json.dumps(_ATLAS, ensure_ascii=False) + ";\nvar PHOTOS = "
+PHOTO_OLD = """    if(been && PHOTOS[s.id]){
+      var ph=document.createElement('span'); ph.className='photo';
+      var url=PHOTOS[s.id][slot===3?'night':slot===2?'evening':'day']||PHOTOS[s.id].day||PHOTOS[s.id].night;
+      if(url) ph.style.backgroundImage='url("'+url+'")'; else ph.className='photo empty';
+      b.appendChild(ph);
+    } else { b.className+=' note'; }"""
+PHOTO_NEW = """    if(been && ((ATLAS&&ATLAS.map[s.id])||PHOTOS[s.id])){
+      var ph=document.createElement('span'); ph.className='photo';
+      var tk=slot===3?'night':slot===2?'evening':'day';
+      if(ATLAS&&ATLAS.map[s.id]){
+        var c=ATLAS.map[s.id][tk]||ATLAS.map[s.id].day||ATLAS.map[s.id].night;
+        if(c){ ph.style.backgroundImage='url("'+ATLAS.url+'")';
+               ph.style.backgroundSize=(ATLAS.cols*100)+'% '+(ATLAS.rows*100)+'%';
+               ph.style.backgroundPosition=(c[0]/(ATLAS.cols-1)*100)+'% '+(c[1]/(ATLAS.rows-1)*100)+'%'; }
+        else ph.className='photo empty';
+      } else {
+        var url=PHOTOS[s.id][tk]||PHOTOS[s.id].day||PHOTOS[s.id].night;
+        if(url) ph.style.backgroundImage='url("'+url+'")'; else ph.className='photo empty';
+      }
+      b.appendChild(ph);
+    } else { b.className+=' note'; }"""
+BLOCK_OLD = """    var r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',x0); r.setAttribute('y',y0);
+    r.setAttribute('width',(x1-x0).toFixed(2)); r.setAttribute('height',(y1-y0).toFixed(2));
+    r.setAttribute('rx','0.6');
+    g.appendChild(r);
+  }
+}"""
+BLOCK_NEW = """    var ext=1.4, k=(i*3+j)*4, JIT=[0.18,-0.22,0.12,-0.15,0.2,-0.1,0.14,-0.2,0.1,-0.18,0.16,-0.12,0.2,-0.14,0.11,-0.19,0.13,-0.21,0.17,-0.13,0.1,-0.16,0.19,-0.11];
+    var L=[[x0-ext,y0,x1+ext,y0],[x0-ext,y1,x1+ext,y1],[x0,y0-ext,x0,y1+ext],[x1,y0-ext,x1,y1+ext]];
+    for(var q=0;q<4;q++){
+      var ln=document.createElementNS(NS,'line'), jt=JIT[(k+q)%JIT.length];
+      ln.setAttribute('x1',(L[q][0]+(q>1?jt:0)).toFixed(2)); ln.setAttribute('y1',(L[q][1]+(q<2?jt:0)).toFixed(2));
+      ln.setAttribute('x2',(L[q][2]+(q>1?-jt:0)).toFixed(2)); ln.setAttribute('y2',(L[q][3]+(q<2?-jt:0)).toFixed(2));
+      g.appendChild(ln);
+    }
+  }
+}"""
+LINECSS_OLD = "  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n/* 她的便條"
+LINECSS_NEW = ("  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n"
+               ".map #blocks line{stroke:rgba(255,255,255,.38);stroke-width:1.2;vector-effect:non-scaling-stroke;stroke-linecap:round}\n/* 她的便條")
+
+
 def swap_board_js(html, stats):
     for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail"),
                            (VIS_OLD_A, VIS_NEW_A, "rail"), (VIS_OLD_B, VIS_NEW_B, "rail"),
                            (CORK_OLD_SKY, CORK_NEW_SKY, "rail"), (CORK_OLD_PAINT, CORK_NEW_PAINT, "rail"),
-                           (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail"), (TEX_OLD, TEX_NEW, "rail")):
+                           (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail"), (TEX_OLD, TEX_NEW, "rail"),
+                           (PHOTO_OLD, PHOTO_NEW, "rail"), (BLOCK_OLD, BLOCK_NEW, "rail"), (LINECSS_OLD, LINECSS_NEW, "rail")):
         if old in html:
             html = html.replace(old, new, 1); stats[name] += 1
         elif new not in html:
             print(f"  ★ 調查板卡片裡找不到這一段的新舊版本（{old[:30]}…），去對 board.html")
+    if "var ATLAS = " not in html and ATLAS_OLD in html:      # atlas 表只加一次（插在 PHOTOS 前面）
+        html = html.replace(ATLAS_OLD, ATLAS_NEW, 1); stats["rail"] += 1
     return html
 
 
