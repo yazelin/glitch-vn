@@ -101,9 +101,39 @@ VIS_OLD_B = "    if(Math.random()<pr || (pity>0 && c>=pity)){ out.push(v[2]); m[
 VIS_NEW_B = "    if(forced || Math.random()<pr || (pity>0 && c>=pity)){ out.push(v[2]); m[key]=0; }"
 
 
+# 調查板換成真的細紋軟木貼圖（2026-09-17 作者給參考圖；art/board-cork.webp 已上傳到媒體庫）。
+# board.html 同一段改了要兩邊一起改；push.py 整包推時是用 /*@@CORK@@*/ 灌網址，這裡直接寫死。
+CORK_URL = _INV + "1789638515611_board-cork.webp"
+CORK_OLD_SKY = "var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];\n\n// 地點"
+CORK_NEW_SKY = ("var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];\n"
+                "var CORK = " + json.dumps(CORK_URL) + ";\n"
+                "var SKY_TEX=[['#f6e4cd','#e7cbad'],['#f7dfc0','#e5c39e'],['#c6a687','#a68870'],['#957a63','#77604d']];\n\n// 地點")
+CORK_OLD_PAINT = ("  var x=c.getContext('2d'), W=c.width, H=c.height;\n"
+                  "  var g=x.createLinearGradient(0,0,W*0.4,H); g.addColorStop(0,a); g.addColorStop(1,b);")
+CORK_NEW_PAINT = ("  var x=c.getContext('2d'), W=c.width, H=c.height;\n"
+                  "  if(CORK){\n"
+                  "    var sk=document.getElementById('sky'); sk.className='sky tex';\n"
+                  "    if(sk.style.backgroundImage.indexOf(CORK)<0) sk.style.backgroundImage='url(\"'+CORK+'\")';\n"
+                  "    var gt=x.createLinearGradient(0,0,W*0.4,H); gt.addColorStop(0,a); gt.addColorStop(1,b);\n"
+                  "    x.fillStyle=gt; x.fillRect(0,0,W,H);\n"
+                  "    var vt=x.createRadialGradient(W/2,H/2,Math.min(W,H)*0.35,W/2,H/2,Math.max(W,H)*0.75);\n"
+                  "    vt.addColorStop(0,'rgba(60,36,16,0)'); vt.addColorStop(1,'rgba(60,36,16,.22)');\n"
+                  "    x.fillStyle=vt; x.fillRect(0,0,W,H);\n"
+                  "    return;\n"
+                  "  }\n"
+                  "  var g=x.createLinearGradient(0,0,W*0.4,H); g.addColorStop(0,a); g.addColorStop(1,b);")
+CORK_OLD_APPLY = "  window.__sky=SKY[slot]; paintCork(SKY[slot][0], SKY[slot][1]);"
+CORK_NEW_APPLY = "  window.__sky=(CORK?SKY_TEX:SKY)[slot]; paintCork(window.__sky[0], window.__sky[1]);"
+CORK_OLD_CSS = ".sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}\n.sky::after"
+CORK_NEW_CSS = (".sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}\n"
+                ".sky.tex{background-position:center;background-size:cover}\n.sky.tex canvas{mix-blend-mode:multiply}\n.sky::after")
+
+
 def swap_board_js(html, stats):
     for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail"),
-                           (VIS_OLD_A, VIS_NEW_A, "rail"), (VIS_OLD_B, VIS_NEW_B, "rail")):
+                           (VIS_OLD_A, VIS_NEW_A, "rail"), (VIS_OLD_B, VIS_NEW_B, "rail"),
+                           (CORK_OLD_SKY, CORK_NEW_SKY, "rail"), (CORK_OLD_PAINT, CORK_NEW_PAINT, "rail"),
+                           (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail")):
         if old in html:
             html = html.replace(old, new, 1); stats[name] += 1
         elif new not in html:

@@ -55,6 +55,8 @@ html,body{margin:0;height:100%;background:var(--board);color:var(--text);
    底色與色溫由 paintCork() 依時段畫進去（2026-09-09 改）。 */
 .sky{position:absolute;inset:0;background:var(--board)}
 .sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sky.tex{background-position:center;background-size:cover}
+.sky.tex canvas{mix-blend-mode:multiply}
 .sky::after{content:"";position:absolute;inset:0;
   box-shadow:inset 0 0 90px rgba(74,47,24,.34),inset 0 0 18px rgba(74,47,24,.26)}
 .wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.4vh 3vw 2vh}
@@ -178,6 +180,10 @@ var THREADS=[
 // 深色軟木。淺木在真的螢幕上太亮，便條與拍立得都浮不出來（2026-09-10 試玩回報）。
 // 顆粒維持 canvas 畫的那一套，只換色溫：上午偏暖、下午再暖一點、晚上壓下來、深夜最沉。
 var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];
+// 2026-09-17 改用真的細紋軟木貼圖當底（CORK，push.py 灌網址；沒有就退回上面程式畫的深色顆粒）。
+// 貼圖本身是淺棕，色溫用 multiply 疊上去：白天接近不染色，晚上、深夜往下壓。
+var CORK = /*@@CORK@@*/'';
+var SKY_TEX=[['#f6e4cd','#e7cbad'],['#f7dfc0','#e5c39e'],['#c6a687','#a68870'],['#957a63','#77604d']];
 
 // 地點：代號、名字、每個時段的狀態、在街區上的位置（百分比）
 //   '名字' = 那個人常駐　　''  = 開著可是沒有常駐　　null = 這個時間進不去
@@ -300,6 +306,17 @@ function paintCork(a,b){
   var dpr=Math.min(2,window.devicePixelRatio||1);
   c.width=Math.round(r.width*dpr); c.height=Math.round(r.height*dpr);
   var x=c.getContext('2d'), W=c.width, H=c.height;
+  if(CORK){
+    // 有貼圖：底是圖，canvas 只畫時段色溫（CSS 上 multiply），顆粒不用畫
+    var sk=document.getElementById('sky'); sk.className='sky tex';
+    if(sk.style.backgroundImage.indexOf(CORK)<0) sk.style.backgroundImage='url("'+CORK+'")';
+    var gt=x.createLinearGradient(0,0,W*0.4,H); gt.addColorStop(0,a); gt.addColorStop(1,b);
+    x.fillStyle=gt; x.fillRect(0,0,W,H);
+    var vt=x.createRadialGradient(W/2,H/2,Math.min(W,H)*0.35,W/2,H/2,Math.max(W,H)*0.75);
+    vt.addColorStop(0,'rgba(60,36,16,0)'); vt.addColorStop(1,'rgba(60,36,16,.22)');
+    x.fillStyle=vt; x.fillRect(0,0,W,H);
+    return;
+  }
   var g=x.createLinearGradient(0,0,W*0.4,H); g.addColorStop(0,a); g.addColorStop(1,b);
   x.fillStyle=g; x.fillRect(0,0,W,H);
   var seed=20260909; function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
@@ -453,7 +470,7 @@ function start(){
   document.getElementById('hint').textContent='去一個地方就過一個時段';
   drawBlocks();
   var sky=document.getElementById('sky');
-  window.__sky=SKY[slot]; paintCork(SKY[slot][0], SKY[slot][1]);
+  window.__sky=(CORK?SKY_TEX:SKY)[slot]; paintCork(window.__sky[0], window.__sky[1]);
   var map=document.getElementById('grid');
   map.className='map';
   Array.prototype.slice.call(map.querySelectorAll('button.spot, .todo')).forEach(function(b){ b.remove(); });
