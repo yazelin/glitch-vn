@@ -139,6 +139,9 @@ function start(){
     var want=null, a=String(values.walk||'').split(';');
     for(var wi=0; wi<a.length; wi++){
       var p=a[wi].split('|');
+      // 舊存檔的劇情軌道相容：標籤曾改名，另一步原先誤寫成手辦店。
+      if(p[0]==='9'&&p[1]==='1'&&p[2]==='studio'&&p[3]==='敲門') p[3]='走進去';
+      if(p[0]==='12'&&p[1]==='1'&&p[2]==='figure'&&p[3]==='問他每次都買一樣的那個') p[2]='store';
       if(p.length>=4 && num(p[0],-1)===day && num(p[1],-1)===slot && p[2]===LOC){ want=p[3]; break; }
     }
     if(want){

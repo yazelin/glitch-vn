@@ -1099,6 +1099,19 @@ def build(cards):
         b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == to[1]
                                             and e["data"]["condition"].get("variable") == "pick")]
         rules[:] = [r for r in rules if r["segment"] != to[1]]
+    # 保全第四階講完女兒的事，時間自然推到兩點多，直接接「對面那個人」。
+    # 固定路線只有四個可挪用的晚間時段；若要求玩家再來第五趟，這條重要線索在劇情模式永遠拿不到。
+    guard_from = next((sid_ for (ff, _l, sec), (_f, sid_) in seg_first.items()
+                       if ff == "調查篇-保全" and sec.startswith("四、女兒學開車")), None)
+    guard_payoff = next(((f_, sid_) for (ff, _l, sec), (f_, sid_) in seg_first.items()
+                         if ff == "調查篇-橋段2" and sec.startswith("十一、對面那個人")), None)
+    assert guard_from and guard_payoff, "接不上：保全第四階 → 對面那個人"
+    last, back = seg_end[guard_from]
+    b.edges = [e for e in b.edges if not (e["source"] == last and e["target"] == back)]
+    b.edge(last, guard_payoff[0])
+    b.edges = [e for e in b.edges if not (e.get("data") and e["data"]["condition"].get("value") == guard_payoff[1]
+                                        and e["data"]["condition"].get("variable") == "pick")]
+    rules[:] = [r for r in rules if r["segment"] != guard_payoff[1]]
     # 第十四天：一開板就進收尾那一場，不管條件（沒查完就是沒查完的版本）
     ending = next((r for r in rules if r["section"].startswith("十二、最後一頁")), None)
     if ending:

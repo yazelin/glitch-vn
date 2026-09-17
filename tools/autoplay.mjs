@@ -26,11 +26,13 @@ const rpick=(a)=>a[Math.floor(rnd()*a.length)];
 // push.py 寫的是 worktree 的那一份，寫死就會去玩別的專案（2026-09-11 踩到）。
 const pv = JSON.parse(fs.readFileSync(process.env.PREVIEW || 'larch/inv/preview.json','utf8'));
 // 記憶體吃緊的機器上一次跑一輪也會被系統擋掉，所以關掉用不到的東西（2026-09-09）
-const browser = await chromium.launch({ args: ['--disable-gpu','--disable-dev-shm-usage',
-  '--disable-extensions','--no-sandbox','--js-flags=--max-old-space-size=384','--renderer-process-limit=2'] });
+// 2026-09-17：原本 --disable-gpu，遊樂園（WebGL）開不了；CG 解鎖之後整支無聲停住，懷疑也是畫面裡的 GL 動畫把
+// 無頭瀏覽器卡死。改用 SwiftShader 軟體 GL，WebGL 能開、又不需要真的 GPU。
+const browser = await chromium.launch({ args: ['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist',
+  '--disable-dev-shm-usage','--disable-extensions','--no-sandbox','--js-flags=--max-old-space-size=384','--renderer-process-limit=2'] });
 const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
 page.on('pageerror', e => out(`PAGE ERR: ${String(e).slice(0,200)}`));
-const T=[]; const out=(s)=>{ T.push(s); };
+const T=[]; let lastOut=Date.now(); const out=(s)=>{ T.push(s); lastOut=Date.now(); };
 const flush=()=>fs.writeFileSync(`${SD}/transcript.txt`, T.join('\n'));
 const text = async () => (await page.locator('body').innerText()).replace(/\s+/g,' ').replace(/存檔 讀取 歷史 自動 快轉 全屏 標題 設定/,'').replace(/點擊對話框繼續/,'').replace(/^\d+\s*/,'').trim();
 const frames = () => page.frames().filter(f => f !== page.mainFrame());
@@ -98,6 +100,13 @@ await page.locator('button', { hasText: '開始遊戲' }).first().click(); await
 let spot=null, when='', flick=0; const t0=Date.now();
 for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   const t = await text();
+  // 2026-09-17：跑到第 6 天 CG 解鎖卡之後整支無聲地停住，哪個分支都沒印。
+  // 60 秒沒有任何輸出就留證據：畫面文字、看得到的按鈕、截圖。每 60 秒一次，不中斷。
+  if (Date.now() - lastOut > 60000) {
+    const btns = (await page.getByRole('button').allInnerTexts().catch(()=>[])).map(s=>s.replace(/\s+/g,' ').trim()).filter(Boolean).slice(0, 20);
+    out(`★ 60 秒沒動（step ${step}）畫面：${t.slice(0, 220)}`); out(`   按鈕：${JSON.stringify(btns)}`);
+    await page.screenshot({ path: `${SD}/idle-${step}.png` }).catch(()=>{}); flush();
+  }
   if (t.includes('開始遊戲') && t.includes('繼續遊戲')) { out('\n=== 回到標題（遊戲結束）'); break; }
   // 結局停在謝幕那一張、不一定回標題。少了這一條，卡住處理會去點「再看一次」，
   // 於是自己又開一輪——2026-09-11 兩輪各跑了三遍，記憶體也是這樣爆的。
@@ -187,6 +196,15 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   }
   // 錄音那一題：對貓草按下去他會轉身，那一晚就不算（design/調查篇-橋段2.md 七）。
   // 自動玩家每一題都選第一個，所以會把他那三個晚上全燒掉。認得出是他就選不開。
+  // 錄音那張卡有時抓不到編號按鈕（2026-09-17 第三輪停在第 6 天深夜貓草那張）：改用文字找。
+  if (!optHits.length && /錄音機在包包裡/.test(t)) {
+    for (const b of await page.getByRole('button').filter({ hasText: /開錄音機|不開/ }).all()) {
+      const tt = ((await b.textContent()) || '').replace(/[\s 　]+/g, ' ').trim();
+      const box = await b.boundingBox().catch(() => null);
+      if (tt.length <= 12 && box && box.height <= 90 && !optHits.some(o => o.t === tt)) optHits.push({ b, t: tt });
+    }
+    if (optHits.length) out(`  [選項] 用文字抓到錄音那題：${optHits.map(o=>o.t).join(' | ')}`);
+  }
   let pick_ = optHits[0];
   // 講者名 2026-09-17 改成「客人」（貓草）——認人的規則要一起認新名字，不然會對他按錄音、燒掉那一晚
   if (optHits.length > 1 && /開錄音機/.test(optHits[0].t) && /貓草|關東煮|客人/.test(lastCard)) {
@@ -197,15 +215,6 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     await pick_.b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   // FILLPAGE1=1：從 HUD 打開守則本，把第一頁那六個名字填好。
-  // 錄音那張卡有時抓不到編號按鈕（2026-09-17 第三輪停在第 6 天深夜貓草那張）：改用文字找。
-  if (!optHits.length && /錄音機在包包裡/.test(t)) {
-    for (const b of await page.getByRole('button').filter({ hasText: /開錄音機|不開/ }).all()) {
-      const tt = ((await b.textContent()) || '').replace(/[\s 　]+/g, ' ').trim();
-      const box = await b.boundingBox().catch(() => null);
-      if (tt.length <= 12 && box && box.height <= 90 && !optHits.some(o => o.t === tt)) optHits.push({ b, t: tt });
-    }
-    if (optHits.length) out(`  [選項] 用文字抓到錄音那題：${optHits.map(o=>o.t).join(' | ')}`);
-  }
   // 自動玩家不會自己填，所以逐字稿的第一頁六個括號永遠是空的，當攻略用不夠格。
   // 第一頁那個分頁要六個 ID 都抄到（斑比那面牆）才會出現，所以填不成就下次再試。
   if (process.env.FILLPAGE1 && !page1Done) {

@@ -68,9 +68,12 @@ BG_MAP = {"lobby": ("bg-lobby-day", "bg-lobby-evening"), "roof": ("bg-roof-day",
           "laundry": ("bg-laundry-day", "bg-laundry"), "figure": ("bg-figure-day", "bg-figure"),
           "catgrass_door": ("bg-catgrass-door", "bg-catgrass-door"), "catgrass_home": ("bg-catgrass-home", "bg-catgrass-home")}
 # 玩家看得到的人名：她不知道鐵塔叫鐵塔，只知道他是經紀人。變數與規則裡仍用「鐵塔」，只有顯示換掉
-DISPLAY = {"鐵塔": "經紀人"}
+# 講者名照她當下知道的叫。鐵塔、貓草、諾亞是斑比牆上六個 ID 之中的三個（@Tower_Manager、
+# @CatGrass_80、@Radio_Noah），ID 對到人是玩家自己要解的題（design/調查篇-背包與謎題.md 六之一），
+# 卡片上直接寫本名等於把答案印在講者欄。三個人全程用描述，不切換（答案是她最後自己填進本子的）。
+DISPLAY = {"鐵塔": "經紀人", "貓草": "客人", "諾亞": "修收音機的"}
 # 板與選單用的：問到名字（asked_斑比_鐵塔）之前叫「畫她的人」
-DISPLAY_UI = {"鐵塔": "經紀人", "斑比": {"until": "asked_斑比_鐵塔", "name": "畫她的人"}}
+DISPLAY_UI = {**DISPLAY, "斑比": {"until": "asked_斑比_鐵塔", "name": "畫她的人"}}
 LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街", "studio": "斑比工作室",
             "booth": "錄音間門口", "tower14": "十四樓大廳", "store": "便利商店", "parts": "材料行",
             "busstop": "車站前站牌", "metro": "南港站二號出口", "laundry": "自助洗衣店", "figure": "手辦店"}
@@ -331,9 +334,6 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             for w in n["data"].get("exits", []):
                 exit_at.setdefault((seg, WHO_MAP.get(w, w)), idx)
     seg_index = {n["id"]: i for sn in by_seg.values() for i, n in enumerate(sn)}
-    seg_dest_of = {r["segment"]: r["dest"] for r in rules}
-    seg_slots_of = {**board.get("seg_slots", {}), **{r["segment"]: r.get("slots") or [] for r in rules}}
-    for n in nodes:
     # 立繪差分：**讀表** design/調查篇-立繪姿勢.tsv（tools/pose_table.py 產、人審過；決定欄優先），跟 larch/apply_poses.py 同一份來源。
     # 規則（poses.py）只負責產提案，不直接決定線上長什麼樣。
     import csv
@@ -345,6 +345,9 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             _p = (_r.get("決定") or _r["提案"]).strip()
             if _p and _p != "base":
                 pose_of.setdefault(_r["卡"], {})[_r["誰"]] = _p
+    seg_dest_of = {r["segment"]: r["dest"] for r in rules}
+    seg_slots_of = {**board.get("seg_slots", {}), **{r["segment"]: r.get("slots") or [] for r in rules}}
+    for n in nodes:
         d = n["data"]
         seg = d.get("segment")
         if d.get("type") != "dialogue" or not seg:
@@ -360,12 +363,12 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         actors, layers = [], []
         for w, slot in zip(cast, slots):
             u = sprite_url(w, state, pid, dry)
-            actors.append({"id": f"actor-{w}-{slot}", "url": u, "name": w, "slot": slot,
-                           "scale": SPRITE_SCALE.get(w, 1.0), "offsetX": 0, "offsetY": 0,
-                           "enter": "fade", "loop": "breathe", "loopSpeed": 1, "loopStrength": 1})
             pv = pose_of.get(n["id"], {}).get(w)
             if pv and (w, pv) in POSES.FILES and (ROOT / POSES.FILES[(w, pv)]).exists():
                 u = local_asset(POSES.FILES[(w, pv)], state, pid, dry, "character")
+            actors.append({"id": f"actor-{w}-{slot}", "url": u, "name": w, "slot": slot,
+                           "scale": SPRITE_SCALE.get(w, 1.0), "offsetX": 0, "offsetY": 0,
+                           "enter": "fade", "loop": "breathe", "loopSpeed": 1, "loopStrength": 1})
             layers.append({"id": f"layer-{w}-{slot}", "url": u, "position": slot, "x": 0, "y": 0,
                            "scale": SPRITE_SCALE.get(w, 1.0), "opacity": 1, "flipX": False})
         scr = d.pop("screen", "")
@@ -392,9 +395,6 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
                                            "scale": 0.01, "opacity": 1, "flipX": False}]
     todo_js = (CARDS / "todo.js").read_text(encoding="utf-8")
     board_html = (CARDS / "board.html").read_text(encoding="utf-8").replace("/*@@TODO@@*/", todo_js)
-    menu_html = (CARDS / "menu.html").read_text(encoding="utf-8")
-    notes_html = (CARDS / "notes.html").read_text(encoding="utf-8").replace("/*@@TODO@@*/", todo_js)
-    missing_bg = []
     # 調查板的軟木貼圖（art/board-cork.webp，2026-09-17 作者給的細紋軟木參考）；沒有這個檔就留空，卡片退回程式畫的顆粒
     cork_url = local_asset("art/board-cork.webp", state, pid, dry, "bg") if (ROOT / "art/board-cork.webp").exists() else ""
     board_html = board_html.replace("/*@@CORK@@*/''", json.dumps(cork_url))
@@ -557,7 +557,7 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
              "miniGameHtml": html, "miniGamePresentation": "fullscreen", "miniGameSkippable": True,
              "miniGameFrame": {"showButton": False, "showTitle": False},
              "miniGameReadVars": ["day", "slot", "phone_log", "phone_day_seen",
-                                  "phone_msg_seen", "phone_live_seen", "open_studio", "met_櫃檯"],
+                                  "phone_msg_seen", "phone_live_seen", "open_studio", "pr_request_sent"],
              "miniGameWriteVars": ["phone_log", "open_phone", "phone_day_seen",
                                    "phone_msg_seen", "phone_live_seen", "live_comment"]}
         return d
@@ -591,9 +591,43 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         if n["data"].get("type") == "phone":
             d = n["data"]
             n["data"] = {**phone_data(d["contact"], d["msg"]), "segment": d.get("segment")}
+
+    # 劇情變數原本掛在一整段 dialogue 的第一張卡，播放器會在台詞開始前就套用；
+    # 全域 interrupt 因此搶在斑比開口、櫃檯交出信箱以前先跳通知。把兩個因果旗標
+    # 移到場景說完之後的卡，通知才會在離場前出現。
+    by_id = {n["id"]: n for n in nodes}
+    def move_ops(source_id, target_id, variables):
+        source = by_id[source_id]["data"]
+        target = by_id[target_id]["data"]
+        moved = [op for op in source.get("variableOps", []) if op.get("variable") in variables]
+        source["variableOps"] = [op for op in source.get("variableOps", []) if op.get("variable") not in variables]
+        if not source["variableOps"]:
+            source.pop("variableOps", None)
+        target.setdefault("variableOps", []).extend(moved)
+
+    move_ops("inv-467", "inv-468", {"trust_斑比", "open_studio"})
+    # 公關回信要先讓玩家真的寄出申請。inv-188 的最後一句已在劇本寫出寄信動作；
+    # 原本的回板卡改成靜默設旗標，再接一張新的回板卡。
+    pr_ops = [op for op in by_id["inv-188"]["data"].get("variableOps", [])
+              if op.get("variable") == "deadend_pr"]
+    pr_ops.append({"id": "op-pr-request-sent", "variable": "pr_request_sent",
+                   "kind": "set", "value": True})
+    by_id["inv-188"]["data"]["variableOps"] = [
+        op for op in by_id["inv-188"]["data"].get("variableOps", [])
+        if op.get("variable") != "deadend_pr"
+    ]
+    if not by_id["inv-188"]["data"]["variableOps"]:
+        by_id["inv-188"]["data"].pop("variableOps", None)
+    by_id["inv-189"]["data"] = {
+        "type": "setVariable", "title": "（公關窗口已收到申請）", "text": "",
+        "variableOps": pr_ops,
+    }
+    add_node("inv-189-return", {"type": "boardJump", "title": "回調查板",
+                                 "jumpNodeId": "inv-001", "jumpBoardId": real_bid}, 0, 0)
+    add_edge("inv-189", "inv-189-return")
     # 她的手機只收不回（背包與謎題 五）：直播開始那三晚由建置層接段落；斑比約你、公關窗口自動回覆
     phones = [("phone-bambi", "未儲存的號碼", "有空來工作室。稿子帶著。", [("open_studio", "eq", True)]),   # 她這時候還不知道名字
-              ("phone-pr", "公關窗口", "您的來信已收到，我們將於三至五個工作天內回覆。", [("met_櫃檯", "gte", 1)])]
+              ("phone-pr", "公關窗口", "您的來信已收到，我們將於三至五個工作天內回覆。", [("pr_request_sent", "eq", True)])]
     for i, (nid, contact, msg, conds) in enumerate(phones):
         cond = {"kind": "variable", "variable": conds[0][0], "op": conds[0][1], "value": conds[0][2], "match": "all",
                 "conditions": [{"variable": v, "op": o, "value": val} for v, o, val in conds]}
@@ -685,6 +719,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
         vs[name] = {"id": name, "name": name, "label": name, "type": t,
                     "defaultValue": 0 if t == "number" else False if t == "boolean" else ""}
 
+    # 段落收尾清場卡：回板前把台上的人清掉（larch/inv/clear_stage.py；線上補用 larch/add_clear_stage.py）
+    import clear_stage as CS
+    CS.apply(nodes, edges, board_id, ghost)
+    CS.apply_autorecord(nodes, edges)     # 劇情模式跳過「開錄音機／不開」，直接錄
+
     # ── 版面：人看得懂的白板 ────────────────────────────────────
     # 左邊一欄是系統卡（調查板、休息、筆記、錄音播放、收尾插播）。
     # 每個地點一個群組框：第一列日版入口、夜版入口、選單、回板；底下一段一列，卡片照走的順序從左到右，
@@ -722,11 +761,6 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     # 左欄
     col = 0
     put(board_id, 0, 0)
-    # 段落收尾清場卡：回板前把台上的人清掉（larch/inv/clear_stage.py；線上補用 larch/add_clear_stage.py）
-    import clear_stage as CS
-    CS.apply(nodes, edges, board_id, ghost)
-    CS.apply_autorecord(nodes, edges)     # 劇情模式跳過「開錄音機／不開」，直接錄
-
     put("inv-rest", 0, CH)
     put("inv-notes-int", 0, 2 * CH); put("inv-notes", CW, 2 * CH)
     y = 3 * CH
@@ -939,6 +973,8 @@ def main():
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--set", action="append", default=[],
                     help="測試用：覆寫變數預設值，例 --set rec_ok=true。驗完要再推一次正常版")
+    ap.add_argument("--wipe-addons", action="store_true",
+                    help="明知線上有本機建置沒有的卡（樂園、CG 解鎖）還是要整包推；推完必須重跑 larch/add_*.py 補回去")
     a = ap.parse_args()
     board = json.loads(BOARD_JSON.read_text(encoding="utf-8"))
     state = load_state()
@@ -1011,6 +1047,22 @@ def main():
         print(f"※ {len(SUBBED)} 處用了別的時段代替：{SUBBED}")
     api("PUT", f"/projects/{pid}", {"project": proj})
     print("PUT 專案設定與變數：ok")
+
+    # 4b. 線上有、本機建置沒有的卡：樂園五款遊戲、CG 解鎖那些，是 larch/add_*.py 幾支
+    #     「先讀線上再補」的腳本直接掛上去的，不在 board.json 裡。這裡的整包 PUT 會把它們
+    #     洗掉，而且不報錯（2026-09-17 對過：線上多 39 張卡、66 條邊，全是這批）。
+    #     所以先讀一次線上版子對照，有就停。真的要推，推完必須照順序重跑那幾支補回去。
+    live = api("GET", f"/projects/{pid}/boards/{bid}")
+    live = live.get("board") or live
+    mine = {n["id"] for n in nodes}
+    foreign = [n["id"] for n in live.get("nodes", []) if n["id"] not in mine]
+    if foreign:
+        print(f"★ 線上有 {len(foreign)} 張本機建置沒有的卡：" + "、".join(foreign[:10]) + ("…" if len(foreign) > 10 else ""))
+        if not a.wipe_addons:
+            print("   整包 PUT 會洗掉它們，停。確定要推就加 --wipe-addons，推完立刻照這個順序重跑（依檔案時間推的）：")
+            print("   larch/add_story_cgs.py → larch/fix_park_cg_crossrun.py → larch/add_relationship_cgs.py → larch/replace_relationship_cg_art.py → larch/add_tape_cgs.py")
+            sys.exit(1)
+        print("   --wipe-addons：照推。推完記得重跑上面那四支。")
 
     # 5. 版子
     api("PUT", f"/projects/{pid}/boards/{bid}",

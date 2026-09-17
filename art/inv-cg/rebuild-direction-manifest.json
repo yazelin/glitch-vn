@@ -1,0 +1,26 @@
+[
+  {
+    "name": "cg-story-guard-daughter-direction-v2",
+    "size": "1536x1024",
+    "refs": ["art/inv-cg/cg-story-guard-daughter.webp", "art/inv-cg/layout-guides/guard-counter.png"],
+    "prompt": "Edit reference image 1. Reference image 2 is a TOP-DOWN FLOOR PLAN and must control spatial direction, not visual style. Create a polished 16:9 anime visual-novel CG. Keep the same middle-aged male security guard, navy uniform, gentle private expression, holding a black smartphone with the screen still dark and unopened. Female protagonist is represented only by her hands and worn black notebook at bottom foreground. CAMERA AND PROTAGONIST are on the public lobby side facing inward. The protagonist has her back toward the elevators and lobby entrance; those are BEHIND THE CAMERA and must not appear anywhere in the picture. The guard sits behind a continuous solid security counter/service window on the staff side. Directly behind the guard show only the security work-area back wall, CCTV monitors, binders, intercom and equipment cabinets. Absolutely no entrance, exterior window, city view, elevators, public lobby, sofas or open hall behind the guard. Clear counter barrier. Intimate cinematic night lighting. No text, no logo."
+  },
+  {
+    "name": "cg-story-clerk-order-direction-v2",
+    "size": "1536x1024",
+    "refs": ["art/inv-cg/cg-story-clerk-order.webp", "art/inv-cg/layout-guides/clerk-counter.png"],
+    "prompt": "Edit reference image 1. Reference image 2 is a TOP-DOWN FLOOR PLAN and must control spatial direction, not visual style. Create a polished 16:9 anime visual-novel CG. Keep the same tired young male convenience-store clerk, uniform and cap. Female protagonist appears only as hands and worn black investigation notebook at bottom foreground. Keep the prepared order: exactly two daikon pieces and one plain unsweetened drink. CAMERA AND PROTAGONIST stand on the customer side facing the checkout. The protagonist's back faces the convenience-store entrance; the entrance is BEHIND THE CAMERA and must not appear. Clerk stands behind a tall solid checkout counter. Directly behind clerk show only the interior staff-side back wall, storage cabinets, shelves, refrigerator backs and work equipment. Oden warmer and register stay on clerk side. Absolutely no storefront glass, street, skyline, entrance door, exterior view or open customer seating behind clerk. Full-width solid counter front clearly separates customer and staff. No text, no logo."
+  },
+  {
+    "name": "cg-story-parts-ledger-direction-v2",
+    "size": "1536x1024",
+    "refs": ["art/inv-cg/cg-story-parts-ledger.webp", "art/inv-cg/layout-guides/parts-counter.png"],
+    "prompt": "Edit reference image 1. Reference image 2 is a TOP-DOWN FLOOR PLAN and must control spatial direction, not visual style. Create a polished 16:9 anime visual-novel CG. Keep the same older female electronics-parts shop owner, plaid work shirt and apron, examining a vacuum tube while pointing at her ledger. Female protagonist appears only as hands and worn black notebook at bottom foreground. CAMERA AND PROTAGONIST are in the customer aisle facing inward. Protagonist's back faces the shop entrance; the entrance is BEHIND THE CAMERA and must not appear. Owner stands behind a high continuous scarred wooden work counter. Directly behind owner show only the deep shop interior: dense wooden parts drawers, vacuum-tube shelves, repair tools, old electronics and a solid rear wall. Absolutely no doorway, street, daylight exterior, awning, window or entrance behind owner. Warm focused workshop lighting. No text, no logo."
+  },
+  {
+    "name": "cg-story-reception-sixth-direction-v2",
+    "size": "1536x1024",
+    "refs": ["art/inv-cg/cg-story-reception-sixth.webp", "art/inv-cg/layout-guides/reception-counter.png"],
+    "prompt": "Edit reference image 1. Reference image 2 is a TOP-DOWN FLOOR PLAN and must control spatial direction, not visual style. Create a polished 16:9 anime visual-novel CG. Keep the same composed female corporate receptionist in white uniform, same open record ledger. Female protagonist appears only as hands holding the worn black notebook at bottom foreground. CAMERA AND PROTAGONIST stand on the public side facing the desk. Protagonist has her back toward the elevators and fourteenth-floor lobby entrance; those are BEHIND THE CAMERA and must not appear. Receptionist sits behind a tall continuous marble reception desk. Directly behind her show only the company interior-side back wall, company emblem, closed staff door, office corridor and discreet storage. Absolutely no building entrance, exterior windows, skyline, elevators, sofas, public lobby or waiting area behind receptionist. Strong clear desk barrier, elegant controlled office lighting. No text, no logo."
+  }
+]
