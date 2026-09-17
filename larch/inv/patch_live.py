@@ -20,6 +20,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(HERE.parent))
 import push as PUSH          # DISPLAY／DISPLAY_UI 只在那裡寫一次
 import novelkit as NK        # cdn()
+import names as NAMES        # 旁白不講名字
 
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 STATE = json.loads((HERE / "state.json").read_text(encoding="utf-8"))
@@ -115,6 +116,9 @@ def patch(board, stats):
                 d[k] = d[k].replace("調 查 篇　・　十 二 天", "調 查 篇　・　十 四 天"); stats["strike"] += 1
         if d.get("type") == "dialogue" and "~~" in (d.get("text") or ""):
             d["text"] = strike(d["text"]); stats["strike"] += 1
+        # 七、旁白正文與筆記標籤裡的名字（names.py），要排在重查配音之前：代號照字算
+        if d.get("type") == "dialogue":
+            stats["names"] += NAMES.hide_names(d)
         # 講者還是原名的時候先重查配音（改名之後就對不到 urls.json 的鍵了）
         if d.get("type") == "dialogue":
             if d.get("dialogueLines"):
@@ -156,9 +160,9 @@ def main():
             payload, etag = request(f"/boards/{bid}")
             board = payload.get("board", payload)
         before = (len(board["nodes"]), len(board["edges"]))
-        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0}
+        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0, "names": 0}
         patch(board, stats)
-        print(f"{bid}：講者名 {stats['speaker']} 處、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
+        print(f"{bid}：講者名 {stats['speaker']} 處、旁白名字 {stats['names']} 處、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
               f"名字表 {stats['table']} 張卡、調查板軌道段落 {stats['rail']}、刪除線 {stats['strike']} 張"
               f"　（卡 {before[0]}、邊 {before[1]}，不動）")
         if a.dry or not any(stats.values()):

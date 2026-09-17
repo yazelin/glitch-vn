@@ -285,6 +285,9 @@ class Board:
         # **掛配音收在這一個地方。** 卡片不是只從 card_node 出來的：錄音那幾張
         # 反應卡、錄音帶卡都是在流程裡直接組 data 的。原本掛在 card_node 裡，
         # 這些就整批沒有聲音，而且板上看起來跟有聲音的卡一模一樣。
+        # 旁白／筆記不講她不知道的名字（names.py）。要排在掛配音之前：配音代號是照字算的。
+        import names as _names
+        _names.hide_names(data)
         _attach_voice(data)
         _attach_bgm(data)
         self.n += 1

@@ -31,6 +31,8 @@ NEW = [
 REPLACE = [
     {"title": "她記得零件", "file": "cg-tape-parts-v4.webp"},   # v3：道具放在看得見的水平檯面上；v4：按鍵一紅三黑
     {"title": "保全的手機", "file": "cg-tape-guard-v3.webp"},
+    # 劇情 CG 也能從這裡換圖（解鎖卡的命名跟 add_story_cgs.py 同形）：v3 袖口不再抄格莉奇、線圈筆記本換守則本
+    {"title": "這集有我", "file": "cg-story-this-episode-v3.webp"},
 ]
 
 
