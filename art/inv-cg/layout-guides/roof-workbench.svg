@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#17202b"/><text x="800" y="52" text-anchor="middle" fill="white" font-size="34">頂樓收音機店・俯視平面圖（不是正面構圖）</text>
+  <rect x="130" y="85" width="1340" height="235" rx="20" fill="#314d63" stroke="#8fc8e8" stroke-width="8"/><text x="800" y="125" text-anchor="middle" fill="white" font-size="30">店內後牆／整面舊收音機與零件層架／工作燈（畫面背景只能看見這一側）</text>
+  <circle cx="800" cy="225" r="55" fill="#f1b66f"/><path d="M800 275 L800 330" stroke="white" stroke-width="12"/><text x="880" y="235" fill="white" font-size="28">諾亞面向玩家 ↓</text>
+  <rect x="230" y="330" width="1140" height="150" rx="15" fill="#90644e" stroke="#f6d5a8" stroke-width="10"/><text x="800" y="420" text-anchor="middle" fill="white" font-size="36">木頭工作檯／完整實體隔板（錄音機與本子放在玩家這一側的檯面）</text>
+  <rect x="130" y="500" width="1340" height="230" rx="20" fill="#617080" stroke="#b8c6d4" stroke-width="8"/><circle cx="800" cy="590" r="48" fill="#d8c7ba"/><path d="M800 545 L800 490" stroke="white" stroke-width="12"/><text x="875" y="600" fill="white" font-size="28">女主角／玩家，背對店門與頂樓 ↑</text>
+  <path d="M800 790 L800 685" stroke="#ffeb8a" stroke-width="18"/><text x="830" y="765" fill="#ffeb8a" font-size="30">鏡頭朝店內拍 ↑</text>
+  <rect x="520" y="805" width="560" height="70" rx="12" fill="#376d50" stroke="#9dffc4" stroke-width="8"/><text x="800" y="852" text-anchor="middle" fill="white" font-size="30">店門／頂樓天空／水塔（只能在玩家背後）</text>
+</svg>
