@@ -90,8 +90,20 @@ PARK_OLD = "  if(values.dest){ if(values.dest!=='park') advance(); setVar('dest'
 PARK_NEW = "  if(values.dest){ advance(); setVar('dest',''); setVar('here',''); }"
 
 
+# 劇情模式在軌道目的地訪客一律在場（board.html whoIsThere()，改了要兩邊一起改）。
+# 2026-09-17：第 5 天深夜鐵塔 0.25 沒骰到，選單全放行，後面整條走歪。
+VIS_OLD_A = "  var out=[], s=null, i, m=triesMap(), dirty=false;\n  for(i=0;i<SPOTS.length;i++) if(SPOTS[i].id===spotId) s=SPOTS[i];"
+VIS_NEW_A = ("  var out=[], s=null, i, m=triesMap(), dirty=false;\n"
+             "  var forced=false;\n"
+             "  if(String(values.mode||'free')==='story'){ var rw=walkMap()[num(values.day,1)+','+slot]; forced=!!(rw && rw.loc===spotId); }\n"
+             "  for(i=0;i<SPOTS.length;i++) if(SPOTS[i].id===spotId) s=SPOTS[i];")
+VIS_OLD_B = "    if(Math.random()<pr || (pity>0 && c>=pity)){ out.push(v[2]); m[key]=0; }"
+VIS_NEW_B = "    if(forced || Math.random()<pr || (pity>0 && c>=pity)){ out.push(v[2]); m[key]=0; }"
+
+
 def swap_board_js(html, stats):
-    for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail")):
+    for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail"),
+                           (VIS_OLD_A, VIS_NEW_A, "rail"), (VIS_OLD_B, VIS_NEW_B, "rail")):
         if old in html:
             html = html.replace(old, new, 1); stats[name] += 1
         elif new not in html:

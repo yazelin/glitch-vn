@@ -261,6 +261,11 @@ function triesMap(){
 }
 function whoIsThere(spotId, slot){
   var out=[], s=null, i, m=triesMap(), dirty=false;
+  // 劇情模式：軌道指到這裡的話，這個時段的訪客一律在場，不擲骰。模擬器驗軌道 48 步全開就是用「訪客都在」算的；
+  // 2026-09-17 實玩：第 5 天深夜鐵塔（0.25、保底第 2 次）沒骰到，選單對不到只好全放行，玩家先跟貓草講，
+  // 之後兩個深夜軌道要的那格都對不到，一路全放行。自由探索照舊擲骰。
+  var forced=false;
+  if(String(values.mode||'free')==='story'){ var rw=walkMap()[num(values.day,1)+','+slot]; forced=!!(rw && rw.loc===spotId); }
   for(i=0;i<SPOTS.length;i++) if(SPOTS[i].id===spotId) s=SPOTS[i];
   if(s && s.live[slot]) out.push(s.live[slot]);
   for(i=0;i<VISITS.length;i++){
@@ -269,7 +274,7 @@ function whoIsThere(spotId, slot){
     var pr=(typeof v[3]==='function')?v[3]():v[3];
     var key=spotId+slot+v[2], c=num(m[key],0)+1;
     var pity=v[4];
-    if(Math.random()<pr || (pity>0 && c>=pity)){ out.push(v[2]); m[key]=0; }
+    if(forced || Math.random()<pr || (pity>0 && c>=pity)){ out.push(v[2]); m[key]=0; }
     else m[key]=c;
     dirty=true;
   }
