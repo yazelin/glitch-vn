@@ -334,6 +334,9 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     seg_dest_of = {r["segment"]: r["dest"] for r in rules}
     seg_slots_of = {**board.get("seg_slots", {}), **{r["segment"]: r.get("slots") or [] for r in rules}}
     for n in nodes:
+    # 立繪差分（larch/inv/poses.py）：照卡上的括號指示換舞台上那個人的圖。線上補用 larch/add_poses… 見 apply_poses.py。
+    import poses as POSES
+    pose_of = POSES.pose_map(list(by_seg.values()))
         d = n["data"]
         seg = d.get("segment")
         if d.get("type") != "dialogue" or not seg:
@@ -352,6 +355,9 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
             actors.append({"id": f"actor-{w}-{slot}", "url": u, "name": w, "slot": slot,
                            "scale": SPRITE_SCALE.get(w, 1.0), "offsetX": 0, "offsetY": 0,
                            "enter": "fade", "loop": "breathe", "loopSpeed": 1, "loopStrength": 1})
+            pv = pose_of.get(n["id"], {}).get(w)
+            if pv and (w, pv) in POSES.FILES and (ROOT / POSES.FILES[(w, pv)]).exists():
+                u = local_asset(POSES.FILES[(w, pv)], state, pid, dry, "character")
             layers.append({"id": f"layer-{w}-{slot}", "url": u, "position": slot, "x": 0, "y": 0,
                            "scale": SPRITE_SCALE.get(w, 1.0), "opacity": 1, "flipX": False})
         scr = d.pop("screen", "")
