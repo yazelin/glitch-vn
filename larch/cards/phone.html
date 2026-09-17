@@ -275,7 +275,7 @@ body{background:
   background:radial-gradient(closest-side,rgba(183,139,255,.34),rgba(37,194,232,.18) 52%,transparent 100%);transition:background .35s}
 body.t-light #halo{background:radial-gradient(closest-side,rgba(226,236,255,.46),rgba(122,79,208,.20) 52%,transparent 100%)}
 @keyframes halo{from{opacity:.72}to{opacity:1}}
-#screen{box-shadow:0 0 36px rgba(183,139,255,.30),0 0 96px rgba(37,194,232,.18)}
+/* 深色不要正面螢幕光（2026-09-17 作者），只留機身後面的背光；淺色才有 */
 body.t-light #screen{box-shadow:0 0 36px rgba(214,228,255,.48),0 0 96px rgba(255,255,255,.2)}
 body.banner #halo{display:none}
 body.banner{background:transparent;display:block;padding:0}
