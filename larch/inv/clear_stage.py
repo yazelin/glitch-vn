@@ -56,35 +56,51 @@ def apply(nodes, edges, board_card, ghost):
     return n
 
 
+# 完美路線（design/調查篇-通關路線.txt）真的按「01開錄音機」的只有這五場；**貓草不錄**：
+# 錄他，他只對錄音機講一句就散場（「貓草：對錄音機」→ 回板），對話不發生、cat_visits 不加，後面每個深夜的軌道都對不到
+# （2026-09-17 自動玩家第一輪抓到，是我先前把六場都加了自動錄音）。
+AUTOREC = {"錄音：諾亞", "錄音：斑比", "錄音：店員", "錄音：材料行老闆", "錄音：保全"}
+
+
 def apply_autorecord(nodes, edges):
-    """劇情模式跳過「開錄音機／不開」：前一張卡多一條 mode=='story' 的條件邊直接接到「開錄音機」那條分支
-    （排在既有的邊前面，跟 CG 解鎖卡同一種寫法）。自由探索照舊。2026-09-17 他問「劇情模式是否固定只能按錄，以免沒拿到 CG」。"""
-    by = {n["id"]: n for n in nodes}
-    n = 0
+    """劇情模式跳過「開錄音機／不開」：前一張卡多一條 mode=='story' 且 rec_ok（錄音機在包包裡，跟進選項卡那條邊同一個閘）
+    的條件邊直接接到「開錄音機」那條分支（排在既有的邊前面，跟 CG 解鎖卡同一種寫法）。只對 AUTOREC 那幾場；
+    不在名單上的場如果先前加過，這裡順手拆掉。自由探索照舊。回傳 (加了幾條, 拆了幾條)。"""
+    n, removed = 0, 0
     for ch in [x for x in nodes if x["data"].get("type") == "choice" and (x["data"].get("choices") or [""])[0] == "開錄音機"]:
+        prefix = f"edge-autorec-{ch['id']}-"
+        if ch["data"].get("title") not in AUTOREC:
+            before = len(edges); edges[:] = [e for e in edges if not str(e.get("id", "")).startswith(prefix)]; removed += before - len(edges)
+            continue
         rec = next((e["target"] for e in edges if e["source"] == ch["id"] and e.get("sourceHandle") == "choice-0"), None)
         if not rec:
             continue
         for pred in [e["source"] for e in edges if e["target"] == ch["id"]]:
-            eid = f"edge-autorec-{ch['id']}-{pred}"
+            eid = prefix + pred
             if any(e.get("id") == eid for e in edges):
                 continue
+            # 一條邊只掛一個條件（build.py 錄音巨集那段的結論）：rec_ok 不另外掛，路線上這五場錄音機都已經清過毛
             leaf = {"variable": "mode", "op": "eq", "value": "story"}
             cond = {"kind": "variable", **leaf, "match": "all", "conditions": [leaf]}
             first = next(i for i, e in enumerate(edges) if e["source"] == pred)
             edges.insert(first, {"id": eid, "source": pred, "target": rec, "sourceHandle": "right", "animated": True, "data": {"condition": cond}})
             n += 1
-    return n
+    return n, removed
 
 
 if __name__ == "__main__":
     nodes = [{"id": "p", "type": "story", "data": {"type": "dialogue"}},
-             {"id": "c", "type": "story", "data": {"type": "choice", "choices": ["開錄音機", "不開"]}},
-             {"id": "rec", "type": "story", "data": {"type": "plugin"}}, {"id": "no", "type": "story", "data": {"type": "dialogue"}}]
+             {"id": "c", "type": "story", "data": {"type": "choice", "title": "錄音：諾亞", "choices": ["開錄音機", "不開"]}},
+             {"id": "rec", "type": "story", "data": {"type": "plugin"}}, {"id": "no", "type": "story", "data": {"type": "dialogue"}},
+             {"id": "p2", "type": "story", "data": {"type": "dialogue"}},
+             {"id": "c2", "type": "story", "data": {"type": "choice", "title": "錄音：貓草", "choices": ["開錄音機", "不開"]}}]
     edges = [{"id": "e1", "source": "p", "target": "c"}, {"id": "e2", "source": "c", "target": "rec", "sourceHandle": "choice-0"},
-             {"id": "e3", "source": "c", "target": "no", "sourceHandle": "choice-1"}]
-    assert apply_autorecord(nodes, edges) == 1 and edges[0]["target"] == "rec" and edges[0]["data"]["condition"]["value"] == "story"
-    assert apply_autorecord(nodes, edges) == 0
+             {"id": "e3", "source": "c", "target": "no", "sourceHandle": "choice-1"},
+             {"id": "edge-autorec-c2-p2", "source": "p2", "target": "rec", "data": {}}, {"id": "e4", "source": "p2", "target": "c2"}]
+    assert apply_autorecord(nodes, edges) == (1, 1)     # 諾亞加一條、貓草那條舊的拆掉
+    assert edges[0]["target"] == "rec" and [c["variable"] for c in edges[0]["data"]["condition"]["conditions"]] == ["mode"]
+    assert not any(e["id"] == "edge-autorec-c2-p2" for e in edges)
+    assert apply_autorecord(nodes, edges) == (0, 0)
 
     nodes = [{"id": "b", "type": "story", "data": {"type": "miniGame"}},
              {"id": "d1", "type": "story", "data": {"type": "dialogue", "variableOps": [{"variable": "open_studio"}, {"variable": "x"}]}},

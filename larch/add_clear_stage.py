@@ -33,9 +33,9 @@ def main():
     board_card = next(n["id"] for n in board["nodes"] if "function walkMap()" in (n["data"].get("miniGameHtml") or ""))
     ghost = next(a["url"] for n in board["nodes"] for a in (n["data"].get("stage") or {}).get("actors") or [] if a["id"] == "actor-none")
     n = CS.apply(board["nodes"], board["edges"], board_card, ghost)
-    m = CS.apply_autorecord(board["nodes"], board["edges"])
-    print(f"插 {n} 張清場卡、{m} 條劇情模式自動錄音邊（版子 {n0[0]}→{len(board['nodes'])} 卡、{n0[1]}→{len(board['edges'])} 邊）")
-    if a.dry or not (n or m):
+    m, r = CS.apply_autorecord(board["nodes"], board["edges"])
+    print(f"插 {n} 張清場卡、{m} 條劇情模式自動錄音邊（拆 {r} 條）（版子 {n0[0]}→{len(board['nodes'])} 卡、{n0[1]}→{len(board['edges'])} 邊）")
+    if a.dry or not (n or m or r):
         return 0
     for attempt in range(5):
         try:
