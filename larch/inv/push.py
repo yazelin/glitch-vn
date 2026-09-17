@@ -696,6 +696,11 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     # 左欄
     col = 0
     put(board_id, 0, 0)
+    # 段落收尾清場卡：回板前把台上的人清掉（larch/inv/clear_stage.py；線上補用 larch/add_clear_stage.py）
+    import clear_stage as CS
+    CS.apply(nodes, edges, board_id, ghost)
+    CS.apply_autorecord(nodes, edges)     # 劇情模式跳過「開錄音機／不開」，直接錄
+
     put("inv-rest", 0, CH)
     put("inv-notes-int", 0, 2 * CH); put("inv-notes", CW, 2 * CH)
     y = 3 * CH

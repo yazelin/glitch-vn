@@ -469,6 +469,11 @@ def _card_node(c):
             if "~~" in text:
                 # 他劃掉自己寫過的結論。收尾門檻之一（信心.md 五：至少三條刪除線）
                 d["variableOps"] = [{"id": "op-strikes", "variable": "strikes", "kind": "add", "value": 1}]
+                # 播放器沒有 markdown，`~~` 會原樣印成兩個波浪號（2026-09-17 實玩看到）。
+                # 組合字元 U+0336 也不行：播放器逐字印，組合字元被拆開印成方框（2026-09-17 下午他截圖抓到；
+                # 播放器 chunk 裡沒有 line-through 也沒有 innerHTML，純文字之外沒有路）。
+                # 只能用純文字記號；配音那邊 voice.to_speech 會把記號拿掉、字照唸。
+                d["text"] = re.sub(r"~~(.+?)~~", r"〔劃掉：\1〕", text)
         return d
     if c["kind"] == "say":
         text = "\n".join(l["text"] for l in lines)

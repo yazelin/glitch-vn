@@ -553,6 +553,8 @@ def to_speech(text):
     # 2026-09-15 讀播放器 bundle 確認過）。那個字元對合成端沒有意義，
     # 留著會讓 pypinyin 與模型看到不認得的碼位。
     text = text.replace("\u0336", "")
+    # 2026-09-17 \u6539\u6210\u7d14\u6587\u5b57\u8a18\u865f\u300c\u3014\u5283\u6389\uff1a\u2026\u3015\u300d\uff08\u7d44\u5408\u5b57\u5143\u5728\u64ad\u653e\u5668\u88e1\u5370\u6210\u65b9\u6846\uff09\uff1a\u8a18\u865f\u62ff\u6389\u3001\u88e1\u9762\u7684\u5b57\u7167\u5538
+    text = re.sub(r"\u3014\u5283\u6389\uff1a(.+?)\u3015", r"\1", text, flags=re.S)
     # 括號拿掉之後留下的空行與行首空白要收乾淨，不然合成端會多一個停頓
     text = re.sub(r"[ \u3000]+", " ", text)
     text = "\n".join(ln.strip() for ln in text.split("\n"))

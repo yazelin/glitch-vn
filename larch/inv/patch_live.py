@@ -21,6 +21,8 @@ sys.path.insert(0, str(HERE)); sys.path.insert(0, str(HERE.parent))
 import push as PUSH          # DISPLAY／DISPLAY_UI 只在那裡寫一次
 import novelkit as NK        # cdn()
 import names as NAMES        # 旁白不講名字
+import clear_stage as CS     # ghost_stage()
+STAGE_CLEAR = {"inv-457", "inv-458", "inv-459", "inv-460"}   # 結局段：諾亞「門幫我帶一下」之後的四張
 
 _R2 = "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/"
 _MAIN = _R2 + "project-bec1644c-0dfe-4447-86c0-0c592e2f939f/"      # 正篇專案
@@ -103,7 +105,9 @@ STRIKE = re.compile(r"~~(.+?)~~")
 
 
 def strike(text):
-    return STRIKE.sub(lambda m: "".join(ch + "̶" for ch in m.group(1)), text)
+    # `~~…~~` 與早先上線的 U+0336 組合字元版本，都換成純文字記號「〔劃掉：…〕」（播放器把組合字元印成方框）
+    text = STRIKE.sub(r"〔劃掉：\1〕", text)
+    return re.sub(r"(?:.̶)+", lambda m: "〔劃掉：" + m.group(0).replace("̶", "") + "〕", text)
 
 
 def rekey_voice(holder, speaker, stats):
@@ -117,6 +121,7 @@ def rekey_voice(holder, speaker, stats):
 
 def patch(board, stats):
     disp = PUSH.DISPLAY
+    ghost = next(a["url"] for n in board["nodes"] for a in (n["data"].get("stage") or {}).get("actors") or [] if a.get("id") == "actor-none")
     for n in board["nodes"]:
         d = n["data"]
         if d.get("type") == "miniGame" and "function walkMap()" in (d.get("miniGameHtml") or ""):
@@ -125,13 +130,18 @@ def patch(board, stats):
         for k in ("miniGameHtml", "pluginHtml", "html"):
             if isinstance(d.get(k), str) and "十 二 天" in d[k]:
                 d[k] = d[k].replace("調 查 篇　・　十 二 天", "調 查 篇　・　十 四 天"); stats["strike"] += 1
-        if d.get("type") == "dialogue" and "~~" in (d.get("text") or ""):
+        if d.get("type") == "dialogue" and ("~~" in (d.get("text") or "") or "̶" in (d.get("text") or "")):
             d["text"] = strike(d["text"]); stats["strike"] += 1
         # 八、斑比工作室深夜掛到正篇的直播間背景（2026-09-17 他抓到）：場景卡與調查板 HTML 裡的網址一起換
         for k in ("background", "backgroundNight", "miniGameHtml", "pluginHtml", "html"):
             for old, new in NIGHT_FIX.items():
                 if isinstance(d.get(k), str) and old in d[k]:
                     d[k] = d[k].replace(old, new); stats["studio"] += 1
+        # 九、結局段諾亞說完「門幫我帶一下」之後她下樓、跟人擦身，諾亞的立繪卻一路留在台上（2026-09-17 他抓到：
+        # 玩家會以為擦身的人是諾亞）。設計稿已補「下台」標記，線上這四張直接清場。
+        if n["id"] in STAGE_CLEAR and any(a.get("name") for a in (d.get("stage") or {}).get("actors") or []):
+            d["stage"], d["characterLayers"] = CS.ghost_stage(ghost)
+            stats["stage"] += 1
         # 七、旁白正文與筆記標籤裡的名字（names.py），要排在重查配音之前：代號照字算
         if d.get("type") == "dialogue":
             stats["names"] += NAMES.hide_names(d)
@@ -176,9 +186,9 @@ def main():
             payload, etag = request(f"/boards/{bid}")
             board = payload.get("board", payload)
         before = (len(board["nodes"]), len(board["edges"]))
-        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0, "names": 0, "studio": 0}
+        stats = {"speaker": 0, "voice": 0, "table": 0, "rail": 0, "strike": 0, "rekey": 0, "names": 0, "studio": 0, "stage": 0}
         patch(board, stats)
-        print(f"{bid}：講者名 {stats['speaker']} 處、旁白名字 {stats['names']} 處、工作室背景 {stats['studio']} 處、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
+        print(f"{bid}：講者名 {stats['speaker']} 處、旁白名字 {stats['names']} 處、工作室背景 {stats['studio']} 處、結局清台 {stats['stage']} 張、音檔網址 {stats['voice']} 處（其中換新檔 {stats['rekey']}）、"
               f"名字表 {stats['table']} 張卡、調查板軌道段落 {stats['rail']}、刪除線 {stats['strike']} 張"
               f"　（卡 {before[0]}、邊 {before[1]}，不動）")
         if a.dry or not any(stats.values()):

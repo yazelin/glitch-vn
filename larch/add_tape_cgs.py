@@ -26,11 +26,13 @@ NEW = [
     {"key": "tape-bambi", "title": "工作室・她一個人住嗎", "label": "問斑比她一個人住嗎", "file": "cg-tape-bambi-v5.webp"},
     # clerk v4：背景照 bg-store-night（台灣 7-11 亮色調），v3 被畫成灰暗倉庫
     {"key": "tape-clerk", "title": "便利商店・穿西裝的那個", "label": "問店員那個穿西裝的", "file": "cg-tape-clerk-v4.webp"},
+    # 這兩張本來是劇情 CG（解鎖卡 id 沿用 add_story_cgs.py 的），2026-09-17 改成錄音帶 CG：
+    # 解鎖卡搬到那場「開錄音機」分支的取得錄音帶卡後面。保全那張原本掛在第四天女兒那段，跟錄音無關，一併搬。
+    {"key": "parts-ledger",   "title": "她記得零件", "label": "問老闆那個穿西裝的", "file": "cg-tape-parts-v4.webp"},   # v3：道具放在水平檯面；v4：按鍵一紅三黑
+    {"key": "guard-daughter", "title": "保全的手機", "label": "聽他講",           "file": "cg-tape-guard-v3.webp"},
 ]
 # 既有 CG 換圖（標題不變，收藏格不變，只換 url）
 REPLACE = [
-    {"title": "她記得零件", "file": "cg-tape-parts-v4.webp"},   # v3：道具放在看得見的水平檯面上；v4：按鍵一紅三黑
-    {"title": "保全的手機", "file": "cg-tape-guard-v3.webp"},
     # 劇情 CG 也能從這裡換圖（解鎖卡的命名跟 add_story_cgs.py 同形）：v3 袖口不再抄格莉奇、線圈筆記本換守則本
     {"title": "這集有我", "file": "cg-story-this-episode-v3.webp"},
 ]
@@ -73,7 +75,10 @@ def cg_condition(url, title):
 
 
 def source_card(board, label):
-    """該場的來源卡：從 pick 邊進段落，沿邊走到 grant-item（錄音機）之後、回板之前的最後一張對話卡。"""
+    """該場的來源卡：從 pick 邊進段落，沿邊走到 grant-item（取得錄音帶）那張，解鎖卡就掛在它後面。
+
+    **不可以掛在收尾那張對話卡**：「不開錄音機」那條分支也會走回同一張收尾卡，不錄也拿得到 CG
+    （2026-09-17 他問「不開還是會有 CG？」——當時確實會）。找不到 grant-item 才退回收尾卡。"""
     import sim as S
     r = next(r for r in S.rules if (r.get("label") or r["section"]) == label)
     by = {n["id"]: n for n in board["nodes"]}
@@ -88,7 +93,9 @@ def source_card(board, label):
         if by[c]["data"].get("pluginCardId") == "grant-item":
             grant = c; break
         fr += [e["target"] for e in board["edges"] if e["source"] == c and by.get(e["target"], {}).get("data", {}).get("type") != "boardJump"]
-    cur, last = grant or entry, grant or entry
+    if grant:
+        return grant
+    cur, last = entry, entry
     seen = set()
     while cur and cur not in seen:
         seen.add(cur)
@@ -117,7 +124,8 @@ def add_unlock(board, spec, url):
                          "cgOps": [{"id": f"op-{node_id}-gallery", "url": url, "mode": "unlock"}]})
     node["data"].pop("variableOps", None)
     enter_id = f"edge-{node_id}-enter"; clone_prefix = f"edge-{node_id}-continue-"
-    edges[:] = [e for e in edges if e.get("id") != enter_id and not e.get("id", "").startswith(clone_prefix)]
+    # 搬家要乾淨：不管舊邊叫什麼名字（add_story_cgs.py 取的不一定同形），進出這張解鎖卡的邊全部拆掉重接
+    edges[:] = [e for e in edges if e.get("source") != node_id and e.get("target") != node_id]
     outgoing = [e for e in edges if e.get("source") == src]
     enter = {"id": enter_id, "source": src, "target": node_id, "sourceHandle": "right", "animated": True, "data": {"condition": cg_condition(url, spec["title"])}}
     first = next((i for i, e in enumerate(edges) if e.get("source") == src), len(edges))
