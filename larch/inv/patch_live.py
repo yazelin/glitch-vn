@@ -187,7 +187,7 @@ PHONE_PAIRS = [
     ("  screen.classList.toggle('t-light', theme==='light');", "  screen.classList.toggle('t-light', theme==='light');\n  document.body.classList.toggle('t-light', theme==='light');"),
     ("rp.appendChild(el('span',null,'她不回。'));", "rp.appendChild(el('span',null,'簡訊與通知。這裡只收。'));"),
     ("'官方帳號・每天開台'", "'官方帳號・不定時開台'"),
-    ("text:'新的插畫。畫她的人說這一版嘴角對了。'", "text:'新的插畫。這一版嘴角對了。'"),
+    ("新的插畫。畫她的人說這一版嘴角對了。", "新的插畫。這一版嘴角對了。"),   # phone.html 的 POSTS 與 push.py 灌的 feed JSON 兩種寫法都對得到
     ('<div id="phone"><div id="screen">', '<div id="halo"></div><div id="phone"><div id="screen">'),
     ('body.banner{background:transparent;display:block;padding:0}', '/* 背光與螢幕光（2026-09-17 作者要求，他之前做的手機都有）：#halo 是機身後面那團光，#screen 的 box-shadow 是螢幕本身溢出來的光。\n   跟著主題換色：深色紫青、淺色偏白。背景維持黑，光才漂亮（作者說的）。橫幅模式不畫。 */\n#halo{position:absolute;left:50%;top:50%;width:min(620px,130vw);height:min(1040px,130vh);transform:translate(-50%,-50%);\n  border-radius:50%;pointer-events:none;filter:blur(30px);animation:halo 7s ease-in-out infinite alternate;\n  background:radial-gradient(closest-side,rgba(183,139,255,.34),rgba(37,194,232,.18) 52%,transparent 100%);transition:background .35s}\nbody.t-light #halo{background:radial-gradient(closest-side,rgba(226,236,255,.46),rgba(122,79,208,.20) 52%,transparent 100%)}\n@keyframes halo{from{opacity:.72}to{opacity:1}}\n#screen{box-shadow:0 0 36px rgba(183,139,255,.30),0 0 96px rgba(37,194,232,.18)}\nbody.t-light #screen{box-shadow:0 0 36px rgba(214,228,255,.48),0 0 96px rgba(255,255,255,.2)}\nbody.banner #halo{display:none}\nbody.banner{background:transparent;display:block;padding:0}'),
 ]
