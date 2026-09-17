@@ -13,6 +13,10 @@
 
 六十分鐘完整遊玩：[YouTube](https://youtu.be/J9OMebCjr9Y)　·　[原始檔](https://github.com/yazelin/glitch-vn/releases/tag/v1.0-play)（330 MB，程式自動玩一次錄的，見 `tools/capture`）
 
+## 接手先讀
+
+`AGENTS.md`（給人和任何 AI 的入口）→ 最新的 `交接-*.md` → `larch/RELEASES.md`。調查篇的規則與現況都在那三份裡。
+
 ## 這個 repo 裡有什麼
 
     novel/chNN.md            小說本文，七章。**支線不寫進來**
