@@ -19,14 +19,15 @@ KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 
 # 段落標籤（design 選單標籤）→ CG。file 在 art/inv-cg。
 NEW = [
-    {"key": "tape-noah",  "title": "頂樓・錄音機開著",   "label": "問諾亞那個穿西裝的", "file": "cg-tape-noah.webp"},
-    {"key": "tape-bambi", "title": "工作室・她一個人住嗎", "label": "問斑比她一個人住嗎", "file": "cg-tape-bambi.webp"},
-    {"key": "tape-clerk", "title": "便利商店・穿西裝的那個", "label": "問店員那個穿西裝的", "file": "cg-tape-clerk.webp"},
+    # 換圖要用新檔名：媒體庫照檔名快取，同名會拿到舊圖。v2＝帶俯視圖與固定道具圖重畫（art/inv-cg/CG畫法.md）
+    {"key": "tape-noah",  "title": "頂樓・錄音機開著",   "label": "問諾亞那個穿西裝的", "file": "cg-tape-noah-v2.webp"},
+    {"key": "tape-bambi", "title": "工作室・她一個人住嗎", "label": "問斑比她一個人住嗎", "file": "cg-tape-bambi-v3.webp"},
+    {"key": "tape-clerk", "title": "便利商店・穿西裝的那個", "label": "問店員那個穿西裝的", "file": "cg-tape-clerk-v2.webp"},
 ]
 # 既有 CG 換圖（標題不變，收藏格不變，只換 url）
 REPLACE = [
-    {"title": "她記得零件", "file": "cg-tape-parts.webp"},
-    {"title": "保全的手機", "file": "cg-tape-guard.webp"},
+    {"title": "她記得零件", "file": "cg-tape-parts-v2.webp"},
+    {"title": "保全的手機", "file": "cg-tape-guard-v2.webp"},
 ]
 
 
