@@ -110,7 +110,11 @@ VIS_NEW_B = "    if(forced || Math.random()<pr || (pity>0 && c>=pity)){ out.push
 
 # 調查板換成真的細紋軟木貼圖（2026-09-17 作者給參考圖；art/board-cork.webp 已上傳到媒體庫）。
 # board.html 同一段改了要兩邊一起改；push.py 整包推時是用 /*@@CORK@@*/ 灌網址，這裡直接寫死。
-CORK_URL = _INV + "1789638515611_board-cork.webp"
+# 2026-09-18 作者拍板：軟木貼圖與拼版改走 jsDelivr（R2 每次 1.3 秒且沒邊緣快取；jsDelivr 暖了 0.27 秒）。
+# 釘在 commit 上，快取一年不用重驗；換圖就換這個 sha。Larch 素材庫那兩份留著（素材打包用）。
+_CDN = "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@8b099ddc920cac3f291add6e6ba0c8cf9b1e58f5/art/"
+CORK_URL = _CDN + "board-cork.webp"
+CORK_R2 = _INV + "1789638515611_board-cork.webp"
 CORK_OLD_SKY = "var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];\n\n// 地點"
 CORK_NEW_SKY = ("var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];\n"
                 "var CORK = " + json.dumps(CORK_URL) + ";\n"
@@ -140,7 +144,8 @@ CORK_NEW_CSS = (".sky canvas{position:absolute;inset:0;width:100%;height:100%;di
 
 # 拍立得縮圖 atlas＋街廓改四條線（2026-09-17 作者要求；board.html 同一段改了要兩邊一起改）。
 _ATLAS = json.loads((HERE.parent.parent / "art/board-atlas.json").read_text(encoding="utf-8"))
-_ATLAS["url"] = _INV + "1789656782122_board-atlas.webp"
+ATLAS_R2 = _INV + "1789656782122_board-atlas.webp"
+_ATLAS["url"] = _CDN + "board-atlas.webp"
 ATLAS_OLD = "var PHOTOS = "
 ATLAS_NEW = "var ATLAS = " + json.dumps(_ATLAS, ensure_ascii=False) + ";\nvar PHOTOS = "
 PHOTO_OLD = """    if(been && PHOTOS[s.id]){
@@ -275,11 +280,15 @@ FADE_NEW_PAINT = ("    var sk=document.getElementById('sky'); sk.className='sky 
 FADE_OLD_PRE = "var SKY_TEX=[['#c6a687','#a68870'],['#c2a283','#a3856c'],['#957a63','#77604d'],['#6e5644','#574334']];"
 FADE_NEW_PRE = (FADE_OLD_PRE + "\n"
                 "var atlasReady=!ATLAS;   // 拼版先預載；載到之前的照片掛 wait（透明），到了一起淡入\n"
-                "function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p,i){ setTimeout(function(){ p.classList.remove('wait'); }, 60+i*70); }); }\n"
+                "function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p){ p.classList.remove('wait'); }); }\n"
                 "if(ATLAS){ var _ai=new Image(); _ai.onload=function(){ atlasReady=true; develop(); }; _ai.src=ATLAS.url; }")
 FADE_OLD_PH = "        if(c){ ph.style.backgroundImage='url(\"'+ATLAS.url+'\")';"
-FADE_NEW_PH = "        if(c){ ph.className='photo wait'; if(atlasReady) setTimeout(function(){ ph.classList.remove('wait'); }, 60+i*70); ph.style.backgroundImage='url(\"'+ATLAS.url+'\")';"
+FADE_NEW_PH = "        if(c){ ph.className='photo wait'; if(atlasReady) requestAnimationFrame(function(){ requestAnimationFrame(function(){ ph.classList.remove('wait'); }); }); ph.style.backgroundImage='url(\"'+ATLAS.url+'\")';"
 FADE_PAIRS = ((FADE_OLD_CSS, FADE_NEW_CSS), (FADE_OLD_PAINT, FADE_NEW_PAINT), (FADE_OLD_PRE, FADE_NEW_PRE), (FADE_OLD_PH, FADE_NEW_PH))
+STAG_PAIRS = (("function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p,i){ setTimeout(function(){ p.classList.remove('wait'); }, 60+i*70); }); }", "function develop(){ Array.prototype.forEach.call(document.querySelectorAll('.photo.wait'),function(p){ p.classList.remove('wait'); }); }"), ("if(c){ ph.className='photo wait'; if(atlasReady) setTimeout(function(){ ph.classList.remove('wait'); }, 60+i*70); ph.style", "if(c){ ph.className='photo wait'; if(atlasReady) requestAnimationFrame(function(){ requestAnimationFrame(function(){ ph.classList.remove('wait'); }); }); ph.style"))   # 2026-09-18 作者：載到就淡入，不要一張一張延時；線上曾套過延時版，先換回來
+SMOOTH_PAIRS = (("button.spot .photo.wait::after{opacity:1;transition:none}\n", "button.spot .photo.wait::after{opacity:1;transition:none}\nbody{opacity:0;transition:opacity .45s ease}\nbody.on{opacity:1}   /* 整張板子淡入，不要第一幀就整片跳出來（2026-09-18 作者：要流暢） */\n"),
+                ("parent.postMessage({type:'larch:ready'},'*');\n", "parent.postMessage({type:'larch:ready'},'*');\nrequestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('on'); }); });\n"))
+CDN_PAIRS = ((CORK_R2, CORK_URL), (ATLAS_R2, _ATLAS["url"]))   # 線上已經是 R2 網址的卡：直接換字
 
 
 def swap_board_js(html, stats):
@@ -289,15 +298,18 @@ def swap_board_js(html, stats):
                            (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail"), (TEX_OLD, TEX_NEW, "rail"),
                            (PHOTO_OLD, PHOTO_NEW, "rail"), (BLOCK_OLD, BLOCK_NEW, "rail"), (LINECSS_OLD, LINECSS_NEW, "rail"),
                            (HDR1_OLD, HDR1_NEW, "rail"), (HDR2_OLD, HDR2_NEW, "rail"), (HDR3_OLD, HDR3_NEW, "rail"), (HDR4_OLD, HDR4_NEW, "rail"), (HDR5_OLD, HDR5_NEW, "rail"),
-                           *[(o, n, "rail") for o, n in FADE_PAIRS]):
+                           *[(o, n, "rail") for o, n in STAG_PAIRS], *[(o, n, "rail") for o, n in FADE_PAIRS], *[(o, n, "rail") for o, n in SMOOTH_PAIRS], *[(o, n, "rail") for o, n in CDN_PAIRS]):
         if new in html:
             continue
         if old in html:
             html = html.replace(old, new, 1); stats[name] += 1
-        else:
+        elif not any(n in html for _, n in FADE_PAIRS + SMOOTH_PAIRS):   # 後面的對已經改寫過這些段落就不喊
             print(f"  ★ 調查板卡片裡找不到這一段的新舊版本（{old[:30]}…），去對 board.html")
     if "var ATLAS = " not in html and ATLAS_OLD in html:      # atlas 表只加一次（插在 PHOTOS 前面）
         html = html.replace(ATLAS_OLD, ATLAS_NEW, 1); stats["rail"] += 1
+    # push.py 整包重建會把軟木／拼版重新上傳到 Larch（時間戳不同），這裡不管時間戳，一律改指 jsDelivr
+    html, n = re.subn(r'https://pub-[^"\']+?_board-(cork|atlas)\.webp', lambda m: _CDN + "board-" + m.group(1) + ".webp", html)
+    stats["rail"] += n
     return html
 
 
