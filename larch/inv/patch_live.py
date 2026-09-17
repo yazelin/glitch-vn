@@ -182,6 +182,7 @@ LINECSS_NEW = ("  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n"
 # 手機卡（inv-phone、phone-bambi、phone-pr；larch/cards/phone.html 灌的）：主題換分頁不洗掉、背光與螢幕光、三句文案。
 # 2026-09-17 作者抓到／要求。改了 phone.html 要一起改這裡。
 PHONE_PAIRS = [
+    ('window.checkCover=checkCover; window.wmRect=wmRect; window.show=show;', "// 點手機以外的地方也收起來（2026-09-17 作者要求）。橫幅模式沒有這回事。halo 是 pointer-events:none，點到它等於點到外面。\ndocument.addEventListener('click', function(e){\n  if(MODE!=='full' || !booted) return;\n  if(e.target && e.target.closest && e.target.closest('#phone')) return;\n  closePhone();\n});\nwindow.checkCover=checkCover; window.wmRect=wmRect; window.show=show;"),
     ('#screen{box-shadow:0 0 36px rgba(183,139,255,.30),0 0 96px rgba(37,194,232,.18)}\n', '/* 深色不要正面螢幕光（2026-09-17 作者），只留機身後面的背光；淺色才有 */\n'),
     ("  document.documentElement.style.colorScheme = theme==='light' ? 'light' : 'dark';", "  document.documentElement.style.colorScheme = 'normal';"),   # inv-phone 那張是更早的寫法
     ('html{color-scheme:dark}   /* 預設暗的;玩家按了那顆鈕才換。不宣告的話捲軸這類 UA 自己畫的東西會跟著玩家的系統走 */', 'html{color-scheme:normal}   /* 2026-09-17 改 normal：dark 會讓透明 iframe 的根畫布被補成純黑，body 的半透明黑就透不出場景。捲軸樣式在上面自己畫了，不靠它 */'),
@@ -207,12 +208,22 @@ PHONE_DEDUP = [
 
 
 def swap_phone_js(html, stats):
+    # 背光 CSS 區塊被插了兩份（舊字串是新字串的結尾）：留第一份
+    START, END = "/* 背光與螢幕光", "body.banner #halo{display:none}\n"
+    while html.count(START) > 1:
+        i = html.find(START, html.find(START) + 1); j = html.find(END, i) + len(END)
+        html = html[:i] + html[j:]; stats["phone"] += 1
     for dup, one in PHONE_DEDUP:
         while dup in html:
             html = html.replace(dup, one); stats["phone"] += 1
     for old, new in PHONE_PAIRS:
         if new in html:
             continue
+        # 舊字串是新字串的一部分（插入式的替換）：新多出來的那段開頭已經在，就是套過了，不可以再插一次
+        if old in new:
+            extra = new.split(old)[0] or new.split(old)[1]
+            if extra.strip()[:24] and extra.strip()[:24] in html:
+                continue
         if old in html:
             html = html.replace(old, new, 1); stats["phone"] += 1
         elif new not in html:

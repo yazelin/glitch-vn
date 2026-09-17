@@ -870,6 +870,12 @@ setTimeout(function(){
   }
 }, 200);
 
+// 點手機以外的地方也收起來（2026-09-17 作者要求）。橫幅模式沒有這回事。halo 是 pointer-events:none，點到它等於點到外面。
+document.addEventListener('click', function(e){
+  if(MODE!=='full' || !booted) return;
+  if(e.target && e.target.closest && e.target.closest('#phone')) return;
+  closePhone();
+});
 window.checkCover=checkCover; window.wmRect=wmRect; window.show=show;
 window.getCardTheme=function(){ return theme; };
 window.flipCardTheme=function(){ var b=document.querySelector('#tbtn'); if(b) b.click(); return !!b; };
