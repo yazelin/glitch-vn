@@ -334,9 +334,17 @@ def assemble(board, state, pid=None, dry=False, real_bid="inv"):
     seg_dest_of = {r["segment"]: r["dest"] for r in rules}
     seg_slots_of = {**board.get("seg_slots", {}), **{r["segment"]: r.get("slots") or [] for r in rules}}
     for n in nodes:
-    # 立繪差分（larch/inv/poses.py）：照卡上的括號指示換舞台上那個人的圖。線上補用 larch/add_poses… 見 apply_poses.py。
+    # 立繪差分：**讀表** design/調查篇-立繪姿勢.tsv（tools/pose_table.py 產、人審過；決定欄優先），跟 larch/apply_poses.py 同一份來源。
+    # 規則（poses.py）只負責產提案，不直接決定線上長什麼樣。
+    import csv
     import poses as POSES
-    pose_of = POSES.pose_map(list(by_seg.values()))
+    pose_of = {}
+    _tsv = ROOT / "design/調查篇-立繪姿勢.tsv"
+    if _tsv.exists():
+        for _r in csv.DictReader(open(_tsv, encoding="utf-8"), delimiter="\t"):
+            _p = (_r.get("決定") or _r["提案"]).strip()
+            if _p and _p != "base":
+                pose_of.setdefault(_r["卡"], {})[_r["誰"]] = _p
         d = n["data"]
         seg = d.get("segment")
         if d.get("type") != "dialogue" or not seg:

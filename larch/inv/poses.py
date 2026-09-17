@@ -25,18 +25,27 @@ FILES = {
     ("管理員", "report"): "art/inv-cast/sprite-admin-report.png", ("管理員", "stare"): "art/inv-cast/sprite-admin-stare.png",
     ("店員", "think"): "art/inv-cast/sprite-clerk-think.png", ("店員", "smile"): "art/inv-cast/sprite-clerk-smile.png",
 }
-# 誰 → [(正規式, 姿勢)]，照順序第一個中的算；"base" 表示回到基本立繪
+# 誰 → [(正規式, 姿勢[, 只在本人講話時算])]，照順序第一個中的算；"base" 表示回到基本立繪（沿用就此中斷）。
+# 2026-09-17 審過 105 列之後的修正：「抬頭」不可以吃到「沒有抬頭」；上來了／沿著牆走／拉窗口這種動作要回基本；
+# 「停了一下」在旁白裡常是在講玩家，只在本人講話時算。
+UP = r"(?<!沒有)(?<!沒)抬頭|抬起頭"
 RULES = {
     "諾亞": [(r"沒有抬頭|低下頭|低著頭|繼續弄|在剝|拆開|對著燈|鉗子|工作檯上|沒有停手|沒有回頭", "down"),
-           (r"抬頭|抬起頭|看了她|看著她|看她|轉過來|站起來|走過來|上來了", "up")],
-    "貓草": [(r"沒有回頭|沒有抬頭|手機|很快地|背對|沒有看她|把杯子", "away"),
-           (r"看了她一眼|看她|看著她|站起來|轉過來|回頭|下巴指|把盒子轉過來|抬頭", "face")],
-    "斑比": [(r"對著螢幕|看著烘乾機|看著收銀台|沒有回頭|右下角|盯著|沒有抬頭|畫著|低頭", "away"),
-           (r"抬頭|看她|看著她|看了她|把筆蓋|轉過來|停了一下|回頭", "look")],
-    "管理員": [(r"報表|翻到下一頁|拿起單子|看單子", "report"),
-             (r"看了她三秒|哼了一聲|停住|抱胸|抬頭|想了一下|看了一眼|放下報表|把窗口拉下來", "stare")],
-    "店員": [(r"笑", "smile"),
-           (r"想了一下|停了一下|（停）|想了想|看了立牌一眼", "think")],
+           (r"上來了|站起來|走過來|坐下", "base"),
+           (UP + r"|看了她|看著她|看她|轉過來", "up")],
+    "貓草": [(r"沒有回頭|沒有抬頭|手機|背對|沒有看她|把杯子|看外面", "away"),
+           (r"看了她一眼|看她|看著她|轉過來|回頭|下巴指|把盒子轉過來|" + UP, "face"),
+           (r"很快地|站起來|把螢幕轉過來|點開", "base")],
+    "斑比": [(r"對著螢幕|看著烘乾機|看著收銀台|沒有回頭|盯著|沒有抬頭|畫著|低頭|回到椅子上|轉回螢幕", "away"),
+           (r"沿著牆|取下|疊起來|右下角|站起來|按了牆上", "base"),
+           (r"把筆蓋|轉過來|看她|看著她|看了她|" + UP, "look"),
+           (r"停了一下", "look", True)],
+    "管理員": [(r"沒有抬頭|把窗口拉下來|拿起筷子|放下筷子|伸手到信箱", "base"),
+             (r"報表|翻到下一頁|拿起單子|看單子", "report"),
+             (r"看了她三秒|哼了一聲|停住|抱胸|想了一下|看了一眼|" + UP, "stare")],
+    "店員": [(r"笑", "smile", True),        # 旁白「紙板人形…笑得跟上次一樣標準」是立牌在笑，只認店員自己的
+           (r"看了立牌一眼|刷了條碼|沒有抬頭", "base"),
+           (r"想了一下|停了一下|（停）|想了想", "think")],
 }
 NARRATORS = {"旁白", "", None}
 
@@ -52,12 +61,14 @@ def _lines(d):
     return d.get("dialogueLines") or [{"speaker": d.get("speaker"), "text": d.get("text")}]
 
 
-def pose_of_card(d, current):
-    """回傳這張卡的姿勢表 {誰: 姿勢}（含沿用）。current 是段落到目前為止的表。
+def pose_of_card(d, current, why=None):
+    """回傳這張卡的姿勢表 {誰: 姿勢}（含沿用）。current 是段落到目前為止的表。why 給的話記下觸發的那一行。
 
     一張卡是一整段對話（十幾行），舞台上的圖整張卡只有一種，所以取卡裡**第一個**指示＝卡出現時的姿勢；
     後面幾行的動作要等下一張卡才看得到（2026-09-17 斑比「（沒有回頭）…（把筆蓋拿出來）」那張抓到）。"""
     cur = dict(current); found = set()
+    if why is not None:
+        why.clear()
     for L in _lines(d):
         sp, tx = L.get("speaker"), L.get("text") or ""
         if not tx:
@@ -67,9 +78,19 @@ def pose_of_card(d, current):
         for who in targets:
             if who in found:
                 continue
-            for rx, pose in RULES.get(who, []):
-                if re.search(rx, tx):
-                    cur[who] = pose; found.add(who)
+            for rule in RULES.get(who, []):
+                rx, pose, self_only = (rule + (False,))[:3]
+                if self_only and who_sp != who:
+                    continue
+                m = re.search(rx, tx)
+                if m:
+                    if pose == "base":
+                        cur.pop(who, None)
+                    else:
+                        cur[who] = pose
+                    found.add(who)
+                    if why is not None:
+                        why[who] = f"{sp or '旁白'}：{tx[:40]}〔{m.group(0)}→{pose}〕"
                     break
     return cur
 
@@ -96,9 +117,15 @@ if __name__ == "__main__":
            {"id": "c", "data": {"type": "dialogue", "speaker": "旁白", "text": "修收音機的抬頭看了她一眼。"}},
            {"id": "d", "data": {"type": "dialogue", "speaker": "旁白", "text": "那個客人沒有回頭。"}},
            {"id": "e", "data": {"type": "dialogue", "dialogueLines": [{"speaker": "斑比", "text": "（沒有回頭）等一下。"},
-                                                                      {"speaker": "斑比", "text": "（把筆蓋從嘴裡拿出來）只有一個人會講這個。"}]}}]
+                                                                      {"speaker": "斑比", "text": "（把筆蓋從嘴裡拿出來）只有一個人會講這個。"}]}},
+           {"id": "f", "data": {"type": "dialogue", "speaker": "旁白", "text": "修收音機的上來了，一手拎著空袋子。"}},
+           {"id": "g", "data": {"type": "dialogue", "speaker": "管理員", "text": "（沒有抬頭）幫我拿著。"}},
+           {"id": "h", "data": {"type": "dialogue", "speaker": "旁白", "text": "她抄到第五行停了一下。斑比回到椅子上。"}}]
     m = pose_map([seg])
     assert m == {"a": {"諾亞": "down"}, "b": {"諾亞": "down"}, "c": {"諾亞": "up"}, "d": {"諾亞": "up", "貓草": "away"},
-                 "e": {"諾亞": "up", "貓草": "away", "斑比": "away"}}, m      # e：取第一個指示
+                 "e": {"諾亞": "up", "貓草": "away", "斑比": "away"},
+                 "f": {"貓草": "away", "斑比": "away"},                     # 上來了 → 諾亞回基本
+                 "g": {"貓草": "away", "斑比": "away"},                     # 沒有抬頭 → 管理員不是抬頭
+                 "h": {"貓草": "away", "斑比": "away"}}, m                  # 停了一下是玩家的；回到椅子上 → 側身
     assert pose_map([[seg[1]]]) == {}          # 段落開頭沒有指示就是基本立繪
     print("ok")

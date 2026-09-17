@@ -60,17 +60,27 @@ def upload(rel):
     return r["asset"]["url"]
 
 
+TABLE = ROOT / "design/調查篇-立繪姿勢.tsv"
+
+
 def plan(board):
-    """回傳 [(card_id, 誰, 姿勢, 演員索引)]：只列舞台上真的有那個人的卡。"""
-    pm = P.pose_map(segments_of(board))
+    """回傳 [(card_id, 誰, 姿勢, 演員索引)]。**來源是表**（tools/pose_table.py 產、人審過）：決定欄有值用決定，空的用提案；
+    base 或沒有差分檔的組合就不換。只列舞台上真的有那個人的卡。"""
+    import csv
+    want = {}
+    for r in csv.DictReader(open(TABLE, encoding="utf-8"), delimiter="\t"):
+        pose = (r.get("決定") or r["提案"]).strip()
+        if pose and pose != "base" and (r["誰"], pose) in P.FILES:
+            want[(r["卡"], r["誰"])] = pose
     by = {n["id"]: n for n in board["nodes"]}
     rows = []
-    for cid, poses in pm.items():
+    for (cid, who), pose in want.items():
+        if cid not in by:
+            print(f"  ★ 表裡的卡不在線上：{cid}"); continue
         actors = (by[cid]["data"].get("stage") or {}).get("actors") or []
         for i, a in enumerate(actors):
-            who = P.who_of_name(a.get("name"))
-            if who in poses:
-                rows.append((cid, who, poses[who], i))
+            if P.who_of_name(a.get("name")) == who:
+                rows.append((cid, who, pose, i))
     return rows
 
 
