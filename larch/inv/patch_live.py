@@ -107,7 +107,7 @@ CORK_URL = _INV + "1789638515611_board-cork.webp"
 CORK_OLD_SKY = "var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];\n\n// 地點"
 CORK_NEW_SKY = ("var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];\n"
                 "var CORK = " + json.dumps(CORK_URL) + ";\n"
-                "var SKY_TEX=[['#8f6d4c','#775a42'],['#8a6847','#735640'],['#6b5039','#57402d'],['#5a4331','#46331f']];\n\n// 地點")
+                "var SKY_TEX=[['#c6a687','#a68870'],['#c2a283','#a3856c'],['#957a63','#77604d'],['#6e5644','#574334']];\n\n// 地點")
 CORK_OLD_PAINT = ("  var x=c.getContext('2d'), W=c.width, H=c.height;\n"
                   "  var g=x.createLinearGradient(0,0,W*0.4,H); g.addColorStop(0,a); g.addColorStop(1,b);")
 CORK_NEW_PAINT = ("  var x=c.getContext('2d'), W=c.width, H=c.height;\n"
@@ -124,8 +124,8 @@ CORK_NEW_PAINT = ("  var x=c.getContext('2d'), W=c.width, H=c.height;\n"
                   "  var g=x.createLinearGradient(0,0,W*0.4,H); g.addColorStop(0,a); g.addColorStop(1,b);")
 CORK_OLD_APPLY = "  window.__sky=SKY[slot]; paintCork(SKY[slot][0], SKY[slot][1]);"
 CORK_NEW_APPLY = "  window.__sky=(CORK?SKY_TEX:SKY)[slot]; paintCork(window.__sky[0], window.__sky[1]);"
-TEX_OLD = "var SKY_TEX=[['#8f6d4c','#775a42'],['#8a6847','#735640'],['#6b5039','#57402d'],['#5a4331','#46331f']];"
-TEX_NEW = "var SKY_TEX=[['#8f6d4c','#775a42'],['#8a6847','#735640'],['#6b5039','#57402d'],['#5a4331','#46331f']];"
+TEX_OLD = "var SKY_TEX=[['#f6e4cd','#e7cbad'],['#f7dfc0','#e5c39e'],['#c6a687','#a68870'],['#957a63','#77604d']];"
+TEX_NEW = "var SKY_TEX=[['#c6a687','#a68870'],['#c2a283','#a3856c'],['#957a63','#77604d'],['#6e5644','#574334']];"
 CORK_OLD_CSS = ".sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}\n.sky::after"
 CORK_NEW_CSS = (".sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}\n"
                 ".sky.tex{background-position:center;background-size:cover}\n.sky.tex canvas{mix-blend-mode:multiply}\n.sky::after")
