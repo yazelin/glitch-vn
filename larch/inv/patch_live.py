@@ -70,9 +70,10 @@ RAIL_NEW = """    var rs = railTo ? spotAt(railTo) : null;
     if(!rs || !drawn(rs) || !isOpen(rs) || rs.live[slot]===null || rs.live[slot]===undefined){"""
 
 
-# 遊樂園不吃時段（board.html start() 那一行，改了要兩邊一起改）
-PARK_OLD = "  if(values.dest){ advance(); setVar('dest',''); setVar('here',''); }"
-PARK_NEW = "  if(values.dest){ if(values.dest!=='park') advance(); setVar('dest',''); setVar('here',''); }"
+# 遊樂園照樣吃時段（board.html start() 那一行，改了要兩邊一起改）。
+# 2026-09-17 曾改成不吃，作者說原設計就是要吃，改回來；線上那張卡若還是「不吃」那版，換回去。
+PARK_OLD = "  if(values.dest){ if(values.dest!=='park') advance(); setVar('dest',''); setVar('here',''); }"
+PARK_NEW = "  if(values.dest){ advance(); setVar('dest',''); setVar('here',''); }"
 
 
 def swap_board_js(html, stats):
