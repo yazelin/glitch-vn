@@ -832,7 +832,7 @@ function renderFull(){
   $('#dot-feed').hidden = !freshPosts();
   $('#dot-msg').hidden  = !freshMsgs();
   $('#dot-live').hidden = !freshLive();
-  if(!booted){ booted=true; show(phoneLog().length ? 'msg' : 'feed'); }
+  if(!booted){ booted=true; if(!vid.getAttribute('src')) vid.src=VIDEO; show(phoneLog().length ? 'msg' : 'feed'); }   // 一打開就預載直播影片，不等切到直播分頁（2026-09-18）
   else show(tab);
 }
 function renderBanner(){

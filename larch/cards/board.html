@@ -61,9 +61,9 @@ html,body{margin:0;height:100%;background:var(--board);color:var(--text);
   box-shadow:inset 0 0 90px rgba(74,47,24,.34),inset 0 0 18px rgba(74,47,24,.26)}
 .wrap{position:relative;height:100%;display:flex;flex-direction:column;padding:2.4vh 3vw 2vh}
 header{flex:none;display:flex;align-items:baseline;gap:.9em;flex-wrap:wrap}
-h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;letter-spacing:.04em}
-.when{font:500 clamp(14px,2vw,17px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:var(--cyan);letter-spacing:.06em;font-variant-numeric:tabular-nums}
-.hint{color:var(--dim);font-size:clamp(11px,1.4vw,13px);margin-left:auto}
+h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;letter-spacing:.04em;text-shadow:0 1px 2px rgba(0,0,0,.55),0 0 10px rgba(0,0,0,.35)}
+.when{font:500 clamp(14px,2vw,17px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:#a8ecf8;letter-spacing:.06em;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(0,0,0,.6),0 0 10px rgba(0,0,0,.35)}
+.hint{color:#f1e7d6;font-size:clamp(11px,1.4vw,13px);margin-left:auto;text-shadow:0 1px 2px rgba(0,0,0,.6)}   /* 2026-09-18：白天的中棕底上灰褐字看不清，改米白＋陰影 */
 .map{position:relative;flex:1;margin-top:1vh;min-height:0}
 .map svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .map .st{stroke:rgba(255,255,255,.13);stroke-linecap:round;fill:none}
@@ -109,8 +109,8 @@ button.spot.locked{opacity:.92}
 button.spot.locked .name{color:var(--ink2);font-weight:500}
 button.spot.closed{opacity:.55}
 footer{flex:none;display:flex;justify-content:flex-end;align-items:center;margin-top:.6vh}
-button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;font-size:clamp(12px,1.5vw,14px);
-  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:.25em .1em}
+button.skip{appearance:none;cursor:pointer;color:#f1e7d6;text-shadow:0 1px 2px rgba(0,0,0,.6);font:inherit;font-size:clamp(12px,1.5vw,14px);
+  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.45);padding:.25em .1em}
 button.skip:hover,button.skip:focus-visible{color:var(--text);border-color:var(--cyan);outline:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 /* 直向手機：地圖式排版擠不下，改成兩欄便條牆，往下捲。街道線與紅線不畫，待辦便條排最上面 */

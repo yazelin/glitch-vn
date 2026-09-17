@@ -182,6 +182,8 @@ LINECSS_NEW = ("  vector-effect:non-scaling-stroke;stroke-linejoin:round}\n"
 # 手機卡（inv-phone、phone-bambi、phone-pr；larch/cards/phone.html 灌的）：主題換分頁不洗掉、背光與螢幕光、三句文案。
 # 2026-09-17 作者抓到／要求。改了 phone.html 要一起改這裡。
 PHONE_PAIRS = [
+    ('https://yazelin.github.io/glitch-live/assets/live-loop.mp4', 'https://cdn.jsdelivr.net/gh/yazelin/glitch-live@main/assets/live-loop.mp4'),   # 直播影片改走 jsDelivr
+    ("  if(!booted){ booted=true; show(phoneLog().length ? 'msg' : 'feed'); }", "  if(!booted){ booted=true; if(!vid.getAttribute('src')) vid.src=VIDEO; show(phoneLog().length ? 'msg' : 'feed'); }   // 一打開就預載直播影片，不等切到直播分頁（2026-09-18）"),
     ('window.checkCover=checkCover; window.wmRect=wmRect; window.show=show;', "// 點手機以外的地方也收起來（2026-09-17 作者要求）。橫幅模式沒有這回事。halo 是 pointer-events:none，點到它等於點到外面。\ndocument.addEventListener('click', function(e){\n  if(MODE!=='full' || !booted) return;\n  if(e.target && e.target.closest && e.target.closest('#phone')) return;\n  closePhone();\n});\nwindow.checkCover=checkCover; window.wmRect=wmRect; window.show=show;"),
     ('#screen{box-shadow:0 0 36px rgba(183,139,255,.30),0 0 96px rgba(37,194,232,.18)}\n', '/* 深色不要正面螢幕光（2026-09-17 作者），只留機身後面的背光；淺色才有 */\n'),
     ("  document.documentElement.style.colorScheme = theme==='light' ? 'light' : 'dark';", "  document.documentElement.style.colorScheme = 'normal';"),   # inv-phone 那張是更早的寫法
@@ -231,12 +233,26 @@ def swap_phone_js(html, stats):
     return html
 
 
+# 板上標題列／提示／「這一段不出門」在白天的中棕底上看不清（2026-09-18 作者）：加陰影、灰褐改米白
+HDR1_OLD = 'h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;letter-spacing:.04em}'
+HDR1_NEW = 'h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;letter-spacing:.04em;text-shadow:0 1px 2px rgba(0,0,0,.55),0 0 10px rgba(0,0,0,.35)}'
+HDR2_OLD = '.when{font:500 clamp(14px,2vw,17px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:var(--cyan);letter-spacing:.06em;font-variant-numeric:tabular-nums}'
+HDR2_NEW = '.when{font:500 clamp(14px,2vw,17px)/1.2 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:#a8ecf8;letter-spacing:.06em;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(0,0,0,.6),0 0 10px rgba(0,0,0,.35)}'
+HDR3_OLD = '.hint{color:var(--dim);font-size:clamp(11px,1.4vw,13px);margin-left:auto}'
+HDR3_NEW = '.hint{color:#f1e7d6;font-size:clamp(11px,1.4vw,13px);margin-left:auto;text-shadow:0 1px 2px rgba(0,0,0,.6)}   /* 2026-09-18：白天的中棕底上灰褐字看不清，改米白＋陰影 */'
+HDR4_OLD = 'button.skip{appearance:none;cursor:pointer;color:var(--dim);font:inherit;font-size:clamp(12px,1.5vw,14px);'
+HDR4_NEW = 'button.skip{appearance:none;cursor:pointer;color:#f1e7d6;text-shadow:0 1px 2px rgba(0,0,0,.6);font:inherit;font-size:clamp(12px,1.5vw,14px);'
+HDR5_OLD = '  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.25);padding:.25em .1em}'
+HDR5_NEW = '  background:none;border:0;border-bottom:1px solid rgba(255,255,255,.45);padding:.25em .1em}'
+
+
 def swap_board_js(html, stats):
     for old, new, name in ((RAIL_OLD, RAIL_NEW, "rail"), (PARK_OLD, PARK_NEW, "rail"),
                            (VIS_OLD_A, VIS_NEW_A, "rail"), (VIS_OLD_B, VIS_NEW_B, "rail"),
                            (CORK_OLD_SKY, CORK_NEW_SKY, "rail"), (CORK_OLD_PAINT, CORK_NEW_PAINT, "rail"),
                            (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail"), (TEX_OLD, TEX_NEW, "rail"),
-                           (PHOTO_OLD, PHOTO_NEW, "rail"), (BLOCK_OLD, BLOCK_NEW, "rail"), (LINECSS_OLD, LINECSS_NEW, "rail")):
+                           (PHOTO_OLD, PHOTO_NEW, "rail"), (BLOCK_OLD, BLOCK_NEW, "rail"), (LINECSS_OLD, LINECSS_NEW, "rail"),
+                           (HDR1_OLD, HDR1_NEW, "rail"), (HDR2_OLD, HDR2_NEW, "rail"), (HDR3_OLD, HDR3_NEW, "rail"), (HDR4_OLD, HDR4_NEW, "rail"), (HDR5_OLD, HDR5_NEW, "rail")):
         if new in html:
             continue
         if old in html:

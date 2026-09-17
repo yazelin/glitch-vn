@@ -29,7 +29,7 @@ CARDS = ROOT / "larch/cards"
 MAIN_ASSETS = json.loads((ROOT / "larch/assets.json").read_text(encoding="utf-8"))
 NEW_BG_DIR = ROOT / "art/bg-investigation"
 # 手機直播頁那段循環影片。**在別的 repo 上**，見上面 VIDEO 那段註解。
-LIVE_VIDEO = "https://yazelin.github.io/glitch-live/assets/live-loop.mp4"
+LIVE_VIDEO = "https://cdn.jsdelivr.net/gh/yazelin/glitch-live@main/assets/live-loop.mp4"   # 2026-09-18 改走 jsDelivr：Pages 直連 3 MB 要 80 秒，jsDelivr 5 秒；改檔要 purge
 
 # 立繪：新五個在 art/inv-cast（2026-09-05 codex 生、09-07 去背），正文七個沿用 assets.json 的網址。
 # 鍵是調查板 here 裡的名字。黑洞先生刻意不上台：他在這款裡只能是旁白描述的「穿西裝的先生」。
