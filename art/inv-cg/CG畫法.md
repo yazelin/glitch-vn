@@ -24,15 +24,15 @@
   磨石子地、藍白冷藏櫃、咖啡機、包子蒸櫃、關東煮；深夜店內也是全亮。模型自己畫會變成灰暗倉庫（2026-09-17 店員第三版，他抓到）。
   只有錄音機／守則本那種道具是用道具圖，背景不要靠模型自己想。
 
-## 一之三、既有 CG 還沒統一的地方（2026-09-17 對過六張的手部）
+## 一之三、既有 CG 的統一（2026-09-17 下午全部做完）
 
-- 指甲：`golden-hat`、`lost-notebook`、`this-episode` 沒塗；`bambi-wall-v3`、`promise-v2` 是紫色指甲油。標準是**不塗**，那兩張之後要重修。
-  他說 `golden-hat-v2`、`lost-notebook-v1` 的手看起來最正常——重畫時拿這兩張當手部的畫風錨；`promise-v2`、`seventh-line-v1` 的袖口也可以。
-  不行的是 `this-episode-v2`（袖口抄了格莉奇的）。
-- 本子：`two-minutes`、`this-episode` 畫成線圈筆記本，跟守則本（皮面、凸稜書脊）不是同一本。標準是守則本。
-- 袖子：`promise` 是米白毛衣，其他深色。**不用統一**（衣服會換），但 `this-episode-v2` 的袖口跟手機畫面裡格莉奇的連帽衫袖口一模一樣——
-  是模型把畫面裡那個人的衣服抄到主角手上（2026-09-17 他抓到）。畫面裡有格莉奇時要明寫「主角的袖子跟她的不同」。
-  這張還有線圈筆記本要換成守則本，重畫時一起處理。
+- 指甲：`bambi-wall-v3`、`promise-v2` 原本是紫色指甲油 → 重生成 `bambi-wall-v4`、`promise-v3`（不塗）。
+  手部畫風錨用 `golden-hat-v2`（他說這張的手最正常），每次都當第二張參考傳。
+- 本子：`two-minutes-v1`、`this-episode-v2` 原本是線圈筆記本 → `two-minutes-v2`、`this-episode-v3`（守則本）。
+- 袖子：**不用統一**（衣服會換），但 `this-episode-v2` 的袖口抄了手機畫面裡格莉奇的連帽衫——模型會把畫面裡那個人的衣服抄到主角手上。
+  畫面裡有格莉奇時要明寫「主角的袖子跟她的不同、素色」。v3 已改。
+- 「只改一件事」的重生：提示詞寫「Reference image 1 is the COMPOSITION anchor: keep everything… Fix exactly ONE thing: …」，
+  其他都不動，三張一次過。
 
 ## 二、空間一定要有俯視平面圖（`layout-guides/*.svg` → png）
 

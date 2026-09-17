@@ -35,7 +35,7 @@ CGS = [
         "key": "bambi-wall",
         "title": "斑比的牆",
         "source": "inv-328",
-        "file": "cg-story-bambi-wall-v3.webp",
+        "file": "cg-story-bambi-wall-v4.webp",
         "board": "board-main",
     },
     {
@@ -49,14 +49,14 @@ CGS = [
         "key": "two-minutes",
         "title": "兩分鐘",
         "source": "inv-351",
-        "file": "cg-story-two-minutes-v1.webp",
+        "file": "cg-story-two-minutes-v2.webp",
         "board": "board-main",
     },
     {
         "key": "promise",
         "title": "我答應過他",
         "source": "inv-408",
-        "file": "cg-story-promise-v2.webp",
+        "file": "cg-story-promise-v3.webp",
         "board": "board-main",
     },
     {

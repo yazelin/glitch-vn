@@ -35,6 +35,10 @@ NEW = [
 REPLACE = [
     # 劇情 CG 也能從這裡換圖（解鎖卡的命名跟 add_story_cgs.py 同形）：v3 袖口不再抄格莉奇、線圈筆記本換守則本
     {"title": "這集有我", "file": "cg-story-this-episode-v3.webp"},
+    # 2026-09-17 他拍板「同一套生，不要指甲油、不要線圈筆記本」
+    {"title": "斑比的牆",   "file": "cg-story-bambi-wall-v4.webp"},    # 紫指甲 → 不塗
+    {"title": "我答應過他", "file": "cg-story-promise-v3.webp"},       # 紫指甲 → 不塗
+    {"title": "兩分鐘",     "file": "cg-story-two-minutes-v2.webp"},   # 線圈本 → 守則本、手露出來
 ]
 
 
