@@ -97,7 +97,8 @@ def main():
                 if got and got != said.strip():
                     print(f"  ★ 平台唸的字不是我們給的：{got[:30]!r}")
                 data = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=120).read()
-                # level_voice 是從 pre-level/ 讀原檔去壓的，新生的檔兩邊都要放，不然壓出來的還是上一版
+                # level_voice 讀 art/voice、先把原檔備份到 pre-level 再壓；這裡順手也放一份到 pre-level，
+                # 讓「壓過的」與「原始的」兩邊都是這一版（帳本用檔名對雜湊，新檔自然會重壓）
                 (OUT / f"{k}.mp3").write_bytes(data); (OUT / "pre-level" / f"{k}.mp3").write_bytes(data)
                 spoken[k] = said
                 spoken_p.write_text(json.dumps(spoken, ensure_ascii=False, indent=0), encoding="utf-8")
