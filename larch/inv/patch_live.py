@@ -193,8 +193,21 @@ PHONE_PAIRS = [
 ]
 
 
+# 2026-09-17 第二次跑把「舊是新的前綴」那三段又插了一遍：先把重複收回一份，之後新的已在就跳過
+PHONE_DEDUP = [
+    ('<div id="halo"></div><div id="halo"></div>', '<div id="halo"></div>'),
+    (" if(theme==='light') screen.classList.add('t-light'); if(theme==='light') screen.classList.add('t-light');", " if(theme==='light') screen.classList.add('t-light');"),
+    ("  document.body.classList.toggle('t-light', theme==='light');\n  document.body.classList.toggle('t-light', theme==='light');", "  document.body.classList.toggle('t-light', theme==='light');"),
+]
+
+
 def swap_phone_js(html, stats):
+    for dup, one in PHONE_DEDUP:
+        while dup in html:
+            html = html.replace(dup, one); stats["phone"] += 1
     for old, new in PHONE_PAIRS:
+        if new in html:
+            continue
         if old in html:
             html = html.replace(old, new, 1); stats["phone"] += 1
         elif new not in html:
@@ -208,9 +221,11 @@ def swap_board_js(html, stats):
                            (CORK_OLD_SKY, CORK_NEW_SKY, "rail"), (CORK_OLD_PAINT, CORK_NEW_PAINT, "rail"),
                            (CORK_OLD_APPLY, CORK_NEW_APPLY, "rail"), (CORK_OLD_CSS, CORK_NEW_CSS, "rail"), (TEX_OLD, TEX_NEW, "rail"),
                            (PHOTO_OLD, PHOTO_NEW, "rail"), (BLOCK_OLD, BLOCK_NEW, "rail"), (LINECSS_OLD, LINECSS_NEW, "rail")):
+        if new in html:
+            continue
         if old in html:
             html = html.replace(old, new, 1); stats[name] += 1
-        elif new not in html:
+        else:
             print(f"  ★ 調查板卡片裡找不到這一段的新舊版本（{old[:30]}…），去對 board.html")
     if "var ATLAS = " not in html and ATLAS_OLD in html:      # atlas 表只加一次（插在 PHOTOS 前面）
         html = html.replace(ATLAS_OLD, ATLAS_NEW, 1); stats["rail"] += 1
