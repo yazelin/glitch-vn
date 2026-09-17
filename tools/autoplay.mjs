@@ -188,7 +188,8 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
   // 錄音那一題：對貓草按下去他會轉身，那一晚就不算（design/調查篇-橋段2.md 七）。
   // 自動玩家每一題都選第一個，所以會把他那三個晚上全燒掉。認得出是他就選不開。
   let pick_ = optHits[0];
-  if (optHits.length > 1 && /開錄音機/.test(optHits[0].t) && /貓草|關東煮/.test(lastCard)) {
+  // 講者名 2026-09-17 改成「客人」（貓草）——認人的規則要一起認新名字，不然會對他按錄音、燒掉那一晚
+  if (optHits.length > 1 && /開錄音機/.test(optHits[0].t) && /貓草|關東煮|客人/.test(lastCard)) {
     pick_ = optHits.find(o => /不開/.test(o.t)) || optHits[0];
   }
   if (optHits.length) { out(`  [選項] ${optHits.map(o=>o.t).join(' | ')} → 選 ${pick_.t}`);
@@ -196,6 +197,15 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     await pick_.b.click({ timeout: 4000 }).catch(()=>{}); await page.waitForTimeout(900); continue; }
   if (await frameWith('她 記 住 的')) { await page.waitForTimeout(1500); stuck=0; continue; }   // 片尾字卷自己走，等它
   // FILLPAGE1=1：從 HUD 打開守則本，把第一頁那六個名字填好。
+  // 錄音那張卡有時抓不到編號按鈕（2026-09-17 第三輪停在第 6 天深夜貓草那張）：改用文字找。
+  if (!optHits.length && /錄音機在包包裡/.test(t)) {
+    for (const b of await page.getByRole('button').filter({ hasText: /開錄音機|不開/ }).all()) {
+      const tt = ((await b.textContent()) || '').replace(/[\s 　]+/g, ' ').trim();
+      const box = await b.boundingBox().catch(() => null);
+      if (tt.length <= 12 && box && box.height <= 90 && !optHits.some(o => o.t === tt)) optHits.push({ b, t: tt });
+    }
+    if (optHits.length) out(`  [選項] 用文字抓到錄音那題：${optHits.map(o=>o.t).join(' | ')}`);
+  }
   // 自動玩家不會自己填，所以逐字稿的第一頁六個括號永遠是空的，當攻略用不夠格。
   // 第一頁那個分頁要六個 ID 都抄到（斑比那面牆）才會出現，所以填不成就下次再試。
   if (process.env.FILLPAGE1 && !page1Done) {

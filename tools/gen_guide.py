@@ -20,6 +20,7 @@ import datetime
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BOARD = json.loads((ROOT / "larch/inv/out/board.json").read_text(encoding="utf-8"))
 OUT = ROOT / "docs/guide"
+DOCS = ROOT / "docs"
 TODAY = datetime.date.today().isoformat()
 
 LOC_NAME = {"lobby": "一樓", "roof": "頂樓收音機店", "street": "車站前那條街",
@@ -168,7 +169,7 @@ footer{max-width:64em;margin:0 auto;padding:24px;border-top:1px solid var(--hair
 
 PAGES = [("index.html", "怎麼玩"), ("canon.html", "跟正篇的關係"), ("people.html", "出場人物"),
          ("places.html", "地點與時段"), ("threads.html", "支線與條件"),
-         ("walkthrough.html", "完整攻略"), ("glossary.html", "名詞表")]
+         ("walkthrough.html", "完整攻略"), ("path.html", "劇情路徑"), ("gallery.html", "收藏畫廊"), ("glossary.html", "名詞表")]
 
 
 def nav(current):
@@ -261,6 +262,8 @@ def build_index():
 <a href="people.html">出場人物<small>誰能問誰，四十二種組合裡真的有東西的那些</small></a>
 <a href="threads.html">支線與條件<small>每一格要什麼條件才開</small></a>
 <a href="walkthrough.html">完整攻略<small>逐日路線，有雷</small></a>
+<a href="path.html">劇情路徑<small>不玩遊戲也能看完主線：十四天每一格發生了什麼</small></a>
+<a href="gallery.html">收藏畫廊<small>二十七張紀念畫面，怎麼拿到的</small></a>
 </div>
 """
     page("index.html", "怎麼玩", body,
@@ -552,6 +555,213 @@ def build_walkthrough(route_file):
     page("walkthrough.html", "完整攻略", body, "調查篇的逐日路線，取自真的跑完的一輪。")
 
 
+# ── 六之二、劇情路徑（給不玩遊戲的人看主線發生了什麼；也給 AI 看）────────────
+# 資料是 tools/path_from_transcript.py 從自動玩家（劇情模式）真的跑完的逐字稿整理的：design/調查篇-劇情路徑.json。
+# 這一頁不推算、不改寫台詞：每一格就是那一輪看到的東西。
+PATH_LOC = {"一樓": "lobby", "頂樓收音機店": "roof", "車站前那條街": "street", "車站前站牌": "busstop",
+            "南港站二號出口": "metro", "便利商店": "store", "材料行": "parts", "自助洗衣店": "laundry",
+            "手辦店": "figure", "斑比工作室": "studio", "十四樓大廳": "tower14", "騎樓那個門口": "booth-hall", "錄音間門口": "booth-hall"}
+PATH_CSS = """
+<style>
+.pth{list-style:none;margin:28px 0 0;padding:0;position:relative}
+.pth::before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;
+  background:linear-gradient(var(--cy),var(--mint));opacity:.55}
+.pth>li{position:relative;padding:0 0 34px 40px}
+.pth>li::before{content:"";position:absolute;left:4px;top:10px;width:16px;height:16px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--cy);box-shadow:0 0 10px rgba(37,194,232,.55)}
+.pth h2{margin:0 0 12px;font-size:20px}
+.pth h2::before{display:none}
+.pth h2 small{color:var(--muted);font-size:13px;margin-left:10px;font-weight:400}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:grid;grid-template-columns:150px 1fr;background:var(--win);border:1px solid var(--hair);
+  border-radius:var(--r);overflow:hidden}
+.step.cg{border-left:3px solid var(--mint)}
+.step .thumb{position:relative;min-height:112px;background:var(--sunk) center/cover no-repeat}
+.step .thumb::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(4,8,12,.28) 0 1px,transparent 1px 3px)}
+.step .when{position:absolute;left:8px;top:8px;z-index:1;font-size:12px;padding:1px 8px;border-radius:999px;
+  background:rgba(4,8,12,.78);border:1px solid var(--hair2);color:var(--cy);letter-spacing:.08em}
+.step .body{padding:12px 16px 12px;min-width:0}
+.step .loc{font-weight:600;color:#fff;font-size:15px}
+.step .loc .pick{font-weight:400;color:var(--cy);margin-left:10px}
+.step .loc .pick::before{content:"→ "}
+.step p.note{margin:6px 0 0;color:var(--text);font-size:14.5px;line-height:1.75;max-width:none}
+.step .q{margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--hair2);color:var(--muted);font-size:13.8px;line-height:1.7}
+.step .q b{color:var(--muted);font-weight:400;margin-left:6px;font-size:12.5px}
+.step .got{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:center}
+.step .got figure{margin:0;width:118px}
+.step .got figure img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--hair2);border-radius:var(--r);display:block}
+.step .got figure figcaption{font-size:12px;color:var(--mint);margin-top:3px;line-height:1.4}
+.step .tape{font-size:12.5px;color:var(--purple);border:1px solid rgba(183,139,255,.45);padding:2px 9px;border-radius:999px}
+.step details{margin-top:8px}
+.step summary{cursor:pointer;color:var(--faint);font-size:13px;list-style:none}
+.step summary::before{content:"▸ "}
+.step details[open] summary::before{content:"▾ "}
+.step dl{margin:6px 0 0;font-size:13.5px;line-height:1.7;color:var(--muted)}
+.step dl div{display:grid;grid-template-columns:5.5em 1fr;gap:6px;padding:2px 0;border-bottom:1px dashed var(--hair)}
+.step dl dt{color:var(--cy);font-size:12.5px}
+.step dl dd{margin:0}
+.step dl div.me dt{color:var(--mint)}
+.prose{background:var(--win);border:1px solid var(--hair);border-radius:var(--r);padding:14px 18px;margin:14px 0}
+.prose dl{margin:0;font-size:14.5px;line-height:1.85}
+.prose dl div{display:grid;grid-template-columns:5.5em 1fr;gap:8px;padding:3px 0}
+.prose dl dt{color:var(--cy);font-size:13px}.prose dl dd{margin:0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:10px 0 0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:middle;margin-right:5px}
+@media(max-width:560px){.step{grid-template-columns:1fr}.step .thumb{min-height:96px}}
+</style>"""
+
+
+def _bg_thumb(loc_name, slot_idx):
+    code = PATH_LOC.get(loc_name)
+    if not code:
+        return ""
+    order = {0: ["day", "day2"], 1: ["day", "day2"], 2: ["evening", "day"], 3: ["night", "", "evening"]}[max(slot_idx, 0)]
+    for t in order:
+        stem = f"bg-{code}-{t}" if t else f"bg-{code}"
+        if (DOCS / "img/inv" / f"{stem}-t.webp").exists():
+            return f"../img/inv/{stem}-t.webp"
+    return ""
+
+
+def _gallery_files():
+    """CG 標題 → 站上的圖（檔名主幹），取自最近一次專案備份的收藏格清單。"""
+    backups = sorted((ROOT / "larch/inv/backups").glob("inv-live-*.json"))
+    if not backups:
+        return {}
+    p = json.loads(backups[-1].read_text(encoding="utf-8")); p = p.get("project", p)
+    return {it["title"]: it["url"].rsplit("/", 1)[-1].split("_", 1)[-1].rsplit(".", 1)[0]
+            for it in p.get("settings", {}).get("cgGalleryItems", [])}
+
+
+def _dl(lines, cls="", limit=None):
+    out = []
+    for sp, tx in (lines[:limit] if limit else lines):
+        me = " class='me'" if sp == "玩家" else ""
+        out.append(f"<div{me}><dt>{html.escape(sp or '　')}</dt><dd>{html.escape(tx)}</dd></div>")
+    return f'<dl class="{cls}">' + "".join(out) + "</dl>"
+
+
+def build_path(data):
+    files = _gallery_files()
+
+    def cg_fig(title):
+        stem = files.get(title)
+        img = f'<img src="../img/inv/{stem}-t.webp" alt="{html.escape(title)}" loading="lazy">' if stem and (DOCS / "img/inv" / f"{stem}-t.webp").exists() else ""
+        return f'<figure>{img}<figcaption>{html.escape(title)}</figcaption></figure>'
+
+    days = []
+    n_steps = n_cg = 0
+    for d in data["days"]:
+        steps = []
+        for s in d["steps"]:
+            n_steps += 1
+            loc = s.get("go") or "—"
+            cgs = list(dict.fromkeys(s.get("cg") or [])); n_cg += len(cgs)
+            others = [(sp, tx) for sp, tx in s["lines"] if sp not in ("玩家", "旁白", "") and len(tx) >= 6][:2]
+            note = s.get("note") or next((tx for sp, tx in s["lines"] if sp == "旁白"), "")
+            body = [f'<div class="loc">{html.escape(loc)}' + (f'<span class="pick">{html.escape(s["pick"])}</span>' if s.get("pick") else "") + "</div>"]
+            if note:
+                body.append(f'<p class="note">{html.escape(note)}</p>')
+            for sp, tx in others:
+                body.append(f'<div class="q">「{html.escape(tx)}」<b>{html.escape(sp)}</b></div>')
+            if cgs or s.get("tapes"):
+                body.append('<div class="got">' + "".join(cg_fig(t) for t in cgs)
+                            + "".join(f'<span class="tape">錄音帶　{html.escape(t)}</span>' for t in s.get("tapes") or []) + "</div>")
+            if s["lines"]:
+                body.append(f'<details><summary>全部對話（{len(s["lines"])} 句）</summary>{_dl(s["lines"])}</details>')
+            thumb = _bg_thumb(loc, s["slotIdx"])
+            steps.append(f'<li class="step{" cg" if cgs else ""}"><div class="thumb"' + (f' style="background-image:url({thumb})"' if thumb else "")
+                         + f'><span class="when">{html.escape(s["slot"])}</span></div><div class="body">{"".join(body)}</div></li>')
+        days.append(f'<li><h2>第 {d["day"]} 天<small>{len(d["steps"])} 個時段</small></h2><ol class="steps">{"".join(steps)}</ol></li>')
+
+    opening = data.get("opening") or []
+    ending = data.get("ending") or []
+    body = f"""{PATH_CSS}
+<h1>劇情路徑</h1>
+<p class="lede">這一頁把主線走一遍：十四天，每一個時段她去了哪裡、問了什麼、在本子上記下什麼，
+以及一路收到的畫面與錄音。給不玩遊戲的人看故事在做什麼，也給 AI 看（同一份資料在
+<a href="path.json">path.json</a>，是一棵 天→時段→事件 的樹）。<strong>整頁有雷。</strong></p>
+<p>資料來自劇情模式真的跑完的一輪，台詞一個字沒改。人名照她當時知道的叫法：
+「經紀人」「客人」「修收音機的」都是還沒問到名字的人。</p>
+<div class="legend"><span><i style="background:var(--mint)"></i>左邊亮綠的格子有收到紀念畫面</span>
+<span><i style="background:var(--purple)"></i>紫色標籤是那一場錄下的錄音帶</span>
+<span>共 {n_steps} 個時段、{n_cg} 張畫面、{sum(len(s.get('tapes') or []) for d in data['days'] for s in d['steps'])} 卷錄音帶</span></div>
+
+<h2>開場</h2>
+<div class="prose">{_dl(opening, limit=6)}</div>
+{f'<details class="spoiler"><summary>開場全部（{len(opening)} 句）</summary>{_dl(opening)}</details>' if len(opening) > 6 else ''}
+
+<ol class="pth">{"".join(days)}</ol>
+
+<h2>第十四天・收尾</h2>
+<div class="prose">{_dl(ending, limit=12) if ending else '<p class="lede">這一輪沒有跑到收尾。</p>'}</div>
+{f'<details class="spoiler"><summary>收尾全部（{len(ending)} 句）</summary>{_dl(ending)}</details>' if len(ending) > 12 else ''}
+{('<div class="got">' + "".join(cg_fig(t) for t in dict.fromkeys(data.get("endingCg") or [])) + '</div>') if data.get("endingCg") else ''}
+"""
+    page("path.html", "劇情路徑", body, "調查篇主線十四天發生了什麼：每個時段去哪、問什麼、記下什麼，附紀念畫面與錄音帶。取自真的跑完的一輪。")
+    (OUT / "path.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+# ── 六之三、收藏畫廊（線上收藏格那 27 張，給不玩遊戲的人看）──────────────
+PARK_HOW = {"扭蛋": "扭蛋機", "娃娃": "夾娃娃機", "777": "拉霸機", "幸運轉盤": "幸運轉盤", "霓虹鋼珠台": "霓虹鋼珠台"}
+GALLERY_CSS = """
+<style>
+.gal2{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0 30px}
+.gal2 figure{margin:0;background:var(--win);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden}
+.gal2 figure:hover{border-color:var(--mint);box-shadow:0 0 12px rgba(124,243,192,.25)}
+.gal2 a{display:block}
+.gal2 img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--sunk)}
+.gal2 .none{aspect-ratio:16/9;display:grid;place-items:center;color:var(--faint);font-size:13px;background:var(--sunk)}
+.gal2 figcaption{padding:9px 12px 11px;font-size:14px;line-height:1.55}
+.gal2 figcaption b{display:block;color:#fff;font-weight:600}
+.gal2 figcaption span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.gal2 figcaption em{font-style:normal;color:var(--faint);font-size:12px;margin-right:6px}
+</style>"""
+
+
+def build_gallery(path_data):
+    backups = sorted((ROOT / "larch/inv/backups").glob("inv-live-*.json"))
+    if not backups:
+        build_stub("gallery.html", "收藏畫廊", "沒有專案備份，拿不到收藏格清單。"); return
+    p = json.loads(backups[-1].read_text(encoding="utf-8")); p = p.get("project", p)
+    items = p.get("settings", {}).get("cgGalleryItems", [])
+    # 哪一天哪一格收到：從劇情路徑資料對回去
+    where = {}
+    for d in (path_data or {}).get("days", []):
+        for s in d["steps"]:
+            for t in s.get("cg") or []:
+                where.setdefault(t, f"第 {d['day']} 天{s['slot']}・{s.get('go') or ''}・{s.get('pick') or ''}".rstrip("・"))
+    for t in (path_data or {}).get("endingCg") or []:
+        where.setdefault(t, "第 14 天上午・收尾")
+    # 自動玩家那一輪沒拿到的（包包卡它點不進去），拿法照攻略頁寫
+    where.setdefault("失物箱的空白守則本", "第 10 天下午・一樓・幫他拿袋子（跳出包包時挑守則本）")
+    groups = {"遊樂園・全收集": [], "遊樂園・未集齊紀念": [], "劇情": [], "錄音帶": []}
+    tape_titles = {"保全的手機", "她記得零件", "頂樓・錄音機開著", "工作室・她一個人住嗎", "便利商店・穿西裝的那個"}
+    for i, it in enumerate(items, 1):
+        t = it["title"]; stem = it["url"].rsplit("/", 1)[-1].split("_", 1)[-1].rsplit(".", 1)[0]
+        if t.endswith("全收集") or t.endswith("全點亮"):
+            g, how = "遊樂園・全收集", f"格莉奇遊樂園・{PARK_HOW.get(t.replace(' 全收集','').replace('全收集','').replace('全點亮',''), '')}集滿全部角色"
+        elif "未集齊" in t:
+            g, how = "遊樂園・未集齊紀念", f"格莉奇遊樂園・{PARK_HOW.get(t.replace(' 未集齊紀念','').replace('未集齊紀念',''), '')}玩過但還沒集滿"
+        elif t in tape_titles:
+            g, how = "錄音帶", where.get(t, "錄下那一卷的時候")
+        else:
+            g, how = "劇情", where.get(t, "劇情裡")
+        thumb = f"../img/inv/{stem}-t.webp"; full = f"../img/inv/{stem}.webp"
+        img = (f'<a href="{full}" target="_blank" rel="noopener"><img src="{thumb}" alt="{html.escape(t)}" loading="lazy"></a>'
+               if (DOCS / "img/inv" / f"{stem}-t.webp").exists() else '<div class="none">（圖還沒轉）</div>')
+        groups[g].append(f'<figure>{img}<figcaption><b><em>{i:02d}</em>{html.escape(t)}</b><span>{html.escape(how)}</span></figcaption></figure>')
+    sections = "".join(f'<h2>{html.escape(g)}<span class="tag">{len(v)} 張</span></h2><div class="gal2">{"".join(v)}</div>' for g, v in groups.items() if v)
+    body = f"""{GALLERY_CSS}
+<h1>收藏畫廊</h1>
+<p class="lede">遊戲裡「CG 收藏」那 {len(items)} 格，照遊戲裡的順序排。每一張底下寫怎麼拿到：遊樂園那十張看你在哪台機器集滿；
+劇情與錄音帶那些寫的是<a href="path.html">劇情路徑</a>那一輪在第幾天哪一格收到。點圖看大圖。<strong>有雷。</strong></p>
+{sections}
+"""
+    page("gallery.html", "收藏畫廊", body, f"《格莉奇與黑洞先生・調查篇》的 {len(items)} 張紀念畫面與拿法。")
+
+
 # ── 七、名詞表 ──────────────────────────────────────────────
 def build_glossary():
     seen = {}
@@ -598,6 +808,13 @@ def main():
         build_walkthrough(route)
     else:
         build_stub("walkthrough.html", "完整攻略", "還沒有把跑通的那一輪存進 design/調查篇-通關路線.txt。")
+    path_json = ROOT / "design/調查篇-劇情路徑.json"
+    path_data = json.loads(path_json.read_text(encoding="utf-8")) if path_json.exists() else None
+    if path_data:
+        build_path(path_data)
+    else:
+        build_stub("path.html", "劇情路徑", "還沒有把自動玩家跑完的那一輪整理成 design/調查篇-劇情路徑.json。")
+    build_gallery(path_data)
     build_glossary()
     print(f"寫出 {OUT}/ 共 {len(PAGES)} 頁")
     print(f"  規則 {len(BOARD['rules'])} 條、變數 {len(BOARD['variables'])} 個、卡片 {len(BOARD['nodes'])} 張")

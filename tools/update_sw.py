@@ -19,7 +19,7 @@ SW = DOCS / "sw.js"
 SHELL = ["index.html", "novel.html", "characters.html", "timeline.html",
          "extras.html", "screens.html", "vn.html", "credits.html", "manifest.webmanifest"] \
         + [f"guide/{n}.html" for n in ("index", "canon", "people", "places",
-                                       "threads", "walkthrough", "glossary")]
+                                       "threads", "walkthrough", "path", "gallery", "glossary")]
 
 
 def shell_hash():

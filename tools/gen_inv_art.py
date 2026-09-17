@@ -62,6 +62,19 @@ def main():
             if thumb:
                 total += convert(p, OUT / f"{p.stem}-t.webp", THUMB, 78)
                 n += 1
+    # 紀念 CG：只轉線上收藏格真的在用的那幾張（檔名清單取自最近一次專案備份 larch/inv/backups/），
+    # 原檔散在 art/inv-cg、art/park、art/out，照檔名主幹找。長邊 1200、縮圖 480。給 guide/path.html（劇情路徑）用。
+    import json
+    backups = sorted((ROOT / "larch/inv/backups").glob("inv-live-*.json"))
+    if backups:
+        p = json.loads(backups[-1].read_text(encoding="utf-8")); p = p.get("project", p)
+        stems = [it["url"].rsplit("/", 1)[-1].split("_", 1)[-1].rsplit(".", 1)[0] for it in p.get("settings", {}).get("cgGalleryItems", [])]
+        for stem in stems:
+            src = next((f for d in ("art/inv-cg", "art/park", "art/out") for ext in (".webp", ".png", ".jpg")
+                        for f in [ROOT / d / f"{stem}{ext}"] if f.exists()), None)
+            if not src:
+                print(f"  ★ 找不到原檔：{stem}"); continue
+            total += convert(src, OUT / f"{stem}.webp", 1200, 80); total += convert(src, OUT / f"{stem}-t.webp", THUMB, 78); n += 2
     print(f"寫出 {n} 個檔到 {OUT.relative_to(ROOT)}／共 {total/1024/1024:.1f} MB")
     src_mb = sum(f.stat().st_size for folder, *_ in JOBS
                  for f in (ROOT / folder).glob("*") if f.is_file()) / 1024 / 1024
