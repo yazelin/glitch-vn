@@ -34,6 +34,13 @@ NIGHT_FIX = {
     _MAIN + "1787369384500_bg-noah-shop.jpg":      _INV + "1789173061225_bg-roof-evening.png",
     _MAIN + "1787369297485_bg-bambi-studio.jpg":   _INV + "1789173211426_bg-studio-evening.png",
 }
+# 2026-09-18：25 張 PNG 背景（各 2～2.8 MB）換成 webp（tools 跑出的對照表 art/bg-investigation/webp/live-map.json），
+# 場景卡的 background／backgroundNight 與調查板 HTML 裡的舊網址一起換。上面三張正篇的也要跟著指到 webp 版。
+_WEBP_MAP = pathlib.Path(__file__).resolve().parents[2] / "art/bg-investigation/webp/live-map.json"
+if _WEBP_MAP.exists():
+    _m = json.loads(_WEBP_MAP.read_text(encoding="utf-8"))
+    NIGHT_FIX = {k: _m.get(v, v) for k, v in NIGHT_FIX.items()}
+    NIGHT_FIX.update(_m)
 
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 STATE = json.loads((HERE / "state.json").read_text(encoding="utf-8"))
