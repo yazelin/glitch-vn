@@ -42,6 +42,23 @@ agent API 的 `POST /publish` 填不進更新說明（skill 記過：十個欄�
 
 # 《調查篇》市集發佈記錄
 
+## 調查篇 1.5（2026-09-20 待發佈；發佈後補上市集 release 號與快照核對結果）
+
+發佈時照舊在網頁後台按，remix 允許、第二屆創作者挑戰標籤維持。貼進「版本與更新日誌」的文字：
+
+> - 開場選單多了第三個選項「公式站（先看怎麼玩）」。選了之後在書桌的檯燈下翻開說明頁，時段、便條、信任、背包怎麼運作都寫在裡面。看完按「合上，回到故事」，回到開場重新選。說明頁有幾頁會劇透（完整攻略、劇情路徑），只想知道怎麼玩，看第一頁就夠了。
+> - 開場改在書桌的檯燈下開始，原本是灰色的底。從公式站回來也是同一個畫面。
+
+給自己看的：線上 925 卡／1059 邊（1.4 是 923／1057）；謝幕 7／6 不變；新增「公式站」版子 9 卡／8 邊（id `board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000`）。素材庫沒有新增：書桌背景用既有的 `bg-desk-night.webp`，配樂用 `bgm-notebook.mp3`（音量 0.28、循環），沒有配音。
+
+- 主線：新增 `inv-open-desk`（書桌場景，現在是起點）→ `inv-723`（開場選單，拿掉 `start`、加第三選項 `choice-2`）→ `inv-formula-jump`（boardJump，跳到公式站的 `formula-hud-off`）。
+- 公式站：`formula-hud-off`（收背包按鈕）→ `formula-desk`（場景）→ `formula-line-1..3` → `formula-guide`（miniGame，整份 HTML 只有一個 iframe 指向 `https://yazelin.github.io/glitch-vn/guide/`，加一顆「合上，回到故事」按鈕送 `larch:complete`）→ `formula-out` → `formula-hud-on` → `formula-return`（boardJump 回 `board-main`／`inv-open-desk`）。
+- 這一批沒有跑 `patch_live.py`，直接用 agent API 的 `POST /nodes`（合併式 upsert，省略的欄位會保留舊值）與 `PATCH` 單卡。搬起點旗標時吃過虧：省略 `start` 舊值還在，會同時有兩張起點卡，要明確寫 `start:false`。舞台的 `stage.actors` 一定要是陣列，寫成物件預覽會當機。
+- 這些卡只存在線上：`push.py` 整包重建會把它們洗掉（跟遊樂園同一類）。凡是寫死 923／1057 的檢查都要改成 925／1059，`AGENTS.md` 的「現況」段落也一樣。
+- 說明頁內嵌時隱藏「回正篇」是網站那邊改的（`tools/gen_guide.py`，載入時用 `window.top!==window.self` 判斷），不在 Larch 版子裡，發佈後不用重發。
+
+驗證：用無頭 Edge 從標題玩到底，逐步截圖：標題 → 書桌加三選項 → 選公式站（背包按鈕收起）→ 三句對話 → 說明頁載入 → 按「合上，回到故事」→ 收尾一句 → 回到書桌加三選項（背包按鈕恢復）。資料核對：主線 925 卡／1059 邊、起點只有 `inv-open-desk`、原本 923 張卡逐張比對沒有變動；公式站 9 卡／8 邊。
+
 ## 調查篇 1.4（2026-09-18 已發佈，市集 release 5；快照對過 `__reveal` 在、remix 與活動標籤都在）
 
 > - 進調查板只淡入一次：軟木紋路到了才跟整張板子一起現身（最多等 0.6 秒），不再整板淡入一次、紋路又淡入一次。

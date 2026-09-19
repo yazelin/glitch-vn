@@ -165,6 +165,7 @@ td.w{white-space:normal;min-width:16em}
 .cards small{display:block;color:var(--faint);font-size:13px;margin-top:3px}
 footer{max-width:64em;margin:0 auto;padding:24px;border-top:1px solid var(--hair);
   color:var(--faint);font-size:13.5px}
+html.embedded nav.top a.back{display:none}
 """
 
 PAGES = [("index.html", "怎麼玩"), ("canon.html", "跟正篇的關係"), ("people.html", "出場人物"),
@@ -178,7 +179,8 @@ def nav(current):
     for f, label in PAGES:
         cur = " aria-current='page'" if f == current else ""
         out.append(f'<a class="l" href="{f}"{cur}>{label}</a>')
-    out.append('<a class="l" href="../index.html">回正篇</a>')
+    # 調查篇的 Larch miniGame 會用 iframe 嵌這一站；內嵌時沒有正篇可回，靠 class="back" 在 embedded 時藏起來
+    out.append('<a class="l back" href="../index.html">回正篇</a>')
     out.append("</div></nav>")
     return "".join(out)
 
@@ -191,6 +193,7 @@ def page(fn, title, body, desc=""):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)}・格莉奇與黑洞先生・調查篇</title>
 <meta name="description" content="{html.escape(desc)}">
+<script>if(window.top!==window.self)document.documentElement.classList.add("embedded")</script>
 <style>{CSS}</style>
 </head>
 <body>

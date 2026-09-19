@@ -9,7 +9,7 @@
    結果就是「圖都在、按播放沒有聲音」。 */
 
 /* cache:start — tools/update_sw.py 產生，勿手改 */
-const SHELL_CACHE = 'gvn-shell-0c4398dbde';
+const SHELL_CACHE = 'gvn-shell-cbdddfcac8';
 const ASSET_CACHE = 'gvn-assets-09ed29d0e0';
 /* cache:end */
 
