@@ -42,7 +42,7 @@ agent API 的 `POST /publish` 填不進更新說明（skill 記過：十個欄�
 
 # 《調查篇》市集發佈記錄
 
-## 調查篇 1.5（2026-09-20 已發佈，網址 https://larch.ink/play/market/yaze/glitch-inv；快照對過三塊版子 925／7／9、remix 與活動標籤都在）
+## 調查篇 1.5.1（2026-09-20 已發佈，網址 https://larch.ink/play/market/yaze/glitch-inv；快照對過三塊版子 925／7／9、remix 與活動標籤都在）
 
 發佈時照舊在網頁後台按，remix 允許、第二屆創作者挑戰標籤維持。貼進「版本與更新日誌」的文字：
 
