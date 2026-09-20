@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""讓遊樂園五款遊戲依本次結果解鎖完整／未集齊 CG，並以跨周目收藏防止重播。"""
+"""讓遊樂園五款遊戲依本次結果解鎖完整／未集齊 CG，並以跨周目收藏防止重播。
+
+歷史紀錄，不能再跑：2026-09-20 把「入口卡＋5 張遊戲橋接卡」合併成 1 張插件卡
+（見 larch/RELEASES.md），這裡寫死的 inv-park-game-{key} 節點與 e-park-game-{key}-*
+邊都已經不存在，執行會在 by_id[game_id] 直接 KeyError。要改遊樂園卡片邏輯，
+現在的起點是 larch/cards/park.html。
+"""
 
 from __future__ import annotations
 

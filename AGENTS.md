@@ -12,7 +12,7 @@
 ## 現況（卡數與公式站更新於 2026-09-20，其餘為 2026-09-18 晚）
 
 - 調查篇 Larch 專案 id 在 `larch/inv/state.json`（`project-d2fea918-…`）。正篇是另一個專案（`larch/config.py`），別搞混。
-- 線上版子：925 張卡／1059 條線（含 109 張清場卡、13 個群組框；1.4 是 923／1057，1.5.1 多了開場書桌場景與公式站入口兩張卡），謝幕版子 7／6，公式站版子 9／8。素材庫 209 筆、沒引用 0、圖全部 webp、沒有任何網址指到正篇專案。
+- 線上版子：920 張卡／1050 條線（含 109 張清場卡、13 個群組框；1.4 是 923／1057，1.5.1 加到 925／1059，2026-09-20 把遊樂園「入口卡＋5 張遊戲橋接卡」合併成 1 張插件卡後少 5 卡到 920／1050，見 `larch/RELEASES.md`），謝幕版子 7／6，公式站版子 9／8。素材庫 209 筆、沒引用 0、圖全部 webp、沒有任何網址指到正篇專案。
 - 公式站：第三塊版子（id `board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000`）用 miniGame 的 iframe 嵌 `https://yazelin.github.io/glitch-vn/guide/`，由開場選單第三項進入，看完回開場書桌場景 `inv-open-desk`（現在的起點）。這些卡只存在線上，`push.py` 整包重建會洗掉；換說明站網址要改 `formula-guide` 卡裡的 HTML。說明頁內嵌時隱藏「回正篇」是 `tools/gen_guide.py` 產生的。細節見 `larch/RELEASES.md` 的 1.5.1。
 - 語音：1479 句走 jsDelivr（`docs/voice/`），諾亞與經紀人 103 句是 Larch AI 配音留在 R2，有在用。
 - 軟木板與拍立得拼版走 jsDelivr 釘 commit（`larch/inv/patch_live.py` 的 `_CDN`）；Larch 素材庫留一份給素材打包。

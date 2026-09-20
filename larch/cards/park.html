@@ -1,0 +1,180 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>格莉奇遊樂園</title>
+<!--
+格莉奇遊樂園．合併版插件卡
+
+把原本「choice 入口卡 + 5 張獨立 miniGame 橋接卡」收斂成這一張。
+內部自己畫選單畫面（背景／BGM／6 個按鈕），玩家選哪一款就把 iframe
+換成對應的 glitch-park-<game> 網址；離開某一款遊戲時的協定與寫回的
+cg_<game>_trigger / cg_<game>_incomplete_trigger 邏輯，逐一對應原本
+5 張橋接卡各自的寫法，下游那 10 張 CG 卡的條件邊不用改。
+
+  Larch host ⟷ 這張卡：larch:ready / larch:init / larch:set / larch:complete
+  這張卡 ⟷ 內嵌遊戲：<game>:ready / <game>:state / <game>:save / <game>:exit
+                      glitch-park:music（遊樂園五款共用同一首主題曲）
+
+選單畫面按「離開遊樂園」寫 park_leave_trigger=true 後 larch:complete，
+交給對應的條件邊送回 inv-001。
+-->
+<style>
+  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#10091d;
+    font-family:"PingFang TC","Microsoft JhengHei",sans-serif}
+  #hub{position:absolute;inset:0;background-size:cover;background-position:center;
+    display:flex;align-items:flex-end;justify-content:center}
+  #hub::before{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(10,8,20,0) 0%,rgba(10,8,20,.75) 55%,rgba(10,8,20,.92) 100%)}
+  #panel{position:relative;z-index:1;width:100%;max-width:520px;padding:0 24px 6vh;
+    box-sizing:border-box;color:#f2eefc}
+  #prompt{font-size:17px;margin:0 0 14px;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+  #choices{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  #choices li{background:rgba(24,18,38,.62);border:1px solid rgba(184,164,255,.35);
+    border-radius:10px;padding:13px 16px;font-size:15px;cursor:pointer;
+    backdrop-filter:blur(2px);transition:background .15s,border-color .15s}
+  #choices li:active,#choices li:hover{background:rgba(120,90,220,.35);
+    border-color:rgba(210,196,255,.7)}
+  #choices li.leave{opacity:.75;margin-top:4px}
+  #gameWrap{position:absolute;inset:0;display:none}
+  #gameWrap iframe{width:100%;height:100%;border:0;display:block}
+</style>
+</head>
+<body>
+  <div id="hub">
+    <div id="panel">
+      <p id="prompt">今晚想先玩哪一台？</p>
+      <ul id="choices">
+        <li data-game="gacha">◉ 扭蛋機</li>
+        <li data-game="claw">◇ 夾娃娃機</li>
+        <li data-game="slots">✦ 777 拉霸</li>
+        <li data-game="wheel">◎ 幸運轉盤</li>
+        <li data-game="pinball">● 霓虹鋼珠台</li>
+        <li class="leave" data-leave="1">← 離開遊樂園</li>
+      </ul>
+    </div>
+  </div>
+  <div id="gameWrap"><iframe id="game" title="遊樂園小遊戲"></iframe></div>
+
+<script>
+var GAMES = {
+  gacha:   { title: '扭蛋',       src: 'https://yazelin.github.io/glitch-park-gacha/' },
+  claw:    { title: '娃娃',       src: 'https://yazelin.github.io/glitch-park-claw/' },
+  slots:   { title: '777 拉霸',   src: 'https://yazelin.github.io/glitch-park-slots/' },
+  wheel:   { title: '幸運轉盤',   src: 'https://yazelin.github.io/glitch-park-wheel/' },
+  pinball: { title: '霓虹鋼珠台', src: 'https://yazelin.github.io/glitch-park-pinball/' }
+};
+var HUB_BGM_URL = 'https://yazelin.github.io/glitch-park-gacha/assets/audio/glitch-park-theme.mp3';
+var HUB_BGM_VOLUME = .27;
+var HUB_BG_URL = 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1789499006706_bg-park-lobby-v1.webp';
+
+var hub = document.getElementById('hub');
+var gameWrap = document.getElementById('gameWrap');
+var gameFrame = document.getElementById('game');
+hub.style.backgroundImage = "url('" + HUB_BG_URL + "')";
+
+var initVars = {};
+var parkMusic = null;
+var parkMusicUrl = '';
+var currentGame = null;
+var gameState = null;
+
+function music(d) {
+  if (d.url && (!parkMusic || parkMusicUrl !== d.url)) {
+    if (parkMusic) { parkMusic.pause(); parkMusic.removeAttribute('src'); }
+    parkMusicUrl = d.url;
+    parkMusic = new Audio(d.url);
+    parkMusic.loop = true;
+    parkMusic.preload = 'metadata';
+    parkMusic.volume = .27;
+  }
+  if (!parkMusic) return;
+  if (d.action === 'mute') {
+    parkMusic.muted = !!d.muted;
+    if (d.muted) parkMusic.pause();
+  }
+  if (d.action === 'play' && !d.muted) {
+    parkMusic.muted = false;
+    parkMusic.play().catch(function () {});
+  }
+}
+
+function startHubMusic() {
+  music({ url: HUB_BGM_URL, action: 'play', muted: false });
+  if (parkMusic) parkMusic.volume = HUB_BGM_VOLUME;
+}
+
+function showHub() {
+  currentGame = null;
+  gameState = null;
+  gameFrame.src = 'about:blank';
+  gameWrap.style.display = 'none';
+  hub.style.display = 'flex';
+  startHubMusic();
+}
+
+function enterGame(key) {
+  var g = GAMES[key];
+  if (!g) return;
+  currentGame = key;
+  var raw = initVars[key + '_state'];
+  try { gameState = raw ? JSON.parse(raw) : null; } catch (err) { gameState = null; }
+  if (parkMusic) parkMusic.pause();
+  hub.style.display = 'none';
+  gameWrap.style.display = 'block';
+  gameFrame.title = g.title;
+  gameFrame.src = g.src;
+}
+
+function leavePark() {
+  if (parkMusic) parkMusic.pause();
+  parent.postMessage({ type: 'larch:set', name: 'park_leave_trigger', value: true }, '*');
+  setTimeout(function () {
+    parent.postMessage({ type: 'larch:complete', result: 'exit', payload: {} }, '*');
+  }, 150);
+}
+
+document.getElementById('choices').addEventListener('click', function (e) {
+  var li = e.target.closest('li');
+  if (!li) return;
+  if (li.dataset.leave) { leavePark(); return; }
+  if (li.dataset.game) { enterGame(li.dataset.game); }
+});
+
+parent.postMessage({ type: 'larch:ready' }, '*');
+
+window.addEventListener('message', function (e) {
+  var d = e.data;
+  if (!d || !d.type) return;
+
+  if (d.type === 'larch:init') {
+    initVars = d.variables || {};
+    showHub();
+    return;
+  }
+
+  if (e.source !== gameFrame.contentWindow) return;
+
+  if (d.type === 'glitch-park:music') { music(d); return; }
+  if (!currentGame) return;
+
+  if (d.type === currentGame + ':ready') {
+    gameFrame.contentWindow.postMessage({ type: currentGame + ':state', state: gameState }, '*');
+    return;
+  }
+  if (d.type === currentGame + ':save') {
+    gameState = d.state;
+    parent.postMessage({ type: 'larch:set', name: currentGame + '_state', value: JSON.stringify(gameState) }, '*');
+    return;
+  }
+  if (d.type === currentGame + ':exit') {
+    if (parkMusic) parkMusic.pause();
+    var complete = !!d.complete;
+    var game = currentGame;
+    parent.postMessage({ type: 'larch:set', name: 'cg_' + game + '_trigger', value: complete }, '*');
+    parent.postMessage({ type: 'larch:set', name: 'cg_' + game + '_incomplete_trigger', value: !complete }, '*');
+    setTimeout(function () {
+      parent.postMessage({ type: 'larch:complete', result: 'exit', payload: { complete: complete } }, '*');
+    }, 240);
+  }
+});
+</script>
+</body></html>
