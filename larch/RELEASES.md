@@ -65,12 +65,13 @@ agent API 的 `POST /publish` 填不進更新說明（skill 記過：十個欄�
 
 原本「入口 choice 卡 + 5 張各自獨立的 miniGame 橋接卡（扭蛋機／夾娃娃機／777拉霸／幸運轉盤／霓虹鋼珠台）」收斂成 **1 張 miniGame 插件卡**，5 款遊戲、存檔、CG 全收集慶祝與未集齊紀念（首次達成才觸發一次）全部功能不變，10 張 CG dialogue／解鎖卡原樣保留。節點 id 保留 `inv-park-gacha`，所以 `inv-001` 進場那條邊、10 張 CG 卡的回程邊完全沒動。
 
-給自己看的：線上 920 卡／1050 邊（1.5.1 是 925／1059，少的 5 卡是被合併掉的 5 張遊戲橋接卡）。新增專案變數 `park_leave_trigger`（boolean）給「離開遊樂園」用；卡片自己畫選單畫面（背景／BGM／6 個按鈕），玩家選哪一款就把內嵌 iframe 換成對應的 `glitch-park-<game>` 網址，5 款遊戲的協定完全一致（`larch:ready/init/set/complete` ↔ `<game>:ready/state/save/exit`）。原始碼存成 `larch/cards/park.html`（取代已經過時的 `gacha-test.html` 測試卡，那份沒刪，留著當歷史紀錄）。
+給自己看的：線上 920 卡／1050 邊（1.5.1 是 925／1059，少的 5 卡是被合併掉的 5 張遊戲橋接卡）。新增專案變數 `park_leave_trigger`（boolean）給「離開遊樂園」用；卡片自己畫選單畫面（背景／BGM／6 個按鈕），玩家選哪一款就把內嵌 iframe 換成對應的 `glitch-park-<game>` 網址，5 款遊戲的協定完全一致（`larch:ready/init/set/complete` ↔ `<game>:ready/state/save/exit`）。原始碼存成 `larch/cards/park.html`（取代已經過時的 `gacha-test.html` 測試卡，那份沒刪，留著當歷史紀錄）；完整接線規格（node 欄位、要開哪些變數、輸出契約、下游邊怎麼接、內嵌遊戲協定）寫在 `larch/cards/park.md`。
 
 - 這批跟遊樂園原本的 5 張卡一樣是線上專案專屬（不在 `push.py`/`build_all.py` 的重建管線裡），`larch/cards/park.html` 只是本機備份／之後要改的起點，**不會**被 `push.py` 自動推上去——真的要改還是要「讀線上最新版→改→PUT 回去→對卡數」。
 - 用 agent API 的 `PATCH` 單卡端點改 `inv-park-gacha` 本體（type/HTML/miniGame 欄位），`DELETE /nodes` 帶 `nodeIds` 砍掉 5 張舊遊戲卡（會連帶砍掉指向/來自這些卡的邊，這次連砍 20 條），新增的 12 條出邊（10 條 CG 條件邊＋離開遊樂園邊＋選單自迴圈邊）改用整塊 board 的 `PUT`（flat body：`{id,kind,mode,name,nodes,edges,summary}`，**不要**包一層 `{"board":...}`，那樣會被吃掉沒反應，卡數線數不變但版本號會跳）。
 - 踩到的雷：`POST /nodes` 的 upsert 對同一個 `(source, sourceHandle)` 是「留最新一條」，一次塞多條同 handle 不同條件的邊會互相蓋掉，只留最後一條——這種「一個 handle 接很多條條件邊」的結構只能靠整塊 board 的 nodes/edges 陣列整包替換來設，不能用 upsert 端點分批加。
 - 大專案（925 卡上下）的 agent API 有時候要 40–80 秒才回應，`curl --max-time` 抓太短會誤判成失敗；**502／504／timeout 不代表沒寫入，重試前先重新 GET 對一次卡數再決定要不要重送**（`AGENTS.md` 鐵律本來就寫過這條，這次又踩了一次）。
+- **`cardId=X` 的單卡預覽測不出多卡路由對不對，兩種結構都一樣。** 一開始懷疑合併後 10 條 CG 條件邊「永遠選第一條」，拿舊結構（副本專案 `project-663f0a5c-…`）的獨立橋接卡複測同一招，結果一樣顯示跟實際路由完全無關的通用收尾畫面（連圖都對不上任何一張 CG）——證實這是預覽工具本身「卡片完成、路由跳出範圍後顯示的畫面」跟真正路由到哪張卡無關，不是合併造成的迴歸。要驗證某張卡內容對不對，直接對那張卡的 id 開 `cardId=<那張卡>`；要驗證條件邊真的選對，只能靠真人連續玩一輪。
 
 驗證：改完重新 GET 專案與 board-main，核對卡數/邊數、`inv-park-gacha` 的 `type`／`miniGameHtml`／`miniGameReadVars`／`miniGameWriteVars`、10 條 CG 條件邊的 `condition` 逐一 diff 跟原本 5 張卡上的一字不差、沒有邊指向已刪除的 5 個舊 id、起點卡 `inv-open-desk` 沒被動到。版本快照（`versions`）每一步都有自動保留點。**還沒**在真的瀏覽器裡把選單和至少一款遊戲整套玩過一輪。
 
