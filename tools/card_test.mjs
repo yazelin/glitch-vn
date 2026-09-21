@@ -442,7 +442,7 @@ console.log('\n=== 遊樂園插件 manifest：沒玩過／玩過沒收齊／收�
     + '}, 60);\n</script></body>');
 
   const V = (exit) => ({
-    title: '遊樂園', prompt: '玩哪一台？', leaveLabel: '← 離開', leaveResultVar: 'park_leave',
+    title: '遊樂園', subtitle: '玩哪一台？', leaveLabel: '← 離開', leaveResultVar: 'park_leave',
     game1Label: '扭蛋機', game1Protocol: 'gacha', game1StateVar: 'gacha_state',
     game1Url: '/.park-stub-game.html?g=gacha' + (exit === null ? '' : '&exit=' + exit),
     game1ResultVar: 'cg_gacha', game1IncompleteVar: 'cg_gacha_no',
