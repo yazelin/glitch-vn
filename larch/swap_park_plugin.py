@@ -44,8 +44,10 @@ def request(path, method="GET", body=None, etag=None):
 
 
 def plugin_values():
+    # 背景那張在專案素材庫裡，所以走 asset 欄位；主題曲在 GitHub Pages 上，素材庫沒有，
+    # 走 bgmUrl（asset 欄位比對不到外部網址，Inspector 會顯示成「未選擇」）。
     v = {"title": "格莉奇遊樂園", "subtitle": "今晚想先玩哪一台？", "background": BG,
-         "bgm": BGM, "bgmVolume": 0.27, "leaveLabel": "← 離開遊樂園",
+         "bgmUrl": BGM, "bgmVolume": 0.27, "leaveLabel": "← 離開遊樂園",
          "leaveResultVar": "park_leave_trigger"}
     for i, (label, key, url) in enumerate(GAMES, 1):
         v[f"game{i}Label"] = label
