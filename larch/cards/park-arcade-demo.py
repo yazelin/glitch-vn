@@ -11,9 +11,14 @@
 """
 import argparse, json, pathlib, sys, time, urllib.request
 
-DESC = ("「小遊戲集合」插件卡怎麼用：一張卡掛五款外部小遊戲，離開時把「收齊／沒收齊」"
-        "寫進兩個一真一假的變量，下游的邊怎麼分、旗標為什麼要清回去、五款參考實作各自"
-        "怎麼判「收齊」。走一遍就知道怎麼接自己的遊戲。")
+NAME = "小遊戲集合・示範"
+DESC = ("「小遊戲集合」插件卡的使用示範，走一遍大概三分鐘。這裡沒有劇情。\n\n"
+        "畫面上是一個遊樂園選單，五款小遊戲都是真的能玩的網頁遊戲（扭蛋機、夾娃娃機、"
+        "777 拉霸、幸運轉盤、霓虹鋼珠台），玩完離開會回到示範，告訴你剛才那張卡寫了哪個"
+        "變量、下一步的邊憑什麼選中它。\n\n"
+        "想自己用的話：插件在素材商城搜「遊樂園小遊戲集合」，五款遊戲的原始碼是 MIT，"
+        "照抄跟卡片溝通的那三個訊息就能把自己的遊戲接上來。最後一張卡列了五個 repo 與"
+        "各自怎麼判「收齊」。")
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
@@ -22,6 +27,9 @@ MANIFEST = ROOT / "larch/cards/park-arcade.larch-plugin.json"
 BG = ("https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/"
       "larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1789499006706_bg-park-lobby-v1.webp")
 BGM = "https://yazelin.github.io/glitch-park-gacha/assets/audio/glitch-park-theme.mp3"
+# 市集縮圖：大廳那張裁 16:9、底部壓暗、標題本機合成上去（art/park/cover-arcade-demo.webp）。
+# 封面不要跟第一張卡的背景用同一張：那張是乾淨的場景，封面要自己站得住。
+COVER = "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-892df123-4806-4343-95be-44f1c65056e4/1789967439188_cover-arcade-demo.webp"
 
 # 五款全開。前兩款接完整的分岔（收齊／未集齊各一張卡），示範接法；
 # 其餘三款共用一張卡，示範「同一組邊可以收斂到同一個去處」，順便讓版子不要爆炸。
@@ -191,7 +199,7 @@ def main():
     pid = a.project
     if not pid:
         created, _ = call("/projects", "POST", {
-            "name": "arcade-hub 插件示範",
+            "name": NAME,
             "description": DESC})
         pid = (created.get("project") or created).get("id")
         print("建好新專案", pid)
@@ -204,8 +212,9 @@ def main():
     st["stageFit"] = "auto"           # 不設的話手機直式會把立繪壓成一條
     st["cgGalleryEnabled"] = False    # 沒有 CG，開著標題畫面會多一顆空按鈕
     p["languages"] = [{"code": "zh-Hant", "label": "繁體中文", "voiceMode": "off"}]
+    p["name"] = NAME
     p["description"] = DESC
-    p["projectThumbnail"] = BG            # 市集列表的縮圖，不設就是空的
+    p["projectThumbnail"] = COVER         # 市集列表的縮圖，不設就是空的
     st["titleScreenEnabled"] = True
     st["titleScreen"] = {"frame": None, "layers": [
         {"id": "name", "kind": "text", "role": "title", "text": "小遊戲集合・示範",
