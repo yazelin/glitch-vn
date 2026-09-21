@@ -427,6 +427,62 @@ console.log('\n=== sandbox：卡片不可以碰 localStorage ===');
   ok('沒有未捕捉的錯誤', errs.length === 0, errs.join(' | ').slice(0, 120));
 }
 
+console.log('\n=== 遊樂園插件 manifest：沒玩過／玩過沒收齊／收齊，三種狀態 ===');
+{
+  // 測的是 manifest 裡那份 html 本人（抓出來寫成暫存檔），不是另外抄一份來測。
+  const manifest = JSON.parse(fs.readFileSync('larch/cards/park-arcade.larch-plugin.json', 'utf8'));
+  const TMP = path.join(DIR, '.park-plugin-test.html');
+  const STUB = path.join(DIR, '.park-stub-game.html');
+  fs.writeFileSync(TMP, manifest.cards[0].html);
+  fs.writeFileSync(STUB, '<!doctype html><meta charset=utf-8><body><script>\n'
+    + 'var p = new URLSearchParams(location.search), g = p.get("g");\n'
+    + 'parent.postMessage({ type: g + ":ready" }, "*");\n'
+    + 'if (p.has("exit")) setTimeout(function () {\n'
+    + '  parent.postMessage({ type: g + ":exit", complete: p.get("exit") === "1" }, "*");\n'
+    + '}, 60);\n</script></body>');
+
+  const V = (exit) => ({
+    title: '遊樂園', prompt: '玩哪一台？', leaveLabel: '← 離開', leaveResultVar: 'park_leave',
+    game1Label: '扭蛋機', game1Protocol: 'gacha', game1StateVar: 'gacha_state',
+    game1Url: '/.park-stub-game.html?g=gacha' + (exit === null ? '' : '&exit=' + exit),
+    game1ResultVar: 'cg_gacha', game1IncompleteVar: 'cg_gacha_no',
+    game2Label: '娃娃機', game2Protocol: 'claw', game2StateVar: 'claw_state',
+    game2Url: '/.park-stub-game.html?g=claw',
+    game2ResultVar: 'cg_claw', game2IncompleteVar: 'cg_claw_no',
+  });
+  // 殼上一輪的卡片可能還在寫它自己的變量，只看這張卡該寫的那幾個。
+  const setsOf = async () => Object.fromEntries(
+    (await msgs()).filter((x) => x.type === 'larch:set')
+      .filter((x) => x.name.startsWith('cg_') || x.name === 'park_leave')
+      .map((x) => [x.name, x.value]));
+
+  for (const [exit, label, win, lose] of [[1, '收齊', true, false], [0, '玩過沒收齊', false, true]]) {
+    const fr = await open('.park-plugin-test.html', V(exit));
+    await fr.locator('li', { hasText: '扭蛋機' }).click();
+    await page.waitForFunction(() => window.__msgs.some((m) => m.type === 'larch:complete'), { timeout: 6000 });
+    const sets = await setsOf();
+    const done = (await msgs()).find((x) => x.type === 'larch:complete');
+    ok(label + '：結果變量寫 ' + win, sets.cg_gacha === win, JSON.stringify(sets));
+    ok(label + '：未集齊變量寫 ' + lose + '（一真一假）', sets.cg_gacha_no === lose, JSON.stringify(sets));
+    ok(label + '：完成事件帶 complete', done && done.payload && done.payload.complete === win);
+    // 這一條就是「為什麼不能讓下游去問 resultVar==false」：沒玩的那款兩個變量都不該被碰，
+    // 它們留在預設的 false，下游只問 ==true 才不會被別款的離開事件掃到。
+    ok(label + '：沒玩的娃娃機兩個變量一個都沒被寫',
+       !('cg_claw' in sets) && !('cg_claw_no' in sets), JSON.stringify(sets));
+  }
+
+  {
+    const fr = await open('.park-plugin-test.html', V(null));
+    await fr.locator('li', { hasText: '離開' }).click();
+    await page.waitForFunction(() => window.__msgs.some((m) => m.type === 'larch:complete'), { timeout: 6000 });
+    const sets = await setsOf();
+    ok('直接離開（沒進任何一款）：只寫離開變量，五款的變量全部留在預設',
+       sets.park_leave === true && Object.keys(sets).length === 1, JSON.stringify(sets));
+  }
+
+  fs.unlinkSync(TMP); fs.unlinkSync(STUB);
+}
+
 await browser.close();
 server.close();
 console.log(fails ? `\n★ ${fails} 項沒過\n` : '\n全部通過\n');
