@@ -1,9 +1,9 @@
 {
   "id": "arcade-hub",
   "name": "遊樂園小遊戲集合",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "author": "yazelin",
-  "description": "一張卡片做成一整個小遊戲集合：背景圖＋BGM＋最多 5 款外部小遊戲的按鈕，玩家選哪一款就把畫面換成那款遊戲的 iframe，離開時把「這次有沒有完整收集」寫進你指定的變量（收齊寫結果變量，沒收齊寫未集齊變量，兩個永遠一真一假）。五格的名稱、網址、存檔變量、結果變量都是自己填的，欄位裡預設帶的《格莉奇與黑洞先生》遊樂園五款（扭蛋機／夾娃娃機／777 拉霸／幸運轉盤／霓虹鋼珠台）只是範例，整組換成自己的遊戲就是你自己的機台房、道場或關卡選單。外部遊戲要照這張卡的 postMessage 協定講話才接得上（開場送 ready 要存檔、存檔變動送 save、離開送 exit 並帶收齊與否），所以它接的是你改得動的遊戲，不是任意網頁。卡片只轉交存檔、寫那兩個變量、送出完成事件，不解鎖 CG、不發獎勵、不畫結算畫面；那些自己在下游接條件邊，條件一律問等於 true（沒玩過的那幾款兩個變量都是預設的 false，不會被別款的離開事件誤觸發）。",
+  "description": "一張卡片做成一整個小遊戲集合：背景圖＋BGM＋最多 5 款外部小遊戲的按鈕，玩家選哪一款就把畫面換成那款遊戲的 iframe，離開時把「這次有沒有完整收集」寫進你指定的變量（收齊寫結果變量，沒收齊寫未集齊變量，兩個永遠一真一假）。每一款填一行：名稱 | 網址 | postMessage 前綴 | 存檔變量 | 結果變量 | 未集齊變量。欄位裡預設帶的《格莉奇與黑洞先生》遊樂園五款只是範例，整組換成自己的遊戲就是你自己的機台房、道場或關卡選單。遊戲端要照這張卡的協定講話才接得上：載入完送 前綴:ready 跟卡片要存檔，存檔變動送 前綴:save，玩家離開送 前綴:exit 並帶 complete 布林值。五個可以照抄的參考實作（MIT）：github.com/yazelin/glitch-park-gacha、glitch-park-claw、glitch-park-slots、glitch-park-wheel、glitch-park-pinball。卡片只轉交存檔、寫那兩個變量、送出完成事件，不解鎖 CG、不發獎勵、不畫結算畫面；那些自己在下游接條件邊，條件一律問等於 true（沒玩過的那幾款兩個變量都是預設的 false，不會被別款的離開事件誤觸發）。",
   "categories": [
     "system",
     "ui"
@@ -19,17 +19,11 @@
     {
       "id": "arcade-menu",
       "name": "遊樂園選單",
-      "description": "最多 5 款外部小遊戲的選單。五格自己填，預設帶的格莉奇遊樂園只是範例；離開時把「收齊／沒收齊」寫進兩個一真一假的布林變量，CG 與獎勵自己在下游用條件邊接。",
+      "description": "最多 5 款外部小遊戲的選單。每一款填一行：名稱 | 網址 | postMessage 前綴 | 存檔變量 | 結果變量 | 未集齊變量。離開時把「收齊／沒收齊」寫進那兩個一真一假的布林變量，CG 與獎勵自己在下游用條件邊接，條件問等於 true。遊戲端要怎麼寫，看這五個參考實作（MIT，可以直接抄協定那一段）：github.com/yazelin/glitch-park-gacha、glitch-park-claw、glitch-park-slots、glitch-park-wheel、glitch-park-pinball。",
       "icon": "dices",
       "color": "#6b2d8f",
       "presentation": "fullscreen",
       "fields": [
-        {
-          "key": "title",
-          "kind": "text",
-          "label": "選單標題",
-          "defaultValue": "格莉奇遊樂園"
-        },
         {
           "key": "subtitle",
           "kind": "text",
@@ -85,197 +79,42 @@
           "hint": "離開這一款遊戲時寫入 true（完整收集）或 false（未集齊），留空就不寫。這張卡只寫值，CG 與獎勵要自己在下游接條件邊"
         },
         {
-          "key": "game1Label",
+          "key": "game1",
           "kind": "text",
-          "label": "① 名稱（含圖示，留空＝停用這一格）",
-          "defaultValue": "◉ 扭蛋機"
+          "label": "① 遊戲",
+          "defaultValue": "◉ 扭蛋機 | https://yazelin.github.io/glitch-park-gacha/ | gacha | gacha_state | cg_gacha_trigger | cg_gacha_incomplete_trigger",
+          "hint": "一款一行，用直線分成六欄：名稱 | 網址 | postMessage 前綴 | 存檔變量 | 結果變量 | 未集齊變量。名稱與網址是必要的，後面四欄留空就是不用。留空整格＝停用這一格"
         },
         {
-          "key": "game1Url",
+          "key": "game2",
           "kind": "text",
-          "label": "① 外部遊戲網址",
-          "defaultValue": "https://yazelin.github.io/glitch-park-gacha/",
-          "hint": "跑在自己的 sandbox iframe 裡，這裡不用是本專案素材，任何 https 網址都可以"
+          "label": "② 遊戲",
+          "defaultValue": "◇ 夾娃娃機 | https://yazelin.github.io/glitch-park-claw/ | claw | claw_state | cg_claw_trigger | cg_claw_incomplete_trigger",
+          "hint": "一款一行，用直線分成六欄：名稱 | 網址 | postMessage 前綴 | 存檔變量 | 結果變量 | 未集齊變量。名稱與網址是必要的，後面四欄留空就是不用。留空整格＝停用這一格"
         },
         {
-          "key": "game1Protocol",
+          "key": "game3",
           "kind": "text",
-          "label": "① postMessage 前綴",
-          "defaultValue": "gacha",
-          "hint": "外部遊戲用 <前綴>:ready / <前綴>:save / <前綴>:exit 跟這張卡溝通，同一輪只有一款在跑，不會撞名"
+          "label": "③ 遊戲",
+          "defaultValue": "✦ 777 拉霸 | https://yazelin.github.io/glitch-park-slots/ | slots | slots_state | cg_slots_trigger | cg_slots_incomplete_trigger",
+          "hint": "一款一行，用直線分成六欄：名稱 | 網址 | postMessage 前綴 | 存檔變量 | 結果變量 | 未集齊變量。名稱與網址是必要的，後面四欄留空就是不用。留空整格＝停用這一格"
         },
         {
-          "key": "game1StateVar",
-          "kind": "variable",
-          "label": "① 存檔變量",
-          "hint": "存這一款遊戲自己的存檔（JSON 字串），留空就不讀不存"
-        },
-        {
-          "key": "game1ResultVar",
-          "kind": "variable",
-          "label": "① 結果變量",
-          "hint": "收齊時寫入 true，沒收齊寫入 false，留空就不寫。下游只問 ==true，沒玩過這一款的時候它保持預設 false，不會誤觸發"
-        },
-        {
-          "key": "game1IncompleteVar",
-          "kind": "variable",
-          "label": "① 未集齊變量",
-          "hint": "沒收齊時寫入 true，收齊時寫回 false，跟上面那個永遠一真一假，留空就不寫。要「沒收齊也給一張紀念 CG」才需要填——不能改用上面那個變量的 ==false，因為沒玩過的那幾款預設就是 false，會被別款的離開事件一起觸發"
-        },
-        {
-          "key": "game2Label",
+          "key": "game4",
           "kind": "text",
-          "label": "② 名稱（含圖示，留空＝停用這一格）",
-          "defaultValue": "◇ 夾娃娃機"
+          "label": "④ 遊戲",
+          "defaultValue": "◎ 幸運轉盤 | https://yazelin.github.io/glitch-park-wheel/ | wheel | wheel_state | cg_wheel_trigger | cg_wheel_incomplete_trigger",
+          "hint": "一款一行，用直線分成六欄：名稱 | 網址 | postMessage 前綴 | 存檔變量 | 結果變量 | 未集齊變量。名稱與網址是必要的，後面四欄留空就是不用。留空整格＝停用這一格"
         },
         {
-          "key": "game2Url",
+          "key": "game5",
           "kind": "text",
-          "label": "② 外部遊戲網址",
-          "defaultValue": "https://yazelin.github.io/glitch-park-claw/",
-          "hint": "跑在自己的 sandbox iframe 裡，這裡不用是本專案素材，任何 https 網址都可以"
-        },
-        {
-          "key": "game2Protocol",
-          "kind": "text",
-          "label": "② postMessage 前綴",
-          "defaultValue": "claw",
-          "hint": "外部遊戲用 <前綴>:ready / <前綴>:save / <前綴>:exit 跟這張卡溝通，同一輪只有一款在跑，不會撞名"
-        },
-        {
-          "key": "game2StateVar",
-          "kind": "variable",
-          "label": "② 存檔變量",
-          "hint": "存這一款遊戲自己的存檔（JSON 字串），留空就不讀不存"
-        },
-        {
-          "key": "game2ResultVar",
-          "kind": "variable",
-          "label": "② 結果變量",
-          "hint": "收齊時寫入 true，沒收齊寫入 false，留空就不寫。下游只問 ==true，沒玩過這一款的時候它保持預設 false，不會誤觸發"
-        },
-        {
-          "key": "game2IncompleteVar",
-          "kind": "variable",
-          "label": "② 未集齊變量",
-          "hint": "沒收齊時寫入 true，收齊時寫回 false，跟上面那個永遠一真一假，留空就不寫。要「沒收齊也給一張紀念 CG」才需要填——不能改用上面那個變量的 ==false，因為沒玩過的那幾款預設就是 false，會被別款的離開事件一起觸發"
-        },
-        {
-          "key": "game3Label",
-          "kind": "text",
-          "label": "③ 名稱（含圖示，留空＝停用這一格）",
-          "defaultValue": "✦ 777 拉霸"
-        },
-        {
-          "key": "game3Url",
-          "kind": "text",
-          "label": "③ 外部遊戲網址",
-          "defaultValue": "https://yazelin.github.io/glitch-park-slots/",
-          "hint": "跑在自己的 sandbox iframe 裡，這裡不用是本專案素材，任何 https 網址都可以"
-        },
-        {
-          "key": "game3Protocol",
-          "kind": "text",
-          "label": "③ postMessage 前綴",
-          "defaultValue": "slots",
-          "hint": "外部遊戲用 <前綴>:ready / <前綴>:save / <前綴>:exit 跟這張卡溝通，同一輪只有一款在跑，不會撞名"
-        },
-        {
-          "key": "game3StateVar",
-          "kind": "variable",
-          "label": "③ 存檔變量",
-          "hint": "存這一款遊戲自己的存檔（JSON 字串），留空就不讀不存"
-        },
-        {
-          "key": "game3ResultVar",
-          "kind": "variable",
-          "label": "③ 結果變量",
-          "hint": "收齊時寫入 true，沒收齊寫入 false，留空就不寫。下游只問 ==true，沒玩過這一款的時候它保持預設 false，不會誤觸發"
-        },
-        {
-          "key": "game3IncompleteVar",
-          "kind": "variable",
-          "label": "③ 未集齊變量",
-          "hint": "沒收齊時寫入 true，收齊時寫回 false，跟上面那個永遠一真一假，留空就不寫。要「沒收齊也給一張紀念 CG」才需要填——不能改用上面那個變量的 ==false，因為沒玩過的那幾款預設就是 false，會被別款的離開事件一起觸發"
-        },
-        {
-          "key": "game4Label",
-          "kind": "text",
-          "label": "④ 名稱（含圖示，留空＝停用這一格）",
-          "defaultValue": "◎ 幸運轉盤"
-        },
-        {
-          "key": "game4Url",
-          "kind": "text",
-          "label": "④ 外部遊戲網址",
-          "defaultValue": "https://yazelin.github.io/glitch-park-wheel/",
-          "hint": "跑在自己的 sandbox iframe 裡，這裡不用是本專案素材，任何 https 網址都可以"
-        },
-        {
-          "key": "game4Protocol",
-          "kind": "text",
-          "label": "④ postMessage 前綴",
-          "defaultValue": "wheel",
-          "hint": "外部遊戲用 <前綴>:ready / <前綴>:save / <前綴>:exit 跟這張卡溝通，同一輪只有一款在跑，不會撞名"
-        },
-        {
-          "key": "game4StateVar",
-          "kind": "variable",
-          "label": "④ 存檔變量",
-          "hint": "存這一款遊戲自己的存檔（JSON 字串），留空就不讀不存"
-        },
-        {
-          "key": "game4ResultVar",
-          "kind": "variable",
-          "label": "④ 結果變量",
-          "hint": "收齊時寫入 true，沒收齊寫入 false，留空就不寫。下游只問 ==true，沒玩過這一款的時候它保持預設 false，不會誤觸發"
-        },
-        {
-          "key": "game4IncompleteVar",
-          "kind": "variable",
-          "label": "④ 未集齊變量",
-          "hint": "沒收齊時寫入 true，收齊時寫回 false，跟上面那個永遠一真一假，留空就不寫。要「沒收齊也給一張紀念 CG」才需要填——不能改用上面那個變量的 ==false，因為沒玩過的那幾款預設就是 false，會被別款的離開事件一起觸發"
-        },
-        {
-          "key": "game5Label",
-          "kind": "text",
-          "label": "⑤ 名稱（含圖示，留空＝停用這一格）",
-          "defaultValue": "● 霓虹鋼珠台"
-        },
-        {
-          "key": "game5Url",
-          "kind": "text",
-          "label": "⑤ 外部遊戲網址",
-          "defaultValue": "https://yazelin.github.io/glitch-park-pinball/",
-          "hint": "跑在自己的 sandbox iframe 裡，這裡不用是本專案素材，任何 https 網址都可以"
-        },
-        {
-          "key": "game5Protocol",
-          "kind": "text",
-          "label": "⑤ postMessage 前綴",
-          "defaultValue": "pinball",
-          "hint": "外部遊戲用 <前綴>:ready / <前綴>:save / <前綴>:exit 跟這張卡溝通，同一輪只有一款在跑，不會撞名"
-        },
-        {
-          "key": "game5StateVar",
-          "kind": "variable",
-          "label": "⑤ 存檔變量",
-          "hint": "存這一款遊戲自己的存檔（JSON 字串），留空就不讀不存"
-        },
-        {
-          "key": "game5ResultVar",
-          "kind": "variable",
-          "label": "⑤ 結果變量",
-          "hint": "收齊時寫入 true，沒收齊寫入 false，留空就不寫。下游只問 ==true，沒玩過這一款的時候它保持預設 false，不會誤觸發"
-        },
-        {
-          "key": "game5IncompleteVar",
-          "kind": "variable",
-          "label": "⑤ 未集齊變量",
-          "hint": "沒收齊時寫入 true，收齊時寫回 false，跟上面那個永遠一真一假，留空就不寫。要「沒收齊也給一張紀念 CG」才需要填——不能改用上面那個變量的 ==false，因為沒玩過的那幾款預設就是 false，會被別款的離開事件一起觸發"
+          "label": "⑤ 遊戲",
+          "defaultValue": "● 霓虹鋼珠台 | https://yazelin.github.io/glitch-park-pinball/ | pinball | pinball_state | cg_pinball_trigger | cg_pinball_incomplete_trigger",
+          "hint": "一款一行，用直線分成六欄：名稱 | 網址 | postMessage 前綴 | 存檔變量 | 結果變量 | 未集齊變量。名稱與網址是必要的，後面四欄留空就是不用。留空整格＝停用這一格"
         }
       ],
-      "html": "<!doctype html><html lang=\"zh-Hant\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<style>\n  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#10091d;\n    font-family:\"PingFang TC\",\"Microsoft JhengHei\",sans-serif}\n  #hub{position:absolute;inset:0;background-size:cover;background-position:center;\n    display:flex;align-items:flex-end;justify-content:center}\n  #hub::before{content:\"\";position:absolute;inset:0;\n    background:linear-gradient(180deg,rgba(10,8,20,0) 0%,rgba(10,8,20,.75) 55%,rgba(10,8,20,.92) 100%)}\n  #panel{position:relative;z-index:1;width:100%;max-width:520px;padding:0 24px 6vh;\n    box-sizing:border-box;color:#f2eefc}\n  #prompt{font-size:17px;margin:0 0 14px;text-shadow:0 2px 6px rgba(0,0,0,.6)}\n  #choices{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}\n  #choices li{background:rgba(24,18,38,.62);border:1px solid rgba(184,164,255,.35);\n    border-radius:10px;padding:13px 16px;font-size:15px;cursor:pointer;\n    backdrop-filter:blur(2px);transition:background .15s,border-color .15s}\n  #choices li:active,#choices li:hover{background:rgba(120,90,220,.35);\n    border-color:rgba(210,196,255,.7)}\n  #choices li.leave{opacity:.75;margin-top:4px}\n  #gameWrap{position:absolute;inset:0;display:none}\n  #gameWrap iframe{width:100%;height:100%;border:0;display:block}\n</style>\n</head>\n<body>\n  <div id=\"hub\">\n    <div id=\"panel\">\n      <p id=\"prompt\"></p>\n      <ul id=\"choices\"></ul>\n    </div>\n  </div>\n  <div id=\"gameWrap\"><iframe id=\"game\" title=\"小遊戲\"></iframe></div>\n\n<script>\nvar values = {}, vars = {};\nvar hub = document.getElementById('hub');\nvar promptEl = document.getElementById('prompt');\nvar choicesEl = document.getElementById('choices');\nvar gameWrap = document.getElementById('gameWrap');\nvar gameFrame = document.getElementById('game');\n\nvar SLOTS = [];\nvar currentSlot = null;\nvar gameState = null;\nvar arcadeMusic = null, arcadeMusicUrl = '';\n\nfunction buildSlots() {\n  var list = [];\n  for (var i = 1; i <= 5; i++) {\n    var label = values['game' + i + 'Label'];\n    var url = values['game' + i + 'Url'];\n    if (!label || !url) continue;\n    list.push({\n      key: 'slot' + i,\n      label: label,\n      url: url,\n      protocol: values['game' + i + 'Protocol'] || ('slot' + i),\n      stateVar: values['game' + i + 'StateVar'] || '',\n      resultVar: values['game' + i + 'ResultVar'] || '',\n      incompleteVar: values['game' + i + 'IncompleteVar'] || ''\n    });\n  }\n  return list;\n}\n\nfunction music(d) {\n  if (d.url && (!arcadeMusic || arcadeMusicUrl !== d.url)) {\n    if (arcadeMusic) { arcadeMusic.pause(); arcadeMusic.removeAttribute('src'); }\n    arcadeMusicUrl = d.url;\n    arcadeMusic = new Audio(d.url);\n    arcadeMusic.loop = true;\n    arcadeMusic.preload = 'metadata';\n    arcadeMusic.volume = (typeof values.bgmVolume === 'number') ? values.bgmVolume : .27;\n  }\n  if (!arcadeMusic) return;\n  if (d.action === 'mute') { arcadeMusic.muted = !!d.muted; if (d.muted) arcadeMusic.pause(); }\n  if (d.action === 'play' && !d.muted) { arcadeMusic.muted = false; arcadeMusic.play().catch(function () {}); }\n}\n\nfunction startHubMusic() {\n  var bgmSrc = values.bgmUrl || values.bgm;\n  if (bgmSrc) music({ url: bgmSrc, action: 'play', muted: false });\n}\n\nfunction renderHub() {\n  promptEl.textContent = values.subtitle || '';\n  var bgSrc = values.backgroundUrl || values.background;\n  hub.style.backgroundImage = bgSrc ? \"url('\" + bgSrc + \"')\" : 'none';\n  choicesEl.innerHTML = '';\n  SLOTS.forEach(function (slot) {\n    var li = document.createElement('li');\n    li.textContent = slot.label;\n    li.dataset.slot = slot.key;\n    choicesEl.appendChild(li);\n  });\n  if (values.leaveLabel) {\n    var leaveLi = document.createElement('li');\n    leaveLi.className = 'leave';\n    leaveLi.textContent = values.leaveLabel;\n    leaveLi.dataset.leave = '1';\n    choicesEl.appendChild(leaveLi);\n  }\n}\n\nfunction showHub() {\n  currentSlot = null;\n  gameState = null;\n  gameFrame.src = 'about:blank';\n  gameWrap.style.display = 'none';\n  hub.style.display = 'flex';\n  startHubMusic();\n}\n\nfunction enterGame(key) {\n  var match = SLOTS.filter(function (s) { return s.key === key; });\n  var slot = match[0];\n  if (!slot) return;\n  currentSlot = slot;\n  var raw = slot.stateVar ? vars[slot.stateVar] : '';\n  try { gameState = raw ? JSON.parse(raw) : null; } catch (err) { gameState = null; }\n  if (arcadeMusic) arcadeMusic.pause();\n  hub.style.display = 'none';\n  gameWrap.style.display = 'block';\n  gameFrame.title = slot.label;\n  gameFrame.src = slot.url;\n}\n\nfunction leaveArcade() {\n  if (arcadeMusic) arcadeMusic.pause();\n  if (values.leaveResultVar) {\n    parent.postMessage({ type: 'larch:set', name: values.leaveResultVar, value: true }, '*');\n  }\n  setTimeout(function () {\n    parent.postMessage({ type: 'larch:complete', result: 'exit', payload: {} }, '*');\n  }, 150);\n}\n\nchoicesEl.addEventListener('click', function (e) {\n  var li = e.target.closest('li');\n  if (!li) return;\n  if (li.dataset.leave) { leaveArcade(); return; }\n  if (li.dataset.slot) { enterGame(li.dataset.slot); }\n});\n\nparent.postMessage({ type: 'larch:ready' }, '*');\n\nwindow.addEventListener('message', function (e) {\n  var d = e.data;\n  if (!d || !d.type) return;\n\n  if (d.type === 'larch:init') {\n    values = d.values || {};\n    vars = d.variables || {};\n    SLOTS = buildSlots();\n    renderHub();\n    showHub();\n    return;\n  }\n\n  if (e.source !== gameFrame.contentWindow) return;\n\n  if (d.type === 'glitch-park:music') { music(d); return; }\n  if (!currentSlot) return;\n\n  if (d.type === currentSlot.protocol + ':ready') {\n    gameFrame.contentWindow.postMessage({ type: currentSlot.protocol + ':state', state: gameState }, '*');\n    return;\n  }\n  if (d.type === currentSlot.protocol + ':save') {\n    gameState = d.state;\n    if (currentSlot.stateVar) {\n      parent.postMessage({ type: 'larch:set', name: currentSlot.stateVar, value: JSON.stringify(gameState) }, '*');\n    }\n    return;\n  }\n  if (d.type === currentSlot.protocol + ':exit') {\n    if (arcadeMusic) arcadeMusic.pause();\n    var complete = !!d.complete;\n    var slot = currentSlot;\n    if (slot.resultVar) {\n      parent.postMessage({ type: 'larch:set', name: slot.resultVar, value: complete }, '*');\n    }\n    /* 未集齊用獨立變量，不是讓下游去問 resultVar==false：沒玩過的那幾款預設就是 false，\n       那樣接會被別款的離開事件一起觸發。兩個變量永遠一真一假。 */\n    if (slot.incompleteVar) {\n      parent.postMessage({ type: 'larch:set', name: slot.incompleteVar, value: !complete }, '*');\n    }\n    setTimeout(function () {\n      parent.postMessage({ type: 'larch:complete', result: 'exit', payload: { slot: slot.key, complete: complete } }, '*');\n    }, 240);\n  }\n});\n</script>\n</body></html>\n"
+      "html": "<!doctype html><html lang=\"zh-Hant\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<style>\n  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#10091d;\n    font-family:\"PingFang TC\",\"Microsoft JhengHei\",sans-serif}\n  #hub{position:absolute;inset:0;background-size:cover;background-position:center;\n    display:flex;align-items:flex-end;justify-content:center}\n  #hub::before{content:\"\";position:absolute;inset:0;\n    background:linear-gradient(180deg,rgba(10,8,20,0) 0%,rgba(10,8,20,.75) 55%,rgba(10,8,20,.92) 100%)}\n  #panel{position:relative;z-index:1;width:100%;max-width:520px;padding:0 24px 6vh;\n    box-sizing:border-box;color:#f2eefc}\n  #prompt{font-size:17px;margin:0 0 14px;text-shadow:0 2px 6px rgba(0,0,0,.6)}\n  #choices{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}\n  #choices li{background:rgba(24,18,38,.62);border:1px solid rgba(184,164,255,.35);\n    border-radius:10px;padding:13px 16px;font-size:15px;cursor:pointer;\n    backdrop-filter:blur(2px);transition:background .15s,border-color .15s}\n  #choices li:active,#choices li:hover{background:rgba(120,90,220,.35);\n    border-color:rgba(210,196,255,.7)}\n  #choices li.leave{opacity:.75;margin-top:4px}\n  #gameWrap{position:absolute;inset:0;display:none}\n  #gameWrap iframe{width:100%;height:100%;border:0;display:block}\n</style>\n</head>\n<body>\n  <div id=\"hub\">\n    <div id=\"panel\">\n      <p id=\"prompt\"></p>\n      <ul id=\"choices\"></ul>\n    </div>\n  </div>\n  <div id=\"gameWrap\"><iframe id=\"game\" title=\"小遊戲\"></iframe></div>\n\n<script>\nvar values = {}, vars = {};\nvar hub = document.getElementById('hub');\nvar promptEl = document.getElementById('prompt');\nvar choicesEl = document.getElementById('choices');\nvar gameWrap = document.getElementById('gameWrap');\nvar gameFrame = document.getElementById('game');\n\nvar SLOTS = [];\nvar currentSlot = null;\nvar gameState = null;\nvar arcadeMusic = null, arcadeMusicUrl = '';\n\n/* 一格一行文字，六欄：名稱 | 網址 | 前綴 | 存檔變量 | 結果變量 | 未集齊變量。\n   之所以不是六個獨立欄位：平台的插件定義每張卡最多收 30 個欄位，超過的靜默砍掉\n   （2026-09-21 實測 39 個上架後只剩 30，第 4、5 款殘缺）。 */\nfunction buildSlots() {\n  var list = [];\n  for (var i = 1; i <= 5; i++) {\n    var row = values['game' + i];\n    if (!row) continue;\n    var col = String(row).split('|').map(function (s) { return s.trim(); });\n    if (!col[0] || !col[1]) continue;\n    list.push({\n      key: 'slot' + i,\n      label: col[0],\n      url: col[1],\n      protocol: col[2] || ('slot' + i),\n      stateVar: col[3] || '',\n      resultVar: col[4] || '',\n      incompleteVar: col[5] || ''\n    });\n  }\n  return list;\n}\n\nfunction music(d) {\n  if (d.url && (!arcadeMusic || arcadeMusicUrl !== d.url)) {\n    if (arcadeMusic) { arcadeMusic.pause(); arcadeMusic.removeAttribute('src'); }\n    arcadeMusicUrl = d.url;\n    arcadeMusic = new Audio(d.url);\n    arcadeMusic.loop = true;\n    arcadeMusic.preload = 'metadata';\n    arcadeMusic.volume = (typeof values.bgmVolume === 'number') ? values.bgmVolume : .27;\n  }\n  if (!arcadeMusic) return;\n  if (d.action === 'mute') { arcadeMusic.muted = !!d.muted; if (d.muted) arcadeMusic.pause(); }\n  if (d.action === 'play' && !d.muted) { arcadeMusic.muted = false; arcadeMusic.play().catch(function () {}); }\n}\n\nfunction startHubMusic() {\n  var bgmSrc = values.bgmUrl || values.bgm;\n  if (bgmSrc) music({ url: bgmSrc, action: 'play', muted: false });\n}\n\nfunction renderHub() {\n  promptEl.textContent = values.subtitle || '';\n  var bgSrc = values.backgroundUrl || values.background;\n  hub.style.backgroundImage = bgSrc ? \"url('\" + bgSrc + \"')\" : 'none';\n  choicesEl.innerHTML = '';\n  SLOTS.forEach(function (slot) {\n    var li = document.createElement('li');\n    li.textContent = slot.label;\n    li.dataset.slot = slot.key;\n    choicesEl.appendChild(li);\n  });\n  if (values.leaveLabel) {\n    var leaveLi = document.createElement('li');\n    leaveLi.className = 'leave';\n    leaveLi.textContent = values.leaveLabel;\n    leaveLi.dataset.leave = '1';\n    choicesEl.appendChild(leaveLi);\n  }\n}\n\nfunction showHub() {\n  currentSlot = null;\n  gameState = null;\n  gameFrame.src = 'about:blank';\n  gameWrap.style.display = 'none';\n  hub.style.display = 'flex';\n  startHubMusic();\n}\n\nfunction enterGame(key) {\n  var match = SLOTS.filter(function (s) { return s.key === key; });\n  var slot = match[0];\n  if (!slot) return;\n  currentSlot = slot;\n  var raw = slot.stateVar ? vars[slot.stateVar] : '';\n  try { gameState = raw ? JSON.parse(raw) : null; } catch (err) { gameState = null; }\n  if (arcadeMusic) arcadeMusic.pause();\n  hub.style.display = 'none';\n  gameWrap.style.display = 'block';\n  gameFrame.title = slot.label;\n  gameFrame.src = slot.url;\n}\n\nfunction leaveArcade() {\n  if (arcadeMusic) arcadeMusic.pause();\n  if (values.leaveResultVar) {\n    parent.postMessage({ type: 'larch:set', name: values.leaveResultVar, value: true }, '*');\n  }\n  setTimeout(function () {\n    parent.postMessage({ type: 'larch:complete', result: 'exit', payload: {} }, '*');\n  }, 150);\n}\n\nchoicesEl.addEventListener('click', function (e) {\n  var li = e.target.closest('li');\n  if (!li) return;\n  if (li.dataset.leave) { leaveArcade(); return; }\n  if (li.dataset.slot) { enterGame(li.dataset.slot); }\n});\n\nparent.postMessage({ type: 'larch:ready' }, '*');\n\nwindow.addEventListener('message', function (e) {\n  var d = e.data;\n  if (!d || !d.type) return;\n\n  if (d.type === 'larch:init') {\n    values = d.values || {};\n    vars = d.variables || {};\n    SLOTS = buildSlots();\n    renderHub();\n    showHub();\n    return;\n  }\n\n  if (e.source !== gameFrame.contentWindow) return;\n\n  if (d.type === 'glitch-park:music') { music(d); return; }\n  if (!currentSlot) return;\n\n  if (d.type === currentSlot.protocol + ':ready') {\n    gameFrame.contentWindow.postMessage({ type: currentSlot.protocol + ':state', state: gameState }, '*');\n    return;\n  }\n  if (d.type === currentSlot.protocol + ':save') {\n    gameState = d.state;\n    if (currentSlot.stateVar) {\n      parent.postMessage({ type: 'larch:set', name: currentSlot.stateVar, value: JSON.stringify(gameState) }, '*');\n    }\n    return;\n  }\n  if (d.type === currentSlot.protocol + ':exit') {\n    if (arcadeMusic) arcadeMusic.pause();\n    var complete = !!d.complete;\n    var slot = currentSlot;\n    if (slot.resultVar) {\n      parent.postMessage({ type: 'larch:set', name: slot.resultVar, value: complete }, '*');\n    }\n    /* 未集齊用獨立變量，不是讓下游去問 resultVar==false：沒玩過的那幾款預設就是 false，\n       那樣接會被別款的離開事件一起觸發。兩個變量永遠一真一假。 */\n    if (slot.incompleteVar) {\n      parent.postMessage({ type: 'larch:set', name: slot.incompleteVar, value: !complete }, '*');\n    }\n    setTimeout(function () {\n      parent.postMessage({ type: 'larch:complete', result: 'exit', payload: { slot: slot.key, complete: complete } }, '*');\n    }, 240);\n  }\n});\n</script>\n</body></html>\n"
     }
   ]
 }

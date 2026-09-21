@@ -443,12 +443,10 @@ console.log('\n=== 遊樂園插件 manifest：沒玩過／玩過沒收齊／收�
 
   const V = (exit) => ({
     title: '遊樂園', subtitle: '玩哪一台？', leaveLabel: '← 離開', leaveResultVar: 'park_leave',
-    game1Label: '扭蛋機', game1Protocol: 'gacha', game1StateVar: 'gacha_state',
-    game1Url: '/.park-stub-game.html?g=gacha' + (exit === null ? '' : '&exit=' + exit),
-    game1ResultVar: 'cg_gacha', game1IncompleteVar: 'cg_gacha_no',
-    game2Label: '娃娃機', game2Protocol: 'claw', game2StateVar: 'claw_state',
-    game2Url: '/.park-stub-game.html?g=claw',
-    game2ResultVar: 'cg_claw', game2IncompleteVar: 'cg_claw_no',
+    game1: ['扭蛋機', '/.park-stub-game.html?g=gacha' + (exit === null ? '' : '&exit=' + exit),
+            'gacha', 'gacha_state', 'cg_gacha', 'cg_gacha_no'].join(' | '),
+    game2: ['娃娃機', '/.park-stub-game.html?g=claw', 'claw', 'claw_state',
+            'cg_claw', 'cg_claw_no'].join(' | '),
   });
   // 殼上一輪的卡片可能還在寫它自己的變量，只看這張卡該寫的那幾個。
   const setsOf = async () => Object.fromEntries(

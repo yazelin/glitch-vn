@@ -46,16 +46,14 @@ def request(path, method="GET", body=None, etag=None):
 def plugin_values():
     # 背景那張在專案素材庫裡，所以走 asset 欄位；主題曲在 GitHub Pages 上，素材庫沒有，
     # 走 bgmUrl（asset 欄位比對不到外部網址，Inspector 會顯示成「未選擇」）。
-    v = {"title": "格莉奇遊樂園", "subtitle": "今晚想先玩哪一台？", "background": BG,
+    v = {"subtitle": "今晚想先玩哪一台？", "background": BG,
          "bgmUrl": BGM, "bgmVolume": 0.27, "leaveLabel": "← 離開遊樂園",
          "leaveResultVar": "park_leave_trigger"}
+    # 1.1.0 起一款一行：名稱 | 網址 | 前綴 | 存檔變量 | 結果變量 | 未集齊變量
+    # （平台每張卡最多收 30 個欄位，六欄乘五款加全域會被靜默砍掉）
     for i, (label, key, url) in enumerate(GAMES, 1):
-        v[f"game{i}Label"] = label
-        v[f"game{i}Url"] = url
-        v[f"game{i}Protocol"] = key
-        v[f"game{i}StateVar"] = f"{key}_state"
-        v[f"game{i}ResultVar"] = f"cg_{key}_trigger"
-        v[f"game{i}IncompleteVar"] = f"cg_{key}_incomplete_trigger"
+        v[f"game{i}"] = " | ".join([label, url, key, f"{key}_state",
+                                    f"cg_{key}_trigger", f"cg_{key}_incomplete_trigger"])
     return v
 
 
@@ -127,7 +125,7 @@ def main():
           "｜出邊", len(outs2), "條")
     ok = (len(bb["nodes"]) == len(nodes) and len(bb["edges"]) == len(edges)
           and got.get("type") == "plugin" and len(outs2) == len(outs)
-          and got.get("pluginValues", {}).get("game5IncompleteVar") == "cg_pinball_incomplete_trigger")
+          and got.get("pluginValues", {}).get("game5", "").endswith("cg_pinball_incomplete_trigger"))
     print("全部對得上" if ok else "★ 對不上，拿備份回復")
     sys.exit(0 if ok else 1)
 
