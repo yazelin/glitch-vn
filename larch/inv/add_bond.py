@@ -308,12 +308,53 @@ def voice(board):
     return n
 
 
+# 第二天收尾的手機（2026-10-01 作者試玩抓到）：那張卡第三天早上才播，手機預設開在「訊息」，
+# 最上面是前一晚的「開始直播了」，點進去是「目前沒有直播」，跟旁白「新貼文」對不起來。
+# 從這張卡打開時直接開在貼文頁：選「看一下」先設 phone_tab=feed，手機開機照它選分頁、收起來清空。
+PHONE_PAIRS = [
+    ("show(phoneLog().length ? 'msg' : 'feed');",
+     "show(values.phone_tab ? values.phone_tab : (phoneLog().length ? 'msg' : 'feed'));"),
+    ("function closePhone(){\n  markSeen('phone_day_seen', day);\n  setVar('open_phone', false);",
+     "function closePhone(){\n  markSeen('phone_day_seen', day);\n  setVar('open_phone', false);\n  if(values.phone_tab) setVar('phone_tab', '');"),
+]
+PHONE_VAR = {"id": "phone_tab", "name": "phone_tab", "type": "string", "label": "手機這一次打開停在哪一頁（劇情帶開時用；收起來清空）", "defaultValue": ""}
+
+
+def phone_tab(board):
+    """可重跑：bond-phone-q 選「看一下」→ bond-phone-set（phone_tab=feed）→ inv-phone。回傳改了幾處。"""
+    nodes = {n["id"]: n for n in board["nodes"]}
+    n = 0
+    if "bond-phone-set" not in nodes:
+        q = nodes["bond-phone-q"]
+        board["nodes"].append({"id": "bond-phone-set", "type": "story",
+            "position": {"x": q["position"]["x"], "y": q["position"]["y"] + 180},
+            **({"parentId": q["parentId"], "extent": "parent"} if q.get("parentId") else {}),
+            "data": {"type": "setVariable", "title": "（手機開在貼文頁）",
+                     "variableOps": [{"id": "op-phone_tab", "kind": "set", "value": "feed", "variable": "phone_tab"}]}})
+        e = [e for e in board["edges"] if e["source"] == "bond-phone-q" and e["target"] == "inv-phone"]
+        assert len(e) == 1
+        e[0]["target"] = "bond-phone-set"
+        board["edges"].append({"id": "e-bond-phone-set", "source": "bond-phone-set", "target": "inv-phone",
+                               "animated": True, "sourceHandle": "right"})
+        n += 1
+    d = nodes["inv-phone"]["data"]
+    new = swap(d["miniGameHtml"], PHONE_PAIRS, "phone")
+    if new != d["miniGameHtml"]:
+        d["miniGameHtml"] = new; n += 1
+    if "phone_tab" not in d["miniGameReadVars"]:
+        d["miniGameReadVars"].append("phone_tab"); n += 1
+    if "phone_tab" not in d["miniGameWriteVars"]:
+        d["miniGameWriteVars"].append("phone_tab"); n += 1
+    return n
+
+
 def local_files():
     """本機三個卡片檔同步（不連線）。"""
     C = HERE.parent / "cards"
     for name, fn in (("notes.html", lambda t: swap(t, NOTES_PAIRS, "notes")),
                      ("todo.js", lambda t: swap(t, TODO_PAIRS, "todo")),
-                     ("board.html", lambda t: css(swap(t, BOARD_PAIRS, "board")))):
+                     ("board.html", lambda t: css(swap(t, BOARD_PAIRS, "board"))),
+                     ("phone.html", lambda t: swap(t, PHONE_PAIRS, "phone"))):
         p = C / name
         t = p.read_text(encoding="utf-8")
         new = fn(t)
@@ -355,8 +396,8 @@ def main():
     stats = {"cards": 0, "narr": 0, "reply": 0, "edges": 0}
     review = []
     make(board, stats, review)
-    stats["voice"] = voice(board)
-    print(f"掛音檔 {stats['voice']} 句")
+    stats["voice"] = voice(board) + phone_tab(board)
+    print(f"掛音檔與手機分頁 {stats['voice']} 處")
     print(f"新卡 {stats['cards']}、新線 {stats['edges']}、桌前旁白接上 {stats['narr']}、回法 {stats['reply']}（原本卡 {before[0]}、邊 {before[1]}）")
     if a.review:
         write_review(review, a.review)
@@ -378,7 +419,7 @@ def main():
             if e.code != 409 or attempt == 4:
                 raise
             payload, etag = request(f"/boards/{BID}"); board = payload.get("board", payload)
-            make(board, {k: 0 for k in stats}, []); voice(board)
+            make(board, {k: 0 for k in stats}, []); voice(board); phone_tab(board)
     back, _ = request(f"/boards/{BID}"); back = back.get("board", back)
     got = (len(back["nodes"]), len(back["edges"]))
     print(f"  回讀：卡 {got[0]}（預期 {want[0]}）　邊 {got[1]}（預期 {want[1]}）", "一致" if got == want else "★ 不一致")
@@ -386,7 +427,7 @@ def main():
     proj, etag = request("")
     proj = proj.get("project", proj)
     have = {v["name"] for v in proj["variables"]}
-    add = [v for v in VARS if v["name"] not in have]
+    add = [v for v in VARS + [PHONE_VAR] if v["name"] not in have]
     if add:
         proj["variables"] += add
         request("", "PUT", {"project": proj}, etag)
