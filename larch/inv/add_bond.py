@@ -276,6 +276,38 @@ def make(board, stats, review):
     stats["edges"] = eid[0]
 
 
+# 回法的配音（2026-10-01 補）：玩家與斑比本機克隆、諾亞與店員 Larch（去括號生）。
+# 玩家那句「謝謝。」板上本來就有同一句的音檔，直接借（BORROW）。
+CDN = "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main/docs/voice/"
+VOICE = {("bond-reply-1-0", 0): "v-e3bff5566b8b0570", ("bond-reply-1-0", 1): "v-a9020434c82df8bd",
+         ("bond-reply-2-0", 0): "v-e3bf29418e1f6f50", ("bond-reply-2-0", 1): "v-af5b7ce7356b7878",
+         ("bond-reply-2-1", 1): "v-5605453cb01b225d",
+         ("bond-reply-3-0", 0): "v-c886fe2de1a5c33d", ("bond-reply-3-0", 1): "v-abf8ee5e91456d2a",
+         ("bond-reply-3-1", 0): "v-69b9697ad8387a6e", ("bond-reply-3-1", 1): "v-223f5e5054895122"}
+BORROW = {("bond-reply-2-1", 0): ("玩家", "謝謝。")}
+
+
+def voice(board):
+    """掛音檔；做過就跳過。回傳掛了幾句。"""
+    nodes = {n["id"]: n for n in board["nodes"]}
+    have = {}
+    for n in board["nodes"]:
+        for l in n["data"].get("dialogueLines") or []:
+            if l.get("voiceUrl"):
+                have.setdefault((l.get("speaker"), l["text"]), l["voiceUrl"])
+    want = {k: CDN + v + ".mp3" for k, v in VOICE.items()}
+    for k, sp_tx in BORROW.items():
+        assert sp_tx in have, f"板上找不到可以借的 {sp_tx}"
+        want[k] = have[sp_tx]
+    n = 0
+    for (cid, i), url in want.items():
+        l = nodes[cid]["data"]["dialogueLines"][i]
+        if l.get("voiceUrl") != url:
+            l["voiceUrl"] = url
+            n += 1
+    return n
+
+
 def local_files():
     """本機三個卡片檔同步（不連線）。"""
     C = HERE.parent / "cards"
@@ -323,13 +355,15 @@ def main():
     stats = {"cards": 0, "narr": 0, "reply": 0, "edges": 0}
     review = []
     make(board, stats, review)
+    stats["voice"] = voice(board)
+    print(f"掛音檔 {stats['voice']} 句")
     print(f"新卡 {stats['cards']}、新線 {stats['edges']}、桌前旁白接上 {stats['narr']}、回法 {stats['reply']}（原本卡 {before[0]}、邊 {before[1]}）")
     if a.review:
         write_review(review, a.review)
     if a.dry or a.review or a.snapshot:
         return
     local_files()
-    if not stats["cards"]:
+    if not stats["cards"] and not stats["voice"]:
         return
     want = (len(board["nodes"]), len(board["edges"]))
     bk = HERE / "backups" / f"board-main-{datetime.datetime.now():%Y%m%d-%H%M}-before-bond.json"
@@ -344,7 +378,7 @@ def main():
             if e.code != 409 or attempt == 4:
                 raise
             payload, etag = request(f"/boards/{BID}"); board = payload.get("board", payload)
-            make(board, {k: 0 for k in stats}, [])
+            make(board, {k: 0 for k in stats}, []); voice(board)
     back, _ = request(f"/boards/{BID}"); back = back.get("board", back)
     got = (len(back["nodes"]), len(back["edges"]))
     print(f"  回讀：卡 {got[0]}（預期 {want[0]}）　邊 {got[1]}（預期 {want[1]}）", "一致" if got == want else "★ 不一致")

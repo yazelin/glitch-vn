@@ -8506,5 +8506,41 @@
 "v-d12b7b67f38a27ee": {
 "line": "Larch 逐句・悠閒女孩",
 "why": "只有 mp3 沒有 wav，是逐句呼叫下載的（2026-10-01 台詞審查 B01，換成「補習班，看一下。」）"
+},
+"v-e3bff5566b8b0570": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 voice-ref/player-f-short.wav（第二句「我知道那是玩笑。」；長參考配短句會拖成 3.8 秒）（2026-10-01 主角連結回法）"
+},
+"v-e3bf29418e1f6f50": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 voice-ref/player-f.wav（2026-10-01 主角連結回法）"
+},
+"v-c886fe2de1a5c33d": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 voice-ref/player-f.wav（2026-10-01 主角連結回法）"
+},
+"v-69b9697ad8387a6e": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 voice-ref/player-f.wav（2026-10-01 主角連結回法）"
+},
+"v-abf8ee5e91456d2a": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 /home/ct/下載/cosyvoice-test/jinn-casting3/34-原聲.wav（2026-10-01 主角連結回法）"
+},
+"v-223f5e5054895122": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 /home/ct/下載/cosyvoice-test/jinn-casting3/34-原聲.wav（2026-10-01 主角連結回法）；唸的字是「嗯。」，原句「……嗯。」配長參考音生出來幾乎無聲"
+},
+"v-a9020434c82df8bd": {
+"line": "Larch 逐句・詼諧長者",
+"why": "regen_larch_clean 去括號生（2026-10-01 主角連結回法）"
+},
+"v-af5b7ce7356b7878": {
+"line": "Larch 逐句・南方青年",
+"why": "regen_larch_clean 去括號生（2026-10-01 主角連結回法）"
+},
+"v-5605453cb01b225d": {
+"line": "Larch 逐句・南方青年",
+"why": "只有 mp3 沒有 wav，是逐句呼叫下載的（2026-10-01 主角連結回法）"
 }
 }
