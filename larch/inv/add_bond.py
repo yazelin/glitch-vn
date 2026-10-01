@@ -71,6 +71,10 @@ ASK = {
 # 早上打開手機直播早就結束，看到「目前沒有直播」。改到第二天晚上直播那段筆記之後，
 # 那時直播還在播，選「再拿起來看」就開在直播頁（phone_tab=live）。
 LIVE = ("inv-520", "手機放在桌上，螢幕還亮著。直播還沒結束。")
+# 三場直播只帶第二天（教學）與第八天。第五天不加：那場已經有「打一行送出去／不打」的選擇，
+# 手機直播頁本身也能留言，再帶開手機等於同一件事做兩次（作者 2026-10-01 同意）。
+LIVES = [("bond-live", LIVE[0], LIVE[1]),
+         ("bond-live8", "story-cg-unlock-this-episode", "手機還在桌上播。聊天室裡又有人貼了一次合輯的連結。")]
 OLD_PHONE = ("bond-phone", "bond-phone-q", "bond-phone-set")
 
 # 結局：第一頁那份名單唸完、第七行之前
@@ -319,13 +323,16 @@ PHONE_PAIRS = [
 PHONE_VAR = {"id": "phone_tab", "name": "phone_tab", "type": "string", "label": "手機這一次打開停在哪一頁（劇情帶開時用；收起來清空）", "defaultValue": ""}
 
 
-def add_live(board, nodes, place, edge, choice):
-    place(LIVE[0], "bond-live", {"type": "dialogue", "title": "手機還亮著", "speaker": "旁白", "text": LIVE[1]})
-    place(LIVE[0], "bond-live-q", choice("", ["再拿起來看", "讓它播著"], "第二天晚上：手機"), dy=360)
-    place(LIVE[0], "bond-live-set", {"type": "setVariable", "title": "（手機開在直播頁）",
-          "variableOps": [{"id": "op-phone_tab", "kind": "set", "value": "live", "variable": "phone_tab"}]}, dy=540)
-    edge(LIVE[0], "bond-live"); edge("bond-live", "bond-live-q"); edge("bond-live-q", "bond-live-set", "choice-0")
-    edge("bond-live-set", "inv-phone")
+def add_live(board, nodes, place, edge, choice, which=None):
+    for nid, anchor, text in LIVES:
+        if which and nid != which:
+            continue
+        place(anchor, nid, {"type": "dialogue", "title": "手機還亮著", "speaker": "旁白", "text": text})
+        place(anchor, nid + "-q", choice("", ["再拿起來看", "讓它播著"], "直播：手機"), dy=360)
+        place(anchor, nid + "-set", {"type": "setVariable", "title": "（手機開在直播頁）",
+              "variableOps": [{"id": "op-phone_tab", "kind": "set", "value": "live", "variable": "phone_tab"}]}, dy=540)
+        edge(anchor, nid); edge(nid, nid + "-q"); edge(nid + "-q", nid + "-set", "choice-0")
+        edge(nid + "-set", "inv-phone")
 
 
 def phone_tab(board):
@@ -337,7 +344,9 @@ def phone_tab(board):
         board["edges"] = [e for e in board["edges"] if e["source"] not in OLD_PHONE and e["target"] not in OLD_PHONE]
         nodes = {x["id"]: x for x in board["nodes"]}
         n += 1
-    if "bond-live" not in nodes:
+    for nid, anchor, _ in LIVES:
+        if nid in nodes:
+            continue
         k = [0]
         def place(anchor, nid, data, dx=0, dy=180):
             a = nodes[anchor]
@@ -347,11 +356,11 @@ def phone_tab(board):
             board["nodes"].append(x); nodes[nid] = x
         def edge(a, b, h="right"):
             k[0] += 1
-            board["edges"].append({"id": f"e-bond-live-{k[0]}", "source": a, "target": b, "animated": True, "sourceHandle": h})
+            board["edges"].append({"id": f"e-{nid}-{k[0]}", "source": a, "target": b, "animated": True, "sourceHandle": h})
         def choice(text, opts, title):
             return {"type": "choice", "text": text, "title": title, "choices": opts, "choiceMode": "branch", "choiceConditions": [None] * len(opts)}
-        assert not [e for e in board["edges"] if e["source"] == LIVE[0]], "inv-520 後面已經有線，要先看"
-        add_live(board, nodes, place, edge, choice)
+        assert not [e for e in board["edges"] if e["source"] == anchor], f"{anchor} 後面已經有線，要先看"
+        add_live(board, nodes, place, edge, choice, nid)
         n += 1
     d = nodes["inv-phone"]["data"]
     new = swap(d["miniGameHtml"], PHONE_PAIRS, "phone")
