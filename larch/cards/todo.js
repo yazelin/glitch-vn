@@ -102,3 +102,13 @@ function todoLines(v){
   if(!L.length) L.push('再去一次同一個地方。');
   return L.slice(0,3);
 }
+// 便條底下那一行「包包」小字（add_bond.py）：不佔上面三行，只提醒手機與本子。
+function bagLine(v){
+  function n(k){ var x=Number(v[k]); return isNaN(x)||v[k]===''||v[k]==null?0:x; }
+  var phone=n('phone_day_seen')<n('day'), book=n('free_count')===0;
+  if(n('day')<=1 && phone) return '包包裡有本子跟手機。手機亮過，還沒看。';
+  if(phone) return '手機亮過。還沒看。';
+  if(book && n('day')<=5) return '本子後面還空著。寫一句自己的。';
+  return '';
+}
+

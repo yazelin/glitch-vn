@@ -305,6 +305,20 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     if (clicked) { await page.waitForTimeout(1500); stuck = 0; continue; }
   }
   if (t && t !== lastCard) { out('  ' + t.slice(0,220)); lastCard = t; stuck=0; } else { stuck++;
+    // 桌前那一題（add_bond.py）：守則本開在空白頁、頁首是題目。寫一句再收起來，結局才唸得回來。
+    if (stuck === 2) {
+      for (const f of frames()) {
+        try {
+          if (!(await f.locator('.ask').count())) continue;
+          const ask = await f.locator('.ask').first().textContent();
+          await f.fill('textarea', '自動玩家：' + ask.slice(0, 8));
+          await f.locator('button', { hasText: '記下來' }).first().click();
+          await f.locator('#close').click();
+          out(`  [桌前一題] ${ask} → 寫了一句，收起來`); stuck = 0; break;
+        } catch (e) {}
+      }
+      if (!stuck) continue;
+    }
     // 卡住的時候多半是有一個視窗要按（取得道具那種，按鈕在外掛的 iframe 裡）。
     // 跳過工具列、跳過純數字的（那是背包上的件數，點下去只會把背包打開）。
     if (stuck % 9 === 8) {

@@ -91,7 +91,7 @@ footer{flex:none;display:flex;justify-content:flex-end}
   <footer><button class="act" id="close">收起來</button></footer>
 </div>
 <script>
-var values={}, vars={}, done=false, free=[], tab=0, dirty=false;
+var values={}, vars={}, done=false, free=[], tab=0, dirty=false, wantFree=false;
 var MAXLEN=200, MAXNOTE=50;
 
 function setVar(n,v){ if(n) parent.postMessage({type:'larch:set',name:n,value:v},'*'); }
@@ -234,7 +234,14 @@ function drawQA(m){
   });
 }
 
-function saveFree(){ setVar('notes_free', JSON.stringify(free)); dirty=false; }
+function saveFree(){ setVar('notes_free', JSON.stringify(free)); setVar('free_count', free.length); setVar('free_echo', freeEcho()); dirty=false; }
+// 結局唸回來的那兩則（add_bond.py）。桌前那一題寫下的會帶「第N天｜」。
+function freeEcho(){
+  function say(t){ var m=String(t).match(/^(第.+?天)｜([\s\S]*)$/); return m ? m[1]+'她寫：「'+m[2]+'」' : '她寫過：「'+t+'」'; }
+  if(!free.length) return '那幾頁是空的。她一行都沒有寫。';
+  if(free.length===1) return '只有一則。'+say(free[0]);
+  return say(free[0])+'\n'+say(free[free.length-1]);
+}
 
 function drawFree(m){
   var box=el('div','free');
@@ -248,7 +255,9 @@ function drawFree(m){
   });
   box.appendChild(ul);
 
-  var ta=el('textarea'); ta.placeholder='自己寫點什麼。系統不會動這一頁。';
+  var ask=String(values.free_prompt||'').split('｜');
+  if(ask.length===2){ var h=el('p','ask',ask[1]); h.style.cssText='margin:0 0 .5em;font-style:italic;color:var(--cyan)'; box.insertBefore(h,box.firstChild); }
+  var ta=el('textarea'); ta.placeholder=ask.length===2?'寫一句。系統不會動這一頁。':'自己寫點什麼。系統不會動這一頁。';
   ta.maxLength=MAXLEN;
   var row=el('div','row');
   var add=el('button','act','記下來'); add.type='button';
@@ -261,7 +270,8 @@ function drawFree(m){
     var t=ta.value.trim();
     if(!t) return;
     if(free.length>=MAXNOTE){ cnt.textContent='寫滿了（'+MAXNOTE+' 則）'; cnt.className='count over'; return; }
-    free.push(t.slice(0,MAXLEN)); saveFree(); render();
+    var day=String(values.free_prompt||'').split('｜');
+    free.push((day.length===2?day[0]+'｜':'')+t.slice(0,MAXLEN)); saveFree(); render();
   });
   row.appendChild(add); row.appendChild(cnt);
   box.appendChild(ta); box.appendChild(row);
@@ -272,7 +282,8 @@ function render(){
   var tabs=TABS.slice(), draws=[drawNames,drawSight,drawQA,drawFree];
   if(hasAllNames()){ tabs.unshift('第一頁'); draws.unshift(drawPage1); }
   tabs.push('明天'); draws.push(drawTodo);
-  if(tab>=tabs.length) tab=0;
+  if(wantFree){ tab=tabs.indexOf('空白頁'); wantFree=false; }
+  if(tab>=tabs.length||tab<0) tab=0;
   var nav=document.getElementById('tabs'); nav.textContent='';
   tabs.forEach(function(name,i){
     var b=el('button',null,name); b.type='button';
@@ -291,10 +302,12 @@ function start(){
     var parsed=typeof raw==='string' && raw ? JSON.parse(raw) : [];
     free=Array.isArray(parsed)?parsed.filter(function(x){return typeof x==='string';}):[];
   }catch(e){ free=[]; }
+  wantFree=!!values.free_prompt;
   render();
   document.getElementById('close').addEventListener('click',function(){
     if(dirty) saveFree();
     setVar('open_notes', false);   // interrupt 卡靠這個放人回原處
+    if(values.free_prompt) setVar('free_prompt', '');
     finish('closed',{notes:free.length});
   });
 }

@@ -89,6 +89,7 @@ h1{margin:0;font:600 clamp(19px,3.2vw,28px)/1.1 "Noto Serif TC","Songti TC","PMi
   background:radial-gradient(circle at 35% 35%,#ff8a80,var(--pin) 55%,#7a1f18);box-shadow:0 2px 3px rgba(0,0,0,.5)}
 .todo b{display:block;font:600 clamp(12px,1.5vw,13.5px)/1.3 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;color:var(--ink2);margin-bottom:.3em}
 .todo p{margin:0;font:italic clamp(12px,1.55vw,14px)/1.5 "Noto Serif TC","Songti TC","PMingLiU",Georgia,serif}
+.todo p.bag{margin-top:.45em;padding-top:.35em;border-top:1px dashed rgba(0,0,0,.18);font-size:.9em;color:var(--ink2)}
 .map .thread{stroke:var(--pin);stroke-width:.35;fill:none;opacity:.85}
 /* 釘上去的東西：拍立得或便條 */
 button.spot{position:absolute;transform:translate(-50%,-50%) rotate(var(--rot,0deg));appearance:none;cursor:pointer;
@@ -558,6 +559,7 @@ function start(){
   var todo=document.createElement('div'); todo.className='todo';
   var tb=document.createElement('b'); tb.textContent='明天'; todo.appendChild(tb);
   todoLines(values).forEach(function(t){ var p=document.createElement('p'); p.textContent=t; todo.appendChild(p); });
+  if(typeof bagLine==='function'){ var bl=bagLine(values); if(bl){ var bp=document.createElement('p'); bp.className='bag'; bp.textContent=bl; todo.appendChild(bp); } }
   map.appendChild(todo);
   SPOTS.forEach(function(s,i){
     var open = isOpen(s);
