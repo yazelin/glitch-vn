@@ -8482,5 +8482,29 @@
 "v-dc65036344a1f6d8": {
 "line": "本機 CosyVoice3 克隆",
 "why": "參考音 /home/ct/下載/cosyvoice-test/jinn-casting3/37-原聲.wav"
+},
+"v-4904695f835b1825": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 /home/ct/下載/cosyvoice-test/jinn-casting3/33-原聲.wav（2026-10-01 台詞審查 B 類重配）"
+},
+"v-c4c58053504d22aa": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 /home/ct/下載/cosyvoice-test/jinn-casting3/33-原聲.wav（2026-10-01 台詞審查 B 類重配）"
+},
+"v-924d566f8665b087": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 /home/ct/下載/cosyvoice-test/jinn-casting3/33-原聲.wav（2026-10-01 台詞審查 B 類重配）"
+},
+"v-168579de22a3a32d": {
+"line": "本機 CosyVoice3 克隆",
+"why": "參考音 /home/ct/下載/cosyvoice-test/jinn-casting3/27-原聲.wav（2026-10-01 台詞審查 B 類重配）"
+},
+"v-a488c77dd9b1f1b9": {
+"line": "Larch 逐句・和藹阿姨",
+"why": "只有 mp3 沒有 wav，是逐句呼叫下載的（2026-10-01 台詞審查 B07）"
+},
+"v-d12b7b67f38a27ee": {
+"line": "Larch 逐句・悠閒女孩",
+"why": "只有 mp3 沒有 wav，是逐句呼叫下載的（2026-10-01 台詞審查 B01，換成「補習班，看一下。」）"
 }
 }
