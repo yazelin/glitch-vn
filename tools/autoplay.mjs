@@ -206,6 +206,12 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
     if (optHits.length) out(`  [選項] 用文字抓到錄音那題：${optHits.map(o=>o.t).join(' | ')}`);
   }
   let pick_ = optHits[0];
+  // PICK=甲,乙：劇情選項卡上文字含其中一個就選它（PREFER 只管地點選單）。用來把第二個選項逼出來驗。
+  if (process.env.PICK) {
+    const hit = process.env.PICK.split(',').map(x => x.trim()).filter(Boolean)
+      .map(w => optHits.find(o => o.t.replace(/^\d+/, '') === w)).find(Boolean);
+    if (hit) pick_ = hit;
+  }
   // 講者名 2026-09-17 改成「客人」（貓草）——認人的規則要一起認新名字，不然會對他按錄音、燒掉那一晚
   if (optHits.length > 1 && /開錄音機/.test(optHits[0].t) && /貓草|關東煮|客人/.test(lastCard)) {
     pick_ = optHits.find(o => /不開/.test(o.t)) || optHits[0];
