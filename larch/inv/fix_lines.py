@@ -83,6 +83,13 @@ SPLITS = {
 }
 
 
+# B 類重配好的音檔（2026-10-01）。--regen 時一併掛上；網址照 novelkit.cdn() 的 jsDelivr 寫法。
+CDN = "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main/docs/voice/"
+VOICE = {("inv-656", 0): "v-d12b7b67f38a27ee", ("inv-198", 22): "v-168579de22a3a32d",
+         ("inv-535", 11): "v-4904695f835b1825", ("inv-537", 4): "v-c4c58053504d22aa",
+         ("inv-411", 4): "v-924d566f8665b087", ("inv-651", 2): "v-a488c77dd9b1f1b9"}
+
+
 def holders(d):
     return d.get("dialogueLines") or [d]
 
@@ -128,6 +135,15 @@ def apply(board, kinds, log):
             d["text"] = new
         log.append(f"{oid} {cid}#{idx}\n    舊：{t}\n    新：{new}")
         done += 1
+    if "B" in kinds:
+        for (cid, idx), k in VOICE.items():
+            h = holders(nodes[cid]["data"])[idx]
+            if h.get("voiceUrl") == CDN + k + ".mp3":
+                skip += 1
+                continue
+            h["voiceUrl"] = CDN + k + ".mp3"
+            log.append(f"音檔 {cid}#{idx} → {k}")
+            done += 1
     for oid, (cid, old, rows) in SPLITS.items():
         if "A" not in kinds:
             continue
