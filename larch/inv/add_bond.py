@@ -7,7 +7,7 @@
   一、桌前每一天多一兩句她自己的生活（無聲旁白）。第一、二天是新卡，其餘接在「第N天。」那張後面。
   二、第一天與第三到十三天，筆記之後問一題：選「寫一句」就翻開守則本的空白頁，頁首是今天的題目；
       寫下的字存進 notes_free，結局在第七行之前唸回第一則與最後一則（free_echo）。
-  三、第二天收尾（第三天早上）手機亮一下，選「看一下」直接打開手機。板上便條底下多一行「包包」小字（bagLine）。
+  三、第二天晚上直播那段筆記之後，選「再拿起來看」直接開在手機的直播頁。板上便條底下多一行「包包」小字（bagLine）。
   四、三場對話後面加「怎麼回」的選項，路線不變，只換對方回的那一句。
 
 新台詞先不配音（作者 2026-10-01 決定），之後 tools/gen_voice.py 補。
@@ -67,8 +67,11 @@ ASK = {
     13: "明天要記得的事。",
 }
 
-# 三、第二天收尾（第三天早上播）的手機（這一天沒有題目：守則本與手機卡都沒有出口，一個插播裡只能接一張）
-PHONE_NARR = "手機在枕頭旁邊亮了一下。螢幕上是她的帳號發的新貼文。"
+# 三、手機。第一版放在第二天的收尾（第三天早上才播），作者試玩：通知是前一晚來的，
+# 早上打開手機直播早就結束，看到「目前沒有直播」。改到第二天晚上直播那段筆記之後，
+# 那時直播還在播，選「再拿起來看」就開在直播頁（phone_tab=live）。
+LIVE = ("inv-520", "手機放在桌上，螢幕還亮著。直播還沒結束。")
+OLD_PHONE = ("bond-phone", "bond-phone-q", "bond-phone-set")
 
 # 結局：第一頁那份名單唸完、第七行之前
 ECHO = ("inv-452", "inv-454", "她把本子翻到最後面，自己寫的那幾頁。\n{{free_echo}}\n她翻回第一頁。")
@@ -238,12 +241,10 @@ def make(board, stats, review):
                    [("玩家（筆記）", nodes[a]["data"]["text"])], [("旁白", text.replace("{{free_echo}}", "〔第一天她寫：「…」／第十二天她寫：「…」；沒寫過的人唸：那幾頁是空的。她一行都沒有寫。〕"))],
                    b))
 
-    # 三、手機
-    place("inv-643", "bond-phone", {"type": "dialogue", "title": "手機亮了一下", "speaker": "旁白", "text": PHONE_NARR})
-    place("inv-643", "bond-phone-q", choice("", ["看一下", "等一下再看"], "第二天：手機"), dy=360)
-    edge("inv-643", "bond-phone"); edge("bond-phone", "bond-phone-q"); edge("bond-phone-q", "inv-phone", "choice-0")
-    review.append(("三、手機", "第三天早上（第二天的收尾，桌前筆記之後）", "bond-phone", [("玩家（筆記）", nodes["inv-643"]["data"]["text"])],
-                   [("旁白", PHONE_NARR), ("選項", "看一下（直接打開手機）／等一下再看")], None))
+    # 三、手機：第二天晚上直播那段筆記之後（見 LIVE）
+    add_live(board, nodes, place, edge, choice)
+    review.append(("三、手機", "第二天晚上（直播那段筆記之後）", "bond-live", [("玩家（筆記）", nodes[LIVE[0]]["data"]["text"])],
+                   [("旁白", LIVE[1]), ("選項", "再拿起來看（直接打開手機的直播頁）／讓它播著")], None))
 
     # 四、回法
     for k, (anc, nxt, prompt, opts) in enumerate(REPLY, 1):
@@ -308,9 +309,7 @@ def voice(board):
     return n
 
 
-# 第二天收尾的手機（2026-10-01 作者試玩抓到）：那張卡第三天早上才播，手機預設開在「訊息」，
-# 最上面是前一晚的「開始直播了」，點進去是「目前沒有直播」，跟旁白「新貼文」對不起來。
-# 從這張卡打開時直接開在貼文頁：選「看一下」先設 phone_tab=feed，手機開機照它選分頁、收起來清空。
+# 手機開機照 phone_tab 選分頁（劇情帶開時用）、收起來清空；從背包開照舊。
 PHONE_PAIRS = [
     ("show(phoneLog().length ? 'msg' : 'feed');",
      "show(values.phone_tab ? values.phone_tab : (phoneLog().length ? 'msg' : 'feed'));"),
@@ -320,31 +319,47 @@ PHONE_PAIRS = [
 PHONE_VAR = {"id": "phone_tab", "name": "phone_tab", "type": "string", "label": "手機這一次打開停在哪一頁（劇情帶開時用；收起來清空）", "defaultValue": ""}
 
 
+def add_live(board, nodes, place, edge, choice):
+    place(LIVE[0], "bond-live", {"type": "dialogue", "title": "手機還亮著", "speaker": "旁白", "text": LIVE[1]})
+    place(LIVE[0], "bond-live-q", choice("", ["再拿起來看", "讓它播著"], "第二天晚上：手機"), dy=360)
+    place(LIVE[0], "bond-live-set", {"type": "setVariable", "title": "（手機開在直播頁）",
+          "variableOps": [{"id": "op-phone_tab", "kind": "set", "value": "live", "variable": "phone_tab"}]}, dy=540)
+    edge(LIVE[0], "bond-live"); edge("bond-live", "bond-live-q"); edge("bond-live-q", "bond-live-set", "choice-0")
+    edge("bond-live-set", "inv-phone")
+
+
 def phone_tab(board):
-    """可重跑：bond-phone-q 選「看一下」→ bond-phone-set（phone_tab=feed）→ inv-phone。回傳改了幾處。"""
+    """可重跑的搬家：拿掉第三天早上那三張、補第二天晚上那三張、手機卡程式與變數。回傳改了幾處。"""
     nodes = {n["id"]: n for n in board["nodes"]}
     n = 0
-    if "bond-phone-set" not in nodes:
-        q = nodes["bond-phone-q"]
-        board["nodes"].append({"id": "bond-phone-set", "type": "story",
-            "position": {"x": q["position"]["x"], "y": q["position"]["y"] + 180},
-            **({"parentId": q["parentId"], "extent": "parent"} if q.get("parentId") else {}),
-            "data": {"type": "setVariable", "title": "（手機開在貼文頁）",
-                     "variableOps": [{"id": "op-phone_tab", "kind": "set", "value": "feed", "variable": "phone_tab"}]}})
-        e = [e for e in board["edges"] if e["source"] == "bond-phone-q" and e["target"] == "inv-phone"]
-        assert len(e) == 1
-        e[0]["target"] = "bond-phone-set"
-        board["edges"].append({"id": "e-bond-phone-set", "source": "bond-phone-set", "target": "inv-phone",
-                               "animated": True, "sourceHandle": "right"})
+    if any(k in nodes for k in OLD_PHONE):
+        board["nodes"] = [x for x in board["nodes"] if x["id"] not in OLD_PHONE]
+        board["edges"] = [e for e in board["edges"] if e["source"] not in OLD_PHONE and e["target"] not in OLD_PHONE]
+        nodes = {x["id"]: x for x in board["nodes"]}
+        n += 1
+    if "bond-live" not in nodes:
+        k = [0]
+        def place(anchor, nid, data, dx=0, dy=180):
+            a = nodes[anchor]
+            x = {"id": nid, "type": "story", "data": data, "position": {"x": a["position"]["x"] + dx, "y": a["position"]["y"] + dy}}
+            if a.get("parentId"):
+                x["parentId"], x["extent"] = a["parentId"], "parent"
+            board["nodes"].append(x); nodes[nid] = x
+        def edge(a, b, h="right"):
+            k[0] += 1
+            board["edges"].append({"id": f"e-bond-live-{k[0]}", "source": a, "target": b, "animated": True, "sourceHandle": h})
+        def choice(text, opts, title):
+            return {"type": "choice", "text": text, "title": title, "choices": opts, "choiceMode": "branch", "choiceConditions": [None] * len(opts)}
+        assert not [e for e in board["edges"] if e["source"] == LIVE[0]], "inv-520 後面已經有線，要先看"
+        add_live(board, nodes, place, edge, choice)
         n += 1
     d = nodes["inv-phone"]["data"]
     new = swap(d["miniGameHtml"], PHONE_PAIRS, "phone")
     if new != d["miniGameHtml"]:
         d["miniGameHtml"] = new; n += 1
-    if "phone_tab" not in d["miniGameReadVars"]:
-        d["miniGameReadVars"].append("phone_tab"); n += 1
-    if "phone_tab" not in d["miniGameWriteVars"]:
-        d["miniGameWriteVars"].append("phone_tab"); n += 1
+    for key in ("miniGameReadVars", "miniGameWriteVars"):
+        if "phone_tab" not in d[key]:
+            d[key].append("phone_tab"); n += 1
     return n
 
 

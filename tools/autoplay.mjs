@@ -318,6 +318,18 @@ for (let step=0; step<6000 && Date.now()-t0 < 40*60*1000; step++){
         } catch (e) {}
       }
       if (!stuck) continue;
+      // 劇情帶開的手機（add_bond.py 第二天晚上那張）：記下一打開停在哪一頁、直播頁寫什麼，再收起來
+      for (const f of frames()) {
+        try {
+          if (!(await f.locator('#t-close').count())) continue;
+          const on = await f.locator('#tabs button.on').first().getAttribute('data-p');
+          const body = ((await f.locator('body').textContent()) || '').replace(/\s+/g, ' ').slice(0, 80);
+          await page.screenshot({ path: `${SD}/phone-story.png` });
+          await f.locator('#t-close').click();
+          out(`  [劇情手機] 一打開停在「${on}」｜${body}`); stuck = 0; break;
+        } catch (e) {}
+      }
+      if (!stuck) continue;
     }
     // 卡住的時候多半是有一個視窗要按（取得道具那種，按鈕在外掛的 iframe 裡）。
     // 跳過工具列、跳過純數字的（那是背包上的件數，點下去只會把背包打開）。
