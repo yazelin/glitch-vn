@@ -112,7 +112,8 @@ VIS_NEW_B = "    if(forced || Math.random()<pr || (pity>0 && c>=pity)){ out.push
 # board.html 同一段改了要兩邊一起改；push.py 整包推時是用 /*@@CORK@@*/ 灌網址，這裡直接寫死。
 # 2026-09-18 作者拍板：軟木貼圖與拼版改走 jsDelivr（R2 每次 1.3 秒且沒邊緣快取；jsDelivr 暖了 0.27 秒）。
 # 釘在 commit 上，快取一年不用重驗；換圖就換這個 sha。Larch 素材庫那兩份留著（素材打包用）。
-_CDN = "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@8b099ddc920cac3f291add6e6ba0c8cf9b1e58f5/art/"
+# 2026-10-07：釘 commit 也一樣超過 jsDelivr 的 50 MB（8b099dd 時 repo 686 MB），改指孤兒 tag inv-art（jsd_tags.py 打的）。
+_CDN = "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-art/art/"
 CORK_URL = _CDN + "board-cork.webp"
 CORK_R2 = _INV + "1789638515611_board-cork.webp"
 CORK_OLD_SKY = "var SKY=[['#42352c','#2c231d'],['#463629','#2e241c'],['#33291f','#221b15'],['#2a231c','#191410']];\n\n// 地點"

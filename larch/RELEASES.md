@@ -42,6 +42,19 @@ agent API 的 `POST /publish` 填不進更新說明（skill 記過：十個欄�
 
 # 《調查篇》市集發佈記錄
 
+## 調查篇 1.6.1（2026-10-07，已推上線上版子，尚未發佈市集）
+
+素材網址全部改走 jsDelivr 的孤兒 tag（`larch/inv/jsd_tags.py`）。原因：jsDelivr 照「repo＋版本」整包算大小，超過 50 MB 回 403，
+glitch-vn 在 main 是 747 MB、在 8b099dd 是 686 MB，抽 200 個網址有 3 個 403；Larch 媒體庫（r2.dev）會限流、沒有 CDN 快取。
+調查篇實際用到約 118 MB，照類型分成 5 個 tag：inv-voice-1（1291 個、40.0 MB）、inv-voice-2（169、6.1）、inv-art（102、19.9）、
+inv-bgm-1（7、38.4）、inv-bgm-2（4、16.1）。Larch AI 配音 91 句原本只在媒體庫，下載到 `art/voice-larch/`；樂園主題曲改走 glitch-park-gacha@main（2 MB）。
+`swap_urls.py jsd_manifest.json --project` 換了專案層 33 處、謝幕 20、公式站 7、主版 2986 處，回讀卡數線數一致、舊網址殘留 0；
+線上 1575 個不重複素材網址逐一 GET 全部 200。直播影片 glitch-live@main（6.7 MB）沒動。公式站版子的 thumbnail 還是媒體庫網址（swap_urls 只換 nodes，播放用不到）。
+
+貼進「版本與更新日誌」的文字：
+
+> - 修正配音、圖片和配樂有時載入很慢、偶爾出不來的問題。
+
 ## 調查篇 1.6（2026-10-01，已推上線上版子，尚未發佈市集）
 
 線上主版子 920／1050 → 962／1109（含作者試玩抓到的手機修正、第八天直播也帶開手機）。兩支腳本都是先讀線上再改、可重跑：

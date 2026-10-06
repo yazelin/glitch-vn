@@ -14,7 +14,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from patch_live import request  # noqa: E402
 
-BOARDS = ("board-credits", "board-main")
+BOARDS = ("board-credits", "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000", "board-main")   # 公式站的背景、立繪、配樂也要換（2026-10-07）；主版最後推
 
 
 def swap_project(table, dry):
@@ -55,6 +55,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("map"); ap.add_argument("--dry", action="store_true")
     ap.add_argument("--project", action="store_true", help="也換 settings／variables（PUT /projects 整包）")
+    ap.add_argument("--summary", default="swap_urls.py：正篇專案的立繪／背景改指調查篇自己上傳的那份", help="Larch 版本紀錄上的說明")
     a = ap.parse_args()
     table = json.loads(pathlib.Path(a.map).read_text(encoding="utf-8"))
     if a.project:
@@ -76,7 +77,7 @@ def main():
             try:
                 request(f"/boards/{bid}", "PUT", {"name": board.get("name", bid), "kind": board.get("kind", "story"),
                         "mode": board.get("mode", "story"), "nodes": json.loads(raw), "edges": board["edges"],
-                        "summary": "swap_urls.py：正篇專案的立繪／背景改指調查篇自己上傳的那份"}, etag)
+                        "summary": a.summary}, etag)
                 break
             except urllib.error.HTTPError as e:
                 if e.code != 409 or attempt == 4:

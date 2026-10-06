@@ -14,8 +14,7 @@
 - 調查篇 Larch 專案 id 在 `larch/inv/state.json`（`project-d2fea918-…`）。正篇是另一個專案（`larch/config.py`），別搞混。
 - 線上版子：962 張卡／1109 條線（2026-10-01 台詞審查與主角連結之後，含手機分頁修正，見 `larch/RELEASES.md` 調查篇 1.6；之前是 920 張卡／1050 條線，含 109 張清場卡、13 個群組框；1.4 是 923／1057，1.5.1 加到 925／1059，2026-09-20 把遊樂園「入口卡＋5 張遊戲橋接卡」合併成 1 張插件卡後少 5 卡到 920／1050，見 `larch/RELEASES.md`），謝幕版子 7／6，公式站版子 9／8。素材庫 209 筆、沒引用 0、圖全部 webp、沒有任何網址指到正篇專案。
 - 公式站：第三塊版子（id `board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000`）用 miniGame 的 iframe 嵌 `https://yazelin.github.io/glitch-vn/guide/`，由開場選單第三項進入，看完回開場書桌場景 `inv-open-desk`（現在的起點）。這些卡只存在線上，`push.py` 整包重建會洗掉；換說明站網址要改 `formula-guide` 卡裡的 HTML。說明頁內嵌時隱藏「回正篇」是 `tools/gen_guide.py` 產生的。細節見 `larch/RELEASES.md` 的 1.5.1。
-- 語音：1479 句走 jsDelivr（`docs/voice/`），諾亞與經紀人 103 句是 Larch AI 配音留在 R2，有在用。
-- 軟木板與拍立得拼版走 jsDelivr 釘 commit（`larch/inv/patch_live.py` 的 `_CDN`）；Larch 素材庫留一份給素材打包。
+- 素材（2026-10-07 起）：配音、圖、配樂全部走 jsDelivr 的孤兒 tag（inv-voice-1／2、inv-art、inv-bgm-1／2），對照在 `larch/inv/jsd_manifest.json`。**`@main` 與釘 commit 都不能用**：glitch-vn 整包超過 jsDelivr 的 50 MB 上限會 403。Larch AI 配音的 91 句原檔在 `art/voice-larch/`；軟木板與拼版在 inv-art（`patch_live.py` 的 `_CDN` 已改指它）。新配的句子推上去會先是 `@main` 網址（novelkit 的 `CDN_VOICE`），要再跑一次 `jsd_tags.py --push` 和 `swap_urls.py jsd_manifest.json --project`；tag 內容變了會打下一版（`-r2`）。Larch 素材庫照舊留一份給素材打包。
 - 角色工坊是空的：立繪都是卡片上直接放圖的網址，不是角色。
 
 ## 鐵律（每一條都是踩過雷才寫的）
@@ -35,7 +34,8 @@
 ## 常用工具
 
     python3 larch/inv/patch_live.py [--dry]            線上版子的所有替換對（名字、網址、卡片程式段落）
-    python3 larch/inv/swap_urls.py 對照表.json [--project] [--dry]   換網址；--project 連設定與變數
+    python3 larch/inv/swap_urls.py 對照表.json [--project] [--dry] [--summary 說明]   換網址；--project 連設定與變數
+    python3 larch/inv/jsd_tags.py [--push]             素材分組打 jsDelivr 孤兒 tag、寫 jsd_manifest.json、逐一 GET 驗收
     python3 larch/inv/split_331.py [--dry]             inv-331 切卡（可重跑）
     python3 larch/inv/add_bond.py [--dry] [--review 檔]  主角連結：桌前生活、每晚一題、手機提示、三場回法（對照稿 design/調查篇-主角連結.md）
     python3 larch/inv/fix_lines.py [--dry] [--regen]    2026-10-01 台詞審查的逐句修正（理由在 design/調查篇-台詞審查-2026-10-01.md）
