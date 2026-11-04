@@ -1,0 +1,7 @@
+# 產圖中間檔不進 git（圖要先轉小再進，見 AGENTS.md）。用資料夾擋，不綁副檔名：換格式也擋得住。
+# raw/ 是生圖服務回的黃幕原圖，cut/ 是去背後的 PNG，preview/ 與 ref/ 都能重做；遊戲用的成品在 sprite/。
+raw/*
+!raw/*.json
+cut/
+preview/
+ref/

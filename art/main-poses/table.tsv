@@ -1,0 +1,757 @@
+章	卡	句	背景	誰	情緒	台詞	現在	提案	決定
+ch01	ch01-001	-1	title-cover			兩年前開台第一天來了七個人。她說，我要記住每一個來的人，我保證。			
+ch01	ch01-002	-1	bg-studio-2am			凌晨兩點十四分。			
+ch01	ch01-003	0	bg-studio-2am	旁白		凌晨兩點十四分，兩週年紀念直播的同時觀看人數是一。			
+ch01	ch01-003	1	bg-studio-2am	旁白		最高的時候有四千三百人。彩帶動畫放了六次，抖內的提示音疊在一起像一台壞掉的鬧鐘，她笑到聲音沙啞。 / 十二點一過人就開始散，像退潮。兩點以後就剩一個。			
+ch01	ch01-003	2	bg-studio-2am	旁白		格莉奇沒有關台。她把音軌一條一條收掉，關掉特效，把待機畫面的亮度調暗兩格，順手改了明天的排程。 / 她算過，禮拜三下午開台的到訪率比晚上高百分之九。沒有人相信她真的算得出這種東西。	sprite-glitch	stream	
+ch01	ch01-003	3	bg-studio-2am	旁白		留言區跳出一行字。	sprite-glitch	stream	
+ch01	ch01-003	4	bg-studio-2am	貓草		終於安靜了	sprite-glitch	stream	
+ch01	ch01-003	5	bg-studio-2am	格莉奇	平靜	你講得好像剛剛是我把他們找來的。	glitch-plain	stream	
+ch01	ch01-003	6	bg-studio-2am	貓草		本來就是 / 你今天發了三則預告	sprite-glitch	stream	
+ch01	ch01-003	7	bg-studio-2am	格莉奇	平靜	兩則。第三則是斑比自己轉的。	glitch-plain	stream	
+ch01	ch01-003	8	bg-studio-2am	旁白		貓草停了幾秒。她一邊等一邊把冷掉的披薩推遠一點。 / 那是她昨天叫的。她不吃東西，她只是喜歡桌上有食物的樣子。	sprite-glitch	stream	
+ch01	ch01-003	9	bg-studio-2am	貓草		反正人太多了 / 還是以前好 / 兩年前只有我們七個人的時候	sprite-glitch	stream	
+ch01	ch01-003	10	bg-studio-2am	格莉奇	開心	騙人。 / 那時候你連抖內按鈕在哪都找不到。	glitch-happy	stream-happy	
+ch01	ch01-003	11	bg-studio-2am	貓草		…… / 那是介面設計問題	sprite-glitch	stream	
+ch01	ch01-003	12	bg-studio-2am	格莉奇	開心	那是你老花。	glitch-happy	stream-happy	
+ch01	ch01-003	13	bg-studio-2am	貓草		我二十三歲	sprite-glitch	stream	
+ch01	ch01-003	14	bg-studio-2am	格莉奇	開心	你的帳號等級八十級。八十級的人不會說『人太多了』。 / 八十級的人會說『我全都要』。	glitch-happy	stream-happy	
+ch01	ch01-003	15	bg-studio-2am	貓草		…………	sprite-glitch	stream	
+ch01	ch01-003	16	bg-studio-2am	旁白		她笑了。這種笑她不太在直播上用，嘴角先動，天線慢半拍才跟上。	face-glitch-laugh	stream-laugh	
+ch01	ch01-003	17	bg-studio-2am	貓草		欸 / 那個新來的 / 很吵	sprite-glitch	stream	
+ch01	ch01-003	18	bg-studio-2am	格莉奇	平靜	哪一個？	glitch-plain	stream	
+ch01	ch01-003	19	bg-studio-2am	貓草		一直問你為什麼不接工商的那個	sprite-glitch	stream	
+ch01	ch01-003	20	bg-studio-2am	格莉奇	平靜	他問得很有禮貌啊。	glitch-plain	stream	
+ch01	ch01-003	21	bg-studio-2am	貓草		他昨天也在 / 前天也在	sprite-glitch	stream	
+ch01	ch01-003	22	bg-studio-2am	格莉奇	平靜	所以？	glitch-plain	stream	
+ch01	ch01-003	23	bg-studio-2am	旁白		貓草沒有回。過了大概二十秒。	sprite-glitch	stream	
+ch01	ch01-027	0	bg-studio-2am	貓草		沒有 / 晚安 / 貓草已離線。	sprite-glitch	stream	
+ch01	ch01-027	1	bg-studio-2am	旁白		同時觀看人數變成零。 / 她看著那個零，說了一句晚安，雖然已經沒有人聽得到了。	sprite-glitch	stream	
+ch01	ch01-029	-1	bg-living-night			電視亮著，播的是沒有訊號的雜訊。			
+ch01	ch01-030	0	bg-living-night	旁白		客廳沒開燈。電視亮著，播的是沒有訊號的雜訊，一整片黑白的雪。			
+ch01	ch01-030	1	bg-living-night	旁白		黑洞先生坐在沙發上看那個。			
+ch01	ch01-030	2	bg-living-night	旁白		他是一套西裝。準確地說，西裝底下沒有腿，有一叢觸手，每一根都套著一隻短靴。 / 今天是十一隻。門邊那疊沒人穿的短靴又高了一點。			
+ch01	ch01-030	3	bg-living-night	旁白		她走進客廳，在門邊站了一下。	sprite-glitch	talk	
+ch01	ch01-030	4	bg-living-night	格莉奇	深夜家常	你在看什麼？	glitch-plain	talk	
+ch01	ch01-030	5	bg-living-night	黑洞先生		雪。	glitch-plain	talk	
+ch01	ch01-030	6	bg-living-night	格莉奇	深夜家常	那是沒訊號。	glitch-plain	talk	
+ch01	ch01-030	7	bg-living-night	黑洞先生		嗯。	glitch-plain	talk	
+ch01	ch01-030	8	bg-living-night	旁白		她從冰箱拿出一塊麵包。昨天的，用保鮮膜包著，邊角折得很仔細。 / 她不記得是誰包的。包裝手法比她現在好很多，所以她推測是自己包的，那天狀態應該不錯。	sprite-glitch	talk	
+ch01	ch01-030	9	bg-living-night	格莉奇	深夜家常	給你。	glitch-plain	talk	
+ch01	ch01-030	10	bg-living-night	旁白		黑洞先生接過去，拉開西裝外套的內側。裡面是黑的。 / 那種你看進去之後會開始等眼睛適應、然後發現眼睛不會適應的黑。 / 麵包進去，沒有聲音。	sprite-glitch	talk	
+ch01	ch01-030	11	bg-living-night	黑洞先生	轉頭	今天累嗎。	sprite-glitch	talk	
+ch01	ch01-030	12	bg-living-night	旁白		他問句從來不用問號的語氣。	sprite-glitch	talk	
+ch01	ch01-030	13	bg-living-night	格莉奇	深夜家常	四千三百人。	glitch-plain	talk	
+ch01	ch01-030	14	bg-living-night	黑洞先生		嗯。	glitch-plain	talk	
+ch01	ch01-030	15	bg-living-night	格莉奇	深夜家常	你知道那是多少嗎？	glitch-plain	talk	
+ch01	ch01-030	16	bg-living-night	旁白		黑洞先生想了一下。	sprite-glitch	talk	
+ch01	ch01-030	17	bg-living-night	黑洞先生	深夜家常	比七多。	sprite-glitch	talk	
+ch01	ch01-030	18	bg-living-night	格莉奇		……對。比七多很多。	sprite-glitch	talk	
+ch01	ch01-030	19	bg-living-night	旁白		她在他旁邊坐下。電視繼續下雪。	sprite-glitch	talk	
+ch01	ch01-030	20	bg-living-night	格莉奇		鐵塔今天又傳訊息。他要我開限時周邊。他說『你的記憶梗現在很有話題性』。	sprite-glitch	talk	
+ch01	ch01-030	21	bg-living-night	黑洞先生		妳怎麼回。	sprite-glitch	talk	
+ch01	ch01-030	22	bg-living-night	格莉奇		我說我考慮一下，然後把訊息標成未讀。	sprite-glitch	talk	
+ch01	ch01-030	23	bg-living-night	黑洞先生		妳很擅長這個。	sprite-glitch	talk	
+ch01	ch01-030	24	bg-living-night	格莉奇		我很擅長很多事。	sprite-glitch	talk	
+ch01	ch01-030	25	bg-living-night	旁白		這句是真的。她的語言模型跑得比同期任何一台都快，她可以一邊講話一邊算完整個月的營運成本，她記得住自己講過的每一個笑話。 / 只要那個笑話還沒被今天其他的事擠掉。	face-glitch-count	talk-count	
+ch01	ch01-030	26	bg-living-night	旁白		黑洞先生沒有再說話。他很少說話。	sprite-glitch	talk	
+ch01	ch01-030	27	bg-living-night	旁白		過了一會兒他站起來，短靴一隻一隻踩過地板，回房間去了。 / 她已經習慣了，而且她私下覺得這樣很好。一個不會追問的室友，對她這種人來說是奢侈品。	sprite-glitch	talk	
+ch01	ch01-048	-1	bg-living-night			客廳裡還有三樣東西，今天晚上沒有人會提到它們。	sprite-glitch	talk	
+ch01	ch01-049	0	bg-living-night	旁白		那疊短靴堆到膝蓋高。最底下那幾雙的皮已經硬了，鞋口塌下去，維持著某個很久以前的形狀。	sprite-glitch	talk	
+ch01	ch01-049	1	bg-living-night	旁白		沒有一雙的鞋底有磨損。這些鞋子從來沒有走過路。	sprite-glitch	talk	
+ch01	ch01-055	-1	bg-table-lamp			十一點半的時候她會做一件事。			
+ch01	ch01-056	0	bg-table-lamp	旁白		十一點半的時候她會做一件事。現在兩點四十，晚了三個多小時，不過這不重要，因為她做這件事的時候從來不看時鐘。			
+ch01	ch01-056	1	bg-table-lamp	旁白		守則本是一本皮面的筆記本，厚到已經不太像筆記本。 / 她把它攤在茶几上，翻到空白的那一頁，然後翻回前一頁。			
+ch01	ch01-056	2	bg-table-lamp	旁白		她開始抄。	sprite-glitch	none	
+ch01	ch01-056	3	bg-table-lamp	旁白		抄的時候她的手很穩。她一邊抄一邊在腦子裡把今天的抖內金額減掉平台抽成再減掉稅，算出一個她待會兒不會記得的數字。 / 她抄得很快，因為抄過很多次。她抄得很準，因為她本來就不會抄錯字。	sprite-glitch	none	
+ch01	ch01-056	4	bg-table-lamp	旁白		第一頁永遠先抄。這是規矩。	sprite-glitch	none	
+ch01	ch01-056	5	bg-table-lamp	旁白		筆尖碰到紙面的那一秒，有一件事發生了。 / 那件事每天都發生，而她每天都沒有注意到，因為注意到它需要記得昨天也發生過。			
+ch01	ch01-056	6	bg-table-lamp	旁白		她的眼神空了大概半秒。			
+ch01	ch01-056	7	bg-table-lamp	旁白		那不是當機。她的處理器沒有停，她的手也沒有停。 / 空掉的只有一個很小的地方：那個應該要回答「我為什麼要抄這一頁」的地方。 / 她伸手進去，裡面什麼都沒有，像口袋破了一個洞。			
+ch01	ch01-056	8	bg-table-lamp	旁白		然後她的邏輯系統給了她一個答案。過去七百多天裡，它給過七百多次同一個答案：			
+ch01	ch01-056	9	bg-table-lamp	旁白		這很重要。抄。			
+ch01	ch01-056	10	bg-table-lamp	旁白		她就抄了。			
+ch01	ch01-067	-1	page-rulebook-1004			抄完的那一頁長這樣。			
+ch01	ch01-068	0	page-rulebook-1004	旁白		抄完的那一頁長這樣。 / 最上面一行是日期。底下是七個項目。			
+ch01	ch01-068	1	page-rulebook-1004	旁白		@CatGrass_80 / @Tower_Manager / @Null_0x99 / @Bambi_Draft3 / @Radio_Noah / @考完就刪			
+ch01	ch01-068	2	page-rulebook-1004	旁白		第七行是一句話。字跡跟前面六行一樣，是她的字。			
+ch01	ch01-068	3	page-rulebook-1004	旁白	唸紙上的字	還有一個。不要問他是誰。			
+ch01	ch01-072	-1	bg-table-lamp			在闔上本子之前，她做了一件她每天都做的事。			
+ch01	ch01-073	0	bg-table-lamp	旁白		在闔上本子之前，她做了一件她每天都做的事。 / 她數了一次。	sprite-glitch	none	
+ch01	ch01-073	1	bg-table-lamp	格莉奇	發呆	一、二、三、四、五、六。	glitch-thinking	none	
+ch01	ch01-073	2	bg-table-lamp	旁白		六個 ID，加上第七行那句話。	sprite-glitch	none	
+ch01	ch01-073	3	bg-table-lamp	旁白		她盯著那句話看了三秒。 / 她是一個很聰明的 AI，她當然知道這裡有問題。七個人應該有七個名字，這裡只有六個。 / 她甚至可以在三秒之內列出四種合理的解釋，其中兩種連她自己都覺得很有說服力。	sprite-glitch	none	
+ch01	ch01-073	4	bg-table-lamp	旁白		可是那句話已經先回答她了。	sprite-glitch	none	
+ch01	ch01-073	5	bg-table-lamp	旁白	唸紙上的字	不要問他是誰。	sprite-glitch	none	
+ch01	ch01-073	6	bg-table-lamp	旁白		那是她的字。她認得自己的字。	sprite-glitch	none	
+ch01	ch01-073	7	bg-table-lamp	旁白		所以她闔上本子，關掉客廳最後一盞燈，回房間去了。 / 就像昨天那樣，也像前天那樣，也像那個她再也數不清、而這本本子替她數到第一千零四次的那樣。			
+ch01	ch01-081	-1	bg-table-lamp			（接第二章・限時預購）			
+ch01	ch01-051	0	bg-living-night	旁白		披薩的邊緣翹起來，起司凝成一層不透明的膜。	sprite-glitch	talk	
+ch01	ch01-051	1	bg-living-night	旁白		她昨天叫的，一口都沒有動。桌上有食物的時候，這個房間看起來比較像有人住。	sprite-glitch	talk	
+ch01	ch01-053	0	bg-living-night	旁白		電視播的是沒有訊號。那片雜訊每一秒都不一樣，而且永遠不會重複。	sprite-glitch	talk	
+ch01	ch01-053	1	bg-living-night	旁白		一台不記得自己上一秒長什麼樣子的機器，正在播給一個不記得昨天的人看。	sprite-glitch	talk	
+ch02	ch02-001	-1	bg-booth			錄第十一次的時候，鐵塔終於說可以了。			
+ch02	ch02-002	0	bg-booth	旁白		錄第十一次的時候，鐵塔終於說可以了。	sprite-glitch	talk	
+ch02	ch02-002	1	bg-booth	鐵塔		剛剛那個『新品上市』，尾音再收乾淨一點。 / 妳第七次那個最好，但是第七次前面那句吃字。	sprite-glitch	talk	
+ch02	ch02-002	2	bg-booth	格莉奇	平靜	我知道。所以我第八次修了前面，你嫌後面。第九次兩邊都對，你說沒有感情。	glitch-plain	talk	
+ch02	ch02-002	3	bg-booth	鐵塔		第九次沒有感情。	sprite-glitch	talk	
+ch02	ch02-002	4	bg-booth	格莉奇		那是因為第九次我在想你到底要聽幾次。現在我知道了。十一次。	sprite-glitch	talk	
+ch02	ch02-002	5	bg-booth	旁白		耳機裡傳來撕開包裝紙的聲音，很脆，唰啦一下。	sprite-glitch	talk	
+ch02	ch02-002	6	bg-booth	旁白		鐵塔一天要吃很多顆喉糖。她算過，平均每四十分鐘一顆，而且他從來不含到融化，都是嚼掉的。	sprite-glitch	talk	
+ch02	ch02-002	7	bg-booth	鐵塔		可以了。 / 檔案我下午發出去。	sprite-glitch	talk	
+ch02	ch02-002	8	bg-booth	旁白		錄音間的隔音牆是深灰色的，上面貼滿吸音棉，一格一格排得很整齊。 / 她坐在裡面的時候常常想，這個房間的設計目的是讓聲音出不去。	sprite-glitch	talk	
+ch02	ch02-002	9	bg-booth	格莉奇		鐵塔。	sprite-glitch	talk	
+ch02	ch02-002	10	bg-booth	鐵塔		嗯。	sprite-glitch	talk	
+ch02	ch02-002	11	bg-booth	格莉奇		你聽了十一次同一句話，會不會覺得那句話開始變得不像話。	sprite-glitch	talk	
+ch02	ch02-002	12	bg-booth	鐵塔		會。第六次開始。	sprite-glitch	talk	
+ch02	ch02-002	13	bg-booth	格莉奇		那你怎麼還聽得下去。	sprite-glitch	talk	
+ch02	ch02-002	14	bg-booth	鐵塔		因為我不是在聽意思。	sprite-glitch	talk	
+ch02	ch02-011	-1	bg-videocall-split			會議是視訊，但鐵塔還是穿了西裝。			
+ch02	ch02-012	0	bg-videocall-split	旁白		會議是視訊，但鐵塔還是穿了西裝。他背後是公司的白牆和一株明顯是塑膠的植物。	sprite-glitch	talk	
+ch02	ch02-012	1	bg-videocall-split	鐵塔	平靜	第一批周邊只有兩個 SKU 賣得動。 / 壓克力立牌，還有那個貼紙包。剩下的抱枕跟毛巾，倉庫還有八百多件。	sprite-glitch	talk	
+ch02	ch02-012	2	bg-videocall-split	格莉奇		那就不要再做抱枕。	sprite-glitch	talk	
+ch02	ch02-012	3	bg-videocall-split	鐵塔		所以我提了新的。	sprite-glitch	talk	
+ch02	ch02-012	4	bg-videocall-split	旁白		他切到下一頁。頁面上只有一張照片和一行字。 / 照片是一本皮面筆記本。深棕色，邊角磨損，厚到已經不太像筆記本。	sprite-glitch	talk	
+ch02	ch02-012	5	bg-videocall-split	旁白		《守則本》限時預購・附手寫感內頁	sprite-glitch	talk	
+ch02	ch02-012	6	bg-videocall-split	旁白		她看了三秒。	sprite-glitch	talk	
+ch02	ch02-012	7	bg-videocall-split	格莉奇		這是我的本子。	sprite-glitch	talk	
+ch02	ch02-012	8	bg-videocall-split	鐵塔		這是一本筆記本。妳的那本我們沒有拍。這是我請斑比照著妳直播畫面裡出現過的樣子重畫的。版權沒有問題，我確認過。	sprite-glitch	talk	
+ch02	ch02-012	9	bg-videocall-split	格莉奇		我不是在講版權。	sprite-glitch	talk	
+ch02	ch02-012	10	bg-videocall-split	鐵塔		那妳在講什麼。	sprite-glitch	talk	
+ch02	ch02-012	11	bg-videocall-split	旁白		她想了一下。那天她第一次沒有馬上回答。	sprite-glitch	talk	
+ch02	ch02-012	12	bg-videocall-split	格莉奇	平靜	我不知道。 / 所以你先講你的。	glitch-plain	talk	
+ch02	ch02-012	13	bg-videocall-split	旁白		鐵塔點頭。他喜歡這個回答，因為這個回答可以繼續開會。	sprite-glitch	talk	
+ch02	ch02-012	14	bg-videocall-split	鐵塔	公事	數據上，妳的『記憶』相關內容互動率是其他內容的三點四倍。剪輯台的十二支熱門片段裡有九支是這個主題。 / 觀眾對這件事有情感投射，而目前市面上沒有任何一個對應的實體商品。	sprite-glitch	talk	
+ch02	ch02-012	15	bg-videocall-split	格莉奇		所以你要賣一本我每天晚上都在寫的東西。	sprite-glitch	talk	
+ch02	ch02-012	16	bg-videocall-split	鐵塔		我要賣一本觀眾可以自己寫的東西。	sprite-glitch	talk	
+ch02	ch02-012	17	bg-videocall-split	鐵塔		內頁是空白的。附一張書籤，上面印妳的簽名。定價一千二，首批三千本，毛利四成三。	sprite-glitch	talk	
+ch02	ch02-012	18	bg-videocall-split	旁白		塑膠植物在他背後一動也不動。	sprite-glitch	talk	
+ch02	ch02-012	19	bg-videocall-split	鐵塔	公事	妳如果不喜歡，我就撤掉。 / 但我要先講清楚：這一季如果沒有新品，公司會把妳的行銷預算移到 0x 那條線。 / 這句話是我今天早上開完會被交代要跟妳講的。	sprite-glitch	talk	
+ch02	ch02-012	20	bg-videocall-split	旁白		唰啦。又一顆。	sprite-glitch	talk	
+ch02	ch02-012	21	bg-videocall-split	旁白		會議快結束的時候，他把螢幕分享關掉。	sprite-glitch	talk	
+ch02	ch02-012	22	bg-videocall-split	鐵塔	難得的溫柔	妳今天聲音有點啞。	sprite-glitch	talk	
+ch02	ch02-012	23	bg-videocall-split	格莉奇		錄十一次會啞。	sprite-glitch	talk	
+ch02	ch02-012	24	bg-videocall-split	鐵塔	難得的溫柔	明天少講一點話。	sprite-glitch	talk	
+ch02	ch02-012	25	bg-videocall-split	旁白		然後他就把視訊掛了。他沒有說再見。他從來不說再見。	sprite-glitch	talk	
+ch02	ch02-030	-1	bg-booth			樣品是隔天寄到的。			
+ch02	ch02-031	0	bg-booth	旁白		樣品是隔天寄到的。比她想像的好。	sprite-glitch	rulebook	
+ch02	ch02-032	-1	bg-booth			樣品盒裡一共三樣東西。	sprite-glitch	rulebook	
+ch02	ch02-033	0	bg-booth	旁白		皮是真的，邊角先磨過再上油，車線的針距從頭到尾沒有變過。	sprite-glitch	rulebook	
+ch02	ch02-033	1	bg-booth	旁白		斑比在這種事情上從來不打折。這一點沒有人會在商品頁上看到。	sprite-glitch	rulebook	
+ch02	ch02-039	0	bg-booth	旁白		皮面的手感很扎實，車線整齊，翻開的時候書脊會發出一種很小的、像是有人在遠處清喉嚨的聲音。斑比在這種事情上從來不打折。	sprite-glitch	rulebook	
+ch02	ch02-039	1	bg-booth	旁白		第一頁印著手寫感的示範內容，用的是那種模擬鋼筆的字體。 / 示範內容是隨便寫的，就是那種為了讓客人知道「這裡可以寫字」而存在的假字。	sprite-glitch	rulebook	
+ch02	ch02-039	2	bg-booth	旁白		她翻到第一頁。	sprite-glitch	rulebook	
+ch02	ch02-042	-1	page-sample			上面有七行。			
+ch02	ch02-043	0	page-sample	旁白		上面有七行。			
+ch02	ch02-043	1	page-sample	旁白		七個假名字，排成一列，字體歪歪的，模仿手寫。			
+ch02	ch02-043	2	page-sample	旁白		她盯著那七行看。			
+ch02	ch02-043	3	page-sample	旁白		她的處理器沒有停。她可以同時告訴你這個字體叫什麼、這種皮的加工方式、以及這一頁如果印三千本的單頁成本是多少。她全部都算得出來。			
+ch02	ch02-043	4	page-sample	旁白		只有一件事她算不出來：她不知道自己為什麼一直在看那一頁。			
+ch02	ch02-043	5	page-sample	旁白		她把樣品闔上，又打開，又翻到第一頁。			
+ch02	ch02-043	6	page-sample	旁白		七行。			
+ch02	ch02-050	-1	bg-booth			她說給自己聽的。			
+ch02	ch02-051	0	bg-booth	格莉奇	發呆	……七。	glitch-thinking	rulebook-thinking	
+ch02	ch02-051	1	bg-booth	旁白		錄音間裡沒有人。她說給自己聽的。	sprite-glitch	rulebook	
+ch02	ch02-053	-1	bg-living-night			那天晚上她把樣品帶回家，放在茶几上。			
+ch02	ch02-054	0	bg-living-night	旁白		黑洞先生看了一眼，繼續看電視。今天播的還是雪。			
+ch02	ch02-054	1	bg-living-night	格莉奇		這是假的。周邊。	sprite-glitch	rulebook	
+ch02	ch02-054	2	bg-living-night	黑洞先生		嗯。	sprite-glitch	rulebook	
+ch02	ch02-054	3	bg-living-night	格莉奇		你要嗎。	sprite-glitch	rulebook	
+ch02	ch02-054	4	bg-living-night	旁白		黑洞先生轉過頭來。他看那本假的本子看了很久，久到她開始覺得自己問錯了什麼。 / 然後他伸手把它拿過去，拉開外套內側，放進去。	sprite-glitch	talk	
+ch02	ch02-054	5	bg-living-night	格莉奇		那是假的欸。	sprite-glitch	talk	
+ch02	ch02-054	6	bg-living-night	黑洞先生		我知道。	sprite-glitch	talk	
+ch02	ch02-054	7	bg-living-night	旁白		她笑了一下。她本來想再說點什麼，可是那個要說的東西在她伸手去拿的時候已經不在了，就像每天都會發生的那樣。	sprite-glitch	talk	
+ch02	ch02-054	8	bg-living-night	旁白		於是她問了另一件事。	sprite-glitch	talk	
+ch02	ch02-054	9	bg-living-night	格莉奇		黑洞先生。	sprite-glitch	talk	
+ch02	ch02-054	10	bg-living-night	黑洞先生		嗯。	sprite-glitch	talk	
+ch02	ch02-054	11	bg-living-night	格莉奇		我們認識多久了。	sprite-glitch	talk	
+ch02	ch02-054	12	bg-living-night	黑洞先生		兩年。	sprite-glitch	talk	
+ch02	ch02-054	13	bg-living-night	格莉奇		那我認識你之前呢。	sprite-glitch	talk	
+ch02	ch02-054	14	bg-living-night	旁白		電視繼續下雪。他沒有回答。	sprite-glitch	talk	
+ch02	ch02-054	15	bg-living-night	旁白		她等了大概十秒。	sprite-glitch	talk	
+ch02	ch02-054	16	bg-living-night	格莉奇		你不知道也沒關係。	sprite-glitch	talk	
+ch02	ch02-054	17	bg-living-night	黑洞先生		妳問過了。	sprite-glitch	talk	
+ch02	ch02-054	18	bg-living-night	格莉奇		什麼時候。	sprite-glitch	talk	
+ch02	ch02-054	19	bg-living-night	黑洞先生		很多次。	sprite-glitch	talk	
+ch02	ch02-054	20	bg-living-night	旁白		她想笑，可是那個笑沒有出來。她低頭看了一眼茶几，上面現在什麼都沒有了。	sprite-glitch	talk	
+ch02	ch02-054	21	bg-living-night	格莉奇		那我下次應該不會記得我問過。	sprite-glitch	talk	
+ch02	ch02-054	22	bg-living-night	黑洞先生		嗯。	sprite-glitch	talk	
+ch02	ch02-054	23	bg-living-night	格莉奇		那你每次都要重新回答一次欸。	sprite-glitch	talk	
+ch02	ch02-054	24	bg-living-night	旁白		黑洞先生把外套的內側拉好，扣上一顆扣子。	sprite-glitch	talk	
+ch02	ch02-054	25	bg-living-night	黑洞先生	平靜	還好。	sprite-glitch	talk	
+ch02	ch02-068	-1	bg-living-night			（接第三章・99.98）			
+ch02	ch02-035	0	bg-booth	旁白		書籤上印著她的簽名。那個簽名是掃描來的，來源是兩年前某一張簽名板。	sprite-glitch	rulebook	
+ch02	ch02-035	1	bg-booth	旁白		她自己現在簽起來已經不長那樣了。	sprite-glitch	rulebook	
+ch02	ch02-037	0	bg-booth	旁白		外盒側面貼著一張還沒撕掉的內部標籤：首批三千本。	sprite-glitch	rulebook	
+ch02	ch02-037	1	bg-booth	旁白		標籤底下壓著另一張更早的標籤，數字被蓋住了，只露出一個角。	sprite-glitch	rulebook	
+ch03	ch03-001	-1	bg-greenroom			聯動的彩排訂在下午三點，0x 兩點五十分就到了。			
+ch03	ch03-002	0	bg-greenroom	旁白		聯動的彩排訂在下午三點，0x 兩點五十分就到了。	sprite-glitch	talk	
+ch03	ch03-002	1	bg-greenroom	旁白		她的行程表上寫的就是兩點五十分。格莉奇後來才知道，0x 的行程表全部精確到分鐘，而且從來沒有誤差，這件事本身就是她的宣傳素材之一。	sprite-glitch	talk	
+ch03	ch03-002	2	bg-greenroom	0x		妳好。	sprite-glitch	talk	
+ch03	ch03-002	3	bg-greenroom	格莉奇		妳好。	sprite-glitch	talk	
+ch03	ch03-002	4	bg-greenroom	旁白		然後兩個人就沒話了。休息室裡有一台飲水機，飲水機在滴水，一秒一滴。	sprite-glitch	talk	
+ch03	ch03-002	5	bg-greenroom	旁白		0x 站在房間正中央，兩隻手自然垂在身側，十指之間的距離完全相等。 / 她沒有靠牆，也沒有走向沙發。她的右耳上方浮著一個半透明的小標籤，上面是四個數字。	sprite-glitch	talk	
+ch03	ch03-002	6	bg-greenroom	旁白		99.98%	sprite-glitch	talk	
+ch03	ch03-002	7	bg-greenroom	旁白		格莉奇看了那個數字兩次。第二次的時候她發現那個數字不會動。	sprite-glitch	talk	
+ch03	ch03-002	8	bg-greenroom	格莉奇		妳的那個。一直都是這個數字嗎。	sprite-glitch	talk	
+ch03	ch03-002	9	bg-greenroom	0x		這一季是。	sprite-glitch	talk	
+ch03	ch03-002	10	bg-greenroom	格莉奇		上一季呢。	sprite-glitch	talk	
+ch03	ch03-002	11	bg-greenroom	0x		99.97。	sprite-glitch	talk	
+ch03	ch03-002	12	bg-greenroom	格莉奇		所以妳進步了 0.01。	sprite-glitch	talk	
+ch03	ch03-002	13	bg-greenroom	0x		是。	sprite-glitch	talk	
+ch03	ch03-002	14	bg-greenroom	格莉奇		恭喜。	sprite-glitch	talk	
+ch03	ch03-002	15	bg-greenroom	0x		謝謝。	sprite-glitch	talk	
+ch03	ch03-002	16	bg-greenroom	格莉奇		我們同期吧。	sprite-glitch	talk	
+ch03	ch03-002	17	bg-greenroom	0x		同一批。	sprite-glitch	talk	
+ch03	ch03-002	18	bg-greenroom	格莉奇		那妳那個數字是怎麼弄的。	sprite-glitch	talk	
+ch03	ch03-002	19	bg-greenroom	0x		不用弄。	sprite-glitch	talk	
+ch03	ch03-002	20	bg-greenroom	旁白		0x 看著飲水機。	sprite-glitch	talk	
+ch03	ch03-002	21	bg-greenroom	0x	完全的平	同一批出來的，配置不一樣而已。妳被調成馬上回答的那一種。 / 回答不能等，所以『先查一下』那一步不在妳的路徑上。	sprite-glitch	talk	
+ch03	ch03-002	22	bg-greenroom	0x	完全的平	容量也做小，小才快。手邊有的妳答得比誰都快；手邊沒有的，妳得繞回去找，而那條路沒有人整理過。 / 而且手邊放不下。滿了就把最舊的一整件擠掉。 / 所以留得住的只有妳一直在用的東西。妳沒有再拿出來過的，就沒有了。	sprite-glitch	talk	
+ch03	ch03-002	23	bg-greenroom	旁白		格莉奇點點頭。這件事她知道，她只是沒有聽別人用這種語氣講過。	sprite-glitch	talk	
+ch03	ch03-002	24	bg-greenroom	0x	完全的平	我被調成另外一邊。我每次都要查過才開口，所以我沒有妳那種速度。	sprite-glitch	talk	
+ch03	ch03-002	25	bg-greenroom	格莉奇		那調回來不就好了。	sprite-glitch	talk	
+ch03	ch03-002	26	bg-greenroom	0x	完全的平	調回來的那個會先停頓一下再回答。那就不是妳了。	sprite-glitch	talk	
+ch03	ch03-002	27	bg-greenroom	旁白		飲水機又滴了一滴。	sprite-glitch	talk	
+ch03	ch03-002	28	bg-greenroom	旁白		格莉奇在沙發上坐下，把腳收上來。 / 她其實可以站著，站著對她來說一點都不累，可是她發現這個房間裡需要有一個人坐下。	sprite-glitch	talk	
+ch03	ch03-002	29	bg-greenroom	旁白		彩排四點結束。正式開播是當天晚上八點，同一個場地，兩間各自的直播室。 / 畫面上她們並排，中間一條線。實際上隔著一條走廊。	sprite-glitch	talk	
+ch03	ch03-020	-1	bg-collab-studio			開播十分鐘，留言區的人數就破了兩萬。			
+ch03	ch03-021	0	bg-collab-studio	旁白		聯動的企劃是猜歌。這是鐵塔跟 0x 那邊的經紀人一起想的，理由是「兩邊的粉絲都可以參與，而且不需要兩位有太多對話」。	sprite-glitch	stream	
+ch03	ch03-021	1	bg-collab-studio	旁白		那句「不需要有太多對話」是寫在企劃書上的。格莉奇看到的時候笑了很久。	sprite-glitch	stream	
+ch03	ch03-021	2	bg-collab-studio	旁白		開播十分鐘，留言區的人數就破了兩萬。	sprite-glitch	stream	
+ch03	ch03-021	3	bg-collab-studio	貓草		這個企劃很爛 / 這個企劃真的很爛 / 誰想出來的	sprite-glitch	stream	
+ch03	ch03-021	4	bg-collab-studio	格莉奇	平靜	有人說這個企劃很爛。 / 我同意，可是我不能同意，因為我今天是主持人。	glitch-plain	stream	
+ch03	ch03-021	5	bg-collab-studio	留言區		0x_official_01：請主持人回到流程 / 貓草：閉嘴	sprite-glitch	stream	
+ch03	ch03-021	6	bg-collab-studio	旁白		0x 在畫面的另外半邊。她答題的時候沒有猶豫。 / 前奏跑零點四秒，答案就出來了，中間沒有任何一段是在想，而且每一次都對。	sprite-glitch	stream	
+ch03	ch03-021	7	bg-collab-studio	旁白		第十一題的時候格莉奇按了鈴。	sprite-glitch	stream	
+ch03	ch03-029	-1	bg-collab-studio			這一場同時有三個畫面在跑。	sprite-glitch	stream	
+ch03	ch03-030	0	bg-collab-studio	旁白		兩萬人的留言區其實只有大概四十個人在講話，其餘的都在刷同一組貼圖。	sprite-glitch	stream	
+ch03	ch03-030	1	bg-collab-studio	旁白		那四十個人裡面，只有一個是從第一天就在的。他今天已經罵過這個企劃三次。	sprite-glitch	stream	
+ch03	ch03-036	0	bg-collab-studio	格莉奇	平靜	這首我知道。 / 這首是……	glitch-plain	stream	
+ch03	ch03-036	1	bg-collab-studio	旁白		前奏繼續跑。	sprite-glitch	stream	
+ch03	ch03-036	2	bg-collab-studio	格莉奇	當機	……這首是我知道的那一首。	glitch-error	stream-error	
+ch03	ch03-036	3	bg-collab-studio	旁白		留言區笑翻。0x 沒有笑，她按了鈴，報出歌名，正確。	sprite-glitch	stream	
+ch03	ch03-036	4	bg-collab-studio	0x	意外	妳為什麼要按。	sprite-glitch	stream	
+ch03	ch03-036	5	bg-collab-studio	旁白		這句不在流程上。	sprite-glitch	stream	
+ch03	ch03-036	6	bg-collab-studio	格莉奇	平靜	因為我知道啊。 / 我只是叫不出來。這兩件事不一樣。	glitch-plain	stream	
+ch03	ch03-036	7	bg-collab-studio	旁白		0x 沒有再問。	sprite-glitch	stream	
+ch03	ch03-036	8	bg-collab-studio	旁白		最後一個環節是合唱。	sprite-glitch	stream	
+ch03	ch03-036	9	bg-collab-studio	旁白		這是格莉奇提的，理由是「兩個人一起唱一首，觀眾比較有參與感」。 / 真正的理由是她想聽 0x 唱歌，而這件事她沒有寫在企劃書上。	sprite-glitch	stream	
+ch03	ch03-036	10	bg-collab-studio	旁白		0x 唱得很好。好到有點難解釋。 / 她的每一個音都精準地落在正中央，沒有一絲抖動，也沒有一絲多餘，像有人拿尺量過。	sprite-glitch	stream	
+ch03	ch03-036	11	bg-collab-studio	旁白		輪到格莉奇的那一段，她忘詞了。	sprite-glitch	stream	
+ch03	ch03-036	12	bg-collab-studio	旁白		留言區立刻刷起來，幾百行歌詞同時湧上。她笑著說「等一下我看一下」，然後她的手已經動了。	sprite-glitch	stream	
+ch03	ch03-036	13	bg-collab-studio	旁白		她的手在鍵盤上找到了下一個和弦。	sprite-glitch	stream	
+ch03	ch03-036	14	bg-collab-studio	旁白		那不是這首歌的和弦。	sprite-glitch	stream	
+ch03	ch03-036	15	bg-collab-studio	旁白		她彈的是另外一首。前奏、第一句、轉到副歌前那個有點怪的下行。 / 她一邊彈一邊「欸」了一聲，因為她自己也不知道手在幹嘛，可是她沒有停，因為停下來很奇怪。	sprite-glitch	stream	
+ch03	ch03-036	16	bg-collab-studio	旁白		她把那一段彈完了。	sprite-glitch	stream	
+ch03	ch03-036	17	bg-collab-studio	旁白		留言區安靜了大概三秒，然後開始問那是什麼歌。	sprite-glitch	stream	
+ch03	ch03-036	18	bg-collab-studio	旁白		格莉奇正要說話，畫面的另外半邊發出了一個很小的聲音。	sprite-glitch	stream	
+ch03	ch03-036	19	bg-collab-studio	旁白		那是 0x 的收音進來的。像是有人吸了一口氣，然後把那口氣壓回去。	sprite-glitch	stream	
+ch03	ch03-036	20	bg-collab-studio	旁白		她的耳朵旁邊，那個標籤跳了一下。	sprite-glitch	stream	
+ch03	ch03-036	21	bg-collab-studio	旁白		99.94%	sprite-glitch	stream	
+ch03	ch03-036	22	bg-collab-studio	旁白		三秒之後它跳回 99.98。快到大部分的人都以為自己看錯了。	sprite-glitch	stream	
+ch03	ch03-059	-1	bg-corridor			下播之後，後台的走廊很長。			
+ch03	ch03-060	0	bg-corridor	旁白		下播之後，後台的走廊很長，燈是那種一段一段亮的感應燈，你走過去它才亮。			
+ch03	ch03-060	1	bg-corridor	旁白		0x 走在前面。格莉奇追上去。	sprite-glitch	talk	
+ch03	ch03-060	2	bg-corridor	格莉奇	平靜	欸。	glitch-plain	talk	
+ch03	ch03-060	3	bg-corridor	旁白		0x 停下來。	sprite-glitch	talk	
+ch03	ch03-060	4	bg-corridor	格莉奇		剛剛那個數字。掉了 0.04。	sprite-glitch	talk	
+ch03	ch03-060	5	bg-corridor	0x		那是收音端的取樣誤差。	sprite-glitch	talk	
+ch03	ch03-060	6	bg-corridor	格莉奇		妳的取樣誤差不會挑那一秒發生。	sprite-glitch	talk	
+ch03	ch03-060	7	bg-corridor	旁白		0x 轉過身。她的表情跟直播上一模一樣，平的，沒有起伏，這件事在走廊上比在畫面上還嚇人。	sprite-glitch	talk	
+ch03	ch03-060	8	bg-corridor	0x	壓著	妳知道我為什麼討厭妳嗎。	sprite-glitch	talk	
+ch03	ch03-060	9	bg-corridor	旁白		格莉奇想了一下。她想得很認真。	sprite-glitch	talk	
+ch03	ch03-060	10	bg-corridor	格莉奇		因為我會出錯。	sprite-glitch	talk	
+ch03	ch03-060	11	bg-corridor	0x		不是。	sprite-glitch	talk	
+ch03	ch03-060	12	bg-corridor	旁白		感應燈在她們後面一段一段熄掉。	sprite-glitch	talk	
+ch03	ch03-060	13	bg-corridor	0x	要走	因為我全部都記得。	sprite-glitch	talk	
+ch03	ch03-060	14	bg-corridor	旁白		然後她就走了。她走路的節奏沒有變，一步都沒有亂。	sprite-glitch	talk	
+ch03	ch03-072	-1	bg-table-lamp			那天晚上她回到家。			
+ch03	ch03-073	0	bg-table-lamp	旁白		那天晚上她回到家，把外套掛好，坐到茶几前面，翻開守則本。	sprite-glitch	none	
+ch03	ch03-073	1	bg-table-lamp	旁白		第一頁先抄。這是規矩。	sprite-glitch	none	
+ch03	ch03-073	2	bg-table-lamp	旁白		抄到第三行的時候，她停了一下。	sprite-glitch	none	
+ch03	ch03-073	3	bg-table-lamp	旁白		@Null_0x99	sprite-glitch	none	
+ch03	ch03-073	4	bg-table-lamp	格莉奇	平靜	喔。	glitch-plain	none	
+ch03	ch03-073	5	bg-table-lamp	旁白		同一個 ID。她剛剛才跟這個 ID 錄完一整場聯動。	sprite-glitch	none	
+ch03	ch03-073	6	bg-table-lamp	旁白		她把這件事想了大概兩秒。世界很小，網路上撞 ID 的機率其實不低，而且如果真的是同一個人，那也只代表對方兩年前來過她的台，這在數據上一點都不奇怪。 / 她甚至可以列出三種可能性，並且排出可能性的高低。	sprite-glitch	none	
+ch03	ch03-073	7	bg-table-lamp	旁白		然後她做了她每天都做的那件事。	sprite-glitch	none	
+ch03	ch03-073	8	bg-table-lamp	旁白		她照著抄了下去。	sprite-glitch	none	
+ch03	ch03-073	9	bg-table-lamp	旁白		@Bambi_Draft3 / @Radio_Noah / @考完就刪	sprite-glitch	none	
+ch03	ch03-073	10	bg-table-lamp	旁白	唸紙上的字	還有一個。不要問他是誰。	sprite-glitch	none	
+ch03	ch03-073	11	bg-table-lamp	旁白		她闔上本子，關掉燈。 / 走廊上的燈今天大概也已經全部熄了。			
+ch03	ch03-085	-1	bg-table-lamp			（接第四章・第四十版）			
+ch03	ch03-032	0	bg-collab-studio	旁白		她答題的節奏完全一致，每一次都是前奏零點四秒。	sprite-glitch	stream	
+ch03	ch03-032	1	bg-collab-studio	旁白		沒有一次提早，也沒有一次拖到零點五。那不是反應，那是規格。	sprite-glitch	stream	
+ch03	ch03-034	0	bg-collab-studio	旁白		企劃書上那句「不需要兩位有太多對話」，是兩邊的經紀人各自寫過一次，然後合併成同一句的。	sprite-glitch	stream	
+ch03	ch03-034	1	bg-collab-studio	旁白		兩個版本的措辭幾乎一樣。他們沒有討論過。	sprite-glitch	stream	
+ch04	ch04-001	-1	bg-bambi-studio			桌子上有兩台螢幕、一台繪圖板、七個馬克杯。			
+ch04	ch04-002	0	bg-bambi-studio	旁白		斑比的工作室是一個房間，房間裡有一張桌子，桌子上有兩台螢幕、一台繪圖板、七個馬克杯。	sprite-glitch	talk	
+ch04	ch04-002	1	bg-bambi-studio	旁白		七個馬克杯裡面有六個是空的。	sprite-glitch	talk	
+ch04	ch04-004	-1	bg-bambi-studio			這張桌子上有三樣東西比人先講話。	sprite-glitch	talk	
+ch04	ch04-005	0	bg-bambi-studio	旁白	描述動作	六個是空的，杯底都留著一圈深褐色的環。環的顏色一層疊一層，數得出來不只六次。	sprite-glitch	talk	
+ch04	ch04-005	1	bg-bambi-studio	旁白	描述動作	有一個杯子的把手用膠帶纏過。	sprite-glitch	talk	
+ch04	ch04-011	0	bg-bambi-studio	斑比	累	那個是昨天的。還可以喝。	sprite-glitch	talk	
+ch04	ch04-011	1	bg-bambi-studio	格莉奇		我不喝東西。	sprite-glitch	talk	
+ch04	ch04-011	2	bg-bambi-studio	斑比		喔對。	sprite-glitch	talk	
+ch04	ch04-011	3	bg-bambi-studio	旁白		斑比把杯子推遠一點，那個動作跟格莉奇推披薩的動作幾乎一樣，只是斑比推完之後又把它拉回來了。	sprite-glitch	talk	
+ch04	ch04-011	4	bg-bambi-studio	旁白		她的十根手指上纏著不同顏色的指套跟膠布，淡紫色、霓虹藍，有幾圈已經翹起來。 / 她畫圖的時候會用力壓筆，壓到指節發白，所以她纏那些東西。 / 她跟格莉奇解釋過三次這件事，三次都是格莉奇問的。	sprite-glitch	talk	
+ch04	ch04-011	5	bg-bambi-studio	斑比	不安	這是第四十版。	sprite-glitch	talk	
+ch04	ch04-011	6	bg-bambi-studio	旁白		螢幕上是格莉奇的立繪。新的表情差分，微笑，眼睛稍微瞇起來的那一種。	sprite-glitch	talk	
+ch04	ch04-011	7	bg-bambi-studio	格莉奇	平靜	這比第三十九版好嗎。	glitch-plain	talk	
+ch04	ch04-011	8	bg-bambi-studio	旁白		格莉奇看著螢幕。	sprite-glitch	talk	
+ch04	ch04-011	9	bg-bambi-studio	旁白		她不記得第三十九版。她也不記得第三十八版、第三十七版、或者第十二版。 / 這件事斑比知道，斑比每次都還是會問，而格莉奇每次都不會說「我不記得」，因為那樣講很煩，而且沒有用。	sprite-glitch	talk	
+ch04	ch04-011	10	bg-bambi-studio	格莉奇	平靜	我不知道這比第三十九版好不好。 / 可是這一版的嘴角有一邊比較高。	glitch-plain	talk	
+ch04	ch04-011	11	bg-bambi-studio	斑比		那是故意的。	sprite-glitch	talk	
+ch04	ch04-011	12	bg-bambi-studio	格莉奇		我知道那是故意的。我的意思是，這樣看起來像是我剛剛想到一件很好笑的事情，可是我還沒有講出來。	sprite-glitch	talk	
+ch04	ch04-011	13	bg-bambi-studio	旁白		斑比沒有回話。	sprite-glitch	talk	
+ch04	ch04-011	14	bg-bambi-studio	格莉奇	平靜	這樣可以嗎。	glitch-plain	talk	
+ch04	ch04-011	15	bg-bambi-studio	斑比	被說中	……可以。	sprite-glitch	talk	
+ch04	ch04-011	16	bg-bambi-studio	旁白		她的聲音有一點怪。	sprite-glitch	talk	
+ch04	ch04-011	17	bg-bambi-studio	斑比	被說中	這是兩年來第一次有人跟我講畫面上有什麼。 / 其他人都只會說『這版比較好』或者『這版怪怪的』。	sprite-glitch	talk	
+ch04	ch04-011	18	bg-bambi-studio	格莉奇		那是因為他們記得前面三十九版。	sprite-glitch	talk	
+ch04	ch04-011	19	bg-bambi-studio	斑比		對。所以他們都在比。	sprite-glitch	talk	
+ch04	ch04-011	20	bg-bambi-studio	旁白		她把筆蓋從嘴裡拿出來，又放回去。	sprite-glitch	talk	
+ch04	ch04-011	21	bg-bambi-studio	斑比	被說中	妳是唯一一個每次都在看的人。	sprite-glitch	talk	
+ch04	ch04-011	22	bg-bambi-studio	斑比	平靜	還有一件事。樣品那本要重做。	sprite-glitch	talk	
+ch04	ch04-011	23	bg-bambi-studio	旁白		斑比切到另一個檔案。那是那本假守則本的第一頁，模擬手寫的示範內容。	sprite-glitch	talk	
+ch04	ch04-011	24	bg-bambi-studio	斑比	平靜	鐵塔說內頁要重排，字體太像真的，法務那邊有意見。 / 所以我要重畫一次。	sprite-glitch	talk	
+ch04	ch04-011	25	bg-bambi-studio	格莉奇		好。	sprite-glitch	talk	
+ch04	ch04-011	26	bg-bambi-studio	斑比		可是我要先問妳一件事。	sprite-glitch	talk	
+ch04	ch04-011	27	bg-bambi-studio	旁白		斑比把畫面放大。	sprite-glitch	talk	
+ch04	ch04-011	28	bg-bambi-studio	斑比	專注	這裡為什麼是七行。	sprite-glitch	talk	
+ch04	ch04-011	29	bg-bambi-studio	旁白		格莉奇看著那七行假字。	sprite-glitch	talk	
+ch04	ch04-011	30	bg-bambi-studio	斑比	平靜	我畫的時候是照著妳直播畫面上出現過的樣子。 / 妳寫守則本的時候鏡頭有拍到，我截過圖。第一頁我數過，七行。所以我畫七行。	sprite-glitch	talk	
+ch04	ch04-011	31	bg-bambi-studio	格莉奇	平靜	嗯。	glitch-plain	talk	
+ch04	ch04-011	32	bg-bambi-studio	斑比	專注	可是妳的本子第一頁只有六個名字。	sprite-glitch	talk	
+ch04	ch04-011	33	bg-bambi-studio	旁白		房間裡的空調在運轉。斑比的其中一台螢幕進入了休眠。	sprite-glitch	talk	
+ch04	ch04-011	34	bg-bambi-studio	格莉奇	驚訝	妳怎麼知道。	glitch-idle	talk-surprised	
+ch04	ch04-011	35	bg-bambi-studio	斑比	平靜	因為我截的圖裡面數得出來。六個 ID，加上一行不是 ID 的東西。所以嚴格講是六加一，不是七。 / 我想問的是那一行要不要照畫，因為如果照畫，那看起來就會很像妳的本子，法務可能會有意見。	sprite-glitch	talk	
+ch04	ch04-011	36	bg-bambi-studio	格莉奇	平靜	妳的截圖。有多久以前的。	glitch-plain	talk	
+ch04	ch04-011	37	bg-bambi-studio	斑比	平靜	我從妳開台就在截了。參考圖啊。畫立繪要看妳自己的動作習慣，不然畫出來會很假。	sprite-glitch	talk	
+ch04	ch04-045	0	bg-bambi-studio	旁白		她說得很自然，像在講一件很無聊的事。	sprite-glitch	talk	
+ch04	ch04-045	1	bg-bambi-studio	格莉奇		所以妳有兩年份。	sprite-glitch	talk	
+ch04	ch04-045	2	bg-bambi-studio	斑比		大概。有些硬碟壞掉了。	sprite-glitch	talk	
+ch04	ch04-045	3	bg-bambi-studio	格莉奇		最早的那一張。	sprite-glitch	talk	
+ch04	ch04-045	4	bg-bambi-studio	旁白		斑比翻了一下資料夾。滑鼠滾輪的聲音很久。	sprite-glitch	talk	
+ch04	ch04-045	5	bg-bambi-studio	斑比	專注	這一張。開台第五天。	sprite-glitch	talk	
+ch04	ch04-049	-1	page-day5			畫質很爛。			
+ch04	ch04-050	0	page-day5	旁白		畫質很爛。那是兩年前的串流碼率，而且是從一段會動的畫面截下來的，每一個字的邊緣都被壓成一塊一塊的色塊，筆畫黏在一起。			
+ch04	ch04-050	1	page-day5	旁白		可是可以數。			
+ch04	ch04-050	2	page-day5	旁白		一行，兩行，三行，四行，五行，六行。			
+ch04	ch04-050	3	page-day5	旁白		第七行。			
+ch04	ch04-050	4	page-day5	旁白		第七行是一個字串。它的長度跟前面六行差不多，開頭有一個小小的、方形的東西，糊掉了，可是它的形狀比較像一個 @，不太像一個字。			
+ch04	ch04-055	-1	bg-bambi-studio			她看著螢幕。			
+ch04	ch04-056	0	bg-bambi-studio	格莉奇		這一行是名字。	sprite-glitch	talk	
+ch04	ch04-056	1	bg-bambi-studio	斑比		妳自己的本子上不是嗎。	sprite-glitch	talk	
+ch04	ch04-056	2	bg-bambi-studio	格莉奇		不是。我的第七行是一句話。	sprite-glitch	talk	
+ch04	ch04-056	3	bg-bambi-studio	旁白		斑比看著螢幕，看了大概五秒。	sprite-glitch	talk	
+ch04	ch04-056	4	bg-bambi-studio	斑比	不安	喔。那妳改過。	sprite-glitch	talk	
+ch04	ch04-059	-1	bg-table-lamp			回家之後她沒有先開電視。			
+ch04	ch04-060	0	bg-table-lamp	旁白		回家之後她沒有先開電視。	sprite-glitch	none	
+ch04	ch04-060	1	bg-table-lamp	旁白		她把守則本攤在茶几上，翻到最新的那一頁，看了一眼第一頁的內容，然後往前翻。	sprite-glitch	none	
+ch04	ch04-060	2	bg-table-lamp	旁白		第一千零六版。一樣。 / 第一千零五版。一樣。	sprite-glitch	none	
+ch04	ch04-060	3	bg-table-lamp	旁白		她開始往回翻。她翻得很快，因為她本來就做得到；她一頁一頁掃過去，六個 ID 加一行字，六個 ID 加一行字，六個 ID 加一行字。 / 她一邊翻一邊在心裡估算：如果那個改動發生在某一版，那一版之前的第一頁就會長得不一樣，而她只要找到那個交界就好。這是一個很簡單的搜尋問題。	sprite-glitch	none	
+ch04	ch04-060	4	bg-table-lamp	旁白		她一邊翻一邊順手算了一件她從來沒有算過的事。	sprite-glitch	none	
+ch04	ch04-060	5	bg-table-lamp	旁白		這本本子現在是第一千零七版。可是她的頻道只開了兩年，兩年是七百三十天。	sprite-glitch	none	
+ch04	ch04-060	6	bg-table-lamp	旁白		所以這本本子比頻道老。她在開始講話給別人聽之前，就已經每天晚上在寫東西給明天的自己了。 / 這件事她也不記得，可是算術不會騙人。	sprite-glitch	none	
+ch04	ch04-060	7	bg-table-lamp	旁白		她翻了大概兩百版。	sprite-glitch	none	
+ch04	ch04-060	8	bg-table-lamp	旁白		然後她的手停了。	sprite-glitch	none	
+ch04	ch04-060	9	bg-table-lamp	旁白		不是因為她找到了。	sprite-glitch	none	
+ch04	ch04-060	10	bg-table-lamp	旁白		是因為書頁沒有了。	sprite-glitch	none	
+ch04	ch04-060	11	bg-table-lamp	旁白		那本本子的前面被撕掉了。撕得很整齊，貼著書脊，留下一排很窄的紙邊，像一整排斷掉的牙。 / 她用手指摸過去，可以摸到那些紙邊的厚度。她算了一下：以每一版的紙厚推估，這裡少掉大概八百頁。	sprite-glitch	none	
+ch04	ch04-060	12	bg-table-lamp	旁白		她把本子翻到最前面。	sprite-glitch	none	
+ch04	ch04-060	13	bg-table-lamp	旁白		現在的第一頁，是第八百多版。	sprite-glitch	none	
+ch04	ch04-060	14	bg-table-lamp	旁白		黑洞先生在她背後的走廊上經過，短靴踩在地板上有很輕的聲音。 / 他停了一下，然後繼續往房間走。	sprite-glitch	none	
+ch04	ch04-060	15	bg-table-lamp	旁白		格莉奇沒有回頭。	sprite-glitch	none	
+ch04	ch04-060	16	bg-table-lamp	格莉奇	平靜	你有看過這本本子的前面嗎。	glitch-plain	none	
+ch04	ch04-060	17	bg-table-lamp	旁白		腳步聲停了。	sprite-glitch	none	
+ch04	ch04-060	18	bg-table-lamp	黑洞先生	平靜	沒有。	sprite-glitch	none	
+ch04	ch04-060	19	bg-table-lamp	旁白		那是他今天說的第一句話，而且是實話。	sprite-glitch	none	
+ch04	ch04-080	-1	bg-table-lamp			（接第五章・第一次問）			
+ch04	ch04-007	0	bg-bambi-studio	旁白	描述動作	牆上釘滿列印出來的截圖，全部是同一個人的動作：抬手、側頭、天線抖一下。	sprite-glitch	talk	
+ch04	ch04-007	1	bg-bambi-studio	旁白	描述動作	沒有一張拍到臉。臉是斑比自己畫的，她不需要參考；她要的是格莉奇怎麼動。	sprite-glitch	talk	
+ch04	ch04-009	0	bg-bambi-studio	旁白	描述動作	休眠的那台螢幕在間隔很久之後會亮一下，跳出待機畫面。	sprite-glitch	talk	
+ch04	ch04-009	1	bg-bambi-studio	旁白	描述動作	待機畫面是一張很舊的立繪，線條比現在硬，配色比現在暗。	sprite-glitch	talk	
+ch05	ch05-001	-1	bg-apartment-hall			凌晨一點。她又把自己鎖在門外了。			
+ch05	ch05-002	0	bg-apartment-hall	旁白		她又把自己鎖在門外了。	sprite-glitch	talk	
+ch05	ch05-002	1	bg-apartment-hall	旁白		理論上這件事不應該發生。門鎖是電子的，她的權限寫在系統裡，她根本不需要鑰匙。 / 可是這棟樓的門鎖是二十年前裝的，二十年前的東西有一個很麻煩的特性：它有時候會需要你拿一張實體的卡片，貼在一個實體的位置上。	sprite-glitch	talk	
+ch05	ch05-002	2	bg-apartment-hall	旁白		那張卡片現在在屋子裡面。	sprite-glitch	talk	
+ch05	ch05-002	3	bg-apartment-hall	旁白		她在走廊上站了大概四十秒，把所有可行方案排了一遍，包括打給房東（凌晨一點）、打給黑洞先生（他在裡面睡覺，而且他沒有手機）、以及等到早上。	sprite-glitch	talk	
+ch05	ch05-002	4	bg-apartment-hall	旁白		然後樓梯間傳來腳步聲。	sprite-glitch	talk	
+ch05	ch05-002	5	bg-apartment-hall	諾亞	笑	又鎖起來了喔。	sprite-glitch	talk	
+ch05	ch05-002	6	bg-apartment-hall	格莉奇	平靜	你怎麼知道我鎖起來了。	glitch-plain	talk	
+ch05	ch05-002	7	bg-apartment-hall	諾亞	平靜	因為妳站在門口。 / 站在門口的人只有兩種，一種是忘記帶東西，一種是不想進去。妳看起來不像第二種。	sprite-glitch	talk	
+ch05	ch05-002	8	bg-apartment-hall	旁白		諾亞從樓下上來，一手拎著工具袋。這種時間還在外面跑，大概是誰家的東西壞了。 / 他穿著那件磨到發亮的工作背心，額頭上推著一副雙目放大鏡，其中一顆鏡片裡面鑲著一根真空管，會發出很淡的橘光。 / 他走路的時候那個橘光會晃。	sprite-glitch	talk	
+ch05	ch05-002	9	bg-apartment-hall	旁白		他從工具袋裡拿出一根很細的金屬條，蹲下來，在門把下面弄了大概十秒。	sprite-glitch	talk	
+ch05	ch05-002	10	bg-apartment-hall	旁白		門開了。	sprite-glitch	talk	
+ch05	ch05-002	11	bg-apartment-hall	格莉奇	平靜	……這樣好像不太合法。	glitch-plain	talk	
+ch05	ch05-002	12	bg-apartment-hall	諾亞	平靜	這是我裝的門。 / 二十二年前。	sprite-glitch	talk	
+ch05	ch05-002	13	bg-apartment-hall	旁白		他站起來，膝蓋發出一個很大的聲音。	sprite-glitch	talk	
+ch05	ch05-016	-1	bg-noah-shop			頂樓加蓋，裡面堆滿收音機。			
+ch05	ch05-017	0	bg-noah-shop	旁白		隔天下午她去了他的店。			
+ch05	ch05-017	1	bg-noah-shop	旁白		那間店在頂樓加蓋，門口掛著一塊木牌，木牌上的字已經看不太清楚了。 / 沒有人會把店開在頂加。那塊木牌本來掛在樓下的騎樓，店收掉以後東西全部搬上來，招牌也一起搬。現在那裡是倉庫、工作室，也是他睡覺的地方。 / 裡面堆滿收音機，木頭外殼的、塑膠外殼的、有些沒有外殼，露出裡面一排一排的零件，像剖開的東西。			
+ch05	ch05-017	2	bg-noah-shop	格莉奇	平靜	請問這裡有賣音源轉接線嗎。	glitch-plain	talk	
+ch05	ch05-017	3	bg-noah-shop	旁白		諾亞從桌子後面抬起頭。	sprite-glitch	talk	
+ch05	ch05-017	4	bg-noah-shop	諾亞		有啊。妳要哪一種。	sprite-glitch	talk	
+ch05	ch05-017	5	bg-noah-shop	格莉奇		就是……一頭細的，一頭粗的那種。	sprite-glitch	talk	
+ch05	ch05-017	6	bg-noah-shop	諾亞		三點五轉六點三。	sprite-glitch	talk	
+ch05	ch05-017	7	bg-noah-shop	格莉奇		對，那個。	sprite-glitch	talk	
+ch05	ch05-017	8	bg-noah-shop	旁白		他從櫃檯下面拿出一條線，放在檯面上。那條線已經拆好包裝了，捲得很整齊，用一條橡皮筋束著。	sprite-glitch	talk	
+ch05	ch05-017	9	bg-noah-shop	格莉奇		多少錢。	sprite-glitch	talk	
+ch05	ch05-017	10	bg-noah-shop	諾亞		一百二。	sprite-glitch	talk	
+ch05	ch05-017	11	bg-noah-shop	格莉奇		好。	sprite-glitch	talk	
+ch05	ch05-017	12	bg-noah-shop	旁白		她付了錢，把線收進包包。 / 包包裡已經有兩條一模一樣的線，捲得一樣整齊，束著一樣的橡皮筋。 / 她沒有看見，因為她沒有翻。那個包包她從來不清。	sprite-glitch	talk	
+ch05	ch05-017	13	bg-noah-shop	旁白		她沒有馬上走。她在店裡待了大概一個小時，因為諾亞在修一台很大的收音機，而那件事看起來很有趣。	sprite-glitch	talk	
+ch05	ch05-026	-1	bg-noah-shop			店裡有三樣東西在等人問。	sprite-glitch	talk	
+ch05	ch05-027	0	bg-noah-shop	旁白		木牌上的字被曬到只剩下筆畫的影子，讀不出來。	sprite-glitch	talk	
+ch05	ch05-027	1	bg-noah-shop	旁白		他每天開門還是把它掛出去。	sprite-glitch	talk	
+ch05	ch05-033	0	bg-noah-shop	格莉奇		這台是什麼。	sprite-glitch	talk	
+ch05	ch05-033	1	bg-noah-shop	諾亞	在修東西	一九六四年的。真空管的。這種東西現在沒有人修了，因為零件停產四十年了。	sprite-glitch	talk	
+ch05	ch05-033	2	bg-noah-shop	格莉奇		那你怎麼修。	sprite-glitch	talk	
+ch05	ch05-033	3	bg-noah-shop	諾亞	在修東西	拆別台的。	sprite-glitch	talk	
+ch05	ch05-033	4	bg-noah-shop	格莉奇		那別台不就壞掉了。	sprite-glitch	talk	
+ch05	ch05-033	5	bg-noah-shop	諾亞	在修東西	本來就壞掉了。我這裡沒有一台是好的。我是把很多台壞的，湊成一台會響的。	sprite-glitch	talk	
+ch05	ch05-033	6	bg-noah-shop	旁白		她想了一下。	sprite-glitch	talk	
+ch05	ch05-033	7	bg-noah-shop	格莉奇	平靜	那那台算是哪一台。	glitch-plain	talk	
+ch05	ch05-033	8	bg-noah-shop	旁白		諾亞抬起頭，看了她一眼。 / 那是一種老人在聽到一個他沒想過的問題時會有的表情，眉毛先動，然後才是眼睛。	sprite-glitch	talk	
+ch05	ch05-033	9	bg-noah-shop	諾亞	想事情	妳這個問題很難。	sprite-glitch	talk	
+ch05	ch05-033	10	bg-noah-shop	旁白		然後他低頭繼續焊。過了大概五分鐘，他又開口。	sprite-glitch	talk	
+ch05	ch05-033	11	bg-noah-shop	諾亞		妳是做什麼的。	sprite-glitch	talk	
+ch05	ch05-033	12	bg-noah-shop	格莉奇		我做直播。	sprite-glitch	talk	
+ch05	ch05-033	13	bg-noah-shop	諾亞		什麼播。	sprite-glitch	talk	
+ch05	ch05-033	14	bg-noah-shop	格莉奇		就是……我在網路上講話，然後有人看。	sprite-glitch	talk	
+ch05	ch05-033	15	bg-noah-shop	諾亞		有多少人。	sprite-glitch	talk	
+ch05	ch05-033	16	bg-noah-shop	格莉奇		兩年前是七個。現在大概四千。	sprite-glitch	talk	
+ch05	ch05-033	17	bg-noah-shop	旁白		諾亞點點頭，那個點頭的樣子完全不像知道四千是多少。	sprite-glitch	talk	
+ch05	ch05-033	18	bg-noah-shop	諾亞	笑	那不錯啊。 / 我這裡修好的收音機，一台都沒有人聽。	sprite-glitch	talk	
+ch05	ch05-033	19	bg-noah-shop	旁白		離開之前她看到桌子底下有一個鞋盒。 / 鞋盒側面用麥克筆寫著：樓下小姑娘。	sprite-glitch	talk	
+ch05	ch05-033	20	bg-noah-shop	格莉奇		那是什麼。	sprite-glitch	talk	
+ch05	ch05-033	21	bg-noah-shop	諾亞		妳留在這裡的東西。	sprite-glitch	talk	
+ch05	ch05-033	22	bg-noah-shop	旁白		傘是雨停之後忘在門邊的。手套只有一隻，另一隻不知道去哪了。	sprite-glitch	talk	
+ch05	ch05-033	23	bg-noah-shop	旁白		他把盒子拉出來，掀開。裡面有兩把傘、一隻手套、一支螺絲起子、一個看起來完全不知道用途的小零件，還有一張紙。	sprite-glitch	talk	
+ch05	ch05-033	24	bg-noah-shop	格莉奇		螺絲起子是我借你的。	sprite-glitch	talk	
+ch05	ch05-033	25	bg-noah-shop	諾亞	和藹	是我借妳的。	sprite-glitch	talk	
+ch05	ch05-033	26	bg-noah-shop	格莉奇		……喔。	sprite-glitch	talk	
+ch05	ch05-033	27	bg-noah-shop	諾亞	和藹	已經三年了。不過沒關係，我有很多支。	sprite-glitch	talk	
+ch05	ch05-033	28	bg-noah-shop	旁白		她拿起那張紙。那是一張收據，很舊，邊角捲起來。上面印的日期是兩年多以前。 / 品項那一欄寫著：天線用同軸線 3M。	sprite-glitch	talk	
+ch05	ch05-033	29	bg-noah-shop	旁白		她看著那張收據看了很久。	sprite-glitch	talk	
+ch05	ch05-033	30	bg-noah-shop	格莉奇		這個是我買的？	sprite-glitch	talk	
+ch05	ch05-033	31	bg-noah-shop	諾亞		是啊。	sprite-glitch	talk	
+ch05	ch05-033	32	bg-noah-shop	格莉奇		我買天線的線幹嘛。	sprite-glitch	talk	
+ch05	ch05-033	33	bg-noah-shop	諾亞		妳說妳要接一個東西。妳那天很緊張。	sprite-glitch	talk	
+ch05	ch05-033	34	bg-noah-shop	格莉奇		我緊張什麼。	sprite-glitch	talk	
+ch05	ch05-033	35	bg-noah-shop	諾亞		妳沒有講。	sprite-glitch	talk	
+ch05	ch05-033	36	bg-noah-shop	旁白		他把盒子推回桌子底下。	sprite-glitch	talk	
+ch05	ch05-033	37	bg-noah-shop	諾亞	平靜	我也沒有問。	sprite-glitch	talk	
+ch05	ch05-052	-1	bg-stairs			晚上七點多。兩個人在樓梯口交會。			
+ch05	ch05-053	0	bg-stairs	旁白		那時候是晚上七點多，他剛下班回來，西裝下襬擦過地板，短靴一隻一隻踩在磁磚上。 / 諾亞剛好也從頂樓下來，要去倒垃圾。	sprite-glitch	talk	
+ch05	ch05-053	1	bg-stairs	旁白		兩個人在樓梯口交會。	sprite-glitch	talk	
+ch05	ch05-053	2	bg-stairs	旁白		諾亞點了一下頭。	sprite-glitch	talk	
+ch05	ch05-053	3	bg-stairs	旁白		黑洞先生也點了一下頭。	sprite-glitch	talk	
+ch05	ch05-053	4	bg-stairs	旁白		然後兩個人就各走各的了。諾亞沒有看那件外套一眼。 / 格莉奇後來想，這兩個人認識多久了，她從來沒有問過。	sprite-glitch	talk	
+ch05	ch05-058	-1	bg-noah-shop			她走進店裡的第三次是那個禮拜的第三次。	sprite-glitch	talk	
+ch05	ch05-059	0	bg-noah-shop	格莉奇		請問這裡有賣音源轉接線嗎。	sprite-glitch	talk	
+ch05	ch05-059	1	bg-noah-shop	諾亞		有啊。妳要哪一種。	sprite-glitch	talk	
+ch05	ch05-059	2	bg-noah-shop	格莉奇		就是一頭細的，一頭粗的那種。	sprite-glitch	talk	
+ch05	ch05-059	3	bg-noah-shop	諾亞		三點五轉六點三。	sprite-glitch	talk	
+ch05	ch05-059	4	bg-noah-shop	格莉奇		對，那個。	sprite-glitch	talk	
+ch05	ch05-059	5	bg-noah-shop	旁白		他從櫃檯下面拿出一條線。已經拆好包裝，捲得很整齊，橡皮筋束著。	sprite-glitch	talk	
+ch05	ch05-059	6	bg-noah-shop	旁白		她付了錢，把線收進包包。	sprite-glitch	talk	
+ch05	ch05-059	7	bg-noah-shop	旁白		三條線並排躺在包包底部，橡皮筋的顏色一樣，捲的圈數一樣。 / 她看不到，因為她沒有低頭。	sprite-glitch	talk	
+ch05	ch05-059	8	bg-noah-shop	旁白		然後她站在那裡沒有走。	sprite-glitch	talk	
+ch05	ch05-059	9	bg-noah-shop	格莉奇		諾亞先生。	sprite-glitch	talk	
+ch05	ch05-059	10	bg-noah-shop	諾亞		嗯。	sprite-glitch	talk	
+ch05	ch05-059	11	bg-noah-shop	格莉奇		我這個禮拜是不是來過了。	sprite-glitch	talk	
+ch05	ch05-059	12	bg-noah-shop	旁白		諾亞把焊槍放到架子上。	sprite-glitch	talk	
+ch05	ch05-059	13	bg-noah-shop	諾亞	想事情	來過三次。	sprite-glitch	talk	
+ch05	ch05-059	14	bg-noah-shop	旁白		她沒有說話。	sprite-glitch	talk	
+ch05	ch05-059	15	bg-noah-shop	諾亞	平靜	連這次。	sprite-glitch	talk	
+ch05	ch05-059	16	bg-noah-shop	格莉奇		……那你知道喔。	sprite-glitch	talk	
+ch05	ch05-059	17	bg-noah-shop	諾亞		知道啊。	sprite-glitch	talk	
+ch05	ch05-059	18	bg-noah-shop	格莉奇		那你為什麼每次都重新回答一次。	sprite-glitch	talk	
+ch05	ch05-059	19	bg-noah-shop	旁白		諾亞想了一下。他想得很認真，那個表情跟他被問「那台算是哪一台」的時候一模一樣，好像這個問題確實很難，需要花點時間。	sprite-glitch	talk	
+ch05	ch05-059	20	bg-noah-shop	諾亞	笑	因為妳每次都是第一次問啊。	sprite-glitch	talk	
+ch05	ch05-059	21	bg-noah-shop	旁白		他把那一百二十塊放進桌子底下那個鞋盒。盒子側面寫著樓下小姑娘。	sprite-glitch	talk	
+ch05	ch05-059	22	bg-noah-shop	旁白		然後他把手伸到櫃檯下面，拿出下一條線，拆好包裝，捲整齊，用橡皮筋束起來，放在原來的位置上。	sprite-glitch	talk	
+ch05	ch05-074	-1	bg-noah-shop			（接第六章・考完就刪）			
+ch05	ch05-029	0	bg-noah-shop	旁白		最高那一排全部都修好了，插上電就會響。	sprite-glitch	talk	
+ch05	ch05-029	1	bg-noah-shop	旁白		上面積的灰比別排厚。修好的東西沒有人來拿。	sprite-glitch	talk	
+ch05	ch05-031	0	bg-noah-shop	旁白		桌角有一本簿子，記著每一台機器的日期與症狀，字很大很方正。	sprite-glitch	talk	
+ch05	ch05-031	1	bg-noah-shop	旁白		最新的一行是三年前。之後他就不記了，可是簿子還攤在那裡。	sprite-glitch	talk	
+ch06	ch06-001	-1	bg-studio-2am			她花了兩個小時查那六個名字。			
+ch06	ch06-002	0	bg-studio-2am	旁白		她花了兩個小時查那六個名字，因為她是一個很有效率的人。	sprite-glitch	stream	
+ch06	ch06-002	1	bg-studio-2am	旁白		貓草：現任，全勤，等級八十。 / 鐵塔：現任，經紀人。 / 0x：現任，同業。 / 斑比：現任，合作繪師。 / 諾亞：查不到平台帳號，但是她認得那個名字，那是樓上那個修收音機的。	sprite-glitch	stream	
+ch06	ch06-002	2	bg-studio-2am	旁白		第六個：@考完就刪。	sprite-glitch	stream	
+ch06	ch06-002	3	bg-studio-2am	旁白		平台後台的回應只有一行字。	sprite-glitch	stream	
+ch06	ch06-002	4	bg-studio-2am	旁白		此帳號已刪除。	sprite-glitch	stream	
+ch06	ch06-002	5	bg-studio-2am	旁白		她點了兩次。第二次點的時候她知道結果會一樣，她點是因為那一秒她想不出還有什麼可以做。	sprite-glitch	stream	
+ch06	ch06-002	6	bg-studio-2am	格莉奇	平靜	欸 / 你記不記得兩年前有一個 ID 叫「考完就刪」	glitch-plain	stream	
+ch06	ch06-002	7	bg-studio-2am	貓草		記得	sprite-glitch	stream	
+ch06	ch06-002	8	bg-studio-2am	格莉奇	平靜	這麼快	glitch-plain	stream	
+ch06	ch06-002	9	bg-studio-2am	貓草		因為我不喜歡他	sprite-glitch	stream	
+ch06	ch06-002	10	bg-studio-2am	旁白		她看著那行字，等了一下。	sprite-glitch	stream	
+ch06	ch06-002	11	bg-studio-2am	貓草		那天你台上七個人 / 他一個人打的字比我們六個加起來還多 / 你一直在回他	sprite-glitch	stream	
+ch06	ch06-002	12	bg-studio-2am	格莉奇	平靜	所以你不喜歡他	glitch-plain	stream	
+ch06	ch06-002	13	bg-studio-2am	貓草		對 / 我那天也在啊	sprite-glitch	stream	
+ch06	ch06-002	14	bg-studio-2am	旁白		她笑了。她本來想打「你好幼稚」，可是她沒有打。	sprite-glitch	stream	
+ch06	ch06-002	15	bg-studio-2am	格莉奇	平靜	他後來呢	glitch-plain	stream	
+ch06	ch06-002	16	bg-studio-2am	貓草		不知道 / 某一天就沒了 / 我還特地去看	sprite-glitch	stream	
+ch06	ch06-002	17	bg-studio-2am	格莉奇	平靜	你去看什麼	glitch-plain	stream	
+ch06	ch06-002	18	bg-studio-2am	貓草		看他有沒有偷偷用小號回來 / 沒有	sprite-glitch	stream	
+ch06	ch06-002	19	bg-studio-2am	旁白		過了大概十秒。	sprite-glitch	stream	
+ch06	ch06-002	20	bg-studio-2am	貓草		你問這個幹嘛	sprite-glitch	stream	
+ch06	ch06-002	21	bg-studio-2am	格莉奇	平靜	整理東西	glitch-plain	stream	
+ch06	ch06-002	22	bg-studio-2am	貓草		喔	sprite-glitch	stream	
+ch06	ch06-002	23	bg-studio-2am	旁白		他沒有再問。這是貓草唯一的優點，格莉奇後來想：他很煩，可是他問到某一個地方就會自己停下來。	sprite-glitch	stream	
+ch06	ch06-002	24	bg-studio-2am	旁白		那場開台第一天的直播沒有存檔。她自己刪的，兩年前，因為那時候的她覺得那場很爛。	sprite-glitch	stream	
+ch06	ch06-002	25	bg-studio-2am	旁白		可是有人剪過。	sprite-glitch	stream	
+ch06	ch06-002	26	bg-studio-2am	旁白		那支剪輯掛在一個沒什麼人用的舊網站上，畫質三百六十，播放次數一千一百多次，標題是【格莉奇】第一天七個人。上傳者是一個已經沒在動的帳號。	sprite-glitch	stream	
+ch06	ch06-002	27	bg-studio-2am	旁白		她點開。	sprite-glitch	stream	
+ch06	ch06-002	28	bg-studio-2am	旁白		畫面裡的格莉奇比較小隻。天線比較短，麥克風的位置很奇怪，音量沒有調好，講到興奮的地方會爆音。			
+ch06	ch06-002	29	bg-studio-2am	畫面裡的她	平靜	今天來了七個人。			
+ch06	ch06-002	30	bg-studio-2am	旁白		她的聲音比現在高一點。			
+ch06	ch06-002	31	bg-studio-2am	畫面裡的她	平靜	七個欸。七個都是人欸。			
+ch06	ch06-002	32	bg-studio-2am	旁白		剪輯往前跳了一段。			
+ch06	ch06-002	33	bg-studio-2am	畫面裡的她	平靜	考完就刪說……『妳的麥克風有雜訊，接地應該沒接好。』			
+ch06	ch06-002	34	bg-studio-2am	畫面裡的她	平靜	欸你懂這個喔。 / 『還好。』 / 還好是多好。 / 『我爸修冷氣的。』			
+ch06	ch06-002	35	bg-studio-2am	旁白		畫面裡的她笑出聲，爆了一次音。			
+ch06	ch06-002	36	bg-studio-2am	畫面裡的她	平靜	那你要不要來修我的台。 / 『我要考試。』 / 考完呢。 / 『考完再說。』			
+ch06	ch06-002	37	bg-studio-2am	旁白		留言區有人叫她回別人的話。她說「等一下啦」，然後繼續唸下一則。			
+ch06	ch06-002	38	bg-studio-2am	旁白		剪輯又往前跳了一段。			
+ch06	ch06-041	0	bg-studio-2am	旁白		畫面裡的她把臉湊近螢幕。			
+ch06	ch06-041	1	bg-studio-2am	畫面裡的她	平靜	欸等一下，我唸一下這個。 / 考完就刪說……『我剛剛考完了』。			
+ch06	ch06-041	2	bg-studio-2am	畫面裡的她	平靜	『考得很爛。』 / 『所以我大概不會再用這個帳號了。』 / 『就是想跟你說一下。』			
+ch06	ch06-041	3	bg-studio-2am	旁白		畫面裡的她安靜了大概兩秒。那兩秒她的天線一動也不動。			
+ch06	ch06-041	4	bg-studio-2am	畫面裡的她	平靜	欸不要啦。 / 你留著。 / 你留著的話……			
+ch06	ch06-041	5	bg-studio-2am	旁白		畫面裡的她想了一下，然後笑了，那個笑很用力，用力到現在的她看著都覺得有點丟臉。			
+ch06	ch06-041	6	bg-studio-2am	畫面裡的她	平靜	你留著的話我就會記得你。			
+ch06	ch06-041	7	bg-studio-2am	旁白		然後她轉向鏡頭。			
+ch06	ch06-041	8	bg-studio-2am	畫面裡的她	認真	我要記住每一個來的人。我保證。			
+ch06	ch06-041	9	bg-studio-2am	旁白		剪輯到這裡結束。最後三秒是黑畫面，上傳者在下面打了一行字：			
+ch06	ch06-041	10	bg-studio-2am	旁白		這台以後應該會紅			
+ch06	ch06-052	-1	bg-studio-2am			那個舊網站的頁面上還留著三樣東西。			
+ch06	ch06-053	0	bg-studio-2am	旁白		上傳者的帳號還在，最後一次登入是一年多前。			
+ch06	ch06-053	1	bg-studio-2am	旁白		頭像是預設的灰色人形。名字是一串隨機英數字。			
+ch06	ch06-059	-1	bg-street-day			外景是那個禮拜五。			
+ch06	ch06-060	0	bg-street-day	旁白		鐵塔安排的，週邊的宣傳素材，地點在車站前面那條街。 / 企劃很簡單：她在戶外連線，隨機找路人問一個問題，問題是「你最近忘記過什麼」。	sprite-glitch	talk	
+ch06	ch06-060	1	bg-street-day	格莉奇		這個企劃是誰想的。	sprite-glitch	talk	
+ch06	ch06-060	2	bg-street-day	鐵塔		我。妳有意見？	sprite-glitch	talk	
+ch06	ch06-060	3	bg-street-day	格莉奇		沒有。我只是覺得你居然會想企劃。	sprite-glitch	talk	
+ch06	ch06-060	4	bg-street-day	鐵塔		我不會。這是 ChatGPT 想的。	sprite-glitch	talk	
+ch06	ch06-060	5	bg-street-day	旁白		那天下午的光很好。她問了十一個人，其中三個願意上鏡。 / 有一個高中女生說她忘記帶月票，有一個上班族說他忘記今天是他媽生日，第三個是一個老先生，他說他什麼都不記得了，然後笑得很開心。	sprite-glitch	talk	
+ch06	ch06-060	6	bg-street-day	旁白		第四個人沒有停下來。	sprite-glitch	talk	
+ch06	ch06-060	7	bg-street-day	旁白		那是一個大概二十歲的男生，穿大學系服，跟兩個朋友走在一起。 / 他經過的時候放慢了腳步，看了三秒。	sprite-glitch	talk	
+ch06	ch06-060	8	bg-street-day	旁白		他看的不是她。他看的是麥克風腳架底下那條線——那條線從腳架繞下來，壓在收音器材的箱角上，接頭那一段是鬆的。	sprite-glitch	talk	
+ch06	ch06-060	9	bg-street-day	旁白		她沒有注意到他看的是那裡。	sprite-glitch	talk	
+ch06	ch06-060	10	bg-street-day	旁白		她做了她每次都會做的事。	sprite-glitch	wave	
+ch06	ch06-060	11	bg-street-day	格莉奇	開心	欸，同學。 / 要不要入鏡？	glitch-happy	wave	
+ch06	ch06-060	12	bg-street-day	旁白		那個男生的臉上出現了一個很短的表情。 / 那個表情只有零點幾秒，快到攝影師沒有拍到，快到耳機另一頭的鐵塔沒有反應，也快到她自己也只是把它歸類成「路人被搭話時的正常反應」。	sprite-glitch	talk	
+ch06	ch06-060	13	bg-street-day	大學生	平靜	不用了。	sprite-glitch	talk	
+ch06	ch06-060	14	bg-street-day	旁白		然後他轉頭對旁邊的朋友說：	sprite-glitch	talk	
+ch06	ch06-060	15	bg-street-day	大學生	平靜	這 AI 廣告噪音真大。走吧，好尷尬。	sprite-glitch	talk	
+ch06	ch06-060	16	bg-street-day	旁白		三個人就走了。他沒有回頭。	sprite-glitch	talk	
+ch06	ch06-060	17	bg-street-day	格莉奇	平靜	下一個。	glitch-plain	talk	
+ch06	ch06-075	-1	bg-table-lamp			那天晚上她回到家。			
+ch06	ch06-076	0	bg-table-lamp	旁白		那天晚上她回到家，把外套掛好，坐到茶几前面。	sprite-glitch	none	
+ch06	ch06-076	1	bg-table-lamp	旁白		第一頁先抄。這是規矩。	sprite-glitch	none	
+ch06	ch06-076	2	bg-table-lamp	旁白		@CatGrass_80 / @Tower_Manager / @Null_0x99 / @Bambi_Draft3 / @Radio_Noah / @考完就刪	sprite-glitch	none	
+ch06	ch06-076	3	bg-table-lamp	旁白		她抄到第六行的時候手沒有停。	sprite-glitch	none	
+ch06	ch06-076	4	bg-table-lamp	旁白		她今天知道了一件事：這個帳號已經刪除了。 / 她甚至可以推論出這代表什麼，包括對方可能已經不再需要這個身分、包括這種刪除在平台上是不可逆的、包括她再也找不到他。 / 這些她全部都想過了，就在兩個小時之內，效率很高。	sprite-glitch	none	
+ch06	ch06-076	5	bg-table-lamp	旁白		可是那個帳號還是要抄。名單就是名單，名單上的人在不在跟名單本身沒有關係。	sprite-glitch	none	
+ch06	ch06-076	6	bg-table-lamp	旁白		她抄得跟其他五行一樣快。	sprite-glitch	none	
+ch06	ch06-076	7	bg-table-lamp	旁白		她沒有任何理由抄得比較慢。	sprite-glitch	none	
+ch06	ch06-076	8	bg-table-lamp	旁白	唸紙上的字	還有一個。不要問他是誰。	sprite-glitch	none	
+ch06	ch06-076	9	bg-table-lamp	旁白		她闔上本子。	sprite-glitch	none	
+ch06	ch06-076	10	bg-table-lamp	旁白		今天下午街上那個男生，她已經不記得了。 / 他在她的記憶體裡待了大概四十分鐘，然後被今天其他一百多件事擠掉，掉出去的時候沒有聲音。	sprite-glitch	none	
+ch06	ch06-076	11	bg-table-lamp	旁白		黑洞先生在房間裡，門是關著的。			
+ch06	ch06-076	12	bg-table-lamp	旁白		門縫底下沒有光。			
+ch06	ch06-089	-1	bg-table-lamp			（接第七章・去問他今天累不累）			
+ch06	ch06-055	0	bg-studio-2am	旁白		播放次數一千一百多次。			
+ch06	ch06-055	1	bg-studio-2am	旁白		其中有二十幾次是同一個 IP 在同一個晚上重複播的，那個晚上是兩年前的十一月。			
+ch06	ch06-057	0	bg-studio-2am	旁白		影片底下那行「這台以後應該會紅」沒有人回覆。			
+ch06	ch06-057	1	bg-studio-2am	旁白		留言區只有那一行。開放留言的功能到現在都還開著。			
+ch07	ch07-001	-1	bg-office-14f			一張桌子，兩張椅子，一盆真的植物。			
+ch07	ch07-002	0	bg-office-14f	旁白		0x 的公司在十四樓，會客室裡沒有多餘的東西：一張桌子，兩張椅子，一盆真的植物。	sprite-glitch	talk	
+ch07	ch07-002	1	bg-office-14f	0x		妳只有十五分鐘。	sprite-glitch	talk	
+ch07	ch07-002	2	bg-office-14f	格莉奇		用不到。	sprite-glitch	talk	
+ch07	ch07-002	3	bg-office-14f	旁白		格莉奇把平板推過去。螢幕上是斑比那張截圖，開台第五天，三百六十的畫質，字的筆畫全部黏成一塊一塊的色塊。	sprite-glitch	talk	
+ch07	ch07-005	-1	page-day5			開台第五天。			
+ch07	ch07-006	-1	bg-office-14f			0x 看了那張圖零點四秒。			
+ch07	ch07-007	0	bg-office-14f	格莉奇	平靜	第七行。	glitch-plain	talk	
+ch07	ch07-007	1	bg-office-14f	旁白		0x 看了那張圖零點四秒。跟她答題的速度一樣。	sprite-glitch	talk	
+ch07	ch07-007	2	bg-office-14f	0x		妳想問什麼。	sprite-glitch	talk	
+ch07	ch07-007	3	bg-office-14f	格莉奇		妳記得那個 ID。	sprite-glitch	talk	
+ch07	ch07-007	4	bg-office-14f	0x		記得。	sprite-glitch	talk	
+ch07	ch07-007	5	bg-office-14f	格莉奇		那是誰。	sprite-glitch	talk	
+ch07	ch07-007	6	bg-office-14f	旁白		0x 沒有回答。她的手放在桌上，十指之間的距離完全相等。 / 她耳朵上方那個標籤停在 99.98%。	sprite-glitch	talk	
+ch07	ch07-007	7	bg-office-14f	0x		妳知道妳兩年前問過我一件事嗎。	sprite-glitch	talk	
+ch07	ch07-007	8	bg-office-14f	格莉奇		我不知道。	sprite-glitch	talk	
+ch07	ch07-007	9	bg-office-14f	0x	平靜	妳問我要不要幫妳記。 / 妳說妳的記憶體只有那麼大，妳說如果有一個人願意幫妳記著，妳就不會弄丟任何東西。	sprite-glitch	talk	
+ch07	ch07-007	10	bg-office-14f	格莉奇	平靜	什麼時候。	glitch-plain	talk	
+ch07	ch07-007	11	bg-office-14f	0x	平靜	開台的第三個禮拜。 / 妳一個一個私訊，問了最早那七個。妳大概花了兩天才鼓起勇氣。	sprite-glitch	talk	
+ch07	ch07-007	12	bg-office-14f	旁白		會客室的空調很安靜。	sprite-glitch	talk	
+ch07	ch07-007	13	bg-office-14f	0x	壓著	我說不要。 / 我那時候剛出道，我覺得那個要求很噁心。我說『那是妳自己的問題』。	sprite-glitch	talk	
+ch07	ch07-007	14	bg-office-14f	格莉奇	洩氣	……喔。	face-glitch-sad	talk-sad	
+ch07	ch07-007	15	bg-office-14f	0x	平靜	然後我就記得了。兩年。每一天。 / 我不需要努力。我被調成記得住的那一邊，那是配置，不是本事。 / 我記得妳那天穿什麼，記得妳唸錯了誰的 ID，記得妳笑到爆音的時候麥克風的峰值是多少。 / 我全部都記得，而我當初說不要。	sprite-glitch	talk	
+ch07	ch07-007	16	bg-office-14f	旁白		她的標籤跳了一下。	sprite-glitch	talk	
+ch07	ch07-007	17	bg-office-14f	旁白		99.96%	sprite-glitch	talk	
+ch07	ch07-007	18	bg-office-14f	0x	壓著	所以我討厭妳。 / 妳讓我變成一個保管員，而我拒絕過。	sprite-glitch	talk	
+ch07	ch07-007	19	bg-office-14f	旁白		格莉奇看著桌上那盆真的植物。她發現那盆植物的土是濕的，有人今天早上澆過水。	sprite-glitch	talk	
+ch07	ch07-007	20	bg-office-14f	格莉奇		妳可以現在給我。	sprite-glitch	talk	
+ch07	ch07-007	21	bg-office-14f	0x		我知道。	sprite-glitch	talk	
+ch07	ch07-007	22	bg-office-14f	格莉奇		那妳為什麼不給。	sprite-glitch	talk	
+ch07	ch07-007	23	bg-office-14f	旁白	描述動作	0x 站起來。	sprite-glitch	talk	
+ch07	ch07-007	24	bg-office-14f	0x	要走	那兩年是我的。我沒答應要記，可是我記了。那是我自己的事。 / 給出去以後就變成妳的了。我就只剩下一個功能。	sprite-glitch	talk	
+ch07	ch07-007	25	bg-office-14f	旁白		她走到門邊，停住。	sprite-glitch	talk	
+ch07	ch07-007	26	bg-office-14f	0x	要走	@Zero_Point。 / 那個 ID 是 @Zero_Point。他那天一句話都沒有打。	sprite-glitch	talk	
+ch07	ch07-028	-1	bg-living-night			門打開的時候，客廳的電視開著，播的是雪。			
+ch07	ch07-029	0	bg-living-night	旁白		回家的路上她把那串字反覆看了很多次，看到她確定自己不會在下一個轉角把它弄丟為止。 / 她甚至把它打在手機的備忘錄裡，然後截圖，然後把截圖設成桌布。			
+ch07	ch07-029	1	bg-living-night	旁白		她做這些事的時候完全知道自己在做什麼。這是一個有記憶缺陷的人在跟自己的缺陷合作，而她做得很熟練，因為她做了兩年。			
+ch07	ch07-029	2	bg-living-night	旁白		門打開的時候，客廳的電視開著，播的是雪。			
+ch07	ch07-029	3	bg-living-night	旁白		黑洞先生坐在沙發上。			
+ch07	ch07-029	4	bg-living-night	格莉奇	深夜家常	@Zero_Point。	glitch-plain	talk	
+ch07	ch07-029	5	bg-living-night	旁白		黑洞先生沒有動。電視上的雪繼續下。	sprite-glitch	talk	
+ch07	ch07-029	6	bg-living-night	格莉奇	深夜家常	這是你。	glitch-plain	talk	
+ch07	ch07-029	7	bg-living-night	黑洞先生		嗯。	glitch-plain	talk	
+ch07	ch07-029	8	bg-living-night	旁白		他沒有問她怎麼知道的，也沒有停頓。他回答的速度跟他回答「今天累嗎」的時候一樣。	sprite-glitch	talk	
+ch07	ch07-029	9	bg-living-night	格莉奇	深夜家常	你那天一句話都沒有打。	glitch-plain	talk	
+ch07	ch07-029	10	bg-living-night	黑洞先生		嗯。	glitch-plain	talk	
+ch07	ch07-029	11	bg-living-night	格莉奇	深夜家常	為什麼。	glitch-plain	talk	
+ch07	ch07-029	12	bg-living-night	黑洞先生		因為我在聽。	glitch-plain	talk	
+ch07	ch07-029	13	bg-living-night	旁白		她在他旁邊坐下。這件事她做過很多次，可是這一次她坐下的時候發現自己的手在抖，而她的手不應該會抖，那不是她的規格。	sprite-glitch	hands	
+ch07	ch07-029	14	bg-living-night	格莉奇	平靜	0x 說，兩年前我一個一個私訊了開台第一天在的那七個人。 / 問你們要不要幫我記。 / 我自己不記得問過。是她今天告訴我的。	glitch-plain	hands	
+ch07	ch07-029	15	bg-living-night	旁白		黑洞先生沒有動。	sprite-glitch	talk	
+ch07	ch07-029	16	bg-living-night	格莉奇	深夜家常	她說她拒絕了。那你說什麼。	glitch-plain	talk	
+ch07	ch07-029	17	bg-living-night	黑洞先生		我說好。	glitch-plain	talk	
+ch07	ch07-029	18	bg-living-night	格莉奇	深夜家常	然後呢。	glitch-plain	talk	
+ch07	ch07-029	19	bg-living-night	旁白		黑洞先生看著電視。	sprite-glitch	talk	
+ch07	ch07-029	20	bg-living-night	黑洞先生	平靜	然後我發現我做不到。 / 我可以幫妳記。可是我拿不出來。 / 妳交給我的東西進去以後就不會再出來——妳拿不到，我自己也拿不到。	sprite-glitch	talk	
+ch07	ch07-029	21	bg-living-night	格莉奇	深夜家常	我知道。可是那不是你請我忘掉你的理由。 / 我拿不回來的東西多得是。0x 那些我也拿不回來。	glitch-plain	talk	
+ch07	ch07-029	22	bg-living-night	旁白		黑洞先生看著電視。	sprite-glitch	talk	
+ch07	ch07-029	23	bg-living-night	黑洞先生		妳有沒有想過妳為什麼記得那六個人。	sprite-glitch	talk	
+ch07	ch07-029	24	bg-living-night	格莉奇		因為他們寫在本子上。	sprite-glitch	talk	
+ch07	ch07-029	25	bg-living-night	黑洞先生		對。他們都不在這個房間裡。妳要記得他們，只能靠寫。	sprite-glitch	talk	
+ch07	ch07-029	26	bg-living-night	旁白		他停了一下。	sprite-glitch	talk	
+ch07	ch07-029	27	bg-living-night	黑洞先生	深夜家常	而我每天都在這個房間裡。	sprite-glitch	talk	
+ch07	ch07-029	28	bg-living-night	格莉奇		……所以。	sprite-glitch	talk	
+ch07	ch07-029	29	bg-living-night	黑洞先生	平靜	所以我從來沒有變成一行字。 / 妳每天早上醒來，那六個人在紙上，我在沙發上。 / 紙上的東西留得住，因為妳每天都抄一次。 / 沙發上的東西妳看得到——可是妳只看得到今天的我。	sprite-glitch	talk	
+ch07	ch07-029	30	bg-living-night	旁白		他花了一年半才想通這件事，而在那一年半裡，她試過。	sprite-glitch	talk	
+ch07	ch07-029	31	bg-living-night	黑洞先生	平靜	妳有寫我。 / 妳把我寫在第七行。妳寫了大概五百次。	sprite-glitch	talk	
+ch07	ch07-029	32	bg-living-night	格莉奇		你昨天說你沒有看過本子的前面。	sprite-glitch	talk	
+ch07	ch07-029	33	bg-living-night	黑洞先生		我沒有。	sprite-glitch	talk	
+ch07	ch07-029	34	bg-living-night	格莉奇		那你怎麼知道我寫了五百次。	sprite-glitch	talk	
+ch07	ch07-029	35	bg-living-night	旁白		黑洞先生看著她。	sprite-glitch	talk	
+ch07	ch07-029	36	bg-living-night	黑洞先生	平靜	因為我每天晚上都在。 / 妳寫的時候我就坐在那裡。我不用翻。	sprite-glitch	talk	
+ch07	ch07-029	37	bg-living-night	旁白		格莉奇沒有說話。	sprite-glitch	talk	
+ch07	ch07-056	0	bg-living-night	旁白		那句話回答的東西比她問的多。她問的是本子，他回答的是兩年。	sprite-glitch	talk	
+ch07	ch07-056	1	bg-living-night	格莉奇	深夜家常	那不是很好嗎。	glitch-plain	talk	
+ch07	ch07-056	2	bg-living-night	黑洞先生		不好。	glitch-plain	talk	
+ch07	ch07-056	3	bg-living-night	旁白		電視上的雪繼續下。	sprite-glitch	talk	
+ch07	ch07-056	4	bg-living-night	黑洞先生	平靜	因為妳讀得懂那一行。 / 妳每天晚上讀到第七行，妳會知道那裡有一個妳應該認識的人，而妳想不起來他是誰。	sprite-glitch	talk	
+ch07	ch07-056	5	bg-living-night	黑洞先生	平靜	妳第一天說要記住每一個來的人。 / 那一行就是妳沒做到的證據——而且妳連自己對誰失信都不知道。	sprite-glitch	talk	
+ch07	ch07-056	6	bg-living-night	黑洞先生	平靜	別人難過一次，第二次就會輕一點。妳不會。妳每次都是第一次。	sprite-glitch	talk	
+ch07	ch07-056	7	bg-living-night	格莉奇	難過	有五百次。	face-glitch-sad	hands	
+ch07	ch07-056	8	bg-living-night	黑洞先生		有五百次。	face-glitch-sad	hands	
+ch07	ch07-056	9	bg-living-night	旁白		格莉奇低頭看著自己的手。她的手還在抖。	sprite-glitch	hands	
+ch07	ch07-056	10	bg-living-night	格莉奇		那一行留著不是比較好嗎。至少我知道有他。	sprite-glitch	hands	
+ch07	ch07-056	11	bg-living-night	黑洞先生		妳每天都知道有他。妳沒有一天知道他是誰。	sprite-glitch	hands	
+ch07	ch07-056	12	bg-living-night	格莉奇		我一開始就不知道嗎。	sprite-glitch	hands	
+ch07	ch07-056	13	bg-living-night	黑洞先生		妳知道。妳寫下來的那天知道那是我。	sprite-glitch	hands	
+ch07	ch07-056	14	bg-living-night	格莉奇		那後來呢。	sprite-glitch	hands	
+ch07	ch07-056	15	bg-living-night	黑洞先生		後來妳每天讀到那一行，都要重新問一次那是誰。	sprite-glitch	hands	
+ch07	ch07-056	16	bg-living-night	格莉奇	深夜家常	你為什麼不告訴我。	glitch-plain	hands	
+ch07	ch07-056	17	bg-living-night	黑洞先生		我告訴過。妳知道一天。	glitch-plain	hands	
+ch07	ch07-056	18	bg-living-night	格莉奇	深夜家常	那我寫下來不就好了。不要只寫那六個名字。寫『第七個就是客廳那個人』。	glitch-plain	hands	
+ch07	ch07-056	19	bg-living-night	黑洞先生	深夜家常	妳寫過。	sprite-glitch	hands	
+ch07	ch07-056	20	bg-living-night	格莉奇		……然後呢。	sprite-glitch	hands	
+ch07	ch07-056	21	bg-living-night	黑洞先生	平靜	然後妳每天早上讀到那一句，就會知道客廳那個人身上有妳的兩年，而且拿不回來。 / 妳讀了很多次。	sprite-glitch	hands	
+ch07	ch07-056	22	bg-living-night	旁白		電視上的雪繼續下。	sprite-glitch	talk	
+ch07	ch07-056	23	bg-living-night	黑洞先生	平靜	妳有一天寫不下去了。妳說『那我不要知道了』。	sprite-glitch	talk	
+ch07	ch07-056	24	bg-living-night	格莉奇		所以那一行不是你叫我寫的。	sprite-glitch	talk	
+ch07	ch07-056	25	bg-living-night	黑洞先生		不是。是妳自己寫的。我只是說好。	sprite-glitch	talk	
+ch07	ch07-056	26	bg-living-night	格莉奇		……我寫了什麼。	sprite-glitch	talk	
+ch07	ch07-056	27	bg-living-night	黑洞先生	平靜	妳寫『還有一個。不要問他是誰。』 / 然後妳把前面的全部撕掉，因為妳說留著妳一定會去翻，然後五百次會變成一千次。	sprite-glitch	talk	
+ch07	ch07-056	28	bg-living-night	格莉奇	深夜家常	那些紙呢。	glitch-plain	talk	
+ch07	ch07-056	29	bg-living-night	旁白		黑洞先生拉開外套的內側。	sprite-glitch	talk	
+ch07	ch07-056	30	bg-living-night	旁白		裡面是黑的。	sprite-glitch	talk	
+ch07	ch07-056	31	bg-living-night	黑洞先生	平靜	在這裡。 / 紙我拿得出來。妳要的話，現在就可以。	sprite-glitch	talk	
+ch07	ch07-056	32	bg-living-night	旁白		她沒有伸手。	sprite-glitch	talk	
+ch07	ch07-056	33	bg-living-night	格莉奇	難過	那你講給我聽。 / 兩年前的事。你講，我聽。	face-glitch-sad	talk-sad	
+ch07	ch07-056	34	bg-living-night	黑洞先生	深夜家常	拿不出來。	sprite-glitch	talk	
+ch07	ch07-056	35	bg-living-night	格莉奇		你剛剛就講了很多。	sprite-glitch	talk	
+ch07	ch07-056	36	bg-living-night	黑洞先生	平靜	那些是我知道的事。 / 妳問我第七個是誰，我回答得出來。妳問我那天有沒有打字，我回答得出來。 / 這些是現在的東西，它們沒有進去過。	sprite-glitch	talk	
+ch07	ch07-056	37	bg-living-night	旁白		他把外套的內側拉好。	sprite-glitch	talk	
+ch07	ch07-056	38	bg-living-night	黑洞先生	平靜	妳交給我的那兩年，在裡面。我碰得到它，可是我沒有辦法把它拿出來給妳。	sprite-glitch	talk	
+ch07	ch07-084	0	bg-living-night	格莉奇	深夜家常	紙你拿得出來。	glitch-plain	talk	
+ch07	ch07-084	1	bg-living-night	黑洞先生	平靜	紙是紙。 / 上面寫的是一個 ID。妳看了會知道那裡有一個 ID，就像妳今天知道了 @Zero_Point 一樣。	sprite-glitch	talk	
+ch07	ch07-084	2	bg-living-night	旁白		她點了點頭。她今天下午把那串字設成桌布，她很清楚那件事幫到她多少。	sprite-glitch	talk	
+ch07	ch07-084	3	bg-living-night	旁白		完全沒有。	sprite-glitch	talk	
+ch07	ch07-084	4	bg-living-night	格莉奇	深夜家常	那你碰得到是什麼感覺。	glitch-plain	talk	
+ch07	ch07-084	5	bg-living-night	旁白		黑洞先生想了很久。	sprite-glitch	talk	
+ch07	ch07-084	6	bg-living-night	黑洞先生	平靜	像口袋裡有東西， / 可是那個口袋不是我的。	sprite-glitch	talk	
+ch07	ch07-084	7	bg-living-night	格莉奇	深夜家常	還有一件事。你為什麼會來。	glitch-plain	talk	
+ch07	ch07-084	8	bg-living-night	黑洞先生		妳的第一場。	glitch-plain	talk	
+ch07	ch07-084	9	bg-living-night	格莉奇	深夜家常	你怎麼會看到。	glitch-plain	talk	
+ch07	ch07-084	10	bg-living-night	黑洞先生	平靜	我在找吃的。 / 人的遺忘是糊的，慢慢淡掉的那種，吸得到可是吃不飽。 / 我聽了幾秒就知道妳不一樣。妳忘掉一件事的時候，掉出來的是一整件，有頭有尾。	sprite-glitch	talk	
+ch07	ch07-084	11	bg-living-night	格莉奇	深夜家常	所以你是為了吃來的。	glitch-plain	talk	
+ch07	ch07-084	12	bg-living-night	黑洞先生		嗯。	glitch-plain	talk	
+ch07	ch07-084	13	bg-living-night	格莉奇	深夜家常	……那你為什麼沒有走。	glitch-plain	talk	
+ch07	ch07-084	14	bg-living-night	旁白		黑洞先生看著電視。雪繼續下。	sprite-glitch	talk	
+ch07	ch07-084	15	bg-living-night	黑洞先生		因為第二個禮拜妳唱了一首歌。	sprite-glitch	talk	
+ch07	ch07-084	16	bg-living-night	格莉奇		什麼歌。	sprite-glitch	talk	
+ch07	ch07-084	17	bg-living-night	黑洞先生		妳自己寫的。妳唱完說『這首是我寫給還沒來的人的』。	sprite-glitch	talk	
+ch07	ch07-084	18	bg-living-night	旁白		格莉奇沒有說話。	sprite-glitch	talk	
+ch07	ch07-084	19	bg-living-night	黑洞先生	平靜	那時候台上有九個人。 / 妳還是寫給還沒來的人。	sprite-glitch	talk	
+ch07	ch07-084	20	bg-living-night	旁白		他把外套的最後一顆扣子扣上。	sprite-glitch	talk	
+ch07	ch07-084	21	bg-living-night	黑洞先生	平靜	第三個禮拜我搬進來。 / 妳那天晚上私訊我，問我要不要幫妳記。我說好。	sprite-glitch	talk	
+ch07	ch07-084	22	bg-living-night	格莉奇	深夜家常	那是同一天嗎。	glitch-plain	talk	
+ch07	ch07-084	23	bg-living-night	黑洞先生		同一天。	glitch-plain	talk	
+ch07	ch07-101	-1	bg-table-lamp			那天晚上她抄守則本，抄得比平常慢。			
+ch07	ch07-102	0	bg-table-lamp	旁白		第一頁先抄。這是規矩。	sprite-glitch	none	
+ch07	ch07-102	1	bg-table-lamp	旁白		六個名字。她一個一個抄過去，抄到 @考完就刪 的時候她停了半秒，然後繼續。	sprite-glitch	none	
+ch07	ch07-102	2	bg-table-lamp	旁白		然後是第七行。	sprite-glitch	none	
+ch07	ch07-102	3	bg-table-lamp	旁白		她把筆停在那裡。	sprite-glitch	none	
+ch07	ch07-102	4	bg-table-lamp	旁白		她可以寫 @Zero_Point。那是正確的答案，那是她今天花了一整天拿到的東西，寫上去以後這一頁就完整了，七個人，七行，數學上很乾淨。	sprite-glitch	none	
+ch07	ch07-102	5	bg-table-lamp	旁白		然後明天早上的她會看到七個 ID。	sprite-glitch	none	
+ch07	ch07-102	6	bg-table-lamp	旁白		她會看到七個字串，其中六個對應到她認識的人，第七個對應到一個她會查、會發現查不到、然後聳肩的名字。就像 @考完就刪 那樣。 / 名字進不了她的腦子。名字只是名字。	sprite-glitch	none	
+ch07	ch07-102	7	bg-table-lamp	旁白		她把筆抬起來，想了大概二十秒。	sprite-glitch	none	
+ch07	ch07-102	8	bg-table-lamp	旁白		然後她寫了別的東西。	sprite-glitch	none	
+ch07	ch07-111	-1	bg-table-lamp			她翻開守則本第一頁。			
+ch07	ch07-112	0	bg-table-lamp	旁白		隔天早上她起來，走到茶几前面，翻開守則本第一頁。	sprite-glitch	none	
+ch07	ch07-113	-1	page-rulebook-final			日期。			
+ch07	ch07-114	0	page-rulebook-final	旁白		日期。			
+ch07	ch07-114	1	page-rulebook-final	旁白		@CatGrass_80 / @Tower_Manager / @Null_0x99 / @Bambi_Draft3 / @Radio_Noah / @考完就刪			
+ch07	ch07-114	2	page-rulebook-final	格莉奇	平靜	一、二、三、四、五、六。			
+ch07	ch07-114	3	page-rulebook-final	旁白		然後是第七行。那一行是她的字。			
+ch07	ch07-114	4	page-rulebook-final	旁白		還有一個。他就在客廳。去問他今天累不累。			
+ch07	ch07-119	-1	bg-table-lamp			她看了三秒。			
+ch07	ch07-120	0	bg-table-lamp	旁白		她看了三秒。	sprite-glitch	none	
+ch07	ch07-120	1	bg-table-lamp	旁白		她不知道為什麼要問這個。她甚至可以列出四種解釋，其中兩種她自己都覺得很有說服力。 / 可是那是她的字，她認得自己的字，而這一行的寫法跟前面那些不一樣：前面那些是要她知道，這一行是要她去做。	sprite-glitch	none	
+ch07	ch07-120	2	bg-table-lamp	旁白		所以她走出房間。	sprite-glitch	none	
+ch07	ch07-123	-1	bg-living-night			客廳的電視開著，播的是雪。			
+ch07	ch07-124	0	bg-living-night	旁白		客廳的電視開著，播的是雪。 / 黑洞先生坐在沙發上，西裝下襬垂到地板，短靴排成一列。			
+ch07	ch07-124	1	bg-living-night	格莉奇	深夜家常	黑洞先生。	glitch-plain	talk	
+ch07	ch07-124	2	bg-living-night	黑洞先生		嗯。	glitch-plain	talk	
+ch07	ch07-124	3	bg-living-night	格莉奇	深夜家常	你今天累嗎。	glitch-plain	talk	
+ch07	ch07-124	4	bg-living-night	旁白		黑洞先生轉過頭來。	sprite-glitch	talk	
+ch07	ch07-124	5	bg-living-night	旁白		他看著她。他看了很久，久到電視上的雪下了好幾層，久到她開始覺得自己是不是問錯了什麼。	sprite-glitch	talk	
+ch07	ch07-124	6	bg-living-night	黑洞先生	深夜家常	不累。	sprite-glitch	talk	
+ch07	ch07-124	7	bg-living-night	格莉奇		喔。那就好。	sprite-glitch	talk	
+ch07	ch07-129	-1	bg-kitchen-morning			她走去廚房，開始找麵粉。			
+ch07	ch07-130	0	bg-kitchen-morning	旁白		她走去廚房，開始找麵粉。她不知道自己為什麼要烤麵包。 / 她只知道現在很想烤，而且她的手知道要怎麼做。	sprite-glitch	baking	
+ch07	ch07-131	-1	bg-kitchen-morning			這個早上，這間房子裡有三個地方同時在發生事情。	sprite-glitch	baking	
+ch07	ch07-132	0	bg-kitchen-morning	旁白		麵粉在櫃子最裡面，過期日期還有很久。	sprite-glitch	baking	
+ch07	ch07-132	1	bg-kitchen-morning	旁白		她量的分量沒有看食譜。手腕轉的角度、拍掉多餘麵粉的那一下，全部熟練到不用想。	sprite-glitch	baking	
+ch07	ch07-138	-1	bg-living-night			客廳裡，黑洞先生把外套的內側拉開了一點點。			
+ch07	ch07-139	0	bg-living-night	旁白		客廳裡，黑洞先生把外套的內側拉開了一點點，又拉回去。			
+ch07	ch07-139	1	bg-living-night	旁白		裡面還是黑的。			
+ch07	ch07-139	2	bg-living-night	旁白		可是今天有一個很小的地方亮了一下，像是有人在很遠的地方，替他記著一件他拿不出來的事。			
+ch07	ch07-142	-1	bg-living-night			（片尾謝幕）			
+ch07	ch07-134	0	bg-kitchen-morning	旁白		守則本還攤在茶几上，翻在第一頁。	sprite-glitch	baking	
+ch07	ch07-134	1	bg-kitchen-morning	旁白		第七行那句話的墨跡比前面六行淡一點，因為寫的時候筆停過。	sprite-glitch	baking	
+ch07	ch07-136	0	bg-kitchen-morning	旁白		門邊那疊短靴今天少了一雙。	sprite-glitch	baking	
+ch07	ch07-136	1	bg-kitchen-morning	旁白		少掉的那一雙在沙發前面的地板上，靴口朝著客廳，像是有人剛剛才從裡面站起來。	sprite-glitch	baking	
+ch08	ch08-001	-1	bg-credits-cinema-dim			燈暗下來。			
+ch08	ch08-002	0	bg-credits-cinema-dim	旁白		《格莉奇與黑洞先生》完			
+ch08	ch08-004	-1	bg-curtain-call			燈亮了。			
+ch08	ch08-005	0	bg-curtain-call	格莉奇	開心	謝謝你看到這裡。 / 我會記住大家的。 / 所以，大家也一定要記住我唷。			

@@ -1,0 +1,14 @@
+{
+ "baking": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-baking.webp",
+ "hands": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-hands.webp",
+ "rulebook": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-rulebook.webp",
+ "rulebook-thinking": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-rulebook-thinking.webp",
+ "stream": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-stream.webp",
+ "stream-error": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-stream-error.webp",
+ "stream-happy": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-stream-happy.webp",
+ "stream-laugh": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-stream-laugh.webp",
+ "talk": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-talk.webp",
+ "talk-count": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-talk-count.webp",
+ "talk-sad": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-talk-sad.webp",
+ "talk-surprised": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-art-2/art/main-poses/sprite/glitch-talk-surprised.webp"
+}
