@@ -21,6 +21,15 @@
     verify.py        檢查：斷邊、孤島、死路、空卡、立繪對不對得上、有沒有意外分岔
     dump.py          把板子印成可讀的樣子，驗節奏用（線上要登入才玩得到）
     assets.json      素材網址
+    ui/push_ui.py    介面 Skills（ui/main 正篇、ui/inv 調查篇）逐部位推上線，讀回比對
+    merge_lines.py   一句一卡併成多句卡；--cdn 同時換成 main_cdn.json 的網址
+    main_cdn.py      配音與圖改走 jsDelivr 孤兒 tag（main-voice-1、main-art-1），寫 main_cdn.json
+    ../art/main-poses/  格莉奇的姿勢與表情：產圖、逐句表 table.tsv、apply.py 換進線上
+
+**2026-11-04 起線上版子比 build 腳本新。** 一句一卡合併、jsDelivr 網址、新立繪都是
+「讀線上→改→推回去」做的，`build_all.py` 重建會把這三樣洗掉。真的要重建，建完照順序再跑
+`merge_lines.py --cdn --push` 與 `../art/main-poses/apply.py --push`（卡片 id 與句子順序
+跟現在一樣，表才對得上）。
 
 ## 素材與角色：照平台的方式做，不要自己發明
 
