@@ -23,6 +23,7 @@
   --bg:#04080c; --ink:#0b1a22; --hair:rgba(255,255,255,.07);
   --cy:#25c2e8; --mint:#7cf3c0; --purple:#b78bff;
   --text:#dfe8ec; --muted:#93a3ac; --faint:#6d7d84;
+  --k:1; /* 字級倍率：程式照畫面高度算（1～1.9），捲動速度跟著一起乘，片長不變 */
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -51,48 +52,49 @@ body{
 #track{
   z-index:2;
   /* 收成一欄。放任滿版的話劇照會飄到寬螢幕的兩端，跟文字脫節。 */
-  position:absolute; left:50%; top:100%; width:min(760px,100%);
+  position:absolute; left:50%; top:100%; width:min(calc(760px * var(--k)),100%);
   padding:0 24px 40vh; text-align:center; will-change:transform;
 }
-.role{margin:52px 0 6px; font-size:13px; letter-spacing:.34em; color:var(--muted)}
-.name{font-size:24px; line-height:1.5; color:var(--text)}
-.name small{display:block; margin-top:7px; font-size:14px; letter-spacing:.06em; color:var(--muted)}
+.role{margin:calc(52px * var(--k)) 0 calc(6px * var(--k)); font-size:calc(14px * var(--k)); letter-spacing:.34em; color:var(--muted)}
+.name{font-size:calc(24px * var(--k)); line-height:1.5; color:var(--text)}
+.name small{display:block; margin-top:calc(7px * var(--k)); font-size:calc(15px * var(--k)); letter-spacing:.06em; color:var(--muted)}
 .h{
-  margin:80px 0 22px; font-size:15px; letter-spacing:.5em; color:var(--cy);
+  margin:calc(80px * var(--k)) 0 calc(22px * var(--k)); font-size:calc(16px * var(--k)); letter-spacing:.5em; color:var(--cy);
   text-indent:.5em;
 }
-.quip{margin:16px 0; font-size:16px; line-height:2; color:var(--muted)}
-.film{margin:14vh 0 0; font-size:38px; letter-spacing:.14em}
-.sub{margin:12px 0 0; font-size:13px; letter-spacing:.42em; color:var(--muted)}
+.h::before{content:""; display:inline-block; width:.42em; height:.42em; margin-right:.5em; vertical-align:.14em; background:currentColor}
+.quip{margin:calc(16px * var(--k)) 0; font-size:calc(16px * var(--k)); line-height:2; color:var(--muted)}
+.film{margin:14vh 0 0; font-size:calc(38px * var(--k)); letter-spacing:.14em}
+.sub{margin:calc(12px * var(--k)) 0 0; font-size:calc(14px * var(--k)); letter-spacing:.42em; color:var(--muted)}
 .epi{
-  margin:88px auto 0; max-width:22em; font-size:21px; line-height:2.1;
+  margin:calc(88px * var(--k)) auto 0; max-width:22em; font-size:calc(21px * var(--k)); line-height:2.1;
   color:var(--mint);
 }
 /* 演員表：立繪卡片排成格 */
 .cast{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr));
-  gap:14px; max-width:620px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(calc(112px * var(--k)),1fr));
+  gap:calc(14px * var(--k)); max-width:calc(620px * var(--k)); margin:0 auto;
 }
 .c-card{background:var(--ink); border:1px solid var(--hair); border-radius:3px; overflow:hidden}
 .c-pic{aspect-ratio:3/4; background:#060d12}
 .c-pic img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block}
-.c-nm{padding:8px 4px 10px; font-size:15px; letter-spacing:.08em}
-.c-nm span{display:block; font-size:12px; color:var(--faint); letter-spacing:.04em}
+.c-nm{padding:8px 4px 10px; font-size:calc(15px * var(--k)); letter-spacing:.08em}
+.c-nm span{display:block; font-size:calc(13px * var(--k)); color:var(--muted); letter-spacing:.04em}
 /* 花絮劇照：左右錯開，跟著字卷一起飄上去 */
-.still{margin:56px 0; max-width:440px}
+.still{margin:calc(56px * var(--k)) 0; max-width:calc(440px * var(--k))}
 .still.left{margin-right:auto}
 .still.right{margin-left:auto}
-.still.wide{max-width:620px; margin-left:auto; margin-right:auto}
+.still.wide{max-width:calc(620px * var(--k)); margin-left:auto; margin-right:auto}
 .s-frame{border:1px solid var(--hair); background:var(--ink); padding:8px}
 .s-img{position:relative; aspect-ratio:16/9; overflow:hidden; background:#060d12}
 .s-img img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.86)}
 .badge,.take{
-  position:absolute; top:8px; font-size:10px; letter-spacing:.16em;
+  position:absolute; top:8px; font-size:calc(11px * var(--k)); letter-spacing:.16em;
   padding:3px 7px; background:rgba(4,8,12,.78); color:var(--muted);
 }
 .badge{left:8px; color:var(--purple)}
 .take{right:8px; font-variant-numeric:tabular-nums}
-.s-cap{margin-top:10px; font-size:13px; letter-spacing:.06em; color:var(--faint)}
+.s-cap{margin-top:10px; font-size:calc(14px * var(--k)); letter-spacing:.06em; color:var(--muted)}
 /* 控制列 */
 #ctrl{
   position:fixed; left:0; right:0; bottom:0; z-index:5;
@@ -112,12 +114,20 @@ button:focus-visible{outline:2px solid var(--cy); outline-offset:2px}
    給 Larch 用的——場景圖掛在卡片上，這一頁疊上去只出字。
    字要壓在別人的圖上，所以補一層陰影，不然亮背景會吃掉字。 */
 body.clear{background:transparent}
-body.clear #hall{display:none}
-body.clear #stage::before{
-  background:linear-gradient(180deg,rgba(4,8,12,.92) 0%,rgba(4,8,12,.25) 16%,
-             rgba(4,8,12,.25) 84%,rgba(4,8,12,.92) 100%);
+/* 2026-11-04：放映廳的銀幕是亮的，原本中間只壓 25%，淺色字疊在亮銀幕上讀不動。
+   壓暗那一層要放在字的後面（#hall，z-index 0），讀的那一欄壓到八成，兩側淡一點，放映廳還看得到。 */
+body.clear #hall{opacity:1; background:linear-gradient(90deg,rgba(4,8,12,.38) 0%,rgba(4,8,12,.8) 24%,rgba(4,8,12,.8) 76%,rgba(4,8,12,.38) 100%)}
+body.clear #hall::after{display:none}
+body.clear{--muted:#bccad1; --faint:#a3b3ba}
+body.clear #stage::before{   /* 上下暗角照舊（在字的前面，讓進出畫面的字淡掉） */
+  background:linear-gradient(180deg,rgba(4,8,12,.92) 0%,transparent 16%,transparent 84%,rgba(4,8,12,.92) 100%);
 }
-body.clear #track{text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6)}
+body.clear #track{text-shadow:0 1px 2px rgba(0,0,0,.85)}
+/* 2026-11-04：細明的襯線字在小字級、暗底上筆畫太細，加上柔光陰影就糊。
+   小字（職稱、說明、圖說）改用系統的黑體；名字與標題留襯線、改用 600。 */
+.role,.name small,.sub,.quip,.c-nm span,.s-cap,.badge,.take{
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif; font-weight:500}
+.name,.film,.h,.c-nm,.epi{font-weight:600}
 /* 嵌在 Larch 裡的時候不要顯示自己的控制列：卡片下面已經有平台的控制列，
    兩排按鈕疊在一起很亂，而且讀者按不到我們這一排。 */
 body.clear #ctrl{display:none}
@@ -242,8 +252,13 @@ body.clear #ctrl{display:none}
   // pos 是「字卷往上走了多少」。track 從 top:100% 開始，所以 pos 0 = 完全在畫面下方。
   // **一開始就讓字卷進到畫面一半。** 從 pos 0 起跑的話畫面全黑，
   // 讀者不知道有東西要來，很可能直接關掉。
+  // 字級倍率：照畫面高度放大（720 高約 1.16 倍、1080 高約 1.74 倍），手機與小視窗維持 1。
+  // 速度跟著乘同一個倍率，字變大、片長不變。
+  let K = 1;
+  const scale = () => { K = Math.min(1.9, Math.max(1, innerHeight / 620)); document.documentElement.style.setProperty('--k', K); };
+  scale(); addEventListener('resize', scale);
   let pos = innerHeight * 0.5, paused = reduced, last = 0;
-  const SPEED = 48;                         // px/秒
+  const SPEED = 48;                         // px/秒（倍率 1 的時候）
   const maxPos = () => track.scrollHeight + innerHeight * 0.35;
   // 置中靠 translateX(-50%)，不要用 margin-left 的百分比——那是對整個舞台寬度算的。
   const apply = () => { track.style.transform = `translate(-50%,${-pos}px)`; };
@@ -294,7 +309,7 @@ body.clear #ctrl{display:none}
     if (!last) last = t;
     const dt = (t - last) / 1000; last = t;
     if (!paused && dragY === null) {
-      pos += SPEED * dt;
+      pos += SPEED * K * dt;
       if (pos >= maxPos()) paused = true, btnPause.textContent = '播放';
       clamp(); apply();
     }
