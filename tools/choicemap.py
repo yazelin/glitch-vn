@@ -26,7 +26,7 @@ def live_board():
     key = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
     st = json.loads(STATE.read_text())
     url = f"https://larch.ink/api/agent/projects/{st['projectId']}/boards/{st['boardId']}"
-    req = urllib.request.Request(url, headers={"Authorization": "Bearer " + key})
+    req = urllib.request.Request(url, headers={"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + key})
     d = json.loads(urllib.request.urlopen(req, timeout=180).read())
     return d.get("board") or d
 

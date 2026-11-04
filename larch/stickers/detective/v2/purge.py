@@ -11,7 +11,7 @@ PAT = re.compile(r"^glitch-detective-(v2-)?\d{2}\.webp$")
 def call(url, method="GET", body=None):
     r = urllib.request.Request(url, method=method,
         data=json.dumps(body).encode() if body else None,
-        headers={"Authorization": "Bearer " + K, "Content-Type": "application/json"})
+        headers={"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + K, "Content-Type": "application/json"})
     for i in range(4):
         try:
             with urllib.request.urlopen(r, timeout=300) as f:

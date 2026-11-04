@@ -14,7 +14,7 @@ CG_KEY = "__larch_cg__:51-3ndgia"
 
 
 def request(method="GET", payload=None, etag=None):
-    headers = {"Authorization": f"Bearer {KEY}", "Accept": "application/json"}
+    headers = {"User-Agent": "glitch-vn/1.0", "Authorization": f"Bearer {KEY}", "Accept": "application/json"}
     if payload is not None:
         headers["Content-Type"] = "application/json"
     if etag:

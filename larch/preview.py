@@ -40,7 +40,7 @@ def main():
     out = argv[1] if len(argv) > 1 else "/tmp/preview.jpg"
     p = json.load(urllib.request.urlopen(urllib.request.Request(
         f"https://larch.ink/api/agent/projects/{PROJ}",
-        headers={"Authorization": f"Bearer {K}"}), timeout=180))
+        headers={"User-Agent": "glitch-vn/1.0", "Authorization": f"Bearer {K}"}), timeout=180))
     board = next((b for b in p["boards"] if b["id"] == bid), None) if bid \
         else p["boards"][0]
     assert board, f"沒有這一章：{bid}　有的是 {[b['id'] for b in p['boards']]}"

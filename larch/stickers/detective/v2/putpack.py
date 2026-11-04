@@ -7,7 +7,7 @@ URL = "https://larch.ink/api/agent/asset-packs/" + PACK
 D = "/home/ct/glitch-vn/larch/stickers/detective/v2/"
 
 def get():
-    r = urllib.request.Request(URL, headers={"Authorization": "Bearer " + K})
+    r = urllib.request.Request(URL, headers={"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + K})
     with urllib.request.urlopen(r, timeout=300) as f:
         d = json.load(f)
     return d.get("pack", d)
@@ -41,7 +41,7 @@ body = {
 
 for attempt in range(4):
     req = urllib.request.Request(URL, data=json.dumps(body, ensure_ascii=False).encode(),
-        method="PUT", headers={"Authorization": "Bearer " + K, "Content-Type": "application/json"})
+        method="PUT", headers={"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + K, "Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=300) as f:
             json.load(f)

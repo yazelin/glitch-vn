@@ -19,7 +19,7 @@ DESC = """格莉奇在寫偵探小說，而且寫不完。
 def call(method, body=None):
     r = urllib.request.Request(URL, method=method,
         data=json.dumps(body, ensure_ascii=False).encode() if body else None,
-        headers={"Authorization": "Bearer " + K, "Content-Type": "application/json"})
+        headers={"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + K, "Content-Type": "application/json"})
     for i in range(4):
         try:
             with urllib.request.urlopen(r, timeout=300) as f:

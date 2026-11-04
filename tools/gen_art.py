@@ -13,7 +13,7 @@ import base64, json, pathlib, sys, time, urllib.error, urllib.request
 
 BASE = "https://ching-tech.ddns.net/codex-image"
 KEY = pathlib.Path.home().joinpath(".config/codex-image/auth").read_text().strip()
-H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+H = {"User-Agent": "glitch-vn/1.0", "Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "art/out"
 

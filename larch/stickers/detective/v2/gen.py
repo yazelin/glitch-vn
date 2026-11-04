@@ -63,7 +63,7 @@ def sheet(n):
     body = json.dumps({"prompt": prompt, "reference_images_base64": refs,
                        "size": "1536x1024", "n": 1}).encode()
     req = urllib.request.Request(BASE + "/v1/images/generate", data=body,
-        headers={"Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
+        headers={"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
     t = time.time()
     with urllib.request.urlopen(req, timeout=1200) as r:
         d = json.load(r)

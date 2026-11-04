@@ -41,7 +41,7 @@ def convert(url):
 def upload(url, dst, key, base):
     body = {"base64": base64.b64encode(dst.read_bytes()).decode(), "name": dst.name, "mimeType": "image/webp"}
     req = urllib.request.Request(base + "/media", json.dumps(body).encode(),
-                                 {"Authorization": "Bearer " + key, "Content-Type": "application/json"}, method="POST")
+                                 {"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + key, "Content-Type": "application/json"}, method="POST")
     for i in range(4):
         try:
             with urllib.request.urlopen(req, timeout=600) as r:

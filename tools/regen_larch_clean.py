@@ -25,7 +25,7 @@ OUT = ROOT / "art/voice"
 
 
 def req(path, method="GET", body=None, etag=None):
-    h = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+    h = {"User-Agent": "glitch-vn/1.0", "Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
     if etag:
         h["If-Match"] = etag
     r = urllib.request.urlopen(urllib.request.Request(BASE + path, json.dumps(body, ensure_ascii=False).encode() if body is not None else None, h, method=method), timeout=300)

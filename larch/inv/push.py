@@ -132,7 +132,7 @@ def api(method, path, body=None, tries=4):
             if rev:
                 ETAGS[path] = rev
     data = json.dumps(body, ensure_ascii=False).encode() if body is not None else None
-    head = {"Authorization": "Bearer " + key(), "Content-Type": "application/json"}
+    head = {"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + key(), "Content-Type": "application/json"}
     if method == "PUT" and ETAGS.get(path):
         head["If-Match"] = ETAGS[path]
     req = urllib.request.Request(API + path, data, head, method=method)

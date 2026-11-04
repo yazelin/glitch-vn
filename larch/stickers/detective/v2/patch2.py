@@ -15,7 +15,7 @@ def call(url, method="GET", body=None, tries=5):
     for i in range(tries):
         r = urllib.request.Request(url, method=method,
             data=json.dumps(body, ensure_ascii=False).encode() if body else None,
-            headers={"Authorization": "Bearer " + K, "Content-Type": "application/json"})
+            headers={"User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + K, "Content-Type": "application/json"})
         try:
             with urllib.request.urlopen(r, timeout=300) as f:
                 return json.load(f)

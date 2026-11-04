@@ -8,7 +8,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 PROJ = "project-bec1644c-0dfe-4447-86c0-0c592e2f939f"
 KEY = pathlib.Path.home().joinpath(".config/larch/key").read_text().strip()
 BASE = f"https://larch.ink/api/agent/projects/{PROJ}"
-H = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+H = {"User-Agent": "glitch-vn/1.0", "Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 STORE = ROOT / "larch/assets.json"
 
 
@@ -43,7 +43,11 @@ def api(data=None, method="GET", path="", tries=4):
                 api(path=path)
                 time.sleep(2)
                 continue
-            if e.code < 500 or i == tries - 1:
+            if (e.code < 500 and e.code != 429) or i == tries - 1:
                 raise
+            # 429：短時間打太多次（2026-11-04 傳完 12 張素材接著 PUT 七章時中過）；照 Retry-After 等，沒給就退避
+            if e.code == 429 and (e.headers.get("Retry-After") or "").isdigit():
+                print(f"  Larch 回 429，照 Retry-After 等 {e.headers['Retry-After']} 秒")
+                time.sleep(int(e.headers["Retry-After"])); continue
             print(f"  Larch 回 {e.code}，{2 ** i * 5} 秒後重試")
             time.sleep(2 ** i * 5)

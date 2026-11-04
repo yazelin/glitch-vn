@@ -28,7 +28,7 @@ for path in files:
                        "base64": b64, "category": "prop"}).encode()
     for attempt in range(5):
         req = urllib.request.Request(URL, data=body, headers={
-            "Authorization": "Bearer " + K, "Content-Type": "application/json"})
+            "User-Agent": "glitch-vn/1.0", "Authorization": "Bearer " + K, "Content-Type": "application/json"})
         try:
             with urllib.request.urlopen(req, timeout=300) as f:
                 a = json.load(f)["asset"]

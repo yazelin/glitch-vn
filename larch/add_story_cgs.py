@@ -99,7 +99,7 @@ CGS = [
 
 def request(path: str = "", method: str = "GET", body=None, etag=None):
     data = json.dumps(body, ensure_ascii=False).encode() if body is not None else None
-    headers = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+    headers = {"User-Agent": "glitch-vn/1.0", "Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
     if etag:
         headers["If-Match"] = etag
     req = urllib.request.Request(BASE + path, data, headers, method=method)
