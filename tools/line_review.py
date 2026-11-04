@@ -14,7 +14,11 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / 'design/台詞審查-2026-11'
 B = os.environ.get('BATCH', '')   # 第二批起：BATCH=-2 讀寫 flags-2.json、candidates-2.json、picks-2.json
 PROJ = {'main': 'project-bec1644c-0dfe-4447-86c0-0c592e2f939f', 'inv': 'project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4'}
-MODELS = ['deepseek-v4-pro', 'kimi-k3', 'qwen3.5:397b']   # 2026-11-04 實測這三個會回中文；glm-5.3 回空字串
+# 作者 2026-11-04：「是不是用了太多其他模型，你只使用 deepseek 4.1 flash 就好」——llmshare 預設只開這一個，其他模型要 LLMSHARE_ALLOW_ANY。
+# 第一批與正篇第二批是 deepseek-v4-pro、kimi-k3、qwen3.5:397b 三個評的；之後偵測、改寫、評審都只用這一個。
+MODELS = ['deepseek-v4.1-flash:1017']
+# 作者：評比時用 deepseek-v4.1-flash:1017 評三次當三個評審（每次洗不同的順序）。kimi-k3 這類貴的模型不用（推理模型，想的部分也算錢）。
+JUDGES = [(MODELS[0], n) for n in (1, 2, 3)]
 BASE = os.environ.get('LLMSHARE_BASE_URL', 'https://llm-share.duotify.com/v1')
 
 STORY = {'main': """《格莉奇與黑洞先生》七章視覺小說。AI 虛擬主播格莉奇只有 4KB 的記憶，每晚睡前抄守則本第一頁：六個名字，加上第七行她自己寫的「還有一個。不要問他是誰。」
@@ -46,9 +50,28 @@ def profiles(work='main'):
     return {k: ' / '.join(x for x in v[1:4] if x) for k, v in ns['PROFILE'].items()}
 
 
+RPM_FILE = pathlib.Path.home() / '.cache/llmshare-rpm'
+
+
+def rpm_slot(limit=13):
+    """llmshare 這把金鑰每分鐘 15 次；本機所有呼叫共用這份時間戳（同 xu/審稿/scene_review.py 的 rpm_slot）。
+    批次派工上限 13，留 2 個給閘門讀稿人（feedback_llmshare_cheap_labor）。2026-11-04 這支一開始沒走限速，一直撞 429。"""
+    import fcntl
+    RPM_FILE.parent.mkdir(exist_ok=True)
+    while True:
+        with open(RPM_FILE, 'a+') as f:
+            fcntl.flock(f, fcntl.LOCK_EX); f.seek(0); now = time.time()
+            ts = [float(x) for x in f.read().split() if now - float(x) < 60]
+            if len(ts) < limit:
+                f.seek(0); f.truncate(); f.write(' '.join(map(str, ts + [now]))); return
+            wait = 60.5 - (now - min(ts))
+        time.sleep(wait)
+
+
 def api(model, prompt, max_tokens=8000, tries=3):
     body = {'model': model, 'messages': [{'role': 'user', 'content': prompt}], 'max_tokens': max_tokens, 'temperature': 0.2}
     for i in range(tries):
+        rpm_slot()
         try:
             r = urllib.request.Request(BASE + '/chat/completions', json.dumps(body).encode(),
                                        {'Authorization': f"Bearer {os.environ['LLMSHARE_API_KEY']}", 'Content-Type': 'application/json', 'User-Agent': 'glitch-vn/1.0'})
@@ -181,9 +204,17 @@ def suggest(work):
 只輸出 JSON 陣列：[{{"id": "編號", "a": "…", "b": "…", "c": "…", "note": "一句話說改了什麼"}}]
 
 """ + '\n\n'.join(blocks)
-        out = d / f'_suggest-{board}.txt'
-        subprocess.run(['codex', 'exec', '-m', 'gpt-6.1-sol', '-s', 'read-only', '--skip-git-repo-check', '-o', str(out), prompt],
-                       stdin=subprocess.DEVNULL, capture_output=True, text=True, cwd=str(d))
+        out = d / f'_suggest-{board}{B}.txt'
+        if out.exists() and json_in(out.read_text(encoding='utf-8')):   # 已經有答案的組不重跑（可以中斷續跑）
+            got = json_in(out.read_text(encoding='utf-8')); print(board, len(fs), '句 → 沿用', len(got), flush=True); return got
+        if os.environ.get('CODEX_OFF'):   # codex 額度用完時：把同一份提示詞寫成檔，交給別的寫手照答，答案寫回 out
+            (d / f'_prompt-{board}{B}.txt').write_text(prompt, encoding='utf-8'); print(board, len(fs), '句 → 寫成提示詞檔', flush=True); return []
+        if os.environ.get('WRITER', 'deepseek') == 'deepseek':   # 同上：改寫也只用 deepseek-v4.1-flash
+            out.write_text(api(MODELS[0], prompt, max_tokens=64000), encoding='utf-8')
+            got = json_in(out.read_text(encoding='utf-8')); print(board, len(fs), '句 → 拿到', len(got), flush=True); return got
+        r = subprocess.run(['codex', 'exec', '-m', 'gpt-6.1-sol', '-s', 'read-only', '--skip-git-repo-check', '-o', str(out), prompt],
+                           stdin=subprocess.DEVNULL, capture_output=True, text=True, cwd=str(d))
+        if not out.exists(): (d / f'_suggest-{board}.log').write_text((r.stdout or '')[-3000:] + '\n----\n' + (r.stderr or '')[-3000:], encoding='utf-8')   # 2026-11-04 調查篇第二批整批沒拿到，留下錯誤訊息
         got = json_in(out.read_text(encoding='utf-8')) if out.exists() else []
         print(board, len(fs), '句 → 拿到', len(got), flush=True)
         return got
@@ -221,13 +252,13 @@ def judge(work):
 
 """ + '\n\n'.join(blocks)
         res = {}
-        for x in json_in(api(model, prompt, max_tokens=64000)):
+        for x in json_in(api(model.split('#')[0], prompt, max_tokens=64000)):
             if isinstance(x, dict) and x.get('id') in order and isinstance(x.get('rank'), list):
                 res[x['id']] = {'rank': [order[x['id']].get(str(r)) for r in x['rank']], 'why': x.get('why', '')}
         return model, res
     score = {i: {'原': 0, 'a': 0, 'b': 0, 'c': 0} for i in ids}; why = {i: [] for i in ids}
     with cf.ThreadPoolExecutor(4) as ex:
-        futs = [ex.submit(ask, m, b, n * 7 + k) for k, b in enumerate(batches) for n, m in enumerate(MODELS)]
+        futs = [ex.submit(ask, f'{m}#{n}', b, n * 7 + k) for k, b in enumerate(batches) for m, n in JUDGES]
         for f in cf.as_completed(futs):
             model, res = f.result()
             for i, v in res.items():
