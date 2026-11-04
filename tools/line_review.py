@@ -318,9 +318,133 @@ def larch_voice_main():
     print('平台重唸', len(done), '句')
 
 
+# 調查篇：板上存的是顯示名（larch/inv/push.py 的 DISPLAY、names.PROSE），配音照本名
+INV_SRC = {'修收音機的': '諾亞', '客人': '貓草', '經紀人': '鐵塔', '畫她的人': '斑比'}
+INV_PROJ = PROJ['inv']
+
+
+def inv_plan():
+    """調查篇要改的每一句。kind：A＝不用重配（本來就沒聲音，或只改括號裡的舞台指示，配音管線會濾掉括號）、
+    L＝本機重配（voice.VOICE）、X＝Larch 音色重配（voice.LARCH_VOICE，平台照板上的字唸）。"""
+    sys.path.insert(0, str(ROOT / 'larch')); import voice as V
+    flags = {f['id']: f for f in json.loads((OUT / 'inv' / f'flags{B}.json').read_text(encoding='utf-8'))}
+    strip = lambda t: re.sub(r'（[^）]*）', '', t)
+    out = []
+    for i, old, new in final_changes('inv'):
+        f = flags[i]; board, card, idx = i.rsplit('/', 2); src = INV_SRC.get(f['who'], f['who'])
+        if not f['voice'] or strip(old) == strip(new): kind = 'A'
+        elif src in V.LARCH_VOICE: kind = 'X'
+        elif V.VOICE.get(src): kind = 'L'
+        else: kind = 'A'; print('  ★ 有配音但找不到聲音：', i, f['who'])
+        out.append({'id': i, 'board': board, 'card': card, 'idx': int(idx), 'who': f['who'], 'src': src, 'emo': f['emo'] or '',
+                    'old': old, 'new': new, 'kind': kind, 'key': V.key(src, new, f['emo'] or None)})
+    return out
+
+
+def _tool_on(items, tool, args=()):
+    """壓響度、ASR 這兩支照 gen_voice.utterances() 挑檔；調查篇改過的字不在那裡面，所以塞一份清單給它們。"""
+    sys.path.insert(0, str(ROOT / 'tools')); import gen_voice as G
+    one = [(x['src'], x['new'], x['emo'] or None, x['key']) for x in items]
+    code = (f"import sys; sys.path[:0]=[{str(ROOT / 'tools')!r},{str(ROOT / 'larch')!r}]; import gen_voice as G; "
+            f"G.utterances=lambda: {one!r}; import runpy; sys.argv=[{tool!r}]+{list(args)!r}; runpy.run_path({str(ROOT / f'tools/{tool}.py')!r}, run_name='__main__')")
+    py = str(pathlib.Path.home() / 'voice-venv/bin/python') if tool == 'asr_audit' else sys.executable
+    return subprocess.run([py, '-c', code], capture_output=True, text=True, cwd=str(ROOT))
+
+
+def inv_gen_local(items):
+    sys.path.insert(0, str(ROOT / 'larch')); import voice as V
+    jobs = [{'out': str(ROOT / f"art/voice/{x['key']}.wav"), 'text': V.to_speech(x['new']), 'prompt_wav': str(ROOT / V.VOICE[x['src']][0]),
+             'prompt_text': V.VOICE[x['src']][1], 'speed': V.VOICE[x['src']][2], 'instruct': V.instruct_for(x['src'], x['emo'] or None, x['new'])} for x in items]
+    jf = ROOT / 'art/voice/jobs-review.json'; jf.write_text(json.dumps(jobs, ensure_ascii=False, indent=1), encoding='utf-8')
+    env = dict(os.environ, MODELSCOPE_OFFLINE='1', HF_HUB_OFFLINE='1')
+    subprocess.run([str(pathlib.Path.home() / 'voice-venv/bin/python'), '-u', str(ROOT / 'tools/voice_batch.py'), '--jobs', str(jf), '--force'], env=env, capture_output=True)
+    for x in items:
+        w = ROOT / f"art/voice/{x['key']}.wav"
+        subprocess.check_call(['ffmpeg', '-v', 'error', '-y', '-i', str(w), '-ac', '1', '-b:a', '64k', str(w.with_suffix('.mp3'))])
+    jf.unlink()
+
+
+def inv_boards():
+    sys.path.insert(0, str(ROOT / 'larch/inv')); from patch_live import request
+    return request
+
+
+def inv_patch(items, field):
+    """field='text'：換字（先比對原文，對不上就停）；field='voice'：換成 tag 上的新配音網址。讀線上→改→PUT→讀回對卡數線數。"""
+    request = inv_boards()
+    for board in sorted({x['board'] for x in items}):
+        payload, etag = request(f'/boards/{board}'); b = payload.get('board', payload); by = {n['id']: n for n in b['nodes']}
+        before = (len(b['nodes']), len(b['edges'])); n = 0
+        for x in [x for x in items if x['board'] == board]:
+            d = by[x['card']]['data']; lines = d.get('dialogueLines')
+            tgt = lines[x['idx']] if lines else d
+            if field == 'text':
+                if tgt.get('text') == x['new']: continue
+                if tgt.get('text') != x['old']: raise SystemExit(f"{x['id']}：線上的字跟審查時不一樣，停下來：{tgt.get('text', '')[:30]!r}")
+                tgt['text'] = x['new']
+                if lines and x['idx'] == 0 and d.get('text') == x['old']: d['text'] = x['new']
+            else:
+                url = x['url']
+                if tgt.get('voiceUrl') == url: continue
+                tgt['voiceUrl'] = url
+                if lines and x['idx'] == 0 and d.get('voiceUrl'): d['voiceUrl'] = url
+            n += 1
+        if not n: print(board, '已經是新的'); continue
+        bk = ROOT / f"larch/inv/backups/{board}-{time.strftime('%Y%m%d-%H%M')}-before-review-{field}.json"; bk.write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')
+        request(f'/boards/{board}', 'PUT', {'name': b.get('name', board), 'kind': b.get('kind', 'story'), 'mode': b.get('mode', 'story'), 'nodes': b['nodes'], 'edges': b['edges'],
+                                            'summary': f'台詞審查（2026-11）：{"換字" if field == "text" else "換新配音"} {n} 句'}, etag)
+        back, _ = request(f'/boards/{board}'); back = back.get('board', back)
+        assert (len(back['nodes']), len(back['edges'])) == before, board
+        print(board, f'改了 {n} 句', '讀回卡數線數一致', before)
+
+
+def inv_larch_voice(items):
+    sys.path.insert(0, str(ROOT / 'larch')); import voice as V
+    request = inv_boards()
+    UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
+    spoken_p = ROOT / 'art/voice/spoken.json'; spoken = json.loads(spoken_p.read_text(encoding='utf-8'))
+    payload, _ = request('/boards/board-main'); by = {n['id']: n for n in payload.get('board', payload)['nodes']}
+    for x in items:
+        body = {'nodeId': x['card'], 'boardId': x['board'], 'voiceId': V.LARCH_VOICE[x['src']][0], 'emotion': x['emo']}
+        if by[x['card']]['data'].get('dialogueLines'): body['lineIndex'] = x['idx']
+        r, _ = request('/voice/generate', 'POST', body)
+        got = (r.get('text') or '').strip(); url = (r.get('asset') or {}).get('url')
+        if got != x['new'].strip() or not url: raise SystemExit(f"{x['id']}：平台唸的不是新字：{got[:24]!r}")
+        (ROOT / f"art/voice/{x['key']}.mp3").write_bytes(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': UA}), timeout=120).read())
+        spoken[x['key']] = x['new']; print(' ', x['who'], x['key']); time.sleep(0.5)
+    spoken_p.write_text(json.dumps(spoken, ensure_ascii=False, indent=0), encoding='utf-8')
+
+
+def inv_publish(items, tag):
+    """新音檔放 docs/voice、urls.json，打 jsDelivr 孤兒 tag，逐一 GET 對大小。回傳每句的新網址。"""
+    import shutil
+    sys.path.insert(0, str(ROOT / 'larch')); from main_cdn import orphan, CDN
+    MAP = ROOT / 'art/voice/urls.json'; urls = json.loads(MAP.read_text(encoding='utf-8')); files = {}
+    for x in items:
+        shutil.copy(ROOT / f"art/voice/{x['key']}.mp3", ROOT / f"docs/voice/{x['key']}.mp3")
+        urls[x['key']] = f"https://yazelin.github.io/glitch-vn/voice/{x['key']}.mp3"
+        path = f"docs/voice/{x['key']}.mp3"
+        files[path] = subprocess.run(['git', 'hash-object', '-w', path], capture_output=True, text=True, check=True, cwd=str(ROOT)).stdout.strip()
+    MAP.write_text(json.dumps(urls, ensure_ascii=False, indent=1), encoding='utf-8')
+    orphan(tag, files, f'台詞審查（2026-11）：調查篇改字的 {len(files)} 句重配')
+    subprocess.run(['git', 'push', 'origin', tag], check=True, capture_output=True, cwd=str(ROOT))
+    for x in items:
+        x['url'] = f"{CDN}{tag}/docs/voice/{x['key']}.mp3"
+        for k in range(6):
+            try: n = len(urllib.request.urlopen(urllib.request.Request(x['url'], headers={'User-Agent': 'glitch-vn/1.0'}), timeout=60).read()); break
+            except Exception:
+                if k == 5: raise
+                time.sleep(10)
+        assert n == (ROOT / f"docs/voice/{x['key']}.mp3").stat().st_size, x['url']
+    print(tag, len(items), '個檔，jsDelivr 逐一對過大小')
+    return items
+
+
 if __name__ == '__main__':
     cmd, work = sys.argv[1], sys.argv[2]
     if cmd == 'larch-voice': larch_voice_main(); raise SystemExit
+    if cmd == 'inv-plan':
+        import collections; pl = inv_plan(); print(collections.Counter(x['kind'] for x in pl)); raise SystemExit
     if cmd == 'apply':
         apply_main('--dry' in sys.argv) if work == 'main' else None; raise SystemExit
     {'export': export, 'detect': detect, 'suggest': suggest, 'judge': judge}[cmd](work)
