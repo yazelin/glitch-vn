@@ -1,0 +1,829 @@
+[
+ {
+  "id": "board-main/inv-106/4",
+  "board": "board-main",
+  "card": "inv-106",
+  "i": 4,
+  "bg": "",
+  "who": "管理員",
+  "emo": "",
+  "text": "每一次來的都是新的人。每一次我都要從頭講一遍。哪一台常停，哪一層的按鈕不靈。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-2f75f349548b3fa7.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「哪一台常停」語意不清，是常故障停機還是常停在哪一層，讀者接不上，建議補成「哪一台常故障」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「哪一台常停」語意不清，容易讀成常停在哪一層；若是電梯故障，台灣口語會說「哪一台常壞」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-112/0",
+  "board": "board-main",
+  "card": "inv-112",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "我想問一下你那個客人。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-120ff812bd5c0a3e.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「問一下你那個客人」讀起來像要直接去問那個客人，而不是問老闆關於客人的事，指代和語序都卡，改成「我想問你那個買線的客人」才順。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「問一下你那個客人」像是要直接問客人，少了「的事」；應說「問一下你那個客人的事」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-112/15",
+  "board": "board-main",
+  "card": "inv-112",
+  "i": 15,
+  "bg": "",
+  "who": "修收音機的",
+  "emo": "",
+  "text": "她講了一個數字。我沒有記住。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/art/voice-larch/1789588423082_491db5ec.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "「我沒有記住」是書面直譯的說法，台灣人講話會說「我沒記住」或「我沒記下來」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不像台灣口語",
+    "why": "「我沒有記住」偏書面，台灣口語多說「我沒記住」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-113/0",
+  "board": "board-main",
+  "card": "inv-113",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "頂樓。我跟他講了她的名字。他沒有反應，也沒有問我那是誰。\n這棟樓的螢幕上一直有她。樓上這個人不知道她叫什麼。\n他知道的是：她在網路上講話，然後有人看。兩年前七個。\n他記得七，不記得後面那個數字。\n大概是因為七比較好記。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-2/docs/voice/v-e66fa46807041c24.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「大概是因為七比較好記」是替前面的細節硬湊一個解釋來收尾，像金句，跟筆記的冷靜紀實不搭。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "前一句才寫「頂樓」，下一句又說「樓上這個人」，位置和指代不一致，讀者會不確定是不是同一個人。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-115/4",
+  "board": "board-main",
+  "card": "inv-115",
+  "i": 4,
+  "bg": "",
+  "who": "修收音機的",
+  "emo": "",
+  "text": "（想事情）有一次。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/art/voice-larch/1789588513294_dcfcb6b0.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「（想事情）」是狀態不是動作，舞台指示寫法怪，應作「（想了一下）」或「（想了想）」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "動作指示「（想事情）」不自然，像直譯；建議改成「（想了想）」或「（想了一下）」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "board-main/inv-116/0",
+  "board": "board-main",
+  "card": "inv-116",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "她問過他一個不一樣的問題。\n「很多台壞的湊成一台會響的，那台算是哪一台。」\n他說他還在想。我問他那是什麼時候，他看了一眼工作檯上那台。那台還沒修好。\n他把答不出來的問題留著，跟他留著那些壞掉的零件一樣。\n這跟我在查的事沒有關係。我記一下而已。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-6f1abb5520c7227d.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「他把答不出來的問題留著，跟他留著那些壞掉的零件一樣」是為了對稱硬湊的比喻，兩個「留著」重複，而且後置的「跟他……一樣」語序讀起來卡，意思反而變薄。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「跟他留著那些壞掉的零件一樣」少了「就像」，讀起來像「和他一起留著」，比喻接不上。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-177/0",
+  "board": "board-main",
+  "card": "inv-177",
+  "i": 0,
+  "bg": "bg-booth-hall.webp",
+  "who": "玩家",
+  "emo": "",
+  "text": "0x，跟她聯動過的那個，是你們的嗎。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-822d14200fc83c6f.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「是你們的嗎」問歸屬問得太省，讀者要等「同業」這個答案才反推問題在問公司，指涉不夠清楚。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [
+   "pronoun-person"
+  ],
+  "n": 1,
+  "level": 1
+ },
+ {
+  "id": "board-main/inv-185/0",
+  "board": "board-main",
+  "card": "inv-185",
+  "i": 0,
+  "bg": "bg-booth-hall.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "走廊底是電梯。他按了往下的那一個，按完站到旁邊。\n手機還拿在手上。他一次都沒有看。\n電梯來了。他沒有進去。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-37a24a582204b33d.mp3",
+  "votes": [],
+  "speak_tw": [
+   "pronoun-person"
+  ],
+  "n": 0,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-222/10",
+  "board": "board-main",
+  "card": "inv-222",
+  "i": 10,
+  "bg": "",
+  "who": "店員",
+  "emo": "",
+  "text": "白天不行。白天一個接一個，我連上一個買什麼都想不起來。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-7152fa69258eae10.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「白天不行」意思不清，讀者不知道不行的是排班、記憶還是人潮，建議寫成「白天沒辦法」或「白班我不行」。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "「白天不行」不知道不行什麼，要讀到下一句才知道是在講記不住人，前後接不上。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "board-main/inv-223/0",
+  "board": "board-main",
+  "card": "inv-223",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "深夜有一個常客。關東煮，兩顆蘿蔔，一杯無糖。從來沒有換過。\n店員說不出他長什麼樣子，可是蘿蔔的數量他記得，因為蘿蔔是他夾的。\n白天他一個都記不住。晚上只有那幾個，所以記得住。\n記一下：要找一個人，先問他買什麼。\n深夜要自己去一趟。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-b406779355ef80b9.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「要找一個人，先問他買什麼」是一句太工整的格言式收尾，不太像筆記裡的順手提醒。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「要找一個人，先問他買什麼」是格言式收尾，替整段下漂亮結論，不像筆記。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「可是蘿蔔的數量他記得」把受詞倒到前面又用書面說法，讀起來卡，口語會說「可是蘿蔔幾顆他記得」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [
+   "never-punchline"
+  ],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-226/0",
+  "board": "board-main",
+  "card": "inv-226",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "隔壁的洗衣店深夜也開。烘乾一輪四十分鐘。\n烘到一半的人會過來買東西，店員說差不多就那幾個。\n兩家店隔壁，同一批人一個晚上會出現兩次。深夜要排一趟。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-c4603a09e8acdde5.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「兩家店隔壁」少了動詞或方位，應是「兩家店就在隔壁」或「兩家店開在隔壁」。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「兩家店隔壁」少了動詞或介詞，應是「兩家店就在隔壁」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-230/0",
+  "board": "board-main",
+  "card": "inv-230",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "這個住樓上。我晚上七點多在一樓看過他。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-6e8ecb22fff2ce9f.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「這個住樓上」的「這個」沒有前文可指，讀者不知道指的是人、照片還是立牌。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "「這個住樓上」的「這個」沒有先行詞，看不出指的是立牌還是照片上的人。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-240/3",
+  "board": "board-main",
+  "card": "inv-240",
+  "i": 3,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "妳有沒有印象，一個很高的、穿深色西裝的。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-8a9258fcc82c70de.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「一個很高的、穿深色西裝的」缺中心語，中間的頓號也斷得怪，建議寫成「一個很高、穿深色西裝的人」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「一個很高的、穿深色西裝的」用頓號切定語，是翻譯腔，口語不會這樣停。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-240/6",
+  "board": "board-main",
+  "card": "inv-240",
+  "i": 6,
+  "bg": "",
+  "who": "旁白",
+  "emo": "描述動作",
+  "text": "她的手停了一下，然後接著包。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「然後接著包」兩個連接詞疊在一起，台灣口語會說「然後繼續包」或「才又低頭包」。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「然後接著包」的「然後」和「接著」意思重複，應留一個。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-336/0",
+  "board": "board-main",
+  "card": "inv-336",
+  "i": 0,
+  "bg": "",
+  "who": "旁白",
+  "emo": "",
+  "text": "自動門開了。\n進來的人穿著西裝，外套沒有扣，手機拿在手上。右耳上有一條藍色的光，比店裡的燈亮。十一樓走廊送她到電梯的那個。\n他走到收銀台旁邊那一排，拿了三包喉糖，放在檯面上。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-abaf33e663b50378.mp3",
+  "votes": [],
+  "speak_tw": [
+   "pronoun-person"
+  ],
+  "n": 0,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-346/0",
+  "board": "board-main",
+  "card": "inv-346",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "第六次。\n櫃檯講的話我一句一句對過。六次，一個字都沒有差，連停在哪裡都一樣。\n她從來沒有問過我是不是來過。\n那段影片四分十二秒一輪。這裡沒有她。頂樓也沒有。\n明天再來。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-2/docs/voice/v-ed71b7d59d32a331.mp3",
+  "votes": [],
+  "speak_tw": [
+   "never-punchline"
+  ],
+  "n": 0,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-351/0",
+  "board": "board-main",
+  "card": "inv-351",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "第六次。她給了我兩分鐘。\n她說我來過六次，每一次都帶著本子。兩件都對。\n今天拿到的。她會忘是真的。修得好，可是調成查好才回應的那個「會先停頓再回答」，\n她說「那就不是她了」。\n停頓一下有什麼關係。這一句我還沒有想通。\n我問她怎麼知道那是真的，她說「因為我記得」。當下沒有追。兩分鐘要留給正題。\n我問她那個人是不是一個人住，她說兩分鐘到了。我看了錶，剛好兩分鐘。\n走之前我問櫃檯我來過幾次。她想了一下，說她沒有印象。她是真的在想。\n六次她才停。前面五次她也都經過。差別在哪裡我還不知道，可是有差別。\n明天第七次。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-cea7f6ba9f2ec3e5.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「今天拿到的。她會忘是真的。修得好，可是調成查好才回應的那個『會先停頓再回答』」主詞一路缺席、兩個引語黏在一起，讀者拼不出誰修了誰、誰說了哪一句；這段是關鍵資訊，一定要拆開重寫。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台灣口語",
+    "why": "「當下沒有追」是書面省略，口語會說「當下沒追問」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [
+   "pronoun-person"
+  ],
+  "n": 1,
+  "level": 3
+ },
+ {
+  "id": "board-main/inv-432/6",
+  "board": "board-main",
+  "card": "inv-432",
+  "i": 6,
+  "bg": "",
+  "who": "保全",
+  "emo": "",
+  "text": "我調給人看過一次。接我班的那個。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-bbdfc1fa64baf971.mp3",
+  "votes": [],
+  "speak_tw": [
+   "pronoun-person"
+  ],
+  "n": 0,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-508/0",
+  "board": "board-main",
+  "card": "inv-508",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "〔劃掉：我在查一個會忘記的人〕\n每個人都記得她的某一段。合起來還是不完整，可是那個缺口不在他們身上。\n缺的是我沒有問到的那一個。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-dfd01ebd6722924c.mp3",
+  "votes": [],
+  "speak_tw": [
+   "pronoun-person"
+  ],
+  "n": 0,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-546/7",
+  "board": "board-main",
+  "card": "inv-546",
+  "i": 7,
+  "bg": "",
+  "who": "修收音機的",
+  "emo": "",
+  "text": "比她開始一個禮拜來三次還早。她說三次是為了那個什麼播。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/art/voice-larch/1789593356835_c58fb74f.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「比她開始一個禮拜來三次還早」把「開始」和頻率片語黏在一起，語序卡住；改成「比她一個禮拜來三次那時候還早」才順。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「比她開始一個禮拜來三次還早」語序不順，主詞和比較的基準都不清楚，讀不出到底是誰的什麼比什麼早。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "board-main/inv-547/0",
+  "board": "board-main",
+  "card": "inv-547",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "一個禮拜三次是為了開台買的線。本子上的日期比那還早。本子比頻道老。\n如果那是道具，沒有必要做舊。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-aa3d25641a6553fc.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "主詞是「一個禮拜三次」（頻率），述語卻是「是為了開台買的線」（東西），兩邊接不上；應拆成「一個禮拜三次，是為了開台。線是為開台買的」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "「一個禮拜三次是為了開台買的線」把頻率和「買的線」用「是為了」硬湊在一起，邏輯跳；下一句「比那還早」的「那」也指不清楚。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/inv-555/0",
+  "board": "board-main",
+  "card": "inv-555",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "每一個人都說那是節目。\n沒有人覺得需要確認。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-417a95346f38a2a7.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "「每一個人都」偏書面，台灣口語多說「每個人」；「沒有人覺得需要確認」也太像翻譯句，可改成「沒有人覺得需要去確認一下」。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台灣口語",
+    "why": "「沒有人覺得需要確認」太書面，口語會說「沒人覺得要確認一下」；放在段落結尾也有一點替讀者下感慨的味道。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "board-main/inv-634/5",
+  "board": "board-main",
+  "card": "inv-634",
+  "i": 5,
+  "bg": "",
+  "who": "店員",
+  "emo": "",
+  "text": "每次。他從來沒有換過。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-272d297bb020b6cb.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「他從來沒有換過」少了受詞，換過什麼沒說，讀者要猜是換餐點還是換位子。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [
+   "never-punchline"
+  ],
+  "n": 1,
+  "level": 1
+ },
+ {
+  "id": "board-main/bond-reply-1-0/1",
+  "board": "board-main",
+  "card": "bond-reply-1-0",
+  "i": 1,
+  "bg": "",
+  "who": "修收音機的",
+  "emo": "",
+  "text": "（沒有抬頭）她問，我就答。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-a9020434c82df8bd.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "諾亞直接對玩家說話卻用「她問」，指代像在講第三者，應是「你問」或改成間接敘述。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "對白中用「她」指正在對話的玩家，指代錯位；若是對玩家說，應改成「你問，我就答」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/bond-reply-3-0/1",
+  "board": "board-main",
+  "card": "bond-reply-3-0",
+  "i": 1,
+  "bg": "",
+  "who": "斑比",
+  "emo": "",
+  "text": "……問了，她要想很久。我不想讓她想。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@inv-voice-1/docs/voice/v-abf8ee5e91456d2a.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不像台灣口語",
+    "why": "「她要想很久」在台灣口語較常說「她會想很久」，「要想」也容易和「如果想要」混淆。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「我不想讓她想」缺少想的內容，讀起來像直譯；台灣口語會說「我不想讓她多想」或「我不想讓她一直想」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-main/bond-live8/0",
+  "board": "board-main",
+  "card": "bond-live8",
+  "i": 0,
+  "bg": "",
+  "who": "旁白",
+  "emo": "",
+  "text": "手機還在桌上播。聊天室裡又有人貼了一次合輯的連結。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「手機還在桌上播」少了「放著」或「播放著」，讀起來像手機在桌上廣播，語序不順。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「手機在桌上播」動詞用法卡，台灣口語通常說「手機還放在桌上播著」或「直播還在手機上跑」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "board-credits/credits-line/0",
+  "board": "board-credits",
+  "card": "credits-line",
+  "i": 0,
+  "bg": "",
+  "who": "格莉奇",
+  "emo": "",
+  "text": "逼——嗶！謝謝你看到這裡。\n這十四天你去了很多地方，問了很多人。\n他們記住你了，一點點。\n我也是。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「他們記住你了，一點點。我也是。」是金句式感性收尾，「記住你了，一點點」語序也像翻譯/AI 腔，不像台灣口語自然說法。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "結尾「他們記住你了，一點點。我也是。」像硬湊的金句式收尾；「我也是」指涉不明，是我也記得你、也去過很多地方，還是也被記住，為抒情犧牲語意。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000/formula-line-1/0",
+  "board": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000",
+  "card": "formula-line-1",
+  "i": 0,
+  "bg": "",
+  "who": "旁白",
+  "emo": "",
+  "text": "檯燈還亮著。\n筆記攤在桌上，軟木板上的紅線拉到一半。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「軟木板上的紅線拉到一半」動詞搭配怪，紅線在軟木板上通常是「牽」或「釘」，用「拉」讀起來像有人在扯線。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「軟木板上的紅線拉到一半」語序鬆散，讀不出是線還沒拉完，還是紅線只釘了一半；補個「只」會清楚些。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000/formula-line-2/0",
+  "board": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000",
+  "card": "formula-line-2",
+  "i": 0,
+  "bg": "",
+  "who": "玩家",
+  "emo": "",
+  "text": "出門以前，先把規則看一遍。\n時段、便條、信任、背包——省得到了街上才發現少帶了什麼。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "前句說「規則看一遍」，後面列的「時段、便條、信任、背包」是要帶的東西或資源，不是規則，前後接不上。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「省得到了街上才發現少帶了什麼」語序卡，「省得」後面直接接「到街上才發現」不順，改成「免得到了街上才發現少帶什麼」較順。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「時段、便條、信任、背包」到底是規則項目還是要帶的東西？後半「少帶了什麼」把它們當成可攜物，但「信任」「時段」根本不能帶，前後接不上。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000/formula-line-3/0",
+  "board": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000",
+  "card": "formula-line-3",
+  "i": 0,
+  "bg": "",
+  "who": "旁白",
+  "emo": "",
+  "text": "你把手機立在筆記旁邊，翻開《調查篇》的公式站。\n（後面有幾頁會劇透。只想知道怎麼玩，看第一頁就夠了。）",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "旁白指主角一律用「她」，這裡突然用「你」，視角不一致；另外「翻開……公式站」搭配不對，網站是「打開」，翻開是書。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台灣口語",
+    "why": "「公式站」是日文「公式サイト」直譯，台灣人會說「官網」或「官方網站」。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「翻開……公式站」網站不能翻開，動作對不上；且旁白指主角一律用「她」，這裡卻冒出「你」，指代不一致。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000/formula-out/0",
+  "board": "board-f375ecf1-87ad-4a9c-b8fc-fb126c9c5000",
+  "card": "formula-out",
+  "i": 0,
+  "bg": "",
+  "who": "旁白",
+  "emo": "",
+  "text": "你把頁面合上，關了檯燈。\n明天，去街上。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "同樣用了「你」，與旁白一律用「她」的設定衝突；「把頁面合上」也是書的動作，網頁要說「關掉」。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「把頁面合上」是書本的動作，對網站不通；且同樣用「你」而不是「她」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ }
+]

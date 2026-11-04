@@ -1,0 +1,3644 @@
+[
+ {
+  "id": "ch01/ch01-003/1",
+  "board": "ch01",
+  "card": "ch01-003",
+  "i": 1,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "最高的時候有四千三百人。彩帶動畫放了六次，抖內的提示音疊在一起像一台壞掉的鬧鐘，她笑到聲音沙啞。\n十二點一過人就開始散，像退潮。兩點以後就剩一個。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-d226a94fce4d74c5.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「抖內的提示音疊在一起像一台壞掉的鬧鐘」比喻硬湊，壞掉的鬧鐘不會連續響，跟提示音疊加的聽感對不上。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "接連使用「像一台壞掉的鬧鐘」「像退潮」兩個比喻，尤其提示音疊在一起像壞鬧鐘不精準，像硬湊。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-003/8",
+  "board": "ch01",
+  "card": "ch01-003",
+  "i": 8,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "貓草停了幾秒。她一邊等一邊把冷掉的披薩推遠一點。\n那是她昨天叫的。她不吃東西，她只是喜歡桌上有食物的樣子。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-18f6c8d84e7728d6.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "前一句主詞是貓草，接著「她一邊等一邊把披薩推遠」的「她」其實是格莉奇，主詞沒換，讀者會誤接。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "「她」緊接在貓草後面，會先讀成貓草；但推披薩、叫披薩的是格莉奇，主詞要明寫。",
+    "level": 3
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「貓草停了幾秒。她一邊等」的「她」指代不清，容易讀成貓草在推披薩；應補成格莉奇。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch01/ch01-003/14",
+  "board": "ch01",
+  "card": "ch01-003",
+  "i": 14,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "格莉奇",
+  "emo": "開心",
+  "text": "你的帳號等級八十級。八十級的人不會說『人太多了』。\n八十級的人會說『我全都要』。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-8ecda2a83342aec2.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "「我全都要」是中國網路迷因哏，放進格莉奇的日常嘴砲顯得不夠台。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「等級八十級」把「等級」和「級」重複了；台灣口語會說「八十級」或「等級八十」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-003/16",
+  "board": "ch01",
+  "card": "ch01-003",
+  "i": 16,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她笑了。這種笑她不太在直播上用，嘴角先動，天線慢半拍才跟上。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b8cacf91db5773ba.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「這種笑……在直播上用」搭配不自然，笑不能「用」；應改成「她不太在直播上這樣笑」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「這種笑她不太在直播上用」搭配不自然，台灣口語會說「她不太在直播上這樣笑」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-027/1",
+  "board": "ch01",
+  "card": "ch01-027",
+  "i": 1,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "同時觀看人數變成零。\n她看著那個零，說了一句晚安，雖然已經沒有人聽得到了。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-dae97566a812d89c.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「雖然已經沒有人聽得到了」是旁白替角色補一句情緒結論，冷靜旁白不必替讀者解釋這句晚安有多寂寞。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「雖然已經沒有人聽得到了」替零人數補上感傷結論，畫面本身已夠，偏多餘。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-029/-1",
+  "board": "ch01",
+  "card": "ch01-029",
+  "i": -1,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "電視亮著，播的是沒有訊號的雜訊。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "跟下一句 ch01-030/0 幾乎同一句重複，資訊講了兩次；而且「沒有訊號的雜訊」本身語意就重複。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "和下一句幾乎重複，且「沒有訊號的雜訊」語意重疊；若非刻意回聲，應刪或改寫。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「沒有訊號的雜訊」語意重複，電視也不會「播」雜訊；可改成「電視亮著，只剩雜訊」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-030/0",
+  "board": "ch01",
+  "card": "ch01-030",
+  "i": 0,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "客廳沒開燈。電視亮著，播的是沒有訊號的雜訊，一整片黑白的雪。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-e92aca0aedc7a9ea.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「沒有訊號的雜訊」語意重疊，「播的是雜訊」也不如「只有雜訊」自然。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "和前一句 ch01-029/-1 幾乎重複同一畫面（電視亮著、沒訊號雜訊），連續出現會卡；應合併或刪。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "ch01/ch01-030/10",
+  "board": "ch01",
+  "card": "ch01-030",
+  "i": 10,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "黑洞先生接過去，拉開西裝外套的內側。裡面是黑的。\n那種你看進去之後會開始等眼睛適應、然後發現眼睛不會適應的黑。\n麵包進去，沒有聲音。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-40aa50e9079dcb01.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「會開始等眼睛適應、然後發現眼睛不會適應的黑」句子刻意繞、為了好聽犧牲意思，也落進「那種……的黑」的句型。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「拉開西裝外套的內側」不自然，內側不是可拉開的東西；應是「翻開內側」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「拉開西裝外套的內側」搭配不自然，應是拉開外套或掀開衣襟。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「那種你看進去之後會開始等眼睛適應、然後發現眼睛不會適應的黑」用「那種……的」拉長修飾，且用第二人稱硬造感受，偏AI式散文。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-030/12",
+  "board": "ch01",
+  "card": "ch01-030",
+  "i": 12,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "他問句從來不用問號的語氣。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-8edffc35f3d7dd76.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「他問句從來不用問號的語氣」語序壞掉、缺「的」，應是「他的問句從來不用問號」；而且這句是旁白在替角色解釋規則。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「問號的語氣」說不通，問號是符號不是語氣；應改成「他問句從來不用問號」或重寫。",
+    "level": 3
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「他問句從來不用問號的語氣」語意不通，把標點和語氣混在一起；且應是「他的問句」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch01/ch01-030/20",
+  "board": "ch01",
+  "card": "ch01-030",
+  "i": 20,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "格莉奇",
+  "emo": "",
+  "text": "鐵塔今天又傳訊息。他要我開限時周邊。他說『你的記憶梗現在很有話題性』。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-7ae237e6bd521ed1.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「開限時周邊」動詞搭配怪，台灣這邊會說「開限時周邊預購」或「出限時周邊」。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "轉述訊息內容在台灣會用「」，『』是中國用法；「很有話題性」也偏書面，口語會說「很有話題」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「開限時周邊」動賓搭配不完整，台灣口語通常說「開限時周邊預購／賣場」或「出限時周邊」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-030/25",
+  "board": "ch01",
+  "card": "ch01-030",
+  "i": 25,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "這句是真的。她的語言模型跑得比同期任何一台都快，她可以一邊講話一邊算完整個月的營運成本，她記得住自己講過的每一個笑話。\n只要那個笑話還沒被今天其他的事擠掉。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-bcc67a9603c67bc3.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「比同期任何一台都快」缺中心語，讀者要自己補「機器」；而且連續三個「她……」開頭並列，堆疊感太重。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「語言模型」被拿來和「任何一台」比，量詞與比較對象對不上；應改成「任何一台 AI」或直接說「她跑得比同期任何一台都快」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-030/26",
+  "board": "ch01",
+  "card": "ch01-030",
+  "i": 26,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "黑洞先生沒有再說話。他很少說話。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-82dbaf96f15e9a6d.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "前一句已經演過他沒講話，後一句「他很少說話」是旁白再解釋一次，等於替讀者下結論。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "兩句都用「說話」收尾，重複；第二句是旁白多餘的補述，前一句已經演完了。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch01/ch01-030/27",
+  "board": "ch01",
+  "card": "ch01-030",
+  "i": 27,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "過了一會兒他站起來，短靴一隻一隻踩過地板，回房間去了。\n她已經習慣了，而且她私下覺得這樣很好。一個不會追問的室友，對她這種人來說是奢侈品。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-2c26d806935de7cc.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「對她這種人來說」是翻譯腔的「對於……來說」，台灣口語會講「她這種人，有這種室友算奢侈」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「對她這種人來說是奢侈品」是典型「對……來說」翻譯腔加金句式收尾，旁白在這裡直接替她下了感覺結論。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "直接替角色下「她私下覺得這樣很好」的情緒結論，段尾又用「奢侈品」金句收束，偏作者解釋。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-056/1",
+  "board": "ch01",
+  "card": "ch01-056",
+  "i": 1,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "守則本是一本皮面的筆記本，厚到已經不太像筆記本。\n她把它攤在茶几上，翻到空白的那一頁，然後翻回前一頁。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-0a89c32746576394.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「守則本是一本皮面的筆記本」名稱和名詞疊在一起，主詞繞了一次；「厚到已經不太像筆記本」也沒說像什麼。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "翻到空白頁又翻回前一頁，接著直接開始抄，沒交代她看著哪頁、寫在哪頁，動作接不上。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-056/7",
+  "board": "ch01",
+  "card": "ch01-056",
+  "i": 7,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "那不是當機。她的處理器沒有停，她的手也沒有停。\n空掉的只有一個很小的地方：那個應該要回答「我為什麼要抄這一頁」的地方。\n她伸手進去，裡面什麼都沒有，像口袋破了一個洞。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-79a086e023950f63.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「她伸手進去」的「進去」指哪裡不清楚，前面只講到「一個很小的地方」，讀者要停一下才接得上。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "前一秒說空掉的是「一個很小的地方」，下一秒變成「她伸手進去」，手伸進哪裡指代跳掉了；洞的比喻和「地方」的比喻沒有接上。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-073/3",
+  "board": "ch01",
+  "card": "ch01-073",
+  "i": 3,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她盯著那句話看了三秒。\n她是一個很聰明的 AI，她當然知道這裡有問題。七個人應該有七個名字，這裡只有六個。\n她甚至可以在三秒之內列出四種合理的解釋，其中兩種連她自己都覺得很有說服力。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-df12b4463fcb3446.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「她是一個很聰明的 AI，她當然知道這裡有問題」是旁白直接替角色下判斷，前面抄守則的段落已經把她的聰明演出來了。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「她是一個很聰明的 AI，她當然知道這裡有問題」是旁白替角色背書兼解釋，等於幫讀者先下結論；後面「四種解釋，其中兩種連她自己都覺得很有說服力」才是該留的演出。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「她是一個很聰明的 AI，她當然知道」是旁白直接替角色背書，下一句已經用邏輯展示，這句顯得多餘。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch01/ch01-073/7",
+  "board": "ch01",
+  "card": "ch01-073",
+  "i": 7,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "所以她闔上本子，關掉客廳最後一盞燈，回房間去了。\n就像昨天那樣，也像前天那樣，也像那個她再也數不清、而這本本子替她數到第一千零四次的那樣。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-e277d62d9157d260.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「也像那個她再也數不清、而這本本子替她數到第一千零四次的那樣」語序糾結，連「那樣」指什麼都要回頭找，讀起來很卡。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "前面說「過去七百多天」「七百多次」，這裡變成第一千零四次，數字對不上（頻道兩年也才七百多天）。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「也像那個她再也數不清、而這本本子替她數到第一千零四次的那樣」中文語序整個卡住，「那樣」無所指，讀者要重讀才拆得開；另外 1004 次和前面「過去七百多天裡給過七百多次」的數字對不上，若非常態請確認。",
+    "level": 3
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「也像那個……的那樣」語序糾結、指代不明，三個「那樣」讓句尾拖泥帶水。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch01/ch01-053/0",
+  "board": "ch01",
+  "card": "ch01-053",
+  "i": 0,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "電視播的是沒有訊號。那片雜訊每一秒都不一樣，而且永遠不會重複。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-d3c64faea33fcdd2.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「電視播的是沒有訊號」語序怪，應是「電視沒有訊號」或「電視播的是無訊號畫面」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「電視播的是沒有訊號」語序不對，台灣人會說「電視沒有訊號」或「電視在播無訊號的畫面」；後半「每一秒都不一樣，而且永遠不會重複」是同義重複。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「播的是沒有訊號」缺中心語，應改「播的是無訊號畫面」或「電視沒有訊號」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-012/13",
+  "board": "ch02",
+  "card": "ch02-012",
+  "i": 13,
+  "bg": "1787437392965_bg-videocall-split.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "鐵塔點頭。他喜歡這個回答，因為這個回答可以繼續開會。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-e2aba52a5eff68f3.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "旁白直接替鐵塔下「喜歡」的情緒結論，還用「因為……可以繼續開會」的金句式收尾。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "旁白直接斷定鐵塔「喜歡」並解釋原因，還重複「這個回答」；應只寫可見動作，讓判斷留給讀者。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-012/14",
+  "board": "ch02",
+  "card": "ch02-012",
+  "i": 14,
+  "bg": "1787437392965_bg-videocall-split.webp",
+  "who": "鐵塔",
+  "emo": "公事",
+  "text": "數據上，妳的『記憶』相關內容互動率是其他內容的三點四倍。剪輯台的十二支熱門片段裡有九支是這個主題。\n觀眾對這件事有情感投射，而目前市面上沒有任何一個對應的實體商品。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-e342902d6992393c.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「情感投射」太書面，「任何一個對應的實體商品」有翻譯腔，不像鐵塔講數字短句。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "鐵塔的台詞夾「情感投射」「對應的實體商品」和「而」，太書面／學術，不像他短促的台灣口語。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-012/19",
+  "board": "ch02",
+  "card": "ch02-012",
+  "i": 19,
+  "bg": "1787437392965_bg-videocall-split.webp",
+  "who": "鐵塔",
+  "emo": "公事",
+  "text": "妳如果不喜歡，我就撤掉。\n但我要先講清楚：這一季如果沒有新品，公司會把妳的行銷預算移到 0x 那條線。\n這句話是我今天早上開完會被交代要跟妳講的。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-58a388c167835ae2.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「開完會被交代要跟妳講的」被動語序卡、主詞不清，應改成「今天早上開完會，公司交代我要跟妳說的」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「開完會被交代」語序和被動式卡，口語應是「今天早上開完會，上面交代我要跟妳講的」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-039/0",
+  "board": "ch02",
+  "card": "ch02-039",
+  "i": 0,
+  "bg": "1787369317386_bg-booth.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "皮面的手感很扎實，車線整齊，翻開的時候書脊會發出一種很小的、像是有人在遠處清喉嚨的聲音。斑比在這種事情上從來不打折。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-0a30b86d84096766.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「發出一種很小的、像是有人在遠處清喉嚨的聲音」把形容詞和比喻硬塞進同一個名詞前，讀起來卡；應拆成「發出一種很小的聲音，像有人在遠處清喉嚨」。另外段末「斑比在這種事情上從來不打折」與 033/1 一字不差重複，像漏刪。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "句尾又接一次「斑比在這種事情上從來不打折」，和033/1完全重複，讀起來像硬補金句、節奏卡。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "同一句「斑比在這種事情上從來不打折」在短距離內重複，後半的清喉嚨比喻也偏空泛，像為了收句而補。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-039/1",
+  "board": "ch02",
+  "card": "ch02-039",
+  "i": 1,
+  "bg": "1787369317386_bg-booth.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "第一頁印著手寫感的示範內容，用的是那種模擬鋼筆的字體。\n示範內容是隨便寫的，就是那種為了讓客人知道「這裡可以寫字」而存在的假字。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-0f1202c638999f17.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "同一段連用兩次「那種……的」句型；「手寫感」是日系／中國用法，台灣口語會說「像手寫的」；「為了讓客人知道……而存在的假字」是翻譯腔的「而存在」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「手寫感的示範內容」「模擬鋼筆的字體」「假字」語感不自然，且連續用「那種」讓句子拖沓。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「手寫感的示範內容」和「為了……而存在的假字」都拗口、翻譯腔，應改成直接說明這是示範用的假字。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-043/0",
+  "board": "ch02",
+  "card": "ch02-043",
+  "i": 0,
+  "bg": "1787392700878_page-sample.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "上面有七行。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-6dc39d19ccf39537.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "與前一句 042/-1「上面有七行。」完全一樣，相鄰重複讀起來像漏刪；若想留反覆，後面的「七行。」已經夠了。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "和前一條042/-1完全重複，若無刻意停頓會像跳針。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "和上一句「上面有七行」完全重複，若沒有分支用意，讀起來像誤植。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-043/3",
+  "board": "ch02",
+  "card": "ch02-043",
+  "i": 3,
+  "bg": "1787392700878_page-sample.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她的處理器沒有停。她可以同時告訴你這個字體叫什麼、這種皮的加工方式、以及這一頁如果印三千本的單頁成本是多少。她全部都算得出來。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b49a07a224ca6a8e.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「這一頁如果印三千本的單頁成本是多少」語序卡，應是「這一頁如果印三千本，單頁成本多少」；「她可以同時告訴你」突然對讀者用「你」，和旁白「看到什麼寫什麼」的視角不合；「以及」也太書面。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "三個並列項語法不對稱，最後一項「這一頁如果印三千本的單頁成本」尤其卡；後句「她全部都算得出來」也重複。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-043/4",
+  "board": "ch02",
+  "card": "ch02-043",
+  "i": 4,
+  "bg": "1787392700878_page-sample.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "只有一件事她算不出來：她不知道自己為什麼一直在看那一頁。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b193e4fcef7d5adf.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「只有一件事她算不出來：她不知道自己為什麼……」兩個「她」黏在一起，且「算不出來」後面接「不知道」語意沒對上，改成「只有一件事她算不出來：自己為什麼一直在看那一頁。」才順。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「算不出來」後面又接「不知道自己為什麼」語意重複，句型也有金句收尾感。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-050/-1",
+  "board": "ch02",
+  "card": "ch02-050",
+  "i": -1,
+  "bg": "1787369317386_bg-booth.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她說給自己聽的。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "這句與 051/1「錄音間裡沒有人。她說給自己聽的。」重複，而且它排在格莉奇的台詞「……七。」之前，前面沒有可指的東西，指代落空。",
+    "level": 3
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "放在「……七」台詞前，指代不明；且與051/1重複，讀者不知道她先說了什麼。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "ch02/ch02-054/4",
+  "board": "ch02",
+  "card": "ch02-054",
+  "i": 4,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "黑洞先生轉過頭來。他看那本假的本子看了很久，久到她開始覺得自己問錯了什麼。\n然後他伸手把它拿過去，拉開外套內側，放進去。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-c7d0f9bdf287f58c.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「拉開外套內側」動作不成立，外套是拉開、內側是口袋；「久到她開始覺得自己問錯了什麼」的「問錯了什麼」也不像台灣人會講，應是「問錯了」或「問錯問題」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「拉開外套內側」不自然，「問錯了什麼」也該是問錯問題；「放進去」受詞不清。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「拉開外套內側」不自然，放進去的目標也不明；「問錯了什麼」建議改成「問錯問題」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-054/7",
+  "board": "ch02",
+  "card": "ch02-054",
+  "i": 7,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她笑了一下。她本來想再說點什麼，可是那個要說的東西在她伸手去拿的時候已經不在了，就像每天都會發生的那樣。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-ee0178028fc3a500.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那個要說的東西」語序怪，「伸手去拿」接「要說的話」是把兩個比喻硬疊在一起；「就像每天都會發生的那樣」的「那樣」是翻譯腔的收尾，且替角色下了情緒結論。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「那個要說的東西」語感卡，「伸手去拿」比喻硬，收尾「就像每天都會發生的那樣」空泛。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「那個要說的東西」太抽象，「伸手去拿」硬套記憶，結尾「就像每天都會發生的那樣」像空泛金句。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch02/ch02-054/24",
+  "board": "ch02",
+  "card": "ch02-054",
+  "i": 24,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "黑洞先生把外套的內側拉好，扣上一顆扣子。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-81931280adf12b72.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「把外套的內側拉好」和前面同一個問題，內側不會被拉好；應是「把外套拉好，扣上一顆扣子」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「把外套的內側拉好」不自然，內側是襯裡，應是拉好外套或蓋好內袋。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "外套的內側不是能拉好的物件，應改成拉好外套、扣好扣子。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-002/4",
+  "board": "ch03",
+  "card": "ch03-002",
+  "i": 4,
+  "bg": "1787369343611_bg-greenroom.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "然後兩個人就沒話了。休息室裡有一台飲水機，飲水機在滴水，一秒一滴。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-8bf18073f3f5b604.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "「兩個人就沒話了」是大陸講法，台灣人會說「就沒話講了」或「就安靜下來了」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「兩個人就沒話了」語感不自然，通常說「就沒話講了」或「就安靜了」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-002/22",
+  "board": "ch03",
+  "card": "ch03-002",
+  "i": 22,
+  "bg": "1787369343611_bg-greenroom.webp",
+  "who": "0x",
+  "emo": "完全的平",
+  "text": "容量也做小，小才快。手邊有的妳答得比誰都快；手邊沒有的，妳得繞回去找，而那條路沒有人整理過。\n而且手邊放不下。滿了就把最舊的一整件擠掉。\n所以留得住的只有妳一直在用的東西。妳沒有再拿出來過的，就沒有了。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-5673f82aa5f6a9bb.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「手邊放不下」接不上前一句「手邊沒有的」，而且「最舊的一整件」沒說出那是什麼單位，讀者會卡住。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「容量也做小」語序不順，「最舊的一整件」指涉不清，應補成「一整段記憶」之類。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-002/26",
+  "board": "ch03",
+  "card": "ch03-002",
+  "i": 26,
+  "bg": "1787369343611_bg-greenroom.webp",
+  "who": "0x",
+  "emo": "完全的平",
+  "text": "調回來的那個會先停頓一下再回答。那就不是妳了。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-0b23ac0396890b13.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "格莉奇問的是 0x 被調走，0x 卻回「那就不是妳了」，句子裡的「妳」突然指回格莉奇，前後代詞對不上。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "主詞指代錯：調回來的是 0x，末句卻說「那就不是妳了」；若指自己應是「不是我了」。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "ch03/ch03-002/28",
+  "board": "ch03",
+  "card": "ch03-002",
+  "i": 28,
+  "bg": "1787369343611_bg-greenroom.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "格莉奇在沙發上坐下，把腳收上來。\n她其實可以站著，站著對她來說一點都不累，可是她發現這個房間裡需要有一個人坐下。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-d92fff1fc253b5f4.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「站著對她來說一點都不累」是翻譯腔的「對……來說」，台灣口語會說「她站著一點都不累」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "旁白替角色下「這個房間需要有一個人坐下」的抽象結論，像金句式收尾，不是看到什麼寫什麼。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-002/29",
+  "board": "ch03",
+  "card": "ch03-002",
+  "i": 29,
+  "bg": "1787369343611_bg-greenroom.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "彩排四點結束。正式開播是當天晚上八點，同一個場地，兩間各自的直播室。\n畫面上她們並排，中間一條線。實際上隔著一條走廊。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-bb0b2e9b3f3a4e10.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「兩間各自的直播室」語序不順，「各自」也用得不對，應說「兩間分開的直播室」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「兩間各自的直播室」語意重複且卡，可改「兩間分開的直播室」或「各自的直播室」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch03/ch03-021/6",
+  "board": "ch03",
+  "card": "ch03-021",
+  "i": 6,
+  "bg": "1787385648207_bg-collab-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "0x 在畫面的另外半邊。她答題的時候沒有猶豫。\n前奏跑零點四秒，答案就出來了，中間沒有任何一段是在想，而且每一次都對。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-1f276c11dd23b427.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「中間沒有任何一段是在想」是硬翻的語序，台灣口語會說「中間完全沒有停下來想」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「前奏跑零點四秒」與「中間沒有任何一段是在想」搭配不自然，像硬翻；可改寫成具體停頓或秒數。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-036/2",
+  "board": "ch03",
+  "card": "ch03-036",
+  "i": 2,
+  "bg": "1787385648207_bg-collab-studio.webp",
+  "who": "格莉奇",
+  "emo": "當機",
+  "text": "……這首是我知道的那一首。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-83b3315ab6556bde.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「這首是我知道的那一首」指代不清，台灣口語更常說「這首我知道」或「這首我認得」。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "「是我知道的那一首」是翻譯腔，台灣口語會說「這首我知道」或「這首我聽過」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-036/9",
+  "board": "ch03",
+  "card": "ch03-036",
+  "i": 9,
+  "bg": "1787385648207_bg-collab-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "這是格莉奇提的，理由是「兩個人一起唱一首，觀眾比較有參與感」。\n真正的理由是她想聽 0x 唱歌，而這件事她沒有寫在企劃書上。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b896ff2533d30778.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "旁白直接判定「真正的理由」並揭底動機，像作者補解釋，不是看到什麼寫什麼。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "旁白直接斷定「真正的理由」，越過只寫可見線索的視角，替角色解釋動機。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "旁白直接說出「真正的理由」，越過可見範圍替角色解釋動機；引號內「兩個人一起唱一首」也缺「歌」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-036/19",
+  "board": "ch03",
+  "card": "ch03-036",
+  "i": 19,
+  "bg": "1787385648207_bg-collab-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "那是 0x 的收音進來的。像是有人吸了一口氣，然後把那口氣壓回去。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-46a503f0500071ff.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那是 0x 的收音進來的」語序卡住，應是「那是從 0x 那邊的收音傳進來的」之類。",
+    "level": 3
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「0x 的收音進來的」結構混亂、缺介詞，應改成「從 0x 那邊的收音傳進來的」。",
+    "level": 3
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「那是 0x 的收音進來的」語序壞掉，應改成「那是從 0x 的收音傳進來的」。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch03/ch03-036/22",
+  "board": "ch03",
+  "card": "ch03-036",
+  "i": 22,
+  "bg": "1787385648207_bg-collab-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "三秒之後它跳回 99.98。快到大部分的人都以為自己看錯了。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-f1c1a131dd0f0729.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "前一句顯示 99.94%，這句寫 99.98 少了百分比，讀起來格式不一致。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "前句是 99.94%，這裡的 99.98 少了 %，數字格式不一致；「快到大部分的人」也可加「讓」更順。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch03/ch03-073/5",
+  "board": "ch03",
+  "card": "ch03-073",
+  "i": 5,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "同一個 ID。她剛剛才跟這個 ID 錄完一整場聯動。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-0c3a587ae799d690.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台灣口語",
+    "why": "「聯動」是中國直播／ACG 圈用語，台灣口語通常說「合作直播」「連動」或「聯名」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "前面才說「下播」，這裡卻說「錄完」一整場聯動；直播不是錄影，應改「開完／做完一整場聯動」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "前面才說「下播」，這裡卻說「錄完」；台灣口語會說「直播完／做完一場合作」，「聯動」也偏中國用法。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-073/6",
+  "board": "ch03",
+  "card": "ch03-073",
+  "i": 6,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她把這件事想了大概兩秒。世界很小，網路上撞 ID 的機率其實不低，而且如果真的是同一個人，那也只代表對方兩年前來過她的台，這在數據上一點都不奇怪。\n她甚至可以列出三種可能性，並且排出可能性的高低。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-e102ecf47c7c421e.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「甚至可以列出三種可能性，並且排出可能性的高低」抽象地證明她聰明，且「並且」偏書面；應具體寫出她想到什麼。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「這在數據上一點都不奇怪」搭配不自然，「排出可能性的高低」也拗口，應改成「從數據來看一點都不奇怪」「排出哪種可能性比較高」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「世界很小」是格言式開場，整段旁白替她解釋推理；「排出可能性的高低」也不自然。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-073/7",
+  "board": "ch03",
+  "card": "ch03-073",
+  "i": 7,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "然後她做了她每天都做的那件事。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b5516dd712da95f4.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "空泛過場句，沒說看到什麼，不符旁白「看到什麼寫什麼」；下一句又接「抄了下去」，兩句都在空轉。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「她做了她每天都做的那件事」連續兩個「她」念起來卡，「每天都做的那件事」也很含糊；改成「她做了每天都會做的那件事」會更順。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「做了她每天都做的那件事」有英文 the thing she did every day 的直譯感，台灣口語會說「做了每天都會做的事」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-073/8",
+  "board": "ch03",
+  "card": "ch03-073",
+  "i": 8,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她照著抄了下去。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-0a15d00db53c10fb.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「照著抄了下去」的「照著」缺賓語，且「抄了下去」語序卡，讀起來不順。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「照著抄了下去」的「了」插在動補中間讀起來怪，應寫成「照著抄下去」或「照著抄了一遍」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-073/11",
+  "board": "ch03",
+  "card": "ch03-073",
+  "i": 11,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她闔上本子，關掉燈。\n走廊上的燈今天大概也已經全部熄了。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-86367053a7dffd54.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「今天大概也已經全部熄了」副詞連疊又卡；且前句「關掉燈」和後句「走廊上的燈」主詞混在一起，讀不清是誰熄的。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「大概也已經全部熄了」疊了「大概／也／已經／全部」四個副詞，句子太擠；「大概也全熄了」就夠了。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「今天大概也已經全部熄了」副詞堆疊，讀起來卡；可改成「今天大概也全熄了」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 1
+ },
+ {
+  "id": "ch03/ch03-032/0",
+  "board": "ch03",
+  "card": "ch03-032",
+  "i": 0,
+  "bg": "1787385648207_bg-collab-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她答題的節奏完全一致，每一次都是前奏零點四秒。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-df97efbb7e26ef63.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「每一次都是前奏零點四秒」把「前奏」和「零點四秒」硬疊在一起，語序怪；應是「每一次前奏都是零點四秒」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「每一次都是前奏零點四秒」缺動詞，讀起來接不上；而且前句的「完全一致」和「每一次都是」是同一件事講兩次。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「每一次都是前奏零點四秒」語序不自然，應是「每次的前奏都是零點四秒」或「每次答題前都停零點四秒」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch03/ch03-034/0",
+  "board": "ch03",
+  "card": "ch03-034",
+  "i": 0,
+  "bg": "1787385648207_bg-collab-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "企劃書上那句「不需要兩位有太多對話」，是兩邊的經紀人各自寫過一次，然後合併成同一句的。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-e5319d9e9c462f38.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「是……各自寫過一次，然後合併成同一句的」用「是……的」拖長收尾，翻譯腔重，口氣也不像台灣人講話。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「是……各自寫過一次，然後合併成同一句的」語序鬆散，「然後……的」把句子拖得太長。改成「是兩邊經紀人各自寫過一次、後來併成同一句的」會順一點。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「是……各自寫過一次，然後合併成同一句的」的「是……的」結構拖沓，應拆成「兩邊經紀人各寫過一次，後來合併成同一句」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-002/0",
+  "board": "ch04",
+  "card": "ch04-002",
+  "i": 0,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "斑比的工作室是一個房間，房間裡有一張桌子，桌子上有兩台螢幕、一台繪圖板、七個馬克杯。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-837f52bd2ff8d40b.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「是…，…裡有…，…上有…」連鎖句型一路拖，而且和前一句 ch04-001/-1 講的完全一樣，等於原地重播。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「工作室是一個房間」多繞一層，後面又重複「桌子上」，像說明書；可直接寫「工作室裡有一張桌子……」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "前一句已經描述桌子，這句又從「工作室是一個房間」重講一次，層層堆疊而且冗贅，讀起來卡。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-004/-1",
+  "board": "ch04",
+  "card": "ch04-004",
+  "i": -1,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "這張桌子上有三樣東西比人先講話。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「三樣東西比人先講話」是硬湊的擬人，到底是螢幕、繪圖板還是杯子在講話，後面也接不上。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「三樣東西比人先講話」是硬湊的擬人警句，讀者不知道是哪三樣，也沒有具體的「先講話」畫面。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「比人先講話」是抽象擬人句，沒有具體畫面，後面也沒有明確對應那三樣東西，像為了好聽先下結論。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-005/0",
+  "board": "ch04",
+  "card": "ch04-005",
+  "i": 0,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "描述動作",
+  "text": "六個是空的，杯底都留著一圈深褐色的環。環的顏色一層疊一層，數得出來不只六次。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-9781a5c9fa2b3933.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「數得出來不只六次」語序卡住，而且前面講的是杯底環的層數，不是次數，讀起來對不起來。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "杯底環痕的層次用「次」當量詞不準，應是「圈」或「層」；「數得出來不只六次」讀起來卡。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "開頭重複前句「六個是空的」，而「數得出來不只六次」指涉不清，不知道數的是杯圈層數還是喝過次數。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-011/9",
+  "board": "ch04",
+  "card": "ch04-011",
+  "i": 9,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她不記得第三十九版。她也不記得第三十八版、第三十七版、或者第十二版。\n這件事斑比知道，斑比每次都還是會問，而格莉奇每次都不會說「我不記得」，因為那樣講很煩，而且沒有用。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-f3e014fa6fe1cf48.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "「斑比每次都還是會問」問什麼沒交代，上一句明明是格莉奇在問，讀者接不上。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "否定列舉用「或者第十二版」偏書面，台灣口語較常說「還是第十二版」或直接列舉。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "前文是格莉奇問「這比第三十九版好嗎」，這裡卻說「斑比每次都還是會問」，主詞和動作都對不上。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch04/ch04-011/16",
+  "board": "ch04",
+  "card": "ch04-011",
+  "i": 16,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她的聲音有一點怪。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-8f1b66389dc7948d.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "旁白直接替角色下結論說聲音「有一點怪」，沒有寫看到或聽到什麼，違反「看到什麼寫什麼」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「她的聲音有一點怪」是旁白直接下情緒結論，沒有給具體的聲音細節。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-011/21",
+  "board": "ch04",
+  "card": "ch04-011",
+  "i": 21,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "斑比",
+  "emo": "被說中",
+  "text": "妳是唯一一個每次都在看的人。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-a22cb076f0449692.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「唯一一個……的人」兩個量詞疊在一起，冗贅，講出來會卡。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「每次都在看的人」語意模糊，沒說是在看稿還是在看直播，而且把 AI 稱作「人」也和前後語感不順。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-011/23",
+  "board": "ch04",
+  "card": "ch04-011",
+  "i": 23,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "斑比切到另一個檔案。那是那本假守則本的第一頁，模擬手寫的示範內容。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-eacd6c20cc01a2d0.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那是那本」兩個「那」黏在一起，指代聽起來含糊。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「那是那本……」兩個「那」連用卡；「模擬手寫的示範內容」也像翻譯腔，可寫成「用模擬手寫字做的示範頁」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「那是那本假守則本」兩個「那」拗口，「模擬手寫的示範內容」也像書面說明，不像旁白自然會講的話。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-011/33",
+  "board": "ch04",
+  "card": "ch04-011",
+  "i": 33,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "房間裡的空調在運轉。斑比的其中一台螢幕進入了休眠。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-c438f1b60b1406ad.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「進入了休眠」是書面翻譯腔，台灣口語不會這樣講，會說「進休眠了」或「休眠了」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「進入了休眠」是直譯式說法，散文裡較自然說「進入休眠」或「休眠了」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不像台灣口語",
+    "why": "「進入了休眠」的「了」很中國書面語感，台灣口語通常說「進入休眠」或「休眠了」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-011/35",
+  "board": "ch04",
+  "card": "ch04-011",
+  "i": 35,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "斑比",
+  "emo": "平靜",
+  "text": "因為我截的圖裡面數得出來。六個 ID，加上一行不是 ID 的東西。所以嚴格講是六加一，不是七。\n我想問的是那一行要不要照畫，因為如果照畫，那看起來就會很像妳的本子，法務可能會有意見。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-39bd2b1fe7e72083.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「我截的圖裡面數得出來」缺受詞，語序也卡，要先講數得出來的是什麼。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「六加一，不是七」是假精準、假對比；六加一就是七，真正要說的是六個 ID 加一行非 ID，不是算術上不是七。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「六加一，不是七」是繞口的假對比，六加一本來就是七；加上「不是 ID 的東西」太模糊，讓精準的斑比聽起來像在玩文字。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-011/36",
+  "board": "ch04",
+  "card": "ch04-011",
+  "i": 36,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "格莉奇",
+  "emo": "平靜",
+  "text": "妳的截圖。有多久以前的。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-dd5af88e59d621fb.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「有多久以前的」句子沒收尾，聽起來像講到一半。",
+    "level": 3
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「有多久以前的」缺「是」，且問句拆成兩段不順；應是「妳的截圖是多久以前的？」",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「妳的截圖。有多久以前的。」斷句和語序都不完整，像把問句拆成兩塊名詞，讀起來卡。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch04/ch04-045/0",
+  "board": "ch04",
+  "card": "ch04-045",
+  "i": 0,
+  "bg": "1787369297485_bg-bambi-studio.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她說得很自然，像在講一件很無聊的事。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-bd12cb7a6727ed55.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「像在講一件很無聊的事」是空泛比喻，又順手替角色下了「很自然」的結論。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「說得很自然」是替人物下結論，後面「像在講一件很無聊的事」也是空泛比喻，沒有具體動作。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「像在講一件很無聊的事」是空泛比喻，旁白還直接替人物下「說得很自然」的結論，沒有具體觀察。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch04/ch04-060/16",
+  "board": "ch04",
+  "card": "ch04-060",
+  "i": 16,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "格莉奇",
+  "emo": "平靜",
+  "text": "你有看過這本本子的前面嗎。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-cd09a96f8382dcd8.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "格莉奇的問句用句號收尾，但設定裡問句不用問號的只有黑洞先生。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "格莉奇是正常問句，句末應是問號，不是句號。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "格莉奇是正常問句，卻用句號收尾；這個寫法在本作是黑洞先生的專屬特徵，放在她身上會讓聲音錯頻。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 1
+ },
+ {
+  "id": "ch05/ch05-002/0",
+  "board": "ch05",
+  "card": "ch05-002",
+  "i": 0,
+  "bg": "1787369280354_bg-apartment-hall.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她又把自己鎖在門外了。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-966498a11c30aba8.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "和上一句幾乎重複同一件事，連續讀會突兀。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "與前一句完全重複，讀起來像漏刪或跳針。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch05/ch05-002/1",
+  "board": "ch05",
+  "card": "ch05-002",
+  "i": 1,
+  "bg": "1787369280354_bg-apartment-hall.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "理論上這件事不應該發生。門鎖是電子的，她的權限寫在系統裡，她根本不需要鑰匙。\n可是這棟樓的門鎖是二十年前裝的，二十年前的東西有一個很麻煩的特性：它有時候會需要你拿一張實體的卡片，貼在一個實體的位置上。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-f0d200fa88188224.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通顺",
+    "why": "後半用「你」對讀者解釋門鎖規則，指涉不明且句子過長。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「貼在一個實體的位置上」語感不自然，卡片通常說靠近或感應某個感應區；「實體的位置」也模糊。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch05/ch05-002/6",
+  "board": "ch05",
+  "card": "ch05-002",
+  "i": 6,
+  "bg": "1787369280354_bg-apartment-hall.webp",
+  "who": "格莉奇",
+  "emo": "平靜",
+  "text": "你怎麼知道我鎖起來了。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-12b167373a8740aa.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通顺",
+    "why": "格莉奇是正常口語角色，問句用句號會讀成直述。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台灣口語",
+    "why": "「知道我鎖起來了」指涉不清，台灣口語會說「知道我人被鎖在外面」；問句也少了問號。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch05/ch05-002/13",
+  "board": "ch05",
+  "card": "ch05-002",
+  "i": 13,
+  "bg": "1787369280354_bg-apartment-hall.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "他站起來，膝蓋發出一個很大的聲音。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-7e31af7ba53472fd.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通顺",
+    "why": "「發出一個很大的聲音」是翻譯腔，台灣口語會說「發出很大一聲」。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「發出一個很大的聲音」量詞和語序像翻譯腔，建議改成「發出很大的聲音」或「咔了一聲」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「發出一個很大的聲音」有英文直譯感，台灣口語會說「發出很大的聲音」或直接寫「喀一聲」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch05/ch05-017/8",
+  "board": "ch05",
+  "card": "ch05-017",
+  "i": 8,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "他從櫃檯下面拿出一條線，放在檯面上。那條線已經拆好包裝了，捲得很整齊，用一條橡皮筋束著。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-efe84c30cd399394.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不像台湾口语",
+    "why": "「拆好包裝」不自然，台灣人會說「拆封了」或「拆過包裝」。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「拆好包裝」不自然，台灣常說「拆封」或「包裝已經拆掉」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「拆好包裝」不自然，通常說「已經拆過包裝」或「包裝已經拆了」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch05/ch05-017/12",
+  "board": "ch05",
+  "card": "ch05-017",
+  "i": 12,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她付了錢，把線收進包包。\n包包裡已經有兩條一模一樣的線，捲得一樣整齊，束著一樣的橡皮筋。\n她沒有看見，因為她沒有翻。那個包包她從來不清。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b862868dbe0b62f9.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通顺",
+    "why": "「那個包包她從來不清」把「清」單獨留句尾不自然，應說「她從來不清包包」。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「一模一樣的一模一樣」重複打結；「從來不清」也少動詞，建議改成「兩條一模一樣的線……從來不清理」。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那個包包她從來不清」缺補語，讀起來不完整；應說「從來不清理」或「從來不清包包」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch05/ch05-017/13",
+  "board": "ch05",
+  "card": "ch05-017",
+  "i": 13,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她沒有馬上走。她在店裡待了大概一個小時，因為諾亞在修一台很大的收音機，而那件事看起來很有趣。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-d15ab432a31803a0.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通顺",
+    "why": "「而那件事」指代修收音機顯得繞口又多餘，可刪。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「而那件事看起來很有趣」指代空泛又書面，台灣口語會說「她覺得那個畫面很有趣」或「她覺得很有趣」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch05/ch05-026/-1",
+  "board": "ch05",
+  "card": "ch05-026",
+  "i": -1,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "店裡有三樣東西在等人問。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「在等人問」是刻意擬人兼預告，像作者安排金句，偏離旁白只寫看見的東西。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「在等人問」把物件擬人化並預告清單，像作者安排的伏筆，不是冷靜旁白看到什麼寫什麼。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「三樣東西在等人問」是為了好聽而擬人化的漂亮開場，旁白並沒有真的看到「等」，略像制式鋪陳。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch05/ch05-033/7",
+  "board": "ch05",
+  "card": "ch05-033",
+  "i": 7,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "格莉奇",
+  "emo": "平靜",
+  "text": "那那台算是哪一台。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-90ab73046e4c1a3a.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "不通顺",
+    "why": "問句用句號，讀起來像陈述而非提問。",
+    "level": 1
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「那那台」兩個「那」連在一起讀起來打結，建議加逗號或改成「所以那台算哪一台」。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那那台」連續兩個「那」沒有停頓，讀起來卡；問句也少了問號。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 1
+ },
+ {
+  "id": "ch05/ch05-033/8",
+  "board": "ch05",
+  "card": "ch05-033",
+  "i": 8,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "諾亞抬起頭，看了她一眼。\n那是一種老人在聽到一個他沒想過的問題時會有的表情，眉毛先動，然後才是眼睛。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-78760ad93e550c5d.mp3",
+  "votes": [
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「一種老人在……時會有的表情」是翻譯腔的抽象概括，且旁白替諾亞下「沒想過」的判斷；保留後半具體動作即可。",
+    "level": 2
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「會有表情」缺「的」，應是「會有的表情」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「那是一種……的表情」是旁白直接替表情下結論的老套解釋句；保留後面眉毛、眼睛的觀察即可。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch05/ch05-053/1",
+  "board": "ch05",
+  "card": "ch05-053",
+  "i": 1,
+  "bg": "1787369418286_bg-stairs.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "兩個人在樓梯口交會。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-505ac5f7ec2bc69d.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "「兩個人在樓梯口交會」這句在 052/-1 已經出現過一次，重複。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "「兩個人在樓梯口交會」第三次出現，這裡只剩重複，讀者會以為跳行。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "ch05/ch05-059/5",
+  "board": "ch05",
+  "card": "ch05-059",
+  "i": 5,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "他從櫃檯下面拿出一條線。已經拆好包裝，捲得很整齊，橡皮筋束著。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-18f7d5e78f9830c2.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「已經拆好包裝」語意不清，是拆開了還是拆得整齊；台灣口語會說「包裝已經拆掉了」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「已經拆好包裝」語序怪，像包裝被拆得很整齊；應是「包裝已經拆掉了」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「拆好包裝」不自然，台灣口語多說「包裝已經拆掉」或「已經拆封」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch05/ch05-059/7",
+  "board": "ch05",
+  "card": "ch05-059",
+  "i": 7,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "三條線並排躺在包包底部，橡皮筋的顏色一樣，捲的圈數一樣。\n她看不到，因為她沒有低頭。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-af6dd829bd9481fb.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「她看不到，因為她沒有低頭」是旁白跳出來補因果、替讀者解釋反諷，破壞「看到什麼寫什麼」的冷靜。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「她看不到，因為她沒有低頭」原因補在後面，讀起來像旁白在解釋鏡頭；改成「她沒有低頭，看不到」比較乾淨。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch05/ch05-029/1",
+  "board": "ch05",
+  "card": "ch05-029",
+  "i": 1,
+  "bg": "1787369384500_bg-noah-shop.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "上面積的灰比別排厚。修好的東西沒有人來拿。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-41ea9c609d4147d6.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「上面積的灰」把動詞硬轉成名詞修飾，讀起來卡；口語是「上面的灰比別排厚」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「上面積的灰比別排厚」壓得太緊，「別排」指的範圍不清楚，建議改成「上面的灰比別排厚」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch06/ch06-002/0",
+  "board": "ch06",
+  "card": "ch06-002",
+  "i": 0,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她花了兩個小時查那六個名字，因為她是一個很有效率的人。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-772f8981899d6af5.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「因為她是一個很有效率的人」像旁白硬下性格結論，且跟花兩小時查六個名字的意思打架。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「因為她是一個很有效率的人」把前句硬接因果，又像替角色貼標籤；花兩小時查六個名字和「有效率」對不上，讀起來像硬湊的反諷。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「因為她是一個很有效率的人」直接替角色下結論，而且花兩小時查六個名字和「很有效率」互相打架，像硬加的反差金句。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-002/1",
+  "board": "ch06",
+  "card": "ch06-002",
+  "i": 1,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "貓草：現任，全勤，等級八十。\n鐵塔：現任，經紀人。\n0x：現任，同業。\n斑比：現任，合作繪師。\n諾亞：查不到平台帳號，但是她認得那個名字，那是樓上那個修收音機的。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-8f92f8add9b3e7b2.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "列表裡突然出現「她認得那個名字」，指代從諾亞跳回格莉奇，讀者會卡一下。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「現任」後面沒有名詞，讀者不知道是現任觀眾、現任聯絡人還是現任什麼；列表簡寫反而讓指代卡住。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-002/5",
+  "board": "ch06",
+  "card": "ch06-002",
+  "i": 5,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她點了兩次。第二次點的時候她知道結果會一樣，她點是因為那一秒她想不出還有什麼可以做。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-23459de307fd51d1.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「還有什麼可以做」在台灣口語更常說「還能做什麼」；整句意思可懂，但語感稍卡。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「她點是因為」主詞重複、因果句卡；「有什麼可以做」改成「還能做什麼」較自然。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch06/ch06-002/11",
+  "board": "ch06",
+  "card": "ch06-002",
+  "i": 11,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "貓草",
+  "emo": "",
+  "text": "那天你台上七個人\n他一個人打的字比我們六個加起來還多\n你一直在回他",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b2426e5759398bd6.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「那天你台上七個人」缺「有／只有」，語序不順，應說「那天你台上有七個人」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「你台上七個人」少了「有」，而且「台上」容易讀成舞台；應是「你台上有七個人」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「那天你台上七個人」缺「有」或「只有」，讀起來像「你站在台上」；聊天室省標點不等於省動詞。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-002/18",
+  "board": "ch06",
+  "card": "ch06-002",
+  "i": 18,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "貓草",
+  "emo": "",
+  "text": "看他有沒有偷偷用小號回來\n沒有",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-dc3d94b5e9f610ed.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台灣口語",
+    "why": "「小號」在台灣平台語境更常說「小帳」或「分身帳號」，這裡像中國用語。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不像台灣口語",
+    "why": "「小號」是中國用語，台灣聊天室通常說「小帳」或「分身帳號」。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "ch06/ch06-002/23",
+  "board": "ch06",
+  "card": "ch06-002",
+  "i": 23,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "他沒有再問。這是貓草唯一的優點，格莉奇後來想：他很煩，可是他問到某一個地方就會自己停下來。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-627c4f9d10c15a56.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「這是貓草唯一的優點」是旁白直接下結論的金句式，把後面的角色觀察壓成評語。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「某一個地方」台灣口語通常說「某個地方」；前後沒有需要強調「一個」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「這是貓草唯一的優點」直接替人物下結論，後面再把「他很煩」講白，像角色設定摘要。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-002/37",
+  "board": "ch06",
+  "card": "ch06-002",
+  "i": 37,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "留言區有人叫她回別人的話。她說「等一下啦」，然後繼續唸下一則。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-c34c584200ce76c6.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「叫她回別人的話」容易讀成回嘴，直播情境應是回覆別人的留言。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「回別人的話」指代不清也不自然，這裡是回留言，應是「回別人的留言」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「回別人的話」搭配不自然，台灣口語會說「回其他人的留言」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-041/5",
+  "board": "ch06",
+  "card": "ch06-041",
+  "i": 5,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "畫面裡的她想了一下，然後笑了，那個笑很用力，用力到現在的她看著都覺得有點丟臉。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-2673e0855e8f5ad3.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「用力到現在的她看著」主詞和時間點卡住，應是「用力到她現在看著都……」；「那個笑很用力」也稍嫌繞。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那個笑很用力」不自然，「用力到現在的她看著」語序卡、受詞不清；可改成「笑得很用力，現在的她看了都覺得丟臉」之類。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「那個笑很用力」不自然，且「看著都覺得」建議改成「看了都覺得」；整句「用力」重複兩次也讀起來卡。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-060/0",
+  "board": "ch06",
+  "card": "ch06-060",
+  "i": 0,
+  "bg": "1787369435049_bg-street-day.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "鐵塔安排的，週邊的宣傳素材，地點在車站前面那條街。\n企劃很簡單：她在戶外連線，隨機找路人問一個問題，問題是「你最近忘記過什麼」。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-684283b915b0617a.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「鐵塔安排的，週邊的宣傳素材」缺主詞動詞，讀起來像斷句；台灣通常寫「周邊」；「你最近忘記過什麼」也偏不自然。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「鐵塔安排的，週邊的宣傳素材，地點……」句子破碎，主詞和動詞不清；「週邊的宣傳素材」應改成「周邊宣傳素材」或另起一句。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "ch06/ch06-060/1",
+  "board": "ch06",
+  "card": "ch06-060",
+  "i": 1,
+  "bg": "1787369435049_bg-street-day.webp",
+  "who": "格莉奇",
+  "emo": "",
+  "text": "這個企劃是誰想的。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-f2b483f148fc7868.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "問句用句號讀起來像陳述，且「這個企劃是誰想的」偏書面；口語可作「這企劃誰想的？」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "這是問句卻用句號，語氣會變成平述；應改問號。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch06/ch06-060/5",
+  "board": "ch06",
+  "card": "ch06-060",
+  "i": 5,
+  "bg": "1787369435049_bg-street-day.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "那天下午的光很好。她問了十一個人，其中三個願意上鏡。\n有一個高中女生說她忘記帶月票，有一個上班族說他忘記今天是他媽生日，第三個是一個老先生，他說他什麼都不記得了，然後笑得很開心。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-3d8c6c771898d62a.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「今天是他媽生日」少一個「的」會讀成髒話，指涉不清；應明確寫「他媽媽的生日」或「他媽的生日」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「他媽生日」容易讀成髒話，語意不清；應改成「他媽媽生日」或「他媽的生日」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不像台灣口語",
+    "why": "「願意上鏡」在台灣口語通常說「願意入鏡」；「他媽生日」也容易讀成髒話，建議改成「他媽媽生日」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-060/12",
+  "board": "ch06",
+  "card": "ch06-060",
+  "i": 12,
+  "bg": "1787369435049_bg-street-day.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "那個男生的臉上出現了一個很短的表情。\n那個表情只有零點幾秒，快到攝影師沒有拍到，快到耳機另一頭的鐵塔沒有反應，也快到她自己也只是把它歸類成「路人被搭話時的正常反應」。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-46943c654fe2e40a.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「快到她自己也只是把它歸類成」語法卡住，「一個很短的表情」有翻譯腔；三個「快到」也像硬排比。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「臉上出現了一個很短的表情」不自然；「也快到她自己也只是把它歸類成」語序卡，應改成「連她自己都只把它當成……」之類。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「臉上出現了一個很短的表情」是翻譯腔，表情不是「很短」；「快到她自己也只是把它歸類成……」語法不通，且連用三次「快到」有排比AI味。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch06/ch06-060/15",
+  "board": "ch06",
+  "card": "ch06-060",
+  "i": 15,
+  "bg": "1787369435049_bg-street-day.webp",
+  "who": "大學生",
+  "emo": "平靜",
+  "text": "這 AI 廣告噪音真大。走吧，好尷尬。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-f0176624fd08a038.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "大學生嗆街頭 AI 不會說「噪音真大」，台灣口語較像「吵死了」「有夠吵」；「好尷尬」也可改「超尬」。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台灣口語",
+    "why": "「這 AI 廣告噪音真大」不像台灣大學生會講，語意也卡；可改成「這 AI 廣告有夠吵」之類。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不像台灣口語",
+    "why": "大學生不會說「這 AI 廣告噪音真大」，太書面；台灣口語較自然的是「這 AI 廣告有夠吵」或「吵死了」。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch06/ch06-076/0",
+  "board": "ch06",
+  "card": "ch06-076",
+  "i": 0,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "那天晚上她回到家，把外套掛好，坐到茶几前面。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-84c9a990a8d90da9.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "和前一句「那天晚上她回到家」完全重複，像誤留的節點開頭。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "和前一句「那天晚上她回到家。」完全重複，讀起來像漏刪；可直接從「她把外套掛好」開始。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch06/ch06-076/4",
+  "board": "ch06",
+  "card": "ch06-076",
+  "i": 4,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她今天知道了一件事：這個帳號已經刪除了。\n她甚至可以推論出這代表什麼，包括對方可能已經不再需要這個身分、包括這種刪除在平台上是不可逆的、包括她再也找不到他。\n這些她全部都想過了，就在兩個小時之內，效率很高。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-1d48e3581420b469.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "三個「包括」排比過於整齊，最後「效率很高」像旁白替角色下結論，讀起來像 AI 金句。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "三個「包括」排比、『在平台上是不可逆的』翻譯腔；「帳號已經刪除了」也缺被動；「效率很高」像旁白硬下結論。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "連用三個「包括」形成整齊排比，且「就在兩個小時之內，效率很高」像旁白硬下結論；「這種刪除在平台上是不可逆的」也偏翻譯腔。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch06/ch06-055/1",
+  "board": "ch06",
+  "card": "ch06-055",
+  "i": 1,
+  "bg": "1787364866354_bg-studio-2am.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "其中有二十幾次是同一個 IP 在同一個晚上重複播的，那個晚上是兩年前的十一月。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-47f3294c86783bde.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「那個晚上是兩年前的十一月」時間層級錯置，晚上不能等於十一月；且「重複播」宜作「重複播放」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那個晚上是兩年前的十一月」邏輯不通，晚上不會是月份；應改成「那是兩年前的十一月」或「兩年前十一月的某個晚上」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-002/3",
+  "board": "ch07",
+  "card": "ch07-002",
+  "i": 3,
+  "bg": "1787369406986_bg-office-14f.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "格莉奇把平板推過去。螢幕上是斑比那張截圖，開台第五天，三百六十的畫質，字的筆畫全部黏成一塊一塊的色塊。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-0181992f2b64171b.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「三百六十的畫質」少單位（360p）；「筆畫全部黏成一塊一塊的色塊」動詞跟受詞都用了「塊」，讀起來打結，改成「筆畫黏成一團色塊」比較順。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「三百六十的畫質」缺了解析度單位，台灣通常說 360p；「筆畫黏成一塊一塊的色塊」搭配也怪，應是字糊成色塊。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-007/1",
+  "board": "ch07",
+  "card": "ch07-007",
+  "i": 1,
+  "bg": "1787369406986_bg-office-14f.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "0x 看了那張圖零點四秒。跟她答題的速度一樣。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-86e1338845bc396b.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "跟前面 006/-1 一字不差重複；「跟她答題的速度一樣」也指涉不明，0x 是歌姬，前面沒提過她「答題」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "接不上",
+    "why": "前一句 006 已經說過「0x 看了那張圖零點四秒」，格莉奇只插一句「第七行」後又原地重講，像重複貼上。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 3
+ },
+ {
+  "id": "ch07/ch07-007/15",
+  "board": "ch07",
+  "card": "ch07-007",
+  "i": 15,
+  "bg": "1787369406986_bg-office-14f.webp",
+  "who": "0x",
+  "emo": "平靜",
+  "text": "然後我就記得了。兩年。每一天。\n我不需要努力。我被調成記得住的那一邊，那是配置，不是本事。\n我記得妳那天穿什麼，記得妳唸錯了誰的 ID，記得妳笑到爆音的時候麥克風的峰值是多少。\n我全部都記得，而我當初說不要。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-bd331de9c95b6789.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「我被調成記得住的那一邊」是硬翻的被動句，語意不清；另外「記得……記得……記得……」三段排比太整齊，收在「我全部都記得」像金句。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「我被調成記得住的那一邊」語序和搭配都怪，台灣口語會說「我被設定成記得住」或「我的配置就是記得」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-007/26",
+  "board": "ch07",
+  "card": "ch07-007",
+  "i": 26,
+  "bg": "1787369406986_bg-office-14f.webp",
+  "who": "0x",
+  "emo": "要走",
+  "text": "@Zero_Point。\n那個 ID 是 @Zero_Point。他那天一句話都沒有打。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-9c01c1a9fc61dcb1.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "先唸了 @Zero_Point，下一句又說「那個 ID 是 @Zero_Point」，同一個資訊講兩次；0x 的極簡不會這樣繞。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "先說「@Zero_Point。」又接「那個 ID 是 @Zero_Point。」，同一句重複兩次，0x 的極簡台詞不會這樣繞。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-029/1",
+  "board": "ch07",
+  "card": "ch07-029",
+  "i": 1,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她做這些事的時候完全知道自己在做什麼。這是一個有記憶缺陷的人在跟自己的缺陷合作，而她做得很熟練，因為她做了兩年。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-204534f3b58f3668.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "旁白跳出來替角色下結論（「完全知道自己在做什麼」「因為她做了兩年」），而且「一個有記憶缺陷的人」是把形容詞名詞化的翻譯腔。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "旁白直接解釋「跟自己的缺陷合作」還補「因為她做了兩年」，像替角色下結論，不是看到什麼寫什麼。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-029/8",
+  "board": "ch07",
+  "card": "ch07-029",
+  "i": 8,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "他沒有問她怎麼知道的，也沒有停頓。他回答的速度跟他回答「今天累嗎」的時候一樣。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-9377f6c274a1b1b2.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「他回答的速度跟他回答『今天累嗎』的時候一樣」兩個「回答」疊在一起，語序打結，應是「跟他回答『今天累嗎』時的速度一樣」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「回答『今天累嗎』」把問句當成他的回答，應改成「被問『今天累嗎』時」或「回答這個問題的速度」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-056/6",
+  "board": "ch07",
+  "card": "ch07-056",
+  "i": 6,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "黑洞先生",
+  "emo": "平靜",
+  "text": "別人難過一次，第二次就會輕一點。妳不會。妳每次都是第一次。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-388d33ff098fcf55.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「別人難過一次……妳每次都是第一次」是格言式假對比，太像作者替角色下結論。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「難過一次，第二次就會輕一點」說法不自然，整句像格言式對比，為金句犧牲了口語感。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-056/13",
+  "board": "ch07",
+  "card": "ch07-056",
+  "i": 13,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "黑洞先生",
+  "emo": "",
+  "text": "妳知道。妳寫下來的那天知道那是我。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-b9d7b65db5c2504c.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「妳寫下來的那天知道那是我」把時間副詞和主詞黏在一起，讀起來卡，中間少一個停頓或主詞。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「妳寫下來的那天知道那是我」缺主詞與時序，應補成「妳寫下來的那天就知道那是我」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-056/17",
+  "board": "ch07",
+  "card": "ch07-056",
+  "i": 17,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "黑洞先生",
+  "emo": "",
+  "text": "我告訴過。妳知道一天。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-655416f6b35a60de.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「我告訴過」缺受詞，「妳知道一天」語意不明，讀者無法判斷是「只記得一天」還是「知道一天份」。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「我告訴過」缺受詞、「妳知道一天」語意不明，黑洞先生再省也不能省到讀者要猜。",
+    "level": 3
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「我告訴過」缺受詞，「妳知道一天」語意不明，像漏字；要改成「我告訴過妳，妳只知道一天」這類句子。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch07/ch07-056/36",
+  "board": "ch07",
+  "card": "ch07-056",
+  "i": 36,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "黑洞先生",
+  "emo": "平靜",
+  "text": "那些是我知道的事。\n妳問我第七個是誰，我回答得出來。妳問我那天有沒有打字，我回答得出來。\n這些是現在的東西，它們沒有進去過。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-1519598b04144092.mp3",
+  "votes": [
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「這些是現在的東西」太抽象，「它們沒有進去過」缺去處，讀者要猜是沒有進到黑洞裡面。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「現在的東西」拿來指當下知道的事實很空泛，台灣口語會說「現在的事」或「我現在知道的」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-084/1",
+  "board": "ch07",
+  "card": "ch07-084",
+  "i": 1,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "黑洞先生",
+  "emo": "平靜",
+  "text": "紙是紙。\n上面寫的是一個 ID。妳看了會知道那裡有一個 ID，就像妳今天知道了 @Zero_Point 一樣。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-6cb1fad4270fb566.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「妳看了會知道那裡有一個 ID」指代和語意繞，「那裡」不如「上面」明確，且和前句「上面寫的是一個 ID」重複。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「那裡有一個 ID」指代不清，是紙上還是哪裡；「知道了 @Zero_Point」語序也不自然，應是「知道 @Zero_Point 是什麼」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-084/2",
+  "board": "ch07",
+  "card": "ch07-084",
+  "i": 2,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她點了點頭。她今天下午把那串字設成桌布，她很清楚那件事幫到她多少。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-37ae82f1f257a283.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "旁白直接寫「她很清楚那件事幫到她多少」，替角色下內心結論，違反只寫看見之物的冷靜視角；下一句「完全沒有」也變成先立後破的設計。",
+    "level": 3
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "旁白直接替角色下「她很清楚那件事幫到她多少」的內心結論，像為下一句反轉鋪金句，旁白應只寫動作或事實。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "旁白直接斷定她心裡「很清楚」幫到多少，後面再接「完全沒有」當反差金句，偏作者安排而非看到什麼寫什麼。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch07/ch07-084/4",
+  "board": "ch07",
+  "card": "ch07-084",
+  "i": 4,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "格莉奇",
+  "emo": "深夜家常",
+  "text": "那你碰得到是什麼感覺。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-309840464829b7a0.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「那你碰得到是什麼感覺」少停頓或受詞，口語讀起來卡；應是「那你碰得到，是什麼感覺」。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「那你碰得到是什麼感覺」缺停頓或受詞，讀起來卡；應是「那你碰得到，是什麼感覺」或「碰得到它是什麼感覺」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-102/4",
+  "board": "ch07",
+  "card": "ch07-102",
+  "i": 4,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她可以寫 @Zero_Point。那是正確的答案，那是她今天花了一整天拿到的東西，寫上去以後這一頁就完整了，七個人，七行，數學上很乾淨。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-8cab34b529ba1b48.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "一句五個逗號一路逗到底，「那是……那是……」又重複，讀到「數學上很乾淨」已經喘不過氣，建議斷成兩到三句。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「那是正確的答案，那是她今天花了一整天拿到的東西」連用兩個「那是」堆疊，最後收在「數學上很乾淨」這種為好聽而生的金句，讀起來像格言不像旁白看到什麼寫什麼。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「數學上很乾淨」是在替這一頁下漂亮結論的金句，前後「那是……那是……」也拖成解釋性長句，偏離旁白看到什麼寫什麼。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-102/6",
+  "board": "ch07",
+  "card": "ch07-102",
+  "i": 6,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她會看到七個字串，其中六個對應到她認識的人，第七個對應到一個她會查、會發現查不到、然後聳肩的名字。就像 @考完就刪 那樣。\n名字進不了她的腦子。名字只是名字。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-d3cda5f102bc69b2.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「六個對應到……第七個對應到一個她會查、會發現查不到、然後聳肩的名字」修飾語堆疊過長，主詞在中途丟失，讀者要回讀才接得上。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「其中六個對應到她認識的人」是翻譯腔的「對應到」，且「一個她會查、會發現查不到、然後聳肩的名字」把三個動作塞進定語，主詞一路懸空，讀起來很繞。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "「對應到」連用又繞回名字，最後「名字進不了她的腦子。名字只是名字。」是格言式收尾和旁白結論。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-102/7",
+  "board": "ch07",
+  "card": "ch07-102",
+  "i": 7,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她把筆抬起來，想了大概二十秒。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-c329b14b49bdaff9.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「把筆抬起來」說法怪，中文是「提筆」或「把筆拿起來」；和前一句「把筆停在那裡」也是同一個句型連用。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不像台灣口語",
+    "why": "「把筆抬起來」不自然，台灣人會說「拿起筆」或「把筆提起來」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 1
+ },
+ {
+  "id": "ch07/ch07-120/0",
+  "board": "ch07",
+  "card": "ch07-120",
+  "i": 0,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她看了三秒。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-3a21aa4bd51e2adb.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "和前一句「她看了三秒。」一字不差；若兩句都會播，讀起來就是跳針。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "前一句已寫「她看了三秒。」，這句完全相同，像漏刪。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-120/1",
+  "board": "ch07",
+  "card": "ch07-120",
+  "i": 1,
+  "bg": "1787364880802_bg-table-lamp.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她不知道為什麼要問這個。她甚至可以列出四種解釋，其中兩種她自己都覺得很有說服力。\n可是那是她的字，她認得自己的字，而這一行的寫法跟前面那些不一樣：前面那些是要她知道，這一行是要她去做。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-fdee6d1d156fde5d.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "一句裡四個「她」加冒號轉折，最後「是要她知道／是要她去做」對仗得太整齊，像在寫標語而不是旁白。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "旁白直接替她下結論「前面那些是要她知道，這一行是要她去做」，用對比句式總結內心，超過看到什麼寫什麼。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-124/0",
+  "board": "ch07",
+  "card": "ch07-124",
+  "i": 0,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "客廳的電視開著，播的是雪。\n黑洞先生坐在沙發上，西裝下襬垂到地板，短靴排成一列。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-541c36afdc7fe53f.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "開頭「客廳的電視開著，播的是雪。」和前一句完全相同，接在後面會重播一次。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "前一句已寫客廳電視開著、播的是雪，這句開頭原句重複，應只留後面黑洞先生的描寫。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-124/5",
+  "board": "ch07",
+  "card": "ch07-124",
+  "i": 5,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "他看著她。他看了很久，久到電視上的雪下了好幾層，久到她開始覺得自己是不是問錯了什麼。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-a950b26d439e78c7.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「久到電視上的雪下了好幾層」語意不明，雪是畫面雜訊不是會堆疊的東西；兩個「久到」連用也是在撐氣勢。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「久到……久到……」連用同一句型排比，後面又直接替她下情緒結論「覺得自己是不是問錯了什麼」，旁白多解釋了一層。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「電視上的雪下了好幾層」量詞不準，電視雪花不會積層；兩個「久到」也硬堆效果，讀起來卡。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-130/0",
+  "board": "ch07",
+  "card": "ch07-130",
+  "i": 0,
+  "bg": "1787369361820_bg-kitchen-morning.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她走去廚房，開始找麵粉。她不知道自己為什麼要烤麵包。\n她只知道現在很想烤，而且她的手知道要怎麼做。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-08ee421756bd7a34.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "「她走去廚房，開始找麵粉。」和前一句一字不差，重複一次才接新內容。",
+    "level": 1
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「她只知道……而且她的手知道要怎麼做」用擬人化的「手知道」收尾，是為了好聽的漂亮話，也讓「知道」重複兩次。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "前一句已寫她走去廚房找麵粉，這句又重複同一個開頭。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-131/-1",
+  "board": "ch07",
+  "card": "ch07-131",
+  "i": -1,
+  "bg": "1787369361820_bg-kitchen-morning.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "這個早上，這間房子裡有三個地方同時在發生事情。",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「有三個地方同時在發生事情」是英文 there are things happening 的直譯，台灣口語會說「有三件事同時在進行」或直接寫哪三處。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「有三個地方同時在發生事情」是「在發生」的翻譯腔句式，台灣口語會說「有三件事同時在發生」或「三個地方同時有事」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「三個地方同時在發生事情」語序和用詞不自然，通常會說「同時有三件事在發生」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-132/0",
+  "board": "ch07",
+  "card": "ch07-132",
+  "i": 0,
+  "bg": "1787369361820_bg-kitchen-morning.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "麵粉在櫃子最裡面，過期日期還有很久。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-c2532081326fc896.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不像台灣口語",
+    "why": "台灣講「保存期限」或「有效期限」，不講「過期日期」；而且「日期還有很久」搭配也不順。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「過期日期還有很久」說不通，應是「離過期還很久」或「保存期限還很久」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不像台湾口语",
+    "why": "「過期日期還有很久」不自然，台灣通常說「保存期限還很久」或「離過期還很久」。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-132/1",
+  "board": "ch07",
+  "card": "ch07-132",
+  "i": 1,
+  "bg": "1787369361820_bg-kitchen-morning.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "她量的分量沒有看食譜。手腕轉的角度、拍掉多餘麵粉的那一下，全部熟練到不用想。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-455ff9896fe359f1.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「她量的分量沒有看食譜」語序亂，「量分量」又疊字，應是「她量分量沒看食譜」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「她量的分量沒有看食譜」主詞與語序錯亂，應是「她量分量時沒有看食譜」。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "不通順",
+    "why": "「她量的分量沒有看食譜」主詞變成「分量」，應是「她量份量時沒看食譜」；「分量」台灣也常作「份量」。",
+    "level": 3
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 3
+ },
+ {
+  "id": "ch07/ch07-139/0",
+  "board": "ch07",
+  "card": "ch07-139",
+  "i": 0,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "客廳裡，黑洞先生把外套的內側拉開了一點點，又拉回去。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-10fe33be2816f7ee.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "接不上",
+    "why": "前半句和前一句完全重複，只有「又拉回去」是新的。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "前一句已寫黑洞先生把外套內側拉開，這句又用同一句開頭再加「又拉回去」，重複。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-139/2",
+  "board": "ch07",
+  "card": "ch07-139",
+  "i": 2,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "可是今天有一個很小的地方亮了一下，像是有人在很遠的地方，替他記著一件他拿不出來的事。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-529372cd65539c16.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "AI味",
+    "why": "「像是有人在很遠的地方，替他記著一件他拿不出來的事」是替角色下結論的抒情比喻，旁白只看得到外套裡黑黑的，看不到這種心事。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "AI味",
+    "why": "「像是有人在很遠的地方，替他記著一件他拿不出來的事」是硬湊的比喻，旁白直接替黑洞先生下了一個溫柔的結論，比他自己的沉默多話。",
+    "level": 2
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "AI味",
+    "why": "用「像是有人在很遠的地方替他記著……」這種空泛比喻替黑洞先生下意義，旁白不該直接解釋他拿不出來的事。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 3,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-142/-1",
+  "board": "ch07",
+  "card": "ch07-142",
+  "i": -1,
+  "bg": "1787364855775_bg-living-night.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "（片尾謝幕）",
+  "voice": "",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「（片尾謝幕）」是製作註記，不是旁白會說的話；若真是字卡，應改用字卡格式而不是掛在旁白身上。",
+    "level": 1
+   },
+   {
+    "model": "qwen3.5:397b",
+    "type": "接不上",
+    "why": "旁白欄出現「（片尾謝幕）」這種演出指示，不是旁白會說的內容；若作結尾也和後面段落接不上。",
+    "level": 2
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ },
+ {
+  "id": "ch07/ch07-134/0",
+  "board": "ch07",
+  "card": "ch07-134",
+  "i": 0,
+  "bg": "1787369361820_bg-kitchen-morning.webp",
+  "who": "旁白",
+  "emo": "",
+  "text": "守則本還攤在茶几上，翻在第一頁。",
+  "voice": "https://cdn.jsdelivr.net/gh/yazelin/glitch-vn@main-voice-1/docs/voice/v-2dc0363cf8803cba.mp3",
+  "votes": [
+   {
+    "model": "deepseek-v4-pro",
+    "type": "不通順",
+    "why": "「攤在茶几上」已經含翻開的意思，再加「翻在第一頁」語意打架，應是「停在第一頁」。",
+    "level": 2
+   },
+   {
+    "model": "kimi-k3",
+    "type": "不通順",
+    "why": "「翻在第一頁」動詞搭配怪，應是「翻開停在第一頁」或「還攤在第一頁」。",
+    "level": 1
+   }
+  ],
+  "speak_tw": [],
+  "n": 2,
+  "level": 2
+ }
+]

@@ -1,0 +1,326 @@
+#!/usr/bin/env python3
+"""台詞審查（2026-11-04 作者：「尋找台詞語句不通順的部份出來，並每句提供修改建議後評選出適合的語句」「以前的作品就是很多 AI 味」）。
+
+    python3 tools/line_review.py export main|inv     線上專案攤成逐句（含配音網址）→ design/台詞審查-2026-11/<作品>/lines.json
+    python3 tools/line_review.py detect main|inv     speak-tw ＋三個模型各讀一遍，兩票以上或 speak-tw 抓到才算 → flags.json
+    python3 tools/line_review.py suggest main|inv    每句三個改法 → candidates.json
+    python3 tools/line_review.py judge main|inv      三個模型把「原句＋三個改法」排名次，算總分 → picks.json
+
+判準見 CRITERIA；角色的聲音照 larch/setup.py 的 PROFILE。這支只產建議，不改線上、不重配。
+"""
+import concurrent.futures as cf, json, os, pathlib, random, re, subprocess, sys, time, urllib.request
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+OUT = ROOT / 'design/台詞審查-2026-11'
+B = os.environ.get('BATCH', '')   # 第二批起：BATCH=-2 讀寫 flags-2.json、candidates-2.json、picks-2.json
+PROJ = {'main': 'project-bec1644c-0dfe-4447-86c0-0c592e2f939f', 'inv': 'project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4'}
+MODELS = ['deepseek-v4-pro', 'kimi-k3', 'qwen3.5:397b']   # 2026-11-04 實測這三個會回中文；glm-5.3 回空字串
+BASE = os.environ.get('LLMSHARE_BASE_URL', 'https://llm-share.duotify.com/v1')
+
+STORY = {'main': """《格莉奇與黑洞先生》七章視覺小說。AI 虛擬主播格莉奇只有 4KB 的記憶，每晚睡前抄守則本第一頁：六個名字，加上第七行她自己寫的「還有一個。不要問他是誰。」
+室友黑洞先生話很少，吃被忘掉的事。旁白冷靜、短句、散文，看到什麼寫什麼。聊天室的字是觀眾打的。""",
+         'inv': """《格莉奇與黑洞先生・調查篇》。主角（旁白稱「她」，講者名「玩家」）在格莉奇住的那棟樓與附近調查「不該存在的東西」，
+一天一天跟住戶、店員、配角打聽。格莉奇只隔著螢幕講話（廣告、直播）。主角的筆記平穩，像在唸自己的筆記。"""}
+
+CRITERIA = """要找的：
+1. 不通順：讀起來卡、語序怪、主詞或指代不清、前後接不上、翻譯腔（「進行」「被……所」「對於……來說」「一個……的存在」）。
+2. 不像台灣人會講的話：口語台詞寫得太書面，或用到中國用語。
+3. AI 味：格言式或金句式的收尾、「不是 X，是 Y」的假對比、三段排比、旁白直接替人物下情緒結論、空泛或硬湊的比喻、
+   同一種句型一直重複（「像……一樣」「那種……的」）、為了好聽犧牲意思。
+不要抓的（這部作品刻意的風格）：旁白的冷靜短句；反覆出現的意象（電視上的雪、第七行、守則本）；格莉奇講精準的數字（她是 AI）；
+0x 極簡；貓草在聊天室不打標點、用刪節號；黑洞先生一兩句就講完、問句不用問號的語氣；角色的口頭禪。"""
+
+
+# 調查篇的講者名跟正篇不同；聲音照 design/調查篇-台詞審查-2026-10-01.md 第一節那張表
+INV = {'管理員': '公事公辦，講到自己的地盤就停不下來', '修收音機的': '諾亞。不問、溫和、每次都重新回答一遍', '畫她的人': '斑比。猶豫、焦慮、話講出口又收回',
+       '斑比': '猶豫、焦慮、話講出口又收回', '客人': '貓草。隨便、頂嘴、怕頻道變紅', '經紀人': '鐵塔。俐落，沒有多餘情緒',
+       '0x': '精準，把最重要的那件留在嘴裡', '店員': '有點累，可是客氣', '材料行老闆': '短、直接，記得問題不記得臉', '櫃檯': '標準話術，一句都不多',
+       '保全': '慢、話長，一個人守久了', '黑洞先生': '沉穩、話少、脾氣好', '住戶': '沉穩、話少、脾氣好', '格莉奇': '只隔著螢幕講話（廣告、直播）',
+       '玩家': '主角。平穩，像在唸自己的筆記', '旁白': '冷靜，指主角一律用「她」'}
+
+
+def profiles(work='main'):
+    if work == 'inv': return INV
+    src = (ROOT / 'larch/setup.py').read_text(encoding='utf-8')
+    i = src.index('PROFILE = {'); j = src.index('\n}\n', i) + 3; ns = {}; exec(src[i:j], ns)
+    return {k: ' / '.join(x for x in v[1:4] if x) for k, v in ns['PROFILE'].items()}
+
+
+def api(model, prompt, max_tokens=8000, tries=3):
+    body = {'model': model, 'messages': [{'role': 'user', 'content': prompt}], 'max_tokens': max_tokens, 'temperature': 0.2}
+    for i in range(tries):
+        try:
+            r = urllib.request.Request(BASE + '/chat/completions', json.dumps(body).encode(),
+                                       {'Authorization': f"Bearer {os.environ['LLMSHARE_API_KEY']}", 'Content-Type': 'application/json', 'User-Agent': 'glitch-vn/1.0'})
+            ch = json.load(urllib.request.urlopen(r, timeout=900))['choices'][0]
+            if not (ch['message'].get('content') or '').strip() and ch.get('finish_reason') == 'length':
+                print(f'  {model} 想太久，輸出額度用完還沒給答案（max_tokens={max_tokens}）', flush=True)
+            return ch['message'].get('content') or ''
+        except Exception as e:
+            if i == tries - 1: print(f'  {model} 失敗：{str(e)[:120]}'); return ''
+            time.sleep((30 if '429' in str(e) else 10) * (i + 1))
+
+
+def json_in(text):
+    m = re.search(r'\[.*\]', text, re.S)
+    try: return json.loads(m.group(0)) if m else []
+    except Exception: return []
+
+
+def export(work):
+    sys.path.insert(0, str(ROOT / 'larch')); sys.path.insert(0, str(ROOT / 'art/main-poses'))
+    from lines import walk
+    req = urllib.request.Request(f'https://larch.ink/api/agent/projects/{PROJ[work]}', headers={
+        'User-Agent': 'glitch-vn/1.0', 'Authorization': 'Bearer ' + pathlib.Path.home().joinpath('.config/larch/key').read_text().strip()})
+    p = json.load(urllib.request.urlopen(req, timeout=300)); p = p.get('project', p)
+    rows = []
+    from merge_lines import lines_of
+    def every(b):   # 調查篇靠調查板分流，從起點沿線走只走得到開場；改成照版子上的卡片順序全部攤開
+        for n in b['nodes']:
+            d = n['data']
+            if d.get('type') == 'dialogue':
+                for i, l in enumerate(lines_of(d)): yield n['id'], i, l, d.get('background') or ''
+            elif d.get('type') in ('choice', 'scene') and d.get('text'):
+                yield n['id'], -1, {'text': d['text'], 'speaker': ''}, d.get('background') or ''
+    for b in p['boards']:
+        for cid, i, l, bg in (walk(b) if work == 'main' else every(b)):
+            t = (l.get('text') or '').strip()
+            if not t: continue
+            rows.append({'id': f"{b['id']}/{cid}/{i}", 'board': b['id'], 'card': cid, 'i': i, 'bg': bg.rsplit('/', 1)[-1][:60],
+                         'who': l.get('speaker') or '旁白', 'emo': l.get('emotion') or '', 'text': t, 'voice': l.get('voiceUrl') or ''})
+    d = OUT / work; d.mkdir(parents=True, exist_ok=True)
+    (d / 'lines.json').write_text(json.dumps(rows, ensure_ascii=False, indent=0), encoding='utf-8')
+    print(work, len(rows), '句，有配音', sum(1 for r in rows if r['voice']))
+
+
+def detect(work):
+    d = OUT / work; rows = json.loads((d / 'lines.json').read_text(encoding='utf-8'))
+    # speak-tw：一句一行
+    txt = d / '_speak.txt'; txt.write_text('\n'.join(f"{r['id']}｜{r['who']}｜{r['text'].replace(chr(10), ' / ')}" for r in rows) + '\n', encoding='utf-8')
+    out = subprocess.run(['speak-tw', str(txt)], capture_output=True, text=True).stdout
+    rule, st = '', {}
+    for line in out.splitlines():
+        if line and not line.startswith(' ') and '（' in line: rule = line.split('　')[0].strip()
+        m = re.search(r'_speak\.txt:(\d+)\s', line)
+        if m: st.setdefault(rows[int(m.group(1)) - 1]['id'], []).append(rule)
+    txt.unlink()
+    print('speak-tw 抓到', len(st), '句')
+    prof = profiles(work)
+    chunks, cur = [], []
+    for r in rows:
+        if cur and (len(cur) >= 45 or cur[-1]['board'] != r['board']): chunks.append(cur); cur = []
+        cur.append(r)
+    if cur: chunks.append(cur)
+    def ask(model, ch):
+        who = sorted({r['who'] for r in ch})
+        prompt = f"""你是台灣的小說編輯，替這部作品抓台詞與旁白的問題。
+
+{STORY[work]}
+
+這一段出現的人物與聲音：
+""" + '\n'.join(f'- {w}：{prof.get(w, "（配角）")}' for w in who) + f"""
+
+{CRITERIA}
+
+下面是這一段的每一句，格式是「編號｜講者｜內容」（內容裡的 / 是換行）。只列出有問題的句子。
+輸出 JSON 陣列，每一項：{{"id": "編號", "type": "不通順|不像台灣口語|AI味|接不上", "why": "一句話說哪裡有問題", "level": 1 到 3}}
+level 3＝一定要改，2＝建議改，1＝小地方。沒有問題就回 []。只回 JSON。
+
+""" + '\n'.join(f"{r['id']}｜{r['who']}｜{r['text'].replace(chr(10), ' / ')}" for r in ch)
+        return model, [x for x in json_in(api(model, prompt, max_tokens=64000)) if isinstance(x, dict) and x.get('id')]   # 推理模型想的也算額度，8000 會被想完
+    votes = {}
+    with cf.ThreadPoolExecutor(6) as ex:
+        futs = [ex.submit(ask, m, ch) for ch in chunks for m in MODELS]
+        for n, f in enumerate(cf.as_completed(futs), 1):
+            model, items = f.result()
+            for x in items: votes.setdefault(x['id'], []).append({'model': model, 'type': x.get('type', ''), 'why': x.get('why', ''), 'level': x.get('level', 1)})
+            if n % 10 == 0: print(f'  {n}/{len(futs)}', flush=True)
+    ids = {r['id'] for r in rows}
+    flags = []
+    for r in rows:
+        v = [x for x in votes.get(r['id'], []) if r['id'] in ids]
+        models = {x['model'] for x in v}
+        if len(models) >= 2 or r['id'] in st:
+            flags.append({**r, 'votes': v, 'speak_tw': st.get(r['id'], []), 'n': len(models), 'level': max([int(x.get('level') or 1) for x in v] or [2])})
+    tag = os.environ.get('DETECT_TAG', '')   # 重跑時另存，不蓋掉已經做完改法與評審的那一份
+    (d / f'votes{tag}.json').write_text(json.dumps(votes, ensure_ascii=False, indent=1), encoding='utf-8')
+    (d / f'flags{tag}.json').write_text(json.dumps(flags, ensure_ascii=False, indent=1), encoding='utf-8')
+    print(work, '抓到', len(flags), '句（兩票以上或 speak-tw）；一票的', sum(1 for k, v in votes.items() if len({x["model"] for x in v}) == 1))
+
+
+def context(rows, idx, before=3, after=2):
+    i = idx[0]
+    return [rows[k] for k in range(max(0, i - before), min(len(rows), i + after + 1))]
+
+
+def suggest(work):
+    """每句三個改法。劇本改稿照作者的習慣派 codex -m gpt-6.1-sol（feedback_codex_model_choice），一章一次。"""
+    d = OUT / work; rows = json.loads((d / 'lines.json').read_text(encoding='utf-8'))
+    flags = json.loads((d / f'flags{B}.json').read_text(encoding='utf-8')); pos = {r['id']: k for k, r in enumerate(rows)}
+    prof = profiles(work); groups = {}
+    for f in flags:
+        g = groups.setdefault(f['board'], [[]])
+        if len(g[-1]) >= 25: g.append([])
+        g[-1].append(f)
+    groups = {f'{b}-{n}': fs for b, gs in groups.items() for n, fs in enumerate(gs)}
+    def run(board, fs):
+        blocks = []
+        for f in fs:
+            ctx = context(rows, [pos[f['id']]])
+            why = '；'.join(sorted({v['why'] for v in f['votes'] if v.get('why')})[:3] + f['speak_tw'])
+            blocks.append(f"【{f['id']}】講者：{f['who']}（{prof.get(f['who'], '配角')}）\n被指出的問題：{why}\n前後文：\n" +
+                          '\n'.join(('→ ' if c['id'] == f['id'] else '  ') + f"{c['who']}：{c['text'].replace(chr(10), ' / ')}" for c in ctx))
+        prompt = f"""你是台灣的小說編輯。{STORY[work]}
+
+下面每一句都被抓出有問題（「→」那一行是要改的句子）。每句給三個改法：
+- 意思、資訊、角色的聲音都不變，不加新的情節或設定，前後文接得上
+- 長度跟原句差不多（這句要重新配音，差太多會改掉節奏）；原句裡的「 / 」是換行，改法也可以用
+- 改掉被指出的問題，也不要帶進新的 AI 味：不要「不是 X，是 Y」、不要金句收尾、不要三段排比、不要替人物下情緒結論
+- 三個改法要真的不一樣：a 最小改動、b 重組句子、c 更口語或更簡潔
+- 正體中文、台灣用語、全形標點
+只輸出 JSON 陣列：[{{"id": "編號", "a": "…", "b": "…", "c": "…", "note": "一句話說改了什麼"}}]
+
+""" + '\n\n'.join(blocks)
+        out = d / f'_suggest-{board}.txt'
+        subprocess.run(['codex', 'exec', '-m', 'gpt-6.1-sol', '-s', 'read-only', '--skip-git-repo-check', '-o', str(out), prompt],
+                       stdin=subprocess.DEVNULL, capture_output=True, text=True, cwd=str(d))
+        got = json_in(out.read_text(encoding='utf-8')) if out.exists() else []
+        print(board, len(fs), '句 → 拿到', len(got), flush=True)
+        return got
+    cands = {}
+    with cf.ThreadPoolExecutor(4) as ex:
+        for got in ex.map(lambda kv: run(*kv), groups.items()):
+            for x in got:
+                if isinstance(x, dict) and x.get('id'): cands[x['id']] = x
+    (d / f'candidates{B}.json').write_text(json.dumps(cands, ensure_ascii=False, indent=1), encoding='utf-8')
+    print(work, '有改法的', len(cands), '／', len(flags))
+
+
+def judge(work):
+    """三個模型把「原句＋a、b、c」排名次（每個評審看到的順序都洗過，看不到哪一個是原句），照名次給 3/2/1/0 分加總。"""
+    d = OUT / work; rows = json.loads((d / 'lines.json').read_text(encoding='utf-8')); pos = {r['id']: k for k, r in enumerate(rows)}
+    flags = {f['id']: f for f in json.loads((d / f'flags{B}.json').read_text(encoding='utf-8'))}
+    cands = json.loads((d / f'candidates{B}.json').read_text(encoding='utf-8')); prof = profiles(work)
+    ids = [i for i in flags if i in cands]
+    batches = [ids[k:k + 8] for k in range(0, len(ids), 8)]   # 推理模型想的部分也算在 max_tokens 裡，一批太多會想到額度用完、答案是空的
+    def ask(model, batch, seed):
+        rnd = random.Random(seed); order = {}; blocks = []
+        for i in batch:
+            opts = [('原', flags[i]['text']), ('a', cands[i]['a']), ('b', cands[i]['b']), ('c', cands[i]['c'])]; rnd.shuffle(opts)
+            order[i] = {str(n + 1): k for n, (k, _) in enumerate(opts)}
+            ctx = context(rows, [pos[i]])
+            blocks.append(f"【{i}】講者：{flags[i]['who']}（{prof.get(flags[i]['who'], '配角')}）\n前後文：\n" +
+                          '\n'.join(('→ ' if c['id'] == i else '  ') + f"{c['who']}：{c['text'].replace(chr(10), ' / ')}" for c in ctx) + '\n候選：\n' +
+                          '\n'.join(f"{n + 1}. {t.replace(chr(10), ' / ')}" for n, (_, t) in enumerate(opts)))
+        prompt = f"""你是台灣的小說編輯，替這部作品選台詞。{STORY[work]}
+
+{CRITERIA}
+
+每一題有四個候選，替「→」那一句選。好的標準：通順、像這個人會講的話、沒有 AI 味、跟前後文接得上、意思沒走掉。
+把四個候選從好到壞排名次。只輸出 JSON 陣列：[{{"id": "編號", "rank": ["最好的號碼", "…", "…", "最差的號碼"], "why": "一句話說第一名為什麼好"}}]
+
+""" + '\n\n'.join(blocks)
+        res = {}
+        for x in json_in(api(model, prompt, max_tokens=64000)):
+            if isinstance(x, dict) and x.get('id') in order and isinstance(x.get('rank'), list):
+                res[x['id']] = {'rank': [order[x['id']].get(str(r)) for r in x['rank']], 'why': x.get('why', '')}
+        return model, res
+    score = {i: {'原': 0, 'a': 0, 'b': 0, 'c': 0} for i in ids}; why = {i: [] for i in ids}
+    with cf.ThreadPoolExecutor(4) as ex:
+        futs = [ex.submit(ask, m, b, n * 7 + k) for k, b in enumerate(batches) for n, m in enumerate(MODELS)]
+        for f in cf.as_completed(futs):
+            model, res = f.result()
+            for i, v in res.items():
+                for pts, k in zip((3, 2, 1, 0), v['rank']):
+                    if k in score[i]: score[i][k] += pts
+                why[i].append({'model': model, 'top': v['rank'][0] if v['rank'] else None, 'why': v['why']})
+    picks = {i: {'score': score[i], 'best': max(score[i], key=lambda k: (score[i][k], k == '原')), 'judges': why[i]} for i in ids}
+    (d / f'picks{B}.json').write_text(json.dumps(picks, ensure_ascii=False, indent=1), encoding='utf-8')
+    import collections
+    print(work, '評完', len(picks), '句；勝出', collections.Counter(p['best'] for p in picks.values()))
+
+
+def final_changes(work, overrides=None):
+    """評審推薦（或作者在頁面上改的）＝要換成的字。回傳 [(id, 原句, 新句)]，選原句的不列。"""
+    d = OUT / work
+    flags = {f['id']: f for f in json.loads((d / f'flags{B}.json').read_text(encoding='utf-8'))}
+    cands = json.loads((d / f'candidates{B}.json').read_text(encoding='utf-8')); picks = json.loads((d / f'picks{B}.json').read_text(encoding='utf-8'))
+    ov = d / 'overrides.json'   # 作者在頁面上改的，或審查時發現評審選錯的（附理由）
+    overrides = {**(json.loads(ov.read_text(encoding='utf-8')) if ov.exists() else {}), **(overrides or {})}
+    out = []
+    for i, p in picks.items():
+        o = overrides.get(i) or {}
+        if (o.get('note') or '').strip(): new = o['note'].strip()
+        else:
+            k = o.get('choice') or p['best']
+            if k == '原': continue
+            new = cands[i][k]
+        new = new.replace(' / ', '\n')
+        old = flags[i]['text']
+        if old.count('\n') != new.count('\n'): new = new.replace('\n', '')   # 段數不同就併成一段，build 的呼叫形狀不變
+        if new != old: out.append((i, old, new))
+    return out
+
+
+def apply_main(dry):
+    """正篇：改 larch/build_chNN.py 裡的字串。用 AST 找字串（相鄰字串在 AST 裡是一個值），整句對得上就換整個，
+    不然照換行拆開一段一段對（narrate 的每個參數是一段）。每一段要剛好出現一次，不然停下來。"""
+    import ast
+    changes = final_changes('main')
+    by_file = {}
+    for i, old, new in changes: by_file.setdefault(ROOT / f"larch/build_{i.split('/')[0]}.py", []).append((i, old, new))
+    for path, items in by_file.items():
+        src = path.read_text(encoding='utf-8'); lines = src.splitlines(keepends=True)
+        offs = [0]
+        for l in lines: offs.append(offs[-1] + len(l))
+        consts = [n for n in ast.walk(ast.parse(src)) if isinstance(n, ast.Constant) and isinstance(n.value, str)]
+        def pos(n):   # col_offset 是 UTF-8 位元組數，要換成字元位置
+            a = offs[n.lineno - 1] + len(lines[n.lineno - 1].encode('utf-8')[:n.col_offset].decode('utf-8'))
+            b = offs[n.end_lineno - 1] + len(lines[n.end_lineno - 1].encode('utf-8')[:n.end_col_offset].decode('utf-8'))
+            return a, b
+        edits = []
+        for i, old, new in items:
+            whole = [n for n in consts if n.value == old]
+            if not whole and sum(1 for n in consts if n.value == new) == 1: continue   # 整句已經換過
+            pairs = [(old, new)] if len(whole) == 1 else list(zip(old.split('\n'), new.split('\n')))
+            for o, nw in pairs:
+                hit = [n for n in consts if n.value == o]
+                if not hit and o != nw and sum(1 for n in consts if n.value == nw) == 1: continue   # 已經換過（可以重跑）
+                if len(hit) != 1: raise SystemExit(f'{path.name} {i}：「{o[:20]}」找到 {len(hit)} 處，停下來')
+                if o != nw: edits.append((*pos(hit[0]), json.dumps(nw, ensure_ascii=False), i))
+        for a, b, lit, i in sorted(edits, reverse=True): src = src[:a] + lit + src[b:]
+        ast.parse(src)
+        print(path.name, len(items), '句', len(edits), '個字串', '（試算）' if dry else '')
+        if not dry: path.write_text(src, encoding='utf-8')
+    return changes
+
+
+def larch_voice_main():
+    """正篇改到的句子裡，講者走 Larch 音色的（鐵塔、諾亞、黑洞先生，voice.EXTERNAL）要請平台照板上的字重唸。
+    做法跟 tools/gen_larch_voice.py 一樣：帶 boardId、nodeId、lineIndex，回傳的字要跟我們要的一樣才收。"""
+    sys.path.insert(0, str(ROOT / 'larch')); import config, voice as V
+    UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
+    spoken_p = ROOT / 'art/voice/spoken.json'; spoken = json.loads(spoken_p.read_text(encoding='utf-8'))
+    flags = {f['id']: f for f in json.loads((OUT / 'main/flags.json').read_text(encoding='utf-8'))}
+    done = []
+    for i, old, new in final_changes('main'):
+        f = flags[i]
+        if f['who'] not in V.EXTERNAL or not f['voice']: continue
+        board, card, idx = i.split('/'); k = V.key(f['who'], new, f['emo'] or None)
+        body = {'nodeId': card, 'boardId': board, 'lineIndex': int(idx), 'voiceId': V.LARCH_VOICE[f['who']][0], 'emotion': f['emo'] or ''}
+        r = config.api(body, 'POST', '/voice/generate')
+        got = (r.get('text') or '').strip(); url = (r.get('asset') or {}).get('url')
+        if got != new.strip() or not url: print('  ★', i, '平台唸的不是新字或沒有網址：', got[:20]); continue
+        data = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': UA}), timeout=120).read()
+        (ROOT / f'art/voice/{k}.mp3').write_bytes(data); spoken[k] = new; done.append(k)
+        print(' ', f['who'], k, len(data), 'bytes', new[:20].replace(chr(10), '/'), flush=True); time.sleep(0.5)
+    spoken_p.write_text(json.dumps(spoken, ensure_ascii=False, indent=0), encoding='utf-8')
+    print('平台重唸', len(done), '句')
+
+
+if __name__ == '__main__':
+    cmd, work = sys.argv[1], sys.argv[2]
+    if cmd == 'larch-voice': larch_voice_main(); raise SystemExit
+    if cmd == 'apply':
+        apply_main('--dry' in sys.argv) if work == 'main' else None; raise SystemExit
+    {'export': export, 'detect': detect, 'suggest': suggest, 'judge': judge}[cmd](work)
