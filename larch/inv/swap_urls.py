@@ -89,6 +89,9 @@ def main():
         left = sum(json.dumps(back["nodes"], ensure_ascii=False).count(k) for k in table)
         print(f"  回讀：卡 {after[0]}/{before[0]}　邊 {after[1]}/{before[1]}　舊網址殘留 {left}", "一致" if after == before and not left else "★ 去查")
         assert after == before and not left
+    if a.project:   # 收藏格換了網址，CG 解鎖條件的鍵跟著變（2026-11-04 遊樂園離不開就是這樣來的，見 fix_cg_keys.py）
+        import fix_cg_keys
+        fix_cg_keys.run(a.dry)
 
 
 if __name__ == "__main__":
