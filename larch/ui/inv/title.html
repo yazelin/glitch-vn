@@ -1,0 +1,98 @@
+<!-- larch-skill-part: title -->
+<script type="application/larch-params">
+{
+  "tagline": { "type": "text", "label": "卡片上的一句話", "default": "AI 主播格莉奇說她只有 4KB 的記憶。全世界當成哏，只有你當真。", "maxLength": 60 },
+  "pin": { "type": "color", "label": "圖釘", "default": "#c9463d" },
+  "mark": { "type": "color", "label": "印章與勾勾", "default": "#8a3b2f" },
+  "intro": { "type": "toggle", "label": "卡片釘上去的動畫", "default": true }
+}
+</script>
+<style>
+/* 一張釘在軟木板上的資料卡：標題寫在卡頭，「調查篇」是蓋上去的章，選單是卡片上的橫線，滑過去打一個勾。
+   跟遊戲裡的調查板同一套材料（紙、圖釘、深色軟木）。 */
+:root { --skin-pin: #c9463d; --skin-mark: #8a3b2f; --ink: #24293a; --ink2: #5a6072; --rule: 44px; }
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; background: #1a1410; }
+body { font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif; color: var(--ink); }
+[hidden] { display: none !important; }
+.cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cover[data-empty] { display: none; }
+.shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(26,20,16,.55), rgba(26,20,16,.1) 45%, transparent 70%); }
+
+.card { position: absolute; left: 6vw; top: 50%; width: clamp(330px, 32vw, 520px); padding: 32px 34px 20px; translate: 0 -50%; rotate: -2deg;
+  background-color: #fbf9f2;
+  background-image: repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--rule) - 1px), rgba(84,120,160,.26) calc(var(--rule) - 1px), rgba(84,120,160,.26) var(--rule));
+  background-position: 0 var(--rule-top, 150px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 26px 44px -10px rgba(0,0,0,.6); }
+.pin { position: absolute; left: 50%; top: -9px; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a80, var(--skin-pin) 55%, #7a1f18); box-shadow: 2px 5px 5px rgba(0,0,0,.4); }
+header { padding-bottom: 14px; margin-bottom: 4px; border-bottom: 2px solid rgba(201,70,61,.65); }
+.src { display: none; }
+h1 { margin: 0; }
+h1 .main { display: block; font: 900 clamp(26px, 2.5vw, 40px)/1.25 inherit; letter-spacing: .04em; color: var(--ink); text-wrap: balance; }
+h1 .stamp { display: inline-block; margin: 12px 0 0 4px; padding: 5px 14px 4px; color: var(--skin-mark); font: 800 clamp(18px, 1.5vw, 25px)/1.2 inherit; letter-spacing: .32em;
+  border: 2.5px solid var(--skin-mark); box-shadow: inset 0 0 0 2px #fbf9f2, inset 0 0 0 3.5px var(--skin-mark); rotate: -7deg; opacity: .86; }
+h1 .stamp:empty { display: none; }
+.tagline { margin: 0; padding: 8px 2px 0; font: 400 clamp(15px, 1.05vw, 17px)/var(--rule) inherit; color: var(--ink2); }
+
+.menu { display: grid; margin-top: 2px; }
+.menu button { display: flex; align-items: center; gap: 14px; height: var(--rule); padding: 0 4px; border: 0; background: none; color: var(--ink); text-align: left;
+  font: 600 clamp(17px, 1.2vw, 20px)/1 inherit; letter-spacing: .12em; cursor: pointer; }
+.menu .box { position: relative; flex: none; width: 18px; height: 18px; border: 1.5px solid var(--ink); }
+.menu .box svg { position: absolute; left: -3px; top: -7px; width: 26px; height: 26px; overflow: visible; }
+.menu .box path { fill: none; stroke: var(--skin-mark); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 30; stroke-dashoffset: 30; transition: stroke-dashoffset .22s ease-out; }
+.menu button:hover, .menu button:focus-visible { color: var(--skin-mark); outline: none; }
+.menu button:hover .box path, .menu button:focus-visible .box path { stroke-dashoffset: 0; }
+.menu button:focus-visible { box-shadow: inset 0 -2px 0 var(--skin-mark); }
+.menu button:active { translate: 0 1px; }
+.menu button:disabled { color: rgba(36,41,58,.38); cursor: default; }
+.menu button:disabled .box { border-color: rgba(36,41,58,.3); }
+.menu button:disabled .box path { stroke-dashoffset: 30; }
+
+html[data-skin-intro="on"] .card { animation: pinned .62s cubic-bezier(.2,.9,.3,1.25) .25s both; }
+html[data-skin-intro="on"] .pin { animation: pop .22s ease-out .8s both; }
+@keyframes pinned { from { opacity: 0; translate: 0 calc(-50% - 22px); rotate: -7deg; } 55% { opacity: 1; } to { opacity: 1; translate: 0 -50%; rotate: -2deg; } }
+@keyframes pop { from { scale: 0; } to { scale: 1; } }
+
+@media (max-width: 760px) {
+  .card { left: 50%; top: auto; bottom: 5vh; width: min(88vw, 420px); translate: -50% 0; rotate: -1deg; padding: 24px 22px 12px; }
+  .shade { background: linear-gradient(180deg, transparent 30%, rgba(26,20,16,.6)); }
+  html[data-skin-intro="on"] .card { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin-intro] .card, html[data-skin-intro] .pin { animation: none !important; }
+  .menu .box path { transition: none; }
+}
+</style>
+<img class="cover" data-larch-slot="cover" alt="">
+<div class="shade" aria-hidden="true"></div>
+<article class="card">
+  <i class="pin" aria-hidden="true"></i>
+  <header>
+    <span class="src" data-larch-slot="title"></span>
+    <h1><span class="main"></span><span class="stamp"></span></h1>
+  </header>
+  <p class="tagline" data-larch-param="tagline"></p>
+  <nav class="menu" aria-label="主選單">
+    <button data-larch-action="start"><i class="box" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 14 l5 5 L22 4"/></svg></i><span data-larch-label="start">開始遊戲</span></button>
+    <button data-larch-action="continue"><i class="box" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 14 l5 5 L22 4"/></svg></i><span data-larch-label="continue">繼續遊戲</span></button>
+    <button data-larch-action="gallery"><i class="box" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 14 l5 5 L22 4"/></svg></i><span data-larch-label="gallery">CG 收藏</span></button>
+    <button data-larch-action="settings"><i class="box" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M5 14 l5 5 L22 4"/></svg></i><span data-larch-label="settings">設定</span></button>
+  </nav>
+</article>
+<script>
+// 標題「A・B」：A 寫在卡頭，B 蓋成印章（字由 Larch 填入，這裡只負責排版）
+const src = document.querySelector('.src'), main = document.querySelector('h1 .main'), stamp = document.querySelector('h1 .stamp');
+const card = document.querySelector('.card'), header = document.querySelector('header');
+function sync() {
+  const t = (src.textContent || '').trim(), i = t.lastIndexOf('・');
+  main.textContent = i > 0 ? t.slice(0, i) : t;
+  stamp.textContent = i > 0 ? t.slice(i + 1) : '';
+  // 橫線從卡頭底下開始畫
+  card.style.setProperty('--rule-top', (header.offsetTop + header.offsetHeight + 4) + 'px');
+}
+new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
+addEventListener('larch:state', sync);
+addEventListener('resize', sync);
+sync();
+</script>

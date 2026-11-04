@@ -1,0 +1,34 @@
+/* larch-skill-part: choices */
+/* @larch-params { "cyan": { "type": "color", "label": "選到時的顏色", "default": "#7fe6ee" } } */
+/* 正篇的選項是「看哪一樣」：三樣東西並排在對話框上方，不擋住站在中間的人。
+   選項不是順序，所以拿掉 01／02 編號，改成她身邊那種小像素方塊。 */
+:scope.vn2-choices-floating {
+  left: 50% !important; right: auto !important; top: auto !important; bottom: 31% !important;
+  translate: -50% 0 !important; transform: none !important;
+  width: max-content !important; max-width: min(1180px, 94vw) !important;
+  display: flex !important; flex-wrap: wrap; justify-content: center; gap: 12px 14px;
+  padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; backdrop-filter: none !important;
+}
+[data-larch-ui="choice"] {
+  --c: 4px; position: relative; display: inline-flex !important; align-items: center; gap: 12px; width: auto !important; min-width: 190px; min-height: 52px;
+  padding: 12px 26px 12px 20px !important; border: 1px solid rgba(183, 170, 255, .3) !important; border-radius: 0 !important;
+  background: rgba(12, 11, 36, .9) !important; color: #ece8ff !important;
+  font: 500 clamp(16px, 1.2vw, 20px)/1.45 "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif !important; letter-spacing: .06em;
+  clip-path: polygon(0 var(--c), var(--c) var(--c), var(--c) 0, calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--c), 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, var(--c) calc(100% - var(--c)), 0 calc(100% - var(--c)));
+  box-shadow: none !important; transition: background-color .15s, border-color .15s;
+}
+[data-larch-ui="choice"]::before { content: ""; flex: none; width: 8px; height: 8px; border: 1.5px solid var(--skin-cyan, #7fe6ee); }
+[data-larch-ui="choice"]:hover, [data-larch-ui="choice"]:focus-visible { background: rgba(30, 28, 72, .95) !important; border-color: var(--skin-cyan, #7fe6ee) !important; color: #fff !important; outline: none; }
+[data-larch-ui="choice"]:hover::before, [data-larch-ui="choice"]:focus-visible::before { background: var(--skin-cyan, #7fe6ee); box-shadow: 0 0 9px var(--skin-cyan, #7fe6ee); }
+[data-larch-ui="choice"]:active { translate: 0 1px; }
+[data-larch-ui="choice"]:disabled { border-style: dashed !important; background: rgba(12, 11, 36, .72) !important; color: #a7a2c8 !important; cursor: default; }
+[data-larch-ui="choice"]:disabled::before { border-style: dashed; }
+[data-larch-ui="choice-index"], [data-larch-ui="choice-arrow"] { display: none !important; }
+[data-larch-ui="choice-text"] { text-align: left; }
+/* 選項排在對話框裡（不是浮著）的時候 */
+:scope:not(.vn2-choices-floating) { display: flex !important; flex-wrap: wrap; gap: 10px 12px; background: none !important; border: 0 !important; box-shadow: none !important; }
+@media (max-width: 640px) {
+  :scope.vn2-choices-floating { bottom: 34% !important; flex-direction: column; align-items: stretch; width: 92vw !important; }
+  [data-larch-ui="choice"] { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) { [data-larch-ui="choice"] { transition: none; } }

@@ -1,0 +1,21 @@
+/* larch-skill-part: inventory */
+/* @larch-params { "brass": { "type": "color", "label": "背包的金屬扣", "default": "#e0c35a" } } */
+/* 背包是她那個帆布包的內袋：深色皮面、一圈縫線，道具一件一件放在紙卡上。 */
+:scope:is([data-larch-ui="bag-button"], [data-larch-ui="bag"], [data-larch-ui="item-tip"]) {
+  --inventory-accent: var(--skin-brass, #e0c35a) !important; --inventory-surface: #2f2622 !important; --inventory-item: #ece6d8 !important;
+  --inventory-text: #f3ecdc !important; --inventory-radius: 4px !important;
+}
+:scope[data-larch-ui="bag-button"] { box-shadow: inset 0 0 0 3px #2f2622, inset 0 0 0 4.5px rgba(214, 192, 150, .55), 0 6px 14px rgba(0, 0, 0, .45) !important; }
+:scope[data-larch-ui="bag"] { box-shadow: inset 0 0 0 7px #2f2622, inset 0 0 0 8.5px rgba(214, 192, 150, .5), 0 30px 60px -12px rgba(0, 0, 0, .7) !important; }
+[data-larch-ui="bag-title"] h2 { font-family: "Noto Serif TC", "Songti TC", serif; letter-spacing: .12em; }
+[data-larch-ui="item"] { color: #24293a !important; border: 1px solid #d8cfba; }
+[data-larch-ui="item"] [data-larch-ui="item-name"] { color: #24293a !important; font-family: "Noto Serif TC", "Songti TC", serif; }
+[data-larch-ui="item"][aria-selected="true"] { background: #f6efdc !important; box-shadow: 0 0 0 2px var(--skin-brass, #e0c35a), 0 6px 10px -4px rgba(0, 0, 0, .5) !important; }
+[data-larch-ui="item-detail"] { background: #efe9dc !important; color: #24293a !important; }
+[data-larch-ui="detail-name"] { font-family: "Noto Serif TC", "Songti TC", serif; color: #24293a !important; }
+[data-larch-ui="detail-desc"] { color: #3a3f52 !important; line-height: 1.8; }
+[data-larch-ui="item-use"] { background: #8a3b2f !important; color: #fbf6ea !important; }
+:scope[data-larch-ui="item-tip"] b { font-family: "Noto Serif TC", "Songti TC", serif; }
+[data-larch-ui="slot-empty"] { background: rgba(236, 230, 216, .06) !important; border: 1.5px dashed rgba(214, 192, 150, .32) !important; box-shadow: none !important; }
+[data-larch-ui="bag-close"] { background: transparent !important; color: #f3ecdc !important; border: 1px solid rgba(214, 192, 150, .5) !important; }
+[data-larch-ui="bag-close"]:hover, [data-larch-ui="bag-close"]:focus-visible { color: var(--skin-brass, #e0c35a) !important; border-color: var(--skin-brass, #e0c35a) !important; }

@@ -1,0 +1,29 @@
+/* larch-skill-part: choices */
+/* @larch-params { "sticky": { "type": "color", "label": "便條紙", "default": "#f0d98a" } } */
+/* 選項是調查板上那種便條：一張一張貼在守則本底下，有點歪，上面一條紙膠帶。
+   顏色跟調查板的便條同一組（#f0d98a → #e2c96e）。便條不是順序，所以拿掉 01／02 編號。 */
+:scope { display: flex !important; flex-wrap: wrap; align-items: flex-start; gap: 18px 24px; padding: 18px 8px 6px !important; background: none !important; border: 0 !important; box-shadow: none !important; backdrop-filter: none !important; }
+:scope.vn2-choices-floating { left: 50% !important; right: auto !important; translate: -50% 0 !important; transform: none !important; width: max-content !important; max-width: 92vw !important; justify-content: center; }
+[data-larch-ui="choice"] {
+  position: relative; display: block !important; width: auto !important; min-width: 168px; max-width: 360px; min-height: 66px;
+  padding: 20px 24px 16px !important; border: 0 !important; border-radius: 2px !important;
+  background: linear-gradient(180deg, var(--skin-sticky, #f0d98a), #e2c96e) !important; color: #2a2a33 !important;
+  font: 500 clamp(17px, 1.25vw, 20px)/1.5 "Noto Serif TC", "Songti TC", "PMingLiU", serif !important; letter-spacing: .04em; text-align: left;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .06), 0 12px 14px -8px rgba(0, 0, 0, .55) !important;
+  rotate: -1.6deg; transition: rotate .16s ease-out, translate .16s ease-out, box-shadow .16s;
+}
+[data-larch-ui="choice"]:nth-child(even) { rotate: 1.3deg; }
+[data-larch-ui="choice"]:nth-child(3n) { rotate: -.5deg; }
+/* 紙膠帶 */
+[data-larch-ui="choice"]::before { content: ""; position: absolute; top: -10px; left: 50%; width: 66px; height: 20px; margin-left: -33px; background: rgba(250, 248, 240, .55); box-shadow: 0 1px 2px rgba(0, 0, 0, .14); rotate: -4deg; }
+[data-larch-ui="choice"]:nth-child(even)::before { rotate: 3deg; }
+[data-larch-ui="choice"]:hover, [data-larch-ui="choice"]:focus-visible { rotate: 0deg; translate: 0 -4px; box-shadow: 0 1px 0 rgba(0, 0, 0, .06), 0 18px 20px -8px rgba(0, 0, 0, .55) !important; }
+[data-larch-ui="choice"]:focus-visible { outline: 2px dashed #2a2a33 !important; outline-offset: 5px; }
+[data-larch-ui="choice"]:active { translate: 0 -1px; }
+[data-larch-ui="choice"]:disabled { background: #e4dfd2 !important; color: #6f6b62 !important; rotate: 0deg; cursor: default; box-shadow: 0 8px 10px -8px rgba(0, 0, 0, .35) !important; }
+[data-larch-ui="choice-index"], [data-larch-ui="choice-arrow"] { display: none !important; }
+@media (max-width: 640px) {
+  :scope { gap: 14px 14px; }
+  [data-larch-ui="choice"] { min-width: 0; flex: 1 1 40%; }
+}
+@media (prefers-reduced-motion: reduce) { [data-larch-ui="choice"] { transition: none; } }

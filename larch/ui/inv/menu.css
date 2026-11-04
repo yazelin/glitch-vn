@@ -1,0 +1,24 @@
+/* larch-skill-part: menu */
+/* @larch-params { "mark": { "type": "color", "label": "選中的顏色", "default": "#8a3b2f" } } */
+/* 設定、存讀檔、對話紀錄都是守則本的內頁：紙、紅色邊線、左邊一條皮面書背。快捷列是淡淡的紙色。 */
+:scope[data-larch-ui="toolbar"] button { color: #ebe3d0; text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
+:scope[data-larch-ui="toolbar"] button:hover, :scope[data-larch-ui="toolbar"] button:focus-visible { color: #f0d98a; outline: none; }
+:scope[data-larch-ui="toolbar"] button[aria-pressed="true"] { color: #f0d98a; }
+:scope[data-larch-ui="toolbar"] .vn2-dialogue-actions-divider { background: rgba(235, 227, 208, .3); }
+
+:scope:is([data-larch-ui="settings"], [data-larch-ui="save"], [data-larch-ui="history"], [data-larch-ui="danmaku"], [data-larch-ui="danmaku-card"]) {
+  --vn-settings-surface: #efe9dc !important; --vn-settings-accent: var(--skin-mark, #8a3b2f) !important; --vn-settings-text: #24293a !important;
+  --vn-settings-button: #e2dacb !important; --vn-settings-button-text: #24293a !important; --vn-settings-border: #c9c3b4 !important; --vn-settings-radius: 3px !important;
+  --vn-history-surface: #efe9dc !important; --vn-history-text: #24293a !important; --vn-history-accent: var(--skin-mark, #8a3b2f) !important;
+  box-shadow: inset 16px 0 0 #2f2622, inset 17.5px 0 0 rgba(214, 192, 150, .5), 0 24px 50px -12px rgba(0, 0, 0, .6) !important;
+  padding-left: 30px !important;
+}
+:scope > header h2 { font-family: "Noto Serif TC", "Songti TC", serif; letter-spacing: .1em; }
+:scope > header small { color: #5a6072; letter-spacing: .16em; }
+[data-larch-ui="settings-tab"][aria-selected="true"] { background: var(--skin-mark, #8a3b2f) !important; color: #fbf6ea !important; }
+[data-larch-ui="save-slot"] { border: 1px solid #c9c3b4; background: #f6f1e6; }
+[data-larch-ui="history-entry"] b { color: var(--skin-mark, #8a3b2f); }
+[data-larch-ui="history-entry"] p { font-family: "Noto Serif TC", "Songti TC", serif; }
+
+:scope[data-larch-ui="title-corner"] button { color: #f3ecdc; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .6)); }
+:scope[data-larch-ui="title-corner"] button:hover, :scope[data-larch-ui="title-corner"] button:focus-visible { color: #f0d98a; }

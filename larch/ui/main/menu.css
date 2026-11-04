@@ -1,0 +1,25 @@
+/* larch-skill-part: menu */
+/* @larch-params { "cyan": { "type": "color", "label": "主色", "default": "#7fe6ee" } } */
+/* 快捷列、設定、存讀檔、對話紀錄、彈幕都用同一套夜色：深藍紫底、淡紫字、選中是她頭髮的青。 */
+:scope[data-larch-ui="toolbar"] button { color: #b9b3dc; }
+:scope[data-larch-ui="toolbar"] button:hover, :scope[data-larch-ui="toolbar"] button:focus-visible { color: var(--skin-cyan, #7fe6ee); outline: none; }
+:scope[data-larch-ui="toolbar"] button[aria-pressed="true"] { color: #7cf3c0; }
+:scope[data-larch-ui="toolbar"] .vn2-dialogue-actions-divider { background: rgba(183, 170, 255, .25); }
+
+:scope:is([data-larch-ui="settings"], [data-larch-ui="save"], [data-larch-ui="history"], [data-larch-ui="danmaku"], [data-larch-ui="danmaku-card"]) {
+  --vn-settings-surface: #0e0d26 !important; --vn-settings-accent: var(--skin-cyan, #7fe6ee) !important; --vn-settings-text: #ece8ff !important;
+  --vn-settings-button: #1c1a42 !important; --vn-settings-button-text: #ece8ff !important; --vn-settings-border: rgba(183, 170, 255, .24) !important; --vn-settings-radius: 0px !important;
+  --vn-history-surface: #0e0d26 !important; --vn-history-text: #ece8ff !important; --vn-history-accent: var(--skin-cyan, #7fe6ee) !important;
+  --c: 6px;
+  clip-path: polygon(0 var(--c), var(--c) var(--c), var(--c) 0, calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--c), 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, var(--c) calc(100% - var(--c)), 0 calc(100% - var(--c)));
+  box-shadow: inset 0 2px 0 rgba(127, 230, 238, .55);
+}
+:scope > header h2 { font-family: "Noto Serif TC", "Songti TC", serif; letter-spacing: .12em; }
+:scope > header small { color: #a9a4cc; letter-spacing: .2em; }
+[data-larch-ui="settings-tab"] { border-radius: 0 !important; }
+[data-larch-ui="settings-tab"][aria-selected="true"] { background: var(--skin-cyan, #7fe6ee) !important; color: #0e0d26 !important; }
+[data-larch-ui="save-slot"] { border: 1px solid rgba(183, 170, 255, .28); border-radius: 0; }
+[data-larch-ui="history-entry"] b { color: var(--skin-cyan, #7fe6ee); }
+
+:scope[data-larch-ui="title-corner"] button { color: #d9d3f5; }
+:scope[data-larch-ui="title-corner"] button:hover, :scope[data-larch-ui="title-corner"] button:focus-visible { color: var(--skin-cyan, #7fe6ee); }

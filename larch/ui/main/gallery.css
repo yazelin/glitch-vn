@@ -1,0 +1,26 @@
+/* larch-skill-part: gallery */
+/* @larch-params { "cyan": { "type": "color", "label": "主色", "default": "#7fe6ee" } } */
+/* CG 收藏與選擇章節：直播室的夜色。還沒看過的格子是一塊沒亮的燈板。 */
+:scope { background: radial-gradient(ellipse 70% 50% at 50% -8%, #221c4e, #0b0a20 62%, #07061a) !important; color: #ece8ff; }
+[data-larch-ui="screen-header"] { border-bottom-color: rgba(183, 170, 255, .16) !important; }
+[data-larch-ui="screen-header"] h1 { font-family: "Noto Serif TC", "Songti TC", serif; letter-spacing: .12em; }
+[data-larch-ui="screen-header"] small, [data-larch-ui="screen-header"] p { color: #a9a4cc; }
+[data-larch-ui="screen-back"], [data-larch-ui="screen-close"] { border: 1px solid rgba(183, 170, 255, .3) !important; border-radius: 0 !important; background: #121031 !important; color: #ece8ff !important; }
+[data-larch-ui="screen-back"]:hover, [data-larch-ui="screen-close"]:hover, [data-larch-ui="screen-back"]:focus-visible, [data-larch-ui="screen-close"]:focus-visible { border-color: var(--skin-cyan, #7fe6ee) !important; color: var(--skin-cyan, #7fe6ee) !important; }
+[data-larch-ui="gallery-grid"] { gap: 22px !important; }
+[data-larch-ui="cg"] {
+  --c: 5px; position: relative; border: 1px solid rgba(183, 170, 255, .26) !important; border-radius: 0 !important; background: #0e0d26 !important; overflow: hidden;
+  clip-path: polygon(0 var(--c), var(--c) var(--c), var(--c) 0, calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--c), 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, var(--c) calc(100% - var(--c)), 0 calc(100% - var(--c)));
+}
+[data-larch-ui="cg"]:not([data-locked]):hover { border-color: var(--skin-cyan, #7fe6ee) !important; }
+[data-larch-ui="cg"][data-locked] { border-style: solid !important; background-color: #07060f !important; background-image: radial-gradient(circle, rgba(255, 255, 255, .07) 1px, transparent 1.3px) !important; background-size: 6px 6px !important; opacity: 1 !important; }
+[data-larch-ui="cg"][data-locked] svg { color: #4c4878; }
+[data-larch-ui="cg"] figcaption { background: linear-gradient(transparent, rgba(7, 6, 26, .9)) !important; }
+[data-larch-ui="cg"] figcaption span { color: #7cf3c0; font-variant-numeric: tabular-nums; }
+[data-larch-ui="cg"] figcaption b { color: #ece8ff; font-weight: 500; letter-spacing: .06em; }
+[data-larch-ui="cg"][data-locked] figcaption b { color: #6f6a99; }
+/* 選擇章節：七章一張一張排 */
+[data-larch-ui="chapter"] { border: 1px solid rgba(183, 170, 255, .26) !important; border-radius: 0 !important; background: #0e0d26 !important; color: #ece8ff !important; }
+[data-larch-ui="chapter"]:hover, [data-larch-ui="chapter"]:focus-visible { border-color: var(--skin-cyan, #7fe6ee) !important; outline: none; }
+[data-larch-ui="chapter"] b { font-family: "Noto Serif TC", "Songti TC", serif; letter-spacing: .06em; }
+[data-larch-ui="chapter"] i { color: #7cf3c0; font-style: normal; }

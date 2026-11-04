@@ -1,0 +1,26 @@
+/* larch-skill-part: gallery */
+/* @larch-params { "pin": { "type": "color", "label": "圖釘", "default": "#c9463d" } } */
+/* CG 收藏是調查板：軟木板上釘著一張一張洗出來的照片，還沒拿到的是一張空白資料卡。軟木板用調查篇素材庫裡的那張。 */
+:scope { background: #2c231d url("https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-d2fea918-c0eb-4ab6-aefb-2fe9a75dc7c4/1789638515611_board-cork.webp") center / cover !important; color: #f6efdf; }
+[data-larch-ui="screen-header"] { background: linear-gradient(180deg, rgba(26, 20, 16, .82), rgba(26, 20, 16, .5)) !important; border-bottom: 0 !important; }
+[data-larch-ui="screen-header"] h1 { font-family: "Noto Serif TC", "Songti TC", serif; letter-spacing: .14em; color: #f6efdf; }
+[data-larch-ui="screen-header"] small, [data-larch-ui="screen-header"] p { color: #d9ccb4; }
+[data-larch-ui="screen-back"], [data-larch-ui="screen-close"] { border: 0 !important; border-radius: 2px !important; background: #f0d98a !important; color: #2a2a33 !important; box-shadow: 0 6px 10px -6px rgba(0, 0, 0, .6); }
+[data-larch-ui="screen-back"]:hover, [data-larch-ui="screen-close"]:hover, [data-larch-ui="screen-back"]:focus-visible, [data-larch-ui="screen-close"]:focus-visible { background: #f6e5a6 !important; outline: 2px dashed #f6efdf; outline-offset: 3px; }
+[data-larch-ui="gallery-grid"] { gap: 34px 30px !important; padding-top: 18px !important; }
+[data-larch-ui="cg"] { position: relative; overflow: visible !important; padding: 10px 10px 42px !important; border: 0 !important; border-radius: 1px !important; background: #fbf8f0 !important;
+  box-shadow: 0 16px 24px -10px rgba(0, 0, 0, .65) !important; rotate: -1.2deg; }
+[data-larch-ui="cg"]:nth-child(even) { rotate: 1.4deg; }
+[data-larch-ui="cg"]:nth-child(3n) { rotate: -.4deg; }
+[data-larch-ui="cg"]::before { content: ""; position: absolute; z-index: 3; left: 50%; top: -8px; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a80, var(--skin-pin, #c9463d) 55%, #7a1f18); box-shadow: 2px 4px 4px rgba(0, 0, 0, .45); }
+[data-larch-ui="cg"]:nth-child(3n+2)::before { background: radial-gradient(circle at 35% 35%, #fff3b0, #e0c35a 55%, #8a7420); }
+[data-larch-ui="cg"] img { border-radius: 0 !important; }
+[data-larch-ui="cg"][data-locked] { opacity: 1 !important; border-style: none !important;
+  background-color: #fbf9f2 !important; background-image: repeating-linear-gradient(180deg, transparent 0, transparent 27px, rgba(84, 120, 160, .26) 27px, rgba(84, 120, 160, .26) 28px) !important; }
+[data-larch-ui="cg"][data-locked] svg { color: #9aa3b5; }
+[data-larch-ui="cg"] figcaption { position: absolute !important; left: 12px !important; right: 12px !important; bottom: 9px !important; top: auto !important; padding: 0 !important; background: none !important; color: #24293a !important; }
+[data-larch-ui="cg"] figcaption span { color: #8a3b2f; font-variant-numeric: tabular-nums; }
+[data-larch-ui="cg"] figcaption b { color: #24293a !important; font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 600; }
+[data-larch-ui="cg"][data-locked] figcaption b { color: #8b8f9e !important; }
+[data-larch-ui="cg"]:not([data-locked]):hover { rotate: 0deg; }

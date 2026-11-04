@@ -1,0 +1,95 @@
+<!-- larch-skill-part: dialogue -->
+<script type="application/larch-params">
+{
+  "cyan": { "type": "color", "label": "格莉奇的名牌", "default": "#7fe6ee" },
+  "violet": { "type": "color", "label": "黑洞先生的名牌", "default": "#c7a4ff" },
+  "others": { "type": "color", "label": "其他人的名牌", "default": "#e6defc" },
+  "opacity": { "type": "range", "label": "對話框不透明度", "min": 60, "max": 100, "step": 2, "unit": "%", "default": 88 },
+  "avatar": { "type": "toggle", "label": "名牌旁的頭像", "default": true }
+}
+</script>
+<style>
+/* 名牌是她帽T上那塊 ERROR 燈板：黑底、看得見沒亮的燈點、名字亮起來。
+   旁白不掛名牌（卡片上的講者「旁白」只是為了不讓名牌沿用上一句）。 */
+:root { --skin-cyan: #7fe6ee; --skin-violet: #c7a4ff; --skin-others: #e6defc; --skin-opacity: 88%; --who: var(--skin-others); }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: transparent; overflow: hidden; }
+body { padding: 30px 10px 6px; font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; }
+.dlg { position: relative; max-width: 1320px; margin: 0 auto; }
+/* 像素階梯角：四個角各缺一格 */
+.box { --c: 5px; position: relative; min-height: 158px; padding: 32px clamp(26px, 4vw, 66px) 26px;
+  background: color-mix(in srgb, #0c0b24 var(--skin-opacity), transparent); color: #eeeaff;
+  clip-path: polygon(0 var(--c), var(--c) var(--c), var(--c) 0, calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--c), 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, var(--c) calc(100% - var(--c)), 0 calc(100% - var(--c))); }
+/* 上緣一條細線：格莉奇OS 的儲存空間條 */
+.box::before { content: ""; position: absolute; left: var(--c); right: var(--c); top: 0; height: 2px; background: linear-gradient(90deg, var(--skin-cyan), #7cf3c0 55%, color-mix(in srgb, var(--skin-violet) 70%, transparent)); opacity: .75; }
+
+.name { position: absolute; z-index: 2; top: -17px; left: clamp(26px, 4vw, 66px); display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px 7px;
+  background-color: #07060f;
+  background-image: radial-gradient(circle, rgba(255,255,255,.085) 1px, transparent 1.3px);
+  background-size: 4px 4px;
+  border: 1px solid color-mix(in srgb, var(--who) 50%, transparent);
+  color: var(--who); font: 700 clamp(16px, 1.25vw, 21px)/1.1 inherit; letter-spacing: .2em;
+  text-shadow: 0 0 1px var(--who), 0 0 6px var(--who), 0 0 16px color-mix(in srgb, var(--who) 60%, transparent); }
+/* 燈點蓋在字上，讓字看起來是一顆一顆亮起來的 */
+.name .led { position: relative; }
+.name .led::after { content: ""; position: absolute; inset: -2px; pointer-events: none;
+  background-image: linear-gradient(transparent 2px, rgba(7,6,15,.26) 2px, rgba(7,6,15,.26) 3px, transparent 3px); background-size: 100% 3px; }
+/* 她身邊那幾顆飄著的像素 */
+.name::after { content: ""; position: absolute; right: -14px; top: -6px; width: 5px; height: 5px; background: var(--who); box-shadow: 7px -6px 0 -1px color-mix(in srgb, var(--who) 55%, transparent); opacity: .85; }
+.name .av { width: 32px; height: 32px; margin: -6px 2px -6px -9px; flex: none; border-radius: 50%; object-fit: cover; background: #07060f; border: 1px solid color-mix(in srgb, var(--who) 60%, transparent); box-shadow: 0 0 8px color-mix(in srgb, var(--who) 35%, transparent); }
+html[data-skin-avatar="off"] .name .av { display: none; }
+html[data-narrator] .name { display: none; }
+
+.text { position: relative; min-height: 3.6em; max-width: 42em; margin: 0; padding-right: 48px; font-size: var(--larch-text-size, 22px); line-height: 1.85; letter-spacing: .03em; white-space: pre-wrap; overflow-wrap: anywhere; }
+html[data-narrator] .text { color: #cdd0ec; }
+
+/* 下一句：一顆像素愛心（她襪子上那顆） */
+.next { position: absolute; right: 22px; bottom: 18px; width: 34px; height: 30px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.next i { position: absolute; left: 6px; top: 8px; width: 3px; height: 3px; color: #7cf3c0;
+  box-shadow: 3px 0, 6px 0, 12px 0, 15px 0,
+    0 3px, 3px 3px, 6px 3px, 9px 3px, 12px 3px, 15px 3px, 18px 3px,
+    0 6px, 3px 6px, 6px 6px, 9px 6px, 12px 6px, 15px 6px, 18px 6px,
+    3px 9px, 6px 9px, 9px 9px, 12px 9px, 15px 9px,
+    6px 12px, 9px 12px, 12px 12px,
+    9px 15px; animation: beat 1.6s ease-in-out infinite; }
+@keyframes beat { 0%, 100% { opacity: .35; } 45% { opacity: 1; } }
+.next:hover i, .next:focus-visible i { color: var(--skin-cyan); opacity: 1; animation: none; }
+.next:focus-visible { outline: 1px solid var(--skin-cyan); outline-offset: 2px; }
+.next:disabled { opacity: .3; }
+
+@media (max-width: 640px) {
+  body { padding-top: 26px; }
+  .box { padding: 28px 18px 22px; min-height: 140px; }
+  .name { left: 18px; }
+  .text { font-size: max(18px, var(--larch-text-size, 22px)); padding-right: 38px; }
+}
+@media (prefers-reduced-motion: reduce) { .next i { animation: none; opacity: .9; } }
+</style>
+<div class="dlg">
+  <div class="name"><img class="av" alt="" hidden><span class="led" data-larch-slot="speaker"></span></div>
+  <section class="box" aria-label="對話">
+    <p class="text" data-larch-slot="text"></p>
+    <button class="next" data-larch-action="advance" aria-label="下一句"><i></i></button>
+  </section>
+</div>
+<script>
+// 名牌顏色跟著講話的人；「旁白」與沒有講者時不掛名牌
+const sp = document.querySelector('[data-larch-slot="speaker"]');
+const COLOR = { '格莉奇': '--skin-cyan', '黑洞先生': '--skin-violet' };
+// 名牌旁的頭像：正篇素材庫裡現成的那一組（她直播聊天室用的）
+const R2 = 'https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-bec1644c-0dfe-4447-86c0-0c592e2f939f/';
+const AV = { '格莉奇': '1787365134681_avatar-glitch.png', '黑洞先生': '1787365104596_avatar-blackhole.png', '貓草': '1787365120263_avatar-catgrass.png',
+  '鐵塔': '1787365159234_avatar-tower.png', '0x': '1787365171850_avatar-zerox.png', '斑比': '1787365093573_avatar-bambi.png', '諾亞': '1787365145104_avatar-noah.png' };
+const av = document.querySelector('.name .av');
+function sync() {
+  const n = (sp.textContent || '').trim();
+  const root = document.documentElement;
+  root.toggleAttribute('data-narrator', !n || n === '旁白' || !root.hasAttribute('data-has-speaker'));
+  root.style.setProperty('--who', `var(${COLOR[n] || '--skin-others'})`);
+  const f = AV[n]; av.hidden = !f; if (f && av.getAttribute('src') !== R2 + f) av.src = R2 + f;
+}
+new MutationObserver(sync).observe(sp, { childList: true, characterData: true, subtree: true });
+new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-has-speaker'] });
+addEventListener('larch:state', sync);
+sync();
+</script>

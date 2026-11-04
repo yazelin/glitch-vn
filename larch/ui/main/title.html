@@ -1,0 +1,104 @@
+<!-- larch-skill-part: title -->
+<script type="application/larch-params">
+{
+  "cyan": { "type": "color", "label": "格莉奇的顏色", "default": "#7fe6ee" },
+  "violet": { "type": "color", "label": "黑洞先生的顏色", "default": "#c7a4ff" },
+  "mint": { "type": "color", "label": "最後一行的顏色", "default": "#7cf3c0" },
+  "tagline": { "type": "text", "label": "標題下面那兩句", "default": "兩年前開台第一天來了七個人。她說，我要記住每一個來的人，我保證。", "maxLength": 60 },
+  "kicker": { "type": "text", "label": "最後一行", "default": "她記得六個。", "maxLength": 30 },
+  "meter": { "type": "text", "label": "記憶體條旁邊的字", "default": "記憶體 4KB", "maxLength": 20 },
+  "left": { "type": "image", "label": "左邊站的人", "default": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-bec1644c-0dfe-4447-86c0-0c592e2f939f/1787364930429_sprite-glitch.png" },
+  "right": { "type": "image", "label": "右邊站的人", "default": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-bec1644c-0dfe-4447-86c0-0c592e2f939f/1787364905531_sprite-blackhole.png" },
+  "intro": { "type": "toggle", "label": "開場動畫（記憶體條裝滿、溢出來的被黑洞先生吃掉）", "default": true },
+  "bgm": { "type": "audio", "kind": "music", "label": "標題音樂", "default": "https://pub-4b20b43f5acf4dfaa3f6ab842daa51cf.r2.dev/2d3b0242-9a6d-4051-9825-46aa4efd064a/larch/project-bec1644c-0dfe-4447-86c0-0c592e2f939f/1787448412938_bgm-title.mp3" }
+}
+</script>
+<style>
+/* 格莉奇OS 的夜：直播室凌晨兩點的藍紫、她頭髮的青、黑洞先生的紫。
+   唯一會自己動的是記憶體條：裝滿 4KB，多出來的三格像素飄向黑洞先生、被吃掉。只動一次。 */
+:root { --skin-cyan: #7fe6ee; --skin-violet: #c7a4ff; --skin-mint: #7cf3c0; --ink: #ece8ff; --night: #090a1c; }
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; background: var(--night); }
+body { color: var(--ink); font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; }
+[hidden] { display: none !important; }
+.screen { position: relative; height: 100%; display: grid; grid-template-rows: 1fr auto 1.1fr; justify-items: center; }
+.cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) brightness(.62); }
+.cover[data-empty] { display: none; }
+.shade { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 46% 58% at 50% 40%, rgba(9,10,28,.72), rgba(9,10,28,.25) 70%, transparent),
+  linear-gradient(180deg, rgba(9,10,28,.35), transparent 30%, transparent 62%, rgba(9,10,28,.85)); }
+.actor { position: absolute; bottom: 0; width: 30vw; height: 88vh; background: no-repeat bottom center / contain; pointer-events: none; }
+.actor.left { left: 0; background-image: var(--skin-left); }
+.actor.right { right: 0; background-image: var(--skin-right); }
+
+.brand { position: relative; grid-row: 2; display: grid; justify-items: center; gap: 14px; padding: 0 24px; text-align: center; }
+h1 { margin: 0; font: 900 clamp(38px, 4.6vw, 82px)/1.12 "Noto Serif TC", "Songti TC", "PMingLiU", serif; letter-spacing: .06em; color: #f3f0ff;
+  text-shadow: 0 2px 0 rgba(9,10,28,.6), 0 0 28px rgba(127,230,238,.18); text-wrap: balance; }
+.tagline { margin: 6px 0 0; font: 400 clamp(16px, 1.35vw, 22px)/1.9 "Noto Serif TC", "Songti TC", serif; color: #d6d2ee; letter-spacing: .05em; }
+.tagline .src { display: none; }
+.tagline .lines span { display: block; }
+.kicker { margin: 4px 0 0; font: 700 clamp(20px, 1.8vw, 30px)/1.4 "Noto Serif TC", "Songti TC", serif; color: var(--skin-mint); letter-spacing: .08em; }
+
+/* 記憶體條：格莉奇OS 的儲存空間條 */
+.meter { position: relative; display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 13px; letter-spacing: .2em; color: #a9a4cc; }
+.meter .bar { position: relative; display: block; width: clamp(160px, 16vw, 240px); height: 6px; background: #1a1a38; outline: 1px solid rgba(183,170,255,.25); }
+.meter .bar b { position: absolute; inset: 0; background: linear-gradient(90deg, var(--skin-cyan), var(--skin-mint)); transform-origin: left; }
+.meter .bit { position: absolute; right: -10px; top: 50%; width: 6px; height: 6px; margin-top: -3px; background: var(--skin-mint); opacity: 0; }
+html[data-skin-intro="on"] .meter .bar b { animation: fill 1.15s steps(16, end) .5s both; }
+html[data-skin-intro="on"] .meter .bit { animation: eaten 1.5s cubic-bezier(.4,0,.6,1) 1.75s both; }
+html[data-skin-intro="on"] .meter .b2 { animation-delay: 1.9s; background: var(--skin-cyan); }
+html[data-skin-intro="on"] .meter .b3 { animation-delay: 2.05s; background: var(--skin-violet); }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes eaten { 0% { opacity: 1; translate: 0 0; } 70% { opacity: .9; } 100% { opacity: 0; translate: 33vw -27vh; scale: .3; } }
+
+.menu { grid-row: 3; align-self: start; display: grid; justify-items: center; gap: 4px; margin-top: 4vh; }
+.menu button { position: relative; display: inline-flex; align-items: center; gap: 14px; min-height: 44px; padding: 8px 26px 8px 22px; border: 0; background: none; color: #d9d3f5;
+  font: 500 clamp(17px, 1.25vw, 21px)/1.2 inherit; letter-spacing: .18em; cursor: pointer; }
+.menu button::before { content: ""; width: 7px; height: 7px; flex: none; background: #8f88c2; }
+.menu button:hover, .menu button:focus-visible { color: #fff; outline: none; }
+.menu button:hover::before, .menu button:focus-visible::before { background: var(--skin-cyan); box-shadow: 0 0 10px var(--skin-cyan); }
+.menu button:focus-visible { box-shadow: inset 0 -1px 0 var(--skin-cyan); }
+.menu button:active { translate: 0 1px; }
+.menu button:disabled { opacity: .38; cursor: default; }
+.menu button:disabled::before { background: #5c5880; box-shadow: none; }
+
+@media (max-width: 760px) {
+  .actor { display: none; }
+  .screen { grid-template-rows: 1.2fr auto 1fr; }
+  .menu { margin-top: 3vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin-intro] .meter .bar b, html[data-skin-intro] .meter .bit { animation: none !important; }
+  .meter .bit { display: none; }
+}
+</style>
+<main class="screen">
+  <img class="cover" data-larch-slot="cover" alt="">
+  <div class="shade" aria-hidden="true"></div>
+  <div class="actor left" aria-hidden="true"></div>
+  <div class="actor right" aria-hidden="true"></div>
+  <section class="brand">
+    <h1 data-larch-slot="title"></h1>
+    <p class="tagline"><span class="src" data-larch-param="tagline"></span><span class="lines"></span></p>
+    <div class="meter" aria-hidden="true"><span data-larch-param="meter"></span><i class="bar"><b></b><em class="bit b1"></em><em class="bit b2"></em><em class="bit b3"></em></i></div>
+    <p class="kicker" data-larch-param="kicker"></p>
+  </section>
+  <nav class="menu" aria-label="主選單">
+    <button data-larch-action="start"><span data-larch-label="start">開始遊戲</span></button>
+    <button data-larch-action="continue"><span data-larch-label="continue">繼續遊戲</span></button>
+    <button data-larch-action="chapters"><span data-larch-label="chapters">選擇章節</span></button>
+    <button data-larch-action="gallery"><span data-larch-label="gallery">CG 收藏</span></button>
+    <button data-larch-action="settings"><span data-larch-label="settings">設定</span></button>
+  </nav>
+</main>
+<script>
+// 標題下那兩句照句號分行（字由參數填入，這裡只負責排版）
+const src = document.querySelector('.tagline .src'), lines = document.querySelector('.tagline .lines');
+function split() {
+  const t = (src.textContent || '').trim();
+  lines.replaceChildren(...(t.match(/[^。！？]+[。！？]?/g) || []).map((s) => { const e = document.createElement('span'); e.textContent = s; return e; }));
+}
+new MutationObserver(split).observe(src, { childList: true, characterData: true, subtree: true });
+addEventListener('larch:state', split);
+split();
+</script>
