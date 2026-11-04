@@ -9,7 +9,7 @@
 
 這兩個加起來，散文式的對話段落才排得出來。
 """
-import json, pathlib, time, urllib.error, urllib.request
+import json, os, pathlib, time, urllib.error, urllib.request
 
 import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -552,6 +552,16 @@ class Chapter:
         # 「只留你送的」的坑也一起避開。
         # 板子順序與 activeBoardId 不用在這裡管：兩個都已經在專案上了，
         # 這支端點是就地更新，不會把版子搬到陣列最後。
+        # **build 完就是新版本。** 2026-11-04 在線上做的三件事（多句併卡、jsDelivr 網址、
+        # 格莉奇新立繪）在這裡套上去再推，不必另外補跑；做法在 larch/finalize.py。
+        from finalize import finalize
+        self.nodes, self.edges = finalize(self.bid, self.nodes, self.edges)
+        if os.environ.get("LARCH_DRY"):   # 只產出、不推：拿來跟線上比對
+            out = pathlib.Path(__file__).resolve().parent / f"merge/build-{self.bid}.json"
+            out.parent.mkdir(exist_ok=True)
+            out.write_text(json.dumps({"id": self.bid, "nodes": self.nodes, "edges": self.edges}, ensure_ascii=False), encoding="utf-8")
+            print(f"{self.name}：LARCH_DRY，沒推，寫到 {out.name}")
+            return None
         path = f"/boards/{self.bid}"
         old = {n["id"]: n for n in ((api(path=path).get("board") or {})
                                     .get("nodes") or [])}

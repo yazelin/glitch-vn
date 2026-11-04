@@ -16,7 +16,7 @@
     settings.py      標題畫面、對話框樣式、封面、CG 收藏
     make_chat_avatar.py  聊天頭貼（圓形頭像放進跟立繪同尺寸的透明畫布）
     preview.py       本地預覽合成（播放器要登入，看不到自己做的東西）
-    build_chNN.py    一章一支（ch01–ch07）。改內容改這裡，不要只改線上版；重跑前先看下面那段
+    build_chNN.py    一章一支（ch01–ch07）。改內容改這裡，不要只改線上版
     build_all.py     照順序跑完七章
     verify.py        檢查：斷邊、孤島、死路、空卡、立繪對不對得上、有沒有意外分岔
     dump.py          把板子印成可讀的樣子，驗節奏用（線上要登入才玩得到）
@@ -25,13 +25,15 @@
     merge_lines.py   一句一卡併成多句卡；--cdn 同時換成 main_cdn.json 的網址
     main_cdn.py      配音與圖改走 jsDelivr 孤兒 tag（main-voice-1、main-art-1），寫 main_cdn.json
     ../art/main-poses/  格莉奇的姿勢與表情：產圖、逐句表 table.tsv、apply.py 換進線上
+    finalize.py      每一章推上線之前，把 build 產的內容變成現在的版本（novelkit.push() 自動呼叫）
 
-**2026-11-04 之後，重跑 `build_all.py` 或任何一支 `build_chNN.py` 都會蓋掉三件事。**
-那天有三件事是直接改線上專案做的，沒有寫回 build 腳本：好幾句併成一張卡（`merge_lines.py`）、
-圖和配音改從 jsDelivr 載入（`main_cdn.py`）、格莉奇的新立繪（`../art/main-poses/apply.py`）。
-build 腳本每跑一章就把那一章整塊推上線，推上去的是舊樣子：一句一張卡、Larch 素材庫的網址、揮手的立繪。
-所以真的要重跑（例如小說原文改了），推完要接著照順序跑 `merge_lines.py --cdn --push`
-和 `../art/main-poses/apply.py --push`，把三件事補回來。
+**build 完推上去的就是線上現在的版本。** 2026-11-04 有三件事是先在線上改的：好幾句併成一張卡、
+圖和配音改從 jsDelivr 載入、格莉奇的新立繪。`novelkit.push()` 推每一章之前會經過 `finalize.py`
+把這三件事套上，所以重跑 `build_all.py` 或任何一支 `build_chNN.py`，推上去的跟線上一樣
+（2026-11-04 八塊版子逐卡比對過，沒有任何差異）。
+想先看會推什麼：`LARCH_DRY=1 python3 larch/build_all.py`，結果寫在 `merge/build-chNN.json`，不會推。
+新配的句子還不在 jsDelivr tag 裡的話，finalize 會把這些檔列出來；`@main` 網址會 403，
+要先照 `main_cdn.py` 的做法把新檔放進下一個 tag 再推。
 
 ## 素材與角色：照平台的方式做，不要自己發明
 

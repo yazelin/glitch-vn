@@ -22,6 +22,16 @@ def plan():
     return want
 
 
+def urls():
+    return json.loads((HERE / 'sprites.json').read_text(encoding='utf-8'))
+
+
+def decided():
+    """table.tsv 決定欄有填的句子（作者改過的）。build 時（larch/finalize.py）蓋過規則算出來的提案。"""
+    return {(r['章'], r['卡'], int(r['句'])): r['決定'].strip()
+            for r in csv.DictReader(open(HERE / 'table.tsv', encoding='utf-8'), delimiter='\t') if r['決定'].strip()}
+
+
 def ghosts(p):
     for b in p['boards']:
         for n in b['nodes']:
@@ -29,7 +39,7 @@ def ghosts(p):
             a = next((x for x in (d.get('stage') or {}).get('actors', []) if x.get('id') == 'actor-none'), None)
             l = next((x for x in d.get('characterLayers') or [] if x.get('id') == 'layer-none'), None)
             if a and l: return a, l
-    raise SystemExit('找不到空白演員')
+    return None, None   # 這一塊版子沒有空白演員；真的要用到時 fix_* 會報錯
 
 
 def fix_actors(actors, key, url, ghost):
@@ -38,6 +48,7 @@ def fix_actors(actors, key, url, ghost):
         if a.get('name') != G: out.append(a); continue
         if key == 'none': continue
         a = dict(a); a['url'] = url; out.append(a)
+    if not out and ghost is None: raise ValueError('台上要換成空白演員，可是這一塊版子找不到 actor-none')
     return out or [copy.deepcopy(ghost)]
 
 
@@ -47,6 +58,7 @@ def fix_layers(layers, key, url, ghost):
         if not str(l.get('id', '')).startswith(f'layer-{G}'): out.append(l); continue
         if key == 'none': continue
         l = dict(l); l['url'] = url; out.append(l)
+    if not out and ghost is None: raise ValueError('台上要換成空白演員，可是這一塊版子找不到 layer-none')
     return out or [copy.deepcopy(ghost)]
 
 

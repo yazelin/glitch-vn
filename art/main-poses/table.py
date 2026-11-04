@@ -33,12 +33,13 @@ def propose(rows):
         pose.append(p)
     for ch, a, b, p in SPANS:
         ks = [k for k, r in enumerate(rows) if r['ch'] == ch]
+        if not ks: continue   # build 一次只推一章（larch/finalize.py）
         start = next(k for k in ks if rows[k]['text'].startswith(a))
         end = next(k for k in ks if k >= start and rows[k]['text'].startswith(b))
         for k in range(start, end + 1): pose[k] = p
     out = []
     for r, p in zip(rows, pose):
-        if not r['glitch']: out.append(''); continue          # 她本來就不在台上
+        if r['glitch'] not in FACE: out.append(''); continue   # 她不在台上，或已經是新圖
         f = FACE[r['glitch']]
         if p in ('none', 'wave'): out.append(p)               # wave＝照舊（現在那張揮手的）
         elif p in ONE_FACE or f == 'plain': out.append(p)

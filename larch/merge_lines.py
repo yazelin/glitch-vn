@@ -180,9 +180,9 @@ def script(board):
     return sorted(seqs)
 
 
-def swapper():
-    """--cdn：舊網址 → jsDelivr 網址（只換整串網址，比對前後兩邊都先換，路線展開才比得起來）"""
-    if '--cdn' not in sys.argv: return lambda o: o
+def swapper(on=None):
+    """--cdn（或 on=True）：舊網址 → jsDelivr 網址（只換整串網址，比對前後兩邊都先換，路線展開才比得起來）"""
+    if not (('--cdn' in sys.argv) if on is None else on): return lambda o: o
     mapping = json.loads((ROOT / 'larch/main_cdn.json').read_text(encoding='utf-8'))
     def swap(o):
         t = json.dumps(o, ensure_ascii=False)
