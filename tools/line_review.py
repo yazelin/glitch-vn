@@ -233,6 +233,8 @@ def judge(work):
     flags = {f['id']: f for f in json.loads((d / f'flags{B}.json').read_text(encoding='utf-8'))}
     cands = json.loads((d / f'candidates{B}.json').read_text(encoding='utf-8')); prof = profiles(work)
     ids = [i for i in flags if i in cands]
+    old = json.loads((d / f'picks{B}.json').read_text(encoding='utf-8')) if os.environ.get('REDO_SHORT') else {}
+    if old: ids = [i for i in ids if len(old.get(i, {}).get('judges', [])) < len(JUDGES)]   # 中途撞到預算上限：只重評評審不滿三位的句子，評滿的沿用
     batches = [ids[k:k + 8] for k in range(0, len(ids), 8)]   # 推理模型想的部分也算在 max_tokens 裡，一批太多會想到額度用完、答案是空的
     def ask(model, batch, seed):
         rnd = random.Random(seed); order = {}; blocks = []
@@ -265,7 +267,7 @@ def judge(work):
                 for pts, k in zip((3, 2, 1, 0), v['rank']):
                     if k in score[i]: score[i][k] += pts
                 why[i].append({'model': model, 'top': v['rank'][0] if v['rank'] else None, 'why': v['why']})
-    picks = {i: {'score': score[i], 'best': max(score[i], key=lambda k: (score[i][k], k == '原')), 'judges': why[i]} for i in ids}
+    picks = {**old, **{i: {'score': score[i], 'best': max(score[i], key=lambda k: (score[i][k], k == '原')), 'judges': why[i]} for i in ids}}
     (d / f'picks{B}.json').write_text(json.dumps(picks, ensure_ascii=False, indent=1), encoding='utf-8')
     import collections
     print(work, '評完', len(picks), '句；勝出', collections.Counter(p['best'] for p in picks.values()))
@@ -289,6 +291,8 @@ def final_changes(work, overrides=None):
         new = new.replace(' / ', '\n')
         old = flags[i]['text']
         if old.count('\n') != new.count('\n'): new = new.replace('\n', '')   # 段數不同就併成一段，build 的呼叫形狀不變
+        if not new.strip():   # 2026-11-06：第一批 ch05-052 刪成空字串，場景卡變成一個空白框。刪整句要改卡片結構，不能換成空字串
+            print(f'  {i}：改法是整句刪掉，build 不能放空字串，先留原句（要刪得手動改卡片）'); continue
         if new != old: out.append((i, old, new))
     return out
 
