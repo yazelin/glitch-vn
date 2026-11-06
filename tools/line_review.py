@@ -218,11 +218,18 @@ def suggest(work):
         got = json_in(out.read_text(encoding='utf-8')) if out.exists() else []
         print(board, len(fs), '句 → 拿到', len(got), flush=True)
         return got
+    who = {f['id']: f['who'] for f in flags}; orig = {f['id']: f['text'] for f in flags}
+    def unlabel(i, t):   # 2026-11-06：deepseek 照前後文「講者：台詞」的格式把講者抄進改法（調查篇 180 個），原句開頭沒有的就拿掉
+        p = f"{who.get(i, '')}："
+        return ' / '.join(x[len(p):] if x.startswith(p) and not orig.get(i, '').startswith(p) else x for x in t.split(' / '))
     cands = {}
     with cf.ThreadPoolExecutor(4) as ex:
         for got in ex.map(lambda kv: run(*kv), groups.items()):
             for x in got:
-                if isinstance(x, dict) and x.get('id'): cands[x['id']] = x
+                if isinstance(x, dict) and x.get('id'):
+                    for k in 'abc':
+                        if isinstance(x.get(k), str): x[k] = unlabel(x['id'], x[k])
+                    cands[x['id']] = x
     (d / f'candidates{B}.json').write_text(json.dumps(cands, ensure_ascii=False, indent=1), encoding='utf-8')
     print(work, '有改法的', len(cands), '／', len(flags))
 
