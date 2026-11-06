@@ -324,12 +324,16 @@ def apply_main(dry):
         for i, old, new in items:
             whole = [n for n in consts if n.value == old]
             if not whole and sum(1 for n in consts if n.value == new) == 1: continue   # 整句已經換過
+            if len(whole) != 1 and old.count('\n') != new.count('\n'):   # 2026-11-06：段數不同時 zip 會把多的那段配錯、重複一段
+                raise SystemExit(f'{path.name} {i}：原句 {old.count(chr(10)) + 1} 段、新句 {new.count(chr(10)) + 1} 段，要手動改卡片')
             pairs = [(old, new)] if len(whole) == 1 else list(zip(old.split('\n'), new.split('\n')))
+            find = lambda v: [n for n in consts if n.value == v or (n.value.endswith('：' + v) and '：' not in n.value[:-len(v) - 1])]   # 聊天卡的字串是「講者：內容」
             for o, nw in pairs:
-                hit = [n for n in consts if n.value == o]
-                if not hit and o != nw and sum(1 for n in consts if n.value == nw) == 1: continue   # 已經換過（可以重跑）
+                if o == nw: continue   # 沒改的那一段不用找
+                hit = find(o)
+                if not hit and len(find(nw)) == 1: continue   # 已經換過（可以重跑）
                 if len(hit) != 1: raise SystemExit(f'{path.name} {i}：「{o[:20]}」找到 {len(hit)} 處，停下來')
-                if o != nw: edits.append((*pos(hit[0]), json.dumps(nw, ensure_ascii=False), i))
+                edits.append((*pos(hit[0]), json.dumps(hit[0].value[:len(hit[0].value) - len(o)] + nw, ensure_ascii=False), i))
         for a, b, lit, i in sorted(edits, reverse=True): src = src[:a] + lit + src[b:]
         ast.parse(src)
         print(path.name, len(items), '句', len(edits), '個字串', '（試算）' if dry else '')
@@ -343,7 +347,7 @@ def larch_voice_main():
     sys.path.insert(0, str(ROOT / 'larch')); import config, voice as V
     UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
     spoken_p = ROOT / 'art/voice/spoken.json'; spoken = json.loads(spoken_p.read_text(encoding='utf-8'))
-    flags = {f['id']: f for f in json.loads((OUT / 'main/flags.json').read_text(encoding='utf-8'))}
+    flags = {f['id']: f for f in json.loads((OUT / f'main/flags{B}.json').read_text(encoding='utf-8'))}   # 第二批讀 flags-2.json
     done = []
     for i, old, new in final_changes('main'):
         f = flags[i]

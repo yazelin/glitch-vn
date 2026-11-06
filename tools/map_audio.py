@@ -13,7 +13,7 @@
 
 用法：python3 tools/map_audio.py
 """
-import json, pathlib, re, runpy, sys, unicodedata
+import hashlib, json, pathlib, re, runpy, subprocess, sys, unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "larch"))
@@ -140,8 +140,17 @@ def align(paras, lines):
     return steps
 
 
+def h(ps, paras):
+    return hashlib.sha1("\n".join(paras[i] for i in ps).encode()).hexdigest()[:12]
+
+
 def main():
     urls = json.loads((ROOT / "art/voice/urls.json").read_text(encoding="utf-8"))
+    # **遊戲改了、小說沒改的段落要沿用舊音檔。** 2026-11-06 台詞審查第二批有幾句只為了避開場景卡重複才改，
+    # 小說沒有場景卡、留原句；新配音唸的是新字對不上，舊的那一支唸的正是小說現在的字。
+    # 每一步存段落文字的雜湊（h），段落沒變才沿用；舊格式沒有 h 的拿上一次提交的小說來比。
+    prev_p = ROOT / "design/audiobook.json"
+    prev = json.loads(prev_p.read_text(encoding="utf-8")) if prev_p.exists() else {}
     per = vn_lines()
     out, tot_p, tot_s = {}, 0, 0
     for ch in sorted(per):
@@ -155,7 +164,19 @@ def main():
         md = src.read_text(encoding="utf-8")
         paras = paragraphs(md)
         steps = align(paras, per[ch])
-        rows = [{"paras": ps, "url": urls[k]} for ps, k in steps if k in urls]
+        rows = [{"paras": ps, "url": urls[k], "h": h(ps, paras)} for ps, k in steps if k in urls]
+        got, head, kept = {q for r in rows for q in r["paras"]}, None, 0
+        for r in prev.get(str(ch), []):
+            if any(q in got or q >= len(paras) for q in r["paras"]): continue
+            if "h" in r: same = r["h"] == h(r["paras"], paras)
+            else:
+                if head is None:
+                    head = paragraphs(subprocess.run(["git", "show", f"HEAD:novel/ch{ch:02d}.md"], cwd=ROOT, capture_output=True, text=True).stdout)
+                same = all(q < len(head) for q in r["paras"]) and h(r["paras"], head) == h(r["paras"], paras)
+            if same:
+                rows.append({"paras": r["paras"], "url": r["url"], "h": h(r["paras"], paras)}); got |= set(r["paras"]); kept += 1
+        rows.sort(key=lambda r: r["paras"][0])
+        if kept: print(f"第{ch}章　沿用舊音檔 {kept} 步（小說沒改、遊戲改了的段落）")
         out[str(ch)] = rows
         covered = len({p for r in rows for p in r["paras"]})
         tot_p += len(paras); tot_s += covered
