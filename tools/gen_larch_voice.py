@@ -66,7 +66,7 @@ def main():
     a = ap.parse_args()
 
     import push as P
-    from voice import LARCH_VOICE as LV
+    from voice import LARCH_VOICE as LV, LARCH_EMOTION
     pid = json.loads((ROOT / "larch/inv/state.json").read_text())["projectId"]
     board = P.api("GET", f"/projects/{pid}/boards/board-main")
     board = board.get("board") or board
@@ -96,7 +96,7 @@ def main():
         # 平台只在「主線版子」找卡（activeBoardId）。最後一次 PUT 的版子會變成主線——
         # 2026-09-17 patch_live 先推主版再推謝幕，主線就被謝幕搶走，每一句都回 404 找不到卡片。
         # 帶 boardId 就不看 activeBoardId（reference_larch_agent_api 記過）。
-        body = {"nodeId": nid, "boardId": "board-main", "voiceId": LV[sp][0], "emotion": emo or ""}
+        body = {"nodeId": nid, "boardId": "board-main", "voiceId": LV[sp][0], "emotion": LARCH_EMOTION}
         if idx is not None:
             body["lineIndex"] = idx
         try:

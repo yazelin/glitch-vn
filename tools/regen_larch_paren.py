@@ -110,7 +110,7 @@ def main():
 
     ok = fail = 0
     for i, (nid, idx, sp, tx, emo, k, said) in enumerate(jobs, 1):
-        body = {"nodeId": nid, "voiceId": LV[sp][0], "emotion": emo}
+        body = {"nodeId": nid, "voiceId": LV[sp][0], "emotion": V.LARCH_EMOTION}
         if idx is not None:
             body["lineIndex"] = idx
         try:

@@ -353,7 +353,7 @@ def larch_voice_main():
         f = flags[i]
         if f['who'] not in V.EXTERNAL or not f['voice']: continue
         board, card, idx = i.split('/'); k = V.key(f['who'], new, f['emo'] or None)
-        body = {'nodeId': card, 'boardId': board, 'lineIndex': int(idx), 'voiceId': V.LARCH_VOICE[f['who']][0], 'emotion': f['emo'] or ''}
+        body = {'nodeId': card, 'boardId': board, 'lineIndex': int(idx), 'voiceId': V.LARCH_VOICE[f['who']][0], 'emotion': V.LARCH_EMOTION}
         r = config.api(body, 'POST', '/voice/generate')
         got = (r.get('text') or '').strip(); url = (r.get('asset') or {}).get('url')
         if got != new.strip() or not url: print('  ★', i, '平台唸的不是新字或沒有網址：', got[:20]); continue
@@ -451,7 +451,7 @@ def inv_larch_voice(items):
     spoken_p = ROOT / 'art/voice/spoken.json'; spoken = json.loads(spoken_p.read_text(encoding='utf-8'))
     payload, _ = request('/boards/board-main'); by = {n['id']: n for n in payload.get('board', payload)['nodes']}
     for x in items:
-        body = {'nodeId': x['card'], 'boardId': x['board'], 'voiceId': V.LARCH_VOICE[x['src']][0], 'emotion': x['emo']}
+        body = {'nodeId': x['card'], 'boardId': x['board'], 'voiceId': V.LARCH_VOICE[x['src']][0], 'emotion': V.LARCH_EMOTION}
         if by[x['card']]['data'].get('dialogueLines'): body['lineIndex'] = x['idx']
         r, _ = request('/voice/generate', 'POST', body)
         got = (r.get('text') or '').strip(); url = (r.get('asset') or {}).get('url')
